@@ -1,19 +1,25 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <div class="flex h-screen">
-      <!-- Sidebar - Copied exactly from Dashboard -->
-      <aside class="w-64 bg-white border-r border-gray-200 hidden md:block">
+  <div class="min-h-screen bg-[#001333] relative overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute inset-0">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-[#0A3573] opacity-10 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#0A3573] opacity-10 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+    </div>
+
+    <div class="relative z-10 flex h-screen">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-[#0A2159]/90 backdrop-blur-sm border-r border-white/10 hidden md:block">
         <!-- Logo/Brand -->
-        <div class="p-6 border-b border-gray-200">
-          <h1 class="text-xl font-bold text-gray-900">Mindoro Paint Center</h1>
+        <div class="p-6 border-b border-white/10">
+          <h1 class="text-xl font-bold text-white">Mindoro Paint Center</h1>
         </div>
 
         <!-- Navigation -->
-        <nav class="p-4 space-y-2">
+        <nav class="p-4 space-y-2 overflow-y-auto max-h-[calc(100vh-10rem)]">
           <router-link 
             to="/admin/dashboard" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/dashboard' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/dashboard' }"
           >
             <LayoutDashboardIcon class="w-5 h-5" />
             <span>Dashboard</span>
@@ -21,8 +27,8 @@
 
           <router-link 
             to="/admin/staff" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/staff' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/staff' }"
           >
             <UsersIcon class="w-5 h-5" />
             <span>Staff Management</span>
@@ -30,8 +36,8 @@
 
           <router-link 
             to="/admin/inventory" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/inventory' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/inventory' }"
           >
             <PackageIcon class="w-5 h-5" />
             <span>Inventory</span>
@@ -39,8 +45,8 @@
 
           <router-link 
             to="/admin/house-paint-recommender" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/house-paint-recommender' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/house-paint-recommender' }"
           >
             <HomeIcon class="w-5 h-5" />
             <span>House Paint Recommender</span>
@@ -48,8 +54,8 @@
 
           <router-link 
             to="/admin/paint-mixing" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/paint-mixing' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/paint-mixing' }"
           >
             <PaletteIcon class="w-5 h-5" />
             <span>Paint Mixing</span>
@@ -57,8 +63,8 @@
 
           <router-link 
             to="/admin/sales-analytics" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/sales-analytics' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/sales-analytics' }"
           >
             <TrendingUpIcon class="w-5 h-5" />
             <span>Sales Analytics</span>
@@ -66,8 +72,8 @@
 
           <router-link 
             to="/admin/reports" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/reports' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/reports' }"
           >
             <ClipboardIcon class="w-5 h-5" />
             <span>Reports</span>
@@ -75,8 +81,8 @@
 
           <router-link 
             to="/admin/settings" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/settings' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/settings' }"
           >
             <SettingsIcon class="w-5 h-5" />
             <span>System Settings</span>
@@ -84,8 +90,8 @@
 
           <router-link 
             to="/admin/security" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/security' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/security' }"
           >
             <ShieldIcon class="w-5 h-5" />
             <span>Security</span>
@@ -93,21 +99,20 @@
         </nav>
 
         <!-- User Menu -->
-        <div class="absolute bottom-0 w-64 p-4 border-t border-gray-200 bg-white">
+        <div class="absolute bottom-0 w-64 p-4 border-t border-white/10 bg-[#0A2159]/90 backdrop-blur-sm">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-              <UserIcon class="w-5 h-5 text-gray-600" />
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+              <UserIcon class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
-              <p class="text-xs text-gray-500 truncate">admin@example.com</p>
+              <p class="text-sm font-medium text-white truncate">Admin User</p>
+              <p class="text-xs text-white/60 truncate">admin@example.com</p>
             </div>
             <button 
               @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              title="Logout"
+              class="p-2 rounded-lg hover:bg-white/10 text-white transition-colors"
             >
-              <LogOutIcon class="w-5 h-5 text-gray-600" />
+              <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -117,10 +122,11 @@
       <div class="fixed top-4 left-4 z-30 md:hidden">
         <button 
           @click="toggleMobileSidebar"
-          class="p-2 bg-white border border-gray-200 rounded-lg shadow-sm"
+          class="p-2 bg-[#0A2159]/90 backdrop-blur-sm border border-white/10 rounded-lg shadow-sm"
+          aria-label="Toggle navigation menu"
         >
-          <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-600" />
-          <XIcon v-else class="w-6 h-6 text-gray-600" />
+          <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-white" />
+          <XIcon v-else class="w-6 h-6 text-white" />
         </button>
       </div>
 
@@ -128,23 +134,23 @@
       <div 
         v-if="mobileSidebarOpen" 
         class="fixed inset-0 bg-black/20 z-20 md:hidden"
-        @click="mobileSidebarOpen = false"
+        @click="toggleMobileSidebar"
       ></div>
-      
+
       <aside 
         v-if="mobileSidebarOpen"
-        class="fixed left-0 top-0 h-full w-64 bg-white border-r border-gray-200 z-20 md:hidden"
+        class="fixed left-0 top-0 h-full w-64 bg-[#0A2159]/90 backdrop-blur-sm border-r border-white/10 z-20 md:hidden"
       >
         <!-- Same content as desktop sidebar -->
-        <div class="p-6 border-b border-gray-200">
-          <h1 class="text-xl font-bold text-gray-900">Mindoro Paint Center</h1>
+        <div class="p-6 border-b border-white/10">
+          <h1 class="text-xl font-bold text-white">Mindoro Paint Center</h1>
         </div>
 
         <nav class="p-4 space-y-2">
           <router-link 
             to="/admin/dashboard" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/dashboard' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/dashboard' }"
             @click="mobileSidebarOpen = false"
           >
             <LayoutDashboardIcon class="w-5 h-5" />
@@ -153,8 +159,8 @@
 
           <router-link 
             to="/admin/staff" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/staff' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/staff' }"
             @click="mobileSidebarOpen = false"
           >
             <UsersIcon class="w-5 h-5" />
@@ -163,8 +169,8 @@
 
           <router-link 
             to="/admin/inventory" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/inventory' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/inventory' }"
             @click="mobileSidebarOpen = false"
           >
             <PackageIcon class="w-5 h-5" />
@@ -173,8 +179,8 @@
 
           <router-link 
             to="/admin/house-paint-recommender" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/house-paint-recommender' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/house-paint-recommender' }"
             @click="mobileSidebarOpen = false"
           >
             <HomeIcon class="w-5 h-5" />
@@ -183,8 +189,8 @@
 
           <router-link 
             to="/admin/paint-mixing" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/paint-mixing' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/paint-mixing' }"
             @click="mobileSidebarOpen = false"
           >
             <PaletteIcon class="w-5 h-5" />
@@ -193,8 +199,8 @@
 
           <router-link 
             to="/admin/sales-analytics" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/sales-analytics' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/sales-analytics' }"
             @click="mobileSidebarOpen = false"
           >
             <TrendingUpIcon class="w-5 h-5" />
@@ -203,8 +209,8 @@
 
           <router-link 
             to="/admin/reports" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/reports' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/reports' }"
             @click="mobileSidebarOpen = false"
           >
             <ClipboardIcon class="w-5 h-5" />
@@ -213,8 +219,8 @@
 
           <router-link 
             to="/admin/settings" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/settings' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/settings' }"
             @click="mobileSidebarOpen = false"
           >
             <SettingsIcon class="w-5 h-5" />
@@ -223,8 +229,8 @@
 
           <router-link 
             to="/admin/security" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/security' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/security' }"
             @click="mobileSidebarOpen = false"
           >
             <ShieldIcon class="w-5 h-5" />
@@ -232,21 +238,20 @@
           </router-link>
         </nav>
 
-        <div class="absolute bottom-0 w-64 p-4 border-t border-gray-200 bg-white">
+        <div class="absolute bottom-0 w-64 p-4 border-t border-white/10 bg-[#0A2159]/90 backdrop-blur-sm">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-              <UserIcon class="w-5 h-5 text-gray-600" />
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+              <UserIcon class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
-              <p class="text-xs text-gray-500 truncate">admin@example.com</p>
+              <p class="text-sm font-medium text-white truncate">Admin User</p>
+              <p class="text-xs text-white/60 truncate">admin@example.com</p>
             </div>
             <button 
               @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              title="Logout"
+              class="p-2 rounded-lg hover:bg-white/10 text-white transition-colors"
             >
-              <LogOutIcon class="w-5 h-5 text-gray-600" />
+              <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -255,51 +260,41 @@
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
         <!-- Header -->
-        <header class="bg-white border-b border-gray-200 px-4 md:px-8 py-4">
-          <div class="flex items-center justify-between">
-            <h1 class="text-xl md:text-2xl font-bold text-gray-900 ml-8 md:ml-0">Inventory Management</h1>
+        <header class="bg-[#0A2159]/80 backdrop-blur-sm border-b border-white/10 px-8 py-4 shadow-md">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h1 class="text-2xl font-bold text-white">Inventory Management</h1>
+              <p class="text-white/60">Manage your paint products and stock levels</p>
+            </div>
             <div class="flex items-center gap-4">
-              <div class="hidden md:flex items-center gap-2 text-gray-600">
+              <div class="hidden md:flex items-center gap-2 text-white/80">
                 <CalendarIcon class="w-5 h-5" />
                 <span>{{ currentDate }}</span>
               </div>
-              <div class="hidden md:block h-6 w-px bg-gray-200"></div>
-              <div class="flex items-center gap-2">
-                <span class="hidden sm:inline text-gray-600">Welcome, Admin</span>
-                <BellIcon class="w-5 h-5 text-gray-600 cursor-pointer hover:text-gray-900" />
+              <div class="hidden md:block h-6 w-px bg-white/20"></div>
+              <div class="flex items-center gap-3">
+                <span class="text-white">Welcome, Admin</span>
+                <div class="relative">
+                  <BellIcon class="w-5 h-5 text-white cursor-pointer hover:text-white/70" />
+                </div>
               </div>
             </div>
           </div>
         </header>
 
-        <div class="p-4 md:p-6 lg:p-8">
-          <!-- Header Section -->
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-            <div>
-              <h1 class="text-2xl font-bold text-navy">Inventory Management</h1>
-              <p class="text-navy/60">Manage your paint products and stock levels</p>
-            </div>
-            <button 
-              @click="showAddModal = true"
-              class="flex items-center gap-2 px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90 transition-colors w-full sm:w-auto justify-center"
-            >
-              <PlusIcon class="w-5 h-5" />
-              <span>Add Product</span>
-            </button>
-          </div>
-
+        <div class="p-6 md:p-8">
           <!-- Error Alert -->
           <div 
             v-if="error" 
-            class="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 flex items-center justify-between"
+            class="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mb-6 flex items-center justify-between"
           >
             <div class="flex items-center gap-2">
-              <AlertTriangleIcon class="w-5 h-5 text-red-600" />
-              <span class="text-red-700">{{ error }}</span>
+              <AlertTriangleIcon class="w-5 h-5 text-red-400" />
+              <span class="text-red-300">{{ error }}</span>
             </div>
             <button 
               @click="error = null"
-              class="text-red-600 hover:text-red-700"
+              class="text-red-400 hover:text-red-300"
             >
               <XIcon class="w-5 h-5" />
             </button>
@@ -307,86 +302,97 @@
           <div v-if="error" class="text-center mb-6">
             <button
               @click="fetchProducts"
-              class="inline-flex items-center gap-2 px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:opacity-90 transition-colors shadow-lg"
             >
               <RefreshCwIcon class="w-5 h-5" />
               Retry Loading Products
             </button>
           </div>
 
+          <!-- Action Button -->
+          <div class="flex justify-end mb-6">
+            <button 
+              @click="showAddModal = true"
+              class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:opacity-90 transition-colors shadow-lg"
+            >
+              <PlusIcon class="w-5 h-5" />
+              <span>Add Product</span>
+            </button>
+          </div>
+
           <!-- Stats Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <!-- Total Products -->
-            <div class="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-sm">
+            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
               <div class="flex items-center gap-4">
-                <div class="p-3 bg-navy/5 rounded-lg">
-                  <PackageIcon class="w-6 h-6 text-navy" />
+                <div class="p-3 bg-white/10 rounded-lg">
+                  <PackageIcon class="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <p class="text-sm text-navy/60">Total Products</p>
-                  <p class="text-2xl font-bold text-navy">{{ totalProducts }}</p>
+                  <p class="text-sm text-white/60">Total Products</p>
+                  <p class="text-2xl font-bold text-white">{{ totalProducts }}</p>
                 </div>
               </div>
             </div>
 
             <!-- Low Stock -->
-            <div class="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-sm">
+            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
               <div class="flex items-center gap-4">
-                <div class="p-3 bg-amber-50 rounded-lg">
-                  <AlertTriangleIcon class="w-6 h-6 text-amber-600" />
+                <div class="p-3 bg-amber-500/20 rounded-lg">
+                  <AlertTriangleIcon class="w-6 h-6 text-amber-400" />
                 </div>
                 <div>
-                  <p class="text-sm text-navy/60">Low Stock Items</p>
-                  <p class="text-2xl font-bold text-navy">{{ lowStockCount }}</p>
+                  <p class="text-sm text-white/60">Low Stock Items</p>
+                  <p class="text-2xl font-bold text-white">{{ lowStockCount }}</p>
                 </div>
               </div>
             </div>
 
             <!-- Out of Stock -->
-            <div class="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-sm">
+            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
               <div class="flex items-center gap-4">
-                <div class="p-3 bg-red-50 rounded-lg">
-                  <XCircleIcon class="w-6 h-6 text-red-600" />
+                <div class="p-3 bg-red-500/20 rounded-lg">
+                  <XCircleIcon class="w-6 h-6 text-red-400" />
                 </div>
                 <div>
-                  <p class="text-sm text-navy/60">Out of Stock</p>
-                  <p class="text-2xl font-bold text-navy">{{ outOfStockCount }}</p>
+                  <p class="text-sm text-white/60">Out of Stock</p>
+                  <p class="text-2xl font-bold text-white">{{ outOfStockCount }}</p>
                 </div>
               </div>
             </div>
 
             <!-- Total Value -->
-            <div class="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-sm">
+            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
               <div class="flex items-center gap-4">
-                <div class="p-3 bg-green-50 rounded-lg">
-                  <DollarSignIcon class="w-6 h-6 text-green-600" />
+                <div class="p-3 bg-green-500/20 rounded-lg">
+                  <DollarSignIcon class="w-6 h-6 text-green-400" />
                 </div>
                 <div>
-                  <p class="text-sm text-navy/60">Total Value</p>
-                  <p class="text-2xl font-bold text-navy">₱{{ totalValue.toLocaleString() }}</p>
+                  <p class="text-sm text-white/60">Total Value</p>
+                  <p class="text-2xl font-bold text-white">₱{{ totalValue.toLocaleString() }}</p>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Search and Filter Bar -->
-          <div class="bg-white/90 backdrop-blur-sm rounded-xl p-4 mb-6 shadow-sm">
+          <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 mb-8 border border-white/10">
             <div class="flex flex-col md:flex-row gap-4">
               <div class="flex-1">
                 <div class="relative">
-                  <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 text-navy/40 w-5 h-5" />
+                  <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/40 w-5 h-5" />
                   <input 
                     type="text"
                     v-model="searchQuery"
                     placeholder="Search products..."
-                    class="w-full pl-10 pr-4 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+                    class="w-full pl-10 pr-4 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white placeholder-white/40"
                   />
                 </div>
               </div>
               <div class="flex flex-col sm:flex-row gap-4">
                 <select 
                   v-model="filterCategory"
-                  class="px-4 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+                  class="px-4 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white"
                 >
                   <option value="">All Categories</option>
                   <option value="interior">Interior Paint</option>
@@ -396,7 +402,7 @@
                 </select>
                 <select 
                   v-model="filterStock"
-                  class="px-4 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+                  class="px-4 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white"
                 >
                   <option value="">All Stock Levels</option>
                   <option value="in-stock">In Stock</option>
@@ -408,23 +414,23 @@
           </div>
 
           <!-- Products Table -->
-          <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-sm overflow-hidden">
+          <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg overflow-hidden border border-white/10">
             <!-- Loading State -->
             <div v-if="loading && products.length === 0" class="p-8 text-center">
-              <LoaderIcon class="w-8 h-8 text-navy/40 animate-spin mx-auto mb-4" />
-              <p class="text-navy/60">Loading inventory data...</p>
+              <LoaderIcon class="w-8 h-8 text-white/40 animate-spin mx-auto mb-4" />
+              <p class="text-white/60">Loading inventory data...</p>
             </div>
 
             <!-- Empty State -->
             <div v-if="!loading && products.length === 0" class="p-8 text-center">
-              <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-navy/5 flex items-center justify-center">
-                <PackageIcon class="w-8 h-8 text-navy/40" />
+              <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center">
+                <PackageIcon class="w-8 h-8 text-white/40" />
               </div>
-              <h3 class="text-lg font-medium text-navy mb-2">No products found</h3>
-              <p class="text-navy/60 mb-4">Get started by adding your first product to the inventory.</p>
+              <h3 class="text-lg font-medium text-white mb-2">No products found</h3>
+              <p class="text-white/60 mb-4">Get started by adding your first product to the inventory.</p>
               <button 
                 @click="showAddModal = true"
-                class="inline-flex items-center gap-2 px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:opacity-90 transition-colors shadow-lg"
               >
                 <PlusIcon class="w-5 h-5" />
                 Add Product
@@ -433,27 +439,27 @@
 
             <!-- Mobile View -->
             <div v-else-if="products.length > 0" class="block md:hidden">
-              <div v-for="product in paginatedProducts" :key="product.id" class="p-4 border-b border-navy/10">
+              <div v-for="product in paginatedProducts" :key="product.id" class="p-4 border-b border-white/10">
                 <div class="flex items-center justify-between mb-2">
                   <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-lg bg-navy/5 flex items-center justify-center">
-                      <PackageIcon class="w-6 h-6 text-navy" />
+                    <div class="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center">
+                      <PackageIcon class="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <p class="font-medium text-navy">{{ product.name }}</p>
-                      <p class="text-sm text-navy/60">{{ formatCategory(product.category) }}</p>
+                      <p class="font-medium text-white">{{ product.name }}</p>
+                      <p class="text-sm text-white/60">{{ formatCategory(product.category) }}</p>
                     </div>
                   </div>
                   <div class="flex items-center gap-2">
                     <button 
                       @click="editProduct(product)"
-                      class="p-2 hover:bg-navy/5 rounded-lg text-navy/60"
+                      class="p-2 hover:bg-white/10 rounded-lg text-white/60 hover:text-white"
                     >
                       <EditIcon class="w-5 h-5" />
                     </button>
                     <button 
                       @click="confirmDelete(product)"
-                      class="p-2 hover:bg-red-50 rounded-lg text-red-600/60"
+                      class="p-2 hover:bg-red-500/10 rounded-lg text-red-400 hover:text-red-300"
                     >
                       <Trash2Icon class="w-5 h-5" />
                     </button>
@@ -466,7 +472,7 @@
                   >
                     {{ formatStockLevel(product.stockLevel) }}
                   </span>
-                  <span class="text-sm text-navy/60">
+                  <span class="text-sm text-white/60">
                     Price: ₱{{ product.price.toLocaleString() }}
                   </span>
                 </div>
@@ -477,43 +483,43 @@
             <div v-if="products.length > 0" class="hidden md:block overflow-x-auto">
               <table class="w-full">
                 <thead>
-                  <tr class="border-b border-navy/10">
-                    <th class="text-left p-4 text-sm font-medium text-navy/60">Product</th>
-                    <th class="text-left p-4 text-sm font-medium text-navy/60">Category</th>
-                    <th class="text-left p-4 text-sm font-medium text-navy/60">Stock Level</th>
-                    <th class="text-left p-4 text-sm font-medium text-navy/60">Price</th>
-                    <th class="text-right p-4 text-sm font-medium text-navy/60">Actions</th>
+                  <tr class="border-b border-white/10">
+                    <th class="text-left p-4 text-sm font-medium text-white/60">Product</th>
+                    <th class="text-left p-4 text-sm font-medium text-white/60">Category</th>
+                    <th class="text-left p-4 text-sm font-medium text-white/60">Stock Level</th>
+                    <th class="text-left p-4 text-sm font-medium text-white/60">Price</th>
+                    <th class="text-right p-4 text-sm font-medium text-white/60">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-if="loading" class="border-b border-navy/10">
+                  <tr v-if="loading" class="border-b border-white/10">
                     <td colspan="5" class="p-8 text-center">
-                      <LoaderIcon class="w-6 h-6 text-navy/40 animate-spin mx-auto" />
+                      <LoaderIcon class="w-6 h-6 text-white/40 animate-spin mx-auto" />
                     </td>
                   </tr>
-                  <tr v-else-if="paginatedProducts.length === 0" class="border-b border-navy/10">
-                    <td colspan="5" class="p-8 text-center text-navy/60">
+                  <tr v-else-if="paginatedProducts.length === 0" class="border-b border-white/10">
+                    <td colspan="5" class="p-8 text-center text-white/60">
                       No products found
                     </td>
                   </tr>
                   <tr 
                     v-for="product in paginatedProducts" 
                     :key="product.id" 
-                    class="border-b border-navy/10"
+                    class="border-b border-white/10 hover:bg-white/5"
                   >
                     <td class="p-4">
                       <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-lg bg-navy/5 flex items-center justify-center">
-                          <PackageIcon class="w-6 h-6 text-navy" />
+                        <div class="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center">
+                          <PackageIcon class="w-6 h-6 text-white" />
                         </div>
                         <div>
-                          <p class="font-medium text-navy">{{ product.name }}</p>
-                          <p class="text-sm text-navy/60">SKU: {{ product.sku }}</p>
+                          <p class="font-medium text-white">{{ product.name }}</p>
+                          <p class="text-sm text-white/60">SKU: {{ product.sku }}</p>
                         </div>
                       </div>
                     </td>
                     <td class="p-4">
-                      <span class="px-3 py-1 rounded-full text-sm bg-navy/5 text-navy">
+                      <span class="px-3 py-1 rounded-full text-sm bg-white/10 text-white">
                         {{ formatCategory(product.category) }}
                       </span>
                     </td>
@@ -525,20 +531,22 @@
                         {{ formatStockLevel(product.stockLevel) }}
                       </span>
                     </td>
-                    <td class="p-4 text-navy">
+                    <td class="p-4 text-white">
                       ₱{{ product.price.toLocaleString() }}
                     </td>
                     <td class="p-4">
                       <div class="flex items-center justify-end gap-2">
                         <button 
                           @click="editProduct(product)"
-                          class="p-2 hover:bg-navy/5 rounded-lg text-navy/60"
+                          class="p-2 hover:bg-white/10 rounded-lg text-white/60 hover:text-white"
+                          title="Edit Product"
                         >
                           <EditIcon class="w-5 h-5" />
                         </button>
                         <button 
                           @click="confirmDelete(product)"
-                          class="p-2 hover:bg-red-50 rounded-lg text-red-600/60"
+                          class="p-2 hover:bg-red-500/10 rounded-lg text-red-400 hover:text-red-300"
+                          title="Delete Product"
                         >
                           <Trash2Icon class="w-5 h-5" />
                         </button>
@@ -550,17 +558,17 @@
             </div>
 
             <!-- Pagination -->
-            <div v-if="products.length > 0" class="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-4 border-t border-navy/10">
+            <div v-if="products.length > 0" class="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-4 border-t border-white/10">
               <div class="flex items-center gap-2">
                 <select 
                   v-model="perPage"
-                  class="px-2 py-1 rounded-lg border border-navy/10 text-sm bg-white"
+                  class="px-2 py-1 rounded-lg border border-white/10 text-sm bg-white/5 text-white"
                 >
                   <option value="10">10 per page</option>
                   <option value="25">25 per page</option>
                   <option value="50">50 per page</option>
                 </select>
-                <span class="text-sm text-navy/60">
+                <span class="text-sm text-white/60">
                   Showing {{ paginationStart }} - {{ paginationEnd }} of {{ filteredProducts.length }}
                 </span>
               </div>
@@ -568,15 +576,15 @@
                 <button 
                   @click="currentPage--"
                   :disabled="currentPage === 1"
-                  class="p-2 rounded-lg hover:bg-navy/5 disabled:opacity-50"
+                  class="p-2 rounded-lg hover:bg-white/10 disabled:opacity-50 text-white"
                 >
                   <ChevronLeftIcon class="w-5 h-5" />
                 </button>
-                <span class="text-sm text-navy">Page {{ currentPage }} of {{ totalPages || 1 }}</span>
+                <span class="text-sm text-white">Page {{ currentPage }} of {{ totalPages || 1 }}</span>
                 <button 
                   @click="currentPage++"
                   :disabled="currentPage >= totalPages"
-                  class="p-2 rounded-lg hover:bg-navy/5 disabled:opacity-50"
+                  class="p-2 rounded-lg hover:bg-white/10 disabled:opacity-50 text-white"
                 >
                   <ChevronRightIcon class="w-5 h-5" />
                 </button>
@@ -589,10 +597,10 @@
   </div>
 
   <!-- Add/Edit Product Modal -->
-  <div v-if="showAddModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-md">
-      <div class="p-6 border-b border-navy/10">
-        <h3 class="text-xl font-bold text-navy">
+  <div v-if="showAddModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl w-full max-w-md border border-white/10 shadow-2xl">
+      <div class="p-6 border-b border-white/10">
+        <h3 class="text-xl font-bold text-white">
           {{ editingProduct ? 'Edit Product' : 'Add Product' }}
         </h3>
       </div>
@@ -601,35 +609,35 @@
         <div class="space-y-4">
           <!-- Name -->
           <div>
-            <label class="block text-sm font-medium text-navy mb-1">Product Name</label>
+            <label class="block text-sm font-medium text-white mb-1">Product Name</label>
             <input 
               type="text"
               v-model="productForm.name"
               required
-              class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+              class="w-full px-3 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white placeholder-white/40"
               placeholder="Enter product name"
             />
           </div>
 
           <!-- SKU -->
           <div>
-            <label class="block text-sm font-medium text-navy mb-1">SKU</label>
+            <label class="block text-sm font-medium text-white mb-1">SKU</label>
             <input 
               type="text"
               v-model="productForm.sku"
               required
-              class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+              class="w-full px-3 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white placeholder-white/40"
               placeholder="Enter SKU"
             />
           </div>
 
           <!-- Category -->
           <div>
-            <label class="block text-sm font-medium text-navy mb-1">Category</label>
+            <label class="block text-sm font-medium text-white mb-1">Category</label>
             <select 
               v-model="productForm.category"
               required
-              class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+              class="w-full px-3 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white"
             >
               <option value="interior">Interior Paint</option>
               <option value="exterior">Exterior Paint</option>
@@ -640,16 +648,16 @@
 
           <!-- Price -->
           <div>
-            <label class="block text-sm font-medium text-navy mb-1">Price</label>
+            <label class="block text-sm font-medium text-white mb-1">Price</label>
             <div class="relative">
-              <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-navy/60">₱</span>
+              <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60">₱</span>
               <input 
                 type="number"
                 v-model="productForm.price"
                 required
                 min="0"
                 step="0.01"
-                class="w-full pl-8 pr-4 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+                class="w-full pl-8 pr-4 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white placeholder-white/40"
                 placeholder="0.00"
               />
             </div>
@@ -657,24 +665,24 @@
 
           <!-- Stock Level -->
           <div>
-            <label class="block text-sm font-medium text-navy mb-1">Stock Level</label>
+            <label class="block text-sm font-medium text-white mb-1">Stock Level</label>
             <input 
               type="number"
               v-model="productForm.stockLevel"
               required
               min="0"
-              class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+              class="w-full px-3 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white placeholder-white/40"
               placeholder="Enter stock level"
             />
           </div>
 
           <!-- Description -->
           <div>
-            <label class="block text-sm font-medium text-navy mb-1">Description</label>
+            <label class="block text-sm font-medium text-white mb-1">Description</label>
             <textarea 
               v-model="productForm.description"
               rows="3"
-              class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+              class="w-full px-3 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white placeholder-white/40"
               placeholder="Enter product description"
             ></textarea>
           </div>
@@ -684,13 +692,13 @@
           <button 
             type="button"
             @click="closeModal"
-            class="px-4 py-2 border border-navy/10 rounded-lg text-navy hover:bg-navy/5"
+            class="px-4 py-2 border border-white/10 rounded-lg text-white hover:bg-white/10 transition-colors"
           >
             Cancel
           </button>
           <button 
             type="submit"
-            class="px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90"
+            class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:opacity-90 transition-colors shadow-lg"
             :disabled="loading"
           >
             <span v-if="loading" class="flex items-center gap-2">
@@ -707,26 +715,26 @@
   </div>
 
   <!-- Delete Confirmation Modal -->
-  <div v-if="showDeleteModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-md">
+  <div v-if="showDeleteModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl w-full max-w-md border border-white/10 shadow-2xl">
       <div class="p-6">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-50 flex items-center justify-center">
-          <AlertTriangleIcon class="w-8 h-8 text-red-600" />
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-500/10 flex items-center justify-center">
+          <AlertTriangleIcon class="w-8 h-8 text-red-400" />
         </div>
-        <h3 class="text-xl font-bold text-navy text-center mb-2">Delete Product</h3>
-        <p class="text-navy/60 text-center mb-6">
+        <h3 class="text-xl font-bold text-white text-center mb-2">Delete Product</h3>
+        <p class="text-white/60 text-center mb-6">
           Are you sure you want to delete {{ selectedProduct?.name }}? This action cannot be undone.
         </p>
         <div class="flex justify-center gap-3">
           <button 
             @click="showDeleteModal = false"
-            class="px-6 py-3 border border-navy/10 rounded-lg text-navy hover:bg-navy/5"
+            class="px-6 py-3 border border-white/10 rounded-lg text-white hover:bg-white/10 transition-colors"
           >
             Cancel
           </button>
           <button 
             @click="deleteProduct"
-            class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700"
+            class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
             :disabled="loading"
           >
             <span v-if="loading" class="flex items-center gap-2">
@@ -743,42 +751,34 @@
   <!-- Success Notification -->
   <div
     v-if="showNotification"
-    class="fixed top-4 right-4 z-50 max-w-sm bg-white rounded-lg shadow-lg border border-green-100 transition-all duration-300 transform translate-x-0"
+    class="fixed top-4 right-4 z-50 max-w-sm bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-lg shadow-lg border border-white/10 transition-all duration-300 transform"
     :class="{
       'translate-x-full': !showNotification,
-      'bg-green-50 border-green-100': notificationType === 'success',
-      'bg-red-50 border-red-100': notificationType === 'error'
+      'border-green-500/20': notificationType === 'success',
+      'border-red-500/20': notificationType === 'error'
     }"
   >
     <div class="p-4 flex items-center gap-3">
       <div 
         class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
         :class="{
-          'bg-green-100': notificationType === 'success',
-          'bg-red-100': notificationType === 'error'
+          'bg-green-500/20': notificationType === 'success',
+          'bg-red-500/20': notificationType === 'error'
         }"
       >
-        <CheckCircle2Icon v-if="notificationType === 'success'" class="w-6 h-6 text-green-600" />
-        <XCircleIcon v-else class="w-6 h-6 text-red-600" />
+        <CheckCircle2Icon v-if="notificationType === 'success'" class="w-6 h-6 text-green-400" />
+        <XCircleIcon v-else class="w-6 h-6 text-red-400" />
       </div>
       <div class="flex-1 min-w-0">
         <p 
-          class="font-medium"
-          :class="{
-            'text-green-800': notificationType === 'success',
-            'text-red-800': notificationType === 'error'
-          }"
+          class="font-medium text-white"
         >
           {{ notificationMessage }}
         </p>
       </div>
       <button 
         @click="showNotification = false"
-        class="flex-shrink-0 ml-2"
-        :class="{
-          'text-green-600 hover:text-green-700': notificationType === 'success',
-          'text-red-600 hover:text-red-700': notificationType === 'error'
-        }"
+        class="flex-shrink-0 ml-2 text-white/60 hover:text-white"
       >
         <XIcon class="w-5 h-5" />
       </button>
@@ -1026,91 +1026,6 @@ onMounted(() => {
   })
 })
 
-// Add sample products for demonstration
-const addSampleProducts = async () => {
-  const sampleProducts = [
-    {
-      name: 'Premium Interior Satin',
-      sku: 'INT-SAT-001',
-      category: 'interior',
-      price: 1850,
-      stockLevel: 45,
-      stock: 45, // Add stock field for compatibility with sales component
-      description: 'High-quality interior paint with a satin finish. Excellent coverage and durability.'
-    },
-    {
-      name: 'Exterior Weather Shield',
-      sku: 'EXT-WS-002',
-      category: 'exterior',
-      price: 2250,
-      stockLevel: 32,
-      stock: 32,
-      description: 'Weather-resistant exterior paint that protects against harsh elements.'
-    },
-    {
-      name: 'Multi-Surface Primer',
-      sku: 'PRM-MS-003',
-      category: 'primer',
-      price: 1200,
-      stockLevel: 18,
-      stock: 18,
-      description: 'Universal primer suitable for all surfaces. Ensures better adhesion of paint.'
-    },
-    {
-      name: 'Ceiling White Flat',
-      sku: 'INT-CW-004',
-      category: 'interior',
-      price: 1500,
-      stockLevel: 27,
-      stock: 27,
-      description: 'Specially formulated for ceilings with minimal splatter and excellent coverage.'
-    },
-    {
-      name: 'Anti-Mold Bathroom Paint',
-      sku: 'SPE-AM-005',
-      category: 'specialty',
-      price: 2500,
-      stockLevel: 8,
-      stock: 8,
-      description: 'Mold and mildew resistant paint ideal for bathrooms and high-humidity areas.'
-    },
-    {
-      name: 'Eco-Friendly Low VOC',
-      sku: 'INT-EF-006',
-      category: 'interior',
-      price: 2100,
-      stockLevel: 22,
-      stock: 22,
-      description: 'Environmentally friendly paint with low volatile organic compounds.'
-    },
-    {
-      name: 'High Gloss Enamel',
-      sku: 'SPE-HG-007',
-      category: 'specialty',
-      price: 1950,
-      stockLevel: 0,
-      stock: 0,
-      description: 'Durable high-gloss enamel paint for trim, doors, and cabinets.'
-    },
-    {
-      name: 'Concrete Floor Paint',
-      sku: 'SPE-CF-008',
-      category: 'specialty',
-      price: 2800,
-      stockLevel: 5,
-      stock: 5,
-      description: 'Heavy-duty paint designed specifically for concrete floors.'
-    }
-  ]
-
-  for (const product of sampleProducts) {
-    await addDoc(productsRef, {
-      ...product,
-      createdAt: serverTimestamp()
-    })
-  }
-}
-
 // Computed properties
 const filteredProducts = computed(() => {
   let filtered = [...products.value]
@@ -1266,9 +1181,9 @@ const showSuccessNotification = (message) => {
 }
 
 const getStockLevelClass = (stockLevel) => {
-  if (stockLevel === 0) return 'bg-red-50 text-red-700'
-  if (stockLevel <= 10) return 'bg-amber-50 text-amber-700'
-  return 'bg-green-50 text-green-700'
+  if (stockLevel === 0) return 'bg-red-500/20 text-red-300'
+  if (stockLevel <= 10) return 'bg-amber-500/20 text-amber-300'
+  return 'bg-green-500/20 text-green-300'
 }
 
 const formatStockLevel = (stockLevel) => {
@@ -1306,16 +1221,22 @@ watch([searchQuery, filterStock, filterCategory], () => {
 </script>
 
 <style scoped>
-.router-link-active {
-  background-color: #f9fafb;
-  font-weight: 500;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* Define your gradient colors */
-:root {
-  --pale-blue: #e0f2fe;
-  --light-blue: #bae6fd;
-  --medium-blue: #93c5fd;
-  --navy: #1e3a8a;
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 </style>

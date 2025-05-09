@@ -11,6 +11,7 @@ import AdminPaintMixing from "../components/admin/AdminPaintMixing.vue"
 import AdminSalesAnalytics from "../components/admin/AdminSalesAnalytics.vue"
 import AdminReports from "../components/admin/AdminReports.vue"
 import AdminSettings from "../components/admin/AdminSettings.vue"
+import AdminHousePaintRecommender from "../components/admin/AdminHousePaintRecommender.vue"
 import StaffPortal from "../components/staff/StaffPortal.vue"
 import StaffDashboard from "../components/staff/StaffDashboard.vue"
 import StaffPaintMixing from "../components/staff/StaffPaintMixing.vue"
@@ -161,6 +162,12 @@ const routes = [
     path: "/admin/security",
     name: "AdminSecurity",
     component: () => import("../components/admin/AdminSecurity.vue"),
+    beforeEnter: requireAdmin,
+  },
+  {
+    path: "/admin/house-paint-recommender",
+    name: "AdminHousePaintRecommender",
+    component: AdminHousePaintRecommender,
     beforeEnter: requireAdmin,
   },
   {

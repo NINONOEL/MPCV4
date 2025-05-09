@@ -1,43 +1,118 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <div class="flex h-screen">\
+  <div class="min-h-screen bg-[#001333] relative overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute inset-0">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-[#0A3573] opacity-10 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#0A3573] opacity-10 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+    </div>
+
+    <div class="relative z-10 flex h-screen">
       <!-- Sidebar -->
-      <aside class="w-64 bg-white border-r border-gray-200 hidden md:block">
+      <aside class="w-64 bg-[#0A2159]/90 backdrop-blur-sm border-r border-white/10 hidden md:block">
         <!-- Logo/Brand -->
-        <div class="p-6 border-b border-gray-200">
-          <h1 class="text-xl font-bold text-gray-900">Mindoro Paint Center</h1>
+        <div class="p-6 border-b border-white/10">
+          <h1 class="text-xl font-bold text-white">Mindoro Paint Center</h1>
         </div>
 
         <!-- Navigation -->
-        <nav class="p-4 space-y-2">
+        <nav class="p-4 space-y-2 overflow-y-auto max-h-[calc(100vh-10rem)]">
           <router-link 
-            v-for="item in navigationItems" 
-            :key="item.path"
-            :to="item.path"
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === item.path }"
+            to="/admin/dashboard" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/dashboard' }"
           >
-            <component :is="item.icon" class="w-5 h-5" />
-            <span>{{ item.name }}</span>
+            <LayoutDashboardIcon class="w-5 h-5" />
+            <span>Dashboard</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/staff" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/staff' }"
+          >
+            <UsersIcon class="w-5 h-5" />
+            <span>Staff Management</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/inventory" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/inventory' }"
+          >
+            <PackageIcon class="w-5 h-5" />
+            <span>Inventory</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/house-paint-recommender" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/house-paint-recommender' }"
+          >
+            <HomeIcon class="w-5 h-5" />
+            <span>House Paint Recommender</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/paint-mixing" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/paint-mixing' }"
+          >
+            <PaletteIcon class="w-5 h-5" />
+            <span>Paint Mixing</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/sales-analytics" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/sales-analytics' }"
+          >
+            <TrendingUpIcon class="w-5 h-5" />
+            <span>Sales Analytics</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/reports" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/reports' }"
+          >
+            <ClipboardIcon class="w-5 h-5" />
+            <span>Reports</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/settings" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/settings' }"
+          >
+            <SettingsIcon class="w-5 h-5" />
+            <span>System Settings</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/security" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/security' }"
+          >
+            <ShieldIcon class="w-5 h-5" />
+            <span>Security</span>
           </router-link>
         </nav>
 
         <!-- User Menu -->
-        <div class="absolute bottom-0 w-64 p-4 border-t border-gray-200 bg-white">
+        <div class="absolute bottom-0 w-64 p-4 border-t border-white/10 bg-[#0A2159]/90 backdrop-blur-sm">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-              <UserIcon class="w-5 h-5 text-gray-600" />
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+              <UserIcon class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
-              <p class="text-xs text-gray-500 truncate">admin@example.com</p>
+              <p class="text-sm font-medium text-white truncate">Admin User</p>
+              <p class="text-xs text-white/60 truncate">admin@example.com</p>
             </div>
             <button 
               @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              title="Logout"
+              class="p-2 rounded-lg hover:bg-white/10 text-white transition-colors"
             >
-              <LogOutIcon class="w-5 h-5 text-gray-600" />
+              <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -47,10 +122,11 @@
       <div class="fixed top-4 left-4 z-30 md:hidden">
         <button 
           @click="toggleMobileSidebar"
-          class="p-2 bg-white border border-gray-200 rounded-lg shadow-sm"
+          class="p-2 bg-[#0A2159]/90 backdrop-blur-sm border border-white/10 rounded-lg shadow-sm"
+          aria-label="Toggle navigation menu"
         >
-          <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-600" />
-          <XIcon v-else class="w-6 h-6 text-gray-600" />
+          <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-white" />
+          <XIcon v-else class="w-6 h-6 text-white" />
         </button>
       </div>
 
@@ -58,47 +134,124 @@
       <div 
         v-if="mobileSidebarOpen" 
         class="fixed inset-0 bg-black/20 z-20 md:hidden"
-        @click="mobileSidebarOpen = false"
+        @click="toggleMobileSidebar"
       ></div>
-      
+
       <aside 
         v-if="mobileSidebarOpen"
-        class="fixed left-0 top-0 h-full w-64 bg-white border-r border-gray-200 z-20 md:hidden"
+        class="fixed left-0 top-0 h-full w-64 bg-[#0A2159]/90 backdrop-blur-sm border-r border-white/10 z-20 md:hidden"
       >
         <!-- Same content as desktop sidebar -->
-        <div class="p-6 border-b border-gray-200">
-          <h1 class="text-xl font-bold text-gray-900">Mindoro Paint Center</h1>
+        <div class="p-6 border-b border-white/10">
+          <h1 class="text-xl font-bold text-white">Mindoro Paint Center</h1>
         </div>
 
         <nav class="p-4 space-y-2">
           <router-link 
-            v-for="item in navigationItems" 
-            :key="item.path"
-            :to="item.path"
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === item.path }"
+            to="/admin/dashboard" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/dashboard' }"
             @click="mobileSidebarOpen = false"
           >
-            <component :is="item.icon" class="w-5 h-5" />
-            <span>{{ item.name }}</span>
+            <LayoutDashboardIcon class="w-5 h-5" />
+            <span>Dashboard</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/staff" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/staff' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <UsersIcon class="w-5 h-5" />
+            <span>Staff Management</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/inventory" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/inventory' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <PackageIcon class="w-5 h-5" />
+            <span>Inventory</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/house-paint-recommender" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/house-paint-recommender' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <HomeIcon class="w-5 h-5" />
+            <span>House Paint Recommender</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/paint-mixing" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/paint-mixing' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <PaletteIcon class="w-5 h-5" />
+            <span>Paint Mixing</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/sales-analytics" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/sales-analytics' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <TrendingUpIcon class="w-5 h-5" />
+            <span>Sales Analytics</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/reports" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/reports' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <ClipboardIcon class="w-5 h-5" />
+            <span>Reports</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/settings" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/settings' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <SettingsIcon class="w-5 h-5" />
+            <span>System Settings</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/security" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/security' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <ShieldIcon class="w-5 h-5" />
+            <span>Security</span>
           </router-link>
         </nav>
 
-        <div class="absolute bottom-0 w-64 p-4 border-t border-gray-200 bg-white">
+        <div class="absolute bottom-0 w-64 p-4 border-t border-white/10 bg-[#0A2159]/90 backdrop-blur-sm">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-              <UserIcon class="w-5 h-5 text-gray-600" />
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+              <UserIcon class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
-              <p class="text-xs text-gray-500 truncate">admin@example.com</p>
+              <p class="text-sm font-medium text-white truncate">Admin User</p>
+              <p class="text-xs text-white/60 truncate">admin@example.com</p>
             </div>
             <button 
               @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              title="Logout"
+              class="p-2 rounded-lg hover:bg-white/10 text-white transition-colors"
             >
-              <LogOutIcon class="w-5 h-5 text-gray-600" />
+              <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -107,36 +260,36 @@
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
         <!-- Header -->
-        <header class="bg-white border-b border-gray-200 px-4 md:px-8 py-4">
-          <div class="flex items-center justify-between">
-            <h1 class="text-xl md:text-2xl font-bold text-gray-900 ml-8 md:ml-0">Sales Analytics</h1>
+        <header class="bg-[#0A2159]/80 backdrop-blur-sm border-b border-white/10 px-8 py-4 shadow-md">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h1 class="text-2xl font-bold text-white">Sales Analytics</h1>
+              <p class="text-white/60">Monitor your sales performance and trends</p>
+            </div>
             <div class="flex items-center gap-4">
-              <div class="hidden md:flex items-center gap-2 text-gray-600">
+              <div class="hidden md:flex items-center gap-2 text-white/80">
                 <CalendarIcon class="w-5 h-5" />
                 <span>{{ currentDate }}</span>
               </div>
-              <div class="hidden md:block h-6 w-px bg-gray-200"></div>
-              <div class="flex items-center gap-2">
-                <span class="hidden sm:inline text-gray-600">Welcome, Admin</span>
-                <BellIcon class="w-5 h-5 text-gray-600 cursor-pointer hover:text-gray-900" />
+              <div class="hidden md:block h-6 w-px bg-white/20"></div>
+              <div class="flex items-center gap-3">
+                <span class="text-white">Welcome, Admin</span>
+                <div class="relative">
+                  <BellIcon class="w-5 h-5 text-white cursor-pointer hover:text-white/70" />
+                </div>
               </div>
             </div>
           </div>
         </header>
 
-        <div class="p-4 md:p-6 lg:p-8">
-          <!-- Header Section -->
+        <div class="p-6 md:p-8">
+          <!-- Action Buttons and Date Range -->
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-            <div>
-              <h1 class="text-2xl font-bold text-navy mb-2">Sales Analytics</h1>
-              <p class="text-navy/60">Monitor your sales performance and trends</p>
-            </div>
-            
             <div class="flex items-center gap-3">
               <!-- Add Sale Button -->
               <button
                 @click="showAddSaleModal = true"
-                class="px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90 flex items-center gap-2"
+                class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:opacity-90 flex items-center gap-2 shadow-lg"
               >
                 <PlusIcon class="w-5 h-5" />
                 Add Sale
@@ -145,70 +298,116 @@
               <!-- Initialize Stock Button -->
               <button
                 @click="initializeProductStock"
-                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2"
+                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2 shadow-lg"
               >
                 <PackageIcon class="w-5 h-5" />
                 Initialize Stock
               </button>
-              
-              <!-- Date Range Selector -->
-              <div class="flex items-center gap-2 bg-white rounded-lg border border-navy/10 p-1">
-                <button 
-                  v-for="range in dateRanges" 
-                  :key="range.value"
-                  @click="selectedRange = range.value"
-                  class="px-3 py-1 rounded-md text-sm transition-colors"
-                  :class="selectedRange === range.value ? 'bg-navy text-white' : 'text-navy hover:bg-navy/5'"
-                >
-                  {{ range.label }}
-                </button>
-              </div>
+            </div>
+            
+            <!-- Date Range Selector -->
+            <div class="flex items-center gap-2 bg-[#0A2159]/80 rounded-lg border border-white/10 p-1">
+              <button 
+                v-for="range in dateRanges" 
+                :key="range.value"
+                @click="selectedRange = range.value"
+                class="px-3 py-1 rounded-md text-sm transition-colors"
+                :class="selectedRange === range.value ? 'bg-blue-600 text-white' : 'text-white hover:bg-white/10'"
+              >
+                {{ range.label }}
+              </button>
             </div>
           </div>
 
           <!-- Loading State -->
-          <div v-if="loading && !error" class="bg-white rounded-xl p-8 mb-6 text-center">
-            <LoaderIcon class="w-8 h-8 text-navy/40 animate-spin mx-auto mb-4" />
-            <p class="text-navy/60">Loading sales data...</p>
+          <div v-if="loading && !error" class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl p-8 mb-6 text-center border border-white/10">
+            <LoaderIcon class="w-8 h-8 text-white/40 animate-spin mx-auto mb-4" />
+            <p class="text-white/60">Loading sales data...</p>
           </div>
 
           <!-- Error State -->
-          <div v-if="error" class="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 flex items-center justify-between">
+          <div v-if="error" class="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mb-6 flex items-center justify-between">
             <div class="flex items-center gap-2">
-              <AlertTriangleIcon class="w-5 h-5 text-red-600" />
-              <span class="text-red-700">{{ error }}</span>
+              <AlertTriangleIcon class="w-5 h-5 text-red-400" />
+              <span class="text-red-300">{{ error }}</span>
             </div>
             <button 
               @click="fetchSalesData"
-              class="text-red-600 hover:text-red-700"
+              class="text-red-400 hover:text-red-300"
             >
               <RefreshCwIcon class="w-5 h-5" />
             </button>
           </div>
 
           <!-- Stats Cards -->
-          <div v-if="!loading || sales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div v-for="stat in stats" :key="stat.label" class="bg-white rounded-xl p-4 shadow-sm">
+          <div v-if="!loading || sales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Revenue -->
+            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
               <div class="flex items-center gap-4">
-                <div class="p-3 rounded-lg" :class="stat.iconBg">
-                  <component :is="stat.icon" class="w-6 h-6" :class="stat.iconColor" />
+                <div class="p-3 bg-green-500/20 rounded-lg">
+                  <DollarSignIcon class="w-6 h-6 text-green-400" />
                 </div>
                 <div>
-                  <p class="text-sm text-navy/60">{{ stat.label }}</p>
-                  <p class="text-2xl font-bold text-navy">{{ stat.value }}</p>
+                  <p class="text-sm text-white/60">Total Revenue</p>
+                  <p class="text-2xl font-bold text-white">{{ formatCurrency(totalRevenue) }}</p>
                   <div class="flex items-center gap-1 mt-1">
-                    <component 
-                      :is="stat.trend > 0 ? TrendingUpIcon : TrendingDownIcon" 
-                      class="w-4 h-4"
-                      :class="stat.trend > 0 ? 'text-green-600' : 'text-red-600'"
-                    />
-                    <span 
-                      class="text-sm font-medium"
-                      :class="stat.trend > 0 ? 'text-green-600' : 'text-red-600'"
-                    >
-                      {{ Math.abs(stat.trend) }}%
-                    </span>
-                    <span class="text-sm text-navy/60">vs last period</span>
+                    <TrendingUpIcon class="w-4 h-4 text-green-400" />
+                    <span class="text-sm font-medium text-green-400">12.5%</span>
+                    <span class="text-sm text-white/60">vs last period</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Total Orders -->
+            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
+              <div class="flex items-center gap-4">
+                <div class="p-3 bg-blue-500/20 rounded-lg">
+                  <ShoppingCartIcon class="w-6 h-6 text-blue-400" />
+                </div>
+                <div>
+                  <p class="text-sm text-white/60">Total Orders</p>
+                  <p class="text-2xl font-bold text-white">{{ totalOrders }}</p>
+                  <div class="flex items-center gap-1 mt-1">
+                    <TrendingUpIcon class="w-4 h-4 text-blue-400" />
+                    <span class="text-sm font-medium text-blue-400">8.2%</span>
+                    <span class="text-sm text-white/60">vs last period</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Products Sold -->
+            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
+              <div class="flex items-center gap-4">
+                <div class="p-3 bg-purple-500/20 rounded-lg">
+                  <PackageIcon class="w-6 h-6 text-purple-400" />
+                </div>
+                <div>
+                  <p class="text-sm text-white/60">Products Sold</p>
+                  <p class="text-2xl font-bold text-white">{{ totalProductsSold }}</p>
+                  <div class="flex items-center gap-1 mt-1">
+                    <TrendingDownIcon class="w-4 h-4 text-red-400" />
+                    <span class="text-sm font-medium text-red-400">3.1%</span>
+                    <span class="text-sm text-white/60">vs last period</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Average Order Value -->
+            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
+              <div class="flex items-center gap-4">
+                <div class="p-3 bg-amber-500/20 rounded-lg">
+                  <TrendingUpIcon class="w-6 h-6 text-amber-400" />
+                </div>
+                <div>
+                  <p class="text-sm text-white/60">Average Order Value</p>
+                  <p class="text-2xl font-bold text-white">{{ formatCurrency(averageOrderValue) }}</p>
+                  <div class="flex items-center gap-1 mt-1">
+                    <TrendingUpIcon class="w-4 h-4 text-amber-400" />
+                    <span class="text-sm font-medium text-amber-400">5.3%</span>
+                    <span class="text-sm text-white/60">vs last period</span>
                   </div>
                 </div>
               </div>
@@ -216,58 +415,58 @@
           </div>
 
           <!-- Best Seller Section -->
-          <div v-if="!loading && topProducts.length > 0" class="bg-white rounded-xl p-6 mb-6 shadow-sm">
-            <h2 class="text-lg font-semibold text-navy mb-4">Best Seller</h2>
-            <div v-if="sortedTopProducts.length > 0" class="flex items-center gap-6">
-              <div class="w-20 h-20 rounded-lg bg-navy/5 flex items-center justify-center">
-                <PackageIcon class="w-10 h-10 text-navy/40" />
+          <div v-if="!loading && topProducts.length > 0" class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 mb-8 border border-white/10">
+            <h2 class="text-lg font-semibold text-white mb-4">Best Seller</h2>
+            <div v-if="sortedTopProducts.length > 0" class="flex flex-col md:flex-row items-start md:items-center gap-6">
+              <div class="w-20 h-20 rounded-lg bg-white/10 flex items-center justify-center">
+                <PackageIcon class="w-10 h-10 text-white/40" />
               </div>
               <div class="flex-1">
-                <div class="flex justify-between items-start mb-2">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">
                   <div>
-                    <h3 class="text-xl font-bold text-navy">{{ sortedTopProducts[0].name }}</h3>
-                    <p class="text-navy/60">{{ sortedTopProducts[0].category }}</p>
+                    <h3 class="text-xl font-bold text-white">{{ sortedTopProducts[0].name }}</h3>
+                    <p class="text-white/60">{{ sortedTopProducts[0].category }}</p>
                   </div>
-                  <div class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+                  <div class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-medium">
                     Top Seller
                   </div>
                 </div>
-                <div class="grid grid-cols-2 gap-4 mt-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                   <div>
-                    <p class="text-sm text-navy/60">Total Revenue</p>
-                    <p class="text-xl font-bold text-navy">{{ formatCurrency(sortedTopProducts[0].revenue) }}</p>
+                    <p class="text-sm text-white/60">Total Revenue</p>
+                    <p class="text-xl font-bold text-white">{{ formatCurrency(sortedTopProducts[0].revenue) }}</p>
                   </div>
                   <div>
-                    <p class="text-sm text-navy/60">Units Sold</p>
-                    <p class="text-xl font-bold text-navy">{{ sortedTopProducts[0].units }}</p>
+                    <p class="text-sm text-white/60">Units Sold</p>
+                    <p class="text-xl font-bold text-white">{{ sortedTopProducts[0].units }}</p>
                   </div>
                 </div>
               </div>
             </div>
             <div v-else class="text-center py-8">
-              <PackageIcon class="w-8 h-8 text-navy/20 mx-auto mb-2" />
-              <p class="text-navy/60">No product data available</p>
+              <PackageIcon class="w-8 h-8 text-white/20 mx-auto mb-2" />
+              <p class="text-white/60">No product data available</p>
             </div>
           </div>
 
           <!-- Empty State -->
-          <div v-if="!loading && sales.length === 0" class="bg-white rounded-xl p-8 mb-6 text-center">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-navy/5 flex items-center justify-center">
-              <ShoppingCartIcon class="w-8 h-8 text-navy/40" />
+          <div v-if="!loading && sales.length === 0" class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-8 mb-8 text-center border border-white/10">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center">
+              <ShoppingCartIcon class="w-8 h-8 text-white/40" />
             </div>
-            <h3 class="text-lg font-medium text-navy mb-2">No sales data yet</h3>
-            <p class="text-navy/60 mb-4">Start recording sales to see analytics and insights.</p>
+            <h3 class="text-lg font-medium text-white mb-2">No sales data yet</h3>
+            <p class="text-white/60 mb-4">Start recording sales to see analytics and insights.</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
               <button 
                 @click="showAddSaleModal = true"
-                class="inline-flex items-center gap-2 px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:opacity-90 shadow-lg"
               >
                 <PlusIcon class="w-5 h-5" />
                 Record Sale
               </button>
               <button 
                 @click="createSampleSale"
-                class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 shadow-lg"
               >
                 <ClipboardIcon class="w-5 h-5" />
                 Create Sample Sale
@@ -276,14 +475,14 @@
           </div>
 
           <!-- Charts Section -->
-          <div v-if="!loading && sales.length > 0" class="mb-6">
+          <div v-if="!loading && sales.length > 0" class="mb-8">
             <!-- Top Products Chart -->
-            <div class="bg-white rounded-xl shadow-sm p-4 md:p-6">
-              <div class="flex items-center justify-between mb-6">
-                <h2 class="text-lg font-semibold text-navy">Top Products</h2>
+            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <h2 class="text-lg font-semibold text-white">Top Products</h2>
                 <select 
                   v-model="selectedProductMetric"
-                  class="px-3 py-1 rounded-lg border border-navy/10 text-sm bg-white"
+                  class="px-3 py-1 rounded-lg border border-white/10 text-sm bg-white/5 text-white"
                 >
                   <option value="revenue">By Revenue</option>
                   <option value="units">By Units Sold</option>
@@ -293,37 +492,37 @@
                 <div 
                   v-for="product in sortedTopProducts" 
                   :key="product.id"
-                  class="flex items-center gap-4"
+                  class="flex items-center gap-4 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors"
                 >
-                  <div class="w-12 h-12 rounded-lg bg-navy/5 flex items-center justify-center">
-                    <PackageIcon class="w-6 h-6 text-navy/40" />
+                  <div class="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center">
+                    <PackageIcon class="w-6 h-6 text-white/40" />
                   </div>
                   <div class="flex-1 min-w-0">
-                    <p class="font-medium text-navy truncate">{{ product.name }}</p>
-                    <p class="text-sm text-navy/60">{{ product.category }}</p>
+                    <p class="font-medium text-white truncate">{{ product.name }}</p>
+                    <p class="text-sm text-white/60">{{ product.category }}</p>
                   </div>
                   <div class="text-right">
-                    <p class="font-medium text-navy">{{ formatCurrency(product.revenue) }}</p>
-                    <p class="text-sm text-navy/60">{{ product.units }} units</p>
+                    <p class="font-medium text-white">{{ formatCurrency(product.revenue) }}</p>
+                    <p class="text-sm text-white/60">{{ product.units }} units</p>
                   </div>
                 </div>
                 
                 <!-- Empty state for top products -->
                 <div v-if="topProducts.length === 0" class="text-center py-8">
-                  <PackageIcon class="w-8 h-8 text-navy/20 mx-auto mb-2" />
-                  <p class="text-navy/60">No product data available</p>
+                  <PackageIcon class="w-8 h-8 text-white/20 mx-auto mb-2" />
+                  <p class="text-white/60">No product data available</p>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Sales by Category -->
-          <div v-if="!loading && sales.length > 0" class="bg-white rounded-xl shadow-sm p-4 md:p-6 mb-6">
-            <div class="flex items-center justify-between mb-6">
-              <h2 class="text-lg font-semibold text-navy">Sales by Category</h2>
+          <div v-if="!loading && sales.length > 0" class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 mb-8 border border-white/10">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+              <h2 class="text-lg font-semibold text-white">Sales by Category</h2>
               <select 
                 v-model="selectedCategoryView"
-                class="px-3 py-1 rounded-lg border border-navy/10 text-sm bg-white"
+                class="px-3 py-1 rounded-lg border border-white/10 text-sm bg-white/5 text-white"
               >
                 <option value="revenue">Revenue</option>
                 <option value="units">Units Sold</option>
@@ -334,15 +533,15 @@
               <div 
                 v-for="category in salesByCategory" 
                 :key="category.name"
-                class="p-4 rounded-lg bg-navy/5"
+                class="p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
               >
                 <div class="flex items-center gap-3 mb-3">
-                  <div class="p-2 rounded-md bg-white">
-                    <component :is="getCategoryIcon(category.name)" class="w-5 h-5 text-navy" />
+                  <div class="p-2 rounded-md bg-white/10">
+                    <component :is="getCategoryIcon(category.name)" class="w-5 h-5 text-white" />
                   </div>
-                  <h3 class="font-medium text-navy">{{ category.name }}</h3>
+                  <h3 class="font-medium text-white">{{ category.name }}</h3>
                 </div>
-                <p class="text-2xl font-bold text-navy mb-2">
+                <p class="text-2xl font-bold text-white mb-2">
                   {{ selectedCategoryView === 'revenue' ? formatCurrency(category.revenue) : 
                      selectedCategoryView === 'units' ? `${category.units} units` : 
                      `${category.orders} orders` }}
@@ -351,11 +550,11 @@
                   <component 
                     :is="category.trend > 0 ? TrendingUpIcon : TrendingDownIcon" 
                     class="w-4 h-4"
-                    :class="category.trend > 0 ? 'text-green-600' : 'text-red-600'"
+                    :class="category.trend > 0 ? 'text-green-400' : 'text-red-400'"
                   />
                   <span 
                     class="text-sm font-medium"
-                    :class="category.trend > 0 ? 'text-green-600' : 'text-red-600'"
+                    :class="category.trend > 0 ? 'text-green-400' : 'text-red-400'"
                   >
                     {{ Math.abs(category.trend) }}%
                   </span>
@@ -364,30 +563,30 @@
               
               <!-- Empty state for categories -->
               <div v-if="salesByCategory.length === 0" class="col-span-4 text-center py-8">
-                <PaletteIcon class="w-8 h-8 text-navy/20 mx-auto mb-2" />
-                <p class="text-navy/60">No category data available</p>
+                <PaletteIcon class="w-8 h-8 text-white/20 mx-auto mb-2" />
+                <p class="text-white/60">No category data available</p>
               </div>
             </div>
           </div>
 
           <!-- Recent Sales Table -->
-          <div v-if="!loading && sales.length > 0" class="bg-white rounded-xl shadow-sm overflow-hidden">
-            <div class="p-4 md:p-6 border-b border-navy/10">
+          <div v-if="!loading && sales.length > 0" class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg overflow-hidden border border-white/10">
+            <div class="p-6 border-b border-white/10">
               <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <h2 class="text-lg font-semibold text-navy">Recent Sales</h2>
-                <div class="flex items-center gap-2">
+                <h2 class="text-lg font-semibold text-white">Recent Sales</h2>
+                <div class="flex flex-col sm:flex-row gap-2">
                   <div class="relative">
-                    <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-navy/40" />
+                    <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/40" />
                     <input 
                       type="text"
                       v-model="searchQuery"
                       placeholder="Search sales..."
-                      class="pl-9 pr-4 py-2 rounded-lg border border-navy/10 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-navy/20"
+                      class="pl-9 pr-4 py-2 rounded-lg border border-white/10 text-sm bg-white/5 text-white focus:outline-none focus:ring-2 focus:ring-white/20 placeholder-white/40"
                     />
                   </div>
                   <select 
                     v-model="salesFilter"
-                    class="px-3 py-2 rounded-lg border border-navy/10 text-sm bg-white"
+                    class="px-3 py-2 rounded-lg border border-white/10 text-sm bg-white/5 text-white"
                   >
                     <option value="all">All Sales</option>
                     <option value="completed">Completed</option>
@@ -402,55 +601,55 @@
             <div class="overflow-x-auto">
               <table class="w-full">
                 <thead>
-                  <tr class="border-b border-navy/10">
-                    <th class="text-left p-4 text-sm font-medium text-navy/60">Order ID</th>
-                    <th class="text-left p-4 text-sm font-medium text-navy/60">Customer</th>
-                    <th class="text-left p-4 text-sm font-medium text-navy/60">Products</th>
-                    <th class="text-left p-4 text-sm font-medium text-navy/60">Total</th>
-                    <th class="text-left p-4 text-sm font-medium text-navy/60">Status</th>
-                    <th class="text-left p-4 text-sm font-medium text-navy/60">Date</th>
+                  <tr class="border-b border-white/10">
+                    <th class="text-left p-4 text-sm font-medium text-white/60">Order ID</th>
+                    <th class="text-left p-4 text-sm font-medium text-white/60">Customer</th>
+                    <th class="text-left p-4 text-sm font-medium text-white/60">Products</th>
+                    <th class="text-left p-4 text-sm font-medium text-white/60">Total</th>
+                    <th class="text-left p-4 text-sm font-medium text-white/60">Status</th>
+                    <th class="text-left p-4 text-sm font-medium text-white/60">Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr 
                     v-for="sale in filteredSales" 
                     :key="sale.id"
-                    class="border-b border-navy/10"
+                    class="border-b border-white/10 hover:bg-white/5"
                   >
                     <td class="p-4">
-                      <span class="font-medium text-navy">{{ sale.orderId }}</span>
+                      <span class="font-medium text-white">{{ sale.orderId }}</span>
                     </td>
                     <td class="p-4">
                       <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-full bg-navy/5 flex items-center justify-center">
-                          <UserIcon class="w-4 h-4 text-navy/40" />
+                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                          <UserIcon class="w-4 h-4 text-white/40" />
                         </div>
                         <div>
-                          <p class="font-medium text-navy">{{ sale.customerName }}</p>
-                          <p class="text-sm text-navy/60">{{ sale.customerEmail }}</p>
+                          <p class="font-medium text-white">{{ sale.customerName }}</p>
+                          <p class="text-sm text-white/60">{{ sale.customerEmail }}</p>
                         </div>
                       </div>
                     </td>
                     <td class="p-4">
-                      <p class="text-navy">{{ sale.products.length }} items</p>
-                      <p class="text-sm text-navy/60">{{ sale.products[0]?.name || 'N/A' }}</p>
+                      <p class="text-white">{{ sale.products.length }} items</p>
+                      <p class="text-sm text-white/60">{{ sale.products[0]?.name || 'N/A' }}</p>
                     </td>
                     <td class="p-4">
-                      <p class="font-medium text-navy">{{ formatCurrency(sale.total) }}</p>
+                      <p class="font-medium text-white">{{ formatCurrency(sale.total) }}</p>
                     </td>
                     <td class="p-4">
                       <span 
                         class="px-2 py-1 rounded-full text-sm font-medium"
                         :class="{
-                          'bg-green-50 text-green-700': sale.status === 'completed',
-                          'bg-yellow-50 text-yellow-700': sale.status === 'pending',
-                          'bg-red-50 text-red-700': sale.status === 'cancelled'
+                          'bg-green-500/20 text-green-400': sale.status === 'completed',
+                          'bg-yellow-500/20 text-yellow-400': sale.status === 'pending',
+                          'bg-red-500/20 text-red-400': sale.status === 'cancelled'
                         }"
                       >
                         {{ sale.status.charAt(0).toUpperCase() + sale.status.slice(1) }}
                       </span>
                     </td>
-                    <td class="p-4 text-navy/60">
+                    <td class="p-4 text-white/60">
                       {{ formatDate(sale.date) }}
                     </td>
                   </tr>
@@ -459,23 +658,23 @@
             </div>
 
             <!-- Pagination -->
-            <div class="flex items-center justify-between p-4 border-t border-navy/10">
-              <p class="text-sm text-navy/60">
+            <div class="flex items-center justify-between p-4 border-t border-white/10">
+              <p class="text-sm text-white/60">
                 Showing {{ paginationStart }} to {{ paginationEnd }} of {{ filteredSales.length }} results
               </p>
               <div class="flex items-center gap-2">
                 <button 
                   @click="currentPage--"
                   :disabled="currentPage === 1"
-                  class="p-2 rounded-lg hover:bg-navy/5 disabled:opacity-50"
+                  class="p-2 rounded-lg hover:bg-white/10 disabled:opacity-50 text-white"
                 >
                   <ChevronLeftIcon class="w-5 h-5" />
                 </button>
-                <span class="text-sm text-navy">Page {{ currentPage }} of {{ totalPages }}</span>
+                <span class="text-sm text-white">Page {{ currentPage }} of {{ totalPages }}</span>
                 <button 
                   @click="currentPage++"
                   :disabled="currentPage === totalPages"
-                  class="p-2 rounded-lg hover:bg-navy/5 disabled:opacity-50"
+                  class="p-2 rounded-lg hover:bg-white/10 disabled:opacity-50 text-white"
                 >
                   <ChevronRightIcon class="w-5 h-5" />
                 </button>
@@ -488,33 +687,33 @@
   </div>
   
   <!-- Add Sale Modal -->
-  <div v-if="showAddSaleModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-lg">
-      <div class="p-6 border-b border-navy/10">
-        <h3 class="text-xl font-bold text-navy">Record New Sale</h3>
+  <div v-if="showAddSaleModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl w-full max-w-lg border border-white/10 shadow-2xl">
+      <div class="p-6 border-b border-white/10">
+        <h3 class="text-xl font-bold text-white">Record New Sale</h3>
       </div>
       
       <form @submit.prevent="handleAddSale" class="p-6">
         <div class="space-y-4">
           <!-- Customer Information -->
           <div>
-            <h4 class="text-sm font-medium text-navy mb-3">Customer Information</h4>
+            <h4 class="text-sm font-medium text-white mb-3">Customer Information</h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label class="block text-sm text-navy/60 mb-1">Customer Name</label>
+                <label class="block text-sm text-white/60 mb-1">Customer Name</label>
                 <input 
                   type="text"
                   v-model="saleForm.customerName"
                   required
-                  class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+                  class="w-full px-3 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white placeholder-white/40"
                 />
               </div>
               <div>
-                <label class="block text-sm text-navy/60 mb-1">Customer Email</label>
+                <label class="block text-sm text-white/60 mb-1">Customer Email</label>
                 <input 
                   type="email"
                   v-model="saleForm.customerEmail"
-                  class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+                  class="w-full px-3 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white placeholder-white/40"
                 />
               </div>
             </div>
@@ -523,24 +722,24 @@
           <!-- Products -->
           <div>
             <div class="flex items-center justify-between mb-3">
-              <h4 class="text-sm font-medium text-navy">Products</h4>
+              <h4 class="text-sm font-medium text-white">Products</h4>
               <button 
                 type="button"
                 @click="addProductToSale"
-                class="text-sm text-navy flex items-center gap-1"
+                class="text-sm text-white/80 hover:text-white flex items-center gap-1"
               >
                 <PlusIcon class="w-4 h-4" />
                 Add Product
               </button>
             </div>
             
-            <div v-for="(product, index) in saleForm.products" :key="index" class="mb-3 p-3 border border-navy/10 rounded-lg">
+            <div v-for="(product, index) in saleForm.products" :key="index" class="mb-3 p-3 border border-white/10 rounded-lg bg-white/5">
               <div class="flex justify-between mb-2">
-                <h5 class="text-sm font-medium text-navy">Product {{ index + 1 }}</h5>
+                <h5 class="text-sm font-medium text-white">Product {{ index + 1 }}</h5>
                 <button 
                   type="button"
                   @click="removeProductFromSale(index)"
-                  class="text-red-600"
+                  class="text-red-400 hover:text-red-300"
                 >
                   <XIcon class="w-4 h-4" />
                 </button>
@@ -548,11 +747,11 @@
               
               <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div class="md:col-span-3">
-                  <label class="block text-xs text-navy/60 mb-1">Product</label>
+                  <label class="block text-xs text-white/60 mb-1">Product</label>
                   <select 
                     v-model="product.id"
                     required
-                    class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+                    class="w-full px-3 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white placeholder-white/40"
                     @change="updateProductDetails(index)"
                   >
                     <option value="">Select a product</option>
@@ -562,53 +761,53 @@
                   </select>
                 </div>
                 <div>
-                  <label class="block text-xs text-navy/60 mb-1">Quantity</label>
+                  <label class="block text-xs text-white/60 mb-1">Quantity</label>
                   <input 
                     type="number"
                     v-model.number="product.quantity"
                     min="1"
                     required
-                    class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+                    class="w-full px-3 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white placeholder-white/40"
                     @input="calculateTotal"
                   />
                 </div>
                 <div>
-                  <label class="block text-xs text-navy/60 mb-1">Price</label>
+                  <label class="block text-xs text-white/60 mb-1">Price</label>
                   <input 
                     type="number"
                     v-model.number="product.price"
                     min="0"
                     step="0.01"
                     required
-                    class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+                    class="w-full px-3 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white placeholder-white/40"
                     @input="calculateTotal"
                   />
                 </div>
                 <div>
-                  <label class="block text-xs text-navy/60 mb-1">Subtotal</label>
+                  <label class="block text-xs text-white/60 mb-1">Subtotal</label>
                   <input 
                     type="text"
                     :value="formatCurrency(product.price * product.quantity)"
                     readonly
-                    class="w-full px-3 py-2 rounded-lg border border-navy/10 bg-gray-50"
+                    class="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-white/80"
                   />
                 </div>
               </div>
             </div>
             
-            <div v-if="saleForm.products.length === 0" class="text-center p-4 border border-dashed border-navy/10 rounded-lg">
-              <p class="text-navy/60">No products added yet</p>
+            <div v-if="saleForm.products.length === 0" class="text-center p-4 border border-dashed border-white/10 rounded-lg">
+              <p class="text-white/60">No products added yet</p>
             </div>
           </div>
 
           <!-- Sale Details -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm text-navy/60 mb-1">Status</label>
+              <label class="block text-sm text-white/60 mb-1">Status</label>
               <select 
                 v-model="saleForm.status"
                 required
-                class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+                class="w-full px-3 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white placeholder-white/40"
               >
                 <option value="completed">Completed</option>
                 <option value="pending">Pending</option>
@@ -616,11 +815,11 @@
               </select>
             </div>
             <div>
-              <label class="block text-sm text-navy/60 mb-1">Payment Method</label>
+              <label class="block text-sm text-white/60 mb-1">Payment Method</label>
               <select 
                 v-model="saleForm.paymentMethod"
                 required
-                class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+                class="w-full px-3 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/5 text-white placeholder-white/40"
               >
                 <option value="cash">Cash</option>
                 <option value="credit_card">Credit Card</option>
@@ -636,18 +835,18 @@
               type="checkbox"
               id="override-stock"
               v-model="overrideStockCheck"
-              class="rounded border-navy/10"
+              class="rounded border-white/10 bg-white/5"
             />
-            <label for="override-stock" class="text-sm text-navy/60">
+            <label for="override-stock" class="text-sm text-white/60">
               Override stock validation (Admin only)
             </label>
           </div>
 
           <!-- Total -->
-          <div class="border-t border-navy/10 pt-4">
+          <div class="border-t border-white/10 pt-4">
             <div class="flex justify-between items-center">
-              <span class="text-navy font-medium">Total Amount:</span>
-              <span class="text-xl font-bold text-navy">{{ formatCurrency(saleForm.total) }}</span>
+              <span class="text-white font-medium">Total Amount:</span>
+              <span class="text-xl font-bold text-white">{{ formatCurrency(saleForm.total) }}</span>
             </div>
           </div>
         </div>
@@ -656,13 +855,13 @@
           <button 
             type="button"
             @click="showAddSaleModal = false"
-            class="px-4 py-2 border border-navy/10 rounded-lg text-navy hover:bg-navy/5"
+            class="px-4 py-2 border border-white/10 rounded-lg text-white hover:bg-white/10 transition-colors"
           >
             Cancel
           </button>
           <button 
             type="submit"
-            class="px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90"
+            class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:opacity-90 transition-colors shadow-lg"
             :disabled="isSubmitting"
           >
             <span v-if="isSubmitting" class="flex items-center gap-2">
@@ -697,59 +896,34 @@ import {
 } from 'firebase/firestore'
 import { db } from '../../config/firebase'
 import {
-  LayoutDashboard,
-  Users,
-  Package,
-  Home,
-  Palette,
-  TrendingUp,
-  TrendingDown,
-  Clipboard,
-  Settings,
-  Shield,
-  User,
-  LogOut,
-  Menu,
-  X,
-  DollarSign,
-  ShoppingCart,
-  Search,
-  ChevronLeft,
-  ChevronRight,
-  Droplets,
-  Paintbrush,
-  Calendar,
-  Bell,
-  Plus,
-  AlertTriangle,
-  RefreshCw,
-  Loader
+  LayoutDashboard as LayoutDashboardIcon,
+  Users as UsersIcon,
+  Package as PackageIcon,
+  Home as HomeIcon,
+  Palette as PaletteIcon,
+  TrendingUp as TrendingUpIcon,
+  TrendingDown as TrendingDownIcon,
+  Clipboard as ClipboardIcon,
+  Settings as SettingsIcon,
+  Shield as ShieldIcon,
+  User as UserIcon,
+  LogOut as LogOutIcon,
+  Menu as MenuIcon,
+  X as XIcon,
+  DollarSign as DollarSignIcon,
+  ShoppingCart as ShoppingCartIcon,
+  Search as SearchIcon,
+  ChevronLeft as ChevronLeftIcon,
+  ChevronRight as ChevronRightIcon,
+  Droplets as DropletsIcon,
+  Paintbrush as PaintbrushIcon,
+  Calendar as CalendarIcon,
+  Bell as BellIcon,
+  Plus as PlusIcon,
+  AlertTriangle as AlertTriangleIcon,
+  RefreshCw as RefreshCwIcon,
+  Loader as LoaderIcon
 } from 'lucide-vue-next'
-
-// Rename imported icons to avoid conflicts
-const PackageIcon = Package
-const UserIcon = User
-const LogOutIcon = LogOut
-const MenuIcon = Menu
-const XIcon = X
-const DollarSignIcon = DollarSign
-const ShoppingCartIcon = ShoppingCart
-const BoxIcon = Package
-const SearchIcon = Search
-const ChevronLeftIcon = ChevronLeft
-const ChevronRightIcon = ChevronRight
-const DropletsIcon = Droplets
-const PaintbrushIcon = Paintbrush
-const CalendarIcon = Calendar
-const BellIcon = Bell
-const PlusIcon = Plus
-const AlertTriangleIcon = AlertTriangle
-const RefreshCwIcon = RefreshCw
-const LoaderIcon = Loader
-const TrendingUpIcon = TrendingUp
-const TrendingDownIcon = TrendingDown
-const ClipboardIcon = Clipboard
-
 
 // Current date
 const currentDate = new Date().toLocaleDateString('en-US', { 
@@ -764,7 +938,6 @@ const sales = ref([])
 const loading = ref(true)
 const error = ref(null)
 const totalRevenue = ref(0)
-const total = ref(0)
 const totalOrders = ref(0)
 const totalProductsSold = ref(0)
 const averageOrderValue = ref(0)
@@ -775,7 +948,7 @@ const showAddSaleModal = ref(false)
 const isSubmitting = ref(false)
 const mobileSidebarOpen = ref(false)
 const router = useRouter()
-const overrideStockCheck = ref(false) // New ref for stock validation override
+const overrideStockCheck = ref(false) // For stock validation override
 
 // Date range selector
 const dateRanges = [
@@ -807,20 +980,6 @@ const saleForm = ref({
   status: 'completed',
   paymentMethod: 'cash'
 })
-
-// Navigation items for sidebar
-const navigationItems = computed(() => [
-  { name: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
-  { name: 'Staff Management', path: '/admin/staff', icon: Users },
-  { name: 'Inventory', path: '/admin/inventory', icon: PackageIcon },
-  { name: 'House Paint Recommender', path: '/admin/house-paint-recommender', icon: Home },
-  { name: 'Paint Mixing', path: '/admin/paint-mixing', icon: Palette },
-  { name: 'Sales Analytics', path: '/admin/sales-analytics', icon: TrendingUpIcon },
-  { name: 'Reports', path: '/admin/reports', icon: ClipboardIcon },
-  { name: 'System Settings', path: '/admin/settings', icon: Settings },
-  { name: 'Security', path: '/admin/security', icon: Shield }
-])
-
 
 // Fetch sales data based on date range
 const fetchSalesData = async () => {
@@ -1046,7 +1205,6 @@ const calculateSalesByCategory = (salesData) => {
   console.log(`Calculated sales for ${salesByCategory.value.length} categories`)
 }
 
-
 // Format currency
 const formatCurrency = (value) => {
   return `₱${Number(value).toLocaleString(undefined, {
@@ -1072,48 +1230,12 @@ const getCategoryIcon = (category) => {
   const icons = {
     'Interior': DropletsIcon,
     'Exterior': PaintbrushIcon,
-    'Primers': BoxIcon,
-    'Specialty': Palette
+    'Primers': PackageIcon,
+    'Specialty': PaletteIcon
   }
   
-  return icons[category] || BoxIcon
+  return icons[category] || PackageIcon
 }
-
-// Computed stats for the cards
-const stats = computed(() => [
-  {
-    label: 'Total Revenue',
-    value: formatCurrency(totalRevenue.value),
-    trend: 12.5, // You can calculate this based on previous period
-    icon: DollarSignIcon,
-    iconBg: 'bg-green-50',
-    iconColor: 'text-green-600',
-  },
-  {
-    label: 'Total Orders',
-    value: totalOrders.value.toString(),
-    trend: 8.2,
-    icon: ShoppingCartIcon,
-    iconBg: 'bg-blue-50',
-    iconColor: 'text-blue-600',
-  },
-  {
-    label: 'Products Sold',
-    value: totalProductsSold.value.toString(),
-    trend: -3.1,
-    icon: BoxIcon,
-    iconBg: 'bg-purple-50',
-    iconColor: 'text-purple-600',
-  },
-  {
-    label: 'Average Order Value',
-    value: formatCurrency(averageOrderValue.value),
-    trend: 5.3,
-    icon: TrendingUpIcon,
-    iconBg: 'bg-amber-50',
-    iconColor: 'text-amber-600',
-  },
-])
 
 // Sorted top products based on selected metric
 const sortedTopProducts = computed(() => {
@@ -1340,7 +1462,7 @@ const resetSaleForm = () => {
   overrideStockCheck.value = false // Reset override checkbox
 }
 
-// Add this function after the resetSaleForm function
+// Create sample sale
 const createSampleSale = () => {
   // Reset the form first
   resetSaleForm()
@@ -1415,12 +1537,48 @@ const handleLogout = () => {
 </script>
 
 <style scoped>
-.router-link-active {
-  background-color: #f9fafb;
-  font-weight: 500;
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
 }
 
-:root {
-  --navy: #1e3a8a;
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Modal transition */
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
 }
 </style>

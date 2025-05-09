@@ -1,19 +1,25 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <div class="flex h-screen">
-      <!-- Sidebar - Copied exactly from other admin pages -->
-      <aside class="w-64 bg-white border-r border-gray-200 hidden md:block">
+  <div class="min-h-screen bg-[#001333] relative overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute inset-0">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-[#0A3573] opacity-10 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#0A3573] opacity-10 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+    </div>
+
+    <div class="relative z-10 flex h-screen">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-[#0A2159]/90 backdrop-blur-sm border-r border-white/10 hidden md:block">
         <!-- Logo/Brand -->
-        <div class="p-6 border-b border-gray-200">
-          <h1 class="text-xl font-bold text-gray-900">Mindoro Paint Center</h1>
+        <div class="p-6 border-b border-white/10">
+          <h1 class="text-xl font-bold text-white">Mindoro Paint Center</h1>
         </div>
 
         <!-- Navigation -->
-        <nav class="p-4 space-y-2">
+        <nav class="p-4 space-y-2 overflow-y-auto max-h-[calc(100vh-10rem)]">
           <router-link 
             to="/admin/dashboard" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/dashboard' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/dashboard' }"
           >
             <LayoutDashboardIcon class="w-5 h-5" />
             <span>Dashboard</span>
@@ -21,8 +27,8 @@
 
           <router-link 
             to="/admin/staff" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/staff' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/staff' }"
           >
             <UsersIcon class="w-5 h-5" />
             <span>Staff Management</span>
@@ -30,8 +36,8 @@
 
           <router-link 
             to="/admin/inventory" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/inventory' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/inventory' }"
           >
             <PackageIcon class="w-5 h-5" />
             <span>Inventory</span>
@@ -39,8 +45,8 @@
 
           <router-link 
             to="/admin/house-paint-recommender" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/house-paint-recommender' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/house-paint-recommender' }"
           >
             <HomeIcon class="w-5 h-5" />
             <span>House Paint Recommender</span>
@@ -48,8 +54,8 @@
 
           <router-link 
             to="/admin/paint-mixing" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/paint-mixing' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/paint-mixing' }"
           >
             <PaletteIcon class="w-5 h-5" />
             <span>Paint Mixing</span>
@@ -57,8 +63,8 @@
 
           <router-link 
             to="/admin/sales-analytics" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/sales-analytics' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/sales-analytics' }"
           >
             <TrendingUpIcon class="w-5 h-5" />
             <span>Sales Analytics</span>
@@ -66,8 +72,8 @@
 
           <router-link 
             to="/admin/reports" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/reports' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/reports' }"
           >
             <ClipboardIcon class="w-5 h-5" />
             <span>Reports</span>
@@ -75,8 +81,8 @@
 
           <router-link 
             to="/admin/settings" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/settings' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/settings' }"
           >
             <SettingsIcon class="w-5 h-5" />
             <span>System Settings</span>
@@ -84,8 +90,8 @@
 
           <router-link 
             to="/admin/security" 
-            class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-            :class="{ 'bg-gray-100': $route.path === '/admin/security' }"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/security' }"
           >
             <ShieldIcon class="w-5 h-5" />
             <span>Security</span>
@@ -93,21 +99,21 @@
         </nav>
 
         <!-- User Menu -->
-        <div class="absolute bottom-0 w-64 p-4 border-t border-gray-200 bg-white">
+        <div class="absolute bottom-0 w-64 p-4 border-t border-white/10 bg-[#0A2159]/90 backdrop-blur-sm">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-              <UserIcon class="w-5 h-5 text-gray-600" />
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+              <UserIcon class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
-              <p class="text-xs text-gray-500 truncate">admin@example.com</p>
+              <p class="text-sm font-medium text-white truncate">{{ userDisplayName }}</p>
+              <p class="text-xs text-white/60 truncate">{{ userEmail }}</p>
             </div>
             <button 
               @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              class="p-2 rounded-lg hover:bg-white/10 text-white transition-colors"
               title="Logout"
             >
-              <LogOutIcon class="w-5 h-5 text-gray-600" />
+              <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -117,10 +123,11 @@
       <div class="fixed top-4 left-4 z-30 md:hidden">
         <button 
           @click="toggleMobileSidebar"
-          class="p-2 bg-white border border-gray-200 rounded-lg shadow-sm"
+          class="p-2 bg-[#0A2159]/90 backdrop-blur-sm border border-white/10 rounded-lg shadow-sm"
+          aria-label="Toggle navigation menu"
         >
-          <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-600" />
-          <XIcon v-else class="w-6 h-6 text-gray-600" />
+          <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-white" />
+          <XIcon v-else class="w-6 h-6 text-white" />
         </button>
       </div>
 
@@ -128,38 +135,125 @@
       <div 
         v-if="mobileSidebarOpen" 
         class="fixed inset-0 bg-black/20 z-20 md:hidden"
-        @click="mobileSidebarOpen = false"
+        @click="toggleMobileSidebar"
       ></div>
-      
+
       <aside 
         v-if="mobileSidebarOpen"
-        class="fixed left-0 top-0 h-full w-64 bg-white border-r border-gray-200 z-20 md:hidden"
+        class="fixed left-0 top-0 h-full w-64 bg-[#0A2159]/90 backdrop-blur-sm border-r border-white/10 z-20 md:hidden"
       >
         <!-- Same content as desktop sidebar -->
-        <div class="p-6 border-b border-gray-200">
-          <h1 class="text-xl font-bold text-gray-900">Mindoro Paint Center</h1>
+        <div class="p-6 border-b border-white/10">
+          <h1 class="text-xl font-bold text-white">Mindoro Paint Center</h1>
         </div>
 
         <nav class="p-4 space-y-2">
-          <!-- Same navigation links as desktop sidebar -->
-          <!-- ... -->
+          <router-link 
+            to="/admin/dashboard" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/dashboard' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <LayoutDashboardIcon class="w-5 h-5" />
+            <span>Dashboard</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/staff" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/staff' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <UsersIcon class="w-5 h-5" />
+            <span>Staff Management</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/inventory" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/inventory' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <PackageIcon class="w-5 h-5" />
+            <span>Inventory</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/house-paint-recommender" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/house-paint-recommender' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <HomeIcon class="w-5 h-5" />
+            <span>House Paint Recommender</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/paint-mixing" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/paint-mixing' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <PaletteIcon class="w-5 h-5" />
+            <span>Paint Mixing</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/sales-analytics" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/sales-analytics' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <TrendingUpIcon class="w-5 h-5" />
+            <span>Sales Analytics</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/reports" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/reports' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <ClipboardIcon class="w-5 h-5" />
+            <span>Reports</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/settings" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/settings' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <SettingsIcon class="w-5 h-5" />
+            <span>System Settings</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/security" 
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
+            :class="{ 'bg-white/10': $route.path === '/admin/security' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <ShieldIcon class="w-5 h-5" />
+            <span>Security</span>
+          </router-link>
         </nav>
 
-        <div class="absolute bottom-0 w-64 p-4 border-t border-gray-200 bg-white">
+        <div class="absolute bottom-0 w-64 p-4 border-t border-white/10 bg-[#0A2159]/90 backdrop-blur-sm">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-              <UserIcon class="w-5 h-5 text-gray-600" />
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+              <UserIcon class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
-              <p class="text-xs text-gray-500 truncate">admin@example.com</p>
+              <p class="text-sm font-medium text-white truncate">{{ userDisplayName }}</p>
+              <p class="text-xs text-white/60 truncate">{{ userEmail }}</p>
             </div>
             <button 
               @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              class="p-2 rounded-lg hover:bg-white/10 text-white transition-colors"
               title="Logout"
             >
-              <LogOutIcon class="w-5 h-5 text-gray-600" />
+              <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -167,32 +261,40 @@
 
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
-        <div class="p-4 md:p-6 lg:p-8">
-          <!-- Header Section -->
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <!-- Header -->
+        <header class="bg-[#0A2159]/80 backdrop-blur-sm border-b border-white/10 px-8 py-4 shadow-md">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 class="text-2xl font-bold text-navy">Dashboard</h1>
-              <p class="text-navy/60">Welcome to your admin dashboard</p>
+              <h1 class="text-2xl font-bold text-white">Dashboard</h1>
+              <p class="text-white/60">Welcome to your admin dashboard</p>
             </div>
-            <button 
-              @click="showSetupGuide = true"
-              class="flex items-center gap-2 px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90 transition-colors"
-            >
-              <BookOpenIcon class="w-5 h-5" />
-              <span>Setup Guide</span>
-            </button>
+            <div class="flex items-center gap-4">
+              <div class="flex items-center gap-2 text-white/80">
+                <CalendarIcon class="w-5 h-5" />
+                <span>{{ currentDate }}</span>
+              </div>
+              <div class="h-6 w-px bg-white/20"></div>
+              <div class="flex items-center gap-3">
+                <span class="text-white">Welcome, {{ userDisplayName || 'Admin' }}</span>
+                <div class="relative">
+                  <BellIcon class="w-5 h-5 text-white cursor-pointer hover:text-white/70" />
+                </div>
+              </div>
+            </div>
           </div>
+        </header>
 
+        <div class="p-6 md:p-8">
           <!-- Welcome Section -->
-          <div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
+          <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 mb-6 border border-white/10">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div>
-                <h2 class="text-xl font-bold text-navy mb-2">Welcome to your Dashboard!</h2>
-                <p class="text-navy/60">Get started by setting up your paint store.</p>
+                <h2 class="text-xl font-bold text-white mb-2">Welcome to your Dashboard!</h2>
+                <p class="text-white/60">Get started by setting up your paint store.</p>
               </div>
               <button 
                 @click="showSetupGuide = true"
-                class="px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90 transition-colors"
+                class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:opacity-90 transition-colors shadow-lg"
               >
                 Setup Guide
               </button>
@@ -200,71 +302,73 @@
           </div>
 
           <!-- Dashboard Summary Cards -->
-          <!-- In the Quick Stats section, update the Total Sales card -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-4 md:p-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Sales Card -->
+            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Total Sales</h3>
-                <DollarSignIcon class="h-6 w-6 text-gray-400" />
+                <h3 class="text-lg font-semibold text-white">Total Sales</h3>
+                <DollarSignIcon class="h-6 w-6 text-white/40" />
               </div>
               <div class="flex items-end justify-between">
                 <div>
-                  <p class="text-3xl font-bold text-gray-900">₱{{ totalSales.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</p>
-                  <p class="text-sm text-gray-500">{{ salesStatus }}</p>
+                  <p class="text-3xl font-bold text-white">₱{{ totalSales.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</p>
+                  <p class="text-sm text-white/60">{{ salesStatus }}</p>
                 </div>
-                <div class="flex items-center text-gray-400">
+                <div class="flex items-center text-blue-300 hover:text-blue-200 cursor-pointer">
                   <ArrowRightIcon class="w-4 h-4 mr-1" />
                   <span class="text-sm font-medium">Start selling</span>
                 </div>
               </div>
             </div>
 
-            <!-- Update the Orders card -->
-            <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-4 md:p-6">
+            <!-- Orders Card -->
+            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Orders</h3>
-                <ShoppingCartIcon class="h-6 w-6 text-gray-400" />
+                <h3 class="text-lg font-semibold text-white">Orders</h3>
+                <ShoppingCartIcon class="h-6 w-6 text-white/40" />
               </div>
               <div class="flex items-end justify-between">
                 <div>
-                  <p class="text-3xl font-bold text-gray-900">{{ totalOrders }}</p>
-                  <p class="text-sm text-gray-500">{{ totalOrders === 0 ? 'No orders yet' : 'Orders processed' }}</p>
+                  <p class="text-3xl font-bold text-white">{{ totalOrders }}</p>
+                  <p class="text-sm text-white/60">{{ totalOrders === 0 ? 'No orders yet' : 'Orders processed' }}</p>
                 </div>
-                <div class="flex items-center text-gray-400">
+                <div class="flex items-center text-blue-300 hover:text-blue-200 cursor-pointer">
                   <ClipboardIcon class="w-4 h-4 mr-1" />
                   <span class="text-sm font-medium">Create order</span>
                 </div>
               </div>
             </div>
 
-            <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-4 md:p-6">
+            <!-- Products Card -->
+            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Products</h3>
-                <PackageIcon class="h-6 w-6 text-gray-400" />
+                <h3 class="text-lg font-semibold text-white">Products</h3>
+                <PackageIcon class="h-6 w-6 text-white/40" />
               </div>
               <div class="flex items-end justify-between">
                 <div>
-                  <p class="text-3xl font-bold text-gray-900">{{ totalProducts }}</p>
-                  <p class="text-sm text-gray-500">Total products</p>
+                  <p class="text-3xl font-bold text-white">{{ totalProducts }}</p>
+                  <p class="text-sm text-white/60">Total products</p>
                 </div>
-                <div class="flex items-center text-gray-400">
+                <div class="flex items-center text-blue-300 hover:text-blue-200 cursor-pointer">
                   <PackagePlusIcon class="w-4 h-4 mr-1" />
                   <span class="text-sm font-medium">Add product</span>
                 </div>
               </div>
             </div>
 
-            <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-4 md:p-6">
+            <!-- Staff Card -->
+            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Staff</h3>
-                <UsersIcon class="h-6 w-6 text-gray-400" />
+                <h3 class="text-lg font-semibold text-white">Staff</h3>
+                <UsersIcon class="h-6 w-6 text-white/40" />
               </div>
               <div class="flex items-end justify-between">
                 <div>
-                  <p class="text-3xl font-bold text-gray-900">{{ totalStaff }}</p>
-                  <p class="text-sm text-gray-500">Total staff members</p>
+                  <p class="text-3xl font-bold text-white">{{ totalStaff }}</p>
+                  <p class="text-sm text-white/60">Total staff members</p>
                 </div>
-                <div class="flex items-center text-gray-400">
+                <div class="flex items-center text-blue-300 hover:text-blue-200 cursor-pointer">
                   <UserPlusIcon class="w-4 h-4 mr-1" />
                   <span class="text-sm font-medium">Add staff</span>
                 </div>
@@ -274,21 +378,21 @@
 
           <!-- Getting Started Section -->
           <div class="mt-8">
-            <h2 class="text-xl font-bold text-navy mb-4">Getting Started</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <h2 class="text-xl font-bold text-white mb-6">Getting Started</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
               <!-- Add Products Card -->
-              <div class="bg-white rounded-xl p-6 shadow-sm">
-                <div class="flex justify-center mb-4">
-                  <div class="p-4 bg-gray-100 rounded-full">
-                    <PackageIcon class="w-8 h-8 text-navy/60" />
+              <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
+                <div class="flex justify-center mb-6">
+                  <div class="p-4 bg-white/10 rounded-full">
+                    <PackageIcon class="w-8 h-8 text-white/70" />
                   </div>
                 </div>
-                <h3 class="text-lg font-bold text-navy text-center mb-2">1. Add Products</h3>
-                <p class="text-navy/60 text-center mb-4">Start by adding your paint products to the inventory</p>
+                <h3 class="text-lg font-bold text-white text-center mb-2">1. Add Products</h3>
+                <p class="text-white/60 text-center mb-6">Start by adding your paint products to the inventory</p>
                 <div class="flex justify-center">
                   <router-link 
                     to="/admin/inventory" 
-                    class="px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90 transition-colors w-full text-center"
+                    class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:opacity-90 transition-colors w-full text-center shadow-lg"
                   >
                     Add Products
                   </router-link>
@@ -296,18 +400,18 @@
               </div>
 
               <!-- Add Staff Card -->
-              <div class="bg-white rounded-xl p-6 shadow-sm">
-                <div class="flex justify-center mb-4">
-                  <div class="p-4 bg-gray-100 rounded-full">
-                    <UsersIcon class="w-8 h-8 text-navy/60" />
+              <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
+                <div class="flex justify-center mb-6">
+                  <div class="p-4 bg-white/10 rounded-full">
+                    <UsersIcon class="w-8 h-8 text-white/70" />
                   </div>
                 </div>
-                <h3 class="text-lg font-bold text-navy text-center mb-2">2. Add Staff</h3>
-                <p class="text-navy/60 text-center mb-4">Create accounts for your staff members</p>
+                <h3 class="text-lg font-bold text-white text-center mb-2">2. Add Staff</h3>
+                <p class="text-white/60 text-center mb-6">Create accounts for your staff members</p>
                 <div class="flex justify-center">
                   <router-link 
                     to="/admin/staff" 
-                    class="px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90 transition-colors w-full text-center"
+                    class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:opacity-90 transition-colors w-full text-center shadow-lg"
                   >
                     Manage Staff
                   </router-link>
@@ -315,18 +419,18 @@
               </div>
 
               <!-- Configure Settings Card -->
-              <div class="bg-white rounded-xl p-6 shadow-sm">
-                <div class="flex justify-center mb-4">
-                  <div class="p-4 bg-gray-100 rounded-full">
-                    <SettingsIcon class="w-8 h-8 text-navy/60" />
+              <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg p-6 border border-white/10">
+                <div class="flex justify-center mb-6">
+                  <div class="p-4 bg-white/10 rounded-full">
+                    <SettingsIcon class="w-8 h-8 text-white/70" />
                   </div>
                 </div>
-                <h3 class="text-lg font-bold text-navy text-center mb-2">3. Configure Settings</h3>
-                <p class="text-navy/60 text-center mb-4">Set up your store preferences and system settings</p>
+                <h3 class="text-lg font-bold text-white text-center mb-2">3. Configure Settings</h3>
+                <p class="text-white/60 text-center mb-6">Set up your store preferences and system settings</p>
                 <div class="flex justify-center">
                   <router-link 
                     to="/admin/settings" 
-                    class="px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90 transition-colors w-full text-center"
+                    class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:opacity-90 transition-colors w-full text-center shadow-lg"
                   >
                     System Settings
                   </router-link>
@@ -340,14 +444,14 @@
   </div>
 
   <!-- Setup Guide Modal -->
-  <div v-if="showSetupGuide" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-2xl max-h-[80vh] overflow-auto">
-      <div class="p-6 border-b border-navy/10 sticky top-0 bg-white z-10">
+  <div v-if="showSetupGuide" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl w-full max-w-2xl max-h-[80vh] overflow-auto border border-white/10 shadow-2xl">
+      <div class="p-6 border-b border-white/10 sticky top-0 bg-[#0A2159] z-10">
         <div class="flex justify-between items-center">
-          <h3 class="text-xl font-bold text-navy">Setup Guide</h3>
+          <h3 class="text-xl font-bold text-white">Setup Guide</h3>
           <button 
             @click="showSetupGuide = false"
-            class="p-2 hover:bg-navy/5 rounded-lg text-navy/60"
+            class="p-2 hover:bg-white/10 rounded-lg text-white/60 hover:text-white"
           >
             <XIcon class="w-5 h-5" />
           </button>
@@ -357,9 +461,9 @@
       <div class="p-6">
         <div class="space-y-6">
           <div>
-            <h4 class="text-lg font-bold text-navy mb-2">1. Add Products</h4>
-            <p class="text-navy/60 mb-4">Start by adding your paint products to the inventory.</p>
-            <ul class="list-disc pl-5 space-y-2 text-navy/70">
+            <h4 class="text-lg font-bold text-white mb-2">1. Add Products</h4>
+            <p class="text-white/60 mb-4">Start by adding your paint products to the inventory.</p>
+            <ul class="list-disc pl-5 space-y-2 text-white/70">
               <li>Go to the Inventory page</li>
               <li>Click "Add Product" button</li>
               <li>Fill in the product details (name, category, price, etc.)</li>
@@ -369,9 +473,9 @@
           </div>
 
           <div>
-            <h4 class="text-lg font-bold text-navy mb-2">2. Add Staff Members</h4>
-            <p class="text-navy/60 mb-4">Create accounts for your staff members.</p>
-            <ul class="list-disc pl-5 space-y-2 text-navy/70">
+            <h4 class="text-lg font-bold text-white mb-2">2. Add Staff Members</h4>
+            <p class="text-white/60 mb-4">Create accounts for your staff members.</p>
+            <ul class="list-disc pl-5 space-y-2 text-white/70">
               <li>Go to the Staff Management page</li>
               <li>Click "Add Staff Member" button</li>
               <li>Fill in the staff details (name, email, role, etc.)</li>
@@ -381,9 +485,9 @@
           </div>
 
           <div>
-            <h4 class="text-lg font-bold text-navy mb-2">3. Configure System Settings</h4>
-            <p class="text-navy/60 mb-4">Set up your store preferences and system settings.</p>
-            <ul class="list-disc pl-5 space-y-2 text-navy/70">
+            <h4 class="text-lg font-bold text-white mb-2">3. Configure System Settings</h4>
+            <p class="text-white/60 mb-4">Set up your store preferences and system settings.</p>
+            <ul class="list-disc pl-5 space-y-2 text-white/70">
               <li>Go to the System Settings page</li>
               <li>Configure store information (name, address, contact details)</li>
               <li>Set up tax rates and currency preferences</li>
@@ -393,9 +497,9 @@
           </div>
 
           <div>
-            <h4 class="text-lg font-bold text-navy mb-2">4. Record Sales</h4>
-            <p class="text-navy/60 mb-4">Start recording sales and managing orders.</p>
-            <ul class="list-disc pl-5 space-y-2 text-navy/70">
+            <h4 class="text-lg font-bold text-white mb-2">4. Record Sales</h4>
+            <p class="text-white/60 mb-4">Start recording sales and managing orders.</p>
+            <ul class="list-disc pl-5 space-y-2 text-white/70">
               <li>Go to the Sales Analytics page</li>
               <li>Click "Add Sale" button</li>
               <li>Select products and quantities</li>
@@ -408,11 +512,35 @@
         <div class="mt-8 flex justify-end">
           <button 
             @click="showSetupGuide = false"
-            class="px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90 transition-colors"
+            class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:opacity-90 transition-colors shadow-lg"
           >
             Got it!
           </button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div v-if="showLogoutConfirmation" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl w-full max-w-md border border-white/10 shadow-2xl p-6">
+      <h3 class="text-xl font-bold text-white mb-4">Confirm Logout</h3>
+      <p class="text-white/80 mb-6">Are you sure you want to log out of your account?</p>
+      <div class="flex justify-end gap-3">
+        <button 
+          @click="showLogoutConfirmation = false"
+          class="px-4 py-2 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors"
+        >
+          Cancel
+        </button>
+        <button 
+          @click="confirmLogout"
+          class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:opacity-90 transition-colors shadow-lg flex items-center"
+          :disabled="isLoggingOut"
+        >
+          <LoaderIcon v-if="isLoggingOut" class="animate-spin w-4 h-4 mr-2" />
+          <span>{{ isLoggingOut ? 'Logging out...' : 'Logout' }}</span>
+        </button>
       </div>
     </div>
   </div>
@@ -421,7 +549,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { 
+import {
   LayoutDashboard as LayoutDashboardIcon,
   Users as UsersIcon,
   Package as PackageIcon,
@@ -449,9 +577,12 @@ import {
   PackagePlus as PackagePlusIcon,
   FileText as FileTextIcon,
   CheckCircle as CheckCircleIcon,
+  BookOpen as BookOpenIcon,
+  Loader as LoaderIcon
 } from 'lucide-vue-next'
 import { collection, query, getDocs, orderBy } from 'firebase/firestore'
-import { db } from '../../config/firebase'
+import { db, auth } from '../../config/firebase'
+import { signOut } from 'firebase/auth'
 
 const router = useRouter()
 const route = useRoute()
@@ -461,6 +592,10 @@ const totalProducts = ref(0)
 const totalStaff = ref(0)
 const totalOrders = ref(0)
 const showSetupGuide = ref(false)
+const showLogoutConfirmation = ref(false)
+const isLoggingOut = ref(false)
+const userEmail = ref('')
+const userDisplayName = ref('')
 
 // Fetch product count from Firestore
 const fetchProductCount = async () => {
@@ -536,31 +671,20 @@ const fetchSalesData = async () => {
   }
 }
 
+// Get current user info
+const fetchUserInfo = () => {
+  const user = auth.currentUser
+  if (user) {
+    userEmail.value = user.email || ''
+    userDisplayName.value = user.displayName || 'Admin'
+  }
+}
+
 const currentDate = new Date().toLocaleDateString('en-US', { 
   weekday: 'long', 
   year: 'numeric', 
   month: 'long', 
   day: 'numeric' 
-})
-
-const currentTime = new Date().toLocaleTimeString('en-US', {
-  hour: '2-digit',
-  minute: '2-digit'
-})
-
-const pageTitle = computed(() => {
-  const routeNames = {
-    '/admin/dashboard': 'Dashboard',
-    '/admin/staff': 'Staff Management',
-    '/admin/inventory': 'Inventory',
-    '/admin/house-paint-recommender': 'House Paint Recommender',
-    '/admin/paint-mixing': 'Paint Mixing',
-    '/admin/sales-analytics': 'Sales Analytics',
-    '/admin/reports': 'Reports',
-    '/admin/settings': 'System Settings',
-    '/admin/security': 'Security'
-  }
-  return routeNames[route.path] || 'Dashboard'
 })
 
 const salesStatus = computed(() => {
@@ -571,8 +695,28 @@ const toggleMobileSidebar = () => {
   mobileSidebarOpen.value = !mobileSidebarOpen.value
 }
 
+// Show logout confirmation dialog
 const handleLogout = () => {
-  router.push('/admin')
+  showLogoutConfirmation.value = true
+}
+
+// Perform actual logout after confirmation
+const confirmLogout = async () => {
+  try {
+    isLoggingOut.value = true
+    
+    // Sign out from Firebase Auth
+    await signOut(auth)
+    console.log('User signed out successfully')
+    
+    // Redirect to homepage (root path)
+    router.push('/')
+  } catch (error) {
+    console.error('Error signing out:', error)
+  } finally {
+    isLoggingOut.value = false
+    showLogoutConfirmation.value = false
+  }
 }
 
 // Load data on component mount
@@ -580,20 +724,27 @@ onMounted(() => {
   fetchProductCount()
   fetchStaffCount()
   fetchSalesData()
+  fetchUserInfo()
 })
 </script>
 
 <style scoped>
-.router-link-active {
-  background-color: #f9fafb;
-  font-weight: 500;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* Define your gradient colors */
-:root {
-  --pale-blue: #e0f2fe;
-  --light-blue: #bae6fd;
-  --medium-blue: #93c5fd;
-  --navy: #1e3a8a;
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 </style>
