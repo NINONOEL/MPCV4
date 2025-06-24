@@ -1,322 +1,366 @@
 <template>
-  <div class="min-h-screen bg-[#00205F] relative overflow-hidden">
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
+    <!-- Enhanced Background Elements with Paint Colors -->
+    <div class="absolute inset-0">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-red-200 via-orange-200 to-yellow-200 opacity-25 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-green-200 via-blue-200 to-purple-200 opacity-25 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+      <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-br from-pink-200 via-rose-200 to-red-200 opacity-20 rounded-full filter blur-2xl transform -translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute top-1/4 left-1/4 w-48 h-48 bg-gradient-to-br from-cyan-200 via-teal-200 to-emerald-200 opacity-15 rounded-full filter blur-xl"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-gradient-to-br from-violet-200 via-purple-200 to-fuchsia-200 opacity-15 rounded-full filter blur-xl"></div>
+    </div>
+
     <!-- Main Content -->
     <div class="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-12">
-      <div class="w-full max-w-md">
-        <!-- Logo -->
-        <div class="text-center mb-10">
-          <h1 class="text-4xl font-bold text-white mb-3 tracking-tight">
-            Mindoro Paint Center
+      <div class="w-full max-w-lg">
+        <!-- Enhanced Colorful Header -->
+        <div class="text-center mb-10 flex flex-col items-center justify-center">
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 tracking-tight italic text-center mx-auto px-4">
+            <span class="bg-gradient-to-r from-red-500 via-orange-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+              Barcelona Paint Center
+            </span>
           </h1>
-          <div class="h-1 w-32 bg-blue-400 mx-auto rounded-full"></div>
+          <div class="flex justify-center items-center gap-2 mb-4">
+            <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+            <div class="w-3 h-3 bg-orange-500 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+            <div class="w-3 h-3 bg-yellow-500 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+            <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse" style="animation-delay: 0.6s;"></div>
+            <div class="w-3 h-3 bg-blue-500 rounded-full animate-pulse" style="animation-delay: 0.8s;"></div>
+            <div class="w-3 h-3 bg-purple-500 rounded-full animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="w-3 h-3 bg-pink-500 rounded-full animate-pulse" style="animation-delay: 1.2s;"></div>
+          </div>
+          <p class="text-xl font-semibold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Admin Portal
+          </p>
         </div>
         
-        <!-- Form Card -->
-        <div class="bg-[#cce7f8] rounded-lg shadow-2xl overflow-hidden">
-          <!-- Tabs -->
-          <div class="flex">
-            <button 
-              @click="activeTab = 'login'"
-              class="flex-1 py-4 text-center font-medium transition-all duration-300"
-              :class="activeTab === 'login' ? 'text-[#00205F] bg-[#cce7f8] border-b-2 border-[#00205F]' : 'text-[#00205F]/70 bg-[#b8ddf5] hover:bg-[#cce7f8]/90'"
-            >
-              <span class="flex justify-center items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-                Login
-              </span>
-            </button>
-            <button 
-              v-if="showRegisterTab"
-              @click="activeTab = 'register'"
-              class="flex-1 py-4 text-center font-medium transition-all duration-300"
-              :class="activeTab === 'register' ? 'text-[#00205F] bg-[#cce7f8] border-b-2 border-[#00205F]' : 'text-[#00205F]/70 bg-[#b8ddf5] hover:bg-[#cce7f8]/90'"
-            >
-              <span class="flex justify-center items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-                Register
-              </span>
-            </button>
-          </div>
-
-          <div class="p-8 space-y-6">
-            <!-- Header -->
-            <div class="text-center space-y-2">
-              <h2 class="text-3xl font-bold text-[#00205F] tracking-tight">
-                {{ activeTab === 'login' ? 'Admin Login' : 'Create Admin Account' }}
-              </h2>
-              <p class="text-[#00205F]/70">
-                {{ activeTab === 'login' ? 'Login to access the administrator dashboard' : 'Set up your administrator account to manage the system' }}
-              </p>
+        <!-- Enhanced Form Card with Paint Theme -->
+        <div class="bg-white/90 backdrop-blur-sm border-2 border-transparent bg-gradient-to-r from-red-100 via-yellow-100 via-green-100 via-blue-100 to-purple-100 p-0.5 rounded-2xl shadow-2xl overflow-hidden hover:shadow-3xl transition-all duration-300">
+          <div class="bg-white/95 backdrop-blur-sm rounded-2xl overflow-hidden">
+            <!-- Colorful Tabs -->
+            <div class="flex bg-gradient-to-r from-red-50 via-orange-50 via-yellow-50 via-green-50 via-blue-50 to-purple-50 border-b-2 border-gray-100">
+              <button 
+                @click="activeTab = 'login'"
+                class="flex-1 py-4 text-center font-bold transition-all duration-300 relative"
+                :class="activeTab === 'login' ? 'text-blue-700 bg-white shadow-lg transform scale-105' : 'text-gray-600 hover:text-gray-900 hover:bg-white/70'"
+              >
+                <span class="flex justify-center items-center gap-2">
+                  <LogInIcon class="h-5 w-5" />
+                  Login
+                </span>
+                <div v-if="activeTab === 'login'" class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 rounded-t-full"></div>
+              </button>
+              <button 
+                v-if="showRegisterTab"
+                @click="activeTab = 'register'"
+                class="flex-1 py-4 text-center font-bold transition-all duration-300 relative"
+                :class="activeTab === 'register' ? 'text-purple-700 bg-white shadow-lg transform scale-105' : 'text-gray-600 hover:text-gray-900 hover:bg-white/70'"
+              >
+                <span class="flex justify-center items-center gap-2">
+                  <UserPlusIcon class="h-5 w-5" />
+                  Register
+                </span>
+                <div v-if="activeTab === 'register'" class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 rounded-t-full"></div>
+              </button>
             </div>
 
-            <!-- Admin Registration Form -->
-            <form v-if="activeTab === 'register'" @submit.prevent="createAdminAccount" class="space-y-6">
-              <!-- Registration Security Code -->
-              <div class="space-y-2">
-                <label for="securityCode" class="block text-sm font-medium text-[#00205F]">
-                  Admin Security Code
-                </label>
-                <div class="relative group">
-                  <ShieldIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#00205F]/40 group-focus-within:text-[#00205F] transition-colors duration-200" />
-                  <input 
-                    type="password" 
-                    id="securityCode" 
-                    v-model="adminData.securityCode" 
-                    required 
-                    class="w-full pl-10 pr-4 py-3 rounded-lg border border-[#00205F]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#00205F]/20 focus:border-[#00205F]/30 transition-all duration-200 text-[#00205F] placeholder-[#00205F]/40 shadow-sm"
-                    placeholder="Enter admin security code"
-                  />
-                </div>
-              </div>
-
-              <!-- Last Name Field -->
-              <div class="space-y-2">
-                <label for="lastName" class="block text-sm font-medium text-[#00205F]">
-                  Last Name
-                </label>
-                <div class="relative group">
-                  <UserIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#00205F]/40 group-focus-within:text-[#00205F] transition-colors duration-200" />
-                  <input
-                    type="text"
-                    id="lastName" 
-                    v-model="adminData.lastName" 
-                    required 
-                    class="w-full pl-10 pr-4 py-3 rounded-lg border border-[#00205F]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#00205F]/20 focus:border-[#00205F]/30 transition-all duration-200 text-[#00205F] placeholder-[#00205F]/40 shadow-sm"
-                    placeholder="Enter your last name"
-                  />
-                </div>
-              </div>
-
-              <!-- First Name Field -->
-              <div class="space-y-2">
-                <label for="firstName" class="block text-sm font-medium text-[#00205F]">
-                  First Name
-                </label>
-                <div class="relative group">
-                  <UserIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#00205F]/40 group-focus-within:text-[#00205F] transition-colors duration-200" />
-                  <input 
-                    type="text" 
-                    id="firstName" 
-                    v-model="adminData.firstName" 
-                    required 
-                    class="w-full pl-10 pr-4 py-3 rounded-lg border border-[#00205F]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#00205F]/20 focus:border-[#00205F]/30 transition-all duration-200 text-[#00205F] placeholder-[#00205F]/40 shadow-sm"
-                    placeholder="Enter your first name"
-                  />
-                </div>
-              </div>
-
-              <!-- Email Field -->
-              <div class="space-y-2">
-                <label for="email" class="block text-sm font-medium text-[#00205F]">
-                  Email
-                </label>
-                <div class="relative group">
-                  <MailIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#00205F]/40 group-focus-within:text-[#00205F] transition-colors duration-200" />
-                  <input 
-                    type="email" 
-                    id="email" 
-                    v-model="adminData.email" 
-                    required 
-                    class="w-full pl-10 pr-4 py-3 rounded-lg border border-[#00205F]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#00205F]/20 focus:border-[#00205F]/30 transition-all duration-200 text-[#00205F] placeholder-[#00205F]/40 shadow-sm"
-                    placeholder="Enter your email"
-                  />
-                </div>
-              </div>
-
-              <!-- Password Field -->
-              <div class="space-y-2">
-                <label for="password" class="block text-sm font-medium text-[#00205F]">
-                  Password
-                </label>
-                <div class="relative group">
-                  <LockIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#00205F]/40 group-focus-within:text-[#00205F] transition-colors duration-200" />
-                  <input 
-                    :type="showPassword ? 'text' : 'password'" 
-                    id="password" 
-                    v-model="adminData.password" 
-                    required 
-                    class="w-full pl-10 pr-12 py-3 rounded-lg border border-[#00205F]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#00205F]/20 focus:border-[#00205F]/30 transition-all duration-200 text-[#00205F] placeholder-[#00205F]/40 shadow-sm"
-                    placeholder="Create a strong password"
-                    minlength="8"
-                  />
-                  <button 
-                    type="button" 
-                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#00205F]/40 hover:text-[#00205F]/60 focus:outline-none transition-colors duration-200"
-                    @click="showPassword = !showPassword"
-                  >
-                    <EyeIcon v-if="!showPassword" class="h-5 w-5" />
-                    <EyeOffIcon v-else class="h-5 w-5" />
-                  </button>
-                </div>
-              </div>
-
-              <!-- Confirm Password Field -->
-              <div class="space-y-2">
-                <label for="confirmPassword" class="block text-sm font-medium text-[#00205F]">
-                  Confirm Password
-                </label>
-                <div class="relative group">
-                  <LockIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#00205F]/40 group-focus-within:text-[#00205F] transition-colors duration-200" />
-                  <input 
-                    :type="showConfirmPassword ? 'text' : 'password'" 
-                    id="confirmPassword" 
-                    v-model="adminData.confirmPassword" 
-                    required 
-                    class="w-full pl-10 pr-12 py-3 rounded-lg border border-[#00205F]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#00205F]/20 focus:border-[#00205F]/30 transition-all duration-200 text-[#00205F] placeholder-[#00205F]/40 shadow-sm"
-                    placeholder="Confirm your password"
-                  />
-                  <button 
-                    type="button" 
-                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#00205F]/40 hover:text-[#00205F]/60 focus:outline-none transition-colors duration-200"
-                    @click="showConfirmPassword = !showConfirmPassword"
-                  >
-                    <EyeIcon v-if="!showConfirmPassword" class="h-5 w-5" />
-                    <EyeOffIcon v-else class="h-5 w-5" />
-                  </button>
-                </div>
-              </div>
-
-              <!-- Submit Button -->
-              <button 
-                type="submit" 
-                class="w-full bg-[#00205F] hover:bg-[#002c85] text-white py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
-                :disabled="isLoading"
-              >
-                <LoaderIcon v-if="isLoading" class="animate-spin h-5 w-5" />
-                <span>{{ isLoading ? 'Creating Account...' : 'Create Admin Account' }}</span>
-              </button>
-            </form>
-
-            <!-- Admin Login Form -->
-            <form v-if="activeTab === 'login'" @submit.prevent="loginAdmin" class="space-y-6">
-              <!-- Email Field -->
-              <div class="space-y-2">
-                <label for="loginEmail" class="block text-sm font-medium text-[#00205F]">
-                  Email
-                </label>
-                <div class="relative group">
-                  <MailIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#00205F]/40 group-focus-within:text-[#00205F] transition-colors duration-200" />
-                  <input 
-                    type="email" 
-                    id="loginEmail" 
-                    v-model="loginData.email" 
-                    required 
-                    class="w-full pl-10 pr-4 py-3 rounded-lg border border-[#00205F]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#00205F]/20 focus:border-[#00205F]/30 transition-all duration-200 text-[#00205F] placeholder-[#00205F]/40 shadow-sm"
-                    placeholder="Enter your email"
-                  />
-                </div>
-              </div>
-
-              <!-- Password Field -->
-              <div class="space-y-2">
-                <label for="loginPassword" class="block text-sm font-medium text-[#00205F]">
-                  Password
-                </label>
-                <div class="relative group">
-                  <LockIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#00205F]/40 group-focus-within:text-[#00205F] transition-colors duration-200" />
-                  <input 
-                    :type="showPassword ? 'text' : 'password'" 
-                    id="loginPassword" 
-                    v-model="loginData.password" 
-                    required 
-                    class="w-full pl-10 pr-12 py-3 rounded-lg border border-[#00205F]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#00205F]/20 focus:border-[#00205F]/30 transition-all duration-200 text-[#00205F] placeholder-[#00205F]/40 shadow-sm"
-                    placeholder="Enter your password"
-                  />
-                  <button 
-                    type="button" 
-                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#00205F]/40 hover:text-[#00205F]/60 focus:outline-none transition-colors duration-200"
-                    @click="showPassword = !showPassword"
-                  >
-                    <EyeIcon v-if="!showPassword" class="h-5 w-5" />
-                    <EyeOffIcon v-else class="h-5 w-5" />
-                  </button>
-                </div>
-                <div class="flex justify-end">
-                  <button 
-                    type="button"
-                    @click="showForgotPassword = true"
-                    class="text-sm text-[#00205F]/70 hover:text-[#00205F] transition-colors duration-200 hover:underline"
-                  >
-                    Forgot Password?
-                  </button>
-                </div>
-              </div>
-
-              <!-- Submit Button -->
-              <button 
-                type="submit" 
-                class="w-full bg-[#00205F] hover:bg-[#002c85] text-white py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
-                :disabled="isLoading"
-              >
-                <LoaderIcon v-if="isLoading" class="animate-spin h-5 w-5" />
-                <span>{{ isLoading ? 'Logging in...' : 'Login' }}</span>
-              </button>
-              
-              <!-- Register Link -->
-              <div v-if="!showRegisterTab" class="text-center">
-                <p class="text-[#00205F]/70">
-                  Don't have an account? 
-                  <a href="#" class="text-[#00205F] font-medium hover:underline transition-colors duration-200">Register here</a>
+            <div class="p-8 space-y-6 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30">
+              <!-- Colorful Header -->
+              <div class="text-center space-y-3">
+                <h2 class="text-3xl font-bold tracking-tight">
+                  <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                    {{ activeTab === 'login' ? 'Admin Login' : 'Create Admin Account' }}
+                  </span>
+                </h2>
+                <p class="text-gray-700 font-medium">
+                  {{ activeTab === 'login' ? 'Access your colorful paint management dashboard' : 'Set up your paint center administrator account' }}
                 </p>
               </div>
-            </form>
 
-            <!-- Alert Message -->
-            <div 
-              v-if="alertMessage" 
-              :class="[
-                'p-4 rounded-lg text-sm font-medium transition-all duration-200',
-                alertType === 'success' ? 'bg-green-100 text-green-800 border border-green-200' : 'bg-red-100 text-red-800 border border-red-200'
-              ]"
-            >
-              <div class="flex items-center">
-                <div v-if="alertType === 'success'" class="mr-2 text-green-500">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              <!-- Admin Registration Form -->
+              <form v-if="activeTab === 'register'" @submit.prevent="createAdminAccount" class="space-y-6">
+                <!-- Registration Security Code -->
+                <div class="space-y-2">
+                  <label for="securityCode" class="block text-sm font-bold text-gray-700">
+                    Admin Security Code
+                  </label>
+                  <div class="relative group">
+                    <ShieldIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-purple-400 group-focus-within:text-purple-600 transition-colors duration-200" />
+                    <input 
+                      type="password" 
+                      id="securityCode" 
+                      v-model="adminData.securityCode" 
+                      required 
+                      class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-purple-200 bg-gradient-to-r from-purple-50 to-pink-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
+                      placeholder="Enter admin security code"
+                    />
+                  </div>
                 </div>
-                <div v-else class="mr-2 text-red-500">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+
+                <!-- Last Name Field -->
+                <div class="space-y-2">
+                  <label for="lastName" class="block text-sm font-bold text-gray-700">
+                    Last Name
+                  </label>
+                  <div class="relative group">
+                    <UserIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-green-400 group-focus-within:text-green-600 transition-colors duration-200" />
+                    <input
+                      type="text"
+                      id="lastName" 
+                      v-model="adminData.lastName" 
+                      required 
+                      class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-green-200 bg-gradient-to-r from-green-50 to-emerald-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
+                      placeholder="Enter your last name"
+                    />
+                  </div>
                 </div>
-                {{ alertMessage }}
+
+                <!-- First Name Field -->
+                <div class="space-y-2">
+                  <label for="firstName" class="block text-sm font-bold text-gray-700">
+                    First Name
+                  </label>
+                  <div class="relative group">
+                    <UserIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-400 group-focus-within:text-blue-600 transition-colors duration-200" />
+                    <input 
+                      type="text" 
+                      id="firstName" 
+                      v-model="adminData.firstName" 
+                      required 
+                      class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-cyan-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
+                      placeholder="Enter your first name"
+                    />
+                  </div>
+                </div>
+
+                <!-- Email Field -->
+                <div class="space-y-2">
+                  <label for="email" class="block text-sm font-bold text-gray-700">
+                    Email
+                  </label>
+                  <div class="relative group">
+                    <MailIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-orange-400 group-focus-within:text-orange-600 transition-colors duration-200" />
+                    <input 
+                      type="email" 
+                      id="email" 
+                      v-model="adminData.email" 
+                      required 
+                      class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-orange-200 bg-gradient-to-r from-orange-50 to-yellow-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+                </div>
+
+                <!-- Password Field -->
+                <div class="space-y-2">
+                  <label for="password" class="block text-sm font-bold text-gray-700">
+                    Password
+                  </label>
+                  <div class="relative group">
+                    <LockIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-red-400 group-focus-within:text-red-600 transition-colors duration-200" />
+                    <input 
+                      :type="showPassword ? 'text' : 'password'" 
+                      id="password" 
+                      v-model="adminData.password" 
+                      required 
+                      class="w-full pl-10 pr-12 py-3 rounded-xl border-2 border-red-200 bg-gradient-to-r from-red-50 to-pink-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
+                      placeholder="Create a strong password"
+                      minlength="8"
+                    />
+                    <button 
+                      type="button" 
+                      class="absolute right-3 top-1/2 transform -translate-y-1/2 text-red-400 hover:text-red-600 focus:outline-none transition-colors duration-200"
+                      @click="showPassword = !showPassword"
+                    >
+                      <EyeIcon v-if="!showPassword" class="h-5 w-5" />
+                      <EyeOffIcon v-else class="h-5 w-5" />
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Confirm Password Field -->
+                <div class="space-y-2">
+                  <label for="confirmPassword" class="block text-sm font-bold text-gray-700">
+                    Confirm Password
+                  </label>
+                  <div class="relative group">
+                    <LockIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-pink-400 group-focus-within:text-pink-600 transition-colors duration-200" />
+                    <input 
+                      :type="showConfirmPassword ? 'text' : 'password'" 
+                      id="confirmPassword" 
+                      v-model="adminData.confirmPassword" 
+                      required 
+                      class="w-full pl-10 pr-12 py-3 rounded-xl border-2 border-pink-200 bg-gradient-to-r from-pink-50 to-rose-50 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
+                      placeholder="Confirm your password"
+                    />
+                    <button 
+                      type="button" 
+                      class="absolute right-3 top-1/2 transform -translate-y-1/2 text-pink-400 hover:text-pink-600 focus:outline-none transition-colors duration-200"
+                      @click="showConfirmPassword = !showConfirmPassword"
+                    >
+                      <EyeIcon v-if="!showConfirmPassword" class="h-5 w-5" />
+                      <EyeOffIcon v-else class="h-5 w-5" />
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Colorful Submit Button -->
+                <button 
+                  type="submit" 
+                  class="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl hover:shadow-3xl transform hover:scale-105"
+                  :disabled="isLoading"
+                >
+                  <LoaderIcon v-if="isLoading" class="animate-spin h-6 w-6" />
+                  <UserPlusIcon v-else class="h-6 w-6" />
+                  <span>{{ isLoading ? 'Creating Account...' : 'Create Admin Account' }}</span>
+                </button>
+              </form>
+
+              <!-- Admin Login Form -->
+              <form v-if="activeTab === 'login'" @submit.prevent="loginAdmin" class="space-y-6">
+                <!-- Email Field -->
+                <div class="space-y-2">
+                  <label for="loginEmail" class="block text-sm font-bold text-gray-700">
+                    Email
+                  </label>
+                  <div class="relative group">
+                    <MailIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-400 group-focus-within:text-blue-600 transition-colors duration-200" />
+                    <input 
+                      type="email" 
+                      id="loginEmail" 
+                      v-model="loginData.email" 
+                      required 
+                      class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-cyan-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+                </div>
+
+                <!-- Password Field -->
+                <div class="space-y-2">
+                  <label for="loginPassword" class="block text-sm font-bold text-gray-700">
+                    Password
+                  </label>
+                  <div class="relative group">
+                    <LockIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-purple-400 group-focus-within:text-purple-600 transition-colors duration-200" />
+                    <input 
+                      :type="showPassword ? 'text' : 'password'" 
+                      id="loginPassword" 
+                      v-model="loginData.password" 
+                      required 
+                      class="w-full pl-10 pr-12 py-3 rounded-xl border-2 border-purple-200 bg-gradient-to-r from-purple-50 to-pink-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
+                      placeholder="Enter your password"
+                    />
+                    <button 
+                      type="button" 
+                      class="absolute right-3 top-1/2 transform -translate-y-1/2 text-purple-400 hover:text-purple-600 focus:outline-none transition-colors duration-200"
+                      @click="showPassword = !showPassword"
+                    >
+                      <EyeIcon v-if="!showPassword" class="h-5 w-5" />
+                      <EyeOffIcon v-else class="h-5 w-5" />
+                    </button>
+                  </div>
+                  <div class="flex justify-end">
+                    <button 
+                      type="button"
+                      @click="showForgotPassword = true"
+                      class="text-sm text-purple-600 hover:text-purple-800 transition-colors duration-200 hover:underline font-semibold"
+                    >
+                      Forgot Password?
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Colorful Submit Button -->
+                <button 
+                  type="submit" 
+                  class="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl hover:shadow-3xl transform hover:scale-105"
+                  :disabled="isLoading"
+                >
+                  <LoaderIcon v-if="isLoading" class="animate-spin h-6 w-6" />
+                  <LogInIcon v-else class="h-6 w-6" />
+                  <span>{{ isLoading ? 'Logging in...' : 'Login to Dashboard' }}</span>
+                </button>
+                
+                <!-- Register Link -->
+                <div class="text-center">
+                  <p class="text-gray-700 font-medium">
+                    Don't have an account? 
+                    <button 
+                      type="button"
+                      @click="switchToRegister"
+                      class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold hover:from-blue-700 hover:to-purple-700 transition-colors duration-200 underline"
+                    >
+                      Register here
+                    </button>
+                  </p>
+                </div>
+              </form>
+
+              <!-- Enhanced Alert Message -->
+              <div 
+                v-if="alertMessage" 
+                :class="[
+                  'p-4 rounded-xl text-sm font-bold transition-all duration-300 border-2',
+                  alertType === 'success' ? 'bg-gradient-to-r from-green-50 to-emerald-50 text-green-800 border-green-300' : 'bg-gradient-to-r from-red-50 to-pink-50 text-red-800 border-red-300'
+                ]"
+              >
+                <div class="flex items-center">
+                  <div v-if="alertType === 'success'" class="mr-3 text-green-600">
+                    <CheckCircleIcon class="h-6 w-6" />
+                  </div>
+                  <div v-else class="mr-3 text-red-600">
+                    <AlertCircleIcon class="h-6 w-6" />
+                  </div>
+                  {{ alertMessage }}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
       
-      <!-- Footer -->
-      <div class="mt-10 text-center text-white/60 text-sm">
-        © 2025 Mindoro Paint Center. All rights reserved.
+      <!-- Colorful Footer -->
+      <div class="mt-10 text-center">
+        <p class="text-gray-600 font-semibold">© 2025 Barcelona Paint Center. All rights reserved.</p>
+        <p class="mt-1 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent font-bold">
+          Secure Admin Portal - Paint Your Success! 🎨
+        </p>
       </div>
     </div>
   </div>
   
-  <!-- Forgot Password Modal -->
-  <div v-if="showForgotPassword" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
-    <div class="bg-[#cce7f8] rounded-lg p-6 w-full max-w-md mx-4 shadow-2xl">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-xl font-bold text-[#00205F]">Reset Password</h3>
+  <!-- Enhanced Forgot Password Modal -->
+  <div v-if="showForgotPassword" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-gradient-to-br from-white via-blue-50 to-purple-50 border-2 border-blue-200 rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl">
+      <div class="flex justify-between items-center mb-6">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg">
+            <KeyIcon class="h-6 w-6 text-white" />
+          </div>
+          <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Reset Password</h3>
+        </div>
         <button 
           type="button" 
           @click="showForgotPassword = false"
-          class="text-[#00205F]/60 hover:text-[#00205F] transition-colors duration-200 focus:outline-none"
+          class="text-gray-400 hover:text-gray-600 transition-colors duration-200 focus:outline-none p-2 rounded-lg hover:bg-gray-100"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          <XIcon class="h-5 w-5" />
         </button>
       </div>
       <form @submit.prevent="handleForgotPassword">
         <div class="space-y-4">
           <div class="space-y-2">
-            <label for="resetEmail" class="block text-sm font-medium text-[#00205F]">
+            <label for="resetEmail" class="block text-sm font-bold text-gray-700">
               Email Address
             </label>
             <div class="relative group">
-              <MailIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#00205F]/40 group-focus-within:text-[#00205F] transition-colors duration-200" />
+              <MailIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-400 group-focus-within:text-blue-600 transition-colors duration-200" />
               <input 
                 type="email" 
                 id="resetEmail" 
                 v-model="resetEmail" 
                 required 
-                class="w-full pl-10 pr-4 py-3 rounded-lg border border-[#00205F]/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#00205F]/20 focus:border-[#00205F]/30 transition-all duration-200 text-[#00205F] placeholder-[#00205F]/40 shadow-sm"
+                class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-cyan-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg font-medium"
                 placeholder="Enter your email"
               />
             </div>
@@ -325,13 +369,13 @@
             <button 
               type="button" 
               @click="showForgotPassword = false"
-              class="flex-1 px-4 py-3 border border-[#00205F]/10 rounded-lg text-[#00205F] hover:bg-[#00205F]/5 transition-all duration-200 font-medium"
+              class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-700 hover:bg-gray-50 transition-all duration-200 font-bold"
             >
               Cancel
             </button>
             <button 
               type="submit" 
-              class="flex-1 px-4 py-3 bg-[#00205F] text-white rounded-lg hover:bg-[#002c85] transition-all duration-200 disabled:opacity-50 shadow-lg font-medium"
+              class="flex-1 px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:from-blue-600 hover:to-purple-600 transition-all duration-200 disabled:opacity-50 shadow-lg font-bold"
               :disabled="isResetting"
             >
               {{ isResetting ? 'Sending...' : 'Reset Password' }}
@@ -344,7 +388,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { auth, db } from '@/config/firebase'
 import { 
@@ -361,7 +405,13 @@ import {
   Eye as EyeIcon,
   EyeOff as EyeOffIcon,
   Loader as LoaderIcon,
-  Shield as ShieldIcon
+  Shield as ShieldIcon,
+  LogIn as LogInIcon,
+  UserPlus as UserPlusIcon,
+  CheckCircle as CheckCircleIcon,
+  AlertCircle as AlertCircleIcon,
+  Key as KeyIcon,
+  X as XIcon
 } from 'lucide-vue-next'
 
 const router = useRouter()
@@ -372,12 +422,12 @@ const alertType = ref('success')
 const showForgotPassword = ref(false)
 const isResetting = ref(false)
 const resetEmail = ref('')
-const activeTab = ref('login') // Always default to login tab
-const showPassword = ref(false);
-const showConfirmPassword = ref(false);
-const showRegisterTab = ref(false); // Initialize to false
+const activeTab = ref('login')
+const showPassword = ref(false)
+const showConfirmPassword = ref(false)
+const showRegisterTab = ref(false)
 
-const ADMIN_SECURITY_CODE = "MPC2025";
+const ADMIN_SECURITY_CODE = "BPC2025"
 
 const loginData = reactive({
   email: '',
@@ -395,16 +445,19 @@ const adminData = reactive({
 
 const checkAdminExists = async () => {
   try {
-    const adminQuery = query(collection(db, 'admins'));
-    const adminSnapshot = await getDocs(adminQuery);
+    const adminQuery = query(collection(db, 'admins'))
+    const adminSnapshot = await getDocs(adminQuery)
     
-    isAdminExists.value = !adminSnapshot.empty;
-
+    // If there are no documents in the admins collection, show register tab
+    isAdminExists.value = !adminSnapshot.empty
+    console.log('Admin exists check:', isAdminExists.value, 'Admin count:', adminSnapshot.size)
+    
   } catch (error) {
-    console.error("Error checking admin existence:", error);
-    isAdminExists.value = false;
+    console.error("Error checking admin existence:", error)
+    // If there's an error, assume no admin exists and show register tab
+    isAdminExists.value = false
   }
-};
+}
 
 const loginAdmin = async () => {
   try {
@@ -419,7 +472,7 @@ const loginAdmin = async () => {
 
     const adminDoc = await getDoc(doc(db, 'admins', user.uid))
     if (!adminDoc.exists()) {
-      await auth.signOut();
+      await auth.signOut()
       throw new Error('Unauthorized access. Admin privileges required.')
     }
 
@@ -445,16 +498,16 @@ const createAdminAccount = async () => {
       throw new Error('Passwords do not match')
     }
 
-    const adminQuery = query(collection(db, 'admins'));
-    const adminSnapshot = await getDocs(adminQuery);
+    const adminQuery = query(collection(db, 'admins'))
+    const adminSnapshot = await getDocs(adminQuery)
     
     if (!adminSnapshot.empty) {
-      const existingAdminsCount = adminSnapshot.size;
+      const existingAdminsCount = adminSnapshot.size
       
       if (existingAdminsCount > 0) {
-        const adminSecurityCheck = await checkAdminSecurityPermission();
+        const adminSecurityCheck = await checkAdminSecurityPermission()
         if (!adminSecurityCheck) {
-          throw new Error('You do not have permission to create additional admin accounts');
+          throw new Error('You do not have permission to create additional admin accounts')
         }
       }
     }
@@ -480,7 +533,7 @@ const createAdminAccount = async () => {
     alertMessage.value = 'Admin account created successfully!'
     alertType.value = 'success'
     isAdminExists.value = true
-    activeTab.value = 'login';
+    activeTab.value = 'login'
 
     adminData.firstName = ''
     adminData.lastName = ''
@@ -497,7 +550,7 @@ const createAdminAccount = async () => {
 }
 
 const checkAdminSecurityPermission = async () => {
-  return false;
+  return false
 }
 
 const handleForgotPassword = async () => {
@@ -508,6 +561,7 @@ const handleForgotPassword = async () => {
     alertMessage.value = 'Password reset email sent!'
     alertType.value = 'success'
     showForgotPassword.value = false
+    resetEmail.value = ''
   } catch (err) {
     alertMessage.value = err.message
     alertType.value = 'error'
@@ -516,17 +570,100 @@ const handleForgotPassword = async () => {
   }
 }
 
+const switchToRegister = () => {
+  // Ensure register tab is visible immediately
+  showRegisterTab.value = true
+  activeTab.value = 'register'
+  alertMessage.value = ''
+  
+  // Force a re-render if needed
+  nextTick(() => {
+    console.log('Switched to register tab')
+  })
+}
+
 const initializeAdminState = async () => {
-  await checkAdminExists();
-};
+  await checkAdminExists()
+}
 
 onMounted(async () => {
-  await initializeAdminState();
-  showRegisterTab.value = !isAdminExists.value;
-  activeTab.value = isAdminExists.value ? 'login' : 'register';
-});
+  try {
+    // Show register tab immediately to avoid delay
+    showRegisterTab.value = true
+    activeTab.value = 'login'
+    
+    // Then check admin existence in background
+    await initializeAdminState()
+    
+    // Update tab visibility based on admin existence (optional)
+    // You can comment out these lines if you want register always available
+    // showRegisterTab.value = !isAdminExists.value
+    
+    console.log('Show register tab:', showRegisterTab.value)
+    console.log('Active tab:', activeTab.value)
+  } catch (error) {
+    console.error('Error during initialization:', error)
+    // Ensure register tab is always available on error
+    showRegisterTab.value = true
+    activeTab.value = 'login'
+  }
+})
+
+// Add this watch function after your reactive declarations
+watch([isAdminExists, showRegisterTab], ([adminExists, showRegister]) => {
+  console.log('State changed - Admin exists:', adminExists, 'Show register:', showRegister)
+}, { immediate: true })
 </script>
 
 <style scoped>
-/* All animation styles have been removed */
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+}
+
+/* Enhanced animations */
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced shadow for cards */
+.shadow-3xl {
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Paint drop animations */
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0,0,0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -30px, 0);
+  }
+  70% {
+    transform: translate3d(0, -15px, 0);
+  }
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
 </style>

@@ -1,284 +1,318 @@
 <template>
-  <div class="min-h-screen bg-[#001333] relative overflow-hidden">
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
     <!-- Background Elements -->
     <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-[#0A3573] opacity-10 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#0A3573] opacity-10 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-200 to-blue-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
     </div>
 
     <div class="relative z-10 flex h-screen">
       <!-- Sidebar -->
-      <aside class="w-64 bg-[#0A2159]/90 backdrop-blur-sm border-r border-white/10 hidden md:block">
+      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden md:flex md:flex-col shadow-lg">
         <!-- Logo/Brand -->
-        <div class="p-6 border-b border-white/10">
-          <h1 class="text-xl font-bold text-white">Mindoro Paint Center</h1>
+        <div class="p-6 border-b border-gray-200 flex-shrink-0">
+          <div>
+            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+          </div>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
+            <UserIcon class="h-3 w-3 mr-1" />
+            Staff Portal
+          </div>
         </div>
-  
-        <!-- Navigation -->
-        <nav class="p-4 space-y-2 overflow-y-auto max-h-[calc(100vh-10rem)]">
+
+        <!-- Navigation - Scrollable Area -->
+        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
           <router-link 
             to="/staff/dashboard" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/dashboard' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+            :class="{ 'shadow-sm border border-blue-200 transform scale-105': $route.path === '/staff/dashboard' }"
           >
             <LayoutDashboardIcon class="w-5 h-5" />
             <span>Dashboard</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/inventory" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/inventory' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 shadow-sm border border-purple-200 transform scale-105"
+            :class="{ 'hover:bg-purple-100 hover:text-purple-700': $route.path !== '/staff/inventory' }"
           >
             <PackageIcon class="w-5 h-5" />
             <span>Inventory</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/paint-mixing" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/paint-mixing' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
+            :class="{ 'shadow-sm border border-pink-200 transform scale-105': $route.path === '/staff/paint-mixing' }"
           >
             <PaletteIcon class="w-5 h-5" />
             <span>Paint Mixing</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/house-paint-recommender" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/house-paint-recommender' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
+            :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/staff/house-paint-recommender' }"
           >
             <HomeIcon class="w-5 h-5" />
             <span>House Paint Recommender</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/settings" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/settings' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
+            :class="{ 'shadow-sm border border-green-200 transform scale-105': $route.path === '/staff/settings' }"
           >
             <SettingsIcon class="w-5 h-5" />
             <span>Settings</span>
           </router-link>
+
+          <!-- Perfect spacing -->
+          <div class="h-4"></div>
         </nav>
-  
-        <!-- User Menu -->
-        <div class="absolute bottom-0 w-64 p-4 border-t border-white/10 bg-[#0A2159]/90 backdrop-blur-sm">
+
+        <!-- User Menu - Fixed at bottom -->
+        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg">
               <UserIcon class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-white truncate">Staff User</p>
-              <p class="text-xs text-white/60 truncate">staff@example.com</p>
+              <p class="text-sm font-medium text-gray-900 truncate">Staff User</p>
+              <p class="text-xs text-gray-600 truncate">staff@example.com</p>
             </div>
             <button 
               @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/10 text-white transition-colors"
+              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
+              title="Logout"
             >
               <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
         </div>
       </aside>
-  
+
       <!-- Mobile Sidebar Toggle -->
       <div class="fixed top-4 left-4 z-30 md:hidden">
         <button 
           @click="toggleMobileSidebar"
-          class="p-2 bg-[#0A2159]/90 backdrop-blur-sm border border-white/10 rounded-lg shadow-sm"
+          class="p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg"
+          aria-label="Toggle navigation menu"
         >
-          <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-white" />
-          <XIcon v-else class="w-6 h-6 text-white" />
+          <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
+          <XIcon v-else class="w-6 h-6 text-gray-700" />
         </button>
       </div>
-  
+
       <!-- Mobile Sidebar -->
       <div 
         v-if="mobileSidebarOpen" 
         class="fixed inset-0 bg-black/20 z-20 md:hidden"
         @click="toggleMobileSidebar"
       ></div>
-  
+
       <aside 
         v-if="mobileSidebarOpen"
-        class="fixed left-0 top-0 h-full w-64 bg-[#0A2159]/90 backdrop-blur-sm border-r border-white/10 z-20 md:hidden"
+        class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-20 md:hidden shadow-xl flex flex-col"
       >
-        <!-- Same content as desktop sidebar -->
-        <div class="p-6 border-b border-white/10">
-          <h1 class="text-xl font-bold text-white">Mindoro Paint Center</h1>
+        <!-- Logo/Brand -->
+        <div class="p-6 border-b border-gray-200 flex-shrink-0">
+          <div>
+            <h1 class="text-lg font-bold text-gray-900 leading-tight">Mindoro Paint Center</h1>
+          </div>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
+            <UserIcon class="h-3 w-3 mr-1" />
+            Staff Portal
+          </div>
         </div>
-  
-        <nav class="p-4 space-y-2">
+
+        <!-- Mobile Navigation - Scrollable -->
+        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
           <router-link 
             to="/staff/dashboard" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/dashboard' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50"
+            :class="{ 'shadow-sm border border-blue-200': $route.path === '/staff/dashboard' }"
             @click="mobileSidebarOpen = false"
           >
             <LayoutDashboardIcon class="w-5 h-5" />
             <span>Dashboard</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/inventory" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/inventory' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 shadow-sm border border-purple-200"
             @click="mobileSidebarOpen = false"
           >
             <PackageIcon class="w-5 h-5" />
             <span>Inventory</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/paint-mixing" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/paint-mixing' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50"
+            :class="{ 'shadow-sm border border-pink-200': $route.path === '/staff/paint-mixing' }"
             @click="mobileSidebarOpen = false"
           >
             <PaletteIcon class="w-5 h-5" />
             <span>Paint Mixing</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/house-paint-recommender" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/house-paint-recommender' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50"
+            :class="{ 'shadow-sm border border-orange-200': $route.path === '/staff/house-paint-recommender' }"
             @click="mobileSidebarOpen = false"
           >
             <HomeIcon class="w-5 h-5" />
             <span>House Paint Recommender</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/settings" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/settings' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50"
+            :class="{ 'shadow-sm border border-green-200': $route.path === '/staff/settings' }"
             @click="mobileSidebarOpen = false"
           >
             <SettingsIcon class="w-5 h-5" />
             <span>Settings</span>
           </router-link>
+
+          <!-- Perfect spacing for mobile too -->
+          <div class="h-4"></div>
         </nav>
-  
-        <div class="absolute bottom-0 w-64 p-4 border-t border-white/10 bg-[#0A2159]/90 backdrop-blur-sm">
+
+        <!-- Mobile User Menu - Fixed at bottom -->
+        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg">
               <UserIcon class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-white truncate">Staff User</p>
-              <p class="text-xs text-white/60 truncate">staff@example.com</p>
+              <p class="text-sm font-medium text-gray-900 truncate">Staff User</p>
+              <p class="text-xs text-gray-600 truncate">staff@example.com</p>
             </div>
             <button 
               @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/10 text-white transition-colors"
+              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
+              title="Logout"
             >
               <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
         </div>
       </aside>
-  
+
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
         <!-- Header -->
-        <header class="bg-[#0A2159]/80 backdrop-blur-sm border-b border-white/10 px-8 py-4 shadow-md">
+        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-8 py-4 shadow-sm">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 class="text-2xl font-bold text-white">Inventory Management</h1>
-              <p class="text-white/60">View and manage product inventory</p>
+              <h1 class="text-2xl font-bold text-gray-900">Inventory Management</h1>
+              <p class="text-gray-600">View and manage product inventory</p>
             </div>
             <div class="flex items-center gap-4">
-              <div class="hidden md:flex items-center gap-2 text-white/80">
-                <CalendarIcon class="w-5 h-5" />
+              <div class="hidden md:flex items-center gap-2 text-gray-700">
+                <CalendarIcon class="w-5 h-5 text-purple-500" />
                 <span>{{ currentDate }}</span>
               </div>
-              <div class="hidden md:block h-6 w-px bg-white/20"></div>
+              <div class="hidden md:block h-6 w-px bg-gray-300"></div>
               <div class="flex items-center gap-3">
-                <span class="text-white">Welcome, Staff</span>
+                <span class="text-gray-900">Welcome, Staff</span>
                 <div class="relative">
-                  <BellIcon class="w-5 h-5 text-white cursor-pointer hover:text-white/70" />
+                  <BellIcon class="w-5 h-5 text-orange-500 cursor-pointer hover:text-orange-600" />
                 </div>
               </div>
             </div>
           </div>
         </header>
 
-        <div class="p-4 md:p-6 lg:p-8">
+        <div class="p-6 md:p-8">
           <!-- Stats Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <!-- Total Products -->
-            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-lg shadow-lg p-4 border border-white/10">
-              <div class="flex items-center gap-3">
-                <div class="p-2 bg-white/10 rounded-lg">
-                  <PackageIcon class="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p class="text-sm text-white/60">Total Products</p>
-                  <p class="text-xl font-bold text-white">{{ totalProducts }}</p>
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
+              <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
+              <div class="p-6">
+                <div class="flex items-center gap-4">
+                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
+                    <PackageIcon class="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Total Products</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ totalProducts }}</p>
+                  </div>
                 </div>
               </div>
             </div>
 
             <!-- Low Stock -->
-            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-lg shadow-lg p-4 border border-white/10">
-              <div class="flex items-center gap-3">
-                <div class="p-2 bg-amber-500/20 rounded-lg">
-                  <AlertTriangleIcon class="w-5 h-5 text-amber-400" />
-                </div>
-                <div>
-                  <p class="text-sm text-white/60">Low Stock Items</p>
-                  <p class="text-xl font-bold text-white">{{ lowStockCount }}</p>
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
+              <div class="bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 h-2 absolute top-0 left-0 right-0"></div>
+              <div class="p-6">
+                <div class="flex items-center gap-4">
+                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 transform hover:scale-110 transition-transform duration-200">
+                    <AlertTriangleIcon class="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Low Stock Items</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ lowStockCount }}</p>
+                  </div>
                 </div>
               </div>
             </div>
 
             <!-- Out of Stock -->
-            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-lg shadow-lg p-4 border border-white/10">
-              <div class="flex items-center gap-3">
-                <div class="p-2 bg-red-500/20 rounded-lg">
-                  <XCircleIcon class="w-5 h-5 text-red-400" />
-                </div>
-                <div>
-                  <p class="text-sm text-white/60">Out of Stock</p>
-                  <p class="text-xl font-bold text-white">{{ outOfStockCount }}</p>
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
+              <div class="bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 h-2 absolute top-0 left-0 right-0"></div>
+              <div class="p-6">
+                <div class="flex items-center gap-4">
+                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 transform hover:scale-110 transition-transform duration-200">
+                    <XCircleIcon class="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Out of Stock</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ outOfStockCount }}</p>
+                  </div>
                 </div>
               </div>
             </div>
 
             <!-- Total Value -->
-            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-lg shadow-lg p-4 border border-white/10">
-              <div class="flex items-center gap-3">
-                <div class="p-2 bg-green-500/20 rounded-lg">
-                  <DollarSignIcon class="w-5 h-5 text-green-400" />
-                </div>
-                <div>
-                  <p class="text-sm text-white/60">Total Value</p>
-                  <p class="text-xl font-bold text-white">₱{{ totalValue.toLocaleString() }}</p>
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
+              <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
+              <div class="p-6">
+                <div class="flex items-center gap-4">
+                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
+                    <DollarSignIcon class="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Total Value</p>
+                    <p class="text-2xl font-bold text-gray-900">₱{{ totalValue.toLocaleString() }}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-  
+
           <!-- Search and Filter Bar -->
-          <div class="bg-[#0A2159] rounded-lg p-4 mb-6 border border-white/10">
+          <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-6 mb-8">
             <div class="flex flex-col md:flex-row gap-4">
               <div class="flex-1">
                 <div class="relative">
-                  <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/40 w-5 h-5" />
+                  <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input 
                     type="text"
                     v-model="searchQuery"
                     placeholder="Search products..."
-                    class="w-full pl-10 pr-4 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/10 text-white placeholder-white/50"
+                    class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
                   />
                 </div>
               </div>
               <div class="flex flex-col sm:flex-row gap-4">
                 <select 
                   v-model="filterCategory"
-                  class="px-4 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/10 text-white"
+                  class="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
                 >
                   <option value="">All Categories</option>
                   <option value="interior">Interior Paint</option>
@@ -288,7 +322,7 @@
                 </select>
                 <select 
                   v-model="filterStock"
-                  class="px-4 py-2 rounded-lg border border-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 bg-white/10 text-white"
+                  class="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
                 >
                   <option value="">All Stock Levels</option>
                   <option value="in-stock">In Stock</option>
@@ -298,37 +332,35 @@
               </div>
             </div>
           </div>
-  
+
           <!-- Products Table -->
-          <div class="bg-[#0A2159] rounded-lg shadow-md overflow-hidden border border-white/10">
+          <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg overflow-hidden">
             <!-- Loading State -->
-            <div v-if="loading" class="p-12 text-center">
-              <LoaderIcon class="w-10 h-10 text-white/20 animate-spin mx-auto mb-4" />
-              <p class="text-white/60">Loading inventory data...</p>
+            <div v-if="loading && products.length === 0" class="p-8 text-center">
+              <LoaderIcon class="w-8 h-8 text-gray-400 animate-spin mx-auto mb-4" />
+              <p class="text-gray-600">Loading inventory data...</p>
             </div>
 
             <!-- Empty State -->
-            <div v-if="!loading && products.length === 0" class="p-12 text-center">
-              <div class="mx-auto w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-4">
-                <PackageIcon class="w-10 h-10 text-white/20" />
+            <div v-if="!loading && products.length === 0" class="p-8 text-center">
+              <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
+                <PackageIcon class="w-8 h-8 text-purple-600" />
               </div>
-              <h3 class="text-xl font-medium text-white mb-2">No products found</h3>
-              <p class="text-white/60 max-w-md mx-auto">
-                Products added by admin will appear here.
-              </p>
+              <h3 class="text-lg font-medium text-gray-900 mb-2">No products found</h3>
+              <p class="text-gray-600 mb-4">Products added by admin will appear here.</p>
             </div>
 
-            <!-- Mobile View (Products) -->
-            <div v-if="!loading && products.length > 0" class="block md:hidden">
-              <div v-for="product in paginatedProducts" :key="product.id" class="p-4 border-b border-white/10">
+            <!-- Mobile View -->
+            <div v-else-if="products.length > 0" class="block md:hidden">
+              <div v-for="product in paginatedProducts" :key="product.id" class="p-4 border-b border-gray-100">
                 <div class="flex items-center justify-between mb-2">
                   <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center">
+                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
                       <PackageIcon class="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <p class="font-medium text-white">{{ product.name }}</p>
-                      <p class="text-sm text-white/60">{{ formatCategory(product.category) }}</p>
+                      <p class="font-medium text-gray-900">{{ product.name }}</p>
+                      <p class="text-sm text-gray-600">{{ formatCategory(product.category) }}</p>
                     </div>
                   </div>
                 </div>
@@ -339,43 +371,53 @@
                   >
                     {{ formatStockLevel(product.stockLevel) }}
                   </span>
-                  <span class="text-sm text-white/60">
+                  <span class="text-sm text-gray-600">
                     Price: ₱{{ product.price.toLocaleString() }}
                   </span>
                 </div>
               </div>
             </div>
 
-            <!-- Desktop View (Products Table) -->
-            <div v-if="!loading && products.length > 0" class="hidden md:block overflow-x-auto">
+            <!-- Desktop View -->
+            <div v-if="products.length > 0" class="hidden md:block overflow-x-auto">
               <table class="w-full">
                 <thead>
-                  <tr class="border-b border-white/10">
-                    <th class="text-left p-4 text-sm font-medium text-white/60">Product</th>
-                    <th class="text-left p-4 text-sm font-medium text-white/60">Category</th>
-                    <th class="text-left p-4 text-sm font-medium text-white/60">Stock Level</th>
-                    <th class="text-left p-4 text-sm font-medium text-white/60">Price</th>
+                  <tr class="border-b border-gray-100">
+                    <th class="text-left p-4 text-sm font-medium text-gray-600">Product</th>
+                    <th class="text-left p-4 text-sm font-medium text-gray-600">Category</th>
+                    <th class="text-left p-4 text-sm font-medium text-gray-600">Stock Level</th>
+                    <th class="text-left p-4 text-sm font-medium text-gray-600">Price</th>
                   </tr>
                 </thead>
                 <tbody>
+                  <tr v-if="loading" class="border-b border-gray-100">
+                    <td colspan="4" class="p-8 text-center">
+                      <LoaderIcon class="w-6 h-6 text-gray-400 animate-spin mx-auto" />
+                    </td>
+                  </tr>
+                  <tr v-else-if="paginatedProducts.length === 0" class="border-b border-gray-100">
+                    <td colspan="4" class="p-8 text-center text-gray-600">
+                      No products found
+                    </td>
+                  </tr>
                   <tr 
                     v-for="product in paginatedProducts" 
                     :key="product.id" 
-                    class="border-b border-white/10 hover:bg-white/5"
+                    class="border-b border-gray-50 hover:bg-gray-50/50 transition-colors"
                   >
                     <td class="p-4">
                       <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center">
+                        <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
                           <PackageIcon class="w-6 h-6 text-white" />
                         </div>
                         <div>
-                          <p class="font-medium text-white">{{ product.name }}</p>
-                          <p class="text-sm text-white/60">SKU: {{ product.sku || 'N/A' }}</p>
+                          <p class="font-medium text-gray-900">{{ product.name }}</p>
+                          <p class="text-sm text-gray-600">SKU: {{ product.sku || 'N/A' }}</p>
                         </div>
                       </div>
                     </td>
                     <td class="p-4">
-                      <span class="px-3 py-1 rounded-full text-sm bg-white/10 text-white">
+                      <span class="px-3 py-1 rounded-full text-sm bg-purple-100 text-purple-800 border border-purple-200">
                         {{ formatCategory(product.category) }}
                       </span>
                     </td>
@@ -387,26 +429,26 @@
                         {{ formatStockLevel(product.stockLevel) }}
                       </span>
                     </td>
-                    <td class="p-4 text-white">
+                    <td class="p-4 text-gray-900">
                       ₱{{ product.price.toLocaleString() }}
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-  
+
             <!-- Pagination -->
-            <div v-if="products.length > 0" class="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-4 border-t border-white/10">
+            <div v-if="products.length > 0" class="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-4 border-t border-gray-100">
               <div class="flex items-center gap-2">
                 <select 
                   v-model="perPage"
-                  class="px-2 py-1 rounded-lg border border-white/10 text-sm bg-white/10 text-white"
+                  class="px-2 py-1 rounded-lg border border-gray-200 text-sm bg-white text-gray-900"
                 >
                   <option value="10">10 per page</option>
                   <option value="25">25 per page</option>
                   <option value="50">50 per page</option>
                 </select>
-                <span class="text-sm text-white/60">
+                <span class="text-sm text-gray-600">
                   Showing {{ paginationStart }} - {{ paginationEnd }} of {{ filteredProducts.length }}
                 </span>
               </div>
@@ -414,15 +456,15 @@
                 <button 
                   @click="currentPage--"
                   :disabled="currentPage === 1"
-                  class="p-2 rounded-lg hover:bg-white/10 disabled:opacity-50 text-white"
+                  class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-700"
                 >
                   <ChevronLeftIcon class="w-5 h-5" />
                 </button>
-                <span class="text-sm text-white">Page {{ currentPage }} of {{ totalPages || 1 }}</span>
+                <span class="text-sm text-gray-700">Page {{ currentPage }} of {{ totalPages || 1 }}</span>
                 <button 
                   @click="currentPage++"
                   :disabled="currentPage >= totalPages"
-                  class="p-2 rounded-lg hover:bg-white/10 disabled:opacity-50 text-white"
+                  class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-700"
                 >
                   <ChevronRightIcon class="w-5 h-5" />
                 </button>
@@ -434,7 +476,7 @@
     </div>
   </div>
 </template>
-  
+
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
@@ -468,7 +510,7 @@ import {
   Timestamp 
 } from 'firebase/firestore'
 import { db } from '../../config/firebase'
-  
+
 const router = useRouter()
 const mobileSidebarOpen = ref(false)
 const searchQuery = ref('')
@@ -617,9 +659,9 @@ const paginationEnd = computed(() => Math.min(currentPage.value * perPage.value,
 
 // Helper methods
 const getStockLevelClass = (stockLevel) => {
-  if (stockLevel === 0) return 'bg-red-500/20 text-red-300'
-  if (stockLevel <= 10) return 'bg-amber-500/20 text-amber-300'
-  return 'bg-green-500/20 text-green-300'
+  if (stockLevel === 0) return 'bg-red-100 text-red-800 border border-red-200'
+  if (stockLevel <= 10) return 'bg-amber-100 text-amber-800 border border-amber-200'
+  return 'bg-green-100 text-green-800 border border-green-200'
 }
 
 const formatStockLevel = (stockLevel) => {
@@ -642,7 +684,7 @@ const formatCategory = (category) => {
 const toggleMobileSidebar = () => {
   mobileSidebarOpen.value = !mobileSidebarOpen.value
 }
-  
+
 const handleLogout = () => {
   router.push('/staff')
 }
@@ -655,20 +697,19 @@ watch([searchQuery, filterStock, filterCategory], () => {
 <style scoped>
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
 }
 </style>

@@ -1,208 +1,240 @@
 <template>
-  <!-- Template remains mostly the same -->
-  <div class="min-h-screen bg-[#001333] relative overflow-hidden">
+  <!-- Toast notification -->
+  <div 
+    v-if="showToast" 
+    class="fixed inset-0 flex items-center justify-center z-50"
+  >
+    <div class="bg-black/50 fixed inset-0" @click="showToast = false"></div>
+    <div class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-4 rounded-lg shadow-lg flex items-center z-10 max-w-md animate-bounce-in">
+      <component :is="toastIcon" class="h-6 w-6 mr-3 text-white" />
+      <div>
+        <h3 class="font-medium">{{ toastTitle }}</h3>
+        <p class="text-sm text-white/80">{{ toastMessage }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading overlay -->
+  <div v-if="loading" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 flex items-center gap-3">
+      <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-green-500"></div>
+      <span>Loading...</span>
+    </div>
+  </div>
+
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
     <!-- Background Elements -->
     <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-[#0A3573] opacity-10 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#0A3573] opacity-10 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-200 to-blue-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
     </div>
 
     <div class="relative z-10 flex h-screen">
       <!-- Sidebar -->
-      <aside class="w-64 bg-[#0A2159]/90 backdrop-blur-sm border-r border-white/10 hidden md:block">
+      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden md:flex md:flex-col shadow-lg">
         <!-- Logo/Brand -->
-        <div class="p-6 border-b border-white/10">
-          <h1 class="text-xl font-bold text-white">Mindoro Paint Center</h1>
+        <div class="p-6 border-b border-gray-200 flex-shrink-0">
+          <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
+            <UserIcon class="h-3 w-3 mr-1" />
+            Staff Portal
+          </div>
         </div>
-  
+
         <!-- Navigation -->
-        <nav class="p-4 space-y-2 overflow-y-auto max-h-[calc(100vh-10rem)]">
+        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
           <router-link 
             to="/staff/dashboard" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/dashboard' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+            :class="{ 'shadow-sm border border-blue-200 transform scale-105': $route.path === '/staff/dashboard' }"
           >
             <LayoutDashboardIcon class="w-5 h-5" />
             <span>Dashboard</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/inventory" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/inventory' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
+            :class="{ 'shadow-sm border border-purple-200 transform scale-105': $route.path === '/staff/inventory' }"
           >
             <PackageIcon class="w-5 h-5" />
             <span>Inventory</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/paint-mixing" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/paint-mixing' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
+            :class="{ 'shadow-sm border border-pink-200 transform scale-105': $route.path === '/staff/paint-mixing' }"
           >
             <PaletteIcon class="w-5 h-5" />
             <span>Paint Mixing</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/house-paint-recommender" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/house-paint-recommender' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
+            :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/staff/house-paint-recommender' }"
           >
             <HomeIcon class="w-5 h-5" />
             <span>House Paint Recommender</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/settings" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/settings' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 shadow-sm border border-green-200 transform scale-105"
+            :class="{ 'hover:bg-green-100 hover:text-green-700': $route.path !== '/staff/settings' }"
           >
             <SettingsIcon class="w-5 h-5" />
             <span>Settings</span>
           </router-link>
+
+          <!-- Perfect spacing -->
+          <div class="h-4"></div>
         </nav>
-  
+
         <!-- User Menu -->
-        <div class="absolute bottom-0 w-64 p-4 border-t border-white/10 bg-[#0A2159]/90 backdrop-blur-sm">
+        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg overflow-hidden">
               <img v-if="userPhotoURL" :src="userPhotoURL" alt="Profile" class="w-full h-full object-cover" />
               <UserIcon v-else class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-white truncate">{{ profile.fullName || 'Staff User' }}</p>
-              <p class="text-xs text-white/60 truncate">{{ profile.email || 'staff@example.com' }}</p>
+              <p class="text-sm font-medium text-gray-900 truncate">{{ profile.fullName || 'Staff User' }}</p>
+              <p class="text-xs text-gray-600 truncate">{{ profile.email || 'staff@example.com' }}</p>
             </div>
             <button 
               @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/10 text-white transition-colors"
+              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
             >
               <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
         </div>
       </aside>
-  
+
       <!-- Mobile Sidebar Toggle -->
       <div class="fixed top-4 left-4 z-30 md:hidden">
         <button 
           @click="toggleMobileSidebar"
-          class="p-2 bg-[#0A2159]/90 backdrop-blur-sm border border-white/10 rounded-lg shadow-sm"
+          class="p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg"
           aria-label="Toggle navigation menu"
         >
-          <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-white" />
-          <XIcon v-else class="w-6 h-6 text-white" />
+          <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
+          <XIcon v-else class="w-6 h-6 text-gray-700" />
         </button>
       </div>
-  
+
       <!-- Mobile Sidebar -->
       <div 
         v-if="mobileSidebarOpen" 
         class="fixed inset-0 bg-black/20 z-20 md:hidden"
         @click="toggleMobileSidebar"
       ></div>
-  
+
       <aside 
         v-if="mobileSidebarOpen"
-        class="fixed left-0 top-0 h-full w-64 bg-[#0A2159]/90 backdrop-blur-sm border-r border-white/10 z-20 md:hidden overflow-y-auto"
+        class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-20 md:hidden shadow-xl flex flex-col overflow-y-auto"
       >
         <!-- Same content as desktop sidebar -->
-        <div class="p-6 border-b border-white/10">
-          <h1 class="text-xl font-bold text-white">Mindoro Paint Center</h1>
+        <div class="p-6 border-b border-gray-200 flex-shrink-0">
+          <h1 class="text-lg font-bold text-gray-900 leading-tight">Mindoro Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
+            <UserIcon class="h-3 w-3 mr-1" />
+            Staff Portal
+          </div>
         </div>
-  
-        <nav class="p-4 space-y-2">
+
+        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
           <router-link 
             to="/staff/dashboard" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/dashboard' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50"
+            :class="{ 'shadow-sm border border-blue-200': $route.path === '/staff/dashboard' }"
             @click="mobileSidebarOpen = false"
           >
             <LayoutDashboardIcon class="w-5 h-5" />
             <span>Dashboard</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/inventory" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/inventory' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50"
+            :class="{ 'shadow-sm border border-purple-200': $route.path === '/staff/inventory' }"
             @click="mobileSidebarOpen = false"
           >
             <PackageIcon class="w-5 h-5" />
             <span>Inventory</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/paint-mixing" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/paint-mixing' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50"
+            :class="{ 'shadow-sm border border-pink-200': $route.path === '/staff/paint-mixing' }"
             @click="mobileSidebarOpen = false"
           >
             <PaletteIcon class="w-5 h-5" />
             <span>Paint Mixing</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/house-paint-recommender" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/house-paint-recommender' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50"
+            :class="{ 'shadow-sm border border-orange-200': $route.path === '/staff/house-paint-recommender' }"
             @click="mobileSidebarOpen = false"
           >
             <HomeIcon class="w-5 h-5" />
             <span>House Paint Recommender</span>
           </router-link>
-  
+
           <router-link 
             to="/staff/settings" 
-            class="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-colors"
-            :class="{ 'bg-white/10': $route.path === '/staff/settings' }"
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 shadow-sm border border-green-200"
             @click="mobileSidebarOpen = false"
           >
             <SettingsIcon class="w-5 h-5" />
             <span>Settings</span>
           </router-link>
         </nav>
-  
-        <div class="absolute bottom-0 w-64 p-4 border-t border-white/10 bg-[#0A2159]/90 backdrop-blur-sm">
+
+        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg overflow-hidden">
               <img v-if="userPhotoURL" :src="userPhotoURL" alt="Profile" class="w-full h-full object-cover" />
               <UserIcon v-else class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-white truncate">{{ profile.fullName || 'Staff User' }}</p>
-              <p class="text-xs text-white/60 truncate">{{ profile.email || 'staff@example.com' }}</p>
+              <p class="text-sm font-medium text-gray-900 truncate">{{ profile.fullName || 'Staff User' }}</p>
+              <p class="text-xs text-gray-600 truncate">{{ profile.email || 'staff@example.com' }}</p>
             </div>
             <button 
               @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/10 text-white transition-colors"
+              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
             >
               <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
         </div>
       </aside>
-  
+
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
         <!-- Header -->
-        <header class="bg-[#0A2159]/80 backdrop-blur-sm border-b border-white/10 px-4 sm:px-6 md:px-8 py-4 shadow-md">
+        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-4 sm:px-6 md:px-8 py-4 shadow-sm">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 class="text-xl sm:text-2xl font-bold text-white">Settings</h1>
-              <p class="text-sm sm:text-base text-white/60">Manage your account and preferences</p>
+              <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Settings</h1>
+              <p class="text-sm sm:text-base text-gray-600">Manage your account and preferences</p>
             </div>
             <div class="flex items-center gap-4">
-              <div class="hidden md:flex items-center gap-2 text-white/80">
-                <CalendarIcon class="w-5 h-5" />
+              <div class="hidden md:flex items-center gap-2 text-gray-700">
+                <CalendarIcon class="w-5 h-5 text-green-500" />
                 <span>{{ currentDate }}</span>
               </div>
-              <div class="hidden md:block h-6 w-px bg-white/20"></div>
+              <div class="hidden md:block h-6 w-px bg-gray-300"></div>
               <div class="flex items-center gap-3">
-                <span class="text-white text-sm sm:text-base">Welcome, {{ firstName }}</span>
+                <span class="text-gray-900 text-sm sm:text-base">Welcome, {{ firstName }}</span>
                 <div class="relative">
-                  <BellIcon class="w-5 h-5 text-white cursor-pointer hover:text-white/70" />
+                  <BellIcon class="w-5 h-5 text-green-500 cursor-pointer hover:text-green-600" />
                 </div>
               </div>
             </div>
@@ -211,13 +243,13 @@
 
         <div class="p-4 sm:p-6 md:p-8 space-y-6">
           <!-- Settings Tabs -->
-          <div class="bg-[#0A2159]/50 backdrop-blur-sm rounded-lg p-1 flex overflow-x-auto hide-scrollbar">
+          <div class="bg-white/50 backdrop-blur-sm rounded-lg p-1 flex overflow-x-auto hide-scrollbar border border-gray-200 shadow-sm">
             <button 
               v-for="tab in tabs" 
               :key="tab.id"
               @click="activeTab = tab.id"
               class="px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium whitespace-nowrap transition-colors"
-              :class="activeTab === tab.id ? 'bg-[#0A3573] text-white' : 'text-white/60 hover:text-white hover:bg-white/5'"
+              :class="activeTab === tab.id ? 'bg-green-500 text-white shadow-sm' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'"
             >
               <div class="flex items-center gap-1 sm:gap-2">
                 <component :is="tab.icon" class="w-4 h-4" />
@@ -228,16 +260,19 @@
 
           <!-- Profile Settings -->
           <div v-if="activeTab === 'profile'" class="max-w-2xl mx-auto">
-            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg border border-white/10">
-              <div class="p-4 sm:p-6 border-b border-white/10">
-                <h2 class="text-base sm:text-lg font-semibold text-white">Profile Settings</h2>
+            <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200">
+              <div class="p-4 sm:p-6 border-b border-gray-200">
+                <h2 class="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
+                  <UserIcon class="w-5 h-5 mr-2 text-green-500" />
+                  Profile Settings
+                </h2>
               </div>
               <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
                 <div class="flex flex-col sm:flex-row items-center gap-4">
                   <div class="relative">
-                    <div class="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center overflow-hidden border-4 border-white shadow-lg">
                       <img v-if="userPhotoURL" :src="userPhotoURL" alt="Profile" class="w-full h-full object-cover" />
-                      <UserIcon v-else class="w-10 h-10 text-white/70" />
+                      <UserIcon v-else class="w-10 h-10 text-green-600" />
                     </div>
                     <input 
                       type="file" 
@@ -250,14 +285,14 @@
                   <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                     <button 
                       @click="$refs.photoInput.click()" 
-                      class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors text-sm"
+                      class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all text-sm"
                     >
                       Change Photo
                     </button>
                     <button 
                       v-if="userPhotoURL" 
                       @click="removePhoto" 
-                      class="px-4 py-2 bg-red-600/20 text-red-400 rounded-lg font-medium hover:bg-red-600/30 transition-colors text-sm"
+                      class="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-lg font-medium hover:shadow-lg transition-all text-sm"
                     >
                       Remove Photo
                     </button>
@@ -265,27 +300,27 @@
                 </div>
                 <div class="space-y-4">
                   <div>
-                    <label class="block text-sm font-medium text-white mb-2">Full Name</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
                     <input 
                       type="text" 
                       v-model="profile.fullName"
-                      class="w-full p-2.5 bg-white/10 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/20"
+                      class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                     />
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-white mb-2">Email</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
                     <input 
                       type="email" 
                       v-model="profile.email"
-                      class="w-full p-2.5 bg-white/10 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/20"
+                      class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                     />
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-white mb-2">Phone Number</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
                     <input 
                       type="tel" 
                       v-model="profile.phone"
-                      class="w-full p-2.5 bg-white/10 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/20"
+                      class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                     />
                   </div>
                 </div>
@@ -295,40 +330,43 @@
 
           <!-- Account Settings -->
           <div v-if="activeTab === 'account'" class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg border border-white/10">
-              <div class="p-4 sm:p-6 border-b border-white/10">
-                <h2 class="text-base sm:text-lg font-semibold text-white">Change Password</h2>
+            <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200">
+              <div class="p-4 sm:p-6 border-b border-gray-200">
+                <h2 class="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
+                  <ShieldIcon class="w-5 h-5 mr-2 text-blue-500" />
+                  Change Password
+                </h2>
               </div>
               <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
                 <div class="space-y-4">
                   <div>
-                    <label class="block text-sm font-medium text-white mb-2">Current Password</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
                     <input 
                       type="password" 
                       v-model="account.currentPassword"
-                      class="w-full p-2.5 bg-white/10 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/20"
+                      class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     />
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-white mb-2">New Password</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">New Password</label>
                     <input 
                       type="password" 
                       v-model="account.newPassword"
-                      class="w-full p-2.5 bg-white/10 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/20"
+                      class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     />
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-white mb-2">Confirm New Password</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
                     <input 
                       type="password" 
                       v-model="account.confirmPassword"
-                      class="w-full p-2.5 bg-white/10 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white/20"
+                      class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     />
                   </div>
                   <div class="pt-2">
                     <button 
                       @click="changePassword" 
-                      class="w-full py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                      class="w-full py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg font-medium hover:shadow-lg transition-all"
                     >
                       Change Password
                     </button>
@@ -337,31 +375,34 @@
               </div>
             </div>
 
-            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg border border-white/10">
-              <div class="p-4 sm:p-6 border-b border-white/10">
-                <h2 class="text-base sm:text-lg font-semibold text-white">Security Settings</h2>
+            <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200">
+              <div class="p-4 sm:p-6 border-b border-gray-200">
+                <h2 class="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
+                  <ShieldIcon class="w-5 h-5 mr-2 text-purple-500" />
+                  Security Settings
+                </h2>
               </div>
               <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
                 <div class="space-y-4">
-                  <div class="flex items-center justify-between">
+                  <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
-                      <h3 class="font-medium text-white">Two-Factor Authentication</h3>
-                      <p class="text-sm text-white/60">Add an extra layer of security</p>
+                      <h3 class="font-medium text-gray-900">Two-Factor Authentication</h3>
+                      <p class="text-sm text-gray-600">Add an extra layer of security</p>
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                       <input type="checkbox" v-model="security.twoFactor" class="sr-only peer">
-                      <div class="w-11 h-6 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white/80 after:border-white/10 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-500"></div>
                     </label>
                   </div>
                   
-                  <div class="flex items-center justify-between">
+                  <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
-                      <h3 class="font-medium text-white">Login Notifications</h3>
-                      <p class="text-sm text-white/60">Get notified when someone logs into your account</p>
+                      <h3 class="font-medium text-gray-900">Login Notifications</h3>
+                      <p class="text-sm text-gray-600">Get notified when someone logs into your account</p>
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                       <input type="checkbox" v-model="security.loginNotifications" class="sr-only peer">
-                      <div class="w-11 h-6 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white/80 after:border-white/10 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-500"></div>
                     </label>
                   </div>
                 </div>
@@ -371,59 +412,65 @@
 
           <!-- Appearance Settings -->
           <div v-if="activeTab === 'appearance'" class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg border border-white/10">
-              <div class="p-4 sm:p-6 border-b border-white/10">
-                <h2 class="text-base sm:text-lg font-semibold text-white">Theme Settings</h2>
+            <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200">
+              <div class="p-4 sm:p-6 border-b border-gray-200">
+                <h2 class="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
+                  <PaintbrushIcon class="w-5 h-5 mr-2 text-pink-500" />
+                  Theme Settings
+                </h2>
               </div>
               <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
                 <div class="space-y-4">
                   <div>
-                    <label class="block text-sm font-medium text-white mb-2">Color Theme</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Color Theme</label>
                     <div class="grid grid-cols-3 gap-2 sm:gap-3">
                       <button 
                         @click="theme.color = 'light'"
                         class="p-2 sm:p-3 rounded-lg border transition-colors flex flex-col items-center"
-                        :class="theme.color === 'light' ? 'border-blue-500 bg-white/10' : 'border-white/10 hover:bg-white/5'"
+                        :class="theme.color === 'light' ? 'border-pink-500 bg-pink-50 ring-2 ring-pink-200' : 'border-gray-200 hover:bg-gray-50'"
                       >
-                        <div class="w-full h-8 sm:h-12 bg-white rounded-md mb-2"></div>
-                        <span class="text-xs sm:text-sm text-white">Light</span>
+                        <div class="w-full h-8 sm:h-12 bg-white rounded-md mb-2 border border-gray-200"></div>
+                        <span class="text-xs sm:text-sm text-gray-900">Light</span>
                       </button>
                       <button 
                         @click="theme.color = 'dark'"
                         class="p-2 sm:p-3 rounded-lg border transition-colors flex flex-col items-center"
-                        :class="theme.color === 'dark' ? 'border-blue-500 bg-white/10' : 'border-white/10 hover:bg-white/5'"
+                        :class="theme.color === 'dark' ? 'border-pink-500 bg-pink-50 ring-2 ring-pink-200' : 'border-gray-200 hover:bg-gray-50'"
                       >
-                        <div class="w-full h-8 sm:h-12 bg-[#0A2159] rounded-md mb-2"></div>
-                        <span class="text-xs sm:text-sm text-white">Dark</span>
+                        <div class="w-full h-8 sm:h-12 bg-gray-800 rounded-md mb-2"></div>
+                        <span class="text-xs sm:text-sm text-gray-900">Dark</span>
                       </button>
                       <button 
                         @click="theme.color = 'system'"
                         class="p-2 sm:p-3 rounded-lg border transition-colors flex flex-col items-center"
-                        :class="theme.color === 'system' ? 'border-blue-500 bg-white/10' : 'border-white/10 hover:bg-white/5'"
+                        :class="theme.color === 'system' ? 'border-pink-500 bg-pink-50 ring-2 ring-pink-200' : 'border-gray-200 hover:bg-gray-50'"
                       >
-                        <div class="w-full h-8 sm:h-12 bg-gradient-to-r from-white to-[#0A2159] rounded-md mb-2"></div>
-                        <span class="text-xs sm:text-sm text-white">System</span>
+                        <div class="w-full h-8 sm:h-12 bg-gradient-to-r from-white to-gray-800 rounded-md mb-2"></div>
+                        <span class="text-xs sm:text-sm text-gray-900">System</span>
                       </button>
                     </div>
                   </div>
                   
-                  <div class="flex items-center justify-between">
+                  <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
-                      <h3 class="font-medium text-white">Reduce Motion</h3>
-                      <p class="text-sm text-white/60">Minimize animations</p>
+                      <h3 class="font-medium text-gray-900">Reduce Motion</h3>
+                      <p class="text-sm text-gray-600">Minimize animations</p>
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                       <input type="checkbox" v-model="theme.reduceMotion" class="sr-only peer">
-                      <div class="w-11 h-6 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white/80 after:border-white/10 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-500"></div>
                     </label>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="bg-gradient-to-br from-[#0A2159] to-[#0A3573] rounded-xl shadow-lg border border-white/10">
-              <div class="p-4 sm:p-6 border-b border-white/10">
-                <h2 class="text-base sm:text-lg font-semibold text-white">Accent Color</h2>
+            <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200">
+              <div class="p-4 sm:p-6 border-b border-gray-200">
+                <h2 class="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
+                  <PaintbrushIcon class="w-5 h-5 mr-2 text-orange-500" />
+                  Accent Color
+                </h2>
               </div>
               <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
                 <div class="grid grid-cols-4 gap-2 sm:gap-3">
@@ -431,28 +478,28 @@
                     v-for="color in accentColors" 
                     :key="color.id"
                     @click="theme.accentColor = color.id"
-                    class="p-2 rounded-lg border border-white/10 hover:bg-white/5 transition-colors aspect-square"
+                    class="p-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors aspect-square"
                   >
                     <div 
                       class="w-full h-full rounded-md transition-transform"
                       :style="{ backgroundColor: color.value }"
-                      :class="theme.accentColor === color.id ? 'ring-2 ring-white scale-90' : ''"
+                      :class="theme.accentColor === color.id ? 'ring-2 ring-gray-400 scale-90' : ''"
                     ></div>
                   </button>
                 </div>
                 
                 <div>
-                  <label class="block text-sm font-medium text-white mb-2">Font Size</label>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Font Size</label>
                   <div class="flex items-center gap-4">
-                    <span class="text-xs text-white/60">A</span>
+                    <span class="text-xs text-gray-600">A</span>
                     <input 
                       type="range" 
                       min="0" 
                       max="4" 
                       v-model="theme.fontSize" 
-                      class="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
                     />
-                    <span class="text-lg text-white/60">A</span>
+                    <span class="text-lg text-gray-600">A</span>
                   </div>
                 </div>
               </div>
@@ -463,7 +510,7 @@
           <div class="flex justify-end">
             <button 
               @click="saveSettings" 
-              class="save-button px-4 sm:px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-medium hover:opacity-90 transition-colors flex items-center gap-2 shadow-lg"
+              class="save-button px-4 sm:px-6 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center gap-2"
             >
               <SaveIcon class="w-4 h-4" />
               Save Changes
@@ -473,22 +520,10 @@
       </main>
     </div>
   </div>
-  
-  <!-- Toast notification -->
-  <div 
-    v-if="showToast" 
-    class="fixed bottom-4 right-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 rounded-lg shadow-lg flex items-center max-w-md z-50"
-  >
-    <component :is="toastIcon" class="w-5 h-5 mr-3" />
-    <div>
-      <h3 class="font-medium">{{ toastTitle }}</h3>
-      <p class="text-sm text-white/80">{{ toastMessage }}</p>
-    </div>
-  </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, watch, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { 
   LayoutDashboard as LayoutDashboardIcon, 
@@ -508,7 +543,23 @@ import {
   Shield as ShieldIcon,
   Paintbrush as PaintbrushIcon
 } from 'lucide-vue-next';
-import { getAuth, signOut } from 'firebase/auth';
+
+// Firebase imports
+import { auth, db } from '@/config/firebase.js';
+import { 
+  signOut, 
+  onAuthStateChanged, 
+  updatePassword, 
+  reauthenticateWithCredential, 
+  EmailAuthProvider 
+} from 'firebase/auth';
+import { 
+  doc, 
+  getDoc, 
+  setDoc, 
+  updateDoc, 
+  serverTimestamp 
+} from 'firebase/firestore';
 
 const router = useRouter();
 const mobileSidebarOpen = ref(false);
@@ -518,6 +569,8 @@ const toastTitle = ref('');
 const toastMessage = ref('');
 const toastIcon = ref(CheckIcon);
 const photoInput = ref(null);
+const loading = ref(true);
+const currentUser = ref(null);
 
 // Global storage key for user data
 const GLOBAL_USER_KEY = 'mindoro-user-data';
@@ -543,9 +596,9 @@ const userPhotoURL = ref(null);
 
 // Profile settings
 const profile = ref({
-  fullName: 'Staff User',
-  email: 'staff@example.com',
-  phone: '+63 912 345 6789'
+  fullName: '',
+  email: '',
+  phone: ''
 });
 
 const firstName = computed(() => {
@@ -568,9 +621,9 @@ const security = ref({
 
 // Theme settings
 const theme = ref({
-  color: 'dark',
+  color: 'light',
   reduceMotion: false,
-  accentColor: 'blue',
+  accentColor: 'green',
   fontSize: 2 // 0-4, 2 is default
 });
 
@@ -585,14 +638,118 @@ const accentColors = [
   { id: 'indigo', value: '#6366f1' }
 ];
 
-// Load settings from localStorage
-const loadSettings = () => {
+// Auth state listener
+let unsubscribeAuth = null;
+
+// Initialize Firebase auth state listener
+const initializeAuth = () => {
+  unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
+    try {
+      if (user) {
+        currentUser.value = user;
+        await loadUserProfile(user.uid);
+      } else {
+        // User is not authenticated, redirect to login
+        router.push('/staff');
+      }
+    } catch (error) {
+      console.error('Auth state change error:', error);
+      showToastNotification('Error', 'Authentication error occurred.', AlertTriangleIcon);
+    } finally {
+      loading.value = false;
+    }
+  });
+};
+
+// Load user profile from Firestore
+const loadUserProfile = async (userId) => {
+  try {
+    const userDocRef = doc(db, 'staff', userId);
+    const userDoc = await getDoc(userDocRef);
+    
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      profile.value = {
+        fullName: userData.fullName || '',
+        email: userData.email || currentUser.value?.email || '',
+        phone: userData.phone || ''
+      };
+      
+      if (userData.photoURL) {
+        userPhotoURL.value = userData.photoURL;
+      }
+      
+      // Load settings
+      if (userData.settings) {
+        if (userData.settings.theme) {
+          theme.value = { ...theme.value, ...userData.settings.theme };
+        }
+        if (userData.settings.security) {
+          security.value = { ...security.value, ...userData.settings.security };
+        }
+      }
+    } else {
+      // Create initial profile document
+      const initialData = {
+        fullName: currentUser.value?.displayName || '',
+        email: currentUser.value?.email || '',
+        phone: '',
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      };
+      
+      await setDoc(userDocRef, initialData);
+      profile.value = initialData;
+    }
+    
+    // Also save to localStorage for offline access
+    saveToLocalStorage();
+  } catch (error) {
+    console.error('Error loading user profile:', error);
+    showToastNotification('Error', 'Failed to load profile data.', AlertTriangleIcon);
+    
+    // Fallback to localStorage
+    loadFromLocalStorage();
+  }
+};
+
+// Save user profile to Firestore
+const saveUserProfile = async () => {
+  if (!currentUser.value) return;
+  
+  try {
+    const userDocRef = doc(db, 'staff', currentUser.value.uid);
+    const updateData = {
+      fullName: profile.value.fullName,
+      email: profile.value.email,
+      phone: profile.value.phone,
+      photoURL: userPhotoURL.value,
+      settings: {
+        theme: theme.value,
+        security: security.value
+      },
+      updatedAt: serverTimestamp()
+    };
+    
+    await updateDoc(userDocRef, updateData);
+    
+    // Also save to localStorage
+    saveToLocalStorage();
+    
+    return true;
+  } catch (error) {
+    console.error('Error saving user profile:', error);
+    throw error;
+  }
+};
+
+// Load settings from localStorage (fallback)
+const loadFromLocalStorage = () => {
   try {
     const savedUserData = localStorage.getItem(GLOBAL_USER_KEY);
     if (savedUserData) {
       const parsedData = JSON.parse(savedUserData);
       
-      // Load profile data
       if (parsedData.fullName) {
         profile.value.fullName = parsedData.fullName;
       }
@@ -605,35 +762,31 @@ const loadSettings = () => {
         profile.value.phone = parsedData.phone;
       }
       
-      // Load profile photo
       if (parsedData.photoURL) {
         userPhotoURL.value = parsedData.photoURL;
       }
     }
     
-    // Load additional settings from separate storage
     const SETTINGS_KEY = 'mindoro-paint-settings';
     const savedSettings = localStorage.getItem(SETTINGS_KEY);
     if (savedSettings) {
       const parsedSettings = JSON.parse(savedSettings);
       
-      // Load theme settings
       if (parsedSettings.theme) {
         theme.value = { ...theme.value, ...parsedSettings.theme };
       }
       
-      // Load security settings
       if (parsedSettings.security) {
         security.value = { ...security.value, ...parsedSettings.security };
       }
     }
   } catch (error) {
-    console.error('Error loading settings:', error);
+    console.error('Error loading from localStorage:', error);
   }
 };
 
-// Save user data to localStorage
-const saveUserData = () => {
+// Save to localStorage
+const saveToLocalStorage = () => {
   try {
     const userData = {
       fullName: profile.value.fullName,
@@ -644,7 +797,6 @@ const saveUserData = () => {
     
     localStorage.setItem(GLOBAL_USER_KEY, JSON.stringify(userData));
     
-    // Also save other settings
     const SETTINGS_KEY = 'mindoro-paint-settings';
     const settingsToSave = {
       theme: theme.value,
@@ -653,7 +805,7 @@ const saveUserData = () => {
     
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsToSave));
   } catch (error) {
-    console.error('Error saving user data:', error);
+    console.error('Error saving to localStorage:', error);
   }
 };
 
@@ -664,9 +816,8 @@ const toggleMobileSidebar = () => {
 
 const handleLogout = async () => {
   try {
-    const auth = getAuth();
     await signOut(auth);
-    router.push('/staff');
+    // The auth state listener will handle the redirect
   } catch (error) {
     console.error('Error logging out:', error);
     showToastNotification('Error', 'Failed to log out. Please try again.', AlertTriangleIcon);
@@ -682,11 +833,8 @@ const saveSettings = async () => {
       saveButton.innerHTML = '<span class="animate-pulse">Saving...</span>';
     }
     
-    // Simulate API call to save all settings
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Save all settings to localStorage
-    saveUserData();
+    // Save to Firestore
+    await saveUserProfile();
     
     // Reset button state
     if (saveButton) {
@@ -698,6 +846,13 @@ const saveSettings = async () => {
   } catch (error) {
     console.error('Error saving settings:', error);
     showToastNotification('Error', 'Failed to save settings. Please try again.', AlertTriangleIcon);
+    
+    // Reset button state
+    const saveButton = document.querySelector('.save-button');
+    if (saveButton) {
+      saveButton.disabled = false;
+      saveButton.innerHTML = '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H14L21 10V19C21 20.1046 20.1046 21 19 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 21V13H7V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 3V8H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Save Changes';
+    }
   }
 };
 
@@ -706,25 +861,25 @@ const handlePhotoUpload = async (event) => {
   if (!file) return;
   
   try {
-    // Show loading state
     showToastNotification('Uploading', 'Uploading your profile photo...', null);
     
-    // Simulate upload to storage
+    // Simulate upload delay
     await new Promise(resolve => setTimeout(resolve, 1500));
     
-    // Create a persistent URL for the image
     const reader = new FileReader();
-    reader.onload = (e) => {
-      // Store the data URL which will persist across page refreshes
+    reader.onload = async (e) => {
       userPhotoURL.value = e.target.result;
       
-      // Save immediately to localStorage to ensure it persists
-      saveUserData();
-      
-      showToastNotification('Success', 'Profile photo updated successfully.', CheckIcon);
+      // Save immediately
+      try {
+        await saveUserProfile();
+        showToastNotification('Success', 'Profile photo updated successfully.', CheckIcon);
+      } catch (error) {
+        console.error('Error saving photo:', error);
+        showToastNotification('Error', 'Failed to save photo. Please try again.', AlertTriangleIcon);
+      }
     };
     
-    // Read the file as a data URL (base64 encoded string)
     reader.readAsDataURL(file);
   } catch (error) {
     console.error('Error uploading photo:', error);
@@ -734,15 +889,8 @@ const handlePhotoUpload = async (event) => {
 
 const removePhoto = async () => {
   try {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    // Update local state
     userPhotoURL.value = null;
-    
-    // Save to localStorage to persist the change
-    saveUserData();
-    
+    await saveUserProfile();
     showToastNotification('Success', 'Profile photo removed successfully.', CheckIcon);
   } catch (error) {
     console.error('Error removing photo:', error);
@@ -763,8 +911,26 @@ const changePassword = async () => {
       return;
     }
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    if (account.value.newPassword.length < 6) {
+      showToastNotification('Error', 'New password must be at least 6 characters long.', AlertTriangleIcon);
+      return;
+    }
+    
+    if (!currentUser.value) {
+      showToastNotification('Error', 'User not authenticated.', AlertTriangleIcon);
+      return;
+    }
+    
+    // Reauthenticate user
+    const credential = EmailAuthProvider.credential(
+      currentUser.value.email,
+      account.value.currentPassword
+    );
+    
+    await reauthenticateWithCredential(currentUser.value, credential);
+    
+    // Update password
+    await updatePassword(currentUser.value, account.value.newPassword);
     
     // Clear form
     account.value = {
@@ -776,7 +942,17 @@ const changePassword = async () => {
     showToastNotification('Success', 'Your password has been changed successfully.', CheckIcon);
   } catch (error) {
     console.error('Error changing password:', error);
-    showToastNotification('Error', 'Failed to change password. Please try again.', AlertTriangleIcon);
+    
+    let errorMessage = 'Failed to change password. Please try again.';
+    if (error.code === 'auth/wrong-password') {
+      errorMessage = 'Current password is incorrect.';
+    } else if (error.code === 'auth/weak-password') {
+      errorMessage = 'New password is too weak.';
+    } else if (error.code === 'auth/requires-recent-login') {
+      errorMessage = 'Please log out and log back in before changing your password.';
+    }
+    
+    showToastNotification('Error', errorMessage, AlertTriangleIcon);
   }
 };
 
@@ -791,52 +967,73 @@ const showToastNotification = (title, message, icon = CheckIcon) => {
   }, 3000);
 };
 
-// Load user data on mount
+// Lifecycle hooks
 onMounted(() => {
-  // Load settings from localStorage
-  loadSettings();
+  // Initialize Firebase auth
+  initializeAuth();
   
-  // Simulate API call to get user data if not already loaded
-  if (!profile.value.fullName || profile.value.fullName === 'Staff User') {
-    setTimeout(() => {
-      // This would normally come from Firebase
-      profile.value = {
-        fullName: 'Juan Dela Cruz',
-        email: 'juan@mindoropaint.com',
-        phone: '+63 912 345 6789'
-      };
-      
-      // Save to localStorage
-      saveUserData();
-    }, 500);
+  // Load from localStorage as fallback
+  loadFromLocalStorage();
+});
+
+onUnmounted(() => {
+  // Clean up auth listener
+  if (unsubscribeAuth) {
+    unsubscribeAuth();
   }
 });
 
-// Watch for changes to save automatically
-watch([profile], () => {
-  // Auto-save when profile changes
-  saveUserData();
+// Watch for changes to auto-save
+watch([profile, theme, security], () => {
+  if (currentUser.value) {
+    // Debounce auto-save
+    clearTimeout(window.autoSaveTimeout);
+    window.autoSaveTimeout = setTimeout(() => {
+      saveToLocalStorage();
+    }, 1000);
+  }
 }, { deep: true });
 </script>
 
 <style scoped>
+.animate-bounce-in {
+  animation: bounceIn 0.5s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #059669, #047857);
 }
 
 /* Hide scrollbar for tabs but keep functionality */
@@ -847,6 +1044,27 @@ watch([profile], () => {
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Custom slider styling */
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.slider::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Reduce motion */
