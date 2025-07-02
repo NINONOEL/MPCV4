@@ -1,43 +1,77 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
+  <div class="min-h-screen relative overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/top-view-colorful-paint-cans.jpg-78zC5PSDkb02uzttCxHJXuCVzpRioD.jpeg" 
+        alt="Colorful paint cans background" 
+        class="w-full h-full object-cover"
+      />
+      <!-- Dark overlay for better text readability -->
+      <div class="absolute inset-0 bg-black/50"></div>
+    </div>
+
+    <!-- Back to Homepage Button with Loading State -->
+    <div class="absolute top-6 left-6 z-20">
+      <button 
+        @click="goToHomepage"
+        :disabled="isNavigating"
+        class="flex items-center gap-2 px-4 py-2 bg-white/95 backdrop-blur-sm border-2 border-white/30 rounded-xl text-gray-800 hover:bg-white hover:border-white/50 transition-all duration-200 shadow-lg hover:shadow-xl font-semibold disabled:opacity-75 disabled:cursor-not-allowed"
+        :class="{ 'transform scale-95': isNavigating }"
+      >
+        <div class="relative flex items-center">
+          <!-- Loading Spinner -->
+          <LoaderIcon 
+            v-if="isNavigating" 
+            class="h-5 w-5 animate-spin text-blue-600" 
+          />
+          <!-- Arrow Icon -->
+          <ArrowLeft 
+            v-else 
+            class="h-5 w-5 transition-transform duration-200" 
+            :class="{ 'group-hover:-translate-x-1': !isNavigating }"
+          />
+        </div>
+        <span class="transition-all duration-200">
+          {{ isNavigating ? 'Loading...' : 'Back to Homepage' }}
+        </span>
+      </button>
+    </div>
+
     <!-- Enhanced Background Elements with Paint Colors -->
-    <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-red-200 via-orange-200 to-yellow-200 opacity-25 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-green-200 via-blue-200 to-purple-200 opacity-25 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
-      <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-br from-pink-200 via-rose-200 to-red-200 opacity-20 rounded-full filter blur-2xl transform -translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute top-1/4 left-1/4 w-48 h-48 bg-gradient-to-br from-cyan-200 via-teal-200 to-emerald-200 opacity-15 rounded-full filter blur-xl"></div>
-      <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-gradient-to-br from-violet-200 via-purple-200 to-fuchsia-200 opacity-15 rounded-full filter blur-xl"></div>
+    <div class="absolute inset-0 z-5">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-red-200 via-orange-200 to-yellow-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-green-200 via-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+      <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-br from-pink-200 via-rose-200 to-red-200 opacity-15 rounded-full filter blur-2xl transform -translate-x-1/2 -translate-y-1/2"></div>
     </div>
 
     <!-- Main Content -->
-    <div class="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-12">
-      <div class="w-full max-w-lg">
+    <div class="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-16">
+      <div class="w-full" :class="activeTab === 'register' ? 'max-w-lg' : 'max-w-md'">
         <!-- Enhanced Colorful Header -->
-        <div class="text-center mb-10 flex flex-col items-center justify-center">
-          <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 tracking-tight italic text-center mx-auto px-4">
-            <span class="bg-gradient-to-r from-red-500 via-orange-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+        <div class="text-center mb-8 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 w-full max-w-4xl mx-auto">
+          <h1 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight text-center">
+            <span class="bg-gradient-to-r from-red-400 via-orange-400 via-yellow-400 via-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-lg whitespace-nowrap">
               Barcelona Paint Center
             </span>
           </h1>
           <div class="flex justify-center items-center gap-2 mb-4">
-            <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-            <div class="w-3 h-3 bg-orange-500 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
-            <div class="w-3 h-3 bg-yellow-500 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
-            <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse" style="animation-delay: 0.6s;"></div>
-            <div class="w-3 h-3 bg-blue-500 rounded-full animate-pulse" style="animation-delay: 0.8s;"></div>
-            <div class="w-3 h-3 bg-purple-500 rounded-full animate-pulse" style="animation-delay: 1s;"></div>
-            <div class="w-3 h-3 bg-pink-500 rounded-full animate-pulse" style="animation-delay: 1.2s;"></div>
+            <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse shadow-lg"></div>
+            <div class="w-3 h-3 bg-orange-500 rounded-full animate-pulse shadow-lg" style="animation-delay: 0.2s;"></div>
+            <div class="w-3 h-3 bg-yellow-500 rounded-full animate-pulse shadow-lg" style="animation-delay: 0.4s;"></div>
+            <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-lg" style="animation-delay: 0.6s;"></div>
+            <div class="w-3 h-3 bg-blue-500 rounded-full animate-pulse shadow-lg" style="animation-delay: 0.8s;"></div>
+            <div class="w-3 h-3 bg-purple-500 rounded-full animate-pulse shadow-lg" style="animation-delay: 1s;"></div>
+            <div class="w-3 h-3 bg-pink-500 rounded-full animate-pulse shadow-lg" style="animation-delay: 1.2s;"></div>
           </div>
-          <p class="text-xl font-semibold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Staff Portal
-          </p>
+          
         </div>
         
         <!-- Enhanced Form Card with Paint Theme -->
-        <div class="bg-white/90 backdrop-blur-sm border-2 border-transparent bg-gradient-to-r from-red-100 via-yellow-100 via-green-100 via-blue-100 to-purple-100 p-0.5 rounded-2xl shadow-2xl overflow-hidden hover:shadow-3xl transition-all duration-300">
-          <div class="bg-white/95 backdrop-blur-sm rounded-2xl overflow-hidden">
+        <div class="bg-white/95 backdrop-blur-md border-2 border-white/30 bg-gradient-to-r from-red-100/80 via-yellow-100/80 via-green-100/80 via-blue-100/80 to-purple-100/80 p-0.5 rounded-2xl shadow-2xl overflow-hidden hover:shadow-3xl transition-all duration-300">
+          <div class="bg-white/98 backdrop-blur-sm rounded-2xl overflow-hidden">
             <!-- Colorful Tabs -->
-            <div class="flex bg-gradient-to-r from-red-50 via-orange-50 via-yellow-50 via-green-50 via-blue-50 to-purple-50 border-b-2 border-gray-100">
+            <div class="flex bg-gradient-to-r from-red-50/90 via-orange-50/90 via-yellow-50/90 via-green-50/90 via-blue-50/90 to-purple-50/90 border-b-2 border-gray-100">
               <button 
                 @click="activeTab = 'login'"
                 class="flex-1 py-4 text-center font-bold transition-all duration-300 relative"
@@ -62,7 +96,7 @@
               </button>
             </div>
 
-            <div class="p-8 space-y-6 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30">
+            <div class="p-6 space-y-6 bg-gradient-to-br from-white/95 via-blue-50/50 to-purple-50/50">
               <!-- Colorful Header -->
               <div class="text-center space-y-3">
                 <h2 class="text-3xl font-bold tracking-tight">
@@ -78,127 +112,85 @@
               <!-- Staff Registration Form -->
               <form v-if="activeTab === 'register'" @submit.prevent="createStaffAccount" class="space-y-6">
                 <!-- First Name Field -->
-                <div class="space-y-2">
-                  <label for="firstName" class="block text-sm font-bold text-gray-700">
-                    First Name
-                  </label>
-                  <div class="relative group">
-                    <UserIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-400 group-focus-within:text-blue-600 transition-colors duration-200" />
-                    <input 
-                      type="text" 
-                      id="firstName" 
-                      v-model="staffData.firstName" 
-                      required 
-                      class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-cyan-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
-                      placeholder="Enter your first name"
-                    />
-                  </div>
+                <div class="relative group">
+                  <UserIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-500 z-10" />
+                  <input 
+                    type="text" 
+                    id="firstName" 
+                    v-model="staffData.firstName" 
+                    required 
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50/90 to-cyan-50/90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    placeholder="Enter your first name"
+                  />
                 </div>
 
                 <!-- Last Name Field -->
-                <div class="space-y-2">
-                  <label for="lastName" class="block text-sm font-bold text-gray-700">
-                    Last Name
-                  </label>
-                  <div class="relative group">
-                    <UserIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-green-400 group-focus-within:text-green-600 transition-colors duration-200" />
-                    <input
-                      type="text"
-                      id="lastName" 
-                      v-model="staffData.lastName" 
-                      required 
-                      class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-green-200 bg-gradient-to-r from-green-50 to-emerald-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
-                      placeholder="Enter your last name"
-                    />
-                  </div>
+                <div class="relative group">
+                  <UserIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-green-500 z-10" />
+                  <input
+                    type="text"
+                    id="lastName" 
+                    v-model="staffData.lastName" 
+                    required 
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-green-200 bg-gradient-to-r from-green-50/90 to-emerald-50/90 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    placeholder="Enter your last name"
+                  />
                 </div>
 
                 <!-- Email Field -->
-                <div class="space-y-2">
-                  <label for="email" class="block text-sm font-bold text-gray-700">
-                    Email
-                  </label>
-                  <div class="relative group">
-                    <MailIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-orange-400 group-focus-within:text-orange-600 transition-colors duration-200" />
-                    <input 
-                      type="email" 
-                      id="email" 
-                      v-model="staffData.email" 
-                      required 
-                      class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-orange-200 bg-gradient-to-r from-orange-50 to-yellow-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
-                      placeholder="Enter your email"
-                    />
-                  </div>
-                </div>
-
-                <!-- Position Field -->
-                <div class="space-y-2">
-                  <label for="position" class="block text-sm font-bold text-gray-700">
-                    Position
-                  </label>
-                  <div class="relative group">
-                    <UserIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-purple-400 group-focus-within:text-purple-600 transition-colors duration-200" />
-                    <input 
-                      type="text" 
-                      id="position" 
-                      v-model="staffData.position" 
-                      class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-purple-200 bg-gradient-to-r from-purple-50 to-pink-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
-                      placeholder="Enter your position (e.g., Sales Associate, Paint Specialist)"
-                    />
-                  </div>
+                <div class="relative group">
+                  <MailIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-orange-500 z-10" />
+                  <input 
+                    type="email" 
+                    id="email" 
+                    v-model="staffData.email" 
+                    required 
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-orange-200 bg-gradient-to-r from-orange-50/90 to-yellow-50/90 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    placeholder="Enter your email"
+                  />
                 </div>
 
                 <!-- Password Field -->
-                <div class="space-y-2">
-                  <label for="password" class="block text-sm font-bold text-gray-700">
-                    Password
-                  </label>
-                  <div class="relative group">
-                    <LockIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-red-400 group-focus-within:text-red-600 transition-colors duration-200" />
-                    <input 
-                      :type="showPassword ? 'text' : 'password'" 
-                      id="password" 
-                      v-model="staffData.password" 
-                      required 
-                      class="w-full pl-10 pr-12 py-3 rounded-xl border-2 border-red-200 bg-gradient-to-r from-red-50 to-pink-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
-                      placeholder="Create a strong password"
-                      minlength="6"
-                    />
-                    <button 
-                      type="button" 
-                      class="absolute right-3 top-1/2 transform -translate-y-1/2 text-red-400 hover:text-red-600 focus:outline-none transition-colors duration-200"
-                      @click="showPassword = !showPassword"
-                    >
-                      <EyeIcon v-if="!showPassword" class="h-5 w-5" />
-                      <EyeOffIcon v-else class="h-5 w-5" />
-                    </button>
-                  </div>
+                <div class="relative group">
+                  <LockIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-red-500 z-10" />
+                  <input 
+                    :type="showPassword ? 'text' : 'password'" 
+                    id="password" 
+                    v-model="staffData.password" 
+                    required 
+                    class="w-full pl-10 pr-12 py-2.5 rounded-xl border-2 border-red-200 bg-gradient-to-r from-red-50/90 to-pink-50/90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    placeholder="Create a strong password"
+                    minlength="6"
+                  />
+                  <button 
+                    type="button" 
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-red-400 hover:text-red-600 focus:outline-none transition-colors duration-200"
+                    @click="showPassword = !showPassword"
+                  >
+                    <EyeIcon v-if="!showPassword" class="h-5 w-5" />
+                    <EyeOffIcon v-else class="h-5 w-5" />
+                  </button>
                 </div>
 
                 <!-- Confirm Password Field -->
-                <div class="space-y-2">
-                  <label for="confirmPassword" class="block text-sm font-bold text-gray-700">
-                    Confirm Password
-                  </label>
-                  <div class="relative group">
-                    <LockIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-pink-400 group-focus-within:text-pink-600 transition-colors duration-200" />
-                    <input 
-                      :type="showConfirmPassword ? 'text' : 'password'" 
-                      id="confirmPassword" 
-                      v-model="staffData.confirmPassword" 
-                      required 
-                      class="w-full pl-10 pr-12 py-3 rounded-xl border-2 border-pink-200 bg-gradient-to-r from-pink-50 to-rose-50 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
-                      placeholder="Confirm your password"
-                    />
-                    <button 
-                      type="button" 
-                      class="absolute right-3 top-1/2 transform -translate-y-1/2 text-pink-400 hover:text-pink-600 focus:outline-none transition-colors duration-200"
-                      @click="showConfirmPassword = !showConfirmPassword"
-                    >
-                      <EyeIcon v-if="!showConfirmPassword" class="h-5 w-5" />
-                      <EyeOffIcon v-else class="h-5 w-5" />
-                    </button>
-                  </div>
+                <div class="relative group">
+                  <LockIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-pink-500 z-10" />
+                  <input 
+                    :type="showConfirmPassword ? 'text' : 'password'" 
+                    id="confirmPassword" 
+                    v-model="staffData.confirmPassword" 
+                    required 
+                    class="w-full pl-10 pr-12 py-2.5 rounded-xl border-2 border-pink-200 bg-gradient-to-r from-pink-50/90 to-rose-50/90 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    placeholder="Confirm your password"
+                  />
+                  <button 
+                    type="button" 
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-pink-400 hover:text-pink-600 focus:outline-none transition-colors duration-200"
+                    @click="showConfirmPassword = !showConfirmPassword"
+                  >
+                    <EyeIcon v-if="!showConfirmPassword" class="h-5 w-5" />
+                    <EyeOffIcon v-else class="h-5 w-5" />
+                  </button>
                 </div>
 
                 <!-- Colorful Submit Button -->
@@ -219,7 +211,7 @@
                     <button 
                       type="button"
                       @click="activeTab = 'login'"
-                      class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold hover:from-blue-700 hover:to-purple-700 transition-colors duration-200"
+                      class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold hover:from-blue-700 hover:to-purple-700 transition-colors duration-200 underline"
                     >
                       Login here
                     </button>
@@ -230,56 +222,46 @@
               <!-- Staff Login Form -->
               <form v-if="activeTab === 'login'" @submit.prevent="loginStaff" class="space-y-6">
                 <!-- Email Field -->
-                <div class="space-y-2">
-                  <label for="loginEmail" class="block text-sm font-bold text-gray-700">
-                    Email
-                  </label>
-                  <div class="relative group">
-                    <MailIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-400 group-focus-within:text-blue-600 transition-colors duration-200" />
-                    <input 
-                      type="email" 
-                      id="loginEmail" 
-                      v-model="loginData.email" 
-                      required 
-                      class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-cyan-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
-                      placeholder="Enter your email"
-                    />
-                  </div>
+                <div class="relative group">
+                  <MailIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-500 z-10" />
+                  <input 
+                    type="email" 
+                    id="loginEmail" 
+                    v-model="loginData.email" 
+                    required 
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50/90 to-cyan-50/90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    placeholder="Enter your email"
+                  />
                 </div>
 
                 <!-- Password Field -->
-                <div class="space-y-2">
-                  <label for="loginPassword" class="block text-sm font-bold text-gray-700">
-                    Password
-                  </label>
-                  <div class="relative group">
-                    <LockIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-purple-400 group-focus-within:text-purple-600 transition-colors duration-200" />
-                    <input 
-                      :type="showPassword ? 'text' : 'password'" 
-                      id="loginPassword" 
-                      v-model="loginData.password" 
-                      required 
-                      class="w-full pl-10 pr-12 py-3 rounded-xl border-2 border-purple-200 bg-gradient-to-r from-purple-50 to-pink-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium"
-                      placeholder="Enter your password"
-                    />
-                    <button 
-                      type="button" 
-                      class="absolute right-3 top-1/2 transform -translate-y-1/2 text-purple-400 hover:text-purple-600 focus:outline-none transition-colors duration-200"
-                      @click="showPassword = !showPassword"
-                    >
-                      <EyeIcon v-if="!showPassword" class="h-5 w-5" />
-                      <EyeOffIcon v-else class="h-5 w-5" />
-                    </button>
-                  </div>
-                  <div class="flex justify-end">
-                    <button 
-                      type="button"
-                      @click="showForgotPassword = true"
-                      class="text-sm text-purple-600 hover:text-purple-800 transition-colors duration-200 hover:underline font-semibold"
-                    >
-                      Forgot Password?
-                    </button>
-                  </div>
+                <div class="relative group">
+                  <LockIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-purple-500 z-10" />
+                  <input 
+                    :type="showPassword ? 'text' : 'password'" 
+                    id="loginPassword" 
+                    v-model="loginData.password" 
+                    required 
+                    class="w-full pl-10 pr-12 py-2.5 rounded-xl border-2 border-purple-200 bg-gradient-to-r from-purple-50/90 to-pink-50/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    placeholder="Enter your password"
+                  />
+                  <button 
+                    type="button" 
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-purple-400 hover:text-purple-600 focus:outline-none transition-colors duration-200"
+                    @click="showPassword = !showPassword"
+                  >
+                    <EyeIcon v-if="!showPassword" class="h-5 w-5" />
+                    <EyeOffIcon v-else class="h-5 w-5" />
+                  </button>
+                </div>
+                <div class="flex justify-end mt-1">
+                  <button 
+                    type="button"
+                    @click="showForgotPassword = true"
+                    class="text-sm text-purple-600 hover:text-purple-800 transition-colors duration-200 hover:underline font-semibold"
+                  >
+                    Forgot Password?
+                  </button>
                 </div>
 
                 <!-- Colorful Submit Button -->
@@ -300,7 +282,7 @@
                     <button 
                       type="button"
                       @click="activeTab = 'register'"
-                      class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold hover:from-blue-700 hover:to-purple-700 transition-colors duration-200"
+                      class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold hover:from-blue-700 hover:to-purple-700 transition-colors duration-200 underline"
                     >
                       Register here
                     </button>
@@ -312,8 +294,8 @@
               <div 
                 v-if="alertMessage" 
                 :class="[
-                  'p-4 rounded-xl text-sm font-bold transition-all duration-300 border-2',
-                  alertType === 'success' ? 'bg-gradient-to-r from-green-50 to-emerald-50 text-green-800 border-green-300' : 'bg-gradient-to-r from-red-50 to-pink-50 text-red-800 border-red-300'
+                  'p-4 rounded-xl text-sm font-bold transition-all duration-300 border-2 backdrop-blur-sm',
+                  alertType === 'success' ? 'bg-gradient-to-r from-green-50/90 to-emerald-50/90 text-green-800 border-green-300' : 'bg-gradient-to-r from-red-50/90 to-pink-50/90 text-red-800 border-red-300'
                 ]"
               >
                 <div class="flex items-center">
@@ -333,8 +315,8 @@
       
       <!-- Colorful Footer -->
       <div class="mt-10 text-center">
-        <p class="text-gray-600 font-semibold">© 2025 Barcelona Paint Center. All rights reserved.</p>
-        <p class="mt-1 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent font-bold">
+        <p class="text-white font-bold drop-shadow-lg">© 2025 Barcelona Paint Center. All rights reserved.</p>
+        <p class="mt-1 bg-gradient-to-r from-red-400 via-yellow-400 via-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent font-bold drop-shadow-lg">
           Secure Staff Portal - Paint Your Success! 🎨
         </p>
       </div>
@@ -343,7 +325,7 @@
   
   <!-- Enhanced Forgot Password Modal -->
   <div v-if="showForgotPassword" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-gradient-to-br from-white via-blue-50 to-purple-50 border-2 border-blue-200 rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl">
+    <div class="bg-gradient-to-br from-white/95 via-blue-50/90 to-purple-50/90 backdrop-blur-md border-2 border-blue-200 rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl">
       <div class="flex justify-between items-center mb-6">
         <div class="flex items-center gap-3">
           <div class="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg">
@@ -354,7 +336,7 @@
         <button 
           type="button" 
           @click="showForgotPassword = false"
-          class="text-gray-400 hover:text-gray-600 transition-colors duration-200 focus:outline-none p-2 rounded-lg hover:bg-gray-100 transition-all duration-200 font-bold"
+          class="text-gray-400 hover:text-gray-600 transition-colors duration-200 focus:outline-none p-2 rounded-lg hover:bg-gray-100"
         >
           <X class="h-5 w-5" />
         </button>
@@ -372,7 +354,7 @@
                 id="resetEmail" 
                 v-model="resetEmail" 
                 required 
-                class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-cyan-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg font-medium"
+                class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50/90 to-cyan-50/90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg font-medium backdrop-blur-sm"
                 placeholder="Enter your email"
               />
             </div>
@@ -381,7 +363,7 @@
             <button 
               type="button" 
               @click="showForgotPassword = false"
-              class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-700 hover:bg-gray-50 transition-all duration-200 font-bold"
+              class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-700 hover:bg-gray-50 transition-all duration-200 font-bold backdrop-blur-sm"
             >
               Cancel
             </button>
@@ -421,11 +403,13 @@ import {
   CheckCircle,
   AlertCircle,
   Key as KeyIcon,
-  X
+  X,
+  ArrowLeft
 } from 'lucide-vue-next'
 
 const router = useRouter()
 const isLoading = ref(false)
+const isNavigating = ref(false) // New loading state for navigation
 const isResetting = ref(false)
 const alertMessage = ref('')
 const alertType = ref('success')
@@ -445,8 +429,7 @@ const staffData = ref({
   lastName: '',
   email: '',
   password: '',
-  confirmPassword: '',
-  position: ''
+  confirmPassword: ''
 })
 
 const createStaffAccount = async () => {
@@ -465,8 +448,7 @@ const createStaffAccount = async () => {
     console.log('Creating staff account with data:', {
       firstName: staffData.value.firstName,
       lastName: staffData.value.lastName,
-      email: staffData.value.email,
-      position: staffData.value.position
+      email: staffData.value.email
     })
 
     // Create user with email and password
@@ -486,7 +468,7 @@ const createStaffAccount = async () => {
       email: staffData.value.email.toLowerCase().trim(),
       role: 'staff', // Default role
       status: 'active', // Default status
-      position: staffData.value.position.trim() || 'Staff Member',
+      position: 'Staff Member', // Default position instead of staffData.value.position
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       photoURL: null // Default photo
@@ -513,8 +495,7 @@ const createStaffAccount = async () => {
       lastName: '',
       email: '',
       password: '',
-      confirmPassword: '',
-      position: ''
+      confirmPassword: ''
     }
   } catch (err) {
     console.error('Error creating staff account:', err)
@@ -620,6 +601,22 @@ const handleForgotPassword = async () => {
     alertType.value = 'error'
   } finally {
     isResetting.value = false
+  }
+}
+
+// Enhanced goToHomepage function with loading state
+const goToHomepage = async () => {
+  try {
+    isNavigating.value = true
+    
+    // Add a small delay to show the loading state
+    await new Promise(resolve => setTimeout(resolve, 800))
+    
+    router.push('/')
+  } catch (error) {
+    console.error('Navigation error:', error)
+    // Reset loading state on error
+    isNavigating.value = false
   }
 }
 </script>

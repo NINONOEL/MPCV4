@@ -80,6 +80,15 @@
           </router-link>
 
           <router-link 
+            to="/staff/sales-analytics" 
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 shadow-sm border border-teal-200 transform scale-105"
+            :class="{ 'hover:bg-teal-100 hover:text-teal-700': $route.path !== '/staff/sales-analytics' }"
+          >
+            <TrendingUpIcon class="w-5 h-5" />
+            <span>Sales Analytics</span>
+          </router-link>
+
+          <router-link 
             to="/staff/settings" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 shadow-sm border border-green-200 transform scale-105"
             :class="{ 'hover:bg-green-100 hover:text-green-700': $route.path !== '/staff/settings' }"
@@ -541,7 +550,8 @@ import {
   Check as CheckIcon,
   AlertTriangle as AlertTriangleIcon,
   Shield as ShieldIcon,
-  Paintbrush as PaintbrushIcon
+  Paintbrush as PaintbrushIcon,
+  TrendingUp as TrendingUpIcon
 } from 'lucide-vue-next';
 
 // Firebase imports

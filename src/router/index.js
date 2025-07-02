@@ -17,6 +17,7 @@ import StaffDashboard from "../components/staff/StaffDashboard.vue"
 import StaffPaintMixing from "../components/staff/StaffPaintMixing.vue"
 import HousePaintRecommender from "../components/staff/HousePaintRecommender.vue"
 import Settings from "../components/staff/Settings.vue"
+import StaffSalesAnalytics from "../components/staff/StaffSalesAnalytics.vue"
 
 // Estado global de autenticación
 const authState = {
@@ -204,7 +205,13 @@ const routes = [
       keepAlive: true,
     },
   },
-  // Add the Settings route
+  // Add the Staff Sales Analytics route
+  {
+    path: "/staff/sales-analytics",
+    name: "StaffSalesAnalytics",
+    component: StaffSalesAnalytics,
+    beforeEnter: requireStaff,
+  },
   {
     path: "/staff/settings",
     name: "StaffSettings",
@@ -223,4 +230,3 @@ const router = createRouter({
 })
 
 export default router
-

@@ -14,93 +14,66 @@
           <div>
             <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
           </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <ShieldIcon class="h-3 w-3 mr-1" />
-            Admin Portal
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
+            <UserIcon class="h-3 w-3 mr-1" />
+            Staff Portal
           </div>
         </div>
 
         <!-- Navigation - Scrollable Area -->
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
           <router-link 
-            to="/admin/dashboard" 
+            to="/staff/dashboard" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-            :class="{ 'shadow-sm border border-blue-200 transform scale-105': $route.path === '/admin/dashboard' }"
+            :class="{ 'shadow-sm border border-blue-200 transform scale-105': $route.path === '/staff/dashboard' }"
           >
             <LayoutDashboardIcon class="w-5 h-5" />
             <span>Dashboard</span>
           </router-link>
 
           <router-link 
-            to="/admin/staff" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
-            :class="{ 'shadow-sm border border-green-200 transform scale-105': $route.path === '/admin/staff' }"
-          >
-            <UsersIcon class="w-5 h-5" />
-            <span>Staff Management</span>
-          </router-link>
-
-          <router-link 
-            to="/admin/inventory" 
+            to="/staff/inventory" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
-            :class="{ 'shadow-sm border border-purple-200 transform scale-105': $route.path === '/admin/inventory' }"
+            :class="{ 'shadow-sm border border-purple-200 transform scale-105': $route.path === '/staff/inventory' }"
           >
             <PackageIcon class="w-5 h-5" />
             <span>Inventory</span>
           </router-link>
 
           <router-link 
-            to="/admin/house-paint-recommender" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
-            :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/admin/house-paint-recommender' }"
-          >
-            <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
-          </router-link>
-
-          <router-link 
-            to="/admin/paint-mixing" 
+            to="/staff/paint-mixing" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
-            :class="{ 'shadow-sm border border-pink-200 transform scale-105': $route.path === '/admin/paint-mixing' }"
+            :class="{ 'shadow-sm border border-pink-200 transform scale-105': $route.path === '/staff/paint-mixing' }"
           >
             <PaletteIcon class="w-5 h-5" />
             <span>Paint Mixing</span>
           </router-link>
 
           <router-link 
-            to="/admin/sales-analytics" 
+            to="/staff/house-paint-recommender" 
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
+            :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/staff/house-paint-recommender' }"
+          >
+            <HomeIcon class="w-5 h-5" />
+            <span>House Paint Recommender</span>
+          </router-link>
+
+          <router-link 
+            to="/staff/sales-analytics" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 shadow-sm border border-teal-200 transform scale-105"
-            :class="{ 'hover:bg-teal-100 hover:text-teal-700': $route.path !== '/admin/sales-analytics' }"
+            :class="{ 'hover:bg-teal-100 hover:text-teal-700': $route.path !== '/staff/sales-analytics' }"
           >
             <TrendingUpIcon class="w-5 h-5" />
             <span>Sales Analytics</span>
           </router-link>
 
           <router-link 
-            to="/admin/reports" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700"
-            :class="{ 'shadow-sm border border-indigo-200 transform scale-105': $route.path === '/admin/reports' }"
-          >
-            <ClipboardIcon class="w-5 h-5" />
-            <span>Reports</span>
-          </router-link>
-
-          <router-link 
-            to="/admin/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700"
-            :class="{ 'shadow-sm border border-amber-200 transform scale-105': $route.path === '/admin/settings' }"
+            to="/staff/settings" 
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
+            :class="{ 'shadow-sm border border-green-200 transform scale-105': $route.path === '/staff/settings' }"
           >
             <SettingsIcon class="w-5 h-5" />
-            <span>System Settings</span>
-          </router-link>
-
-          <router-link 
-            to="/admin/security" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-red-600 bg-red-50 hover:bg-red-100 hover:text-red-700"
-            :class="{ 'shadow-sm border border-red-200 transform scale-105': $route.path === '/admin/security' }"
-          >
-            <ShieldIcon class="w-5 h-5" />
-            <span>Security</span>
+            <span>Settings</span>
           </router-link>
 
           <!-- Perfect spacing -->
@@ -108,14 +81,14 @@
         </nav>
 
         <!-- User Menu - Fixed at bottom -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-green-50 to-teal-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg">
               <UserIcon class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
-              <p class="text-xs text-gray-600 truncate">admin@example.com</p>
+              <p class="text-sm font-medium text-gray-900 truncate">Staff User</p>
+              <p class="text-xs text-gray-600 truncate">staff@example.com</p>
             </div>
             <button 
               @click="handleLogout"
@@ -156,18 +129,18 @@
           <div>
             <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
           </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <ShieldIcon class="h-3 w-3 mr-1" />
-            Admin Portal
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-green-500 to-teal-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
+            <UserIcon class="h-3 w-3 mr-1" />
+            Staff Portal
           </div>
         </div>
 
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
           <!-- Mobile navigation links with same styling -->
           <router-link 
-            to="/admin/dashboard" 
+            to="/staff/dashboard" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50"
-            :class="{ 'shadow-sm border border-blue-200': $route.path === '/admin/dashboard' }"
+            :class="{ 'shadow-sm border border-blue-200': $route.path === '/staff/dashboard' }"
             @click="mobileSidebarOpen = false"
           >
             <LayoutDashboardIcon class="w-5 h-5" />
@@ -175,19 +148,9 @@
           </router-link>
 
           <router-link 
-            to="/admin/staff" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50"
-            :class="{ 'shadow-sm border border-green-200': $route.path === '/admin/staff' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <UsersIcon class="w-5 h-5" />
-            <span>Staff Management</span>
-          </router-link>
-
-          <router-link 
-            to="/admin/inventory" 
+            to="/staff/inventory" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50"
-            :class="{ 'shadow-sm border border-purple-200': $route.path === '/admin/inventory' }"
+            :class="{ 'shadow-sm border border-purple-200': $route.path === '/staff/inventory' }"
             @click="mobileSidebarOpen = false"
           >
             <PackageIcon class="w-5 h-5" />
@@ -195,9 +158,9 @@
           </router-link>
 
           <router-link 
-            to="/admin/house-paint-recommender" 
+            to="/staff/house-paint-recommender" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50"
-            :class="{ 'shadow-sm border border-orange-200': $route.path === '/admin/house-paint-recommender' }"
+            :class="{ 'shadow-sm border border-orange-200': $route.path === '/staff/house-paint-recommender' }"
             @click="mobileSidebarOpen = false"
           >
             <HomeIcon class="w-5 h-5" />
@@ -205,9 +168,9 @@
           </router-link>
 
           <router-link 
-            to="/admin/paint-mixing" 
+            to="/staff/paint-mixing" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50"
-            :class="{ 'shadow-sm border border-pink-200': $route.path === '/admin/paint-mixing' }"
+            :class="{ 'shadow-sm border border-pink-200': $route.path === '/staff/paint-mixing' }"
             @click="mobileSidebarOpen = false"
           >
             <PaletteIcon class="w-5 h-5" />
@@ -215,7 +178,7 @@
           </router-link>
 
           <router-link 
-            to="/admin/sales-analytics" 
+            to="/staff/sales-analytics" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 shadow-sm border border-teal-200"
             @click="mobileSidebarOpen = false"
           >
@@ -224,33 +187,13 @@
           </router-link>
 
           <router-link 
-            to="/admin/reports" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50"
-            :class="{ 'shadow-sm border border-indigo-200': $route.path === '/admin/reports' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <ClipboardIcon class="w-5 h-5" />
-            <span>Reports</span>
-          </router-link>
-
-          <router-link 
-            to="/admin/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50"
-            :class="{ 'shadow-sm border border-amber-200': $route.path === '/admin/settings' }"
+            to="/staff/settings" 
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50"
+            :class="{ 'shadow-sm border border-green-200': $route.path === '/staff/settings' }"
             @click="mobileSidebarOpen = false"
           >
             <SettingsIcon class="w-5 h-5" />
-            <span>System Settings</span>
-          </router-link>
-
-          <router-link 
-            to="/admin/security" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-red-600 bg-red-50"
-            :class="{ 'shadow-sm border border-red-200': $route.path === '/admin/security' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <ShieldIcon class="w-5 h-5" />
-            <span>Security</span>
+            <span>Settings</span>
           </router-link>
 
           <!-- Perfect spacing for mobile too -->
@@ -258,14 +201,14 @@
         </nav>
 
         <!-- Mobile User Menu - Fixed at bottom -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-green-50 to-teal-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center shadow-lg">
               <UserIcon class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
-              <p class="text-xs text-gray-600 truncate">admin@example.com</p>
+              <p class="text-sm font-medium text-gray-900 truncate">Staff User</p>
+              <p class="text-xs text-gray-600 truncate">staff@example.com</p>
             </div>
             <button 
               @click="handleLogout"
@@ -283,8 +226,8 @@
         <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-8 py-4 shadow-sm">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 class="text-2xl font-bold text-gray-900">Sales Analytics</h1>
-              <p class="text-gray-600">Monitor your sales performance and trends</p>
+              <h1 class="text-2xl font-bold text-gray-900">Daily Sales Analytics</h1>
+              <p class="text-gray-600">Monitor today's sales performance and trends</p>
             </div>
             <div class="flex items-center gap-4">
               <div class="hidden md:flex items-center gap-2 text-gray-700">
@@ -293,7 +236,7 @@
               </div>
               <div class="hidden md:block h-6 w-px bg-gray-300"></div>
               <div class="flex items-center gap-3">
-                <span class="text-gray-900">Welcome, Admin</span>
+                <span class="text-gray-900">Welcome, Staff</span>
                 <div class="relative">
                   <BellIcon class="w-5 h-5 text-orange-500 cursor-pointer hover:text-orange-600" />
                 </div>
@@ -303,7 +246,7 @@
         </header>
 
         <div class="p-6 md:p-8">
-          <!-- Action Buttons and Date Range -->
+          <!-- Action Buttons - Only Add Sale (no Delete All) -->
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
             <div class="flex items-center gap-3">
               <!-- Add Sale Button -->
@@ -314,8 +257,7 @@
                 <PlusIcon class="w-5 h-5" />
                 Add Sale
               </button>
-              
-              <!-- Daily Report Button -->
+              <!-- Add this button next to the "Add Sale" button -->
               <button
                 @click="generateDailyReport"
                 class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2 shadow-lg"
@@ -323,35 +265,19 @@
                 <ClipboardIcon class="w-5 h-5" />
                 Daily Report
               </button>
-              
-              <!-- Delete All Sales Button -->
-              <button
-                @click="confirmDeleteAllSales"
-                class="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2 shadow-lg"
-              >
-                <Trash2Icon class="w-5 h-5" />
-                Delete All Sales
-              </button>
             </div>
             
-            <!-- Date Range Selector -->
-            <div class="flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-lg border border-gray-200 p-1 shadow-sm">
-              <button 
-                v-for="range in dateRanges" 
-                :key="range.value"
-                @click="selectedRange = range.value"
-                class="px-3 py-1 rounded-md text-sm transition-colors"
-                :class="selectedRange === range.value ? 'bg-teal-500 text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'"
-              >
-                {{ range.label }}
-              </button>
+            <!-- Today's Date Display -->
+            <div class="flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-lg border border-gray-200 p-3 shadow-sm">
+              <CalendarIcon class="w-5 h-5 text-teal-500" />
+              <span class="text-sm font-medium text-gray-700">Today: {{ todayFormatted }}</span>
             </div>
           </div>
 
           <!-- Loading State -->
           <div v-if="loading && !error" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-8 mb-6 text-center">
             <LoaderIcon class="w-8 h-8 text-gray-400 animate-spin mx-auto mb-4" />
-            <p class="text-gray-600">Loading sales data...</p>
+            <p class="text-gray-600">Loading today's sales data...</p>
           </div>
 
           <!-- Error State -->
@@ -361,16 +287,16 @@
               <span class="text-red-800">{{ error }}</span>
             </div>
             <button 
-              @click="fetchSalesData"
+              @click="fetchTodaysSalesData"
               class="text-red-600 hover:text-red-700"
             >
               <RefreshCwIcon class="w-5 h-5" />
             </button>
           </div>
 
-          <!-- Stats Cards -->
-          <div v-if="!loading || sales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <!-- Total Revenue -->
+          <!-- Today's Stats Cards -->
+          <div v-if="!loading || todaysSales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Today's Revenue -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
               <div class="p-6">
@@ -379,19 +305,18 @@
                     <DollarSignIcon class="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p class="text-sm text-gray-600">Total Revenue</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ formatCurrency(totalRevenue) }}</p>
+                    <p class="text-sm text-gray-600">Today's Revenue</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ formatCurrency(todaysRevenue) }}</p>
                     <div class="flex items-center gap-1 mt-1">
                       <TrendingUpIcon class="w-4 h-4 text-green-600" />
-                      <span class="text-sm font-medium text-green-600">12.5%</span>
-                      <span class="text-sm text-gray-600">vs last period</span>
+                      <span class="text-sm font-medium text-green-600">Daily Target</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Total Orders -->
+            <!-- Today's Orders -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 h-2 absolute top-0 left-0 right-0"></div>
               <div class="p-6">
@@ -400,19 +325,18 @@
                     <ShoppingCartIcon class="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p class="text-sm text-gray-600">Total Orders</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ totalOrders }}</p>
+                    <p class="text-sm text-gray-600">Today's Orders</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ todaysOrders }}</p>
                     <div class="flex items-center gap-1 mt-1">
                       <TrendingUpIcon class="w-4 h-4 text-blue-600" />
-                      <span class="text-sm font-medium text-blue-600">8.2%</span>
-                      <span class="text-sm text-gray-600">vs last period</span>
+                      <span class="text-sm font-medium text-blue-600">Orders Today</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Products Sold -->
+            <!-- Today's Products Sold -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
               <div class="p-6">
@@ -421,19 +345,18 @@
                     <PackageIcon class="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p class="text-sm text-gray-600">Products Sold</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ totalProductsSold }}</p>
+                    <p class="text-sm text-gray-600">Products Sold Today</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ todaysProductsSold }}</p>
                     <div class="flex items-center gap-1 mt-1">
-                      <TrendingDownIcon class="w-4 h-4 text-red-600" />
-                      <span class="text-sm font-medium text-red-600">3.1%</span>
-                      <span class="text-sm text-gray-600">vs last period</span>
+                      <PackageIcon class="w-4 h-4 text-purple-600" />
+                      <span class="text-sm font-medium text-purple-600">Items Sold</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Average Order Value -->
+            <!-- Today's Average Order Value -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 h-2 absolute top-0 left-0 right-0"></div>
               <div class="p-6">
@@ -442,12 +365,11 @@
                     <TrendingUpIcon class="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p class="text-sm text-gray-600">Average Order Value</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ formatCurrency(averageOrderValue) }}</p>
+                    <p class="text-sm text-gray-600">Avg Order Value</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ formatCurrency(todaysAverageOrderValue) }}</p>
                     <div class="flex items-center gap-1 mt-1">
                       <TrendingUpIcon class="w-4 h-4 text-amber-600" />
-                      <span class="text-sm font-medium text-amber-600">5.3%</span>
-                      <span class="text-sm text-gray-600">vs last period</span>
+                      <span class="text-sm font-medium text-amber-600">Per Order</span>
                     </div>
                   </div>
                 </div>
@@ -455,48 +377,48 @@
             </div>
           </div>
 
-          <!-- Best Seller Section -->
-          <div v-if="!loading && topProducts.length > 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6 mb-8">
-            <h2 class="text-lg font-semibold text-gray-900 mb-4">Best Seller</h2>
-            <div v-if="sortedTopProducts.length > 0" class="flex flex-col md:flex-row items-start md:items-center gap-6">
+          <!-- Today's Best Seller Section -->
+          <div v-if="!loading && todaysTopProducts.length > 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6 mb-8">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">Today's Best Seller</h2>
+            <div v-if="sortedTodaysTopProducts.length > 0" class="flex flex-col md:flex-row items-start md:items-center gap-6">
               <div class="w-20 h-20 rounded-lg bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center shadow-sm">
                 <PackageIcon class="w-10 h-10 text-green-600" />
               </div>
               <div class="flex-1">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">
                   <div>
-                    <h3 class="text-xl font-bold text-gray-900">{{ sortedTopProducts[0].name }}</h3>
-                    <p class="text-gray-600">{{ sortedTopProducts[0].category }}</p>
+                    <h3 class="text-xl font-bold text-gray-900">{{ sortedTodaysTopProducts[0].name }}</h3>
+                    <p class="text-gray-600">{{ sortedTodaysTopProducts[0].category }}</p>
                   </div>
                   <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium border border-green-200">
-                    Top Seller
+                    Today's Top Seller
                   </div>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                   <div>
-                    <p class="text-sm text-gray-600">Total Revenue</p>
-                    <p class="text-xl font-bold text-gray-900">{{ formatCurrency(sortedTopProducts[0].revenue) }}</p>
+                    <p class="text-sm text-gray-600">Revenue Today</p>
+                    <p class="text-xl font-bold text-gray-900">{{ formatCurrency(sortedTodaysTopProducts[0].revenue) }}</p>
                   </div>
                   <div>
-                    <p class="text-sm text-gray-600">Units Sold</p>
-                    <p class="text-xl font-bold text-gray-900">{{ sortedTopProducts[0].units }}</p>
+                    <p class="text-sm text-gray-600">Units Sold Today</p>
+                    <p class="text-xl font-bold text-gray-900">{{ sortedTodaysTopProducts[0].units }}</p>
                   </div>
                 </div>
               </div>
             </div>
             <div v-else class="text-center py-8">
               <PackageIcon class="w-8 h-8 text-gray-300 mx-auto mb-2" />
-              <p class="text-gray-600">No product data available</p>
+              <p class="text-gray-600">No product sales today yet</p>
             </div>
           </div>
 
           <!-- Empty State -->
-          <div v-if="!loading && sales.length === 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-8 mb-8 text-center">
+          <div v-if="!loading && todaysSales.length === 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-8 mb-8 text-center">
             <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center">
               <ShoppingCartIcon class="w-8 h-8 text-teal-600" />
             </div>
-            <h3 class="text-lg font-medium text-gray-900 mb-2">No sales data yet</h3>
-            <p class="text-gray-600 mb-4">Start recording sales to see analytics and insights.</p>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">No sales today today</h3>
+            <p class="text-gray-600 mb-4">Start recording sales to see today's analytics and insights.</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
               <button 
                 @click="showAddSaleModal = true"
@@ -516,11 +438,11 @@
           </div>
 
           <!-- Charts Section -->
-          <div v-if="!loading && sales.length > 0" class="mb-8">
-            <!-- Top Products Chart -->
+          <div v-if="!loading && todaysSales.length > 0" class="mb-8">
+            <!-- Today's Top Products Chart -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-                <h2 class="text-lg font-semibold text-gray-900">Top Products</h2>
+                <h2 class="text-lg font-semibold text-gray-900">Today's Top Products</h2>
                 <select 
                   v-model="selectedProductMetric"
                   class="px-3 py-1 rounded-lg border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
@@ -530,37 +452,63 @@
                 </select>
               </div>
               <div class="space-y-4">
-                <div 
-                  v-for="product in sortedTopProducts" 
-                  :key="product.id"
-                  class="flex items-center gap-4 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-                >
-                  <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
-                    <PackageIcon class="w-6 h-6 text-purple-600" />
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <p class="font-medium text-gray-900 truncate">{{ product.name }}</p>
-                    <p class="text-sm text-gray-600">{{ product.category }}</p>
-                  </div>
-                  <div class="text-right">
-                    <p class="font-medium text-gray-900">{{ formatCurrency(product.revenue) }}</p>
-                    <p class="text-sm text-gray-600">{{ product.units }} units</p>
+                <!-- Top Products Today -->
+                <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200" v-if="sortedTodaysTopProducts.length > 0">
+                  <h3 class="font-semibold text-gray-900 mb-3 flex items-center">
+                    <PackageIcon class="w-4 h-4 mr-2 text-purple-600" />
+                    Top Products Today
+                  </h3>
+                  <div class="space-y-3">
+                    <div 
+                      v-for="(product, index) in sortedTodaysTopProducts.slice(0, 5)" 
+                      :key="product.id"
+                      class="grid grid-cols-12 gap-3 p-3 bg-gray-50 rounded text-xs border border-gray-100 items-center"
+                    >
+                      <!-- Rank -->
+                      <div class="col-span-1">
+                        <span class="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs flex items-center justify-center font-bold">{{ index + 1 }}</span>
+                      </div>
+                      
+                      <!-- Product Info -->
+                      <div class="col-span-4">
+                        <div class="font-bold text-gray-900 text-sm">{{ product.name }}</div>
+                        <div class="text-gray-600 text-xs">{{ product.category || 'N/A' }}</div>
+                      </div>
+                      
+                      <!-- Units -->
+                      <div class="col-span-2 text-center">
+                        <div class="text-purple-600 text-sm font-bold">{{ product.units }}</div>
+                        <div class="text-gray-600 text-xs">units sold</div>
+                      </div>
+                      
+                      <!-- Revenue -->
+                      <div class="col-span-3 text-right">
+                        <div class="font-bold text-green-700 text-sm">{{ formatCurrency(product.revenue) }}</div>
+                        <div class="text-gray-600 text-xs">{{ formatCurrency(product.units > 0 ? product.revenue / product.units : 0) }}/unit</div>
+                      </div>
+                      
+                      <!-- Percentage -->
+                      <div class="col-span-2 text-right">
+                        <div class="text-purple-600 text-xs font-medium">{{ todaysRevenue > 0 ? ((product.revenue / todaysRevenue) * 100).toFixed(1) : 0 }}%</div>
+                        <div class="text-gray-600 text-xs">of total</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 
                 <!-- Empty state for top products -->
-                <div v-if="topProducts.length === 0" class="text-center py-8">
+                <div v-if="todaysTopProducts.length === 0" class="text-center py-8">
                   <PackageIcon class="w-8 h-8 text-gray-300 mx-auto mb-2" />
-                  <p class="text-gray-600">No product data available</p>
+                  <p class="text-gray-600">No product data available for today</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Sales by Category -->
-          <div v-if="!loading && sales.length > 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6 mb-8">
+          <!-- Today's Sales by Category -->
+          <div v-if="!loading && todaysSales.length > 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6 mb-8">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-              <h2 class="text-lg font-semibold text-gray-900">Sales by Category</h2>
+              <h2 class="text-lg font-semibold text-gray-900">Today's Sales by Category</h2>
               <select 
                 v-model="selectedCategoryView"
                 class="px-3 py-1 rounded-lg border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
@@ -572,7 +520,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div 
-                v-for="category in salesByCategory" 
+                v-for="category in todaysSalesByCategory" 
                 :key="category.name"
                 class="p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
               >
@@ -588,39 +536,30 @@
                      `${category.orders} orders` }}
                 </p>
                 <div class="flex items-center gap-1">
-                  <component 
-                    :is="category.trend > 0 ? TrendingUpIcon : TrendingDownIcon" 
-                    class="w-4 h-4"
-                    :class="category.trend > 0 ? 'text-green-600' : 'text-red-600'"
-                  />
-                  <span 
-                    class="text-sm font-medium"
-                    :class="category.trend > 0 ? 'text-green-600' : 'text-red-600'"
-                  >
-                    {{ Math.abs(category.trend) }}%
-                  </span>
+                  <CalendarIcon class="w-4 h-4 text-teal-600" />
+                  <span class="text-sm font-medium text-teal-600">Today</span>
                 </div>
               </div>
               
               <!-- Empty state for categories -->
-              <div v-if="salesByCategory.length === 0" class="col-span-4 text-center py-8">
+              <div v-if="todaysSalesByCategory.length === 0" class="col-span-4 text-center py-8">
                 <PaletteIcon class="w-8 h-8 text-gray-300 mx-auto mb-2" />
-                <p class="text-gray-600">No category data available</p>
+                <p class="text-gray-600">No category data available for today</p>
               </div>
             </div>
           </div>
 
-          <!-- Recent Sales Table -->
-          <div v-if="!loading && sales.length > 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg overflow-hidden">
+          <!-- Today's Sales Table -->
+          <div v-if="!loading && todaysSales.length > 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg overflow-hidden">
             <div class="p-6 border-b border-gray-200">
               <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <h2 class="text-lg font-semibold text-gray-900">Recent Sales</h2>
+                <h2 class="text-lg font-semibold text-gray-900">Today's Sales</h2>
                 <div class="relative">
                   <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                   <input 
                     type="text"
                     v-model="searchQuery"
-                    placeholder="Search sales..."
+                    placeholder="Search today's sales..."
                     class="pl-9 pr-4 py-2 rounded-lg border border-gray-200 text-sm bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent placeholder-gray-500"
                   />
                 </div>
@@ -632,25 +571,25 @@
               <table class="w-full">
                 <thead>
                   <tr class="border-b border-gray-200">
-                    <th class="text-left p-4 text-sm font-medium text-gray-600">Order ID</th>
-                    <th class="text-left p-4 text-sm font-medium text-gray-600">Customer</th>
+                    <th class="text-left p-4 text-sm font-medium text-gray-600 min-w-[120px]">Order ID</th>
+                    <th class="text-left p-4 text-sm font-medium text-gray-600 min-w-[150px]">Customer</th>
                     <th class="text-left p-4 text-sm font-medium text-gray-600">Products</th>
                     <th class="text-left p-4 text-sm font-medium text-gray-600">Total</th>
                     <th class="text-left p-4 text-sm font-medium text-gray-600">Status</th>
-                    <th class="text-left p-4 text-sm font-medium text-gray-600">Date</th>
+                    <th class="text-left p-4 text-sm font-medium text-gray-600 min-w-[80px]">Time</th>
                     <th class="text-left p-4 text-sm font-medium text-gray-600">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr 
-                    v-for="sale in filteredSales" 
+                    v-for="sale in filteredTodaysSales" 
                     :key="sale.id"
                     class="border-b border-gray-100 hover:bg-gray-50"
                   >
-                    <td class="p-4">
+                    <td class="p-4 min-w-[120px]">
                       <span class="font-medium text-gray-900">{{ sale.orderId }}</span>
                     </td>
-                    <td class="p-4">
+                    <td class="p-4 min-w-[150px]">
                       <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
                           <UserIcon class="w-4 h-4 text-blue-600" />
@@ -680,8 +619,8 @@
                         {{ sale.status.charAt(0).toUpperCase() + sale.status.slice(1) }}
                       </span>
                     </td>
-                    <td class="p-4 text-gray-600">
-                      {{ formatDate(sale.date) }}
+                    <td class="p-4 text-gray-600 min-w-[80px]">
+                      {{ formatTime(sale.date) }}
                     </td>
                     <td class="p-4">
                       <button 
@@ -700,7 +639,7 @@
             <!-- Pagination -->
             <div class="flex items-center justify-between p-4 border-t border-gray-200">
               <p class="text-sm text-gray-600">
-                Showing {{ paginationStart }} to {{ paginationEnd }} of {{ filteredSales.length }} results
+                Showing {{ paginationStart }} to {{ paginationEnd }} of {{ filteredTodaysSales.length }} results
               </p>
               <div class="flex items-center gap-2">
                 <button 
@@ -891,13 +830,13 @@
   </div>
 
   <!-- Daily Sales Report Modal -->
-  <div v-if="showDailyReportModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+  <div v-if="showReceiptModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
     <div class="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
       <div class="p-6 border-b border-gray-200">
         <div class="flex items-center justify-between">
           <h3 class="text-xl font-bold text-gray-900">Daily Sales Report</h3>
           <button 
-            @click="showDailyReportModal = false"
+            @click="showReceiptModal = false"
             class="text-gray-400 hover:text-gray-600"
           >
             <XIcon class="w-6 h-6" />
@@ -909,75 +848,75 @@
         <!-- Daily Sales Report Preview -->
         <div id="daily-report-content" class="bg-gradient-to-br from-blue-50 to-purple-50 p-4 rounded-lg mb-4 text-sm">
           <div class="text-center mb-6">
-            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center">
               <TrendingUpIcon class="w-8 h-8 text-white" />
             </div>
             <h2 class="text-xl font-bold text-gray-900">Barcelona Paint Center</h2>
-            <p class="text-blue-600 font-medium">Admin Daily Sales Report</p>
+            <p class="text-teal-600 font-medium">Daily Sales Report</p>
             <p class="text-xs text-gray-500 mt-1">{{ formatDateTime(new Date()) }}</p>
           </div>
         
-          <!-- Admin Information -->
+          <!-- Staff Information -->
           <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200">
             <h3 class="font-semibold text-gray-900 mb-2 flex items-center">
-              <ShieldIcon class="w-4 h-4 mr-2 text-blue-600" />
-              Admin Report
+              <UserIcon class="w-4 h-4 mr-2 text-teal-600" />
+              Staff Report
             </h3>
             <div class="grid grid-cols-2 gap-2 text-xs">
               <div>
-                <span class="text-gray-600">Admin:</span>
-                <span class="font-medium ml-1">Admin User</span>
+                <span class="text-gray-600">Staff:</span>
+                <span class="font-medium ml-1">Staff User</span>
               </div>
               <div>
                 <span class="text-gray-600">Date:</span>
                 <span class="font-medium ml-1">{{ todayFormatted }}</span>
               </div>
               <div>
-                <span class="text-gray-600">Period:</span>
-                <span class="font-medium ml-1">{{ selectedRange.toUpperCase() }}</span>
+                <span class="text-gray-600">Shift:</span>
+                <span class="font-medium ml-1">Full Day</span>
               </div>
               <div>
                 <span class="text-gray-600">Status:</span>
-                <span class="font-medium ml-1 text-green-600">Active</span>
+                <span class="font-medium ml-1 text-green-600">Completed</span>
               </div>
             </div>
           </div>
         
-          <!-- Performance Summary -->
+          <!-- Daily Summary -->
           <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200">
             <h3 class="font-semibold text-gray-900 mb-3 flex items-center">
               <DollarSignIcon class="w-4 h-4 mr-2 text-green-600" />
-              Overall Performance ({{ selectedRange.toUpperCase() }})
+              Today's Performance
             </h3>
             <div class="grid grid-cols-2 gap-3">
               <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-3 rounded-lg border border-green-200">
                 <p class="text-xs text-green-700 font-medium">Total Revenue</p>
-                <p class="text-lg font-bold text-green-800">{{ formatCurrency(totalRevenue) }}</p>
+                <p class="text-lg font-bold text-green-800">{{ formatCurrency(todaysRevenue) }}</p>
               </div>
               <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-3 rounded-lg border border-blue-200">
-                <p class="text-xs text-blue-700 font-medium">Total Orders</p>
-                <p class="text-lg font-bold text-blue-800">{{ totalOrders }}</p>
+                <p class="text-xs text-blue-700 font-medium">Orders</p>
+                <p class="text-lg font-bold text-blue-800">{{ todaysOrders }}</p>
               </div>
               <div class="bg-gradient-to-r from-purple-50 to-violet-50 p-3 rounded-lg border border-purple-200">
                 <p class="text-xs text-purple-700 font-medium">Items Sold</p>
-                <p class="text-lg font-bold text-purple-800">{{ totalProductsSold }}</p>
+                <p class="text-lg font-bold text-purple-800">{{ todaysProductsSold }}</p>
               </div>
               <div class="bg-gradient-to-r from-orange-50 to-amber-50 p-3 rounded-lg border border-orange-200">
                 <p class="text-xs text-orange-700 font-medium">Avg Order</p>
-                <p class="text-lg font-bold text-orange-800">{{ formatCurrency(averageOrderValue) }}</p>
+                <p class="text-lg font-bold text-orange-800">{{ formatCurrency(todaysAverageOrderValue) }}</p>
               </div>
             </div>
           </div>
 
-          <!-- Top Products -->
-          <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200" v-if="sortedTopProducts.length > 0">
+          <!-- Top Products Today -->
+          <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200" v-if="sortedTodaysTopProducts.length > 0">
             <h3 class="font-semibold text-gray-900 mb-3 flex items-center">
               <PackageIcon class="w-4 h-4 mr-2 text-purple-600" />
-              Top Products ({{ selectedRange.toUpperCase() }})
+              Top Products Today
             </h3>
             <div class="space-y-3">
               <div 
-                v-for="(product, index) in sortedTopProducts.slice(0, 5)" 
+                v-for="(product, index) in sortedTodaysTopProducts.slice(0, 5)" 
                 :key="product.id"
                 class="grid grid-cols-12 gap-3 p-3 bg-gray-50 rounded text-xs border border-gray-100 items-center"
               >
@@ -1012,7 +951,7 @@
                 
                 <!-- Percentage -->
                 <div class="col-span-1 text-right">
-                  <div class="text-purple-600 text-xs font-medium">{{ totalRevenue > 0 ? ((product.revenue / totalRevenue) * 100).toFixed(1) : 0 }}%</div>
+                  <div class="text-purple-600 text-xs font-medium">{{ todaysRevenue > 0 ? ((product.revenue / todaysRevenue) * 100).toFixed(1) : 0 }}%</div>
                   <div class="text-gray-600 text-xs">of total</div>
                 </div>
               </div>
@@ -1020,18 +959,18 @@
           </div>
 
           <!-- Recent Sales -->
-          <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200" v-if="sales.length > 0">
+          <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200" v-if="todaysSales.length > 0">
             <h3 class="font-semibold text-gray-900 mb-3 flex items-center">
               <ShoppingCartIcon class="w-4 h-4 mr-2 text-blue-600" />
               Recent Transactions (Last 5)
             </h3>
             <div class="space-y-3">
               <div 
-                v-for="sale in sales.slice(0, 5)" 
+                v-for="sale in todaysSales.slice(0, 5)" 
                 :key="sale.id"
                 class="p-3 bg-gray-50 rounded border border-gray-100"
               >
-                <!-- First Row: Order ID and Amount -->
+                <!-- First Row: Order ID and Time (Fixed spacing) -->
                 <div class="flex justify-between items-center mb-2">
                   <div class="flex items-center gap-6">
                     <span class="font-bold text-gray-900 text-sm min-w-[120px]">{{ sale.orderId }}</span>
@@ -1072,11 +1011,11 @@
 
           <!-- Footer -->
           <div class="text-center pt-4 border-t border-gray-200">
-            <p class="text-xs text-gray-600 mb-1">Report generated for admin review</p>
-            <p class="text-xs text-gray-500">Barcelona Paint Center Admin Portal</p>
+            <p class="text-xs text-gray-600 mb-1">Report generated for owner review</p>
+            <p class="text-xs text-gray-500">Barcelona Paint Center Staff Portal</p>
             <div class="mt-2 flex items-center justify-center">
-              <div class="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
-              <span class="text-xs text-blue-600 font-medium">All sales data verified and current</span>
+              <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+              <span class="text-xs text-green-600 font-medium">All sales recorded and verified</span>
             </div>
           </div>
         </div>
@@ -1095,93 +1034,6 @@
           >
             <ClipboardIcon class="w-5 h-5" />
             Summary
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Receipt Modal -->
-  <div v-if="showReceiptModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
-      <div class="p-6 border-b border-gray-200">
-        <div class="flex items-center justify-between">
-          <h3 class="text-xl font-bold text-gray-900">Receipt Generated</h3>
-          <button 
-            @click="showReceiptModal = false"
-            class="text-gray-400 hover:text-gray-600"
-          >
-            <XIcon class="w-6 h-6" />
-          </button>
-        </div>
-      </div>
-      
-      <div class="p-6">
-        <!-- Receipt Preview -->
-        <div id="receipt-content" class="bg-white p-6 border border-gray-200 rounded-lg mb-4 text-sm">
-          <div class="text-center mb-4">
-            <h2 class="text-lg font-bold">Barcelona Paint Center</h2>
-            <p class="text-gray-600">Sales Receipt</p>
-            <p class="text-xs text-gray-500">{{ formatDateTime(new Date()) }}</p>
-          </div>
-          
-          <div class="border-t border-gray-200 pt-4 mb-4">
-            <div class="flex justify-between mb-2">
-              <span class="font-medium">Order ID:</span>
-              <span>{{ lastSaleData.orderId }}</span>
-            </div>
-            <div class="flex justify-between mb-2">
-              <span class="font-medium">Customer:</span>
-              <span>{{ lastSaleData.customerName }}</span>
-            </div>
-            <div class="flex justify-between mb-2" v-if="lastSaleData.customerContactNo">
-              <span class="font-medium">Contact:</span>
-              <span>{{ lastSaleData.customerContactNo }}</span>
-            </div>
-            <div class="flex justify-between mb-2">
-              <span class="font-medium">Payment:</span>
-              <span>{{ formatPaymentMethod(lastSaleData.paymentMethod) }}</span>
-            </div>
-          </div>
-          
-          <div class="border-t border-gray-200 pt-4 mb-4">
-            <h3 class="font-medium mb-2">Items:</h3>
-            <div v-for="product in lastSaleData.products" :key="product.id" class="flex justify-between mb-1">
-              <div class="flex-1">
-                <div class="font-medium">{{ product.name }}</div>
-                <div class="text-xs text-gray-600">{{ product.quantity }} x {{ formatCurrency(product.price) }}</div>
-              </div>
-              <div class="font-medium">{{ formatCurrency(product.price * product.quantity) }}</div>
-            </div>
-          </div>
-          
-          <div class="border-t border-gray-200 pt-4">
-            <div class="flex justify-between text-lg font-bold">
-              <span>Total:</span>
-              <span>{{ formatCurrency(lastSaleData.total) }}</span>
-            </div>
-          </div>
-          
-          <div class="text-center mt-4 text-xs text-gray-500">
-            <p>Thank you for your business!</p>
-            <p>Visit us again soon.</p>
-          </div>
-        </div>
-        
-        <div class="flex gap-3">
-          <button 
-            @click="downloadReceipt"
-            class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
-          >
-            <DownloadIcon class="w-5 h-5" />
-            Download
-          </button>
-          <button 
-            @click="printReceipt"
-            class="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
-          >
-            <PrinterIcon class="w-5 h-5" />
-            Print
           </button>
         </div>
       </div>
@@ -1212,36 +1064,6 @@
             class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200"
           >
             Delete Sale
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Delete All Sales Confirmation Modal -->
-  <div v-if="showDeleteAllModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
-      <div class="p-6">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
-          <AlertTriangleIcon class="w-8 h-8 text-red-600" />
-        </div>
-        <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Delete All Sales</h3>
-        <p class="text-gray-600 text-center mb-6">
-          Are you sure you want to delete <strong>ALL {{ sales.length }} sales</strong>? 
-          This will restore all product stock and cannot be undone.
-        </p>
-        <div class="flex justify-center gap-3">
-          <button 
-            @click="showDeleteAllModal = false"
-            class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-          >
-            Cancel
-          </button>
-          <button 
-            @click="deleteAllSales"
-            class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200"
-          >
-            Delete All Sales
           </button>
         </div>
       </div>
@@ -1317,20 +1139,19 @@ const todayFormatted = new Date().toLocaleDateString('en-US', {
   year: 'numeric'
 })
 
-// State
-const sales = ref([])
+// State - focused on today's data only
+const todaysSales = ref([])
 const loading = ref(true)
 const error = ref(null)
-const totalRevenue = ref(0)
-const totalOrders = ref(0)
-const totalProductsSold = ref(0)
-const averageOrderValue = ref(0)
-const topProducts = ref([])
-const salesByCategory = ref([])
+const todaysRevenue = ref(0)
+const todaysOrders = ref(0)
+const todaysProductsSold = ref(0)
+const todaysAverageOrderValue = ref(0)
+const todaysTopProducts = ref([])
+const todaysSalesByCategory = ref([])
 const availableProducts = ref([])
 const showAddSaleModal = ref(false)
 const showReceiptModal = ref(false)
-const showDailyReportModal = ref(false)
 const isSubmitting = ref(false)
 const mobileSidebarOpen = ref(false)
 const router = useRouter()
@@ -1338,18 +1159,6 @@ const route = useRoute()
 const lastSaleData = ref({}) // Store last sale data for receipt
 const showDeleteModal = ref(false)
 const saleToDelete = ref(null)
-const showDeleteAllModal = ref(false)
-const dailySales = ref([])
-
-// Date range selector
-const dateRanges = [
-  { label: '1D', value: '1d' },
-  { label: '7D', value: '7d' },
-  { label: '30D', value: '30d' },
-  { label: '3M', value: '3m' },
-  { label: '1Y', value: '1y' },
-]
-const selectedRange = ref('30d')
 
 // Chart controls
 const selectedProductMetric = ref('revenue')
@@ -1372,64 +1181,31 @@ const saleForm = ref({
   paymentMethod: 'cash'
 })
 
-// Calculate daily sales
-const calculateDailySales = (salesData) => {
-  const dailySalesMap = new Map()
-
-  salesData.forEach(sale => {
-    const date = sale.date.toLocaleDateString()
-    const existing = dailySalesMap.get(date) || {
-      date: date,
-      revenue: 0,
-      orders: 0
-    }
-
-    existing.revenue += Number(sale.total)
-    existing.orders += 1
-    dailySalesMap.set(date, existing)
-  })
-
-  dailySales.value = Array.from(dailySalesMap.values()).sort((a, b) => new Date(a.date) - new Date(b.date))
-  console.log(`Calculated daily sales for ${dailySales.value.length} days`)
+// Get today's start and end dates
+const getTodayDateRange = () => {
+  const today = new Date()
+  const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0)
+  const endOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59)
+  return { startOfDay, endOfDay }
 }
 
-// Fetch sales data based on date range
-const fetchSalesData = async () => {
+// Fetch today's sales data only
+const fetchTodaysSalesData = async () => {
   try {
     loading.value = true
     error.value = null
-    console.log("Fetching sales data...")
+    console.log("Fetching today's sales data...")
 
-    // Calculate date range
-    const now = new Date()
-    let startDate = new Date()
-    
-    switch(selectedRange.value) {
-      case '1d':
-        startDate.setDate(now.getDate() - 1)
-        break
-      case '7d':
-        startDate.setDate(now.getDate() - 7)
-        break
-      case '30d':
-        startDate.setDate(now.getDate() - 30)
-        break
-      case '3m':
-        startDate.setMonth(now.getMonth() - 3)
-        break
-      case '1y':
-        startDate.setFullYear(now.getFullYear() - 1)
-        break
-    }
+    const { startOfDay, endOfDay } = getTodayDateRange()
 
-    // Create query without date filters initially
+    // Create query for today's sales only
     const salesRef = collection(db, 'sales')
     const q = query(
       salesRef,
       orderBy('date', 'desc')
     )
 
-    console.log("Query created, setting up listener...")
+    console.log("Query created, setting up listener for today's sales...")
 
     // Set up real-time listener
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -1462,8 +1238,8 @@ const fetchSalesData = async () => {
           sale.date = new Date() // Default to current date if missing
         }
         
-        // Filter by date range in memory
-        if (sale.date >= startDate && sale.date <= now) {
+        // Filter for today's sales only
+        if (sale.date >= startOfDay && sale.date <= endOfDay) {
           salesData.push(sale)
           revenue += Number(sale.total) || 0
           
@@ -1473,37 +1249,36 @@ const fetchSalesData = async () => {
           }, 0) || 0
           
           productsSold += soldItems
-          console.log(`Added sale ${sale.orderId} with ${soldItems} items, total: ${sale.total}`)
+          console.log(`Added today's sale ${sale.orderId} with ${soldItems} items, total: ${sale.total}`)
         }
       })
 
-      console.log(`Processed ${salesData.length} sales within date range`)
-      console.log(`Total revenue: ${revenue}, Products sold: ${productsSold}`)
+      console.log(`Processed ${salesData.length} sales for today`)
+      console.log(`Today's revenue: ${revenue}, Products sold: ${productsSold}`)
 
-      // Update reactive refs
-      sales.value = salesData
-      totalRevenue.value = revenue
-      totalOrders.value = salesData.length
-      totalProductsSold.value = productsSold
-      averageOrderValue.value = salesData.length ? revenue / salesData.length : 0
+      // Update reactive refs for today's data
+      todaysSales.value = salesData
+      todaysRevenue.value = revenue
+      todaysOrders.value = salesData.length
+      todaysProductsSold.value = productsSold
+      todaysAverageOrderValue.value = salesData.length ? revenue / salesData.length : 0
       
-      // Calculate derived data
-      calculateTopProducts(salesData)
-      calculateSalesByCategory(salesData)
-      calculateDailySales(salesData)
+      // Calculate derived data for today
+      calculateTodaysTopProducts(salesData)
+      calculateTodaysSalesByCategory(salesData)
       
       loading.value = false
     }, (err) => {
-      console.error('Error fetching sales:', err)
-      error.value = 'Failed to load sales data: ' + err.message
+      console.error('Error fetching today\'s sales:', err)
+      error.value = 'Failed to load today\'s sales data: ' + err.message
       loading.value = false
     })
 
     // Return unsubscribe function
     return unsubscribe
   } catch (err) {
-    console.error('Error in fetchSalesData:', err)
-    error.value = 'Failed to fetch sales data: ' + err.message
+    console.error('Error in fetchTodaysSalesData:', err)
+    error.value = 'Failed to fetch today\'s sales data: ' + err.message
     loading.value = false
     return () => {}
   }
@@ -1538,8 +1313,8 @@ const fetchAvailableProducts = async () => {
   }
 }
 
-// Calculate top products
-const calculateTopProducts = (salesData) => {
+// Calculate today's top products
+const calculateTodaysTopProducts = (salesData) => {
   const productMap = new Map()
   
   salesData.forEach(sale => {
@@ -1558,15 +1333,15 @@ const calculateTopProducts = (salesData) => {
     })
   })
 
-  topProducts.value = Array.from(productMap.values())
+  todaysTopProducts.value = Array.from(productMap.values())
     .sort((a, b) => b.revenue - a.revenue)
     .slice(0, 4)
     
-  console.log(`Calculated ${topProducts.value.length} top products`)
+  console.log(`Calculated ${todaysTopProducts.value.length} top products for today`)
 }
 
-// Calculate sales by category
-const calculateSalesByCategory = (salesData) => {
+// Calculate today's sales by category
+const calculateTodaysSalesByCategory = (salesData) => {
   const categoryMap = new Map()
   
   salesData.forEach(sale => {
@@ -1576,8 +1351,7 @@ const calculateSalesByCategory = (salesData) => {
         name: category,
         revenue: 0,
         units: 0,
-        orders: 0,
-        trend: Math.floor(Math.random() * 20) - 5 // Random trend for demo
+        orders: 0
       }
       
       existing.revenue += Number(product.price) * Number(product.quantity)
@@ -1587,8 +1361,8 @@ const calculateSalesByCategory = (salesData) => {
     })
   })
 
-  salesByCategory.value = Array.from(categoryMap.values())
-  console.log(`Calculated sales for ${salesByCategory.value.length} categories`)
+  todaysSalesByCategory.value = Array.from(categoryMap.values())
+  console.log(`Calculated sales for ${todaysSalesByCategory.value.length} categories today`)
 }
 
 // Confirm delete sale
@@ -1636,54 +1410,6 @@ const deleteSale = async () => {
   }
 }
 
-// Confirm delete all sales
-const confirmDeleteAllSales = () => {
-  if (sales.value.length === 0) {
-    alert('No sales to delete')
-    return
-  }
-  showDeleteAllModal.value = true
-}
-
-// Delete all sales
-const deleteAllSales = async () => {
-  try {
-    if (sales.value.length === 0) return
-    
-    // Delete all sales and restore stock
-    for (const sale of sales.value) {
-      // Delete from Firestore
-      const saleRef = doc(db, 'sales', sale.id)
-      await deleteDoc(saleRef)
-      
-      // Restore stock for each product in the sale
-      for (const product of sale.products) {
-        if (product.id && product.id !== 'sample-product') {
-          const productRef = doc(db, 'products', product.id)
-          const productDoc = await getDoc(productRef)
-          
-          if (productDoc.exists()) {
-            const currentStock = productDoc.data().stock || 0
-            const restoredStock = currentStock + product.quantity
-            
-            await updateDoc(productRef, {
-              stock: restoredStock,
-              lastUpdated: serverTimestamp()
-            })
-          }
-        }
-      }
-    }
-    
-    alert(`Successfully deleted ${sales.value.length} sales and restored all stock!`)
-    showDeleteAllModal.value = false
-    
-  } catch (err) {
-    console.error('Error deleting all sales:', err)
-    alert('Failed to delete all sales: ' + err.message)
-  }
-}
-
 // Format currency
 const formatCurrency = (value) => {
   return `₱${Number(value).toLocaleString(undefined, {
@@ -1704,7 +1430,7 @@ const formatDate = (dateString) => {
   })
 }
 
-// Format time for sales
+// Format time for today's sales
 const formatTime = (date) => {
   if (!date) return 'N/A'
   
@@ -1725,6 +1451,16 @@ const formatDateTime = (date) => {
     minute: '2-digit'
   })
 }
+
+// Format payment method
+// const formatPaymentMethod = (method) => {
+//   const methods = {
+//     'cash': 'Cash',
+//     'credit_card': 'Credit Card',
+//
+//
+//   })
+// }
 
 // Format payment method
 const formatPaymentMethod = (method) => {
@@ -1749,9 +1485,9 @@ const getCategoryIcon = (category) => {
   return icons[category] || PackageIcon
 }
 
-// Sorted top products based on selected metric
-const sortedTopProducts = computed(() => {
-  return [...topProducts.value].sort((a, b) => {
+// Sorted today's top products based on selected metric
+const sortedTodaysTopProducts = computed(() => {
+  return [...todaysTopProducts.value].sort((a, b) => {
     if (selectedProductMetric.value === 'revenue') {
       return b.revenue - a.revenue
     } else {
@@ -1760,9 +1496,9 @@ const sortedTopProducts = computed(() => {
   })
 })
 
-// Filtered sales for the table
-const filteredSales = computed(() => {
-  let filtered = [...sales.value]
+// Filtered today's sales for the table
+const filteredTodaysSales = computed(() => {
+  let filtered = [...todaysSales.value]
   
   // Apply search filter only
   if (searchQuery.value) {
@@ -1782,9 +1518,9 @@ const filteredSales = computed(() => {
 })
 
 // Pagination
-const totalPages = computed(() => Math.ceil(sales.value.length / itemsPerPage) || 1)
-const paginationStart = computed(() => sales.value.length ? ((currentPage.value - 1) * itemsPerPage) + 1 : 0)
-const paginationEnd = computed(() => Math.min(currentPage.value * itemsPerPage, sales.value.length))
+const totalPages = computed(() => Math.ceil(todaysSales.value.length / itemsPerPage) || 1)
+const paginationStart = computed(() => todaysSales.value.length ? ((currentPage.value - 1) * itemsPerPage) + 1 : 0)
+const paginationEnd = computed(() => Math.min(currentPage.value * itemsPerPage, todaysSales.value.length))
 
 // Add product to sale form
 const addProductToSale = () => {
@@ -1842,674 +1578,104 @@ const generateOrderId = () => {
 }
 
 // Generate and download receipt
-const generateReceipt = (saleData) => {
-  lastSaleData.value = saleData
-  showReceiptModal.value = true
-}
+// const generateReceipt = (saleData) => {
+//   lastSaleData.value = saleData
+//   showReceiptModal.value = true
+// }
 
-// Generate daily sales report
-const generateDailyReport = () => {
-  const reportData = {
-    date: new Date(),
-    totalRevenue: totalRevenue.value,
-    totalOrders: totalOrders.value,
-    totalProductsSold: totalProductsSold.value,
-    averageOrderValue: averageOrderValue.value,
-    topProducts: sortedTopProducts.value.slice(0, 3),
-    recentSales: sales.value.slice(0, 3),
-    totalSales: sales.value.length
-  }
-  
-  lastSaleData.value = reportData
-  showDailyReportModal.value = true
-}
-
-// Download daily report as image with complete details
-const downloadDailyReport = async () => {
-  try {
-    const reportElement = document.getElementById('daily-report-content')
-    if (!reportElement) {
-      alert('Report content not found')
-      return
-    }
-
-    // Create a canvas element with better dimensions for complete details
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
+// Download receipt as text file
+// const downloadReceipt = () => {
+//   try {
+//     // Create receipt content as text
+//     const receiptText = generateReceiptText()
     
-    // Set canvas size for complete report
-    canvas.width = 800
-    canvas.height = 1600 // Increased height for better spacing
+//     // Create blob and download
+//     const blob = new Blob([receiptText], { type: 'text/plain' })
+//     const url = URL.createObjectURL(blob)
     
-    // Create gradient background
-    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
-    gradient.addColorStop(0, '#f8fafc')
-    gradient.addColorStop(0.3, '#e2e8f0')
-    gradient.addColorStop(1, '#f1f5f9')
-    ctx.fillStyle = gradient
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
+//     const link = document.createElement('a')
+//     link.download = `receipt-${lastSaleData.value.orderId}.txt`
+//     link.href = url
     
-    // Add subtle pattern/texture
-    ctx.fillStyle = 'rgba(148, 163, 184, 0.1)'
-    for (let i = 0; i < canvas.width; i += 20) {
-      for (let j = 0; j < canvas.height; j += 20) {
-        if ((i + j) % 40 === 0) {
-          ctx.fillRect(i, j, 2, 2)
-        }
-      }
-    }
+//     // Trigger download
+//     document.body.appendChild(link)
+//     link.click()
+//     document.body.removeChild(link)
     
-    // Header section with company branding
-    const headerHeight = 130
-    const headerGradient = ctx.createLinearGradient(0, 0, 0, headerHeight)
-    headerGradient.addColorStop(0, '#3b82f6')
-    headerGradient.addColorStop(1, '#8b5cf6')
-    ctx.fillStyle = headerGradient
-    ctx.fillRect(0, 0, canvas.width, headerHeight)
+//     // Clean up
+//     URL.revokeObjectURL(url)
     
-    // Company name
-    ctx.fillStyle = '#ffffff'
-    ctx.font = 'bold 32px Arial'
-    ctx.textAlign = 'center'
-    ctx.fillText('BARCELONA PAINT CENTER', canvas.width / 2, 45)
-    
-    // Report title
-    ctx.fillStyle = '#a7f3d0'
-    ctx.font = 'bold 20px Arial'
-    ctx.fillText('ADMIN DAILY SALES REPORT', canvas.width / 2, 75)
-    
-    // Date and time
-    ctx.fillStyle = '#e6fffa'
-    ctx.font = '16px Arial'
-    ctx.fillText(formatDateTime(new Date()), canvas.width / 2, 100)
-    
-    // Report ID
-    ctx.fillStyle = '#cbd5e1'
-    ctx.font = '12px Arial'
-    ctx.fillText(`Report ID: ADM-${Date.now().toString().slice(-8)}`, canvas.width / 2, 120)
-    
-    let currentY = headerHeight + 25
-    
-    // Admin Report Section - Complete Details
-    ctx.fillStyle = '#ffffff'
-    ctx.fillRect(25, currentY, canvas.width - 50, 100)
-    ctx.strokeStyle = '#e2e8f0'
-    ctx.lineWidth = 2
-    ctx.strokeRect(25, currentY, canvas.width - 50, 100)
-    
-    // Admin section header
-    ctx.fillStyle = '#3b82f6'
-    ctx.font = 'bold 18px Arial'
-    ctx.textAlign = 'left'
-    ctx.fillText('🛡️ ADMIN INFORMATION', 45, currentY + 25)
-    
-    // Admin details - Complete
-    ctx.fillStyle = '#374151'
-    ctx.font = '14px Arial'
-    ctx.fillText(`Admin: Admin User`, 45, currentY + 50)
-    ctx.fillText(`Admin ID: ADM-001`, 45, currentY + 70)
-    ctx.fillText(`Date: ${todayFormatted}`, 350, currentY + 50)
-    ctx.fillText(`Period: ${selectedRange.value.toUpperCase()}`, 350, currentY + 70)
-    
-    // Status badge
-    ctx.fillStyle = '#059669'
-    ctx.fillRect(45, currentY + 80, 120, 15)
-    ctx.fillStyle = '#ffffff'
-    ctx.font = 'bold 12px Arial'
-    ctx.fillText('✓ SYSTEM ACTIVE', 50, currentY + 90)
-    
-    currentY += 120
-    
-    // Performance Section - Complete Metrics
-    ctx.fillStyle = '#ffffff'
-    ctx.fillRect(25, currentY, canvas.width - 50, 160)
-    ctx.strokeStyle = '#e2e8f0'
-    ctx.lineWidth = 2
-    ctx.strokeRect(25, currentY, canvas.width - 50, 160)
-    
-    // Performance header
-    ctx.fillStyle = '#059669'
-    ctx.font = 'bold 18px Arial'
-    ctx.fillText(`💰 OVERALL PERFORMANCE (${selectedRange.value.toUpperCase()})`, 45, currentY + 25)
-    
-    // Performance metrics in a detailed grid
-    const metrics = [
-      { label: 'Total Revenue', value: formatCurrency(totalRevenue.value), color: '#059669', icon: '💰' },
-      { label: 'Total Orders', value: `${totalOrders.value} orders`, color: '#0891b2', icon: '📋' },
-      { label: 'Items Sold', value: `${totalProductsSold.value} pieces`, color: '#7c3aed', icon: '📦' },
-      { label: 'Average Order', value: formatCurrency(averageOrderValue.value), color: '#ea580c', icon: '📊' }
-    ]
-    
-    metrics.forEach((metric, index) => {
-      const x = 45 + (index % 2) * 280
-      const y = currentY + 55 + Math.floor(index / 2) * 50
-      
-      // Metric background with border
-      ctx.fillStyle = metric.color + '15'
-      ctx.fillRect(x - 5, y - 25, 270, 45)
-      ctx.strokeStyle = metric.color + '40'
-      ctx.lineWidth = 1
-      ctx.strokeRect(x - 5, y - 25, 270, 45)
-      
-      // Icon
-      ctx.fillStyle = metric.color
-      ctx.font = '16px Arial'
-      ctx.fillText(metric.icon, x, y - 5)
-      
-      // Metric label
-      ctx.fillStyle = '#6b7280'
-      ctx.font = '13px Arial'
-      ctx.fillText(metric.label, x + 25, y - 5)
-      
-      // Metric value
-      ctx.fillStyle = metric.color
-      ctx.font = 'bold 20px Arial'
-      ctx.fillText(metric.value, x + 25, y + 15)
-    })
-    
-    currentY += 180
-    
-    // Top Products Section - Complete Details with Fixed Layout
-    if (sortedTopProducts.value.length > 0) {
-      const productsToShow = Math.min(sortedTopProducts.value.length, 5)
-      const sectionHeight = productsToShow * 80 + 120 // Increased spacing
-      
-      ctx.fillStyle = '#ffffff'
-      ctx.fillRect(25, currentY, canvas.width - 50, sectionHeight)
-      ctx.strokeStyle = '#e2e8f0'
-      ctx.lineWidth = 2
-      ctx.strokeRect(25, currentY, canvas.width - 50, sectionHeight)
-      
-      // Top products header
-      ctx.fillStyle = '#7c3aed'
-      ctx.font = 'bold 18px Arial'
-      ctx.fillText(`🏆 TOP PRODUCTS (${selectedRange.value.toUpperCase()})`, 45, currentY + 25)
-      
-      // Column headers with proper spacing
-      ctx.fillStyle = '#6b7280'
-      ctx.font = 'bold 11px Arial'
-      ctx.textAlign = 'left'
-      ctx.fillText('RANK', 50, currentY + 55)
-      ctx.fillText('PRODUCT NAME', 100, currentY + 55)
-      ctx.fillText('CATEGORY', 280, currentY + 55)
-      ctx.fillText('UNITS', 380, currentY + 55)
-      ctx.fillText('REVENUE', 460, currentY + 55)
-      ctx.fillText('AMOUNT', 580, currentY + 55)
-      ctx.fillText('%', 680, currentY + 55)
-      
-      // Draw header line
-      ctx.strokeStyle = '#e2e8f0'
-      ctx.lineWidth = 1
-      ctx.beginPath()
-      ctx.moveTo(45, currentY + 60)
-      ctx.lineTo(canvas.width - 45, currentY + 60)
-      ctx.stroke()
-      
-      // Products list with improved layout and no overlapping
-      sortedTopProducts.value.slice(0, productsToShow).forEach((product, index) => {
-        const y = currentY + 85 + (index * 80) // Increased spacing between rows
-      
-        // Alternating row background
-        if (index % 2 === 0) {
-          ctx.fillStyle = '#f8fafc'
-          ctx.fillRect(35, y - 30, canvas.width - 70, 75)
-        }
-      
-        // Rank circle with gradient
-        const rankGradient = ctx.createRadialGradient(70, y, 0, 70, y, 18)
-        rankGradient.addColorStop(0, '#7c3aed')
-        rankGradient.addColorStop(1, '#5b21b6')
-        ctx.fillStyle = rankGradient
-        ctx.beginPath()
-        ctx.arc(70, y, 18, 0, 2 * Math.PI)
-        ctx.fill()
-      
-        // Rank number
-        ctx.fillStyle = '#ffffff'
-        ctx.font = 'bold 16px Arial'
-        ctx.textAlign = 'center'
-        ctx.fillText((index + 1).toString(), 70, y + 6)
-      
-        // Product name (truncate if needed)
-        ctx.fillStyle = '#374151'
-        ctx.font = 'bold 13px Arial'
-        ctx.textAlign = 'left'
-        const productName = product.name.length > 18 ? product.name.substring(0, 18) + '...' : product.name
-        ctx.fillText(productName, 100, y - 10)
-      
-        // Category
-        ctx.fillStyle = '#7c3aed'
-        ctx.font = '11px Arial'
-        ctx.fillText(product.category || 'N/A', 280, y - 10)
-      
-        // Units sold
-        ctx.fillStyle = '#374151'
-        ctx.font = 'bold 14px Arial'
-        ctx.textAlign = 'center'
-        ctx.fillText(`${product.units}`, 400, y - 10)
-        ctx.fillStyle = '#6b7280'
-        ctx.font = '10px Arial'
-        ctx.fillText('units', 400, y + 5)
-      
-        // Revenue
-        ctx.fillStyle = '#059669'
-        ctx.font = 'bold 13px Arial'
-        ctx.textAlign = 'center'
-        ctx.fillText(formatCurrency(product.revenue), 500, y - 10)
-        ctx.fillStyle = '#6b7280'
-        ctx.font = '9px Arial'
-        ctx.fillText('total revenue', 500, y + 5)
-      
-        // Amount (Price per unit)
-        const avgPrice = product.units > 0 ? product.revenue / product.units : 0
-        ctx.fillStyle = '#0891b2'
-        ctx.font = 'bold 13px Arial'
-        ctx.textAlign = 'center'
-        ctx.fillText(formatCurrency(avgPrice), 610, y - 10)
-        ctx.fillStyle = '#6b7280'
-        ctx.font = '9px Arial'
-        ctx.fillText('per unit', 610, y + 5)
-      
-        // Percentage of total
-        ctx.fillStyle = '#ea580c'
-        ctx.font = 'bold 12px Arial'
-        ctx.textAlign = 'center'
-        const percentage = totalRevenue.value > 0 ? ((product.revenue / totalRevenue.value) * 100).toFixed(1) : 0
-        ctx.fillText(`${percentage}%`, 700, y - 10)
-        ctx.fillStyle = '#6b7280'
-        ctx.font = '9px Arial'
-        ctx.fillText('of total', 700, y + 5)
-      
-        // Additional product details on second line
-        ctx.fillStyle = '#6b7280'
-        ctx.font = '10px Arial'
-        ctx.textAlign = 'left'
-        ctx.fillText(`Stock ID: ${product.id.substring(0, 8)}`, 100, y + 20)
-      })
-    
-      currentY += sectionHeight + 30
-    }
-    
-    // Sales Summary by Payment Method
-    if (sales.value.length > 0) {
-      const paymentMethods = {}
-      sales.value.forEach(sale => {
-        const method = sale.paymentMethod || 'cash'
-        if (!paymentMethods[method]) {
-          paymentMethods[method] = { count: 0, total: 0 }
-        }
-        paymentMethods[method].count++
-        paymentMethods[method].total += sale.total
-      })
-      
-      const sectionHeight = 120
-      ctx.fillStyle = '#ffffff'
-      ctx.fillRect(25, currentY, canvas.width - 50, sectionHeight)
-      ctx.strokeStyle = '#e2e8f0'
-      ctx.lineWidth = 2
-      ctx.strokeRect(25, currentY, canvas.width - 50, sectionHeight)
-      
-      // Payment methods header
-      ctx.fillStyle = '#0891b2'
-      ctx.font = 'bold 18px Arial'
-      ctx.textAlign = 'left'
-      ctx.fillText('💳 PAYMENT METHODS BREAKDOWN', 45, currentY + 25)
-      
-      let methodY = currentY + 50
-      Object.entries(paymentMethods).forEach(([method, data], index) => {
-        const x = 45 + (index % 2) * 280
-        const y = methodY + Math.floor(index / 2) * 30
-        
-        // Payment method details
-        ctx.fillStyle = '#374151'
-        ctx.font = 'bold 14px Arial'
-        ctx.fillText(formatPaymentMethod(method), x, y)
-        
-        ctx.fillStyle = '#6b7280'
-        ctx.font = '12px Arial'
-        ctx.fillText(`${data.count} orders • ${formatCurrency(data.total)}`, x, y + 15)
-      })
-      
-      currentY += sectionHeight + 30
-    }
-    
-    // Recent Sales Section - Fixed Layout with No Overlapping
-    if (sales.value.length > 0) {
-      const salesToShow = Math.min(sales.value.length, 5)
-      const sectionHeight = salesToShow * 100 + 120 // Fixed height per transaction
-      
-      ctx.fillStyle = '#ffffff'
-      ctx.fillRect(25, currentY, canvas.width - 50, sectionHeight)
-      ctx.strokeStyle = '#e2e8f0'
-      ctx.lineWidth = 2
-      ctx.strokeRect(25, currentY, canvas.width - 50, sectionHeight)
-      
-      // Recent sales header
-      ctx.fillStyle = '#0891b2'
-      ctx.font = 'bold 18px Arial'
-      ctx.fillText('🛒 RECENT TRANSACTIONS (COMPLETE DETAILS)', 45, currentY + 25)
-      
-      // Column headers with better spacing
-      ctx.fillStyle = '#6b7280'
-      ctx.font = 'bold 11px Arial'
-      ctx.textAlign = 'left'
-      ctx.fillText('ORDER ID', 50, currentY + 55)
-      ctx.fillText('TIME', 150, currentY + 55)
-      ctx.fillText('CUSTOMER', 220, currentY + 55)
-      ctx.fillText('CONTACT', 350, currentY + 55)
-      ctx.fillText('ITEMS', 450, currentY + 55)
-      ctx.fillText('PAYMENT', 520, currentY + 55)
-      ctx.fillText('AMOUNT', 650, currentY + 55)
-      
-      // Draw header line
-      ctx.strokeStyle = '#e2e8f0'
-      ctx.lineWidth = 1
-      ctx.beginPath()
-      ctx.moveTo(45, currentY + 60)
-      ctx.lineTo(canvas.width - 45, currentY + 60)
-      ctx.stroke()
-      
-      // Sales list with proper spacing and no overlapping
-      sales.value.slice(0, salesToShow).forEach((sale, index) => {
-        const y = currentY + 85 + (index * 100) // Fixed spacing between transactions
-        
-        // Alternating row background
-        if (index % 2 === 0) {
-          ctx.fillStyle = '#f8fafc'
-          ctx.fillRect(35, y - 30, canvas.width - 70, 95)
-        }
-        
-        // Transaction border
-        ctx.strokeStyle = '#e5e7eb'
-        ctx.lineWidth = 1
-        ctx.strokeRect(40, y - 25, canvas.width - 80, 85)
-        
-        // Row 1: Order ID and Time (Fixed spacing)
-        ctx.fillStyle = '#374151'
-        ctx.font = 'bold 14px Arial'
-        ctx.textAlign = 'left'
-        ctx.fillText(sale.orderId, 50, y - 5)
-        
-        ctx.fillStyle = '#6b7280'
-        ctx.font = '12px Arial'
-        ctx.fillText(formatTime(sale.date), 150, y - 5)
-        
-        // Amount (right aligned)
-        ctx.fillStyle = '#059669'
-        ctx.font = 'bold 18px Arial'
-        ctx.textAlign = 'right'
-        ctx.fillText(formatCurrency(sale.total), canvas.width - 50, y)
-        
-        // Row 2: Customer and Contact (with proper spacing)
-        ctx.fillStyle = '#374151'
-        ctx.font = 'bold 13px Arial'
-        ctx.textAlign = 'left'
-        const customerName = sale.customerName.length > 15 ? sale.customerName.substring(0, 15) + '...' : sale.customerName
-        ctx.fillText(customerName, 50, y + 20)
-        
-        ctx.fillStyle = '#6b7280'
-        ctx.font = '11px Arial'
-        const contact = sale.customerContactNo || 'No contact'
-        const contactText = contact.length > 15 ? contact.substring(0, 15) + '...' : contact
-        ctx.fillText(contactText, 220, y + 20)
-        
-        // Items count
-        ctx.fillStyle = '#7c3aed'
-        ctx.font = 'bold 12px Arial'
-        ctx.fillText(`${sale.products.length} items`, 350, y + 20)
-        
-        // Payment method
-        ctx.fillStyle = '#0891b2'
-        ctx.font = '11px Arial'
-        ctx.fillText(formatPaymentMethod(sale.paymentMethod), 450, y + 20)
-        
-        // Row 3: Product details and Status (with more spacing)
-        ctx.fillStyle = '#6b7280'
-        ctx.font = '11px Arial'
-        const firstProduct = sale.products[0]?.name || 'N/A'
-        const productText = firstProduct.length > 20 ? firstProduct.substring(0, 20) + '...' : firstProduct
-        ctx.fillText(`Product: ${productText}`, 50, y + 45)
-        
-        // Status with colored background
-        const statusColor = sale.status === 'completed' ? '#059669' : sale.status === 'pending' ? '#ea580c' : '#dc2626'
-        const statusBgColor = sale.status === 'completed' ? '#d1fae5' : sale.status === 'pending' ? '#fed7aa' : '#fecaca'
-        
-        // Status background
-        ctx.fillStyle = statusBgColor
-        ctx.fillRect(450, y + 30, 80, 20)
-        ctx.strokeStyle = statusColor
-        ctx.lineWidth = 1
-        ctx.strokeRect(450, y + 30, 80, 20)
-        
-        // Status text
-        ctx.fillStyle = statusColor
-        ctx.font = 'bold 10px Arial'
-        ctx.textAlign = 'center'
-        ctx.fillText(sale.status.toUpperCase(), 490, y + 42)
-        
-        // Percentage of total (right side)
-        ctx.fillStyle = '#6b7280'
-        ctx.font = '10px Arial'
-        ctx.textAlign = 'right'
-        const percentage = totalRevenue.value > 0 ? ((sale.total / totalRevenue.value) * 100).toFixed(1) : 0
-        ctx.fillText(`${percentage}% of total`, canvas.width - 50, y + 45)
-      })
-      
-      currentY += sectionHeight + 30
-    }
-    
-    // Footer section with complete information
-    const footerY = canvas.height - 120
-    ctx.fillStyle = '#f1f5f9'
-    ctx.fillRect(0, footerY, canvas.width, 120)
-    
-    // Footer border
-    ctx.strokeStyle = '#e2e8f0'
-    ctx.lineWidth = 2
-    ctx.beginPath()
-    ctx.moveTo(0, footerY)
-    ctx.lineTo(canvas.width, footerY)
-    ctx.stroke()
-    
-    // Footer content
-    ctx.fillStyle = '#374151'
-    ctx.font = 'bold 14px Arial'
-    ctx.textAlign = 'center'
-    ctx.fillText('ADMIN REPORT SUMMARY', canvas.width / 2, footerY + 25)
-    
-    ctx.fillStyle = '#6b7280'
-    ctx.font = '12px Arial'
-    ctx.fillText(`Generated on: ${formatDateTime(new Date())}`, canvas.width / 2, footerY + 45)
-    ctx.fillText('Barcelona Paint Center Admin Portal', canvas.width / 2, footerY + 65)
-    
-    // Verification status
-    ctx.fillStyle = '#3b82f6'
-    ctx.font = 'bold 12px Arial'
-    ctx.fillText('✓ ALL DATA VERIFIED AND CURRENT', canvas.width / 2, footerY + 85)
-    
-    // Digital signature
-    ctx.fillStyle = '#6b7280'
-    ctx.font = '10px Arial'
-    ctx.fillText(`Digital Report • Admin: Admin User • Period: ${selectedRange.value.toUpperCase()}`, canvas.width / 2, footerY + 105)
-    
-    // Convert to blob and download
-    canvas.toBlob((blob) => {
-      const url = URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.download = `admin-sales-report-${selectedRange.value}-${todayFormatted.replace(/\s+/g, '-')}.png`
-      link.href = url
-      
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-      
-      URL.revokeObjectURL(url)
-      
-      alert('Admin sales report saved successfully! 📋✅')
-    }, 'image/png', 0.95)
-
-  } catch (err) {
-    console.error('Error generating admin report:', err)
-    alert('Failed to generate admin report. Please try again.')
-  }
-}
-
-// Generate daily summary function
-const generateDailySummary = () => {
-  const summaryText = `
-📊 ADMIN SALES SUMMARY - ${todayFormatted}
-Barcelona Paint Center Admin Portal
-
-🛡️ ADMIN OVERVIEW:
-• Admin: Admin User (ADM-001)
-• Period: ${selectedRange.value.toUpperCase()}
-• Status: ✅ System Active
-
-💰 PERFORMANCE RESULTS:
-• Total Revenue: ${formatCurrency(totalRevenue.value)}
-• Total Orders: ${totalOrders.value} orders
-• Items Sold: ${totalProductsSold.value} pieces
-• Average Order: ${formatCurrency(averageOrderValue.value)}
-
-🏆 TOP PRODUCTS:
-${sortedTopProducts.value.slice(0, 3).map((product, index) => 
-  `${index + 1}. ${product.name} - ${formatCurrency(product.revenue)} (${product.units} units)`
-).join('\n')}
-
-💳 PAYMENT BREAKDOWN:
-${Object.entries(sales.value.reduce((acc, sale) => {
-  const method = sale.paymentMethod || 'cash'
-  if (!acc[method]) acc[method] = { count: 0, total: 0 }
-  acc[method].count++
-  acc[method].total += sale.total
-  return acc
-}, {})).map(([method, data]) => 
-  `• ${formatPaymentMethod(method)}: ${data.count} orders (${formatCurrency(data.total)})`
-).join('\n')}
-
-🛒 RECENT TRANSACTIONS:
-${sales.value.slice(0, 5).map(sale => 
-  `• ${sale.orderId} - ${sale.customerName} - ${formatCurrency(sale.total)} (${formatTime(sale.date)})`
-).join('\n')}
-
-📋 ADMIN SUMMARY:
-• Total Sales Value: ${formatCurrency(totalRevenue.value)}
-• Transactions Processed: ${totalOrders.value}
-• System Status: 100% Operational
-• Data Integrity: ✅ Verified
-• Report Generated: ${formatDateTime(new Date())}
-
-✅ All data verified and current
-Barcelona Paint Center - Admin Portal
-  `
-  
-  // Create and download summary
-  const blob = new Blob([summaryText], { type: 'text/plain' })
-  const url = URL.createObjectURL(blob)
-  const link = document.createElement('a')
-  link.download = `admin-summary-${selectedRange.value}-${todayFormatted.replace(/\s+/g, '-')}.txt`
-  link.href = url
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
-  URL.revokeObjectURL(url)
-  
-  alert('Admin summary downloaded successfully! 📋✅')
-}
-
-// Download receipt as text file instead of image
-const downloadReceipt = () => {
-  try {
-    // Create receipt content as text
-    const receiptText = generateReceiptText()
-    
-    // Create blob and download
-    const blob = new Blob([receiptText], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    
-    const link = document.createElement('a')
-    link.download = `receipt-${lastSaleData.value.orderId}.txt`
-    link.href = url
-    
-    // Trigger download
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-    
-    // Clean up
-    URL.revokeObjectURL(url)
-    
-    console.log('Receipt downloaded successfully')
-  } catch (err) {
-    console.error('Error downloading receipt:', err)
-    alert('Failed to download receipt. Please try again.')
-  }
-}
+//     console.log('Receipt downloaded successfully')
+//   } catch (err) {
+//     console.error('Error downloading receipt:', err)
+//     alert('Failed to download receipt. Please try again.')
+//   }
+// }
 
 // Generate receipt as text
-const generateReceiptText = () => {
-  const receipt = `
-========================================
-        BARCELONA PAINT CENTER
-           SALES RECEIPT
-========================================
+// const generateReceiptText = () => {
+//   const receipt = `
+// ========================================
+//         BARCELONA PAINT CENTER
+//            SALES RECEIPT
+// ========================================
 
-Date: ${formatDateTime(new Date())}
-Order ID: ${lastSaleData.value.orderId}
-Customer: ${lastSaleData.value.customerName}
-${lastSaleData.value.customerContactNo ? `Contact: ${lastSaleData.value.customerContactNo}` : ''}
-Payment: ${formatPaymentMethod(lastSaleData.value.paymentMethod)}
+// Date: ${formatDateTime(new Date())}
+// Order ID: ${lastSaleData.value.orderId}
+// Customer: ${lastSaleData.value.customerName}
+// ${lastSaleData.value.customerContactNo ? `Contact: ${lastSaleData.value.customerContactNo}` : ''}
+// Payment: ${formatPaymentMethod(lastSaleData.value.paymentMethod)}
 
-========================================
-                ITEMS
-========================================
+// ========================================
+//                 ITEMS
+// ========================================
 
-${lastSaleData.value.products.map(product => 
-  `${product.name}
-  ${product.quantity} x ${formatCurrency(product.price)} = ${formatCurrency(product.price * product.quantity)}`
-).join('\n\n')}
+// ${lastSaleData.value.products.map(product => 
+//   `${product.name}
+//   ${product.quantity} x ${formatCurrency(product.price)} = ${formatCurrency(product.price * product.quantity)}`
+// ).join('\n\n')}
 
-========================================
-TOTAL: ${formatCurrency(lastSaleData.value.total)}
-========================================
+// ========================================
+// TOTAL: ${formatCurrency(lastSaleData.value.total)}
+// ========================================
 
-Thank you for your business!
-Visit us again soon.
+// Thank you for your business!
+// Visit us again soon.
 
-========================================
-  `
-  return receipt
-}
+// ========================================
+//   `
+//   return receipt
+// }
 
 // Print receipt
-const printReceipt = () => {
-  const receiptContent = document.getElementById('receipt-content')
-  if (!receiptContent) {
-    alert('Receipt content not found')
-    return
-  }
+// const printReceipt = () => {
+//   const receiptContent = document.getElementById('receipt-content')
+//   if (!receiptContent) {
+//     alert('Receipt content not found')
+//     return
+//   }
 
-  const printWindow = window.open('', '_blank')
-  printWindow.document.write(`
-    <html>
-      <head>
-        <title>Receipt - ${lastSaleData.value.orderId}</title>
-        <style>
-          body { font-family: Arial, sans-serif; margin: 20px; }
-          .receipt { max-width: 300px; margin: 0 auto; }
-        </style>
-      </head>
-      <body>
-        <div class="receipt">
-          ${receiptContent.innerHTML}
-        </div>
-      </body>
-    </html>
-  `)
+//   const printWindow = window.open('', '_blank')
+//   printWindow.document.write(`
+//     <html>
+//       <head>
+//         <title>Receipt - ${lastSaleData.value.orderId}</title>
+//         <style>
+//           body { font-family: Arial, sans-serif; margin: 20px; }
+//           .receipt { max-width: 300px; margin: 0 auto; }
+//         </style>
+//       </head>
+//       <body>
+//         <div class="receipt">
+//           ${receiptContent.innerHTML}
+//         </div>
+//       </body>
+//     </html>
+//   `)
   
-  printWindow.document.close()
-  printWindow.print()
-}
+//   printWindow.document.close()
+//   printWindow.print()
+// }
 
 // Handle add sale
 const handleAddSale = async () => {
@@ -2578,7 +1744,7 @@ const handleAddSale = async () => {
     
     console.log("Sale data prepared:", saleData)
     
-    // Update inventory stock for each product first (even with override)
+    // Update inventory stock for each product first
     for (const product of saleForm.value.products) {
       if (product.id && product.id !== 'sample-product') {
         const productRef = doc(db, 'products', product.id)
@@ -2605,15 +1771,9 @@ const handleAddSale = async () => {
     
     console.log('Sale added successfully with ID:', docRef.id)
     
-    // Show success message
-    alert('Sale recorded successfully and inventory updated!')
-    
-    // Generate receipt
-    generateReceipt({
-      ...saleData,
-      date: new Date() // Use current date for receipt display
-    })
-    
+    // Show success message without auto-generating daily report
+    alert('Sale recorded successfully!')
+
     // Reset form and close modal
     resetSaleForm()
     showAddSaleModal.value = false
@@ -2632,13 +1792,12 @@ const resetSaleForm = () => {
     orderId: '',
     customerId: '',
     customerName: '',
-    customerContactNo: '', // Changed from customerEmail
+    customerContactNo: '',
     products: [],
     total: 0,
-    status: 'completed', // Default to completed
+    status: 'completed',
     paymentMethod: 'cash'
   }
-  // Remove: overrideStockCheck.value = false
 }
 
 // Create sample sale
@@ -2648,7 +1807,7 @@ const createSampleSale = () => {
   
   // Set sample data
   saleForm.value.customerName = 'Sample Customer'
-  saleForm.value.customerContactNo = '09XX-XXX-XXXX' // Changed from email
+  saleForm.value.customerContactNo = '09XX-XXX-XXXX'
   saleForm.value.status = 'completed'
   saleForm.value.paymentMethod = 'cash'
   
@@ -2679,11 +1838,6 @@ const createSampleSale = () => {
   showAddSaleModal.value = true
 }
 
-// Watch for date range changes
-watch(selectedRange, () => {
-  fetchSalesData()
-})
-
 // Watch for search query and filter changes
 watch(searchQuery, () => {
   currentPage.value = 1
@@ -2691,9 +1845,9 @@ watch(searchQuery, () => {
 
 // Initialize data on component mount
 onMounted(() => {
-  console.log("Component mounted, initializing data...")
+  console.log("Staff Sales Analytics component mounted, initializing today's data...")
   fetchAvailableProducts()
-  const unsubscribe = fetchSalesData()
+  const unsubscribe = fetchTodaysSalesData()
   
   // Clean up on unmount
   onUnmounted(() => {
@@ -2711,7 +1865,589 @@ const toggleMobileSidebar = () => {
 
 // Handle logout
 const handleLogout = () => {
-  router.push('/admin')
+  router.push('/staff')
+}
+
+// Generate daily sales report (instead of individual receipt)
+const generateDailyReport = () => {
+  const reportData = {
+    date: new Date(),
+    todaysRevenue: todaysRevenue.value,
+    todaysOrders: todaysOrders.value,
+    todaysProductsSold: todaysProductsSold.value,
+    todaysAverageOrderValue: todaysAverageOrderValue.value,
+    topProducts: sortedTodaysTopProducts.value.slice(0, 3),
+    recentSales: todaysSales.value.slice(0, 3),
+    totalSales: todaysSales.value.length
+  }
+  
+  lastSaleData.value = reportData
+  showReceiptModal.value = true
+}
+
+// Download daily report as image with complete details
+const downloadDailyReport = async () => {
+try {
+  const reportElement = document.getElementById('daily-report-content')
+  if (!reportElement) {
+    alert('Report content not found')
+    return
+  }
+
+  // Create a canvas element with better dimensions for complete details
+  const canvas = document.createElement('canvas')
+  const ctx = canvas.getContext('2d')
+  
+  // Set canvas size for complete report
+  canvas.width = 800
+  canvas.height = 1600 // Increased height for better spacing
+  
+  // Create gradient background
+  const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
+  gradient.addColorStop(0, '#f8fafc')
+  gradient.addColorStop(0.3, '#e2e8f0')
+  gradient.addColorStop(1, '#f1f5f9')
+  ctx.fillStyle = gradient
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+  
+  // Add subtle pattern/texture
+  ctx.fillStyle = 'rgba(148, 163, 184, 0.1)'
+  for (let i = 0; i < canvas.width; i += 20) {
+    for (let j = 0; j < canvas.height; j += 20) {
+      if ((i + j) % 40 === 0) {
+        ctx.fillRect(i, j, 2, 2)
+      }
+    }
+  }
+  
+  // Header section with company branding
+  const headerHeight = 130
+  const headerGradient = ctx.createLinearGradient(0, 0, 0, headerHeight)
+  headerGradient.addColorStop(0, '#0f766e')
+  headerGradient.addColorStop(1, '#0891b2')
+  ctx.fillStyle = headerGradient
+  ctx.fillRect(0, 0, canvas.width, headerHeight)
+  
+  // Company name
+  ctx.fillStyle = '#ffffff'
+  ctx.font = 'bold 32px Arial'
+  ctx.textAlign = 'center'
+  ctx.fillText('BARCELONA PAINT CENTER', canvas.width / 2, 45)
+  
+  // Report title
+  ctx.fillStyle = '#a7f3d0'
+  ctx.font = 'bold 20px Arial'
+  ctx.fillText('DAILY SALES REPORT', canvas.width / 2, 75)
+  
+  // Date and time
+  ctx.fillStyle = '#e6fffa'
+  ctx.font = '16px Arial'
+  ctx.fillText(formatDateTime(new Date()), canvas.width / 2, 100)
+  
+  // Report ID
+  ctx.fillStyle = '#cbd5e1'
+  ctx.font = '12px Arial'
+  ctx.fillText(`Report ID: RPT-${Date.now().toString().slice(-8)}`, canvas.width / 2, 120)
+  
+  let currentY = headerHeight + 25
+  
+  // Staff Report Section - Complete Details
+  ctx.fillStyle = '#ffffff'
+  ctx.fillRect(25, currentY, canvas.width - 50, 100)
+  ctx.strokeStyle = '#e2e8f0'
+  ctx.lineWidth = 2
+  ctx.strokeRect(25, currentY, canvas.width - 50, 100)
+  
+  // Staff section header
+  ctx.fillStyle = '#0f766e'
+  ctx.font = 'bold 18px Arial'
+  ctx.textAlign = 'left'
+  ctx.fillText('👤 STAFF INFORMATION', 45, currentY + 25)
+  
+  // Staff details - Complete
+  ctx.fillStyle = '#374151'
+  ctx.font = '14px Arial'
+  ctx.fillText(`Staff Name: Staff User`, 45, currentY + 50)
+  ctx.fillText(`Employee ID: EMP-001`, 45, currentY + 70)
+  ctx.fillText(`Date: ${todayFormatted}`, 350, currentY + 50)
+  ctx.fillText(`Shift: Full Day (8:00 AM - 6:00 PM)`, 350, currentY + 70)
+  
+  // Status badge
+  ctx.fillStyle = '#059669'
+  ctx.fillRect(45, currentY + 80, 120, 15)
+  ctx.fillStyle = '#ffffff'
+  ctx.font = 'bold 12px Arial'
+  ctx.fillText('✓ SHIFT COMPLETED', 50, currentY + 90)
+  
+  currentY += 120
+  
+  // Performance Section - Complete Metrics
+  ctx.fillStyle = '#ffffff'
+  ctx.fillRect(25, currentY, canvas.width - 50, 160)
+  ctx.strokeStyle = '#e2e8f0'
+  ctx.lineWidth = 2
+  ctx.strokeRect(25, currentY, canvas.width - 50, 160)
+  
+  // Performance header
+  ctx.fillStyle = '#059669'
+  ctx.font = 'bold 18px Arial'
+  ctx.fillText('💰 TODAY\'S PERFORMANCE SUMMARY', 45, currentY + 25)
+  
+  // Performance metrics in a detailed grid
+  const metrics = [
+    { label: 'Total Revenue', value: formatCurrency(todaysRevenue.value), color: '#059669', icon: '💰' },
+    { label: 'Total Orders', value: `${todaysOrders.value} orders`, color: '#0891b2', icon: '📋' },
+    { label: 'Items Sold', value: `${todaysProductsSold.value} pieces`, color: '#7c3aed', icon: '📦' },
+    { label: 'Average Order', value: formatCurrency(todaysAverageOrderValue.value), color: '#ea580c', icon: '📊' }
+  ]
+  
+  metrics.forEach((metric, index) => {
+    const x = 45 + (index % 2) * 280
+    const y = currentY + 55 + Math.floor(index / 2) * 50
+    
+    // Metric background with border
+    ctx.fillStyle = metric.color + '15'
+    ctx.fillRect(x - 5, y - 25, 270, 45)
+    ctx.strokeStyle = metric.color + '40'
+    ctx.lineWidth = 1
+    ctx.strokeRect(x - 5, y - 25, 270, 45)
+    
+    // Icon
+    ctx.fillStyle = metric.color
+    ctx.font = '16px Arial'
+    ctx.fillText(metric.icon, x, y - 5)
+    
+    // Metric label
+    ctx.fillStyle = '#6b7280'
+    ctx.font = '13px Arial'
+    ctx.fillText(metric.label, x + 25, y - 5)
+    
+    // Metric value
+    ctx.fillStyle = metric.color
+    ctx.font = 'bold 20px Arial'
+    ctx.fillText(metric.value, x + 25, y + 15)
+  })
+  
+  currentY += 180
+  
+  // Top Products Section - Complete Details with Fixed Layout
+  if (sortedTodaysTopProducts.value.length > 0) {
+    const productsToShow = Math.min(sortedTodaysTopProducts.value.length, 5)
+    const sectionHeight = productsToShow * 80 + 120 // Increased spacing
+    
+    ctx.fillStyle = '#ffffff'
+    ctx.fillRect(25, currentY, canvas.width - 50, sectionHeight)
+    ctx.strokeStyle = '#e2e8f0'
+    ctx.lineWidth = 2
+    ctx.strokeRect(25, currentY, canvas.width - 50, sectionHeight)
+    
+    // Top products header
+    ctx.fillStyle = '#7c3aed'
+    ctx.font = 'bold 18px Arial'
+    ctx.fillText('🏆 TOP SELLING PRODUCTS TODAY', 45, currentY + 25)
+    
+    // Column headers with proper spacing
+    ctx.fillStyle = '#6b7280'
+    ctx.font = 'bold 11px Arial'
+    ctx.textAlign = 'left'
+    ctx.fillText('RANK', 50, currentY + 55)
+    ctx.fillText('PRODUCT NAME', 100, currentY + 55)
+    ctx.fillText('CATEGORY', 280, currentY + 55)
+    ctx.fillText('UNITS', 380, currentY + 55)
+    ctx.fillText('REVENUE', 460, currentY + 55)
+    ctx.fillText('AMOUNT', 580, currentY + 55)
+    ctx.fillText('%', 680, currentY + 55)
+    
+    // Draw header line
+    ctx.strokeStyle = '#e2e8f0'
+    ctx.lineWidth = 1
+    ctx.beginPath()
+    ctx.moveTo(45, currentY + 60)
+    ctx.lineTo(canvas.width - 45, currentY + 60)
+    ctx.stroke()
+    
+    // Products list with improved layout and no overlapping
+    sortedTodaysTopProducts.value.slice(0, productsToShow).forEach((product, index) => {
+      const y = currentY + 85 + (index * 80) // Increased spacing between rows
+    
+      // Alternating row background
+      if (index % 2 === 0) {
+        ctx.fillStyle = '#f8fafc'
+        ctx.fillRect(35, y - 30, canvas.width - 70, 75)
+      }
+    
+      // Rank circle with gradient
+      const rankGradient = ctx.createRadialGradient(70, y, 0, 70, y, 18)
+      rankGradient.addColorStop(0, '#7c3aed')
+      rankGradient.addColorStop(1, '#5b21b6')
+      ctx.fillStyle = rankGradient
+      ctx.beginPath()
+      ctx.arc(70, y, 18, 0, 2 * Math.PI)
+      ctx.fill()
+    
+      // Rank number
+      ctx.fillStyle = '#ffffff'
+      ctx.font = 'bold 16px Arial'
+      ctx.textAlign = 'center'
+      ctx.fillText((index + 1).toString(), 70, y + 6)
+    
+      // Product name (truncate if needed)
+      ctx.fillStyle = '#374151'
+      ctx.font = 'bold 13px Arial'
+      ctx.textAlign = 'left'
+      const productName = product.name.length > 18 ? product.name.substring(0, 18) + '...' : product.name
+      ctx.fillText(productName, 100, y - 10)
+    
+      // Category
+      ctx.fillStyle = '#7c3aed'
+      ctx.font = '11px Arial'
+      ctx.fillText(product.category || 'N/A', 280, y - 10)
+    
+      // Units sold
+      ctx.fillStyle = '#374151'
+      ctx.font = 'bold 14px Arial'
+      ctx.textAlign = 'center'
+      ctx.fillText(`${product.units}`, 400, y - 10)
+      ctx.fillStyle = '#6b7280'
+      ctx.font = '10px Arial'
+      ctx.fillText('units', 400, y + 5)
+    
+      // Revenue
+      ctx.fillStyle = '#059669'
+      ctx.font = 'bold 13px Arial'
+      ctx.textAlign = 'center'
+      ctx.fillText(formatCurrency(product.revenue), 500, y - 10)
+      ctx.fillStyle = '#6b7280'
+      ctx.font = '9px Arial'
+      ctx.fillText('total revenue', 500, y + 5)
+    
+      // Amount (Price per unit)
+      const avgPrice = product.units > 0 ? product.revenue / product.units : 0
+      ctx.fillStyle = '#0891b2'
+      ctx.font = 'bold 13px Arial'
+      ctx.textAlign = 'center'
+      ctx.fillText(formatCurrency(avgPrice), 610, y - 10)
+      ctx.fillStyle = '#6b7280'
+      ctx.font = '9px Arial'
+      ctx.fillText('per unit', 610, y + 5)
+    
+      // Percentage of total
+      ctx.fillStyle = '#ea580c'
+      ctx.font = 'bold 12px Arial'
+      ctx.textAlign = 'center'
+      const percentage = todaysRevenue.value > 0 ? ((product.revenue / todaysRevenue.value) * 100).toFixed(1) : 0
+      ctx.fillText(`${percentage}%`, 700, y - 10)
+      ctx.fillStyle = '#6b7280'
+      ctx.font = '9px Arial'
+      ctx.fillText('of total', 700, y + 5)
+    
+      // Additional product details on second line
+      ctx.fillStyle = '#6b7280'
+      ctx.font = '10px Arial'
+      ctx.textAlign = 'left'
+      ctx.fillText(`Stock ID: ${product.id.substring(0, 8)}`, 100, y + 20)
+    })
+  
+    currentY += sectionHeight + 30
+  }
+  
+  // Sales Summary by Payment Method
+  if (todaysSales.value.length > 0) {
+    const paymentMethods = {}
+    todaysSales.value.forEach(sale => {
+      const method = sale.paymentMethod || 'cash'
+      if (!paymentMethods[method]) {
+        paymentMethods[method] = { count: 0, total: 0 }
+      }
+      paymentMethods[method].count++
+      paymentMethods[method].total += sale.total
+    })
+    
+    const sectionHeight = 120
+    ctx.fillStyle = '#ffffff'
+    ctx.fillRect(25, currentY, canvas.width - 50, sectionHeight)
+    ctx.strokeStyle = '#e2e8f0'
+    ctx.lineWidth = 2
+    ctx.strokeRect(25, currentY, canvas.width - 50, sectionHeight)
+    
+    // Payment methods header
+    ctx.fillStyle = '#0891b2'
+    ctx.font = 'bold 18px Arial'
+    ctx.textAlign = 'left'
+    ctx.fillText('💳 PAYMENT METHODS BREAKDOWN', 45, currentY + 25)
+    
+    let methodY = currentY + 50
+    Object.entries(paymentMethods).forEach(([method, data], index) => {
+      const x = 45 + (index % 2) * 280
+      const y = methodY + Math.floor(index / 2) * 30
+      
+      // Payment method details
+      ctx.fillStyle = '#374151'
+      ctx.font = 'bold 14px Arial'
+      ctx.fillText(formatPaymentMethod(method), x, y)
+      
+      ctx.fillStyle = '#6b7280'
+      ctx.font = '12px Arial'
+      ctx.fillText(`${data.count} orders • ${formatCurrency(data.total)}`, x, y + 15)
+    })
+    
+    currentY += sectionHeight + 30
+  }
+  
+  // Recent Sales Section - Fixed Layout with No Overlapping
+  if (todaysSales.value.length > 0) {
+    const salesToShow = Math.min(todaysSales.value.length, 5)
+    const sectionHeight = salesToShow * 100 + 100 // Reduced height per transaction
+    
+    ctx.fillStyle = '#ffffff'
+    ctx.fillRect(25, currentY, canvas.width - 50, sectionHeight)
+    ctx.strokeStyle = '#e2e8f0'
+    ctx.lineWidth = 2
+    ctx.strokeRect(25, currentY, canvas.width - 50, sectionHeight)
+    
+    // Recent sales header
+    ctx.fillStyle = '#0891b2'
+    ctx.font = 'bold 18px Arial'
+    ctx.textAlign = 'left'
+    ctx.fillText('🛒 RECENT TRANSACTIONS (LAST 5)', 45, currentY + 25)
+    
+    // Column headers with better spacing
+    ctx.fillStyle = '#6b7280'
+    ctx.font = 'bold 11px Arial'
+    ctx.textAlign = 'left'
+    ctx.fillText('ORDER ID', 50, currentY + 50)
+    ctx.fillText('CUSTOMER', 180, currentY + 50)
+    ctx.fillText('CONTACT', 320, currentY + 50)
+    ctx.fillText('ITEMS', 450, currentY + 50)
+    ctx.fillText('PAYMENT', 520, currentY + 50)
+    ctx.fillText('TIME', 620, currentY + 50)
+    ctx.fillText('AMOUNT', 680, currentY + 50)
+    
+    // Draw header line
+    ctx.strokeStyle = '#e2e8f0'
+    ctx.lineWidth = 1
+    ctx.beginPath()
+    ctx.moveTo(45, currentY + 55)
+    ctx.lineTo(canvas.width - 45, currentY + 55)
+    ctx.stroke()
+    
+    // Sales list with clean layout and no overlapping
+    todaysSales.value.slice(0, salesToShow).forEach((sale, index) => {
+      const y = currentY + 75 + (index * 100) // Clean spacing between transactions
+    
+      // Alternating row background
+      if (index % 2 === 0) {
+        ctx.fillStyle = '#f8fafc'
+        ctx.fillRect(35, y - 15, canvas.width - 70, 90)
+      }
+    
+      // Transaction border
+      ctx.strokeStyle = '#e5e7eb'
+      ctx.lineWidth = 1
+      ctx.strokeRect(40, y - 10, canvas.width - 80, 80)
+    
+      // Row 1: Order ID (NO TIME HERE)
+      ctx.fillStyle = '#374151'
+      ctx.font = 'bold 14px Arial'
+      ctx.textAlign = 'left'
+      ctx.fillText(sale.orderId, 50, y + 5)
+    
+      // Customer Name
+      ctx.fillStyle = '#374151'
+      ctx.font = 'bold 13px Arial'
+      const customerName = sale.customerName.length > 15 ? sale.customerName.substring(0, 15) + '...' : sale.customerName
+      ctx.fillText(customerName, 180, y + 5)
+    
+      // Contact
+      ctx.fillStyle = '#6b7280'
+      ctx.font = '11px Arial'
+      const contact = sale.customerContactNo || 'No contact'
+      const contactText = contact.length > 12 ? contact.substring(0, 12) + '...' : contact
+      ctx.fillText(contactText, 320, y + 5)
+    
+      // Items count
+      ctx.fillStyle = '#7c3aed'
+      ctx.font = 'bold 12px Arial'
+      ctx.fillText(`${sale.products.length} items`, 450, y + 5)
+    
+      // Payment method
+      ctx.fillStyle = '#0891b2'
+      ctx.font = '11px Arial'
+      ctx.fillText(formatPaymentMethod(sale.paymentMethod), 520, y + 5)
+    
+      // Time (ONLY HERE)
+      ctx.fillStyle = '#6b7280'
+      ctx.font = '12px Arial'
+      ctx.fillText(formatTime(sale.date), 620, y + 5)
+    
+      // Amount (right aligned)
+      ctx.fillStyle = '#059669'
+      ctx.font = 'bold 16px Arial'
+      ctx.textAlign = 'right'
+      ctx.fillText(formatCurrency(sale.total), canvas.width - 50, y + 5)
+    
+      // Row 2: Product details and Status (with proper spacing)
+      ctx.fillStyle = '#6b7280'
+      ctx.font = '11px Arial'
+      ctx.textAlign = 'left'
+      const firstProduct = sale.products[0]?.name || 'N/A'
+      const productText = firstProduct.length > 25 ? firstProduct.substring(0, 25) + '...' : firstProduct
+      ctx.fillText(`Product: ${productText}`, 50, y + 25)
+    
+      // Status with colored background
+      const statusColor = sale.status === 'completed' ? '#059669' : sale.status === 'pending' ? '#ea580c' : '#dc2626'
+      const statusBgColor = sale.status === 'completed' ? '#d1fae5' : sale.status === 'pending' ? '#fed7aa' : '#fecaca'
+    
+      // Status background
+      ctx.fillStyle = statusBgColor
+      ctx.fillRect(450, y + 15, 80, 18)
+      ctx.strokeStyle = statusColor
+      ctx.lineWidth = 1
+      ctx.strokeRect(450, y + 15, 80, 18)
+    
+      // Status text
+      ctx.fillStyle = statusColor
+      ctx.font = 'bold 10px Arial'
+      ctx.textAlign = 'center'
+      ctx.fillText(sale.status.toUpperCase(), 490, y + 27)
+    
+      // Percentage of total (right side)
+      ctx.fillStyle = '#6b7280'
+      ctx.font = '10px Arial'
+      ctx.textAlign = 'right'
+      const percentage = todaysRevenue.value > 0 ? ((sale.total / todaysRevenue.value) * 100).toFixed(1) : 0
+      ctx.fillText(`${percentage}% of daily total`, canvas.width - 50, y + 25)
+    
+      // Row 3: Additional clean details
+      ctx.fillStyle = '#9ca3af'
+      ctx.font = '9px Arial'
+      ctx.textAlign = 'left'
+      ctx.fillText(`Transaction ID: ${sale.id.substring(0, 12)}`, 50, y + 45)
+    
+      ctx.textAlign = 'right'
+      ctx.fillText(`Processed: ${formatDate(sale.date)}`, canvas.width - 50, y + 45)
+    })
+  
+    currentY += sectionHeight + 30
+  }
+  
+  // Footer section with complete information
+  const footerY = canvas.height - 120
+  ctx.fillStyle = '#f1f5f9'
+  ctx.fillRect(0, footerY, canvas.width, 120)
+  
+  // Footer border
+  ctx.strokeStyle = '#e2e8f0'
+  ctx.lineWidth = 2
+  ctx.beginPath()
+  ctx.moveTo(0, footerY)
+  ctx.lineTo(canvas.width, footerY)
+  ctx.stroke()
+  
+  // Footer content
+  ctx.fillStyle = '#374151'
+  ctx.font = 'bold 14px Arial'
+  ctx.textAlign = 'center'
+  ctx.fillText('REPORT SUMMARY', canvas.width / 2, footerY + 25)
+  
+  ctx.fillStyle = '#6b7280'
+  ctx.font = '12px Arial'
+  ctx.fillText(`Generated on: ${formatDateTime(new Date())}`, canvas.width / 2, footerY + 45)
+  ctx.fillText('Barcelona Paint Center Staff Portal', canvas.width / 2, footerY + 65)
+  
+  // Verification status
+  ctx.fillStyle = '#059669'
+  ctx.font = 'bold 12px Arial'
+  ctx.fillText('✓ ALL TRANSACTIONS VERIFIED AND RECORDED', canvas.width / 2, footerY + 85)
+  
+  // Digital signature
+  ctx.fillStyle = '#6b7280'
+  ctx.font = '10px Arial'
+  ctx.fillText(`Digital Report • Staff: Staff User • Shift: ${formatTime(new Date())}`, canvas.width / 2, footerY + 105)
+  
+  // Convert to blob and download
+  canvas.toBlob((blob) => {
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.download = `complete-daily-sales-report-${todayFormatted.replace(/\s+/g, '-')}.png`
+    link.href = url
+    
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    
+    URL.revokeObjectURL(url)
+    
+    alert('Complete daily sales report with all details saved successfully! 📋✅')
+  }, 'image/png', 0.95)
+
+} catch (err) {
+  console.error('Error generating complete report:', err)
+  alert('Failed to generate complete report. Please try again.')
+}
+}
+
+// Generate daily summary function
+const generateDailySummary = () => {
+  const summaryText = `
+📊 DAILY SALES SUMMARY - ${todayFormatted}
+Barcelona Paint Center Staff Portal
+
+👤 STAFF PERFORMANCE:
+• Staff: Staff User (EMP-001)
+• Shift: Full Day (8:00 AM - 6:00 PM)
+• Status: ✅ Completed
+
+💰 TODAY'S RESULTS:
+• Total Revenue: ${formatCurrency(todaysRevenue.value)}
+• Total Orders: ${todaysOrders.value} orders
+• Items Sold: ${todaysProductsSold.value} pieces
+• Average Order: ${formatCurrency(todaysAverageOrderValue.value)}
+
+🏆 TOP PRODUCTS:
+${sortedTodaysTopProducts.value.slice(0, 3).map((product, index) => 
+  `${index + 1}. ${product.name} - ${formatCurrency(product.revenue)} (${product.units} units)`
+).join('\n')}
+
+💳 PAYMENT BREAKDOWN:
+${Object.entries(todaysSales.value.reduce((acc, sale) => {
+  const method = sale.paymentMethod || 'cash'
+  if (!acc[method]) acc[method] = { count: 0, total: 0 }
+  acc[method].count++
+  acc[method].total += sale.total
+  return acc
+}, {})).map(([method, data]) => 
+  `• ${formatPaymentMethod(method)}: ${data.count} orders (${formatCurrency(data.total)})`
+).join('\n')}
+
+🛒 RECENT TRANSACTIONS:
+${todaysSales.value.slice(0, 5).map(sale => 
+  `• ${sale.orderId} - ${sale.customerName} - ${formatCurrency(sale.total)} (${formatTime(sale.date)})`
+).join('\n')}
+
+📋 SUMMARY:
+• Total Sales Value: ${formatCurrency(todaysRevenue.value)}
+• Transactions Processed: ${todaysOrders.value}
+• Customer Satisfaction: 100% (All completed)
+• Inventory Updated: ✅ Real-time
+• Report Generated: ${formatDateTime(new Date())}
+
+✅ All transactions verified and recorded
+Barcelona Paint Center - Staff Portal
+  `
+  
+  // Create and download summary
+  const blob = new Blob([summaryText], { type: 'text/plain' })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.download = `daily-summary-${todayFormatted.replace(/\s+/g, '-')}.txt`
+  link.href = url
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  URL.revokeObjectURL(url)
+  
+  alert('Daily summary downloaded successfully! 📋✅')
 }
 </script>
 
@@ -2741,11 +2477,11 @@ const handleLogout = () => {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #10b981, #06b6d4);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  background: linear-gradient(135deg, #059669, #0891b2);
 }
 </style>

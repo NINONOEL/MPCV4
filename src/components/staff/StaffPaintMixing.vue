@@ -59,6 +59,15 @@
           </router-link>
 
           <router-link 
+            to="/staff/sales-analytics" 
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
+            :class="{ 'shadow-sm border border-teal-200 transform scale-105': $route.path === '/staff/sales-analytics' }"
+          >
+            <TrendingUpIcon class="w-5 h-5" />
+            <span>Sales Analytics</span>
+          </router-link>
+
+          <router-link 
             to="/staff/settings" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
             :class="{ 'shadow-sm border border-green-200 transform scale-105': $route.path === '/staff/settings' }"
@@ -147,6 +156,16 @@
             <PackageIcon class="w-5 h-5" />
             <span>Inventory</span>
           </router-link>
+
+          <router-link 
+            to="/staff/sales-analytics" 
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50"
+            :class="{ 'shadow-sm border border-indigo-200': $route.path === '/staff/sales-analytics' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <BarChart3Icon class="w-5 h-5" />
+            <span>Sales Analytics</span>
+          </router-link>
   
           <router-link 
             to="/staff/paint-mixing" 
@@ -165,6 +184,16 @@
           >
             <HomeIcon class="w-5 h-5" />
             <span>House Paint Recommender</span>
+          </router-link>
+
+          <router-link 
+            to="/staff/sales-analytics" 
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50"
+            :class="{ 'shadow-sm border border-teal-200': $route.path === '/staff/sales-analytics' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <TrendingUpIcon class="w-5 h-5" />
+            <span>Sales Analytics</span>
           </router-link>
   
           <router-link 
@@ -315,7 +344,7 @@
                         @input="updateColorPreview"
                         min="0"
                         max="100"
-                        class="w-24 bg-white border border-gray-200 rounded-lg text-gray-800 px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all placeholder-gray-400"
+                        class="w-32 bg-white border border-gray-200 rounded-lg text-gray-800 px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all placeholder-gray-400"
                         placeholder="Ratio %"
                       />
                       
@@ -338,14 +367,6 @@
                         Add Color
                       </button>
                       
-                      <button 
-                        type="button"
-                        @click="showAddColorModal = true"
-                        class="flex items-center gap-2 text-purple-600 hover:text-purple-700 transition-colors ml-4"
-                      >
-                        <PaletteIcon class="h-5 w-5" />
-                        Add to Palette
-                      </button>
                     </div>
                   </div>
   
@@ -417,15 +438,6 @@
                       </div>
                     </div>
   
-                    <div class="space-y-2">
-                      <label class="block text-sm font-medium text-gray-700">Notes</label>
-                      <textarea 
-                        v-model="mixture.notes"
-                        rows="3"
-                        class="w-full bg-white border border-gray-200 rounded-lg text-gray-800 px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all resize-none placeholder-gray-400"
-                        placeholder="Add any special instructions or notes"
-                      ></textarea>
-                    </div>
                   </div>
   
                   <button 
@@ -490,7 +502,7 @@
                   </div>
                 </div>
                 
-                <div class="space-y-4 max-h-[calc(100vh-20rem)] overflow-y-auto pr-2">
+                <div class="space-y-4 h-[700px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-gray-100">
                   <div v-for="mix in filteredMixtures" :key="mix.id" 
                        class="p-4 bg-white border border-gray-100 rounded-lg group hover:border-purple-200 hover:shadow-md transition-all duration-300 animate-fade-in"
                   >
@@ -639,14 +651,6 @@
                       <h4 class="text-sm font-medium text-gray-900">Finish Type</h4>
                       <p class="text-sm text-gray-600">{{ selectedMixture?.finishType }}</p>
                     </div>
-                    <div class="mt-4">
-                      <h4 class="text-sm font-medium text-gray-900">Notes</h4>
-                      <p class="text-sm text-gray-600">{{ selectedMixture?.notes || 'No notes provided' }}</p>
-                    </div>
-                    <div class="mt-4">
-                      <h4 class="text-sm font-medium text-gray-900">Created On</h4>
-                      <p class="text-sm text-gray-600">{{ formatDate(selectedMixture?.date) }}</p>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -666,144 +670,144 @@
       <div v-if="showColorPalette" class="fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <div class="fixed inset-0 bg-black/70 transition-opacity" aria-hidden="true" @click="showColorPalette = false"></div>
-  
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-  
-        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <div class="px-6 pt-6 pb-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
-              <PaletteIcon class="w-6 h-6 mr-2 text-purple-600" />
-              Color Palette
-            </h3>
-            
-            <!-- Add color categories -->
-            <div class="mb-6">
-              <div class="flex flex-wrap gap-2">
-                <button 
-                  @click="filterColorCategory = ''"
-                  class="px-3 py-1 text-sm rounded-full"
-                  :class="filterColorCategory === '' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
-                >
-                  All Colors
-                </button>
-                <button 
-                  @click="filterColorCategory = 'primary'"
-                  class="px-3 py-1 text-sm rounded-full"
-                  :class="filterColorCategory === 'primary' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
-                >
-                  Primary
-                </button>
-                <button 
-                  @click="filterColorCategory = 'earth'"
-                  class="px-3 py-1 text-sm rounded-full"
-                  :class="filterColorCategory === 'earth' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
-                >
-                  Earth Tones
-                </button>
-                <button 
-                  @click="filterColorCategory = 'custom'"
-                  class="px-3 py-1 text-sm rounded-full"
-                  :class="filterColorCategory === 'custom' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
-                >
-                  Custom
-                </button>
-              </div>
-            </div>
-            
-            <!-- Colors grid -->
-            <div class="grid grid-cols-3 gap-6 mb-6">
-              <div v-for="color in filteredPaletteColors" :key="color.id" 
-                   class="flex flex-col items-center"
-              >
-                <div 
-                  class="w-16 h-16 rounded-full border-2 border-gray-200 cursor-pointer shadow-md hover:shadow-lg transition-all"
-                  :style="{ backgroundColor: color.hex }"
-                  @click="addColorToMixtureFromPalette(color)"
-                ></div>
-                <div class="flex flex-col items-center mt-2">
-                  <span class="text-gray-900 text-sm font-medium text-center">{{ color.name }}</span>
-                  <span class="text-gray-600 text-xs">{{ color.hex }}</span>
-                  <button 
-                    @click="deleteColor(color.id)" 
-                    class="mt-2 px-2 py-1 bg-red-100 text-red-700 rounded-md hover:bg-red-200 flex items-center gap-1 transition-colors"
-                  >
-                    <Trash2Icon class="h-3 w-3" />
-                    <span class="text-xs">Delete</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            <div class="flex justify-end">
+
+          <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+          <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="px-6 pt-6 pb-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                <PaletteIcon class="w-6 h-6 mr-2 text-purple-600" />
+                Color Palette
+              </h3>
+          
+          <!-- Add color categories -->
+          <div class="mb-6">
+            <div class="flex flex-wrap gap-2">
               <button 
-                @click="showColorPalette = false"
-                class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                @click="filterColorCategory = ''"
+                class="px-3 py-1 text-sm rounded-full"
+                :class="filterColorCategory === '' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
               >
-                Close
+                All Colors
+              </button>
+              <button 
+                @click="filterColorCategory = 'primary'"
+                class="px-3 py-1 text-sm rounded-full"
+                :class="filterColorCategory === 'primary' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+              >
+                Primary
+              </button>
+              <button 
+                @click="filterColorCategory = 'earth'"
+                class="px-3 py-1 text-sm rounded-full"
+                :class="filterColorCategory === 'earth' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+              >
+                Earth Tones
+              </button>
+              <button 
+                @click="filterColorCategory = 'custom'"
+                class="px-3 py-1 text-sm rounded-full"
+                :class="filterColorCategory === 'custom' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+              >
+                Custom
               </button>
             </div>
+          </div>
+          
+          <!-- Colors grid -->
+          <div class="grid grid-cols-3 gap-6 mb-6">
+            <div v-for="color in filteredPaletteColors" :key="color.id" 
+                 class="flex flex-col items-center"
+            >
+              <div 
+                class="w-16 h-16 rounded-full border-2 border-gray-200 cursor-pointer shadow-md hover:shadow-lg transition-all"
+                :style="{ backgroundColor: color.hex }"
+                @click="addColorToMixtureFromPalette(color)"
+              ></div>
+              <div class="flex flex-col items-center mt-2">
+                <span class="text-gray-900 text-sm font-medium text-center">{{ color.name }}</span>
+                <span class="text-gray-600 text-xs">{{ color.hex }}</span>
+                <button 
+                  @click="deleteColor(color.id)" 
+                  class="mt-2 px-2 py-1 bg-red-100 text-red-700 rounded-md hover:bg-red-200 flex items-center gap-1 transition-colors"
+                >
+                  <Trash2Icon class="h-3 w-3" />
+                  <span class="text-xs">Delete</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex justify-end">
+            <button 
+              @click="showColorPalette = false"
+              class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
     </div>
-  </transition>
+  </div>
+</transition>
   
-    <!-- Simple Add Color Modal -->
+    <!-- Add New Color Modal -->
     <transition name="modal">
       <div v-if="showAddColorModal" class="fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <div class="fixed inset-0 bg-black/70 transition-opacity" aria-hidden="true" @click="showAddColorModal = false"></div>
-  
+
           <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-  
+
           <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full">
             <div class="px-6 pt-6 pb-6">
               <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
                 <PlusIcon class="w-6 h-6 mr-2 text-orange-500" />
                 Add New Color
               </h3>
-              
-              <div class="space-y-6">
-                <div>
-                  <label class="block text-gray-700 mb-2">Color Name</label>
-                  <input 
-                    type="text" 
-                    v-model="newColorName" 
-                    class="w-full bg-white border border-gray-300 rounded-lg text-gray-800 px-4 py-3 focus:ring-2 focus:ring-orange-500 focus:outline-none"
-                    placeholder="Enter color name"
-                  />
-                </div>
-                
-                <div>
-                  <label class="block text-gray-700 mb-2">Color Hex Code</label>
-                  <input 
-                    type="text" 
-                    v-model="newColorHex" 
-                    class="w-full bg-white border border-gray-300 rounded-lg text-gray-800 px-4 py-3 focus:ring-2 focus:ring-orange-500 focus:outline-none"
-                    placeholder="e.g. #FF5733"
-                  />
-                </div>
-                
-                <div class="flex justify-end gap-3">
-                  <button 
-                    @click="showAddColorModal = false"
-                    class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-                  >
-                    Cancel
-                  </button>
-                  <button 
-                    @click="addNewColorToPalette"
-                    class="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors"
-                  >
-                    Add Color
-                  </button>
-                </div>
-              </div>
+          
+          <div class="space-y-6">
+            <div>
+              <label class="block text-gray-700 mb-2">Color Name</label>
+              <input 
+                type="text" 
+                v-model="newColorName" 
+                class="w-full bg-white border border-gray-300 rounded-lg text-gray-800 px-4 py-3 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                placeholder="Enter color name"
+              />
+            </div>
+            
+            <div>
+              <label class="block text-gray-700 mb-2">Color Hex Code</label>
+              <input 
+                type="text" 
+                v-model="newColorHex" 
+                class="w-full bg-white border border-gray-300 rounded-lg text-gray-800 px-4 py-3 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                placeholder="e.g. #FF5733"
+              />
+            </div>
+            
+            <div class="flex justify-end gap-3">
+              <button 
+                @click="showAddColorModal = false"
+                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                @click="addNewColorToPalette"
+                class="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors"
+              >
+                Add Color
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </transition>
+    </div>
+  </div>
+</transition>
   
     <!-- Mixing Tips Modal -->
     <transition name="modal">
@@ -884,6 +888,7 @@ import { useRouter } from 'vue-router'
 import {
   LayoutDashboard as LayoutDashboardIcon,
   Package as PackageIcon,
+  BarChart3 as BarChart3Icon,
   Palette as PaletteIcon,
   Home as HomeIcon,
   Settings as SettingsIcon,
@@ -907,7 +912,8 @@ import {
   Loader as LoaderIcon,
   AlertCircle as AlertCircleIcon,
   CheckCircle as CheckCircleIcon,
-  ChevronDown as ChevronDownIcon
+  ChevronDown as ChevronDownIcon,
+  TrendingUp as TrendingUpIcon
 } from 'lucide-vue-next'
 import { 
   collection, 
@@ -976,7 +982,6 @@ const mixture = reactive({
   name: '',
   colors: [{ name: '', ratio: '' }],
   quantity: '',
-  notes: '',
   finishType: ''
 })
 
@@ -994,10 +999,9 @@ const colorHarmony = ref('')
 // Add these state variables
 const filterColorCategory = ref('')
 
-// Simple Add Color Modal
-const showAddColorModal = ref(false)
 const newColorName = ref('')
 const newColorHex = ref('#')
+const showAddColorModal = ref(false)
 
 // Add computed property for filtered palette colors
 const filteredPaletteColors = computed(() => {
@@ -1136,7 +1140,6 @@ const createMixture = async () => {
           hex: getColorHex(color.name)
         })),
       quantity: parseFloat(mixture.quantity),
-      notes: mixture.notes || '',
       finishType: mixture.finishType,
       predictedColor: predictedColor.value,
       createdBy: 'staff',
@@ -1158,7 +1161,6 @@ const createMixture = async () => {
     mixture.name = ''
     mixture.colors = [{ name: '', ratio: '' }]
     mixture.quantity = ''
-    mixture.notes = ''
     mixture.finishType = ''
     predictedColor.value = '#FFFFFF'
     colorHarmony.value = ''
@@ -1272,7 +1274,6 @@ const duplicateMixture = (mix) => {
   mixture.name = `Copy of ${mix.name}`
   mixture.colors = mix.colors.map(c => ({ name: c.name, ratio: c.ratio.toString() }))
   mixture.quantity = mix.quantity.toString()
-  mixture.notes = mix.notes
   mixture.finishType = mix.finishType
   updateColorPreview()
 }
@@ -1295,7 +1296,6 @@ const editMixture = async (mix) => {
   mixture.name = mix.name
   mixture.colors = mix.colors.map(c => ({ name: c.name, ratio: c.ratio.toString() }))
   mixture.quantity = mix.quantity.toString()
-  mixture.notes = mix.notes
   mixture.finishType = mix.finishType
   updateColorPreview()
 }
@@ -1364,47 +1364,6 @@ const addColorToMixtureFromPalette = (color) => {
   showColorPalette.value = false
 }
 
-// Add a new color to the palette
-const addNewColorToPalette = () => {
-  if (!newColorName.value) {
-    errorMessage.value = 'Please enter a color name'
-    clearMessages()
-    return
-  }
-  
-  if (!newColorHex.value || !/^#[0-9A-F]{6}$/i.test(newColorHex.value)) {
-    errorMessage.value = 'Please enter a valid hex color code (e.g. #FF5733)'
-    clearMessages()
-    return
-  }
-  
-  // Convert hex to RGB
-  const r = parseInt(newColorHex.value.slice(1, 3), 16)
-  const g = parseInt(newColorHex.value.slice(3, 5), 16)
-  const b = parseInt(newColorHex.value.slice(5, 7), 16)
-  
-  // Add to baseColors
-  const newId = baseColors.value.length + 1
-  baseColors.value.push({
-    id: newId,
-    name: newColorName.value,
-    hex: newColorHex.value,
-    rgb: [r, g, b],
-    category: 'custom'
-  })
-  
-  // Reset form
-  newColorName.value = ''
-  newColorHex.value = '#'
-  
-  // Close modal
-  showAddColorModal.value = false
-  
-  // Show success message
-  successMessage.value = `Added ${newColorName.value} to palette`
-  clearMessages()
-}
-
 // Helper function to convert RGB to HEX
 const rgbToHex = (r, g, b) => {
   return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()
@@ -1460,6 +1419,47 @@ const deleteColor = (id) => {
   
   baseColors.value = baseColors.value.filter(color => color.id !== id)
   successMessage.value = 'Color deleted successfully'
+  clearMessages()
+}
+
+// Add a new color to the palette
+const addNewColorToPalette = () => {
+  if (!newColorName.value) {
+    errorMessage.value = 'Please enter a color name'
+    clearMessages()
+    return
+  }
+  
+  if (!newColorHex.value || !/^#[0-9A-F]{6}$/i.test(newColorHex.value)) {
+    errorMessage.value = 'Please enter a valid hex color code (e.g. #FF5733)'
+    clearMessages()
+    return
+  }
+  
+  // Convert hex to RGB
+  const r = parseInt(newColorHex.value.slice(1, 3), 16)
+  const g = parseInt(newColorHex.value.slice(3, 5), 16)
+  const b = parseInt(newColorHex.value.slice(5, 7), 16)
+  
+  // Add to baseColors
+  const newId = baseColors.value.length + 1
+  baseColors.value.push({
+    id: newId,
+    name: newColorName.value,
+    hex: newColorHex.value,
+    rgb: [r, g, b],
+    category: 'custom'
+  })
+  
+  // Reset form
+  newColorName.value = ''
+  newColorHex.value = '#'
+  
+  // Close modal
+  showAddColorModal.value = false
+  
+  // Show success message
+  successMessage.value = `Added ${newColorName.value} to palette`
   clearMessages()
 }
 

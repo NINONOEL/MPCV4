@@ -59,6 +59,15 @@
           </router-link>
 
           <router-link 
+            to="/staff/sales-analytics" 
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
+            :class="{ 'shadow-sm border border-teal-200 transform scale-105': $route.path === '/staff/sales-analytics' }"
+          >
+            <TrendingUpIcon class="w-5 h-5" />
+            <span>Sales Analytics</span>
+          </router-link>
+
+          <router-link 
             to="/staff/settings" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
             :class="{ 'shadow-sm border border-green-200 transform scale-105': $route.path === '/staff/settings' }"
@@ -168,6 +177,16 @@
           </router-link>
 
           <router-link 
+            to="/staff/sales-analytics" 
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50"
+            :class="{ 'shadow-sm border border-teal-200': $route.path === '/staff/sales-analytics' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <TrendingUpIcon class="w-5 h-5" />
+            <span>Sales Analytics</span>
+          </router-link>
+
+          <router-link 
             to="/staff/settings" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50"
             :class="{ 'shadow-sm border border-green-200': $route.path === '/staff/settings' }"
@@ -229,7 +248,7 @@
 
         <div class="p-6 md:p-8">
           <!-- Stats Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <!-- Total Products -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
@@ -273,22 +292,6 @@
                   <div>
                     <p class="text-sm text-gray-600">Out of Stock</p>
                     <p class="text-2xl font-bold text-gray-900">{{ outOfStockCount }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Total Value -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
-                    <DollarSignIcon class="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <p class="text-sm text-gray-600">Total Value</p>
-                    <p class="text-2xl font-bold text-gray-900">₱{{ totalValue.toLocaleString() }}</p>
                   </div>
                 </div>
               </div>
@@ -495,10 +498,10 @@ import {
   ChevronRight as ChevronRightIcon,
   AlertTriangle as AlertTriangleIcon,
   XCircle as XCircleIcon,
-  DollarSign as DollarSignIcon,
   Loader as LoaderIcon,
   Calendar as CalendarIcon,
-  Bell as BellIcon
+  Bell as BellIcon,
+  TrendingUp as TrendingUpIcon
 } from 'lucide-vue-next'
 import { 
   collection, 
@@ -651,7 +654,7 @@ const paginatedProducts = computed(() => {
 const totalProducts = computed(() => products.value.length)
 const lowStockCount = computed(() => products.value.filter(p => p.stockLevel > 0 && p.stockLevel <= 10).length)
 const outOfStockCount = computed(() => products.value.filter(p => p.stockLevel === 0).length)
-const totalValue = computed(() => products.value.reduce((sum, product) => sum + (product.price * product.stockLevel), 0))
+// const totalValue = computed(() => products.value.reduce((sum, product) => sum + (product.price * product.stockLevel), 0))
 
 const totalPages = computed(() => Math.ceil(filteredProducts.value.length / perPage.value) || 1)
 const paginationStart = computed(() => filteredProducts.value.length ? ((currentPage.value - 1) * perPage.value) + 1 : 0)

@@ -238,7 +238,7 @@
       </aside>
     
       <!-- Main Content -->
-      <main class="flex-1 flex flex-col">
+      <main class="flex-1 flex flex-col overflow-auto">
         <!-- Header -->
         <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-8 py-4 shadow-sm">
           <div class="flex justify-between items-center">
@@ -302,7 +302,7 @@
             <!-- Left side - Form -->
             <div class="w-1/3 p-6 border-r border-gray-200">
               <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Pilipinas House Details</h2>
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">House Details</h2>
                 
                 <form @submit.prevent="getRecommendations" class="space-y-6">
                   <!-- House Style -->
@@ -530,14 +530,14 @@
 
                       <!-- Main house body - Two-story structure with rounded corners -->
                       <!-- First floor - Primary color -->
-                      <rect x="350" y="300" width="500" height="150" :fill="activeScheme[0]?.hex || 'white'" rx="5" ry="5" />
+                      <rect x="350" y="300" width="500" height="150" :fill="activeScheme[0]?.hex || '#FFFFFF'" rx="5" ry="5" />
 
                       <!-- Second floor - Primary color with slight variation -->
-                      <rect x="400" y="200" width="400" height="100" :fill="activeScheme[0]?.hex || 'white'" rx="5" ry="5" />
+                      <rect x="400" y="200" width="400" height="100" :fill="activeScheme[0]?.hex || '#FFFFFF'" rx="5" ry="5" />
 
-                      <!-- Roof - Modern style with solar panels -->
-                      <polygon points="350,200 600,100 850,200" :fill="activeScheme[3]?.hex || '#4169E1'" />
-                      <rect x="350" y="190" width="500" height="10" :fill="activeScheme[3]?.hex || '#4169E1'" rx="2" ry="2" />
+                      <!-- Roof - Roof color from Davies Roofshield -->
+                      <polygon points="350,200 600,100 850,200" :fill="activeScheme[3]?.hex || '#FF0000'" />
+                      <rect x="350" y="190" width="500" height="10" :fill="activeScheme[3]?.hex || '#FF0000'" rx="2" ry="2" />
 
                       <!-- Solar panels on roof -->
                       <rect x="550" y="140" width="100" height="40" fill="#1a237e" opacity="0.8" rx="2" ry="2" />
@@ -550,9 +550,9 @@
                       <line x1="635" y1="145" x2="635" y2="175" stroke="#374151" strokeWidth="1" opacity="0.5" />
 
                       <!-- Chimney -->
-                      <rect x="750" y="120" width="40" height="80" :fill="activeScheme[0]?.hex || 'white'" rx="2" ry="2" />
-                      <rect x="745" y="120" width="50" height="10" :fill="activeScheme[3]?.hex || '#4169E1'" rx="2" ry="2" />
-                      <rect x="750" y="110" width="40" height="10" :fill="activeScheme[2]?.hex || '#E57373'" rx="2" ry="2" />
+                      <rect x="750" y="120" width="40" height="80" :fill="activeScheme[0]?.hex || '#FFFFFF'" rx="2" ry="2" />
+                      <rect x="745" y="120" width="50" height="10" :fill="activeScheme[3]?.hex || '#FF0000'" rx="2" ry="2" />
+                      <rect x="750" y="110" width="40" height="10" :fill="activeScheme[2]?.hex || '#8B4513'" rx="2" ry="2" />
 
                       <!-- Windows - First floor - Modern Capiz style -->
                       <!-- Left window group -->
@@ -622,7 +622,7 @@
 
                       <!-- Front door with steps - Modern style -->
                       <rect x="560" y="380" width="80" height="70" :fill="activeScheme[1]?.hex || '#FF7043'" rx="5" ry="5" />
-                      <rect x="570" y="390" width="60" height="60" :fill="activeScheme[2]?.hex || '#5D4037'" rx="3" ry="3" />
+                      <rect x="570" y="390" width="60" height="60" :fill="activeScheme[2]?.hex || '#8B4513'" rx="3" ry="3" />
                       <!-- Modern door pattern -->
                       <rect x="580" y="400" width="40" height="40" fill="none" stroke="#374151" strokeWidth="1" rx="2" ry="2" />
                       <circle cx="600" cy="420" r="15" fill="none" stroke="#374151" strokeWidth="1" />
@@ -635,7 +635,7 @@
                       <rect x="570" y="460" width="60" height="5" fill="#4b5563" rx="2" ry="2" />
 
                       <!-- Garage - Modern style -->
-                      <rect x="350" y="350" width="150" height="100" :fill="activeScheme[0]?.hex || 'white'" rx="5" ry="5" />
+                      <rect x="350" y="350" width="150" height="100" :fill="activeScheme[0]?.hex || '#FFFFFF'" rx="5" ry="5" />
                       <rect x="360" y="360" width="130" height="80" :fill="activeScheme[1]?.hex || '#FF7043'" rx="3" ry="3" />
                       <!-- Modern garage door pattern -->
                       <line x1="360" y1="380" x2="490" y2="380" stroke="#374151" strokeWidth="1" />
@@ -663,29 +663,29 @@
                       <rect x="655" y="285" width="175" height="15" fill="rgba(200, 230, 255, 0.5)" rx="1" ry="1" />
 
                       <!-- Column details - Modern style -->
-                      <rect x="648" y="380" width="19" height="5" :fill="activeScheme[2]?.hex || '#5D4037'" rx="1" ry="1" />
-                      <rect x="648" y="445" width="19" height="5" :fill="activeScheme[2]?.hex || '#5D4037'" rx="1" ry="1" />
-                      <rect x="648" y="390" width="19" height="5" :fill="activeScheme[2]?.hex || '#5D4037'" rx="1" ry="1" />
-                      <rect x="648" y="435" width="19" height="5" :fill="activeScheme[2]?.hex || '#5D4037'" rx="1" ry="1" />
-                      <rect x="823" y="380" width="19" height="5" :fill="activeScheme[2]?.hex || '#5D4037'" rx="1" ry="1" />
-                      <rect x="823" y="445" width="19" height="5" :fill="activeScheme[2]?.hex || '#5D4037'" rx="1" ry="1" />
-                      <rect x="823" y="390" width="19" height="5" :fill="activeScheme[2]?.hex || '#5D4037'" rx="1" ry="1" />
-                      <rect x="823" y="435" width="19" height="5" :fill="activeScheme[2]?.hex || '#5D4037'" rx="1" ry="1" />
+                      <rect x="648" y="380" width="19" height="5" :fill="activeScheme[2]?.hex || '#8B4513'" rx="1" ry="1" />
+                      <rect x="648" y="445" width="19" height="5" :fill="activeScheme[2]?.hex || '#8B4513'" rx="1" ry="1" />
+                      <rect x="648" y="390" width="19" height="5" :fill="activeScheme[2]?.hex || '#8B4513'" rx="1" ry="1" />
+                      <rect x="648" y="435" width="19" height="5" :fill="activeScheme[2]?.hex || '#8B4513'" rx="1" ry="1" />
+                      <rect x="823" y="380" width="19" height="5" :fill="activeScheme[2]?.hex || '#8B4513'" rx="1" ry="1" />
+                      <rect x="823" y="445" width="19" height="5" :fill="activeScheme[2]?.hex || '#8B4513'" rx="1" ry="1" />
+                      <rect x="823" y="390" width="19" height="5" :fill="activeScheme[2]?.hex || '#8B4513'" rx="1" ry="1" />
+                      <rect x="823" y="435" width="19" height="5" :fill="activeScheme[2]?.hex || '#8B4513'" rx="1" ry="1" />
 
                       <!-- Decorative elements - Modern Filipino motifs -->
                       <!-- Shutters -->
-                      <rect x="360" y="330" width="15" height="90" :fill="activeScheme[2]?.hex || '#5D4037'" rx="2" ry="2" />
-                      <rect x="465" y="330" width="15" height="90" :fill="activeScheme[2]?.hex || '#5D4037'" rx="2" ry="2" />
-                      <rect x="540" y="330" width="15" height="90" :fill="activeScheme[2]?.hex || '#5D4037'" rx="2" ry="2" />
-                      <rect x="645" y="330" width="15" height="90" :fill="activeScheme[2]?.hex || '#5D4037'" rx="2" ry="2" />
-                      <rect x="720" y="330" width="15" height="90" :fill="activeScheme[2]?.hex || '#5D4037'" rx="2" ry="2" />
-                      <rect x="825" y="330" width="15" height="90" :fill="activeScheme[2]?.hex || '#5D4037'" rx="2" ry="2" />
+                      <rect x="360" y="330" width="15" height="90" :fill="activeScheme[2]?.hex || '#8B4513'" rx="2" ry="2" />
+                      <rect x="465" y="330" width="15" height="90" :fill="activeScheme[2]?.hex || '#8B4513'" rx="2" ry="2" />
+                      <rect x="540" y="330" width="15" height="90" :fill="activeScheme[2]?.hex || '#8B4513'" rx="2" ry="2" />
+                      <rect x="645" y="330" width="15" height="90" :fill="activeScheme[2]?.hex || '#8B4513'" rx="2" ry="2" />
+                      <rect x="720" y="330" width="15" height="90" :fill="activeScheme[2]?.hex || '#8B4513'" rx="2" ry="2" />
+                      <rect x="825" y="330" width="15" height="90" :fill="activeScheme[2]?.hex || '#8B4513'" rx="2" ry="2" />
 
                       <!-- Second floor shutters -->
-                      <rect x="410" y="220" width="15" height="70" :fill="activeScheme[2]?.hex || '#5D4037'" rx="2" ry="2" />
-                      <rect x="495" y="220" width="15" height="70" :fill="activeScheme[2]?.hex || '#5D4037'" rx="2" ry="2" />
-                      <rect x="690" y="220" width="15" height="70" :fill="activeScheme[2]?.hex || '#5D4037'" rx="2" ry="2" />
-                      <rect x="775" y="220" width="15" height="70" :fill="activeScheme[2]?.hex || '#5D4037'" rx="2" ry="2" />
+                      <rect x="410" y="220" width="15" height="70" :fill="activeScheme[2]?.hex || '#8B4513'" rx="2" ry="2" />
+                      <rect x="495" y="220" width="15" height="70" :fill="activeScheme[2]?.hex || '#8B4513'" rx="2" ry="2" />
+                      <rect x="690" y="220" width="15" height="70" :fill="activeScheme[2]?.hex || '#8B4513'" rx="2" ry="2" />
+                      <rect x="775" y="220" width="15" height="70" :fill="activeScheme[2]?.hex || '#8B4513'" rx="2" ry="2" />
 
                       <!-- Decorative trim - Modern style -->
                       <rect x="350" y="300" width="500" height="10" :fill="activeScheme[1]?.hex || '#FF7043'" rx="2" ry="2" />
@@ -777,8 +777,8 @@
           </div>
 
           <!-- History Tab -->
-          <div v-if="activeTab === 'history'" class="p-6">
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-6">
+          <div v-if="activeTab === 'history'" class="p-6 h-full overflow-auto">
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-6 h-full flex flex-col">
               <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold text-gray-800 flex items-center">
                   <HistoryIcon class="h-6 w-6 mr-2 text-orange-500" />
@@ -834,76 +834,234 @@
                 </div>
               </div>
               
-              <!-- History Items -->
-              <div v-if="historyLoading" class="flex items-center justify-center py-12">
-                <div class="w-10 h-10 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin"></div>
-              </div>
-              
-              <div v-else-if="filteredHistory.length === 0" class="py-12 text-center">
-                <h3 class="text-xl font-medium text-gray-800 mb-2">No Recommendations Found</h3>
-                <p class="text-gray-600">Try adjusting your search or filter criteria.</p>
-              </div>
-              
-              <!-- History Items -->
-              <div v-else class="space-y-6">
-                <div 
-                  v-for="item in filteredHistory" 
-                  :key="item.id"
-                  class="bg-gray-50 p-5 rounded-lg border border-gray-200 hover:border-orange-300 transition-all"
-                >
-                  <div class="flex justify-between items-start mb-3">
-                    <div>
-                      <h3 class="text-lg font-medium text-gray-800">{{ getHouseStyleNameById(item.houseStyle) }}</h3>
-                      <p class="text-sm text-gray-600">{{ formatDate(item.createdAt) }}</p>
-                      <div class="mt-1">
-                        <span 
-                          class="text-xs px-2 py-0.5 rounded-full border" 
-                          :class="item.userType === 'admin' ? 'bg-blue-100 text-blue-700 border-blue-200' : 'bg-green-100 text-green-700 border-green-200'"
-                        >
-                          <span v-if="item.userType === 'admin'">
-                            <ShieldIcon class="h-3 w-3 inline mr-1" />
-                            Admin
-                          </span>
-                          <span v-else>
-                            <UserIcon class="h-3 w-3 inline mr-1" />
-                            Staff
-                          </span>
-                        </span>
-                      </div>
-                    </div>
-                    
-                    <button 
-                      @click="deleteHistoryItem(item.id)"
-                      class="p-2 rounded-lg hover:bg-red-50 text-gray-600 hover:text-red-600 transition-colors border border-transparent hover:border-red-200"
-                    >
-                      <TrashIcon class="w-4 h-4" />
-                    </button>
-                  </div>
-                  
-                  <div class="grid grid-cols-4 gap-3 mb-4">
-                    <div 
-                      v-for="(color, colorIndex) in item.scheme" 
-                      :key="colorIndex"
-                      class="bg-white p-2 rounded-lg border border-gray-200"
-                    >
-                      <div 
-                        class="h-10 rounded-md mb-1 cursor-pointer border border-gray-200"
-                        :style="{ backgroundColor: color.hex }"
-                        @click="copyColorToClipboard(color.hex)"
-                        title="Click to copy color code"
-                      ></div>
-                      <div class="flex justify-between items-center">
-                        <span class="text-gray-800 font-medium text-xs">{{ color.name }}</span>
-                        <span class="text-gray-600 text-xs">{{ color.hex.toUpperCase() }}</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="flex justify-between items-center text-sm text-gray-600">
-                    <span>{{ getSurfaceMaterialNameById(item.surfaceMaterial) }}</span>
-                    <span>{{ getColorPreferenceNameById(item.colorPreference) }}</span>
-                  </div>
+              <!-- History Items Container with proper scrolling -->
+              <div class="flex-1 overflow-auto">
+                <div v-if="historyLoading" class="flex items-center justify-center py-12">
+                  <div class="w-10 h-10 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin"></div>
                 </div>
+                
+                <div v-else-if="filteredHistory.length === 0" class="py-12 text-center">
+                  <h3 class="text-xl font-medium text-gray-800 mb-2">No Recommendations Found</h3>
+                  <p class="text-gray-600">Try adjusting your search or filter criteria.</p>
+                </div>
+                
+                <!-- History Items -->
+                
+<div v-else class="space-y-6 pb-6">
+  <div 
+    v-for="item in filteredHistory" 
+    :key="item.id"
+    class="bg-gray-50 p-5 rounded-lg border border-gray-200 hover:border-orange-300 transition-all"
+  >
+    <div class="flex gap-6">
+      <!-- Left side - Info and Colors -->
+      <div class="flex-1">
+        <div class="flex justify-between items-start mb-3">
+          <div>
+            <h3 class="text-lg font-medium text-gray-800">{{ getHouseStyleNameById(item.houseStyle) }}</h3>
+            <p class="text-sm text-gray-600">{{ formatDate(item.createdAt) }}</p>
+            <div class="mt-1">
+              <span 
+                class="text-xs px-2 py-0.5 rounded-full border" 
+                :class="item.userType === 'admin' ? 'bg-blue-100 text-blue-700 border-blue-200' : 'bg-green-100 text-green-700 border-green-200'"
+              >
+                <span v-if="item.userType === 'admin'">
+                  <ShieldIcon class="h-3 w-3 inline mr-1" />
+                  Admin
+                </span>
+                <span v-else>
+                  <UserIcon class="h-3 w-3 inline mr-1" />
+                  Staff
+                </span>
+              </span>
+            </div>
+          </div>
+          
+          <button 
+            @click="deleteHistoryItem(item.id)"
+            class="p-2 rounded-lg hover:bg-red-50 text-gray-600 hover:text-red-600 transition-colors border border-transparent hover:border-red-200"
+          >
+            <TrashIcon class="w-4 h-4" />
+          </button>
+        </div>
+        
+        <!-- Compact Color Grid -->
+        <div class="grid grid-cols-4 gap-2 mb-4">
+          <div 
+            v-for="(color, colorIndex) in item.scheme" 
+            :key="colorIndex"
+            class="bg-white p-2 rounded-lg border border-gray-200"
+          >
+            <div 
+              class="h-8 rounded-md mb-1 cursor-pointer border border-gray-200"
+              :style="{ backgroundColor: color.hex }"
+              @click="copyColorToClipboard(color.hex)"
+              title="Click to copy color code"
+            ></div>
+            <div class="text-center">
+              <span class="text-gray-800 font-medium text-xs block truncate">{{ color.name }}</span>
+              <span class="text-gray-600 text-xs">{{ color.hex.toUpperCase() }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex justify-between items-center text-sm text-gray-600">
+          <span>{{ getSurfaceMaterialNameById(item.surfaceMaterial) }}</span>
+          <span>{{ getColorPreferenceNameById(item.colorPreference) }}</span>
+        </div>
+      </div>
+      
+      <!-- Right side - House Preview -->
+      <div class="w-80 flex-shrink-0">
+        <div class="bg-white rounded-lg border border-gray-200 p-3">
+          <h4 class="text-sm font-medium text-gray-700 mb-2">House Preview</h4>
+          <div class="relative h-48 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg overflow-hidden">
+            <!-- Enhanced SVG House Visualization -->
+            <svg viewBox="0 0 800 500" class="w-full h-full">
+              <!-- Sky background -->
+              <defs>
+                <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#e0f2fe" />
+                  <stop offset="100%" stopColor="#bae6fd" />
+                </linearGradient>
+                <radialGradient id="sunGlow" cx="80%" cy="20%" r="15%">
+                  <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#fbbf24" stopOpacity="0" />
+                </radialGradient>
+              </defs>
+
+              <rect x="0" y="0" width="800" height="500" fill="url(#skyGradient)" />
+              
+              <!-- Sun -->
+              <circle cx="640" cy="80" r="80" fill="url(#sunGlow)" />
+              <circle cx="640" cy="80" r="35" fill="#fbbf24" opacity="0.9" />
+
+              <!-- Clouds -->
+              <g opacity="0.7">
+                <ellipse cx="150" cy="90" rx="40" ry="20" fill="white" />
+                <ellipse cx="180" cy="80" rx="35" ry="18" fill="white" />
+                <ellipse cx="210" cy="90" rx="40" ry="20" fill="white" />
+                
+                <ellipse cx="450" cy="110" rx="35" ry="15" fill="white" />
+                <ellipse cx="480" cy="100" rx="30" ry="12" fill="white" />
+                <ellipse cx="510" cy="110" rx="35" ry="15" fill="white" />
+              </g>
+
+              <!-- Ground -->
+              <rect x="0" y="320" width="800" height="180" fill="#86efac" />
+              
+              <!-- Trees and landscape -->
+              <!-- Left coconut tree -->
+              <rect x="80" y="250" width="12" height="70" fill="#8b4513" />
+              <ellipse cx="86" cy="230" rx="35" ry="40" fill="#22c55e" opacity="0.8" />
+              <circle cx="70" cy="240" r="5" fill="#d4a373" />
+              <circle cx="102" cy="245" r="5" fill="#d4a373" />
+              
+              <!-- Right tree -->
+              <rect x="680" y="260" width="10" height="60" fill="#8b4513" />
+              <ellipse cx="685" cy="245" rx="30" ry="35" fill="#22c55e" opacity="0.8" />
+
+              <!-- Main House Structure -->
+              <!-- Foundation -->
+              <rect x="250" y="320" width="300" height="8" fill="#9ca3af" />
+              
+              <!-- Main house body -->
+              <rect x="250" y="220" width="300" height="100" :fill="item.scheme[0]?.hex || '#FFFFFF'" rx="3" />
+              
+              <!-- Second floor -->
+              <rect x="280" y="160" width="240" height="60" :fill="item.scheme[0]?.hex || '#FFFFFF'" rx="3" />
+              
+              <!-- Roof -->
+              <polygon points="250,160 400,100 550,160" :fill="item.scheme[3]?.hex || '#dc2626'" />
+              <rect x="250" y="155" width="300" height="8" :fill="item.scheme[3]?.hex || '#dc2626'" />
+              
+              <!-- Windows - First floor -->
+              <rect x="270" y="240" width="50" height="60" :fill="item.scheme[1]?.hex || '#3b82f6'" rx="2" />
+              <rect x="275" y="245" width="40" height="50" fill="rgba(255,255,255,0.9)" rx="1" />
+              <line x1="295" y1="245" x2="295" y2="295" stroke="#374151" strokeWidth="1" />
+              <line x1="275" y1="270" x2="315" y2="270" stroke="#374151" strokeWidth="1" />
+              
+              <rect x="340" y="240" width="50" height="60" :fill="item.scheme[1]?.hex || '#3b82f6'" rx="2" />
+              <rect x="345" y="245" width="40" height="50" fill="rgba(255,255,255,0.9)" rx="1" />
+              <line x1="365" y1="245" x2="365" y2="295" stroke="#374151" strokeWidth="1" />
+              <line x1="345" y1="270" x2="385" y2="270" stroke="#374151" strokeWidth="1" />
+              
+              <rect x="480" y="240" width="50" height="60" :fill="item.scheme[1]?.hex || '#3b82f6'" rx="2" />
+              <rect x="485" y="245" width="40" height="50" fill="rgba(255,255,255,0.9)" rx="1" />
+              <line x1="505" y1="245" x2="505" y2="295" stroke="#374151" strokeWidth="1" />
+              <line x1="485" y1="270" x2="525" y2="270" stroke="#374151" strokeWidth="1" />
+              
+              <!-- Windows - Second floor -->
+              <rect x="300" y="170" width="40" height="40" :fill="item.scheme[1]?.hex || '#3b82f6'" rx="2" />
+              <rect x="305" y="175" width="30" height="30" fill="rgba(255,255,255,0.9)" rx="1" />
+              <line x1="320" y1="175" x2="320" y2="205" stroke="#374151" strokeWidth="1" />
+              <line x1="305" y1="190" x2="335" y2="190" stroke="#374151" strokeWidth="1" />
+              
+              <rect x="460" y="170" width="40" height="40" :fill="item.scheme[1]?.hex || '#3b82f6'" rx="2" />
+              <rect x="465" y="175" width="30" height="30" fill="rgba(255,255,255,0.9)" rx="1" />
+              <line x1="480" y1="175" x2="480" y2="205" stroke="#374151" strokeWidth="1" />
+              <line x1="465" y1="190" x2="495" y2="190" stroke="#374151" strokeWidth="1" />
+              
+              <!-- Center decorative window -->
+              <circle cx="400" cy="185" r="18" :fill="item.scheme[1]?.hex || '#3b82f6'" />
+              <circle cx="400" cy="185" r="15" fill="rgba(255,255,255,0.9)" />
+              <circle cx="400" cy="185" r="8" fill="none" stroke="#374151" strokeWidth="1" />
+              
+              <!-- Front door -->
+              <rect x="380" y="270" width="40" height="50" :fill="item.scheme[1]?.hex || '#3b82f6'" rx="3" />
+              <rect x="385" y="275" width="30" height="45" :fill="item.scheme[2]?.hex || '#8b4513'" rx="2" />
+              <circle cx="410" cy="295" r="2" fill="#fbbf24" />
+              
+              <!-- Door steps -->
+              <rect x="380" y="320" width="40" height="3" fill="#9ca3af" />
+              <rect x="382" y="323" width="36" height="3" fill="#6b7280" />
+              
+              <!-- Decorative elements -->
+              <!-- Shutters -->
+              <rect x="260" y="240" width="8" height="60" :fill="item.scheme[2]?.hex || '#8b4513'" rx="1" />
+              <rect x="322" y="240" width="8" height="60" :fill="item.scheme[2]?.hex || '#8b4513'" rx="1" />
+              <rect x="392" y="240" width="8" height="60" :fill="item.scheme[2]?.hex || '#8b4513'" rx="1" />
+              <rect x="532" y="240" width="8" height="60" :fill="item.scheme[2]?.hex || '#8b4513'" rx="1" />
+              
+              <!-- Balcony -->
+              <rect x="430" y="220" width="120" height="5" :fill="item.scheme[1]?.hex || '#3b82f6'" />
+              <rect x="430" y="200" width="5" height="25" :fill="item.scheme[1]?.hex || '#3b82f6'" />
+              <rect x="450" y="200" width="5" height="25" :fill="item.scheme[1]?.hex || '#3b82f6'" />
+              <rect x="470" y="200" width="5" height="25" :fill="item.scheme[1]?.hex || '#3b82f6'" />
+              <rect x="490" y="200" width="5" height="25" :fill="item.scheme[1]?.hex || '#3b82f6'" />
+              <rect x="510" y="200" width="5" height="25" :fill="item.scheme[1]?.hex || '#3b82f6'" />
+              <rect x="530" y="200" width="5" height="25" :fill="item.scheme[1]?.hex || '#3b82f6'" />
+              <rect x="545" y="200" width="5" height="25" :fill="item.scheme[1]?.hex || '#3b82f6'" />
+              
+              <!-- Glass railing -->
+              <rect x="435" y="205" width="110" height="15" fill="rgba(200,230,255,0.4)" />
+              
+              <!-- Decorative trim -->
+              <rect x="250" y="215" width="300" height="5" :fill="item.scheme[1]?.hex || '#3b82f6'" />
+              <rect x="280" y="155" width="240" height="5" :fill="item.scheme[1]?.hex || '#3b82f6'" />
+              
+              <!-- Outdoor lighting -->
+              <circle cx="320" cy="230" r="3" fill="#fbbf24" opacity="0.8" />
+              <circle cx="480" cy="230" r="3" fill="#fbbf24" opacity="0.8" />
+              
+              <!-- House number -->
+              <rect x="370" y="250" width="30" height="12" :fill="item.scheme[1]?.hex || '#3b82f6'" rx="6" />
+              <text x="385" y="260" fontFamily="Arial" fontSize="8" fontWeight="bold" fill="white" textAnchor="middle">123</text>
+              
+              <!-- Filipino flag accent -->
+              <rect x="250" y="210" width="300" height="3" fill="#0038a8" />
+              <rect x="250" y="213" width="300" height="2" fill="#ce1126" />
+            </svg>
+          </div>
+          <p class="text-xs text-gray-600 mt-2 text-center">
+            {{ getHouseStyleNameById(item.houseStyle) }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
               </div>
             </div>
           </div>
@@ -992,7 +1150,7 @@ const formData = ref({
   colorPreference: "",
 });
 
-// House Styles - Philippines specific (reduced to 5 most common)
+// House Styles - Philippines specific
 const houseStyles = [
   { id: "bahay_kubo", name: "Bahay Kubo" },
   { id: "bahay_na_bato", name: "Bahay na Bato" },
@@ -1001,7 +1159,7 @@ const houseStyles = [
   { id: "bungalow", name: "Filipino Bungalow" },
 ];
 
-// Surface Materials - Philippines specific (reduced to 5 most common)
+// Surface Materials - Philippines specific
 const surfaceMaterials = [
   { id: "concrete", name: "Concrete/Cement" },
   { id: "hollow_blocks", name: "Hollow Blocks" },
@@ -1010,14 +1168,160 @@ const surfaceMaterials = [
   { id: "stone", name: "Stone/Bato" },
 ];
 
-// Color Preferences - Philippines specific (reduced to 5 most common)
+// Color Preferences - Philippines specific
 const colorPreferences = [
-  { id: "traditional_filipino", name: "Traditional Filipino" },
-  { id: "modern_pinoy", name: "Modern Pinoy" },
-  { id: "tropical_vibrant", name: "Tropical Vibrant" },
-  { id: "provincial_earthy", name: "Provincial Earthy" },
-  { id: "coastal_filipino", name: "Coastal Filipino" },
+  { id: "warm_earth", name: "Warm Earth Tones" },
+  { id: "cool_blues", name: "Cool Blues & Greens" },
+  { id: "vibrant_tropical", name: "Vibrant Tropical" },
+  { id: "neutral_whites", name: "Neutral Whites & Creams" },
+  { id: "bold_colors", name: "Bold Statement Colors" },
 ];
+
+// Paint Colors from Davies catalog - organized by categories
+const paintColors = {
+  // Reds & Pinks
+  reds_pinks: [
+    { name: "Lady Candy", hex: "#E8B5B5", code: "SR-106" },
+    { name: "Nifty Pink", hex: "#D67B7B", code: "SR-132" },
+    { name: "Valentine Pink", hex: "#E8C5D1", code: "SR-102" },
+    { name: "Berry Rouge", hex: "#C85A5A", code: "SR-105" },
+    { name: "Mad Magenta", hex: "#B83D6E", code: "SR-107" },
+    { name: "Fire Opal", hex: "#D2524A", code: "SR-103" },
+    { name: "Mascot Red", hex: "#B22222", code: "SR-110" },
+    { name: "Cathay Red", hex: "#DC143C", code: "SR-111" },
+    { name: "Happy Red", hex: "#8B1538", code: "SR-109" },
+    { name: "Terra Cotta", hex: "#8B4513", code: "SR-101" },
+    { name: "Adobe Red", hex: "#5D2E1F", code: "SR-108" }
+  ],
+
+  // Violets & Purples
+  violets_purples: [
+    { name: "Light Wisteria", hex: "#C8A2C8", code: "SR-214" },
+    { name: "Purple Passion", hex: "#9966CC", code: "SR-213" },
+    { name: "Violet Essence", hex: "#6A5ACD", code: "SR-211" },
+    { name: "Imagine Violet", hex: "#663399", code: "SR-216" }
+  ],
+
+  // Blacks & Grays
+  blacks_grays: [
+    { name: "Tinge of Gray", hex: "#D3D3D3", code: "SR-060" },
+    { name: "Smoke Gray", hex: "#708090", code: "SR-601" },
+    { name: "Gray Delight", hex: "#A9A9A9", code: "SR-609" },
+    { name: "Seal Gray", hex: "#2F4F4F", code: "SR-608" },
+    { name: "Black", hex: "#000000", code: "SR-660" }
+  ],
+
+  // Blues
+  blues: [
+    { name: "Summer Sea", hex: "#87CEEB", code: "SR-207" },
+    { name: "Calm Sky", hex: "#87CEFA", code: "SR-208" },
+    { name: "Blue Ocean", hex: "#4169E1", code: "SR-223" },
+    { name: "Blue Jeans", hex: "#1E90FF", code: "SR-212" },
+    { name: "Azure Blue", hex: "#0080FF", code: "SR-220" },
+    { name: "King Cerulean", hex: "#191970", code: "SR-203" },
+    { name: "Flirty Lavender", hex: "#9370DB", code: "SR-215" }
+  ],
+
+  // Whites & Off-Whites
+  whites_offwhites: [
+    { name: "Winter Morning", hex: "#F8F8FF", code: "SR-011" },
+    { name: "Alabaster", hex: "#F0F8FF", code: "SR-008" },
+    { name: "Tulle White", hex: "#FFFAFA", code: "SR-021" },
+    { name: "Whitewash", hex: "#F5F5F5", code: "SR-013" },
+    { name: "Rose White", hex: "#FFF0F5", code: "SR-001" },
+    { name: "Paper Mache", hex: "#FAEBD7", code: "SR-004" },
+    { name: "Cornsilk", hex: "#FFF8DC", code: "SR-005" },
+    { name: "Milky Way", hex: "#F5F5DC", code: "SR-012" },
+    { name: "Lip Tint", hex: "#FFE4E1", code: "SR-015" },
+    { name: "Tinkerbelle", hex: "#F0E68C", code: "SR-040" },
+    { name: "White", hex: "#FFFFFF", code: "SR-100" }
+  ],
+
+  // Oranges & Peaches
+  oranges_peaches: [
+    { name: "Infinite Peach", hex: "#FFDAB9", code: "SR-513" },
+    { name: "Orange Spray", hex: "#FF8C00", code: "SR-506" },
+    { name: "Angel Blush", hex: "#FFB6C1", code: "SR-509" },
+    { name: "Peach", hex: "#FFCBA4", code: "SR-501" },
+    { name: "Zesty Orange", hex: "#FF6347", code: "SR-507" },
+    { name: "Sexy Salmon", hex: "#FA8072", code: "SR-508" },
+    { name: "Jolly Orange", hex: "#FF4500", code: "SR-504" },
+    { name: "Terraza Orange", hex: "#CD5C5C", code: "SR-593" },
+    { name: "Flamingo Sweet", hex: "#DC143C", code: "SR-505" }
+  ],
+
+  // Yellows & Creams
+  yellows_creams: [
+    { name: "Linen Cream", hex: "#FAF0E6", code: "SR-083" },
+    { name: "Cream Surprise", hex: "#F5DEB3", code: "SR-411" },
+    { name: "Ivory", hex: "#FFFFF0", code: "SR-462" },
+    { name: "Lotus Peach", hex: "#FFEFD5", code: "SR-429" },
+    { name: "Smiley Yellow", hex: "#FFFF99", code: "SR-409" },
+    { name: "Calamansi", hex: "#FFD700", code: "SR-433" },
+    { name: "Yellow Breeze", hex: "#F0E68C", code: "SR-481" },
+    { name: "Sunny Day", hex: "#FFD700", code: "SR-472" },
+    { name: "Lovely Days", hex: "#FFFF00", code: "SR-418" },
+    { name: "Cheezee Yellow", hex: "#DAA520", code: "SR-413" },
+    { name: "Maiz Con Hielo", hex: "#DEB887", code: "SR-408" },
+    { name: "Clarion Yellow", hex: "#B8860B", code: "SR-482" }
+  ],
+
+  // Greens
+  greens: [
+    { name: "Burst of Green", hex: "#90EE90", code: "SR-309" },
+    { name: "Menthol", hex: "#98FB98", code: "SR-323" },
+    { name: "My Chartreuse", hex: "#7FFF00", code: "SR-307" },
+    { name: "Matcha", hex: "#9ACD32", code: "SR-318" },
+    { name: "Cool Mint", hex: "#8FBC8F", code: "SR-329" },
+    { name: "Pale Nile", hex: "#6B8E23", code: "SR-304" },
+    { name: "Asparagus", hex: "#87A96B", code: "SR-338" },
+    { name: "Green Tree", hex: "#228B22", code: "SR-305" },
+    { name: "Green Salad", hex: "#32CD32", code: "SR-310" },
+    { name: "Bright Green", hex: "#00FF00", code: "SR-328" },
+    { name: "Baguio Green", hex: "#006400", code: "SR-333" },
+    { name: "Clear Promise", hex: "#40E0D0", code: "SR-306" },
+    { name: "Chill Water", hex: "#00CED1", code: "SR-398" },
+    { name: "Aquamarine", hex: "#7FFFD4", code: "SR-355" }
+  ],
+
+  // Browns & Beiges
+  browns_beiges: [
+    { name: "Apricot White", hex: "#F5F5DC", code: "SR-020" },
+    { name: "Bone Ivory", hex: "#F5F5DC", code: "SR-425" },
+    { name: "Mocha Blanch", hex: "#DEB887", code: "SR-902" },
+    { name: "Sand Beige", hex: "#D2B48C", code: "SR-901" },
+    { name: "Double Mustard", hex: "#CD853F", code: "SR-414" },
+    { name: "Cotton Candy", hex: "#F8BBD9", code: "SR-967" },
+    { name: "Big Bacon Beige", hex: "#D2691E", code: "SR-912" },
+    { name: "Tasty Tan", hex: "#D2B48C", code: "SR-913" },
+    { name: "Mud O' Pie", hex: "#8B7355", code: "SR-914" },
+    { name: "Burger Brown", hex: "#8B4513", code: "SR-911" },
+    { name: "Choco Brown", hex: "#654321", code: "SR-933" }
+  ],
+
+  // Roof Colors (Davies Roofshield)
+  roof_colors: [
+    { name: "Cathay Red", hex: "#DC143C", code: "DV 50-16" },
+    { name: "Spanish Red", hex: "#8B4513", code: "DV 50-13" },
+    { name: "Colonial Red", hex: "#A0522D", code: "DV 50-10" },
+    { name: "Spanish Red", hex: "#CD853F", code: "DV 50-12" },
+    { name: "Russet Brown", hex: "#80461B", code: "DV 50-91" },
+    { name: "Orange Clay", hex: "#FF8C00", code: "DV 50-58" },
+    { name: "Terra Cotta", hex: "#E2725B", code: "DV 50-15" },
+    { name: "Brick Red", hex: "#B22222", code: "DV 50-11" },
+    { name: "Ivy Green", hex: "#228B22", code: "DV 50-30" },
+    { name: "Baguio Green", hex: "#006400", code: "DV 50-33" },
+    { name: "Inca Gold", hex: "#DAA520", code: "DV 50-40" },
+    { name: "Sahara Beige", hex: "#F4A460", code: "DV 50-90" },
+    { name: "Azure Blue", hex: "#007FFF", code: "DV 50-20" },
+    { name: "Casa Blue", hex: "#4169E1", code: "DV 50-28" },
+    { name: "Delft Blue", hex: "#1E3A8A", code: "DV 50-22" },
+    { name: "Coastlight", hex: "#F5F5DC", code: "DV 50-92" },
+    { name: "Stone Slate", hex: "#708090", code: "DV 50-96" },
+    { name: "Velvet Gray", hex: "#696969", code: "DV 50-61" },
+    { name: "White", hex: "#FFFFFF", code: "DV 50-00" }
+  ]
+};
 
 // Recommendations
 const recommendations = ref([]);
@@ -1080,7 +1384,7 @@ const copyColorToClipboard = (colorCode) => {
   });
 };
 
-// Generate recommendations
+// Generate recommendations based on actual Davies paint colors
 const getRecommendations = async () => {
   if (!formData.value.houseStyle || !formData.value.surfaceMaterial || !formData.value.colorPreference) {
     showSuccessToast("Please fill out all fields.");
@@ -1091,44 +1395,13 @@ const getRecommendations = async () => {
   recommendations.value = [];
 
   try {
-    // Add a small delay to ensure the loading state is visible
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const schemes = [];
 
-    // Generate 5 color schemes with different colors (reduced from 10)
+    // Generate 5 color schemes based on color preference and house style
     for (let i = 0; i < 5; i++) {
-      const scheme = [];
-
-      // Each scheme has 4 colors
-      for (let j = 0; j < 4; j++) {
-        let color;
-
-        // Generate colors based on preference and ensure variety
-        switch (formData.value.colorPreference) {
-          case "traditional_filipino":
-            color = getTraditionalFilipinoColor(j, i);
-            break;
-          case "tropical_vibrant":
-            color = getTropicalVibrantColor(j, i);
-            break;
-          case "provincial_earthy":
-            color = getProvincialEarthyColor(j, i);
-            break;
-          case "coastal_filipino":
-            color = getCoastalFilipinoColor(j, i);
-            break;
-          case "modern_pinoy":
-            color = getModernPinoyColor(j, i);
-            break;
-          default:
-            // Fallback to traditional Filipino if no match
-            color = getTraditionalFilipinoColor(j, i);
-        }
-
-        scheme.push(color);
-      }
-
+      const scheme = generateColorScheme(formData.value.colorPreference, formData.value.houseStyle, formData.value.surfaceMaterial, i);
       schemes.push(scheme);
     }
 
@@ -1141,194 +1414,105 @@ const getRecommendations = async () => {
   }
 };
 
-// Modern Pinoy color palette
-const getModernPinoyColor = (index, schemeIndex) => {
-  const schemes = [
-    [
-      { name: "Tierra Brown", hex: "#A68A64" },
-      { name: "Azure Blue", hex: "#367FA9" },
-      { name: "Sampaguita White", hex: "#F8F8FF" },
-      { name: "Mango Yellow", hex: "#FFDA64" },
-    ],
-    [
-      { name: "Cogon Gold", hex: "#D4A373" },
-      { name: "Laguna Green", hex: "#3D9970" },
-      { name: "Capiz Shell", hex: "#F0F8FF" },
-      { name: "Anahaw Green", hex: "#3A5A40" },
-    ],
-    [
-      { name: "Banaue Earth", hex: "#8B4513" },
-      { name: "Taal Blue", hex: "#0077B6" },
-      { name: "Rice Paper", hex: "#FAF9F6" },
-      { name: "Ylang-Ylang", hex: "#FFFDD0" },
-    ],
-    [
-      { name: "Chocolate Hills", hex: "#5D4037" },
-      { name: "Baguio Pine", hex: "#2E8B57" },
-      { name: "Silk White", hex: "#FFFAFA" },
-      { name: "Sun Kissed", hex: "#FFECB3" },
-    ],
-    [
-      { name: "Antique Wood", hex: "#654321" },
-      { name: "Emerald Rice", hex: "#50C878" },
-      { name: "Cloud White", hex: "#F0FFFF" },
-      { name: "Golden Hour", hex: "#FFD700" },
-    ],
+// Generate color scheme based on preferences using actual Davies colors
+const generateColorScheme = (colorPreference, houseStyle, surfaceMaterial, schemeIndex) => {
+  let mainColors, accentColors, trimColors;
+  
+  // Primary selection based on color preference
+  switch (colorPreference) {
+    case "warm_earth":
+      mainColors = [...paintColors.browns_beiges, ...paintColors.oranges_peaches];
+      accentColors = [...paintColors.yellows_creams, ...paintColors.reds_pinks];
+      trimColors = [...paintColors.browns_beiges];
+      break;
+      
+    case "cool_blues":
+      mainColors = [...paintColors.blues, ...paintColors.greens];
+      accentColors = [...paintColors.whites_offwhites, ...paintColors.blues];
+      trimColors = [...paintColors.blacks_grays];
+      break;
+      
+    case "vibrant_tropical":
+      mainColors = [...paintColors.oranges_peaches, ...paintColors.yellows_creams];
+      accentColors = [...paintColors.reds_pinks, ...paintColors.violets_purples];
+      trimColors = [...paintColors.greens];
+      break;
+      
+    case "neutral_whites":
+      mainColors = [...paintColors.whites_offwhites];
+      accentColors = [...paintColors.browns_beiges, ...paintColors.blacks_grays];
+      trimColors = [...paintColors.browns_beiges];
+      break;
+      
+    case "bold_colors":
+      mainColors = [...paintColors.reds_pinks, ...paintColors.violets_purples];
+      accentColors = [...paintColors.oranges_peaches, ...paintColors.yellows_creams];
+      trimColors = [...paintColors.blacks_grays];
+      break;
+      
+    default:
+      mainColors = [...paintColors.whites_offwhites];
+      accentColors = [...paintColors.browns_beiges];
+      trimColors = [...paintColors.blacks_grays];
+  }
+
+  // Secondary adjustment based on house style
+  if (houseStyle === "bahay_kubo") {
+    // Traditional Filipino - prefer natural, earthy colors
+    mainColors = [...paintColors.browns_beiges, ...paintColors.yellows_creams];
+    accentColors = [...paintColors.greens, ...paintColors.oranges_peaches];
+    trimColors = [...paintColors.browns_beiges];
+  } else if (houseStyle === "bahay_na_bato") {
+    // Spanish colonial - prefer whites with rich accents
+    mainColors = [...paintColors.whites_offwhites, ...paintColors.browns_beiges];
+    accentColors = [...paintColors.reds_pinks, ...paintColors.browns_beiges];
+    trimColors = [...paintColors.browns_beiges];
+  } else if (houseStyle === "modern_filipino") {
+    // Modern - can use any colors but prefer clean combinations
+    // Keep the color preference selection but ensure good contrast
+  } else if (houseStyle === "contemporary_tropical") {
+    // Tropical - prefer bright, vibrant colors
+    if (colorPreference === "neutral_whites") {
+      accentColors = [...paintColors.greens, ...paintColors.blues];
+    }
+  } else if (houseStyle === "bungalow") {
+    // Bungalow - prefer warm, welcoming colors
+    if (colorPreference === "cool_blues") {
+      mainColors = [...paintColors.blues, ...paintColors.whites_offwhites];
+    }
+  }
+
+  // Tertiary adjustment based on surface material
+  if (surfaceMaterial === "wood") {
+    // Wood surfaces - prefer natural wood tones for trim
+    trimColors = [...paintColors.browns_beiges];
+  } else if (surfaceMaterial === "metal") {
+    // Metal surfaces - prefer darker, more durable colors for trim
+    trimColors = [...paintColors.blacks_grays];
+  } else if (surfaceMaterial === "concrete") {
+    // Concrete - can handle any color but prefer neutral trims
+    if (trimColors.length === 0) {
+      trimColors = [...paintColors.blacks_grays, ...paintColors.browns_beiges];
+    }
+  } else if (surfaceMaterial === "hollow_blocks") {
+    // Hollow blocks - similar to concrete
+    if (trimColors.length === 0) {
+      trimColors = [...paintColors.blacks_grays, ...paintColors.whites_offwhites];
+    }
+  } else if (surfaceMaterial === "stone") {
+    // Stone - prefer earthy, natural colors
+    trimColors = [...paintColors.browns_beiges, ...paintColors.blacks_grays];
+  }
+
+  // Select specific colors for this scheme
+  const scheme = [
+    mainColors[schemeIndex % mainColors.length], // Main color
+    accentColors[schemeIndex % accentColors.length], // Accent color
+    trimColors[schemeIndex % trimColors.length], // Trim color
+    paintColors.roof_colors[schemeIndex % paintColors.roof_colors.length] // Roof color (always from roof collection)
   ];
 
-  return schemes[schemeIndex % schemes.length][index % 4];
-};
-
-// Tropical Vibrant color palette
-const getTropicalVibrantColor = (index, schemeIndex) => {
-  const schemes = [
-    [
-      { name: "Mango Yellow", hex: "#ffca28" },
-      { name: "Ocean Turquoise", hex: "#2dd4cf" },
-      { name: "Hibiscus Pink", hex: "#f472b6" },
-      { name: "Lush Green", hex: "#86efac" },
-    ],
-    [
-      { name: "Banana Yellow", hex: "#fde047" },
-      { name: "Lagoon Blue", hex: "#38bdf8" },
-      { name: "Bougainvillea", hex: "#e879f9" },
-      { name: "Palm Green", hex: "#a3e635" },
-    ],
-    [
-      { name: "Pineapple Gold", hex: "#fbbf24" },
-      { name: "Coral Blue", hex: "#67e8f9" },
-      { name: "Orchid Purple", hex: "#c084fc" },
-      { name: "Lime Green", hex: "#bef264" },
-    ],
-    [
-      { name: "Sunflower Yellow", hex: "#facc15" },
-      { name: "Aqua Marine", hex: "#22d3ee" },
-      { name: "Magenta", hex: "#db2777" },
-      { name: "Jungle Green", hex: "#4ade80" },
-    ],
-    [
-      { name: "Citrus Yellow", hex: "#eab308" },
-      { name: "Sky Blue", hex: "#38bdf8" },
-      { name: "Fuchsia", hex: "#be185d" },
-      { name: "Forest Green", hex: "#16a34a" },
-    ],
-  ];
-
-  return schemes[schemeIndex % schemes.length][index % 4];
-};
-
-// Provincial Earthy color palette
-const getProvincialEarthyColor = (index, schemeIndex) => {
-  const schemes = [
-    [
-      { name: "Clay Pot", hex: "#a87c6d" },
-      { name: "Rice Field Green", hex: "#a3b18a" },
-      { name: "Woven Basket", hex: "#d4a373" },
-      { name: "Sunset Orange", hex: "#ea5455" },
-    ],
-    [
-      { name: "Adobe Brown", hex: "#b19470" },
-      { name: "Grass Green", hex: "#81b29a" },
-      { name: "Wooden Fence", hex: "#c6ac8f" },
-      { name: "Harvest Gold", hex: "#f0ab51" },
-    ],
-    [
-      { name: "Terracotta", hex: "#e2725b" },
-      { name: "Leaf Green", hex: "#6a994e" },
-      { name: "Burlap Beige", hex: "#dcd0c0" },
-      { name: "Rustic Red", hex: "#e56b6f" },
-    ],
-    [
-      { name: "Burnt Sienna", hex: "#e97777" },
-      { name: "Olive Green", hex: "#386641" },
-      { name: "Sandstone", hex: "#f2e8cf" },
-      { name: "Amber", hex: "#ffbe0b" },
-    ],
-    [
-      { name: "Russet", hex: "#c38e70" },
-      { name: "Sage Green", hex: "#6b705c" },
-      { name: "Cream", hex: "#f8f1f1" },
-      { name: "Ochre", hex: "#bc6c25" },
-    ],
-  ];
-
-  return schemes[schemeIndex % schemes.length][index % 4];
-};
-
-// Coastal Filipino color palette
-const getCoastalFilipinoColor = (index, schemeIndex) => {
-  const schemes = [
-    [
-      { name: "Seafoam Green", hex: "#a7d1ab" },
-      { name: "Sandy Beige", hex: "#f2d7b4" },
-      { name: "Ocean Blue", hex: "#70a1d7" },
-      { name: "Coral Pink", hex: "#ff7f50" },
-    ],
-    [
-      { name: "Aqua Marine", hex: "#7fffd4" },
-      { name: "Shell White", hex: "#f5f5dc" },
-      { name: "Sky Blue", hex: "#87ceeb" },
-      { name: "Salmon", hex: "#fa8072" },
-    ],
-    [
-      { name: "Turquoise", hex: "#40e0d0" },
-      { name: "Pearl White", hex: "#f8f8ff" },
-      { name: "Azure", hex: "#007fff" },
-      { name: "Peach", hex: "#ffdab9" },
-    ],
-    [
-      { name: "Teal", hex: "#008080" },
-      { name: "Ivory", hex: "#fffff0" },
-      { name: "Cobalt Blue", hex: "#00008b" },
-      { name: "Rose", hex: "#ff007f" },
-    ],
-    [
-      { name: "Mint Green", hex: "#98ff98" },
-      { name: "Linen", hex: "#faf0e6" },
-      { name: "Navy Blue", hex: "#000080" },
-      { name: "Lavender", hex: "#e6e6fa" },
-    ],
-  ];
-
-  return schemes[schemeIndex % schemes.length][index % 4];
-};
-
-// Traditional Filipino color palette
-const getTraditionalFilipinoColor = (index, schemeIndex) => {
-  const schemes = [
-    [
-      { name: "Capiz White", hex: "#f8f9fa" },
-      { name: "Antique Brown", hex: "#8b4513" },
-      { name: "Indigo Blue", hex: "#3f51b5" },
-      { name: "Terracotta Red", hex: "#e45826" },
-    ],
-    [
-      { name: "Cream", hex: "#fffdd0" },
-      { name: "Chocolate", hex: "#795548" },
-      { name: "Azure", hex: "#03a9f4" },
-      { name: "Rust", hex: "#bf360c" },
-    ],
-    [
-      { name: "Ivory", hex: "#fffff0" },
-      { name: "Umber", hex: "#6d4c41" },
-      { name: "Sapphire", hex: "#303f9f" },
-      { name: "Burnt Sienna", hex: "#e64a19" },
-    ],
-    [
-      { name: "Lace", hex: "#f0f8ff" },
-      { name: "Mahogany", hex: "#603813" },
-      { name: "Cobalt", hex: "#1a237e" },
-      { name: "Brick", hex: "#d32f2f" },
-    ],
-    [
-      { name: "Seashell", hex: "#fff5ee" },
-      { name: "Saddle Brown", hex: "#8b4513" },
-      { name: "Navy", hex: "#283593" },
-      { name: "Crimson", hex: "#c62828" },
-    ],
-  ];
-
-  return schemes[schemeIndex % schemes.length][index % 4];
+  return scheme;
 };
 
 // Save recommendation
@@ -1341,7 +1525,6 @@ const saveRecommendation = async () => {
   saving.value = true;
 
   try {
-    // Check if Firestore is initialized
     if (!db) {
       console.error("Firestore is not initialized");
       showSuccessToast("Failed to save: Database not connected");
@@ -1349,17 +1532,16 @@ const saveRecommendation = async () => {
       return;
     }
 
-    // Only save the active scheme instead of all schemes
     const activeSchemeData = {};
     activeScheme.value.forEach((color, colorIndex) => {
       activeSchemeData[`color_${colorIndex}`] = {
         name: color.name,
         hex: color.hex,
+        code: color.code,
         index: colorIndex,
       };
     });
 
-    // Prepare the data
     const recommendationData = {
       houseStyle: formData.value.houseStyle,
       surfaceMaterial: formData.value.surfaceMaterial,
@@ -1367,27 +1549,16 @@ const saveRecommendation = async () => {
       activeScheme: activeSchemeData,
       activeSchemeIndex: activeSchemeIndex.value,
       createdAt: serverTimestamp(),
-      userType: "admin", // Mark as created by admin
+      userType: "admin",
     };
 
-    console.log("Attempting to save recommendation:", recommendationData);
+    const paintRecommendationsRef = collection(db, "paintRecommendations");
+    const docRef = await addDoc(paintRecommendationsRef, recommendationData);
+    console.log("Recommendation saved with ID:", docRef.id);
+    showSuccessToast("Recommendation saved successfully");
 
-    // Save to Firestore
-    try {
-      const paintRecommendationsRef = collection(db, "paintRecommendations");
-      console.log("Collection reference created");
-
-      const docRef = await addDoc(paintRecommendationsRef, recommendationData);
-      console.log("Recommendation saved with ID:", docRef.id);
-      showSuccessToast("Recommendation saved successfully");
-
-      // Update history if we're on the history tab
-      if (activeTab.value === "history") {
-        fetchAllHistory();
-      }
-    } catch (firestoreError) {
-      console.error("Firestore error:", firestoreError);
-      showSuccessToast(`Failed to save: ${firestoreError.message}`);
+    if (activeTab.value === "history") {
+      fetchAllHistory();
     }
   } catch (error) {
     console.error("Error saving recommendation:", error);
@@ -1421,16 +1592,12 @@ const fetchAllHistory = async () => {
       historyItems.value = snapshot.docs.map((doc) => {
         const data = doc.data();
 
-        // Convert the object structure to array for display
         let scheme = [];
         if (data.activeScheme) {
-          // If it's the new format with only active scheme
           scheme = Object.keys(data.activeScheme)
             .sort()
             .map((colorKey) => data.activeScheme[colorKey]);
         } else if (data.schemes) {
-          // If it's the old format with multiple schemes
-          // Get the first scheme or the active scheme if specified
           const schemeIndex = data.activeSchemeIndex || 0;
           if (typeof data.schemes === "object" && !Array.isArray(data.schemes)) {
             const schemeKey = `scheme_${schemeIndex}`;
@@ -1468,7 +1635,7 @@ const deleteHistoryItem = async (itemId) => {
     if (db) {
       await deleteDoc(doc(db, "paintRecommendations", itemId));
       showSuccessToast("Recommendation deleted successfully");
-      fetchAllHistory(); // Refresh history after deletion
+      fetchAllHistory();
     } else {
       console.error("Firestore is not initialized");
       showSuccessToast("Failed to delete: Database not connected");
@@ -1487,17 +1654,15 @@ const clearAllHistory = async () => {
 
   try {
     if (db) {
-      // Get all documents in the collection
       const recommendationsRef = collection(db, "paintRecommendations");
       const q = query(recommendationsRef);
       const snapshot = await getDocs(q);
 
-      // Delete each document
       const deletePromises = snapshot.docs.map((doc) => deleteDoc(doc.ref));
       await Promise.all(deletePromises);
 
       showSuccessToast("All recommendations cleared successfully");
-      fetchAllHistory(); // Refresh history after clearing
+      fetchAllHistory();
     } else {
       console.error("Firestore is not initialized");
       showSuccessToast("Failed to clear history: Database not connected");
@@ -1527,7 +1692,6 @@ const formatDate = (timestamp) => {
 const filteredHistory = computed(() => {
   let filtered = [...historyItems.value];
 
-  // Search filter
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase();
     filtered = filtered.filter((item) => {
@@ -1537,7 +1701,6 @@ const filteredHistory = computed(() => {
     });
   }
 
-  // User filter
   if (filterUser.value) {
     filtered = filtered.filter((item) => item.userType === filterUser.value);
   }
@@ -1545,11 +1708,11 @@ const filteredHistory = computed(() => {
   return filtered;
 });
 
-// Fetch all history outside of the watch and onMounted
+// Initialize history
 const initializeHistory = async () => {
-    if (activeTab.value === "history") {
-        await fetchAllHistory();
-    }
+  if (activeTab.value === "history") {
+    await fetchAllHistory();
+  }
 };
 
 // Watch for tab changes to load history data
@@ -1559,9 +1722,7 @@ watch(activeTab, async (newTab) => {
   }
 });
 
-// Use useRouter inside onMounted or setup
 onMounted(async () => {
-  // Check if Firebase is properly initialized
   if (!db) {
     console.error("Firebase DB is not initialized");
     showSuccessToast("Warning: Database connection not established");

@@ -59,6 +59,15 @@
           </router-link>
 
           <router-link 
+            to="/staff/sales-analytics" 
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
+            :class="{ 'shadow-sm border border-teal-200 transform scale-105': $route.path === '/staff/sales-analytics' }"
+          >
+            <TrendingUpIcon class="w-5 h-5" />
+            <span>Sales Analytics</span>
+          </router-link>
+
+          <router-link 
             to="/staff/settings" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
             :class="{ 'shadow-sm border border-green-200 transform scale-105': $route.path === '/staff/settings' }"
@@ -118,7 +127,7 @@
         <!-- Logo/Brand -->
         <div class="p-6 border-b border-gray-200 flex-shrink-0">
           <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Mindoro Paint Center</h1>
+            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
           </div>
           <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
             <UserIcon class="h-3 w-3 mr-1" />
@@ -165,6 +174,16 @@
           >
             <HomeIcon class="w-5 h-5" />
             <span>House Paint Recommender</span>
+          </router-link>
+
+          <router-link 
+            to="/staff/sales-analytics" 
+            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50"
+            :class="{ 'shadow-sm border border-teal-200': $route.path === '/staff/sales-analytics' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <TrendingUpIcon class="w-5 h-5" />
+            <span>Sales Analytics</span>
           </router-link>
 
           <router-link 
@@ -342,7 +361,7 @@
                 </button>
               </div>
               
-              <div class="grid grid-cols-2 gap-4 mb-6">
+              <div class="grid grid-cols-2 gap-4">
                 <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg p-4 border border-amber-200">
                   <div class="flex items-center gap-3 mb-2">
                     <div class="p-2 bg-amber-100 rounded-lg border border-amber-200">
@@ -364,17 +383,6 @@
                   <p class="text-2xl font-bold text-gray-900">{{ inventoryStats.outOfStock }}</p>
                   <p class="text-xs text-gray-600">Items need reordering</p>
                 </div>
-              </div>
-              
-              <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-4 border border-blue-200">
-                <div class="flex items-center gap-3 mb-2">
-                  <div class="p-2 bg-blue-100 rounded-lg border border-blue-200">
-                    <BarChart3Icon class="w-5 h-5 text-blue-600" />
-                  </div>
-                  <span class="text-gray-900 font-medium">Inventory Value</span>
-                </div>
-                <p class="text-2xl font-bold text-gray-900">₱{{ formatCurrency(inventoryStats.totalValue) }}</p>
-                <p class="text-xs text-gray-600">Total value of current inventory</p>
               </div>
             </div>
 
@@ -421,60 +429,16 @@
                   <div class="p-2 bg-purple-100 rounded-lg border border-purple-200">
                     <TrendingUpIcon class="w-5 h-5 text-purple-600" />
                   </div>
-                  <span class="text-gray-900 font-medium">This Month</span>
+                  <span class="text-gray-900 font-medium">Total</span>
                 </div>
-                <p class="text-2xl font-bold text-gray-900">{{ paintMixingStats.thisMonth }}</p>
-                <p class="text-xs text-gray-600">Recommendations this month</p>
+                <p class="text-2xl font-bold text-gray-900">{{ paintMixingStats.total }}</p>
+                <p class="text-xs text-gray-600">All recommendations</p>
               </div>
             </div>
           </div>
 
-          <!-- Recent Inventory Changes and House Paint Recommender -->
+          <!-- House Paint Recommender and Quick Actions -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            <!-- Recent Inventory Changes -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
-              <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center gap-3">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-600 transform hover:scale-110 transition-transform duration-200">
-                    <HistoryIcon class="w-6 h-6 text-white" />
-                  </div>
-                  <h3 class="text-xl font-bold text-gray-900">Recent Inventory Changes</h3>
-                </div>
-                <div class="flex items-center gap-2">
-                  <button class="text-gray-600 hover:text-gray-900 transition-colors">
-                    <FilterIcon class="w-5 h-5" />
-                  </button>
-                  <button @click="fetchInventoryChanges" class="text-gray-600 hover:text-gray-900 transition-colors">
-                    <RefreshCwIcon class="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-              
-              <div v-if="inventoryChanges.length === 0" class="flex flex-col items-center justify-center py-10 text-center">
-                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                  <HistoryIcon class="w-8 h-8 text-gray-400" />
-                </div>
-                <p class="text-gray-900 text-lg font-medium">No recent inventory changes</p>
-                <p class="text-gray-600 mt-2">Changes to inventory will be shown here</p>
-              </div>
-              
-              <div v-else class="space-y-4">
-                <div v-for="change in inventoryChanges" :key="change.id" class="bg-gradient-to-br from-gray-50 to-white rounded-lg p-4 flex items-center gap-4 border border-gray-200 hover:shadow-md transition-all duration-200">
-                  <div class="p-2 rounded-full" :class="getChangeTypeColor(change.type)">
-                    <component :is="getChangeTypeIcon(change.type)" class="w-5 h-5" />
-                  </div>
-                  <div class="flex-1">
-                    <p class="text-gray-900 font-medium">{{ change.productName }}</p>
-                    <p class="text-gray-600 text-sm">{{ change.description }}</p>
-                  </div>
-                  <div class="text-right">
-                    <p class="text-gray-700 text-sm font-medium">{{ formatDate(change.timestamp) }}</p>
-                    <p class="text-gray-500 text-xs">By {{ change.user }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
             <!-- House Paint Recommender -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
               <div class="flex items-center justify-between mb-6">
@@ -518,10 +482,64 @@
                   <div class="p-2 bg-purple-100 rounded-lg border border-purple-200">
                     <TrendingUpIcon class="w-5 h-5 text-purple-600" />
                   </div>
-                  <span class="text-gray-900 font-medium">This Month</span>
+                  <span class="text-gray-900 font-medium">Total</span>
                 </div>
-                <p class="text-2xl font-bold text-gray-900">{{ recommenderStats.thisMonth }}</p>
-                <p class="text-xs text-gray-600">Recommendations this month</p>
+                <p class="text-2xl font-bold text-gray-900">{{ recommenderStats.total }}</p>
+                <p class="text-xs text-gray-600">All recommendations</p>
+              </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
+              <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-600 transform hover:scale-110 transition-transform duration-200">
+                    <TrendingUpIcon class="w-6 h-6 text-white" />
+                  </div>
+                  <h3 class="text-xl font-bold text-gray-900">Quick Actions</h3>
+                </div>
+              </div>
+              
+              <div class="space-y-3">
+                <router-link 
+                  to="/staff/inventory" 
+                  class="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-200 hover:bg-purple-100 transition-colors"
+                >
+                  <PackageIcon class="w-5 h-5 text-purple-600" />
+                  <span class="text-gray-900 font-medium">Manage Inventory</span>
+                </router-link>
+                
+                <router-link 
+                  to="/staff/paint-mixing" 
+                  class="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-pink-50 to-rose-50 border border-pink-200 hover:bg-pink-100 transition-colors"
+                >
+                  <PaletteIcon class="w-5 h-5 text-pink-600" />
+                  <span class="text-gray-900 font-medium">Mix Paint</span>
+                </router-link>
+                
+                <router-link 
+                  to="/staff/house-paint-recommender" 
+                  class="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-teal-50 to-cyan-50 border border-teal-200 hover:bg-teal-100 transition-colors"
+                >
+                  <HomeIcon class="w-5 h-5 text-teal-600" />
+                  <span class="text-gray-900 font-medium">Recommend Paint</span>
+                </router-link>
+                
+                <router-link 
+                  to="/staff/sales-analytics" 
+                  class="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200 hover:bg-emerald-100 transition-colors"
+                >
+                  <TrendingUpIcon class="w-5 h-5 text-emerald-600" />
+                  <span class="text-gray-900 font-medium">Sales Analytics</span>
+                </router-link>
+                
+                <router-link 
+                  to="/staff/settings" 
+                  class="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-200 hover:bg-gray-100 transition-colors"
+                >
+                  <SettingsIcon class="w-5 h-5 text-gray-600" />
+                  <span class="text-gray-900 font-medium">Settings</span>
+                </router-link>
               </div>
             </div>
           </div>
@@ -667,12 +685,8 @@ const systemStatus = ref({
   recommender: true
 })
 
-// Inventory changes
-const inventoryChanges = ref([])
-
 // Firestore unsubscribe functions
 let unsubscribeInventory = null
-let unsubscribeChanges = null
 let unsubscribePaintMixing = null
 let unsubscribeRecommender = null
 let unsubscribeSales = null
@@ -680,46 +694,6 @@ let unsubscribeSales = null
 // Format currency
 const formatCurrency = (value) => {
   return value.toLocaleString('en-PH')
-}
-
-// Format date
-const formatDate = (timestamp) => {
-  if (!timestamp) return 'N/A'
-  
-  const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp)
-  
-  // If today, show time
-  const today = new Date()
-  if (date.toDateString() === today.toDateString()) {
-    return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
-  }
-  
-  // If this year, show month and day
-  if (date.getFullYear() === today.getFullYear()) {
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-  }
-  
-  // Otherwise show full date
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
-}
-
-// Helper functions for inventory changes
-const getChangeTypeColor = (type) => {
-  switch(type) {
-    case 'add': return 'bg-green-100 text-green-600 border border-green-200'
-    case 'remove': return 'bg-red-100 text-red-600 border border-red-200'
-    case 'update': return 'bg-blue-100 text-blue-600 border border-blue-200'
-    default: return 'bg-gray-100 text-gray-600 border border-gray-200'
-  }
-}
-
-const getChangeTypeIcon = (type) => {
-  switch(type) {
-    case 'add': return PlusCircleIcon
-    case 'remove': return MinusCircleIcon
-    case 'update': return EditIcon
-    default: return InfoIcon
-  }
 }
 
 // Get current user info
@@ -1010,58 +984,6 @@ const setupSalesListener = () => {
   }
 }
 
-// Fetch inventory changes
-const fetchInventoryChanges = async () => {
-  try {
-    if (!db) return
-    
-    const changesRef = collection(db, 'inventoryChanges')
-    const q = query(changesRef, orderBy('timestamp', 'desc'), limit(10))
-    
-    const snapshot = await getDocs(q)
-    
-    const changes = []
-    snapshot.forEach(doc => {
-      changes.push({
-        id: doc.id,
-        ...doc.data()
-      })
-    })
-    
-    inventoryChanges.value = changes
-    
-  } catch (error) {
-    console.error('Error fetching inventory changes:', error)
-  }
-}
-
-// Set up real-time listener for inventory changes
-const setupInventoryChangesListener = () => {
-  if (!db) return null
-  
-  try {
-    const changesRef = collection(db, 'inventoryChanges')
-    const q = query(changesRef, orderBy('timestamp', 'desc'), limit(10))
-    
-    return onSnapshot(q, (snapshot) => {
-      const changes = []
-      snapshot.forEach(doc => {
-        changes.push({
-          id: doc.id,
-          ...doc.data()
-        })
-      })
-      
-      inventoryChanges.value = changes
-    }, (error) => {
-      console.error('Error listening to inventory changes:', error)
-    })
-  } catch (error) {
-    console.error('Error setting up inventory changes listener:', error)
-    return null
-  }
-}
-
 // Set up real-time listener for paint mixing - UPDATED to use paintMixtures collection
 const setupPaintMixingListener = () => {
   if (!db) return null
@@ -1164,14 +1086,12 @@ onMounted(async () => {
   
   // Fetch initial data
   await fetchInventoryData()
-  await fetchInventoryChanges()
   await fetchPaintMixingData()
   await fetchRecommenderData()
   await fetchSalesData()
   
   // Set up real-time listeners
   unsubscribeInventory = setupInventoryListener()
-  unsubscribeChanges = setupInventoryChangesListener()
   unsubscribePaintMixing = setupPaintMixingListener()
   unsubscribeRecommender = setupRecommenderListener()
   unsubscribeSales = setupSalesListener()
@@ -1182,10 +1102,6 @@ onUnmounted(() => {
   // Unsubscribe from Firestore listeners
   if (unsubscribeInventory) {
     unsubscribeInventory()
-  }
-  
-  if (unsubscribeChanges) {
-    unsubscribeChanges()
   }
   
   if (unsubscribePaintMixing) {
