@@ -27,9 +27,13 @@ try {
     analytics = getAnalytics(app)
   }
 
+  // Set auth language to the operating system language, or pass in a language code
+  auth.languageCode = "en"
+
   console.log("Firebase initialized successfully")
 } catch (error) {
   console.error("Firebase initialization error:", error)
 }
 
 export { app, db, auth, analytics }
+export default app

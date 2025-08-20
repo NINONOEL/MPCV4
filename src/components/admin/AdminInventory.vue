@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
+  <div class="min-h-screen bg-gray-50 relative overflow-hidden">
     <!-- Background Elements -->
     <div class="absolute inset-0">
       <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
@@ -286,96 +286,107 @@
           </div>
 
           <!-- Stats Cards -->
+          <!-- Moved icons to upper left and reduced number font sizes -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-8">
-  <!-- Total Products -->
-  <div 
-  class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer"
-  @click="clearAllFilters"
->
-    <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
-    <div class="p-6">
-      <div class="flex items-center justify-between">
-        <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
-          <PackageIcon class="w-6 h-6 text-white" />
-        </div>
-        <div class="text-right">
-          <p class="text-sm text-gray-600">Total Products</p>
-          <p class="text-2xl font-bold text-gray-900">{{ totalProducts }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+            <!-- Total Products -->
+            <div 
+              class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer h-32"
+              @click="clearAllFilters"
+            >
+              <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
+              <div class="p-6 h-full flex flex-col">
+                <!-- Icon moved to upper left -->
+                <div class="flex justify-start mb-2">
+                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
+                    <PackageIcon class="w-5 h-5 text-white" />
+                  </div>
+                </div>
+                <!-- Numbers and text positioned below icon -->
+                <div class="flex-1 flex flex-col justify-center">
+                  <p class="text-xs text-gray-600 mb-1">Total Products</p>
+                  <p class="text-xl font-bold text-gray-900">{{ totalProducts }}</p>
+                </div>
+              </div>
+            </div>
 
-  <!-- Low Stock -->
-  <div 
-    class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer"
-    @click="filterByLowStock"
-  >
-    <div class="bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 h-2 absolute top-0 left-0 right-0"></div>
-    <div class="p-6">
-      <div class="flex items-center justify-between">
-        <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 transform hover:scale-110 transition-transform duration-200">
-          <AlertTriangleIcon class="w-6 h-6 text-white" />
-        </div>
-        <div class="text-right">
-          <p class="text-sm text-gray-600">Low Stock Items</p>
-          <p class="text-2xl font-bold text-gray-900">{{ lowStockCount }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+            <!-- Low Stock -->
+            <div 
+              class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer h-32"
+              @click="filterByLowStock"
+            >
+              <div class="bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 h-2 absolute top-0 left-0 right-0"></div>
+              <div class="p-6 h-full flex flex-col">
+                <!-- Icon moved to upper left -->
+                <div class="flex justify-start mb-2">
+                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 transform hover:scale-110 transition-transform duration-200">
+                    <AlertTriangleIcon class="w-5 h-5 text-white" />
+                  </div>
+                </div>
+                <!-- Numbers and text positioned below icon -->
+                <div class="flex-1 flex flex-col justify-center">
+                  <p class="text-xs text-gray-600 mb-1">Low Stock Items</p>
+                  <p class="text-xl font-bold text-gray-900">{{ lowStockCount }}</p>
+                </div>
+              </div>
+            </div>
 
-  <!-- Out of Stock -->
-  <div 
-    class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer"
-    @click="filterByOutOfStock"
-  >
-    <div class="bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 h-2 absolute top-0 left-0 right-0"></div>
-    <div class="p-6">
-      <div class="flex items-center justify-between">
-        <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 transform hover:scale-110 transition-transform duration-200">
-          <XCircleIcon class="w-6 h-6 text-white" />
-        </div>
-        <div class="text-right">
-          <p class="text-sm text-gray-600">Out of Stock</p>
-          <p class="text-2xl font-bold text-gray-900">{{ outOfStockCount }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+            <!-- Out of Stock -->
+            <div 
+              class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer h-32"
+              @click="filterByOutOfStock"
+            >
+              <div class="bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 h-2 absolute top-0 left-0 right-0"></div>
+              <div class="p-6 h-full flex flex-col">
+                <!-- Icon moved to upper left -->
+                <div class="flex justify-start mb-2">
+                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 transform hover:scale-110 transition-transform duration-200">
+                    <XCircleIcon class="w-5 h-5 text-white" />
+                  </div>
+                </div>
+                <!-- Numbers and text positioned below icon -->
+                <div class="flex-1 flex flex-col justify-center">
+                  <p class="text-xs text-gray-600 mb-1">Out of Stock</p>
+                  <p class="text-xl font-bold text-gray-900">{{ outOfStockCount }}</p>
+                </div>
+              </div>
+            </div>
 
-  <!-- Total Value -->
-  <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-    <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
-    <div class="p-6">
-      <div class="flex items-center justify-between">
-        <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
-          <DollarSignIcon class="w-6 h-6 text-white" />
-        </div>
-        <div class="text-right">
-          <p class="text-sm text-gray-600">Total Value</p>
-          <p class="text-lg font-bold text-gray-900">₱{{ totalValue.toLocaleString() }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+            <!-- Total Value -->
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative h-32">
+              <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
+              <div class="p-6 h-full flex flex-col">
+                <!-- Icon moved to upper left -->
+                <div class="flex justify-start mb-2">
+                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
+                    <span class="text-white font-bold text-lg">₱</span>
+                  </div>
+                </div>
+                <!-- Numbers and text positioned below icon -->
+                <div class="flex-1 flex flex-col justify-center">
+                  <p class="text-xs text-gray-600 mb-1">Total Value</p>
+                  <p class="text-lg font-bold text-gray-900">₱{{ totalValue.toLocaleString() }}</p>
+                </div>
+              </div>
+            </div>
 
-  <!-- Total Unit Price Value -->
-  <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-    <div class="bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 h-2 absolute top-0 left-0 right-0"></div>
-    <div class="p-6">
-      <div class="flex items-center justify-between">
-        <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
-          <DollarSignIcon class="w-6 h-6 text-white" />
-        </div>
-        <div class="text-right">
-          <p class="text-sm text-gray-600">Unit Price Value</p>
-          <p class="text-lg font-bold text-gray-900">₱{{ totalUnitPriceValue.toLocaleString() }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+            <!-- Total Unit Price Value -->
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative h-32">
+              <div class="bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 h-2 absolute top-0 left-0 right-0"></div>
+              <div class="p-6 h-full flex flex-col">
+                <!-- Icon moved to upper left -->
+                <div class="flex justify-start mb-2">
+                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
+                    <span class="text-white font-bold text-lg">₱</span>
+                  </div>
+                </div>
+                <!-- Numbers and text positioned below icon -->
+                <div class="flex-1 flex flex-col justify-center">
+                  <p class="text-xs text-gray-600 mb-1">Unit Price Value</p>
+                  <p class="text-lg font-bold text-gray-900">₱{{ totalUnitPriceValue.toLocaleString() }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <!-- Search and Filter Bar -->
           <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-6 mb-8">
@@ -444,8 +455,16 @@
               <div v-for="product in paginatedProducts" :key="product.id" class="p-4 border-b border-gray-100">
                 <div class="flex items-center justify-between mb-2">
                   <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
-                      <PackageIcon class="w-6 h-6 text-white" />
+                    <!-- Display product image instead of icon in mobile view -->
+                    <div class="w-12 h-12 rounded-lg shadow-lg overflow-hidden flex items-center justify-center"
+                         :class="product.image ? 'bg-white border border-gray-200' : 'bg-gradient-to-br from-purple-500 to-pink-500'">
+                      <img 
+                        v-if="product.image" 
+                        :src="product.image" 
+                        :alt="product.name"
+                        class="w-full h-full object-cover"
+                      />
+                      <PackageIcon v-else class="w-6 h-6 text-white" />
                     </div>
                     <div>
                       <p class="font-medium text-gray-900">{{ product.name }}</p>
@@ -512,8 +531,16 @@
                   >
                     <td class="p-4">
                       <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
-                          <PackageIcon class="w-6 h-6 text-white" />
+                        <!-- Display product image instead of icon in desktop view -->
+                        <div class="w-12 h-12 rounded-lg shadow-lg overflow-hidden flex items-center justify-center"
+                             :class="product.image ? 'bg-white border border-gray-200' : 'bg-gradient-to-br from-purple-500 to-pink-500'">
+                          <img 
+                            v-if="product.image" 
+                            :src="product.image" 
+                            :alt="product.name"
+                            class="w-full h-full object-cover"
+                          />
+                          <PackageIcon v-else class="w-6 h-6 text-white" />
                         </div>
                         <div>
                           <p class="font-medium text-gray-900">{{ product.name }}</p>
@@ -600,368 +627,534 @@
         </div>
       </main>
     </div>
-  </div>
 
-  <!-- Add/Edit Product Modal -->
-  <div v-if="showAddModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-lg max-h-[90vh] shadow-2xl flex flex-col">
-      <div class="p-4 border-b border-gray-200 flex-shrink-0">
-        <div class="flex items-center justify-between">
-          <h3 class="text-lg font-bold text-gray-900">
-            {{ editingProduct ? 'Edit Product' : 'Add Product' }}
-          </h3>
-          <button 
-            @click="closeModal"
-            class="p-1 hover:bg-gray-100 rounded-lg text-gray-500 hover:text-gray-700 transition-colors"
+    <!-- Add/Edit Product Modal -->
+    <div v-if="showAddModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-xl w-full max-w-lg max-h-[90vh] shadow-2xl flex flex-col">
+        <div class="p-4 border-b border-gray-200 flex-shrink-0">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-bold text-gray-900">
+              {{ editingProduct ? 'Edit Product' : 'Add Product' }}
+            </h3>
+            <button 
+              @click="closeModal"
+              class="p-1 hover:bg-gray-100 rounded-lg text-gray-500 hover:text-gray-700 transition-colors"
+            >
+              <XIcon class="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+        
+        <form @submit.prevent="handleSubmit" class="flex flex-col flex-1 min-h-0">
+          <div class="flex-1 overflow-y-auto p-4">
+            <div class="space-y-3">
+              <!-- Updated image upload section with adjust button next to upload button -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Product Image</label>
+                
+                <!-- Image Preview -->
+                <div v-if="imagePreview" class="mb-3">
+                  <div class="relative inline-block">
+                    <img 
+                      :src="imagePreview" 
+                      alt="Product preview" 
+                      class="w-24 h-24 object-cover rounded-lg border border-gray-200 shadow-sm"
+                    />
+                    <button 
+                      type="button"
+                      @click="removeImage"
+                      class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
+                    >
+                      <XIcon class="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+                
+                <!-- Upload and Adjust Buttons -->
+                <div class="flex items-center gap-3">
+                  <input 
+                    ref="imageInput"
+                    type="file" 
+                    accept="image/*" 
+                    @change="handleImageUpload"
+                    class="hidden"
+                  />
+                  <button 
+                    type="button"
+                    @click="imageInput?.click()"
+                    class="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors text-sm"
+                  >
+                    <UploadIcon class="w-4 h-4" />
+                    {{ imagePreview ? 'Change Image' : 'Upload Image' }}
+                  </button>
+                  <!-- Added adjust button next to upload button -->
+                  <button 
+                    v-if="imagePreview"
+                    type="button"
+                    @click="openImageEditor"
+                    class="flex items-center gap-2 px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    Crop Image
+                  </button>
+                  <span class="text-xs text-gray-500">Max 100MB, JPG/PNG</span>
+                </div>
+              </div>
+
+              <!-- Name -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Product Name</label>
+                <input 
+                  type="text"
+                  v-model="productForm.name"
+                  required
+                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm"
+                  placeholder="Enter product name"
+                />
+              </div>
+
+              <!-- SKU -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">SKU</label>
+                <input 
+                  type="text"
+                  v-model="productForm.sku"
+                  required
+                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm"
+                  placeholder="Enter SKU"
+                />
+              </div>
+
+              <!-- Category -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <select 
+                  v-model="productForm.category"
+                  required
+                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 text-sm"
+                >
+                  <option value="interior">Interior Paint</option>
+                  <option value="exterior">Exterior Paint</option>
+                  <option value="primer">Primers</option>
+                  <option value="specialty">Specialty Paints</option>
+                </select>
+              </div>
+
+              <!-- Price and Unit Price in one row -->
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Price</label>
+                  <div class="relative">
+                    <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 text-sm">₱</span>
+                    <input 
+                      type="number"
+                      v-model="productForm.price"
+                      required
+                      min="0"
+                      step="0.01"
+                      class="w-full pl-7 pr-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm"
+                      placeholder="0.00"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Unit Price</label>
+                  <div class="relative">
+                    <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 text-sm">₱</span>
+                    <input 
+                      type="number"
+                      v-model="productForm.unitPrice"
+                      required
+                      min="0"
+                      step="0.01"
+                      class="w-full pl-7 pr-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm"
+                      placeholder="0.00"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stock Level -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Stock Level</label>
+                <input 
+                  type="number"
+                  v-model="productForm.stockLevel"
+                  required
+                  min="0"
+                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm"
+                  placeholder="Enter stock level"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-end gap-3 p-4 border-t border-gray-200 flex-shrink-0">
+            <button 
+              type="button"
+              @click="closeModal"
+              class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors text-sm"
+            >
+              Cancel
+            </button>
+            <button 
+              type="submit"
+              class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg text-sm"
+              :disabled="modalLoading"
+            >
+              <span v-if="modalLoading" class="flex items-center gap-2">
+                <LoaderIcon class="w-4 h-4 animate-spin" />
+                Saving...
+              </span>
+              <span v-else>
+                {{ editingProduct ? 'Save Changes' : 'Add Product' }}
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div v-if="showDeleteModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
+        <div class="p-6">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
+            <AlertTriangleIcon class="w-8 h-8 text-red-600" />
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Delete Product</h3>
+          <p class="text-gray-600 text-center mb-6">
+            Are you sure you want to delete {{ selectedProduct?.name }}? This action cannot be undone.
+          </p>
+          <div class="flex justify-center gap-3">
+            <button 
+              @click="showDeleteModal = false"
+              class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+            >
+              Cancel
+            </button>
+            <button 
+              @click="deleteProduct"
+              class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200"
+              :disabled="modalLoading"
+            >
+              <span v-if="modalLoading" class="flex items-center gap-2">
+                <LoaderIcon class="w-5 h-5 animate-spin" />
+                Deleting...
+              </span>
+              <span v-else>Delete</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Notification -->
+    <div
+      v-if="showNotification"
+      class="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-[60] transition-all duration-300"
+      :class="{
+        'opacity-0 pointer-events-none': !showNotification,
+        'opacity-100': showNotification
+      }"
+    >
+      <div 
+        class="bg-white rounded-xl shadow-2xl border max-w-sm mx-4 transform transition-all duration-300 ease-out"
+        :class="{
+          'scale-95 opacity-0 translate-y-4': !showNotification,
+          'scale-100 opacity-100 translate-y-0': showNotification,
+          'border-green-200': notificationType === 'success',
+          'border-red-200': notificationType === 'error'
+        }"
+      >
+        <div class="p-6 text-center">
+          <div 
+            class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+            :class="{
+              'bg-green-100': notificationType === 'success',
+              'bg-red-100': notificationType === 'error'
+            }"
           >
-            <XIcon class="w-5 h-5" />
+            <CheckCircle2Icon v-if="notificationType === 'success'" class="w-8 h-8 text-green-600" />
+            <XCircleIcon v-else class="w-8 h-8 text-red-600" />
+          </div>
+          <h3 
+            class="text-lg font-semibold mb-2"
+            :class="{
+              'text-green-800': notificationType === 'success',
+              'text-red-800': notificationType === 'error'
+            }"
+          >
+            {{ notificationType === 'success' ? 'Success!' : 'Error!' }}
+          </h3>
+          <p 
+            class="text-gray-600 mb-4"
+          >
+            {{ notificationMessage }}
+          </p>
+          <button 
+            @click="showNotification = false"
+            class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors text-sm font-medium"
+          >
+            Close
           </button>
         </div>
       </div>
-      
-      <form @submit.prevent="handleSubmit" class="flex flex-col flex-1 min-h-0">
-        <div class="flex-1 overflow-y-auto p-4">
-          <div class="space-y-3">
-            <!-- Name -->
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Product Name</label>
-              <input 
-                type="text"
-                v-model="productForm.name"
-                required
-                class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm"
-                placeholder="Enter product name"
-              />
-            </div>
+    </div>
 
-            <!-- SKU -->
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">SKU</label>
-              <input 
-                type="text"
-                v-model="productForm.sku"
-                required
-                class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm"
-                placeholder="Enter SKU"
-              />
-            </div>
+    <!-- Order Product Modal -->
+    <div v-if="showOrderModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] shadow-2xl flex flex-col">
+        <div class="p-4 border-b border-gray-200 flex-shrink-0">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-bold text-gray-900">Order Products from Supplier</h3>
+            <button 
+              @click="closeOrderModal"
+              class="p-1 hover:bg-gray-100 rounded-lg text-gray-500 hover:text-gray-700 transition-colors"
+            >
+              <XIcon class="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+        
+        <div class="flex flex-1 min-h-0">
+          <!-- Left Panel - Create New Order -->
+          <div class="w-1/2 p-4 border-r border-gray-200">
+            <h4 class="text-md font-semibold text-gray-800 mb-4">Create New Order</h4>
+            <form @submit.prevent="handleOrderSubmit" class="space-y-4">
+              <!-- Product Selection -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Select Product</label>
+                <select 
+                  v-model="orderForm.productId"
+                  @change="updateSelectedProduct"
+                  required
+                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 text-sm"
+                >
+                  <option value="">Choose a product...</option>
+                  <option v-for="product in products" :key="product.id" :value="product.id">
+                    {{ product.name }} ({{ product.sku }}) - Current Stock: {{ product.stockLevel }}
+                  </option>
+                </select>
+              </div>
 
-            <!-- Category -->
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
-              <select 
-                v-model="productForm.category"
-                required
-                class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 text-sm"
+              <!-- SUPPLIER NAME FIELD - BAGONG FIELD NA ITO -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Supplier Name</label>
+                <input 
+                  type="text"
+                  v-model="orderForm.supplierName"
+                  required
+                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm"
+                  placeholder="Enter supplier name (e.g., Davies Paints Philippines)"
+                />
+              </div>
+
+              <!-- Quantity -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Order Quantity</label>
+                <input 
+                  type="number"
+                  v-model="orderForm.quantity"
+                  required
+                  min="1"
+                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm"
+                  placeholder="Enter quantity to order"
+                />
+              </div>
+
+              <!-- Status -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Order Status</label>
+                <select 
+                  v-model="orderForm.status"
+                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 text-sm"
+                >
+                  <option value="incomplete">Incomplete</option>
+                  <option value="delivered">Delivered</option>
+                </select>
+              </div>
+
+              <button 
+                type="submit"
+                class="w-full px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg text-sm"
+                :disabled="modalLoading"
               >
-                <option value="interior">Interior Paint</option>
-                <option value="exterior">Exterior Paint</option>
-                <option value="primer">Primers</option>
-                <option value="specialty">Specialty Paints</option>
-              </select>
-            </div>
+                <span v-if="modalLoading" class="flex items-center justify-center gap-2">
+                  <LoaderIcon class="w-4 h-4 animate-spin" />
+                  Creating Order...
+                </span>
+                <span v-else>Create Order</span>
+              </button>
+            </form>
+          </div>
 
-            <!-- Price and Unit Price in one row -->
-            <div class="grid grid-cols-2 gap-3">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Price</label>
-                <div class="relative">
-                  <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 text-sm">₱</span>
-                  <input 
-                    type="number"
-                    v-model="productForm.price"
-                    required
-                    min="0"
-                    step="0.01"
-                    class="w-full pl-7 pr-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm"
-                    placeholder="0.00"
-                  />
+          <!-- Right Panel - Orders List -->
+          <div class="w-1/2 p-4 flex flex-col">
+            <h4 class="text-md font-semibold text-gray-800 mb-4">Current Orders</h4>
+            <div class="flex-1 overflow-y-auto space-y-3">
+              <div v-if="orders.length === 0" class="text-center py-8 text-gray-500">
+                No orders yet. Create your first order!
+              </div>
+              <div v-for="order in orders" :key="order.id" class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                <div class="flex items-center justify-between mb-2">
+                  <div>
+                    <p class="font-medium text-gray-900">{{ order.productName }}</p>
+                    <!-- SUPPLIER NAME DISPLAY - BAGONG DISPLAY NA ITO -->
+                    <p class="text-sm text-gray-600">Supplier: {{ order.supplierName }}</p>
+                    <p class="text-sm text-gray-600">Quantity: {{ order.quantity }}</p>
+                    <p class="text-xs text-gray-500">{{ formatDate(order.createdAt) }}</p>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <select 
+                      :value="order.status"
+                      @change="updateOrderStatus(order.id, $event.target.value)"
+                      class="px-2 py-1 rounded text-xs border border-gray-300 bg-white"
+                      :class="{
+                        'text-orange-700 bg-orange-50 border-orange-200': order.status === 'incomplete',
+                        'text-green-700 bg-green-50 border-green-200': order.status === 'delivered'
+                      }"
+                    >
+                      <option value="incomplete">Incomplete</option>
+                      <option value="delivered">Delivered</option>
+                    </select>
+                    <button 
+                      @click="deleteOrder(order.id)"
+                      class="p-1 hover:bg-red-50 rounded text-red-600 hover:text-red-700 transition-colors"
+                      title="Delete Order"
+                    >
+                      <Trash2Icon class="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span 
+                    class="px-2 py-1 rounded-full text-xs"
+                    :class="{
+                      'bg-orange-100 text-orange-800': order.status === 'incomplete',
+                      'bg-green-100 text-green-800': order.status === 'delivered'
+                    }"
+                  >
+                    <TruckIcon class="w-3 h-3 inline mr-1" />
+                    {{ order.status === 'incomplete' ? 'Pending Delivery' : 'Delivered' }}
+                  </span>
                 </div>
               </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Unit Price</label>
-                <div class="relative">
-                  <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 text-sm">₱</span>
-                  <input 
-                    type="number"
-                    v-model="productForm.unitPrice"
-                    required
-                    min="0"
-                    step="0.01"
-                    class="w-full pl-7 pr-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm"
-                    placeholder="0.00"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <!-- Stock Level -->
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Stock Level</label>
-              <input 
-                type="number"
-                v-model="productForm.stockLevel"
-                required
-                min="0"
-                class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm"
-                placeholder="Enter stock level"
-              />
             </div>
           </div>
         </div>
-
-        <div class="flex justify-end gap-3 p-4 border-t border-gray-200 flex-shrink-0">
-          <button 
-            type="button"
-            @click="closeModal"
-            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors text-sm"
-          >
-            Cancel
-          </button>
-          <button 
-            type="submit"
-            class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg text-sm"
-            :disabled="modalLoading"
-          >
-            <span v-if="modalLoading" class="flex items-center gap-2">
-              <LoaderIcon class="w-4 h-4 animate-spin" />
-              Saving...
-            </span>
-            <span v-else>
-              {{ editingProduct ? 'Save Changes' : 'Add Product' }}
-            </span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Delete Confirmation Modal -->
-  <div v-if="showDeleteModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
-      <div class="p-6">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
-          <AlertTriangleIcon class="w-8 h-8 text-red-600" />
-        </div>
-        <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Delete Product</h3>
-        <p class="text-gray-600 text-center mb-6">
-          Are you sure you want to delete {{ selectedProduct?.name }}? This action cannot be undone.
-        </p>
-        <div class="flex justify-center gap-3">
-          <button 
-            @click="showDeleteModal = false"
-            class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-          >
-            Cancel
-          </button>
-          <button 
-            @click="deleteProduct"
-            class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200"
-            :disabled="modalLoading"
-          >
-            <span v-if="modalLoading" class="flex items-center gap-2">
-              <LoaderIcon class="w-5 h-5 animate-spin" />
-              Deleting...
-            </span>
-            <span v-else>Delete</span>
-          </button>
-        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Success Notification -->
-  <div
-    v-if="showNotification"
-    class="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-[60] transition-all duration-300"
-    :class="{
-      'opacity-0 pointer-events-none': !showNotification,
-      'opacity-100': showNotification
-    }"
-  >
-    <div 
-      class="bg-white rounded-xl shadow-2xl border max-w-sm mx-4 transform transition-all duration-300 ease-out"
-      :class="{
-        'scale-95 opacity-0 translate-y-4': !showNotification,
-        'scale-100 opacity-100 translate-y-0': showNotification,
-        'border-green-200': notificationType === 'success',
-        'border-red-200': notificationType === 'error'
-      }"
-    >
-      <div class="p-6 text-center">
-        <div 
-          class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
-          :class="{
-            'bg-green-100': notificationType === 'success',
-            'bg-red-100': notificationType === 'error'
-          }"
-        >
-          <CheckCircle2Icon v-if="notificationType === 'success'" class="w-8 h-8 text-green-600" />
-          <XCircleIcon v-else class="w-8 h-8 text-red-600" />
-        </div>
-        <h3 
-          class="text-lg font-semibold mb-2"
-          :class="{
-            'text-green-800': notificationType === 'success',
-            'text-red-800': notificationType === 'error'
-          }"
-        >
-          {{ notificationType === 'success' ? 'Success!' : 'Error!' }}
-        </h3>
-        <p 
-          class="text-gray-600 mb-4"
-        >
-          {{ notificationMessage }}
-        </p>
-        <button 
-          @click="showNotification = false"
-          class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors text-sm font-medium"
-        >
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Order Product Modal -->
-  <div v-if="showOrderModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] shadow-2xl flex flex-col">
-      <div class="p-4 border-b border-gray-200 flex-shrink-0">
-        <div class="flex items-center justify-between">
-          <h3 class="text-lg font-bold text-gray-900">Order Products from Supplier</h3>
-          <button 
-            @click="closeOrderModal"
-            class="p-1 hover:bg-gray-100 rounded-lg text-gray-500 hover:text-gray-700 transition-colors"
-          >
-            <XIcon class="w-5 h-5" />
+    <!-- Simplified image editor modal with side handle cropping -->
+    <div v-if="showImageEditor" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg p-6 max-w-4xl max-h-[90vh] overflow-auto">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-semibold">Crop Image</h3>
+          <button @click="closeImageEditor" class="text-gray-500 hover:text-gray-700">
+            <XIcon class="w-6 h-6" />
           </button>
         </div>
-      </div>
-      
-      <div class="flex flex-1 min-h-0">
-        <!-- Left Panel - Create New Order -->
-        <div class="w-1/2 p-4 border-r border-gray-200">
-          <h4 class="text-md font-semibold text-gray-800 mb-4">Create New Order</h4>
-          <form @submit.prevent="handleOrderSubmit" class="space-y-4">
-            <!-- Product Selection -->
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Select Product</label>
-              <select 
-                v-model="orderForm.productId"
-                @change="updateSelectedProduct"
-                required
-                class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 text-sm"
-              >
-                <option value="">Choose a product...</option>
-                <option v-for="product in products" :key="product.id" :value="product.id">
-                  {{ product.name }} ({{ product.sku }}) - Current Stock: {{ product.stockLevel }}
-                </option>
-              </select>
-            </div>
-
-            <!-- SUPPLIER NAME FIELD - BAGONG FIELD NA ITO -->
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Supplier Name</label>
-              <input 
-                type="text"
-                v-model="orderForm.supplierName"
-                required
-                class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm"
-                placeholder="Enter supplier name (e.g., Davies Paints Philippines)"
+        
+        <div class="space-y-4">
+          <!-- Replaced complex canvas cropping with simple side handle cropping -->
+          <div class="relative border border-gray-300 rounded-lg overflow-hidden bg-gray-100">
+            <div class="relative inline-block">
+              <img 
+                ref="cropImage"
+                :src="currentImage"
+                class="max-w-full max-h-96 block"
+                @load="initializeCropHandles"
               />
-            </div>
-
-            <!-- Quantity -->
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Order Quantity</label>
-              <input 
-                type="number"
-                v-model="orderForm.quantity"
-                required
-                min="1"
-                class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm"
-                placeholder="Enter quantity to order"
-              />
-            </div>
-
-            <!-- Status -->
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Order Status</label>
-              <select 
-                v-model="orderForm.status"
-                class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 text-sm"
+              
+              <!-- Crop overlay with side handles -->
+              <div 
+                class="absolute border-2 border-blue-500 bg-blue-500 bg-opacity-10"
+                :style="{
+                  left: cropBounds.left + 'px',
+                  top: cropBounds.top + 'px',
+                  width: cropBounds.width + 'px',
+                  height: cropBounds.height + 'px'
+                }"
               >
-                <option value="incomplete">Incomplete</option>
-                <option value="delivered">Delivered</option>
-              </select>
+                <!-- Top handle -->
+                <div 
+                  class="absolute w-full h-2 bg-blue-500 cursor-ns-resize -top-1"
+                  @mousedown="startResize('top', $event)"
+                ></div>
+                
+                <!-- Bottom handle -->
+                <div 
+                  class="absolute w-full h-2 bg-blue-500 cursor-ns-resize -bottom-1"
+                  @mousedown="startResize('bottom', $event)"
+                ></div>
+                
+                <!-- Left handle -->
+                <div 
+                  class="absolute h-full w-2 bg-blue-500 cursor-ew-resize -left-1"
+                  @mousedown="startResize('left', $event)"
+                ></div>
+                
+                <!-- Right handle -->
+                <div 
+                  class="absolute h-full w-2 bg-blue-500 cursor-ew-resize -right-1"
+                  @mousedown="startResize('right', $event)"
+                ></div>
+                
+                <!-- Corner handles -->
+                <div 
+                  class="absolute w-3 h-3 bg-blue-600 cursor-nw-resize -top-1 -left-1"
+                  @mousedown="startResize('top-left', $event)"
+                ></div>
+                <div 
+                  class="absolute w-3 h-3 bg-blue-600 cursor-ne-resize -top-1 -right-1"
+                  @mousedown="startResize('top-right', $event)"
+                ></div>
+                <div 
+                  class="absolute w-3 h-3 bg-blue-600 cursor-sw-resize -bottom-1 -left-1"
+                  @mousedown="startResize('bottom-left', $event)"
+                ></div>
+                <div 
+                  class="absolute w-3 h-3 bg-blue-600 cursor-se-resize -bottom-1 -right-1"
+                  @mousedown="startResize('bottom-right', $event)"
+                ></div>
+              </div>
             </div>
-
+          </div>
+          
+          <!-- Crop controls -->
+          <div class="flex gap-3">
             <button 
-              type="submit"
-              class="w-full px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg text-sm"
-              :disabled="modalLoading"
+              @click="applyCropImage"
+              class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
             >
-              <span v-if="modalLoading" class="flex items-center justify-center gap-2">
-                <LoaderIcon class="w-4 h-4 animate-spin" />
-                Creating Order...
-              </span>
-              <span v-else>Create Order</span>
+              Apply Crop
             </button>
-          </form>
-        </div>
+            <button 
+              @click="resetCropImage"
+              class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+            >
+              Reset
+            </button>
+          </div>
 
-        <!-- Right Panel - Orders List -->
-        <div class="w-1/2 p-4 flex flex-col">
-          <h4 class="text-md font-semibold text-gray-800 mb-4">Current Orders</h4>
-          <div class="flex-1 overflow-y-auto space-y-3">
-            <div v-if="orders.length === 0" class="text-center py-8 text-gray-500">
-              No orders yet. Create your first order!
-            </div>
-            <div v-for="order in orders" :key="order.id" class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-              <div class="flex items-center justify-between mb-2">
-                <div>
-                  <p class="font-medium text-gray-900">{{ order.productName }}</p>
-                  <!-- SUPPLIER NAME DISPLAY - BAGONG DISPLAY NA ITO -->
-                  <p class="text-sm text-gray-600">Supplier: {{ order.supplierName }}</p>
-                  <p class="text-sm text-gray-600">Quantity: {{ order.quantity }}</p>
-                  <p class="text-xs text-gray-500">{{ formatDate(order.createdAt) }}</p>
-                </div>
-                <div class="flex items-center gap-2">
-                  <select 
-                    :value="order.status"
-                    @change="updateOrderStatus(order.id, $event.target.value)"
-                    class="px-2 py-1 rounded text-xs border border-gray-300 bg-white"
-                    :class="{
-                      'text-orange-700 bg-orange-50 border-orange-200': order.status === 'incomplete',
-                      'text-green-700 bg-green-50 border-green-200': order.status === 'delivered'
-                    }"
-                  >
-                    <option value="incomplete">Incomplete</option>
-                    <option value="delivered">Delivered</option>
-                  </select>
-                  <button 
-                    @click="deleteOrder(order.id)"
-                    class="p-1 hover:bg-red-50 rounded text-red-600 hover:text-red-700 transition-colors"
-                    title="Delete Order"
-                  >
-                    <Trash2Icon class="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-              <div class="flex items-center gap-2">
-                <span 
-                  class="px-2 py-1 rounded-full text-xs"
-                  :class="{
-                    'bg-orange-100 text-orange-800': order.status === 'incomplete',
-                    'bg-green-100 text-green-800': order.status === 'delivered'
-                  }"
-                >
-                  <TruckIcon class="w-3 h-3 inline mr-1" />
-                  {{ order.status === 'incomplete' ? 'Pending Delivery' : 'Delivered' }}
-                </span>
-              </div>
-            </div>
+          <!-- Action buttons -->
+          <div class="flex justify-end gap-3 pt-4 border-t">
+            <button 
+              @click="closeImageEditor"
+              class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+            >
+              Cancel
+            </button>
+            <button 
+              @click="saveImageChanges"
+              class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+            >
+              Save Changes
+            </button>
           </div>
         </div>
       </div>
@@ -970,7 +1163,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { 
   collection, 
@@ -1016,10 +1209,15 @@ import {
   Calendar as CalendarIcon,
   Bell as BellIcon,
   ShoppingCart as ShoppingCartIcon,
-  Truck as TruckIcon
+  Truck as TruckIcon,
+  Upload as UploadIcon,
+  Image as ImageIcon
 } from 'lucide-vue-next'
 
-// State
+const router = useRouter()
+const route = useRoute()
+
+// Core state references
 const loading = ref(false)
 const showAddModal = ref(false)
 const showDeleteModal = ref(false)
@@ -1040,16 +1238,77 @@ const stockUpdateInProgress = ref(false)
 const modalLoading = ref(false)
 const showOrderModal = ref(false)
 const orders = ref([])
+const products = ref([])
+
+// Image handling references
+const imagePreview = ref('')
+const imageInput = ref(null)
+const showImageEditor = ref(false)
+const imageCanvas = ref(null)
+const originalImage = ref(null)
+const currentImage = ref(null)
+const editorCanvas = ref(null)
+const cropImage = ref(null)
+
+// Image adjustment references
+const imageAdjustments = ref({
+  brightness: 100,
+  contrast: 100,
+  saturation: 100,
+  rotation: 0
+})
+
+// Crop area references - properly declared
+const cropArea = ref({
+  active: false,
+  x: 0,
+  y: 0,
+  width: 0,
+  height: 0,
+  startX: 0,
+  startY: 0,
+  isDragging: false,
+  endX: 0,
+  endY: 0
+})
+
+// Crop bounds for side handle cropping
+const cropBounds = ref({
+  left: 0,
+  top: 0,
+  width: 0,
+  height: 0
+})
+
+// Resize state references
+const isResizing = ref(false)
+const resizeDirection = ref('')
+const startMousePos = ref({ x: 0, y: 0 })
+const startBounds = ref({ left: 0, top: 0, width: 0, height: 0 })
+
+// Form state references
+const productForm = ref({
+  name: '',
+  sku: '',
+  category: 'interior',
+  price: 0,
+  unitPrice: 0,
+  stockLevel: 0,
+  image: ''
+})
+
 const orderForm = ref({
   productId: '',
   productName: '',
-  supplierName: '', // BAGONG FIELD NA ITO
+  supplierName: '',
   quantity: 0,
   status: 'incomplete'
 })
 
-const router = useRouter()
-const route = useRoute()
+// Router and utility functions
+const isActive = (path) => {
+  return route.path === path
+}
 
 // Current date
 const currentDate = new Date().toLocaleDateString('en-US', { 
@@ -1062,18 +1321,89 @@ const currentDate = new Date().toLocaleDateString('en-US', {
 // Products collection reference
 const productsRef = db ? collection(db, 'products') : null
 
-// Products state
-const products = ref([])
+// Computed properties
+const filteredProducts = computed(() => {
+  let filtered = [...products.value]
 
-// Form state with validation
-const productForm = ref({
-  name: '',
-  sku: '',
-  category: 'interior',
-  price: 0,
-  unitPrice: 0,
-  stockLevel: 0
+  if (searchQuery.value) {
+    const query = searchQuery.value.toLowerCase()
+    filtered = filtered.filter(product => 
+      product.name.toLowerCase().includes(query) ||
+      product.sku?.toLowerCase().includes(query)
+    )
+  }
+
+  if (filterCategory.value) {
+    filtered = filtered.filter(product => product.category === filterCategory.value)
+  }
+
+  if (filterStock.value) {
+    switch (filterStock.value) {
+      case 'in-stock':
+        filtered = filtered.filter(product => product.stockLevel > 10)
+        break
+      case 'low-stock':
+        filtered = filtered.filter(product => product.stockLevel > 0 && product.stockLevel <= 10)
+        break
+      case 'out-of-stock':
+        filtered = filtered.filter(product => product.stockLevel === 0)
+        break
+    }
+  }
+
+  return filtered
 })
+
+const paginatedProducts = computed(() => {
+  const start = (currentPage.value - 1) * perPage.value
+  const end = start + parseInt(perPage.value)
+  return filteredProducts.value.slice(start, end)
+})
+
+const totalProducts = computed(() => products.value.length)
+const lowStockCount = computed(() => products.value.filter(p => p.stockLevel > 0 && p.stockLevel <= 10).length)
+const outOfStockCount = computed(() => products.value.filter(p => p.stockLevel === 0).length)
+const totalValue = computed(() => products.value.reduce((sum, product) => sum + (product.price * product.stockLevel), 0))
+const totalUnitPriceValue = computed(() => products.value.reduce((sum, product) => sum + ((product.unitPrice || 0) * product.stockLevel), 0))
+
+const totalPages = computed(() => Math.ceil(filteredProducts.value.length / perPage.value) || 1)
+const paginationStart = computed(() => filteredProducts.value.length ? ((currentPage.value - 1) * perPage.value) + 1 : 0)
+const paginationEnd = computed(() => Math.min(currentPage.value * perPage.value, filteredProducts.length))
+
+// Methods
+const handleImageUpload = (event) => {
+  const file = event.target.files[0]
+  if (file) {
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      error.value = 'Please select a valid image file'
+      return
+    }
+    
+    if (file.size > 100 * 1024 * 1024) {
+      error.value = 'Image size must be less than 100MB'
+      return
+    }
+    
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const base64Image = e.target.result
+      productForm.value.image = base64Image
+      imagePreview.value = base64Image
+      originalImage.value = base64Image
+      currentImage.value = base64Image
+    }
+    reader.readAsDataURL(file)
+  }
+}
+
+const removeImage = () => {
+  productForm.value.image = ''
+  imagePreview.value = ''
+  if (imageInput.value) {
+    imageInput.value.value = ''
+  }
+}
 
 // Fetch products from Firestore with real-time updates
 const fetchProducts = async () => {
@@ -1191,7 +1521,7 @@ const updateProductStock = async (productId, newStockLevel) => {
   }
 }
 
-// Add these methods after the existing methods
+// Filter methods
 const filterByLowStock = () => {
   filterStock.value = 'low-stock'
   searchQuery.value = ''
@@ -1240,100 +1570,7 @@ const clearAllFilters = () => {
   }, 3000)
 }
 
-// Clean up listener on component unmount
-onUnmounted(() => {
-  if (unsubscribe.value) {
-    unsubscribe.value()
-  }
-  if (window.ordersUnsubscribe) {
-    window.ordersUnsubscribe()
-  }
-})
-
-// Call fetchProducts on component mount with error handling
-const fetchProductsOnMount = () => {
-  fetchProducts().catch(err => {
-    console.error('Mount error:', err)
-    error.value = 'Failed to initialize inventory. Please refresh the page.'
-  })
-}
-
-onMounted(() => {
-  console.log('Component mounted, initializing...');
-  fetchProductsOnMount();
-  
-  // Add a small delay to ensure Firebase is ready
-  setTimeout(() => {
-    fetchOrders();
-  }, 1000);
-});
-
-// Set up listener for stock updates from sales
-const salesRef = collection(db, 'sales')
-const salesQuery = query(salesRef, orderBy('date', 'desc'))
-
-const salesUnsubscribe = onSnapshot(salesQuery, (snapshot) => {
-  console.log('Sales collection updated, refreshing product data...')
-  // No need to do anything here as the products listener will update automatically
-}, (err) => {
-  console.error('Error listening to sales collection:', err)
-})
-
-// Clean up sales listener on unmount
-onUnmounted(() => {
-  salesUnsubscribe()
-})
-
-// Computed properties
-const filteredProducts = computed(() => {
-  let filtered = [...products.value]
-
-  if (searchQuery.value) {
-    const query = searchQuery.value.toLowerCase()
-    filtered = filtered.filter(product => 
-      product.name.toLowerCase().includes(query) ||
-      product.sku?.toLowerCase().includes(query)
-    )
-  }
-
-  if (filterCategory.value) {
-    filtered = filtered.filter(product => product.category === filterCategory.value)
-  }
-
-  if (filterStock.value) {
-    switch (filterStock.value) {
-      case 'in-stock':
-        filtered = filtered.filter(product => product.stockLevel > 10)
-        break
-      case 'low-stock':
-        filtered = filtered.filter(product => product.stockLevel > 0 && product.stockLevel <= 10)
-        break
-      case 'out-of-stock':
-        filtered = filtered.filter(product => product.stockLevel === 0)
-        break
-    }
-  }
-
-  return filtered
-})
-
-const paginatedProducts = computed(() => {
-  const start = (currentPage.value - 1) * perPage.value
-  const end = start + parseInt(perPage.value)
-  return filteredProducts.value.slice(start, end)
-})
-
-const totalProducts = computed(() => products.value.length)
-const lowStockCount = computed(() => products.value.filter(p => p.stockLevel > 0 && p.stockLevel <= 10).length)
-const outOfStockCount = computed(() => products.value.filter(p => p.stockLevel === 0).length)
-const totalValue = computed(() => products.value.reduce((sum, product) => sum + (product.price * product.stockLevel), 0))
-const totalUnitPriceValue = computed(() => products.value.reduce((sum, product) => sum + ((product.unitPrice || 0) * product.stockLevel), 0))
-
-const totalPages = computed(() => Math.ceil(filteredProducts.value.length / perPage.value) || 1)
-const paginationStart = computed(() => filteredProducts.value.length ? ((currentPage.value - 1) * perPage.value) + 1 : 0)
-const paginationEnd = computed(() => Math.min(currentPage.value * perPage.value, filteredProducts.length))
-
-// Methods
+// Form submission methods
 const handleSubmit = async () => {
   try {
     modalLoading.value = true
@@ -1348,7 +1585,9 @@ const handleSubmit = async () => {
       price: Number(productForm.value.price),
       unitPrice: Number(productForm.value.unitPrice),
       stockLevel: Number(productForm.value.stockLevel),
-      stock: Number(productForm.value.stockLevel)
+      stock: Number(productForm.value.stockLevel),
+      // Include image in product data
+      image: productForm.value.image
     }
     
     console.log('Submitting product data:', productData)
@@ -1385,6 +1624,7 @@ const handleSubmit = async () => {
 const editProduct = (product) => {
   editingProduct.value = product
   productForm.value = { ...product }
+  imagePreview.value = product.image || ''
   showAddModal.value = true
 }
 
@@ -1419,13 +1659,18 @@ const closeModal = () => {
   showAddModal.value = false
   editingProduct.value = null
   error.value = null
+  imagePreview.value = ''
+  if (imageInput.value) {
+    imageInput.value.value = ''
+  }
   productForm.value = {
     name: '',
     sku: '',
     category: 'interior',
     price: 0,
     unitPrice: 0,
-    stockLevel: 0
+    stockLevel: 0,
+    image: ''
   }
 }
 
@@ -1470,7 +1715,7 @@ const handleLogout = () => {
   router.push('/admin')
 }
 
-// Fetch orders from Firestore with better error handling
+// Order management methods
 const fetchOrders = async () => {
   try {
     if (!db) {
@@ -1536,7 +1781,6 @@ const fetchOrders = async () => {
   }
 };
 
-// Handle order form submission
 const handleOrderSubmit = async () => {
   try {
     modalLoading.value = true;
@@ -1556,10 +1800,10 @@ const handleOrderSubmit = async () => {
     const orderData = {
       productId: orderForm.value.productId,
       productName: orderForm.value.productName,
-      supplierName: orderForm.value.supplierName, // BAGONG FIELD NA ITO
+      supplierName: orderForm.value.supplierName,
       quantity: Number(orderForm.value.quantity),
       status: orderForm.value.status,
-      createdAt: new Date(), // Use regular Date instead of serverTimestamp for now
+      createdAt: new Date(),
       updatedAt: new Date()
     };
 
@@ -1595,7 +1839,6 @@ const handleOrderSubmit = async () => {
   }
 };
 
-// Update selected product name when product is selected
 const updateSelectedProduct = () => {
   const selectedProduct = products.value.find(p => p.id === orderForm.value.productId);
   if (selectedProduct) {
@@ -1603,7 +1846,6 @@ const updateSelectedProduct = () => {
   }
 };
 
-// Update order status
 const updateOrderStatus = async (orderId, newStatus) => {
   try {
     if (!db) {
@@ -1615,7 +1857,7 @@ const updateOrderStatus = async (orderId, newStatus) => {
     
     await updateDoc(orderRef, {
       status: newStatus,
-      updatedAt: new Date() // Use regular Date instead of serverTimestamp
+      updatedAt: new Date()
     });
 
     // If changing to delivered, update product stock
@@ -1631,7 +1873,6 @@ const updateOrderStatus = async (orderId, newStatus) => {
   }
 };
 
-// Update product stock from order
 const updateProductStockFromOrder = async (productId, quantity) => {
   try {
     const productRef = doc(db, 'products', productId);
@@ -1653,7 +1894,6 @@ const updateProductStockFromOrder = async (productId, quantity) => {
   }
 };
 
-// Delete order
 const deleteOrder = async (orderId) => {
   try {
     const orderRef = doc(db, 'orders', orderId);
@@ -1667,24 +1907,21 @@ const deleteOrder = async (orderId) => {
   }
 };
 
-// Close order modal
 const closeOrderModal = () => {
   showOrderModal.value = false;
   resetOrderForm();
 };
 
-// Reset order form
 const resetOrderForm = () => {
   orderForm.value = {
     productId: '',
     productName: '',
-    supplierName: '', // BAGONG FIELD NA ITO
+    supplierName: '',
     quantity: 0,
     status: 'incomplete'
   };
 };
 
-// Format date for display
 const formatDate = (timestamp) => {
   if (!timestamp) return '';
   
@@ -1709,24 +1946,204 @@ const formatDate = (timestamp) => {
   });
 };
 
+const openImageEditor = () => {
+  if (imagePreview.value) {
+    currentImage.value = imagePreview.value
+    originalImage.value = imagePreview.value
+    showImageEditor.value = true
+    // Initialize crop bounds after modal opens
+    nextTick(() => {
+      initializeCropHandles()
+    })
+  }
+}
+
+const initializeCropHandles = () => {
+  if (!cropImage.value) return
+  
+  const img = cropImage.value
+  const rect = img.getBoundingClientRect()
+  
+  // Set initial crop bounds to cover the entire image
+  cropBounds.value = {
+    left: 0,
+    top: 0,
+    width: img.offsetWidth,
+    height: img.offsetHeight
+  }
+}
+
+const startResize = (direction, event) => {
+  event.preventDefault()
+  isResizing.value = true
+  resizeDirection.value = direction
+  startMousePos.value = { x: event.clientX, y: event.clientY }
+  startBounds.value = { ...cropBounds.value }
+  
+  document.addEventListener('mousemove', handleResize)
+  document.addEventListener('mouseup', stopResize)
+}
+
+const handleResize = (event) => {
+  if (!isResizing.value) return
+  
+  const deltaX = event.clientX - startMousePos.value.x
+  const deltaY = event.clientY - startMousePos.value.y
+  const img = cropImage.value
+  
+  if (!img) return
+  
+  const imgWidth = img.offsetWidth
+  const imgHeight = img.offsetHeight
+  
+  let newBounds = { ...startBounds.value }
+  
+  switch (resizeDirection.value) {
+    case 'top':
+      newBounds.top = Math.max(0, Math.min(startBounds.value.top + deltaY, startBounds.value.top + startBounds.value.height - 20))
+      newBounds.height = startBounds.value.height - (newBounds.top - newBounds.value.top)
+      break
+    case 'bottom':
+      newBounds.height = Math.max(20, Math.min(startBounds.value.height + deltaY, imgHeight - startBounds.value.top))
+      break
+    case 'left':
+      newBounds.left = Math.max(0, Math.min(startBounds.value.left + deltaX, startBounds.value.left + startBounds.value.width - 20))
+      newBounds.width = startBounds.value.width - (newBounds.left - newBounds.value.left)
+      break
+    case 'right':
+      newBounds.width = Math.max(20, Math.min(startBounds.value.width + deltaX, imgWidth - startBounds.value.left))
+      break
+    case 'top-left':
+      newBounds.top = Math.max(0, Math.min(startBounds.value.top + deltaY, startBounds.value.top + startBounds.value.height - 20))
+      newBounds.left = Math.max(0, Math.min(startBounds.value.left + deltaX, startBounds.value.left + startBounds.value.width - 20))
+      newBounds.height = startBounds.value.height - (newBounds.top - newBounds.top)
+      newBounds.width = startBounds.value.width - (newBounds.left - newBounds.left)
+      break
+    case 'top-right':
+      newBounds.top = Math.max(0, Math.min(startBounds.value.top + deltaY, startBounds.value.top + startBounds.value.height - 20))
+      newBounds.height = startBounds.value.height - (newBounds.top - newBounds.top)
+      newBounds.width = Math.max(20, Math.min(startBounds.value.width + deltaX, imgWidth - startBounds.value.left))
+      break
+    case 'bottom-left':
+      newBounds.left = Math.max(0, Math.min(startBounds.value.left + deltaX, startBounds.value.left + startBounds.value.width - 20))
+      newBounds.width = startBounds.value.width - (newBounds.left - newBounds.left)
+      newBounds.height = Math.max(20, Math.min(startBounds.value.height + deltaY, imgHeight - startBounds.value.top))
+      break
+    case 'bottom-right':
+      newBounds.width = Math.max(20, Math.min(startBounds.value.width + deltaX, imgWidth - startBounds.value.left))
+      newBounds.height = Math.max(20, Math.min(startBounds.value.height + deltaY, imgHeight - startBounds.value.top))
+      break
+  }
+  
+  cropBounds.value = newBounds
+}
+
+const stopResize = () => {
+  isResizing.value = false
+  resizeDirection.value = ''
+  document.removeEventListener('mousemove', handleResize)
+  document.removeEventListener('mouseup', stopResize)
+}
+
+const applyCropImage = () => {
+  if (!cropImage.value || !currentImage.value) return
+  
+  const img = cropImage.value
+  const canvas = document.createElement('canvas')
+  const ctx = canvas.getContext('2d')
+  
+  // Calculate the actual image dimensions vs displayed dimensions
+  const scaleX = img.naturalWidth / img.offsetWidth
+  const scaleY = img.naturalHeight / img.offsetHeight
+  
+  // Set canvas size to crop area
+  canvas.width = cropBounds.value.width * scaleX
+  canvas.height = cropBounds.value.height * scaleY
+  
+  // Create image object to draw from
+  const sourceImg = new Image()
+  sourceImg.onload = () => {
+    // Draw the cropped portion
+    ctx.drawImage(
+      sourceImg,
+      cropBounds.value.left * scaleX,
+      cropBounds.value.top * scaleY,
+      cropBounds.value.width * scaleX,
+      cropBounds.value.height * scaleY,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    )
+    
+    // Update the current image with cropped version
+    currentImage.value = canvas.toDataURL('image/jpeg', 0.9)
+    
+    // Reset crop bounds to full image
+    initializeCropHandles()
+  }
+  sourceImg.src = currentImage.value
+}
+
+const resetCropImage = () => {
+  currentImage.value = originalImage.value
+  initializeCropHandles()
+}
+
+const saveImageChanges = () => {
+  // Update form and preview with final image
+  productForm.value.image = currentImage.value
+  imagePreview.value = currentImage.value
+  closeImageEditor()
+}
+
+const closeImageEditor = () => {
+  showImageEditor.value = false
+  // Reset image adjustments
+  imageAdjustments.value = {
+    brightness: 100,
+    contrast: 100,
+    saturation: 100,
+    rotation: 0
+  }
+  // Reset crop bounds
+  cropBounds.value = {
+    left: 0,
+    top: 0,
+    width: 0,
+    height: 0
+  }
+}
+
+// Lifecycle hooks
+onMounted(() => {
+  console.log('Component mounted, initializing...');
+  fetchProducts().catch(err => {
+    console.error('Mount error:', err)
+    error.value = 'Failed to initialize inventory. Please refresh the page.'
+  });
+  
+  // Add a small delay to ensure Firebase is ready
+  setTimeout(() => {
+    fetchOrders();
+  }, 1000);
+});
+
+// Clean up listeners on component unmount
+onUnmounted(() => {
+  if (unsubscribe.value) {
+    unsubscribe.value()
+  }
+  if (window.ordersUnsubscribe) {
+    window.ordersUnsubscribe()
+  }
+})
+
 // Export methods for other components to use
 defineExpose({
   updateProductStock
 })
 
-watch([searchQuery, filterStock, filterCategory], () => {
-  currentPage.value = 1
-})
-
-const activePath = ref(route.path);
-
-const isActive = (path) => {
-  return route.path === path;
-};
-
-watch(route, (newRoute) => {
-  activePath.value = newRoute.path;
-});
 </script>
 
 <style scoped>

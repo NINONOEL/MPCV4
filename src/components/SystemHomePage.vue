@@ -129,7 +129,7 @@
                 </div>
                 
                 <!-- Description -->
-                <p class="text-gray-600 text-sm leading-relaxed px-2">Full access to system and analytics</p>
+                <p class="text-gray-600 text-sm leading-relaxed px-2">Full access to system and sale analytics</p>
                 
                 <!-- Enter Button -->
                 <div class="w-full pt-1">

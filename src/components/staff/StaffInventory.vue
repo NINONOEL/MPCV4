@@ -20,67 +20,40 @@
           </div>
         </div>
 
-        <!-- Navigation - Scrollable Area -->
+        <!-- Navigation -->
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link 
-            to="/staff/dashboard" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-            :class="{ 'shadow-sm border border-blue-200 transform scale-105': $route.path === '/staff/dashboard' }"
-          >
+          <router-link to="/staff/dashboard" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700">
             <LayoutDashboardIcon class="w-5 h-5" />
             <span>Dashboard</span>
           </router-link>
 
-          <router-link 
-            to="/staff/inventory" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 shadow-sm border border-purple-200 transform scale-105"
-            :class="{ 'hover:bg-purple-100 hover:text-purple-700': $route.path !== '/staff/inventory' }"
-          >
+          <router-link to="/staff/inventory" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 shadow-sm border border-purple-200 transform scale-105">
             <PackageIcon class="w-5 h-5" />
             <span>Inventory</span>
           </router-link>
 
-          <router-link 
-            to="/staff/paint-mixing" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
-            :class="{ 'shadow-sm border border-pink-200 transform scale-105': $route.path === '/staff/paint-mixing' }"
-          >
+          <router-link to="/staff/paint-mixing" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700">
             <PaletteIcon class="w-5 h-5" />
             <span>Paint Mixing</span>
           </router-link>
 
-          <router-link 
-            to="/staff/house-paint-recommender" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
-            :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/staff/house-paint-recommender' }"
-          >
+          <router-link to="/staff/house-paint-recommender" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700">
             <HomeIcon class="w-5 h-5" />
             <span>House Paint Recommender</span>
           </router-link>
 
-          <router-link 
-            to="/staff/sales-analytics" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
-            :class="{ 'shadow-sm border border-teal-200 transform scale-105': $route.path === '/staff/sales-analytics' }"
-          >
+          <router-link to="/staff/sales-analytics" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700">
             <TrendingUpIcon class="w-5 h-5" />
             <span>Sales Analytics</span>
           </router-link>
 
-          <router-link 
-            to="/staff/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
-            :class="{ 'shadow-sm border border-green-200 transform scale-105': $route.path === '/staff/settings' }"
-          >
+          <router-link to="/staff/settings" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700">
             <SettingsIcon class="w-5 h-5" />
             <span>Settings</span>
           </router-link>
-
-          <!-- Perfect spacing -->
-          <div class="h-4"></div>
         </nav>
 
-        <!-- User Menu - Fixed at bottom -->
+        <!-- User Menu -->
         <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg">
@@ -90,11 +63,7 @@
               <p class="text-sm font-medium text-gray-900 truncate">Staff User</p>
               <p class="text-xs text-gray-600 truncate">staff@example.com</p>
             </div>
-            <button 
-              @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
-              title="Logout"
-            >
+            <button @click="handleLogout" class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors" title="Logout">
               <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
@@ -103,31 +72,20 @@
 
       <!-- Mobile Sidebar Toggle -->
       <div class="fixed top-4 left-4 z-30 md:hidden">
-        <button 
-          @click="toggleMobileSidebar"
-          class="p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg"
-          aria-label="Toggle navigation menu"
-        >
+        <button @click="toggleMobileSidebar" class="p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg" aria-label="Toggle navigation menu">
           <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
           <XIcon v-else class="w-6 h-6 text-gray-700" />
         </button>
       </div>
 
       <!-- Mobile Sidebar -->
-      <div 
-        v-if="mobileSidebarOpen" 
-        class="fixed inset-0 bg-black/20 z-20 md:hidden"
-        @click="toggleMobileSidebar"
-      ></div>
+      <div v-if="mobileSidebarOpen" class="fixed inset-0 bg-black/20 z-20 md:hidden" @click="toggleMobileSidebar"></div>
 
-      <aside 
-        v-if="mobileSidebarOpen"
-        class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-20 md:hidden shadow-xl flex flex-col"
-      >
-        <!-- Logo/Brand -->
+      <aside v-if="mobileSidebarOpen" class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-20 md:hidden shadow-xl flex flex-col">
+        <!-- Mobile Logo -->
         <div class="p-6 border-b border-gray-200 flex-shrink-0">
           <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Mindoro Paint Center</h1>
+            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
           </div>
           <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
             <UserIcon class="h-3 w-3 mr-1" />
@@ -135,72 +93,40 @@
           </div>
         </div>
 
-        <!-- Mobile Navigation - Scrollable -->
+        <!-- Mobile Navigation -->
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link 
-            to="/staff/dashboard" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50"
-            :class="{ 'shadow-sm border border-blue-200': $route.path === '/staff/dashboard' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/staff/dashboard" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50" @click="mobileSidebarOpen = false">
             <LayoutDashboardIcon class="w-5 h-5" />
             <span>Dashboard</span>
           </router-link>
 
-          <router-link 
-            to="/staff/inventory" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 shadow-sm border border-purple-200"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/staff/inventory" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 shadow-sm border border-purple-200" @click="mobileSidebarOpen = false">
             <PackageIcon class="w-5 h-5" />
             <span>Inventory</span>
           </router-link>
 
-          <router-link 
-            to="/staff/paint-mixing" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50"
-            :class="{ 'shadow-sm border border-pink-200': $route.path === '/staff/paint-mixing' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/staff/paint-mixing" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50" @click="mobileSidebarOpen = false">
             <PaletteIcon class="w-5 h-5" />
             <span>Paint Mixing</span>
           </router-link>
 
-          <router-link 
-            to="/staff/house-paint-recommender" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50"
-            :class="{ 'shadow-sm border border-orange-200': $route.path === '/staff/house-paint-recommender' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/staff/house-paint-recommender" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50" @click="mobileSidebarOpen = false">
             <HomeIcon class="w-5 h-5" />
             <span>House Paint Recommender</span>
           </router-link>
 
-          <router-link 
-            to="/staff/sales-analytics" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50"
-            :class="{ 'shadow-sm border border-teal-200': $route.path === '/staff/sales-analytics' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/staff/sales-analytics" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50" @click="mobileSidebarOpen = false">
             <TrendingUpIcon class="w-5 h-5" />
             <span>Sales Analytics</span>
           </router-link>
 
-          <router-link 
-            to="/staff/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50"
-            :class="{ 'shadow-sm border border-green-200': $route.path === '/staff/settings' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/staff/settings" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50" @click="mobileSidebarOpen = false">
             <SettingsIcon class="w-5 h-5" />
             <span>Settings</span>
           </router-link>
-
-          <!-- Perfect spacing for mobile too -->
-          <div class="h-4"></div>
         </nav>
 
-        <!-- Mobile User Menu - Fixed at bottom -->
+        <!-- Mobile User Menu -->
         <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg">
@@ -210,11 +136,7 @@
               <p class="text-sm font-medium text-gray-900 truncate">Staff User</p>
               <p class="text-xs text-gray-600 truncate">staff@example.com</p>
             </div>
-            <button 
-              @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
-              title="Logout"
-            >
+            <button @click="handleLogout" class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors" title="Logout">
               <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
@@ -249,7 +171,6 @@
         <div class="p-6 md:p-8">
           <!-- Stats Cards -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            <!-- Total Products -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
               <div class="p-6">
@@ -265,7 +186,6 @@
               </div>
             </div>
 
-            <!-- Low Stock -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 h-2 absolute top-0 left-0 right-0"></div>
               <div class="p-6">
@@ -281,7 +201,6 @@
               </div>
             </div>
 
-            <!-- Out of Stock -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 h-2 absolute top-0 left-0 right-0"></div>
               <div class="p-6">
@@ -304,29 +223,18 @@
               <div class="flex-1">
                 <div class="relative">
                   <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input 
-                    type="text"
-                    v-model="searchQuery"
-                    placeholder="Search products..."
-                    class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
-                  />
+                  <input type="text" v-model="searchQuery" placeholder="Search products..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500" />
                 </div>
               </div>
               <div class="flex flex-col sm:flex-row gap-4">
-                <select 
-                  v-model="filterCategory"
-                  class="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
-                >
+                <select v-model="filterCategory" class="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900">
                   <option value="">All Categories</option>
                   <option value="interior">Interior Paint</option>
                   <option value="exterior">Exterior Paint</option>
                   <option value="primer">Primers</option>
                   <option value="specialty">Specialty Paints</option>
                 </select>
-                <select 
-                  v-model="filterStock"
-                  class="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
-                >
+                <select v-model="filterStock" class="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900">
                   <option value="">All Stock Levels</option>
                   <option value="in-stock">In Stock</option>
                   <option value="low-stock">Low Stock</option>
@@ -358,8 +266,10 @@
               <div v-for="product in paginatedProducts" :key="product.id" class="p-4 border-b border-gray-100">
                 <div class="flex items-center justify-between mb-2">
                   <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
-                      <PackageIcon class="w-6 h-6 text-white" />
+                    <!-- Updated to show product images instead of generic icons -->
+                    <div class="w-12 h-12 rounded-lg overflow-hidden shadow-lg flex items-center justify-center" :class="product.image ? 'bg-white' : 'bg-gradient-to-br from-purple-500 to-pink-500'">
+                      <img v-if="product.image" :src="product.image" :alt="product.name" class="w-full h-full object-cover" />
+                      <PackageIcon v-else class="w-6 h-6 text-white" />
                     </div>
                     <div>
                       <p class="font-medium text-gray-900">{{ product.name }}</p>
@@ -368,10 +278,7 @@
                   </div>
                 </div>
                 <div class="flex flex-wrap gap-2 mt-2">
-                  <span 
-                    class="px-2 py-1 rounded-full text-sm"
-                    :class="getStockLevelClass(product.stockLevel)"
-                  >
+                  <span class="px-2 py-1 rounded-full text-sm" :class="getStockLevelClass(product.stockLevel)">
                     {{ formatStockLevel(product.stockLevel) }}
                   </span>
                   <span class="text-sm text-gray-600">
@@ -403,15 +310,13 @@
                       No products found
                     </td>
                   </tr>
-                  <tr 
-                    v-for="product in paginatedProducts" 
-                    :key="product.id" 
-                    class="border-b border-gray-50 hover:bg-gray-50/50 transition-colors"
-                  >
+                  <tr v-for="product in paginatedProducts" :key="product.id" class="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
                     <td class="p-4">
                       <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
-                          <PackageIcon class="w-6 h-6 text-white" />
+                        <!-- Updated to show product images instead of generic icons -->
+                        <div class="w-12 h-12 rounded-lg overflow-hidden shadow-lg flex items-center justify-center" :class="product.image ? 'bg-white' : 'bg-gradient-to-br from-purple-500 to-pink-500'">
+                          <img v-if="product.image" :src="product.image" :alt="product.name" class="w-full h-full object-cover" />
+                          <PackageIcon v-else class="w-6 h-6 text-white" />
                         </div>
                         <div>
                           <p class="font-medium text-gray-900">{{ product.name }}</p>
@@ -425,10 +330,7 @@
                       </span>
                     </td>
                     <td class="p-4">
-                      <span 
-                        class="px-3 py-1 rounded-full text-sm"
-                        :class="getStockLevelClass(product.stockLevel)"
-                      >
+                      <span class="px-3 py-1 rounded-full text-sm" :class="getStockLevelClass(product.stockLevel)">
                         {{ formatStockLevel(product.stockLevel) }}
                       </span>
                     </td>
@@ -443,10 +345,7 @@
             <!-- Pagination -->
             <div v-if="products.length > 0" class="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-4 border-t border-gray-100">
               <div class="flex items-center gap-2">
-                <select 
-                  v-model="perPage"
-                  class="px-2 py-1 rounded-lg border border-gray-200 text-sm bg-white text-gray-900"
-                >
+                <select v-model="perPage" class="px-2 py-1 rounded-lg border border-gray-200 text-sm bg-white text-gray-900">
                   <option value="10">10 per page</option>
                   <option value="25">25 per page</option>
                   <option value="50">50 per page</option>
@@ -456,19 +355,11 @@
                 </span>
               </div>
               <div class="flex items-center gap-2">
-                <button 
-                  @click="currentPage--"
-                  :disabled="currentPage === 1"
-                  class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-700"
-                >
+                <button @click="currentPage--" :disabled="currentPage === 1" class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-700">
                   <ChevronLeftIcon class="w-5 h-5" />
                 </button>
                 <span class="text-sm text-gray-700">Page {{ currentPage }} of {{ totalPages || 1 }}</span>
-                <button 
-                  @click="currentPage++"
-                  :disabled="currentPage >= totalPages"
-                  class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-700"
-                >
+                <button @click="currentPage++" :disabled="currentPage >= totalPages" class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-700">
                   <ChevronRightIcon class="w-5 h-5" />
                 </button>
               </div>
@@ -503,17 +394,10 @@ import {
   Bell as BellIcon,
   TrendingUp as TrendingUpIcon
 } from 'lucide-vue-next'
-import { 
-  collection, 
-  getDocs, 
-  query, 
-  orderBy,
-  onSnapshot,
-  where,
-  Timestamp 
-} from 'firebase/firestore'
+import { collection, query, onSnapshot } from 'firebase/firestore'
 import { db } from '../../config/firebase'
 
+// Router and reactive state
 const router = useRouter()
 const mobileSidebarOpen = ref(false)
 const searchQuery = ref('')
@@ -524,8 +408,12 @@ const currentPage = ref(1)
 const loading = ref(false)
 const error = ref(null)
 const unsubscribe = ref(null)
+const products = ref([])
 
-// Current date
+// Database reference
+const productsRef = db ? collection(db, 'products') : null
+
+// Computed properties
 const currentDate = computed(() => {
   return new Date().toLocaleDateString('en-US', { 
     weekday: 'long', 
@@ -535,84 +423,6 @@ const currentDate = computed(() => {
   })
 })
 
-// Products state
-const products = ref([])
-
-// Products collection reference
-const productsRef = db ? collection(db, 'products') : null
-
-// Fetch products from Firestore with real-time updates
-const fetchProducts = async () => {
-  try {
-    loading.value = true
-    error.value = null
-    
-    // Ensure db is properly initialized
-    if (!db || !productsRef) {
-      throw new Error('Database not initialized')
-    }
-
-    // Create query with error handling
-    const q = query(productsRef)
-    
-    // Set up real-time listener
-    if (unsubscribe.value) {
-      unsubscribe.value()
-    }
-
-    unsubscribe.value = onSnapshot(
-      q,
-      (snapshot) => {
-        products.value = snapshot.docs.map(doc => {
-          const data = doc.data()
-          // Ensure we use the correct stock value (check both fields)
-          const stockValue = data.stock !== undefined ? Number(data.stock) : 
-                            data.stockLevel !== undefined ? Number(data.stockLevel) : 0
-          
-          return {
-            id: doc.id,
-            ...data,
-            price: Number(data.price) || 0,
-            stockLevel: stockValue,
-            stock: stockValue
-          }
-        })
-        
-        loading.value = false
-        error.value = null
-        console.log('Fetched products with real-time updates:', products.value)
-      },
-      (err) => {
-        console.error('Firestore error:', err)
-        loading.value = false
-        error.value = 'Unable to connect to database. Please try again.'
-        products.value = []
-      }
-    )
-  } catch (err) {
-    console.error('Error in fetchProducts:', err)
-    loading.value = false
-    error.value = 'Database connection failed. Please refresh the page.'
-    products.value = []
-  }
-}
-
-// Clean up listener on component unmount
-onUnmounted(() => {
-  if (unsubscribe.value) {
-    unsubscribe.value()
-  }
-})
-
-// Call fetchProducts on component mount with error handling
-onMounted(() => {
-  fetchProducts().catch(err => {
-    console.error('Mount error:', err)
-    error.value = 'Failed to initialize inventory. Please refresh the page.'
-  })
-})
-
-// Computed properties
 const filteredProducts = computed(() => {
   let filtered = [...products.value]
 
@@ -654,13 +464,61 @@ const paginatedProducts = computed(() => {
 const totalProducts = computed(() => products.value.length)
 const lowStockCount = computed(() => products.value.filter(p => p.stockLevel > 0 && p.stockLevel <= 10).length)
 const outOfStockCount = computed(() => products.value.filter(p => p.stockLevel === 0).length)
-// const totalValue = computed(() => products.value.reduce((sum, product) => sum + (product.price * product.stockLevel), 0))
-
 const totalPages = computed(() => Math.ceil(filteredProducts.value.length / perPage.value) || 1)
 const paginationStart = computed(() => filteredProducts.value.length ? ((currentPage.value - 1) * perPage.value) + 1 : 0)
 const paginationEnd = computed(() => Math.min(currentPage.value * perPage.value, filteredProducts.value.length))
 
-// Helper methods
+// Methods
+const fetchProducts = async () => {
+  try {
+    loading.value = true
+    error.value = null
+    
+    if (!db || !productsRef) {
+      throw new Error('Database not initialized')
+    }
+
+    const q = query(productsRef)
+    
+    if (unsubscribe.value) {
+      unsubscribe.value()
+    }
+
+    unsubscribe.value = onSnapshot(
+      q,
+      (snapshot) => {
+        products.value = snapshot.docs.map(doc => {
+          const data = doc.data()
+          const stockValue = data.stock !== undefined ? Number(data.stock) : 
+                            data.stockLevel !== undefined ? Number(data.stockLevel) : 0
+          
+          return {
+            id: doc.id,
+            ...data,
+            price: Number(data.price) || 0,
+            stockLevel: stockValue,
+            stock: stockValue
+          }
+        })
+        
+        loading.value = false
+        error.value = null
+      },
+      (err) => {
+        console.error('Firestore error:', err)
+        loading.value = false
+        error.value = 'Unable to connect to database. Please try again.'
+        products.value = []
+      }
+    )
+  } catch (err) {
+    console.error('Error in fetchProducts:', err)
+    loading.value = false
+    error.value = 'Database connection failed. Please refresh the page.'
+    products.value = []
+  }
+}
+
 const getStockLevelClass = (stockLevel) => {
   if (stockLevel === 0) return 'bg-red-100 text-red-800 border border-red-200'
   if (stockLevel <= 10) return 'bg-amber-100 text-amber-800 border border-amber-200'
@@ -683,7 +541,6 @@ const formatCategory = (category) => {
   return categories[category] || category
 }
 
-// Methods
 const toggleMobileSidebar = () => {
   mobileSidebarOpen.value = !mobileSidebarOpen.value
 }
@@ -692,13 +549,27 @@ const handleLogout = () => {
   router.push('/staff')
 }
 
+// Lifecycle hooks
+onMounted(() => {
+  fetchProducts().catch(err => {
+    console.error('Mount error:', err)
+    error.value = 'Failed to initialize inventory. Please refresh the page.'
+  })
+})
+
+onUnmounted(() => {
+  if (unsubscribe.value) {
+    unsubscribe.value()
+  }
+})
+
+// Watchers
 watch([searchQuery, filterStock, filterCategory], () => {
   currentPage.value = 1
 })
 </script>
 
 <style scoped>
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }

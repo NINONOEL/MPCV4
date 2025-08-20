@@ -2,7 +2,20 @@ import { createRouter, createWebHistory } from "vue-router"
 import { auth, db } from "@/config/firebase"
 import { getDoc, doc } from "firebase/firestore"
 import { onAuthStateChanged } from "firebase/auth"
-import HomePage from "../components/HomePage.vue"
+import SystemHomePage from "@/components/SystemHomePage.vue"
+
+// PUBLIC COMPONENTS (Customer-facing)
+import LandingPage from "@/components/public/LandingPage.vue"
+import LoginPage from "@/components/public/LoginPage.vue"
+import SignupPage from "@/components/public/SignupPage.vue"
+import CustomerPortal from "@/components/public/CustomerPortal.vue"
+import HouseColorRecommender from "@/components/public/HouseColorRecommender.vue"
+import PaintMixing from "@/components/public/PaintMixing.vue"
+// --- BAGO: I-import ang bagong dashboard component --- //
+import CustomerDashboard from "@/components/public/CustomerDashboard.vue"
+import Products from "@/components/public/Products.vue"
+
+// ADMIN COMPONENTS
 import AdminPortal from "../components/admin/AdminPortal.vue"
 import AdminDashboard from "../components/admin/AdminDashboard.vue"
 import AdminStaffManagement from "../components/admin/AdminStaffManagement.vue"
@@ -12,6 +25,8 @@ import AdminSalesAnalytics from "../components/admin/AdminSalesAnalytics.vue"
 import AdminReports from "../components/admin/AdminReports.vue"
 import AdminSettings from "../components/admin/AdminSettings.vue"
 import AdminHousePaintRecommender from "../components/admin/AdminHousePaintRecommender.vue"
+
+// STAFF COMPONENTS
 import StaffPortal from "../components/staff/StaffPortal.vue"
 import StaffDashboard from "../components/staff/StaffDashboard.vue"
 import StaffPaintMixing from "../components/staff/StaffPaintMixing.vue"
@@ -19,25 +34,24 @@ import HousePaintRecommender from "../components/staff/HousePaintRecommender.vue
 import Settings from "../components/staff/Settings.vue"
 import StaffSalesAnalytics from "../components/staff/StaffSalesAnalytics.vue"
 
-// Estado global de autenticación
+// (Ang iyong mga navigation guards ay mananatili dito)
+// Global authentication state
 const authState = {
   isStaff: false,
   isAdmin: false,
+  isCustomer: false,
   initialized: false,
 }
 
-// Función para verificar el estado de autenticación
+// Function to check authentication state
 const checkAuthState = () => {
   return new Promise((resolve) => {
-    // Si ya está inicializado y el usuario está autenticado, resolver inmediatamente
     if (authState.initialized && auth.currentUser) {
       resolve()
       return
     }
-
-    // Si no hay usuario actual, esperar a que se determine el estado de autenticación
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      unsubscribe() // Cancelar la suscripción inmediatamente
+      unsubscribe()
       authState.initialized = true
       resolve(user)
     })
@@ -47,21 +61,16 @@ const checkAuthState = () => {
 // Navigation guard for admin routes
 const requireAdmin = async (to, from, next) => {
   await checkAuthState()
-
   const user = auth.currentUser
   if (!user) {
     next("/admin")
     return
   }
-
   try {
-    // Verificar si el usuario ya ha sido comprobado como admin
     if (authState.isAdmin) {
       next()
       return
     }
-
-    // Verificar en la base de datos
     const adminDoc = await getDoc(doc(db, "admins", user.uid))
     if (adminDoc.exists()) {
       authState.isAdmin = true
@@ -78,21 +87,16 @@ const requireAdmin = async (to, from, next) => {
 // Navigation guard for staff routes
 const requireStaff = async (to, from, next) => {
   await checkAuthState()
-
   const user = auth.currentUser
   if (!user) {
     next("/staff")
     return
   }
-
   try {
-    // Verificar si el usuario ya ha sido comprobado como staff
     if (authState.isStaff) {
       next()
       return
     }
-
-    // Verificar en la base de datos
     const staffDoc = await getDoc(doc(db, "staff", user.uid))
     if (staffDoc.exists()) {
       authState.isStaff = true
@@ -106,12 +110,95 @@ const requireStaff = async (to, from, next) => {
   }
 }
 
+// Navigation guard for customer routes
+const requireCustomer = async (to, from, next) => {
+  await checkAuthState()
+  const user = auth.currentUser
+  if (!user) {
+    next("/login")
+    return
+  }
+  try {
+    if (authState.isCustomer) {
+      next()
+      return
+    }
+    const adminDoc = await getDoc(doc(db, "admins", user.uid))
+    const staffDoc = await getDoc(doc(db, "staff", user.uid))
+
+    if (!adminDoc.exists() && !staffDoc.exists()) {
+      authState.isCustomer = true
+      next()
+    } else {
+      if (adminDoc.exists()) {
+        next("/admin/dashboard")
+      } else {
+        next("/staff/dashboard")
+      }
+    }
+  } catch (error) {
+    console.error("Error checking customer status:", error)
+    next("/login")
+  }
+}
+
 const routes = [
+  // PUBLIC ROUTES (Customer-facing)
   {
     path: "/",
-    name: "Home",
-    component: HomePage,
+    name: "LandingPage",
+    component: LandingPage,
   },
+  {
+    path: "/login",
+    name: "Login",
+    component: LoginPage,
+  },
+  {
+    path: "/signup",
+    name: "Signup",
+    component: SignupPage,
+  },
+
+  // --- BINAGO: CUSTOMER ROUTES (may default dashboard na) --- //
+  {
+    path: "/customer/portal",
+    component: CustomerPortal,
+    beforeEnter: requireCustomer,
+    // TINANGGAL: Ang redirect ay hindi na kailangan dahil may default child route na tayo
+    children: [
+      {
+        path: "", // Default view para sa /customer/portal
+        name: "CustomerPortalDashboard",
+        component: CustomerDashboard,
+      },
+      {
+        path: "products", // URL: /customer/portal/products
+        name: "CustomerPortalProducts",
+        component: Products,
+      },
+      {
+        path: "mixing", // URL: /customer/portal/mixing
+        name: "CustomerPortalMixing",
+        component: PaintMixing,
+      },
+      {
+        path: "recommender", // URL: /customer/portal/recommender
+        name: "CustomerPortalRecommender",
+        component: HouseColorRecommender,
+      },
+    ],
+  },
+  // --- END NG PAGBABAGO --- //
+
+  // SYSTEM ROUTE (Internal access)
+  {
+    path: "/system",
+    name: "SystemHomePage",
+    component: SystemHomePage,
+  },
+
+  // ADMIN ROUTES (Mananatili)
   {
     path: "/admin",
     name: "AdminPortal",
@@ -171,6 +258,8 @@ const routes = [
     component: AdminHousePaintRecommender,
     beforeEnter: requireAdmin,
   },
+
+  // STAFF ROUTES (Mananatili)
   {
     path: "/staff",
     name: "StaffPortal",
@@ -188,14 +277,12 @@ const routes = [
     component: () => import("../components/staff/StaffInventory.vue"),
     beforeEnter: requireStaff,
   },
-  // Add the Paint Mixing route
   {
     path: "/staff/paint-mixing",
     name: "StaffPaintMixing",
     component: StaffPaintMixing,
     beforeEnter: requireStaff,
   },
-  // Add the House Paint Recommender route
   {
     path: "/staff/house-paint-recommender",
     name: "HousePaintRecommender",
@@ -205,7 +292,6 @@ const routes = [
       keepAlive: true,
     },
   },
-  // Add the Staff Sales Analytics route
   {
     path: "/staff/sales-analytics",
     name: "StaffSalesAnalytics",
@@ -218,6 +304,8 @@ const routes = [
     component: Settings,
     beforeEnter: requireStaff,
   },
+
+  // CATCH ALL - redirect to homepage
   {
     path: "/:pathMatch(.*)*",
     redirect: "/",
