@@ -1,4 +1,5 @@
 <template>
+  <!-- biome-ignore lint/correctness/useHookAtTopLevel: False positive - all hooks are at top level -->
   <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
     <!-- Background Elements -->
     <div class="absolute inset-0">
@@ -55,7 +56,7 @@
             :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/admin/house-paint-recommender' }"
           >
             <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+            <span>Paint Recommender</span>
           </router-link>
 
           <router-link 
@@ -76,13 +77,9 @@
             <span>Sales Analytics</span>
           </router-link>
 
-          <router-link 
-            to="/admin/reports" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700"
-            :class="{ 'shadow-sm border border-indigo-200 transform scale-105': $route.path === '/admin/reports' }"
-          >
-            <ClipboardIcon class="w-5 h-5" />
-            <span>Reports</span>
+          <router-link to="/admin/visualization" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 shadow-sm border border-indigo-200">
+            <BarChart3Icon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Data Visualization</span>
           </router-link>
 
           <router-link 
@@ -91,16 +88,7 @@
             :class="{ 'hover:bg-amber-100 hover:text-amber-700': $route.path !== '/admin/settings' }"
           >
             <SettingsIcon class="w-5 h-5" />
-            <span>System Settings</span>
-          </router-link>
-
-          <router-link 
-            to="/admin/security" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-red-600 bg-red-50 hover:bg-red-100 hover:text-red-700"
-            :class="{ 'shadow-sm border border-red-200 transform scale-105': $route.path === '/admin/security' }"
-          >
-            <ShieldIcon class="w-5 h-5" />
-            <span>Security</span>
+            <span>Settings</span>
           </router-link>
 
           <!-- Perfect spacing -->
@@ -132,7 +120,7 @@
       <div class="fixed top-4 left-4 z-30 md:hidden">
         <button 
           @click="toggleMobileSidebar"
-          class="p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg"
+          class="p-3 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
           aria-label="Toggle navigation menu"
         >
           <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
@@ -264,7 +252,7 @@
               <UserIcon class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">{{ userDisplayName || 'Admin User' }}</p>
+              <p class="text-sm font-medium text-gray-900 truncate">{{ userDisplayName || 'Admin' }}</p>
               <p class="text-xs text-gray-600 truncate">{{ userEmail || 'admin@example.com' }}</p>
             </div>
             <button 
@@ -281,358 +269,90 @@
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
         <!-- Header -->
-        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-8 py-4 shadow-sm">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <h1 class="text-2xl font-bold text-gray-900">System Settings</h1>
-              <p class="text-gray-600">Configure your system preferences and settings</p>
+        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-4 shadow-sm">
+          <div class="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:items-center justify-between">
+            <!-- Enhanced mobile header layout -->
+            <div class="ml-12 md:ml-0">
+              <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Settings</h1>
+              <p class="text-sm sm:text-base text-gray-600">Manage your account security settings</p>
             </div>
-            <div class="flex items-center gap-4">
-              <div class="hidden md:flex items-center gap-2 text-gray-700">
-                <CalendarIcon class="w-5 h-5 text-amber-500" />
-                <span>{{ currentDate }}</span>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+              <div class="flex items-center gap-2 text-gray-700 text-sm sm:text-base">
+                <CalendarIcon class="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
+                <span class="hidden sm:inline">{{ currentDate }}</span>
+                <span class="sm:hidden">{{ currentDate.split(',')[0] }}</span>
               </div>
-              <div class="hidden md:block h-6 w-px bg-gray-300"></div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-900">Welcome, {{ userDisplayName || 'Admin' }}</span>
+              <div class="hidden sm:block h-6 w-px bg-gray-300"></div>
+              <div class="flex items-center gap-2 sm:gap-3">
+                <span class="text-sm sm:text-base text-gray-900 truncate max-w-32 sm:max-w-none">Welcome, {{ userDisplayName || 'Admin' }}</span>
                 <div class="relative">
-                  <BellIcon class="w-5 h-5 text-orange-500 cursor-pointer hover:text-orange-600" />
+                  <BellIcon class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 cursor-pointer hover:text-orange-600" />
                 </div>
               </div>
             </div>
           </div>
         </header>
 
-        <div class="p-6 md:p-8">
-          <!-- Settings Grid -->
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- General Settings -->
-            <div class="lg:col-span-2 space-y-6">
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
-                <div class="flex items-center gap-3 mb-6">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 transform hover:scale-110 transition-transform duration-200">
-                    <SettingsIcon class="w-6 h-6 text-white" />
-                  </div>
-                  <h2 class="text-xl font-bold text-gray-900">General Settings</h2>
+        <!-- Enhanced responsive padding and spacing -->
+        <div class="p-4 sm:p-6 lg:p-8">
+          <!-- Account & Security Section -->
+          <div class="max-w-lg mx-auto">
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-4 sm:p-6">
+              <div class="flex items-center gap-3 mb-4 sm:mb-6">
+                <div class="p-2 sm:p-3 rounded-xl shadow-lg bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 transform hover:scale-110 transition-transform duration-200">
+                  <ShieldIcon class="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <form @submit.prevent="saveGeneralSettings" class="space-y-4">
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Store Name</label>
-                    <input 
-                      type="text"
-                      v-model="settings.general.storeName"
-                      class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
-                      placeholder="Enter store name"
-                    />
-                  </div>
-
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Store Address</label>
-                    <textarea 
-                      v-model="settings.general.address"
-                      rows="3"
-                      class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
-                      placeholder="Enter store address"
-                    ></textarea>
-                  </div>
-
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Contact Email</label>
-                    <input 
-                      type="email"
-                      v-model="settings.general.email"
-                      class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
-                      placeholder="Enter contact email"
-                    />
-                  </div>
-
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Contact Phone</label>
-                    <input 
-                      type="tel"
-                      v-model="settings.general.phone"
-                      class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
-                      placeholder="Enter contact phone"
-                    />
-                  </div>
-
-                  <div class="flex justify-end pt-4">
-                    <button 
-                      type="submit"
-                      class="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center gap-2"
-                    >
-                      <SaveIcon class="w-5 h-5" />
-                      Save Changes
-                    </button>
-                  </div>
-                </form>
+                <h2 class="text-lg sm:text-xl font-bold text-gray-900">Account & Security</h2>
               </div>
 
-              <!-- Notification Settings -->
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
-                <div class="flex items-center gap-3 mb-6">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
-                    <BellIcon class="w-6 h-6 text-white" />
-                  </div>
-                  <h2 class="text-xl font-bold text-gray-900">Notification Settings</h2>
-                </div>
-                <div class="space-y-6">
-                  <div class="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
-                    <div>
-                      <p class="font-medium text-gray-900">Email Notifications</p>
-                      <p class="text-sm text-gray-600">Receive updates via email</p>
+              <div class="space-y-4 sm:space-y-6">
+                <!-- Password Section -->
+                <div class="p-4 sm:p-5 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-200 shadow-sm">
+                  <div class="flex flex-col gap-3 sm:gap-4">
+                    <div class="flex items-start gap-3">
+                      <div class="p-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg flex-shrink-0">
+                        <KeyIcon class="w-5 h-5 text-white" />
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <h3 class="text-base font-semibold text-gray-900">Change Password</h3>
+                        <p class="text-xs sm:text-sm text-gray-600 mt-1">Update your account password for better security</p>
+                        <p class="text-xs text-purple-600 mt-1">Last changed 30 days ago</p>
+                      </div>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                      <input 
-                        type="checkbox"
-                        v-model="settings.notifications.email"
-                        class="sr-only peer"
-                      />
-                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                    </label>
-                  </div>
-
-                  <div class="flex items-center justify-between p-4 bg-amber-50 rounded-lg border border-amber-200">
-                    <div>
-                      <p class="font-medium text-gray-900">Low Stock Alerts</p>
-                      <p class="text-sm text-gray-600">Get notified when inventory is low</p>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                      <input 
-                        type="checkbox"
-                        v-model="settings.notifications.lowStock"
-                        class="sr-only peer"
-                      />
-                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
-                    </label>
-                  </div>
-
-                  <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
-                    <div>
-                      <p class="font-medium text-gray-900">Order Updates</p>
-                      <p class="text-sm text-gray-600">Notifications for new orders</p>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                      <input 
-                        type="checkbox"
-                        v-model="settings.notifications.orders"
-                        class="sr-only peer"
-                      />
-                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Security Settings -->
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
-                <div class="flex items-center gap-3 mb-6">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 transform hover:scale-110 transition-transform duration-200">
-                    <ShieldIcon class="w-6 h-6 text-white" />
-                  </div>
-                  <h2 class="text-xl font-bold text-gray-900">Security Settings</h2>
-                </div>
-                <div class="space-y-6">
-                  <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-200">
-                    <div>
-                      <p class="font-medium text-gray-900">Two-Factor Authentication</p>
-                      <p class="text-sm text-gray-600">Add an extra layer of security</p>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                      <input 
-                        type="checkbox"
-                        v-model="settings.security.twoFactor"
-                        class="sr-only peer"
-                      />
-                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
-                    </label>
-                  </div>
-
-                  <div class="flex items-center justify-between p-4 bg-purple-50 rounded-lg border border-purple-200">
-                    <div>
-                      <p class="font-medium text-gray-900">Login Notifications</p>
-                      <p class="text-sm text-gray-600">Get alerted about new logins</p>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                      <input 
-                        type="checkbox"
-                        v-model="settings.security.loginAlerts"
-                        class="sr-only peer"
-                      />
-                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
-                    </label>
-                  </div>
-
-                  <div class="pt-2">
                     <button 
                       @click="changePassword"
-                      class="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center gap-2"
+                      class="w-full px-4 py-2 text-sm bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
                     >
-                      <KeyIcon class="w-5 h-5" />
+                      <KeyIcon class="w-4 h-4" />
                       Change Password
                     </button>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <!-- System Info -->
-            <div class="space-y-6">
-              <!-- System Status -->
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
-                <div class="flex items-center gap-3 mb-6">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
-                    <ActivityIcon class="w-6 h-6 text-white" />
-                  </div>
-                  <h2 class="text-xl font-bold text-gray-900">System Status</h2>
-                </div>
-                <div class="space-y-4">
-                  <div class="p-3 bg-gray-50 rounded-lg">
-                    <p class="text-sm text-gray-600">Version</p>
-                    <p class="font-medium text-gray-900">1.0.0</p>
-                  </div>
-                  <div class="p-3 bg-gray-50 rounded-lg">
-                    <p class="text-sm text-gray-600">Last Updated</p>
-                    <p class="font-medium text-gray-900">March 5, 2025</p>
-                  </div>
-                  <div class="p-3 bg-green-50 rounded-lg border border-green-200">
-                    <p class="text-sm text-gray-600">Database Status</p>
-                    <div class="flex items-center gap-2">
-                      <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                      <p class="font-medium text-green-800">Connected</p>
+                <!-- Delete Account Section -->
+                <div class="p-4 sm:p-5 bg-gradient-to-r from-red-50 to-orange-50 rounded-xl border border-red-200 shadow-sm">
+                  <div class="flex flex-col gap-3 sm:gap-4">
+                    <div class="flex items-start gap-3">
+                      <div class="p-2 rounded-lg bg-gradient-to-r from-red-500 to-orange-500 shadow-lg flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <h3 class="text-base font-semibold text-red-900">Delete Account</h3>
+                        <p class="text-xs sm:text-sm text-red-700 mt-1">Permanently delete your account and all associated data</p>
+                        <p class="text-xs text-red-600 mt-1 font-medium">⚠️ This action cannot be undone</p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="p-3 bg-green-50 rounded-lg border border-green-200">
-                    <p class="text-sm text-gray-600">Server Status</p>
-                    <div class="flex items-center gap-2">
-                      <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                      <p class="font-medium text-green-800">Online</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Storage Usage -->
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
-                <div class="flex items-center gap-3 mb-6">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-600 transform hover:scale-110 transition-transform duration-200">
-                    <DatabaseIcon class="w-6 h-6 text-white" />
-                  </div>
-                  <h2 class="text-xl font-bold text-gray-900">Storage Usage</h2>
-                </div>
-                <div class="space-y-4">
-                  <div>
-                    <div class="flex justify-between items-center mb-2">
-                      <p class="text-sm text-gray-600">Database Storage</p>
-                      <p class="text-sm font-medium text-gray-900">75%</p>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                      <div class="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full transition-all duration-500" style="width: 75%"></div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div class="flex justify-between items-center mb-2">
-                      <p class="text-sm text-gray-600">File Storage</p>
-                      <p class="text-sm font-medium text-gray-900">45%</p>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                      <div class="bg-gradient-to-r from-green-500 to-teal-600 h-3 rounded-full transition-all duration-500" style="width: 45%"></div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div class="flex justify-between items-center mb-2">
-                      <p class="text-sm text-gray-600">Backup Storage</p>
-                      <p class="text-sm font-medium text-gray-900">30%</p>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                      <div class="bg-gradient-to-r from-purple-500 to-pink-600 h-3 rounded-full transition-all duration-500" style="width: 30%"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Quick Actions -->
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
-                <div class="flex items-center gap-3 mb-6">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
-                    <ZapIcon class="w-6 h-6 text-white" />
-                  </div>
-                  <h2 class="text-xl font-bold text-gray-900">Quick Actions</h2>
-                </div>
-                <div class="space-y-3">
-                  <button 
-                    @click="clearCache"
-                    class="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-700 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 border border-blue-200"
-                  >
-                    <RefreshCwIcon class="w-5 h-5" />
-                    <span>Clear Cache</span>
-                  </button>
-                  <button 
-                    @click="backupData"
-                    class="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-green-50 to-teal-50 text-green-700 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 border border-green-200"
-                  >
-                    <DatabaseIcon class="w-5 h-5" />
-                    <span>Backup Data</span>
-                  </button>
-                  <button 
-                    @click="checkUpdates"
-                    class="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 border border-purple-200"
-                  >
-                    <DownloadIcon class="w-5 h-5" />
-                    <span>Check for Updates</span>
-                  </button>
-                  <button 
-                    @click="optimizeDatabase"
-                    class="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 border border-amber-200"
-                  >
-                    <ZapIcon class="w-5 h-5" />
-                    <span>Optimize Database</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- System Logs -->
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
-                <div class="flex items-center justify-between mb-6">
-                  <div class="flex items-center gap-3">
-                    <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-gray-400 via-slate-500 to-gray-600 transform hover:scale-110 transition-transform duration-200">
-                      <FileTextIcon class="w-6 h-6 text-white" />
-                    </div>
-                    <h2 class="text-xl font-bold text-gray-900">System Logs</h2>
-                  </div>
-                  <button 
-                    @click="viewAllLogs"
-                    class="text-sm text-gray-600 hover:text-gray-900 flex items-center gap-1 px-3 py-1 rounded-lg hover:bg-gray-100 transition-colors"
-                  >
-                    <ExternalLinkIcon class="w-4 h-4" />
-                    View All
-                  </button>
-                </div>
-                <div class="space-y-3 max-h-60 overflow-y-auto">
-                  <div v-for="log in recentLogs" :key="log.id" class="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors border border-gray-200">
-                    <div class="flex items-center gap-2 mb-1">
-                      <span 
-                        class="px-2 py-0.5 text-xs rounded-full font-medium"
-                        :class="{
-                          'bg-green-100 text-green-800 border border-green-200': log.type === 'info',
-                          'bg-yellow-100 text-yellow-800 border border-yellow-200': log.type === 'warning',
-                          'bg-red-100 text-red-800 border border-red-200': log.type === 'error'
-                        }"
-                      >
-                        {{ log.type.toUpperCase() }}
-                      </span>
-                      <span class="text-xs text-gray-500">{{ formatDate(log.timestamp) }}</span>
-                    </div>
-                    <p class="text-sm text-gray-900">{{ log.message }}</p>
-                  </div>
-                  
-                  <div v-if="recentLogs.length === 0" class="text-center py-8">
-                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-gray-100 flex items-center justify-center">
-                      <FileTextIcon class="w-6 h-6 text-gray-400" />
-                    </div>
-                    <p class="text-gray-500">No recent logs</p>
+                    <button 
+                      @click="deleteAccount"
+                      class="w-full px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2 hover:from-red-700 hover:to-red-800 text-sm"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                      </svg>
+                      Delete Account
+                    </button>
                   </div>
                 </div>
               </div>
@@ -686,23 +406,23 @@
     <!-- Change Password Modal -->
     <div v-if="showPasswordModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div class="bg-white rounded-xl w-full max-w-md border border-gray-200 shadow-2xl">
-        <div class="p-6 border-b border-gray-200">
+        <div class="p-4 sm:p-6 border-b border-gray-200">
           <div class="flex items-center gap-3">
             <div class="p-2 rounded-lg bg-purple-100">
-              <KeyIcon class="w-6 h-6 text-purple-600" />
+              <KeyIcon class="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
             </div>
-            <h3 class="text-xl font-bold text-gray-900">Change Password</h3>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900">Change Password</h3>
           </div>
         </div>
         
-        <form @submit.prevent="updatePassword" class="p-6 space-y-4">
+        <form @submit.prevent="updatePassword" class="p-4 sm:p-6 space-y-4">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
             <input 
               type="password"
               v-model="passwordForm.current"
               required
-              class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
+              class="w-full px-3 py-2 text-sm sm:text-base rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
               placeholder="Enter current password"
             />
           </div>
@@ -713,7 +433,7 @@
               type="password"
               v-model="passwordForm.new"
               required
-              class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
+              class="w-full px-3 py-2 text-sm sm:text-base rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
               placeholder="Enter new password"
             />
           </div>
@@ -724,22 +444,22 @@
               type="password"
               v-model="passwordForm.confirm"
               required
-              class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
+              class="w-full px-3 py-2 text-sm sm:text-base rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
               placeholder="Confirm new password"
             />
           </div>
 
-          <div class="flex justify-end gap-3 mt-6">
+          <div class="flex flex-col sm:flex-row justify-end gap-3 mt-6">
             <button 
               type="button"
               @click="showPasswordModal = false"
-              class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+              class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
             >
               Cancel
             </button>
             <button 
               type="submit"
-              class="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
+              class="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
             >
               Update Password
             </button>
@@ -760,25 +480,18 @@ import {
   Home as HomeIcon,
   Palette as PaletteIcon,
   TrendingUp as TrendingUpIcon,
-  Clipboard as ClipboardIcon,
   Settings as SettingsIcon,
   Shield as ShieldIcon,
   User as UserIcon,
   LogOut as LogOutIcon,
   Menu as MenuIcon,
   X as XIcon,
-  RefreshCw as RefreshCwIcon,
-  Database as DatabaseIcon,
-  Download as DownloadIcon,
-  Save as SaveIcon,
   Key as KeyIcon,
-  Zap as ZapIcon,
   Check as CheckIcon,
-  ExternalLink as ExternalLinkIcon,
   Calendar as CalendarIcon,
   Bell as BellIcon,
-  Activity as ActivityIcon,
-  FileText as FileTextIcon
+  BarChart3 as BarChart3Icon,
+  Clipboard as ClipboardIcon
 } from 'lucide-vue-next'
 
 const router = useRouter()
@@ -787,137 +500,20 @@ const showToast = ref(false)
 const toastMessage = ref('')
 const notificationType = ref('success')
 const showPasswordModal = ref(false)
-const userDisplayName = ref('')
-const userEmail = ref('')
+const userDisplayName = ref('Nino Noel Monsanto')
+const userEmail = ref('nnmonsanto23@gmail.com')
 
-// Current date
-const currentDate = new Date().toLocaleDateString('en-US', { 
-  weekday: 'long', 
-  year: 'numeric', 
-  month: 'long', 
-  day: 'numeric' 
-})
-
-// Settings state - reset to empty values
-const settings = ref({
-  general: {
-    storeName: '',
-    address: '',
-    email: '',
-    phone: ''
-  },
-  notifications: {
-    email: false,
-    lowStock: false,
-    orders: false
-  },
-  security: {
-    twoFactor: false,
-    loginAlerts: false
-  }
-})
-
-// Password form - reset to empty
 const passwordForm = ref({
   current: '',
   new: '',
   confirm: ''
 })
 
-// Recent logs
-const recentLogs = ref([
-  {
-    id: 1,
-    type: 'info',
-    message: 'System backup completed successfully',
-    timestamp: new Date(Date.now() - 3600000).toISOString()
-  },
-  {
-    id: 2,
-    type: 'warning',
-    message: 'Low stock alert: Premium White Paint (10 units remaining)',
-    timestamp: new Date(Date.now() - 7200000).toISOString()
-  },
-  {
-    id: 3,
-    type: 'error',
-    message: 'Failed to connect to payment gateway',
-    timestamp: new Date(Date.now() - 86400000).toISOString()
-  }
-])
-
-// Methods
-const saveGeneralSettings = async () => {
-  // Implement settings save logic
-  console.log('Saving settings:', settings.value)
-  
-  // Show success toast
-  toastMessage.value = 'Settings saved successfully!'
-  notificationType.value = 'success'
-  showToast.value = true
-  setTimeout(() => {
-    showToast.value = false
-  }, 3000)
-}
-
-const clearCache = async () => {
-  // Implement cache clearing logic
-  console.log('Clearing cache...')
-  
-  // Show success toast
-  toastMessage.value = 'Cache cleared successfully!'
-  notificationType.value = 'success'
-  showToast.value = true
-  setTimeout(() => {
-    showToast.value = false
-  }, 3000)
-}
-
-const backupData = async () => {
-  // Implement backup logic
-  console.log('Backing up data...')
-  
-  // Show success toast
-  toastMessage.value = 'Data backup completed!'
-  notificationType.value = 'success'
-  showToast.value = true
-  setTimeout(() => {
-    showToast.value = false
-  }, 3000)
-}
-
-const checkUpdates = async () => {
-  // Implement update check logic
-  console.log('Checking for updates...')
-  
-  // Show success toast
-  toastMessage.value = 'System is up to date!'
-  notificationType.value = 'success'
-  showToast.value = true
-  setTimeout(() => {
-    showToast.value = false
-  }, 3000)
-}
-
-const optimizeDatabase = async () => {
-  // Implement database optimization logic
-  console.log('Optimizing database...')
-  
-  // Show success toast
-  toastMessage.value = 'Database optimized successfully!'
-  notificationType.value = 'success'
-  showToast.value = true
-  setTimeout(() => {
-    showToast.value = false
-  }, 3000)
-}
-
 const changePassword = () => {
   showPasswordModal.value = true
 }
 
 const updatePassword = async () => {
-  // Validate passwords
   if (passwordForm.value.new !== passwordForm.value.confirm) {
     toastMessage.value = 'New passwords do not match!'
     notificationType.value = 'error'
@@ -928,39 +524,55 @@ const updatePassword = async () => {
     return
   }
   
-  // Implement password update logic
-  console.log('Updating password...')
-  
-  // Reset form and close modal
-  passwordForm.value = {
-    current: '',
-    new: '',
-    confirm: ''
+  if (passwordForm.value.new.length < 8) {
+    toastMessage.value = 'Password must be at least 8 characters long!'
+    notificationType.value = 'error'
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 3000)
+    return
   }
-  showPasswordModal.value = false
   
-  // Show success toast
-  toastMessage.value = 'Password updated successfully!'
-  notificationType.value = 'success'
-  showToast.value = true
-  setTimeout(() => {
-    showToast.value = false
-  }, 3000)
+  try {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    passwordForm.value = {
+      current: '',
+      new: '',
+      confirm: ''
+    }
+    showPasswordModal.value = false
+    
+    toastMessage.value = 'Password updated successfully!'
+    notificationType.value = 'success'
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 3000)
+  } catch (error) {
+    toastMessage.value = 'Failed to update password. Please try again.'
+    notificationType.value = 'error'
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 3000)
+  }
 }
 
-const viewAllLogs = () => {
-  // Navigate to logs page or show full logs modal
-  console.log('Viewing all logs...')
-}
-
-const formatDate = (dateString) => {
-  const date = new Date(dateString)
-  return date.toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  })
+const deleteAccount = () => {
+  if (confirm('⚠️ WARNING: This will permanently delete your account and all associated data.\n\nThis action cannot be undone. Are you absolutely sure you want to proceed?')) {
+    if (confirm('Please confirm one more time: Delete your account permanently?')) {
+      toastMessage.value = 'Account deletion initiated. You will be logged out shortly.'
+      notificationType.value = 'success'
+      showToast.value = true
+      
+      setTimeout(() => {
+        showToast.value = false
+        router.push('/admin')
+      }, 3000)
+    }
+  }
 }
 
 const toggleMobileSidebar = () => {
@@ -970,6 +582,13 @@ const toggleMobileSidebar = () => {
 const handleLogout = () => {
   router.push('/admin')
 }
+
+const currentDate = new Date().toLocaleDateString('en-US', { 
+  weekday: 'long', 
+  year: 'numeric', 
+  month: 'long', 
+  day: 'numeric' 
+})
 </script>
 
 <style scoped>

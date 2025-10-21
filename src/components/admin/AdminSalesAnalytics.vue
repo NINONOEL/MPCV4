@@ -55,7 +55,7 @@
             :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/admin/house-paint-recommender' }"
           >
             <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+            <span>Paint Recommender</span>
           </router-link>
 
           <router-link 
@@ -76,13 +76,9 @@
             <span>Sales Analytics</span>
           </router-link>
 
-          <router-link 
-            to="/admin/reports" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700"
-            :class="{ 'shadow-sm border border-indigo-200 transform scale-105': $route.path === '/admin/reports' }"
-          >
-            <ClipboardIcon class="w-5 h-5" />
-            <span>Reports</span>
+          <router-link to="/admin/visualization" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 shadow-sm border border-indigo-200">
+            <BarChart3Icon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Data Visualization</span>
           </router-link>
 
           <router-link 
@@ -91,16 +87,7 @@
             :class="{ 'shadow-sm border border-amber-200 transform scale-105': $route.path === '/admin/settings' }"
           >
             <SettingsIcon class="w-5 h-5" />
-            <span>System Settings</span>
-          </router-link>
-
-          <router-link 
-            to="/admin/security" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-red-600 bg-red-50 hover:bg-red-100 hover:text-red-700"
-            :class="{ 'shadow-sm border border-red-200 transform scale-105': $route.path === '/admin/security' }"
-          >
-            <ShieldIcon class="w-5 h-5" />
-            <span>Security</span>
+            <span>Settings</span>
           </router-link>
 
           <!-- Perfect spacing -->
@@ -369,22 +356,23 @@
           </div>
 
           <!-- Stats Cards -->
-          <div v-if="!loading || sales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div v-if="!loading || sales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             <!-- Total Revenue -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
-                    <DollarSignIcon class="w-6 h-6 text-white" />
+              <div class="p-4">
+                <div class="flex items-center gap-3">
+                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
+                    <DollarSignIcon class="w-5 h-5 text-white" />
                   </div>
-                  <div>
-                    <p class="text-sm text-gray-600">Total Revenue</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ formatCurrency(totalRevenue) }}</p>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs sm:text-sm text-gray-600">Total Revenue</p>
+                    <!-- reduced font size from text-2xl to text-lg to handle millions -->
+                    <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ formatCurrency(totalRevenue) }}</p>
                     <div class="flex items-center gap-1 mt-1">
-                      <TrendingUpIcon class="w-4 h-4 text-green-600" />
-                      <span class="text-sm font-medium text-green-600">12.5%</span>
-                      <span class="text-sm text-gray-600">vs last period</span>
+                      <TrendingUpIcon class="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
+                      <span class="text-xs font-medium text-green-600">12.5%</span>
+                      <span class="text-xs text-gray-600">vs last period</span>
                     </div>
                   </div>
                 </div>
@@ -394,18 +382,19 @@
             <!-- Total Orders -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
-                    <ShoppingCartIcon class="w-6 h-6 text-white" />
+              <div class="p-4">
+                <div class="flex items-center gap-3">
+                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
+                    <ShoppingCartIcon class="w-5 h-5 text-white" />
                   </div>
-                  <div>
-                    <p class="text-sm text-gray-600">Total Orders</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ totalOrders }}</p>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs sm:text-sm text-gray-600">Total Orders</p>
+                    <!-- reduced font size from text-2xl to text-lg to handle millions -->
+                    <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ totalOrders }}</p>
                     <div class="flex items-center gap-1 mt-1">
-                      <TrendingUpIcon class="w-4 h-4 text-blue-600" />
-                      <span class="text-sm font-medium text-blue-600">8.2%</span>
-                      <span class="text-sm text-gray-600">vs last period</span>
+                      <TrendingUpIcon class="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
+                      <span class="text-xs font-medium text-blue-600">8.2%</span>
+                      <span class="text-xs text-gray-600">vs last period</span>
                     </div>
                   </div>
                 </div>
@@ -415,18 +404,19 @@
             <!-- Products Sold -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
-                    <PackageIcon class="w-6 h-6 text-white" />
+              <div class="p-4">
+                <div class="flex items-center gap-3">
+                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
+                    <PackageIcon class="w-5 h-5 text-white" />
                   </div>
-                  <div>
-                    <p class="text-sm text-gray-600">Products Sold</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ totalProductsSold }}</p>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs sm:text-sm text-gray-600">Products Sold</p>
+                    <!-- reduced font size from text-2xl to text-lg to handle millions -->
+                    <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ totalProductsSold }}</p>
                     <div class="flex items-center gap-1 mt-1">
-                      <TrendingDownIcon class="w-4 h-4 text-red-600" />
-                      <span class="text-sm font-medium text-red-600">3.1%</span>
-                      <span class="text-sm text-gray-600">vs last period</span>
+                      <TrendingDownIcon class="w-3 h-3 sm:w-4 sm:h-4 text-red-600" />
+                      <span class="text-xs font-medium text-red-600">3.1%</span>
+                      <span class="text-xs text-gray-600">vs last period</span>
                     </div>
                   </div>
                 </div>
@@ -436,18 +426,19 @@
             <!-- Average Order Value -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 transform hover:scale-110 transition-transform duration-200">
-                    <TrendingUpIcon class="w-6 h-6 text-white" />
+              <div class="p-4">
+                <div class="flex items-center gap-3">
+                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 transform hover:scale-110 transition-transform duration-200">
+                    <TrendingUpIcon class="w-5 h-5 text-white" />
                   </div>
-                  <div>
-                    <p class="text-sm text-gray-600">Average Order Value</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ formatCurrency(averageOrderValue) }}</p>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs sm:text-sm text-gray-600">Average Order Value</p>
+                    <!-- reduced font size from text-2xl to text-lg to handle millions -->
+                    <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ formatCurrency(averageOrderValue) }}</p>
                     <div class="flex items-center gap-1 mt-1">
-                      <TrendingUpIcon class="w-4 h-4 text-amber-600" />
-                      <span class="text-sm font-medium text-amber-600">5.3%</span>
-                      <span class="text-sm text-gray-600">vs last period</span>
+                      <TrendingUpIcon class="w-3 h-3 sm:w-4 sm:h-4 text-amber-600" />
+                      <span class="text-xs font-medium text-amber-600">5.3%</span>
+                      <span class="text-xs text-gray-600">vs last period</span>
                     </div>
                   </div>
                 </div>
@@ -853,7 +844,7 @@
               <option value="cash">Cash</option>
               <option value="credit_card">Credit Card</option>
               <option value="bank_transfer">Bank Transfer</option>
-              <option value="gcash">GCash</option>
+              <option value=" gcash">GCash</option>
             </select>
           </div>
 
@@ -892,7 +883,7 @@
 
   <!-- Daily Sales Report Modal -->
   <div v-if="showDailyReportModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
+    <div class="bg-white rounded-xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl">
       <div class="p-6 border-b border-gray-200">
         <div class="flex items-center justify-between">
           <h3 class="text-xl font-bold text-gray-900">Daily Sales Report</h3>
@@ -1090,11 +1081,11 @@
             Save as Image
           </button>
           <button 
-            @click="generateDailySummary"
-            class="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
+            @click="printDailyReport"
+            class="flex-1 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
           >
-            <ClipboardIcon class="w-5 h-5" />
-            Summary
+            <PrinterIcon class="w-5 h-5" />
+            Print
           </button>
         </div>
       </div>
@@ -1299,7 +1290,8 @@ import {
   Loader as LoaderIcon,
   Trash2 as Trash2Icon,
   Download as DownloadIcon,
-  Printer as PrinterIcon
+  Printer as PrinterIcon,
+  BarChart3 as BarChart3Icon,
 } from 'lucide-vue-next'
 
 // Current date
@@ -1732,7 +1724,7 @@ const formatPaymentMethod = (method) => {
     'cash': 'Cash',
     'credit_card': 'Credit Card',
     'bank_transfer': 'Bank Transfer',
-    'gcash': 'GCash'
+    ' gcash': 'GCash'
   }
   return methods[method] || method
 }
@@ -1880,14 +1872,6 @@ const downloadDailyReport = async () => {
     // Set canvas size for complete report
     canvas.width = 800
     canvas.height = 1600 // Increased height for better spacing
-    
-    // Create gradient background
-    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
-    gradient.addColorStop(0, '#f8fafc')
-    gradient.addColorStop(0.3, '#e2e8f0')
-    gradient.addColorStop(1, '#f1f5f9')
-    ctx.fillStyle = gradient
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
     
     // Add subtle pattern/texture
     ctx.fillStyle = 'rgba(148, 163, 184, 0.1)'
@@ -2354,68 +2338,96 @@ const downloadDailyReport = async () => {
   }
 }
 
-// Generate daily summary function
-const generateDailySummary = () => {
-  const summaryText = `
-📊 ADMIN SALES SUMMARY - ${todayFormatted}
-Barcelona Paint Center Admin Portal
-
-🛡️ ADMIN OVERVIEW:
-• Admin: Admin User (ADM-001)
-• Period: ${selectedRange.value.toUpperCase()}
-• Status: ✅ System Active
-
-💰 PERFORMANCE RESULTS:
-• Total Revenue: ${formatCurrency(totalRevenue.value)}
-• Total Orders: ${totalOrders.value} orders
-• Items Sold: ${totalProductsSold.value} pieces
-• Average Order: ${formatCurrency(averageOrderValue.value)}
-
-🏆 TOP PRODUCTS:
-${sortedTopProducts.value.slice(0, 3).map((product, index) => 
-  `${index + 1}. ${product.name} - ${formatCurrency(product.revenue)} (${product.units} units)`
-).join('\n')}
-
-💳 PAYMENT BREAKDOWN:
-${Object.entries(sales.value.reduce((acc, sale) => {
-  const method = sale.paymentMethod || 'cash'
-  if (!acc[method]) acc[method] = { count: 0, total: 0 }
-  acc[method].count++
-  acc[method].total += sale.total
-  return acc
-}, {})).map(([method, data]) => 
-  `• ${formatPaymentMethod(method)}: ${data.count} orders (${formatCurrency(data.total)})`
-).join('\n')}
-
-🛒 RECENT TRANSACTIONS:
-${sales.value.slice(0, 5).map(sale => 
-  `• ${sale.orderId} - ${sale.customerName} - ${formatCurrency(sale.total)} (${formatTime(sale.date)})`
-).join('\n')}
-
-📋 ADMIN SUMMARY:
-• Total Sales Value: ${formatCurrency(totalRevenue.value)}
-• Transactions Processed: ${totalOrders.value}
-• System Status: 100% Operational
-• Data Integrity: ✅ Verified
-• Report Generated: ${formatDateTime(new Date())}
-
-✅ All data verified and current
-Barcelona Paint Center - Admin Portal
-  `
+// Print daily report
+const printDailyReport = () => {
+  const reportContent = document.getElementById('daily-report-content')
+  if (!reportContent) {
+    alert('Daily report content not found.')
+    return
+  }
   
-  // Create and download summary
-  const blob = new Blob([summaryText], { type: 'text/plain' })
-  const url = URL.createObjectURL(blob)
-  const link = document.createElement('a')
-  link.download = `admin-summary-${selectedRange.value}-${todayFormatted.replace(/\s+/g, '-')}.txt`
-  link.href = url
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
-  URL.revokeObjectURL(url)
-  
-  alert('Admin summary downloaded successfully! 📋✅')
+  const printWindow = window.open('', '_blank')
+  if (!printWindow) {
+    alert('Please allow pop-ups to print the report.')
+    return
+  }
+
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Daily Sales Report</title>
+      <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
+        .report-header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        .report-header h2 { font-size: 24px; font-weight: bold; color: #1e40af; margin-bottom: 5px; }
+        .report-header p { font-size: 14px; color: #0891b2; font-weight: 600; }
+        .report-header .date { font-size: 12px; color: #6b7280; margin-top: 5px; }
+        .report-content { font-size: 12px; line-height: 1.6; }
+        .section { margin-bottom: 15px; }
+        .section-title { font-weight: bold; color: #1e40af; margin-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f3f4f6; font-weight: bold; }
+        .footer { text-align: center; margin-top: 20px; font-size: 10px; color: #666; border-top: 1px solid #ddd; padding-top: 10px; }
+        .admin-info, .performance, .top-products, .recent-transactions { 
+          background-color: rgba(255, 255, 255, 0.8); 
+          border: 1px solid #e2e8f0; 
+          border-radius: 8px; 
+          padding: 15px; 
+          margin-bottom: 20px; 
+        }
+        .section-title { font-size: 16px; font-weight: 700; color: #1e3a8a; margin-bottom: 15px; display: flex; align-items: center; }
+        .section-title svg { margin-right: 8px; color: #0891b2; width: 18px; height: 18px;}
+        .grid-cols-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+        .grid-cols-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
+        .metric-box { padding: 10px; border-radius: 6px; display: flex; align-items: center; }
+        .metric-label { font-size: 11px; color: #4b5563; font-weight: 600; margin-bottom: 3px;}
+        .metric-value { font-size: 18px; font-weight: 800; }
+        .product-item, .sale-item { border-bottom: 1px dashed #e5e7eb; padding-bottom: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .product-item:last-child, .sale-item:last-child { border-bottom: none; margin-bottom: 0; }
+        .product-name { font-weight: 600; color: #1f2937; }
+        .product-category { font-size: 11px; color: #6b7280; }
+        .product-units, .product-revenue, .product-amount, .product-percent { text-align: center; }
+        .product-units .value, .product-revenue .value, .product-amount .value { font-weight: 700; }
+        .product-units .label, .product-revenue .label, .product-amount .label, .product-percent .label { font-size: 10px; color: #6b7280; }
+        .status-badge { padding: 3px 8px; border-radius: 9999px; font-size: 11px; font-weight: 600; display: inline-block; }
+        .status-completed { background-color: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+        .status-pending { background-color: #ffedd5; color: #92400e; border: 1px solid #fecaca; }
+        .status-cancelled { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        
+        @media print {
+          body { margin: 0; }
+          .report-container { border: none; box-shadow: none; max-width: 100%; padding: 10px; }
+          .section-title svg { display: none; } /* Hide icons for print */
+          button { display: none; } /* Hide buttons */
+        }
+      </style>
+    </head>
+    <body>
+      <div class="report-container">
+        <div class="report-header">
+          <h2>Barcelona Paint Center</h2>
+          <p>Admin Daily Sales Report</p>
+          <p class="date">${formatDateTime(new Date())}</p>
+        </div>
+        <div class="report-content">
+          ${reportContent.innerHTML}
+        </div>
+        <div class="footer">
+          <p>Report generated for admin review</p>
+          <p>Barcelona Paint Center Admin Portal</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `)
+
+  printWindow.document.close()
+  printWindow.focus() // Required for some browsers to print correctly
+  printWindow.print()
 }
+
 
 // Download receipt as text file instead of image
 const downloadReceipt = () => {

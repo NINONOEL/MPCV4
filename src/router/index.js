@@ -11,8 +11,6 @@ import SignupPage from "@/components/public/SignupPage.vue"
 import CustomerPortal from "@/components/public/CustomerPortal.vue"
 import HouseColorRecommender from "@/components/public/HouseColorRecommender.vue"
 import PaintMixing from "@/components/public/PaintMixing.vue"
-// --- BAGO: I-import ang bagong dashboard component --- //
-import CustomerDashboard from "@/components/public/CustomerDashboard.vue"
 import Products from "@/components/public/Products.vue"
 
 // ADMIN COMPONENTS
@@ -22,9 +20,9 @@ import AdminStaffManagement from "../components/admin/AdminStaffManagement.vue"
 import AdminInventory from "../components/admin/AdminInventory.vue"
 import AdminPaintMixing from "../components/admin/AdminPaintMixing.vue"
 import AdminSalesAnalytics from "../components/admin/AdminSalesAnalytics.vue"
-import AdminReports from "../components/admin/AdminReports.vue"
 import AdminSettings from "../components/admin/AdminSettings.vue"
 import AdminHousePaintRecommender from "../components/admin/AdminHousePaintRecommender.vue"
+import AdminVisualization from "../components/admin/AdminVisualization.vue"
 
 // STAFF COMPONENTS
 import StaffPortal from "../components/staff/StaffPortal.vue"
@@ -160,36 +158,30 @@ const routes = [
     component: SignupPage,
   },
 
-  // --- BINAGO: CUSTOMER ROUTES (may default dashboard na) --- //
   {
     path: "/customer/portal",
+    name: "CustomerPortal",
     component: CustomerPortal,
     beforeEnter: requireCustomer,
-    // TINANGGAL: Ang redirect ay hindi na kailangan dahil may default child route na tayo
-    children: [
-      {
-        path: "", // Default view para sa /customer/portal
-        name: "CustomerPortalDashboard",
-        component: CustomerDashboard,
-      },
-      {
-        path: "products", // URL: /customer/portal/products
-        name: "CustomerPortalProducts",
-        component: Products,
-      },
-      {
-        path: "mixing", // URL: /customer/portal/mixing
-        name: "CustomerPortalMixing",
-        component: PaintMixing,
-      },
-      {
-        path: "recommender", // URL: /customer/portal/recommender
-        name: "CustomerPortalRecommender",
-        component: HouseColorRecommender,
-      },
-    ],
   },
-  // --- END NG PAGBABAGO --- //
+  {
+    path: "/customer/portal/products",
+    name: "CustomerPortalProducts",
+    component: Products,
+    beforeEnter: requireCustomer,
+  },
+  {
+    path: "/customer/portal/mixing",
+    name: "CustomerPortalMixing",
+    component: PaintMixing,
+    beforeEnter: requireCustomer,
+  },
+  {
+    path: "/customer/portal/recommender",
+    name: "CustomerPortalRecommender",
+    component: HouseColorRecommender,
+    beforeEnter: requireCustomer,
+  },
 
   // SYSTEM ROUTE (Internal access)
   {
@@ -235,21 +227,15 @@ const routes = [
     beforeEnter: requireAdmin,
   },
   {
-    path: "/admin/reports",
-    name: "AdminReports",
-    component: AdminReports,
+    path: "/admin/visualization",
+    name: "AdminVisualization",
+    component: AdminVisualization,
     beforeEnter: requireAdmin,
   },
   {
     path: "/admin/settings",
     name: "AdminSettings",
     component: AdminSettings,
-    beforeEnter: requireAdmin,
-  },
-  {
-    path: "/admin/security",
-    name: "AdminSecurity",
-    component: () => import("../components/admin/AdminSecurity.vue"),
     beforeEnter: requireAdmin,
   },
   {

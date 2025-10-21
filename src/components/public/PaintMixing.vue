@@ -1,224 +1,95 @@
 <template>
-  <div class="min-h-screen bg-background p-3 sm:p-4">
-    <div class="max-w-6xl mx-auto space-y-4 sm:space-y-6">
-      <!-- Header -->
-      <div class="text-center space-y-2">
-        <h1 class="text-2xl sm:text-3xl font-bold text-foreground">AI Paint Mixing Studio</h1>
-        <p class="text-sm sm:text-base text-muted-foreground">Create perfect color combinations with AI-powered predictions</p>
+  <div class="min-h-screen bg-background p-2 sm:p-3">
+    <div class="max-w-5xl mx-auto space-y-3 sm:space-y-4">
+      <!-- Navigation header with back button -->
+      <div class="flex items-center gap-3 mb-3">
+        <button
+          @click="goBack"
+          class="flex items-center gap-2 px-3 py-1.5 bg-card border border-border rounded-lg hover:bg-accent transition-colors text-sm"
+        >
+          <ChevronLeft class="w-4 h-4" />
+          <span class="text-xs font-medium">Back to Portal</span>
+        </button>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-        <!-- Left Panel: Color Selection -->
-        <div class="space-y-4 sm:space-y-6">
-          <!-- Added Image Upload Section for color analysis -->
-          <div class="bg-gradient-to-br from-card via-card to-muted/20 rounded-xl border-2 border-border/50 p-6 shadow-lg">
-            <h3 class="text-lg font-bold text-card-foreground mb-6 flex items-center gap-3">
-              <div class="p-2 bg-primary/10 rounded-lg">
-                <Upload class="w-5 h-5 text-primary" />
-              </div>
-              Color Analysis Upload
-              <div class="ml-auto text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
-                AI Powered
-              </div>
-            </h3>
-            
-            <div 
-              @drop="handleDrop"
-              @dragover.prevent
-              @dragenter.prevent
-              @dragleave="isDragOver = false"
-              @dragover="isDragOver = true"
-              :class="[
-                'border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 cursor-pointer relative overflow-hidden',
-                isDragOver ? 'border-primary bg-primary/10 scale-[1.02] shadow-lg' : 'border-border hover:border-primary/50 hover:bg-muted/30',
-                isAnalyzing ? 'pointer-events-none' : ''
-              ]"
-              @click="triggerFileInput"
-            >
-              <input 
-                ref="fileInput" 
-                type="file" 
-                accept="image/*" 
-                @change="handleFileSelect" 
-                class="hidden"
-              />
-              
-              <!-- Background decoration -->
-              <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-50"></div>
-              
-              <div v-if="!isAnalyzing && !uploadedImage" class="space-y-4 relative z-10">
-                <div class="w-16 h-16 mx-auto bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center">
-                  <Upload class="w-8 h-8 text-primary" />
-                </div>
-                <div>
-                  <p class="text-base font-semibold text-card-foreground mb-2">
-                    Drop your image here or click to upload
-                  </p>
-                  <p class="text-sm text-muted-foreground">
-                    AI will analyze the main object and extract its dominant colors
-                  </p>
-                  <p class="text-xs text-muted-foreground mt-2 opacity-75">
-                    Supports JPG, PNG, GIF, WebP • Max 10MB
-                  </p>
-                </div>
-              </div>
-              
-              <div v-if="isAnalyzing" class="space-y-4 relative z-10">
-                <div class="w-16 h-16 mx-auto bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center">
-                  <Palette class="w-8 h-8 text-primary color-extract" />
-                </div>
-                <div>
-                  <p class="text-base font-semibold text-card-foreground mb-3">Analyzing object colors...</p>
-                  <div class="w-full bg-muted/50 rounded-full h-3 overflow-hidden">
-                    <div 
-                      class="bg-gradient-to-r from-primary to-secondary h-3 rounded-full transition-all duration-500 relative"
-                      :style="{ width: `${analysisProgress}%` }"
-                    >
-                      <div class="absolute inset-0 bg-white/20 rounded-full animate-pulse"></div>
-                    </div>
-                  </div>
-                  <p class="text-xs text-muted-foreground mt-2">{{ analysisProgress }}% complete</p>
-                </div>
-              </div>
-              
-              <div v-if="uploadedImage && !isAnalyzing" class="space-y-4 relative z-10">
-                <div class="relative inline-block">
-                  <img 
-                    :src="uploadedImage" 
-                    alt="Uploaded image" 
-                    class="max-w-full max-h-40 mx-auto rounded-xl shadow-lg border-2 border-border/50"
-                  />
-                  <div class="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                    </svg>
-                  </div>
-                </div>
-                <div class="flex gap-3 justify-center">
-                  <button 
-                    @click.stop="analyzeImage"
-                    class="px-6 py-2.5 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground rounded-lg text-sm font-semibold hover:from-primary/90 hover:to-primary transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 flex items-center gap-2"
-                  >
-                    <Palette class="w-4 h-4" />
-                    Analyze Colors
-                  </button>
-                  <button 
-                    @click.stop="clearUpload"
-                    class="px-6 py-2.5 bg-gradient-to-r from-destructive to-destructive/90 text-destructive-foreground rounded-lg text-sm font-semibold hover:from-destructive/90 hover:to-destructive transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 flex items-center gap-2"
-                  >
-                    <X class="w-4 h-4" />
-                    Remove
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Enhanced Analysis Results -->
-            <div v-if="analysisResults.length > 0" class="space-y-4">
-              <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-foreground">Detected Object Colors</h3>
-                <span class="text-sm text-green-600 bg-green-50 px-2 py-1 rounded">
-                  {{ analysisResults.length }} colors found
-                </span>
-              </div>
-              
-              <div class="space-y-3">
-                <div v-for="(result, index) in analysisResults" :key="index"
-                     class="flex items-center gap-4 p-3 bg-card rounded-lg border hover:shadow-md transition-all duration-200">
-                  <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-lg border-2 border-border shadow-sm" 
-                         :style="{ backgroundColor: result.hex }"></div>
-                    <div class="flex flex-col">
-                      <span class="text-sm font-medium text-foreground">{{ index + 1 }}</span>
-                    </div>
-                  </div>
-                  
-                  <div class="flex-1 space-y-1">
-                    <div class="text-sm font-mono text-muted-foreground">{{ result.hex }}</div>
-                    <div class="text-xs text-muted-foreground">RGB({{ result.rgb.r }}, {{ result.rgb.g }}, {{ result.rgb.b }})</div>
-                  </div>
-                  
-                  <div class="text-right">
-                    <div class="text-lg font-semibold text-foreground">{{ result.percentage }}%</div>
-                    <button @click="addColorToMixture(result)" 
-                            class="text-xs text-primary hover:text-primary/80 font-medium transition-colors">
-                      Add to Mix
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <!-- Header -->
+      <div class="text-center space-y-1">
+        <h1 class="text-xl sm:text-2xl font-bold text-foreground">Paint Mixing Studio</h1>
+        <p class="text-xs sm:text-sm text-muted-foreground">Create perfect color combinations with Predictions</p>
+      </div>
 
-          <div class="bg-card rounded-lg border p-4 sm:p-6 space-y-4 sm:space-y-6">
-            <div class="space-y-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+        <!-- Left Panel: Color Selection -->
+        <div class="space-y-3 sm:space-y-4">
+
+          <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-3 sm:space-y-4">
+            <div class="space-y-3">
               <!-- Fixed color picker with accurate HSV color wheel and reduced sizes -->
-              <div class="space-y-3">
-                <h3 class="text-base sm:text-lg font-semibold text-foreground">Interactive Color Picker</h3>
+              <div class="space-y-2">
+                <h3 class="text-sm sm:text-base font-semibold text-foreground">Interactive Color Picker</h3>
                 <div class="relative">
-                  <canvas 
+                  <!-- Reduced canvas height for more compact layout -->
+                  <canvas
                     ref="colorCanvas"
-                    class="w-full h-40 sm:h-48 rounded-xl cursor-crosshair border"
-                    width="300" 
+                    class="w-full h-32 sm:h-40 rounded-lg cursor-crosshair border-2 border-border shadow-md"
+                    width="400"
                     height="200"
                     @click="selectColorFromCanvas"
                     @mousemove="previewColorFromCanvas">
                   </canvas>
                   <!-- Color picker cursor -->
-                  <div v-if="pickerPosition.x !== null && pickerPosition.y !== null" 
+                  <div v-if="pickerPosition.x !== null && pickerPosition.y !== null"
                        class="absolute w-3 h-3 border-2 border-white rounded-full shadow-lg transform -translate-x-1.5 -translate-y-1.5 pointer-events-none"
                        :style="{ left: pickerPosition.x + 'px', top: pickerPosition.y + 'px' }">
                     <div class="w-full h-full rounded border border-black/30"></div>
                   </div>
                 </div>
                 <!-- Added current color preview for accuracy verification -->
-                <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 rounded border-2 border-gray-300" :style="{ backgroundColor: currentPreviewColor }"></div>
-                  <span class="text-xs sm:text-sm font-mono text-muted-foreground">{{ currentPreviewColor }}</span>
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg border-2 border-gray-300 shadow-sm" :style="{ backgroundColor: currentPreviewColor }"></div>
+                  <span class="text-xs font-mono text-muted-foreground">{{ currentPreviewColor }}</span>
                 </div>
               </div>
 
               <!-- Enhanced Quick Color Selection with smooth animations -->
               <div>
-                <h3 class="text-base sm:text-lg font-semibold text-card-foreground mb-4">Quick Color Selection</h3>
-                
+                <h3 class="text-sm sm:text-base font-semibold text-card-foreground mb-2">Quick Color Selection</h3>
+
                 <!-- Primary & Basic Colors -->
-                <div class="mb-4">
-                  <!-- Removed dropdown functionality from colored circle, kept only right-side dropdown -->
-                  <button 
+                <div class="mb-2">
+                  <!-- Reduced padding and text sizes for compact layout -->
+                  <button
                     @click="toggleCategory('primary')"
-                    class="flex items-center gap-3 w-full text-left bg-card hover:bg-accent/50 rounded-lg px-4 py-3 transition-all duration-200 group border border-border hover:border-primary/30 shadow-sm hover:shadow-md"
+                    class="flex items-center gap-2 w-full text-left bg-card hover:bg-accent/50 rounded-lg px-3 py-2 transition-all duration-200 group border border-border hover:border-primary/30 shadow-sm hover:shadow-md"
                   >
-                    <!-- Made colored circle purely decorative without chevron icon -->
-                    <div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 group-hover:bg-primary/30 transition-colors">
+                    <div class="w-6 h-6 rounded-full bg-primary/20 border border-primary/30 group-hover:bg-primary/30 transition-colors">
                     </div>
-                    <div class="flex-1">
-                      <h4 class="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                    <div class="flex-1 min-w-0">
+                      <h4 class="text-xs font-semibold text-foreground group-hover:text-primary transition-colors">
                         Primary & Basic Colors
                       </h4>
-                      <p class="text-xs text-muted-foreground">Essential colors for any project</p>
+                      <p class="text-xs text-muted-foreground hidden sm:block">Essential colors</p>
                     </div>
-                    <div class="flex items-center gap-2">
-                      <span class="text-xs font-medium text-muted-foreground bg-muted px-2 py-1 rounded-full">
-                        {{ primaryColors.length }} colors
+                    <div class="flex items-center gap-1">
+                      <span class="text-xs font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded-full">
+                        {{ primaryColors.length }}
                       </span>
-                      <!-- Enhanced dropdown button with palette icon and chevron for better UX -->
-                      <div class="flex items-center gap-1 px-2 py-1 rounded-full bg-muted border border-border hover:bg-primary/10 hover:border-primary/30 transition-all">
+                      <div class="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-muted border border-border hover:bg-primary/10 hover:border-primary/30 transition-all">
                         <Palette class="w-3 h-3 text-foreground/60" />
-                        <component 
-                          :is="categoryVisibility.primary ? ChevronDown : ChevronRightIcon" 
+                        <component
+                          :is="categoryVisibility.primary ? ChevronDown : ChevronRightIcon"
                           class="w-3 h-3 text-foreground/70"
                         />
                       </div>
                     </div>
                   </button>
-                  <transition 
+                  <transition
                     name="category"
                     @enter="onCategoryEnter"
                     @leave="onCategoryLeave"
                   >
                     <div v-show="categoryVisibility.primary" class="overflow-hidden">
-                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-2 mt-3 p-3 bg-muted/30 rounded-lg">
+                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-1 mt-2 p-2 bg-muted/30 rounded-lg">
                         <div v-for="color in primaryColors" :key="color.name"
                              class="aspect-square rounded-lg cursor-pointer border-2 border-border hover:border-primary hover:scale-110 transition-all duration-200 shadow-sm hover:shadow-lg"
                              :style="{ backgroundColor: color.hex }"
@@ -231,42 +102,39 @@
                 </div>
 
                 <!-- Earth Tones -->
-                <div class="mb-4">
-                  <!-- Removed dropdown functionality from colored circle, kept only right-side dropdown -->
-                  <button 
+                <div class="mb-2">
+                  <button
                     @click="toggleCategory('earth')"
-                    class="flex items-center gap-3 w-full text-left bg-card hover:bg-accent/50 rounded-lg px-4 py-3 transition-all duration-200 group border border-border hover:border-primary/30 shadow-sm hover:shadow-md"
+                    class="flex items-center gap-2 w-full text-left bg-card hover:bg-accent/50 rounded-lg px-3 py-2 transition-all duration-200 group border border-border hover:border-primary/30 shadow-sm hover:shadow-md"
                   >
-                    <!-- Made colored circle purely decorative without chevron icon -->
-                    <div class="w-8 h-8 rounded-full bg-amber-100 border border-amber-300 group-hover:bg-amber-200 transition-colors">
+                    <div class="w-6 h-6 rounded-full bg-amber-100 border border-amber-300 group-hover:bg-amber-200 transition-colors">
                     </div>
-                    <div class="flex-1">
-                      <h4 class="text-sm font-semibold text-foreground group-hover:text-amber-600 transition-colors">
+                    <div class="flex-1 min-w-0">
+                      <h4 class="text-xs font-semibold text-foreground group-hover:text-amber-600 transition-colors">
                         Earth Tones
                       </h4>
-                      <p class="text-xs text-muted-foreground">Natural, warm colors</p>
+                      <p class="text-xs text-muted-foreground hidden sm:block">Natural, warm colors</p>
                     </div>
-                    <div class="flex items-center gap-2">
-                      <span class="text-xs font-medium text-muted-foreground bg-muted px-2 py-1 rounded-full">
-                        {{ earthTones.length }} colors
+                    <div class="flex items-center gap-1">
+                      <span class="text-xs font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded-full">
+                        {{ earthTones.length }}
                       </span>
-                      <!-- Enhanced dropdown button with palette icon and chevron for better UX -->
-                      <div class="flex items-center gap-1 px-2 py-1 rounded-full bg-muted border border-border hover:bg-amber-100 hover:border-amber-300 transition-all">
+                      <div class="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-muted border border-border hover:bg-amber-100 hover:border-amber-300 transition-all">
                         <Palette class="w-3 h-3 text-foreground/60" />
-                        <component 
-                          :is="categoryVisibility.earth ? ChevronDown : ChevronRightIcon" 
+                        <component
+                          :is="categoryVisibility.earth ? ChevronDown : ChevronRightIcon"
                           class="w-3 h-3 text-foreground/70"
                         />
                       </div>
                     </div>
                   </button>
-                  <transition 
+                  <transition
                     name="category"
                     @enter="onCategoryEnter"
                     @leave="onCategoryLeave"
                   >
                     <div v-show="categoryVisibility.earth" class="overflow-hidden">
-                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-2 mt-3 p-3 bg-muted/30 rounded-lg">
+                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-1 mt-2 p-2 bg-muted/30 rounded-lg">
                         <div v-for="color in earthTones" :key="color.name"
                              class="aspect-square rounded-lg cursor-pointer border-2 border-border hover:border-primary hover:scale-110 transition-all duration-200 shadow-sm hover:shadow-lg"
                              :style="{ backgroundColor: color.hex }"
@@ -279,42 +147,39 @@
                 </div>
 
                 <!-- Pastels -->
-                <div class="mb-4">
-                  <!-- Removed dropdown functionality from colored circle, kept only right-side dropdown -->
-                  <button 
+                <div class="mb-2">
+                  <button
                     @click="toggleCategory('pastels')"
-                    class="flex items-center gap-3 w-full text-left bg-card hover:bg-accent/50 rounded-lg px-4 py-3 transition-all duration-200 group border border-border hover:border-primary/30 shadow-sm hover:shadow-md"
+                    class="flex items-center gap-2 w-full text-left bg-card hover:bg-accent/50 rounded-lg px-3 py-2 transition-all duration-200 group border border-border hover:border-primary/30 shadow-sm hover:shadow-md"
                   >
-                    <!-- Made colored circle purely decorative without chevron icon -->
-                    <div class="w-8 h-8 rounded-full bg-pink-100 border border-pink-300 group-hover:bg-pink-200 transition-colors">
+                    <div class="w-6 h-6 rounded-full bg-pink-100 border border-pink-300 group-hover:bg-pink-200 transition-colors">
                     </div>
-                    <div class="flex-1">
-                      <h4 class="text-sm font-semibold text-foreground group-hover:text-pink-600 transition-colors">
+                    <div class="flex-1 min-w-0">
+                      <h4 class="text-xs font-semibold text-foreground group-hover:text-pink-600 transition-colors">
                         Pastel Colors
                       </h4>
-                      <p class="text-xs text-muted-foreground">Soft, gentle tones</p>
+                      <p class="text-xs text-muted-foreground hidden sm:block">Soft, gentle tones</p>
                     </div>
-                    <div class="flex items-center gap-2">
-                      <span class="text-xs font-medium text-muted-foreground bg-muted px-2 py-1 rounded-full">
-                        {{ pastelColors.length }} colors
+                    <div class="flex items-center gap-1">
+                      <span class="text-xs font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded-full">
+                        {{ pastelColors.length }}
                       </span>
-                      <!-- Enhanced dropdown button with palette icon and chevron for better UX -->
-                      <div class="flex items-center gap-1 px-2 py-1 rounded-full bg-muted border border-border hover:bg-pink-100 hover:border-pink-300 transition-all">
+                      <div class="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-muted border border-border hover:bg-pink-100 hover:border-pink-300 transition-all">
                         <Palette class="w-3 h-3 text-foreground/60" />
-                        <component 
-                          :is="categoryVisibility.pastels ? ChevronDown : ChevronRightIcon" 
+                        <component
+                          :is="categoryVisibility.pastels ? ChevronDown : ChevronRightIcon"
                           class="w-3 h-3 text-foreground/70"
                         />
                       </div>
                     </div>
                   </button>
-                  <transition 
+                  <transition
                     name="category"
                     @enter="onCategoryEnter"
                     @leave="onCategoryLeave"
                   >
                     <div v-show="categoryVisibility.pastels" class="overflow-hidden">
-                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-2 mt-3 p-3 bg-muted/30 rounded-lg">
+                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-1 mt-2 p-2 bg-muted/30 rounded-lg">
                         <div v-for="color in pastelColors" :key="color.name"
                              class="aspect-square rounded-lg cursor-pointer border-2 border-border hover:border-primary hover:scale-110 transition-all duration-200 shadow-sm hover:shadow-lg"
                              :style="{ backgroundColor: color.hex }"
@@ -328,41 +193,38 @@
 
                 <!-- Deep & Rich Colors -->
                 <div>
-                  <!-- Removed dropdown functionality from colored circle, kept only right-side dropdown -->
-                  <button 
+                  <button
                     @click="toggleCategory('deep')"
-                    class="flex items-center gap-3 w-full text-left bg-card hover:bg-accent/50 rounded-lg px-4 py-3 transition-all duration-200 group border border-border hover:border-primary/30 shadow-sm hover:shadow-md"
+                    class="flex items-center gap-2 w-full text-left bg-card hover:bg-accent/50 rounded-lg px-3 py-2 transition-all duration-200 group border border-border hover:border-primary/30 shadow-sm hover:shadow-md"
                   >
-                    <!-- Made colored circle purely decorative without chevron icon -->
-                    <div class="w-8 h-8 rounded-full bg-purple-100 border border-purple-300 group-hover:bg-purple-200 transition-colors">
+                    <div class="w-6 h-6 rounded-full bg-purple-100 border border-purple-300 group-hover:bg-purple-200 transition-colors">
                     </div>
-                    <div class="flex-1">
-                      <h4 class="text-sm font-semibold text-foreground group-hover:text-purple-600 transition-colors">
+                    <div class="flex-1 min-w-0">
+                      <h4 class="text-xs font-semibold text-foreground group-hover:text-purple-600 transition-colors">
                         Deep & Rich Colors
                       </h4>
-                      <p class="text-xs text-muted-foreground">Bold, vibrant tones</p>
+                      <p class="text-xs text-muted-foreground hidden sm:block">Bold, vibrant tones</p>
                     </div>
-                    <div class="flex items-center gap-2">
-                      <span class="text-xs font-medium text-muted-foreground bg-muted px-2 py-1 rounded-full">
-                        {{ deepColors.length }} colors
+                    <div class="flex items-center gap-1">
+                      <span class="text-xs font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded-full">
+                        {{ deepColors.length }}
                       </span>
-                      <!-- Enhanced dropdown button with palette icon and chevron for better UX -->
-                      <div class="flex items-center gap-1 px-2 py-1 rounded-full bg-muted border border-border hover:bg-purple-100 hover:border-purple-300 transition-all">
+                      <div class="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-muted border border-border hover:bg-purple-100 hover:border-purple-300 transition-all">
                         <Palette class="w-3 h-3 text-foreground/60" />
-                        <component 
-                          :is="categoryVisibility.deep ? ChevronDown : ChevronRightIcon" 
+                        <component
+                          :is="categoryVisibility.deep ? ChevronDown : ChevronRightIcon"
                           class="w-3 h-3 text-foreground/70"
                         />
                       </div>
                     </div>
                   </button>
-                  <transition 
+                  <transition
                     name="category"
                     @enter="onCategoryEnter"
                     @leave="onCategoryLeave"
                   >
                     <div v-show="categoryVisibility.deep" class="overflow-hidden">
-                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-2 mt-3 p-3 bg-muted/30 rounded-lg">
+                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-1 mt-2 p-2 bg-muted/30 rounded-lg">
                         <div v-for="color in deepColors" :key="color.name"
                              class="aspect-square rounded-lg cursor-pointer border-2 border-border hover:border-primary hover:scale-110 transition-all duration-200 shadow-sm hover:shadow-lg"
                              :style="{ backgroundColor: color.hex }"
@@ -377,314 +239,109 @@
             </div>
 
             <!-- Selected Colors for Mixing -->
-            <div class="space-y-3">
+            <div class="space-y-2">
               <div class="flex items-center justify-between">
-                <h3 class="text-base sm:text-lg font-semibold text-foreground">Selected Colors</h3>
-                <!-- Enhanced Clear All button with better styling -->
-                <button v-if="selectedColors.length > 0" 
+                <h3 class="text-sm sm:text-base font-semibold text-foreground">Selected Colors</h3>
+                <!-- Reduced button size and padding -->
+                <button v-if="selectedColors.length > 0"
                         @click="clearAllColors"
-                        class="px-3 py-1.5 text-xs font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg transition-all duration-200 hover:shadow-md hover:scale-105 flex items-center gap-1">
+                        class="px-2 py-1 text-xs font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg transition-all duration-200 hover:shadow-md hover:scale-105 flex items-center gap-1">
                   <X class="w-3 h-3" />
-                  Clear All
+                  Clear
                 </button>
               </div>
-              
-              <div v-if="selectedColors.length === 0" class="text-center py-6 text-muted-foreground text-sm">
+
+              <div v-if="selectedColors.length === 0" class="text-center py-3 text-muted-foreground text-xs">
                 Select colors to start mixing
               </div>
-              
-              <div v-else class="space-y-2">
+
+              <div v-else class="space-y-1.5">
                 <div v-for="(color, index) in selectedColors" :key="index"
-                     class="flex items-center gap-3 p-3 bg-muted/50 rounded-lg border border-muted hover:border-primary/30 transition-colors">
-                  <div class="w-8 h-8 rounded-lg border-2 border-gray-300 shadow-sm" :style="{ backgroundColor: color.hex }"></div>
+                     class="flex items-center gap-2 p-2 bg-muted/50 rounded-lg border border-muted hover:border-primary/30 transition-colors">
+                  <div class="w-6 h-6 rounded-lg border-2 border-gray-300 shadow-sm flex-shrink-0" :style="{ backgroundColor: color.hex }"></div>
                   <div class="flex-1 min-w-0">
-                    <p class="text-sm font-medium text-foreground truncate">{{ color.name }}</p>
+                    <p class="text-xs font-medium text-foreground truncate">{{ color.name }}</p>
                     <p class="text-xs text-muted-foreground">{{ color.hex }}</p>
                   </div>
-                  <!-- Enhanced percentage control with better color contrast and visibility -->
-                  <div class="flex items-center gap-3 bg-gradient-to-r from-background to-muted/30 rounded-lg p-3 border shadow-sm">
-                    <div class="flex items-center gap-4 flex-1">
-                      <input type="range" 
-                             v-model="color.ratio" 
-                             min="1" 
-                             max="100" 
-                             class="enhanced-range flex-1"
-                             :style="{ '--color': color.hex }">
-                      <div class="flex items-center gap-2">
-                        <span class="text-sm font-bold text-foreground min-w-[3rem] text-right">{{ color.ratio }}%</span>
-                        <div class="w-12 h-2 bg-muted rounded-full overflow-hidden border">
-                          <div class="h-full transition-all duration-300 rounded-full" 
-                               :style="{ 
-                                 width: color.ratio + '%', 
-                                 backgroundColor: color.hex,
-                                 boxShadow: `0 0 4px ${color.hex}40`
-                               }"></div>
-                        </div>
-                      </div>
-                    </div>
+                  <!-- Reduced range slider size and padding -->
+                  <div class="flex items-center gap-2 bg-gradient-to-r from-background to-muted/30 rounded-lg p-2 border shadow-sm">
+                    <input type="range"
+                           v-model="color.ratio"
+                           min="1"
+                           max="100"
+                           class="enhanced-range w-16"
+                           :style="{ '--color': color.hex }">
+                    <span class="text-xs font-bold text-foreground min-w-[2rem] text-right">{{ color.ratio }}%</span>
                   </div>
-                  <button @click="removeColor(index)" 
-                          class="text-red-500 hover:text-red-600 hover:bg-red-50 p-1.5 rounded-lg transition-all duration-200 hover:scale-110">
-                    <X class="w-4 h-4" />
+                  <button @click="removeColor(index)"
+                          class="text-red-500 hover:text-red-600 hover:bg-red-50 p-1 rounded-lg transition-all duration-200 hover:scale-110 flex-shrink-0">
+                    <X class="w-3 h-3" />
                   </button>
                 </div>
-              </div>
-            </div>
-
-            <!-- AI Controls -->
-            <div class="mt-8 p-4 bg-primary/5 rounded-xl border border-primary/20">
-              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div>
-                  <h3 class="font-semibold text-foreground">AI Analysis</h3>
-                  <p class="text-sm text-muted-foreground">Get intelligent color predictions and recommendations</p>
-                </div>
-                <button @click="runAiAnalysis"
-                        :disabled="selectedColors.length < 2 || isAiProcessing"
-                        class="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2 font-medium">
-                  <SparklesIcon class="w-5 h-5" />
-                  {{ isAiProcessing ? 'Analyzing...' : 'Analyze Colors' }}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Saved Mixtures -->
-          <div class="bg-card border border-border rounded-lg p-6 shadow-sm">
-            <div class="flex items-center justify-between mb-6">
-              <h2 class="text-2xl font-bold text-foreground flex items-center gap-2">
-                <HistoryIcon class="w-6 h-6 text-secondary" />
-                My Color Mixtures
-              </h2>
-              <div class="flex items-center gap-2">
-                <input type="text" 
-                       v-model="searchQuery"
-                       placeholder="Search mixtures..."
-                       class="px-3 py-2 bg-input border border-border rounded-lg text-sm focus:ring-2 focus:ring-ring focus:border-transparent">
-                <SearchIcon class="w-5 h-5 text-muted-foreground" />
-              </div>
-            </div>
-
-            <div class="space-y-3 max-h-64 overflow-y-auto">
-              <div v-for="mixture in filteredMixtures" :key="mixture.id"
-                   class="flex items-center gap-4 p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors">
-                <div class="w-12 h-12 rounded-lg border-2 border-border shadow-sm"
-                     :style="{ backgroundColor: mixture.predictedColor }"></div>
-                
-                <div class="flex-1">
-                  <div class="font-medium text-foreground">{{ mixture.name }}</div>
-                  <div class="text-sm text-muted-foreground">{{ mixture.colors.length }} colors • {{ formatDate(mixture.date) }}</div>
-                </div>
-
-                <div class="flex items-center gap-2">
-                  <button @click="loadMixture(mixture)"
-                          class="p-2 text-muted-foreground hover:text-primary transition-colors">
-                    <DownloadIcon class="w-4 h-4" />
-                  </button>
-                  <button @click="deleteMixture(mixture.id)"
-                          class="p-2 text-muted-foreground hover:text-destructive transition-colors">
-                    <Trash2Icon class="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-
-              <div v-if="filteredMixtures.length === 0" class="text-center py-8 text-muted-foreground">
-                <PaletteIcon class="w-12 h-12 mx-auto mb-3 opacity-50" />
-                <p>No saved mixtures yet</p>
-                <p class="text-sm">Create your first color mixture to get started</p>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Right Column -->
-        <div class="space-y-6">
+        <div class="space-y-3 sm:space-y-4">
           <!-- Color Palette Display -->
-          <div class="bg-card border border-border rounded-lg p-6 shadow-sm">
-            <h3 class="font-semibold text-foreground mb-4">Current Palette</h3>
-            <div class="grid grid-cols-5 gap-2 mb-4">
+          <div class="bg-card border border-border rounded-lg p-3 sm:p-4 shadow-sm">
+            <h3 class="font-semibold text-sm text-foreground mb-2">Current Palette</h3>
+            <div class="grid grid-cols-5 gap-1.5 mb-3">
               <div
                 v-for="(color, index) in selectedColors"
                 :key="index"
                 class="aspect-square rounded-lg border-2 border-border cursor-pointer hover:scale-105 transition-transform"
-                :style="{ backgroundColor: color }"
+                :style="{ backgroundColor: color.hex }"
                 @click="removeColor(index)"
-                :title="`Remove ${color}`"
+                :title="`Remove ${color.name || color.hex}`"
               ></div>
               <div
                 v-for="n in Math.max(0, 5 - selectedColors.length)"
                 :key="`empty-${n}`"
                 class="aspect-square rounded-lg border-2 border-dashed border-muted-foreground/30 flex items-center justify-center text-muted-foreground/50"
               >
-                <PlusIcon class="w-4 h-4" />
+                <PlusIcon class="w-3 h-3" />
               </div>
             </div>
-            <p class="text-sm text-muted-foreground">
+            <p class="text-xs text-muted-foreground">
               Click colors to add them to your palette (max 5)
             </p>
           </div>
 
-          <!-- Reduced result preview sizes -->
-          <div class="bg-card rounded-lg border p-4 sm:p-6 space-y-4">
-            <h3 class="text-base sm:text-lg font-semibold text-foreground">Mixed Result</h3>
-            
+          <!-- Mixed Result -->
+          <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-2">
+            <h3 class="text-sm sm:text-base font-semibold text-foreground">Mixed Result</h3>
+
             <div class="relative">
-              <div class="w-full h-32 sm:h-40 rounded-xl border-2 border-dashed border-gray-300 flex items-center justify-center"
+              <div class="w-full h-24 sm:h-32 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center"
                    :style="{ backgroundColor: mixedColor }">
                 <div v-if="!mixedColor || mixedColor === '#ffffff'" class="text-center text-muted-foreground">
-                  <Palette class="w-8 h-8 mx-auto mb-2 opacity-50" />
-                  <p class="text-sm">Mixed color will appear here</p>
+                  <Palette class="w-6 h-6 mx-auto mb-1 opacity-50" />
+                  <p class="text-xs">Mixed color will appear here</p>
                 </div>
               </div>
-              
-              <div v-if="mixedColor && mixedColor !== '#ffffff'" class="mt-3 text-center">
-                <p class="text-sm font-mono text-muted-foreground">{{ mixedColor }}</p>
-                <div class="flex justify-center gap-2 mt-2">
-                  <span class="text-xs px-2 py-1 bg-muted rounded">RGB: {{ getRgbFromHex(mixedColor) }}</span>
-                  <span class="text-xs px-2 py-1 bg-muted rounded">HSL: {{ getHslFromHex(mixedColor) }}</span>
+
+              <div v-if="mixedColor && mixedColor !== '#ffffff'" class="mt-2 text-center">
+                <p class="text-xs font-mono text-muted-foreground">{{ mixedColor }}</p>
+                <div class="flex justify-center gap-1 mt-1 flex-wrap">
+                  <span class="text-xs px-1.5 py-0.5 bg-muted rounded">RGB: {{ getRgbFromHex(mixedColor) }}</span>
+                  <span class="text-xs px-1.5 py-0.5 bg-muted rounded">HSL: {{ getHslFromHex(mixedColor) }}</span>
                 </div>
               </div>
             </div>
-
-            <!-- Color Preview & Results -->
-            <div class="bg-card border border-border rounded-lg p-6 shadow-sm">
-              <h2 class="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-                <EyeIcon class="w-6 h-6 text-accent" />
-                AI Prediction
-              </h2>
-
-              <!-- Main Color Preview -->
-              <div class="space-y-6">
-                <div class="relative">
-                  <div class="w-full h-32 sm:h-40 rounded-xl border-2 border-border shadow-lg color-blend"
-                       :style="{ backgroundColor: aiPrediction.color }">
-                  </div>
-                  <div class="absolute top-3 right-3 bg-black/70 text-white px-2 py-1 rounded-lg text-sm">
-                    {{ aiPrediction.color }}
-                  </div>
-                </div>
-
-                <!-- AI Confidence & Analysis -->
-                <div v-if="aiPrediction.confidence" class="space-y-4">
-                  <div>
-                    <div class="flex items-center justify-between mb-2">
-                      <span class="text-sm font-medium text-foreground">AI Confidence</span>
-                      <span class="text-sm text-muted-foreground">{{ aiPrediction.confidence }}%</span>
-                    </div>
-                    <div class="w-full bg-muted rounded-full h-2">
-                      <div class="bg-primary h-2 rounded-full transition-all duration-500"
-                           :style="{ width: aiPrediction.confidence + '%' }"></div>
-                    </div>
-                  </div>
-
-                  <div class="space-y-2">
-                    <h3 class="font-semibold text-foreground">Color Analysis</h3>
-                    <div class="text-sm text-muted-foreground space-y-1">
-                      <p><strong>Harmony:</strong> {{ aiPrediction.harmony }}</p>
-                      <p><strong>Mood:</strong> {{ aiPrediction.mood }}</p>
-                      <p><strong>Best Use:</strong> {{ aiPrediction.usage }}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- AI Recommendations -->
-              <div v-if="aiRecommendations.length > 0" class="mt-8 pt-6 border-t border-border">
-                <h3 class="font-semibold text-foreground mb-4 flex items-center gap-2">
-                  <LightbulbIcon class="w-5 h-5 text-accent" />
-                  AI Recommendations
-                </h3>
-                <div class="space-y-3">
-                  <div v-for="rec in aiRecommendations" :key="rec.id"
-                       class="flex items-center gap-3 p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
-                       @click="applyRecommendation(rec)">
-                    <div class="w-8 h-8 rounded-lg border border-border"
-                         :style="{ backgroundColor: rec.color }"></div>
-                    <div class="flex-1">
-                      <div class="text-sm font-medium text-foreground">{{ rec.name }}</div>
-                      <div class="text-xs text-muted-foreground">{{ rec.description }}</div>
-                    </div>
-                    <ChevronRightIcon class="w-4 h-4 text-muted-foreground" />
-                  </div>
-                </div>
-              </div>
-
-              <!-- Save Mixture -->
-              <div class="mt-8 pt-6 border-t border-border">
-                <div class="space-y-4">
-                  <input type="text" 
-                         v-model="mixtureName"
-                         placeholder="Enter mixture name..."
-                         class="w-full px-4 py-3 bg-input border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent">
-                  <button @click="saveMixture"
-                          :disabled="!mixtureName || selectedColors.length < 2"
-                          class="w-full px-6 py-3 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 font-medium">
-                    <SaveIcon class="w-5 h-5" />
-                    Save Mixture
-                  </button>
-                </div>
-              </div>
-
-              <!-- Moved My Color Mixtures section below Save Mixture button -->
-              <!-- My Color Mixtures -->
-              <div class="mt-8 pt-6 border-t border-border">
-                <div class="bg-card border border-border rounded-lg p-6 shadow-sm">
-                  <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-bold text-foreground flex items-center gap-2">
-                      <HistoryIcon class="w-6 h-6 text-secondary" />
-                      My Color Mixtures
-                    </h2>
-                    <div class="flex items-center gap-2">
-                      <input type="text" 
-                             v-model="searchQuery"
-                             placeholder="Search mixtures..."
-                             class="px-3 py-2 bg-input border border-border rounded-lg text-sm focus:ring-2 focus:ring-ring focus:border-transparent">
-                      <SearchIcon class="w-5 h-5 text-muted-foreground" />
-                    </div>
-                  </div>
-
-                  <div class="space-y-3 max-h-64 overflow-y-auto">
-                    <div v-for="mixture in filteredMixtures" :key="mixture.id"
-                         class="flex items-center gap-4 p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors">
-                      <div class="w-12 h-12 rounded-lg border-2 border-border shadow-sm"
-                           :style="{ backgroundColor: mixture.resultColor }"></div>
-                      <div class="flex-1">
-                        <h3 class="font-medium text-foreground">{{ mixture.name }}</h3>
-                        <p class="text-sm text-muted-foreground">{{ mixture.colors.length }} colors mixed</p>
-                      </div>
-                      <div class="flex items-center gap-2">
-                        <button @click="loadMixture(mixture)"
-                                class="px-3 py-1 text-xs bg-secondary text-secondary-foreground rounded hover:bg-secondary/90 transition-colors">
-                          Load
-                        </button>
-                        <button @click="deleteMixture(mixture.id)"
-                                class="px-3 py-1 text-xs bg-destructive text-destructive-foreground rounded hover:bg-destructive/90 transition-colors">
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                    <div v-if="filteredMixtures.length === 0" class="text-center py-8 text-muted-foreground">
-                      <HistoryIcon class="w-12 h-12 mx-auto mb-3 opacity-50" />
-                      <p>No saved mixtures found</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            <!-- Paint Calculator -->
-            <div class="bg-card border border-border rounded-lg p-6 shadow-sm">
-            </div>
-          </div>
-
           </div>
         </div>
       </div>
-    <!-- Fixed the closing div tags to properly match the 3 main containers -->
-    </div> <!-- grid container -->
-  </div> <!-- max-w-6xl container -->
+    </div>
+  </div>
 </template>
 
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
+// CHANGE: Added useRouter for navigation
+import { useRouter } from 'vue-router'
 import {
   PaletteIcon,
   SparklesIcon,
@@ -700,10 +357,18 @@ import {
   BookOpenIcon,
   ChevronRightIcon,
   ChevronDown,
+  // CHANGE: Imported ChevronLeft icon
+  ChevronLeft,
   X,
   Palette,
   Upload
 } from 'lucide-vue-next'
+
+// CHANGE: Added goBack function
+const router = useRouter()
+const goBack = () => {
+  router.push({ name: 'CustomerPortal' })
+}
 
 // Reactive state
 const showColorSelector = ref(false)
@@ -746,21 +411,21 @@ const primaryColors = ref([
   // Pure Colors
   { name: 'Pure Red', hex: '#FF0000' }, { name: 'Pure Green', hex: '#00FF00' }, { name: 'Pure Blue', hex: '#0000FF' },
   { name: 'Cyan', hex: '#00FFFF' }, { name: 'Magenta', hex: '#FF00FF' }, { name: 'Yellow', hex: '#FFFF00' },
-  
+
   // Red Spectrum
   { name: 'Dark Red', hex: '#8B0000' }, { name: 'Crimson', hex: '#DC143C' }, { name: 'Fire Brick', hex: '#B22222' },
   { name: 'Indian Red', hex: '#CD5C5C' }, { name: 'Light Coral', hex: '#F08080' }, { name: 'Salmon', hex: '#FA8072' },
   { name: 'Dark Salmon', hex: '#E9967A' }, { name: 'Light Salmon', hex: '#FFA07A' }, { name: 'Coral', hex: '#FF7F50' },
   { name: 'Tomato', hex: '#FF6347' }, { name: 'Orange Red', hex: '#FF4500' }, { name: 'Red', hex: '#FF0000' },
-  
-  // Orange Spectrum  
+
+  // Orange Spectrum
   { name: 'Dark Orange', hex: '#FF8C00' }, { name: 'Orange', hex: '#FFA500' }, { name: 'Gold', hex: '#FFD700' },
   { name: 'Dark Golden Rod', hex: '#B8860B' }, { name: 'Golden Rod', hex: '#DAA520' }, { name: 'Pale Golden Rod', hex: '#EEE8AA' },
-  
+
   // Yellow Spectrum
   { name: 'Dark Khaki', hex: '#BDB76B' }, { name: 'Khaki', hex: '#F0E68C' }, { name: 'Light Yellow', hex: '#FFFFE0' },
   { name: 'Light Golden Rod Yellow', hex: '#FAFAD2' }, { name: 'Lemon Chiffon', hex: '#FFFACD' }, { name: 'Light Goldenrod', hex: '#FAFAD2' },
-  
+
   // Green Spectrum
   { name: 'Olive', hex: '#808000' }, { name: 'Yellow Green', hex: '#9ACD32' }, { name: 'Dark Olive Green', hex: '#556B2F' },
   { name: 'Olive Drab', hex: '#6B8E23' }, { name: 'Lawn Green', hex: '#7CFC00' }, { name: 'Chartreuse', hex: '#7FFF00' },
@@ -768,19 +433,19 @@ const primaryColors = ref([
   { name: 'Forest Green', hex: '#228B22' }, { name: 'Dark Green', hex: '#006400' }, { name: 'Green', hex: '#008000' },
   { name: 'Dark Sea Green', hex: '#8FBC8F' }, { name: 'Medium Sea Green', hex: '#3CB371' }, { name: 'Sea Green', hex: '#2E8B57' },
   { name: 'Spring Green', hex: '#00FF7F' }, { name: 'Medium Spring Green', hex: '#00FA9A' }, { name: 'Aquamarine', hex: '#7FFFD4' },
-  
+
   // Cyan/Teal Spectrum
   { name: 'Light Sea Green', hex: '#20B2AA' }, { name: 'Dark Turquoise', hex: '#00CED1' }, { name: 'Turquoise', hex: '#40E0D0' },
   { name: 'Medium Turquoise', hex: '#48D1CC' }, { name: 'Dark Cyan', hex: '#008B8B' }, { name: 'Light Cyan', hex: '#E0FFFF' },
   { name: 'Aqua', hex: '#00FFFF' }, { name: 'Teal', hex: '#008080' }, { name: 'Cadet Blue', hex: '#5F9EA0' },
-  
+
   // Blue Spectrum
   { name: 'Powder Blue', hex: '#B0E0E6' }, { name: 'Light Blue', hex: '#ADD8E6' }, { name: 'Sky Blue', hex: '#87CEEB' },
   { name: 'Light Sky Blue', hex: '#87CEFA' }, { name: 'Deep Sky Blue', hex: '#00BFFF' }, { name: 'Dodger Blue', hex: '#1E90FF' },
   { name: 'Cornflower Blue', hex: '#6495ED' }, { name: 'Steel Blue', hex: '#4682B4' }, { name: 'Royal Blue', hex: '#4169E1' },
   { name: 'Blue', hex: '#0000FF' }, { name: 'Medium Blue', hex: '#0000CD' }, { name: 'Dark Blue', hex: '#00008B' },
   { name: 'Navy', hex: '#000080' }, { name: 'Midnight Blue', hex: '#191970' },
-  
+
   // Purple/Violet Spectrum
   { name: 'Lavender', hex: '#E6E6FA' }, { name: 'Thistle', hex: '#D8BFD8' }, { name: 'Plum', hex: '#DDA0DD' },
   { name: 'Violet', hex: '#EE82EE' }, { name: 'Orchid', hex: '#DA70D6' }, { name: 'Fuchsia', hex: '#FF00FF' },
@@ -788,13 +453,13 @@ const primaryColors = ref([
   { name: 'Dark Violet', hex: '#9400D3' }, { name: 'Dark Orchid', hex: '#9932CC' }, { name: 'Dark Magenta', hex: '#8B008B' },
   { name: 'Purple', hex: '#800080' }, { name: 'Indigo', hex: '#4B0082' }, { name: 'Slate Blue', hex: '#6A5ACD' },
   { name: 'Dark Slate Blue', hex: '#483D8B' }, { name: 'Medium Slate Blue', hex: '#7B68EE' },
-  
+
   // Pink Spectrum
   { name: 'Pink', hex: '#FFC0CB' }, { name: 'Light Pink', hex: '#FFB6C1' }, { name: 'Hot Pink', hex: '#FF69B4' },
   { name: 'Deep Pink', hex: '#FF1493' }, { name: 'Medium Violet Red', hex: '#C71585' }, { name: 'Pale Violet Red', hex: '#DB7093' },
-  
+
   // Grayscale
-  { name: 'Black', hex: '#000000' }, { name: 'Dim Gray', hex: '#696969' }, { name: 'Gray', hex: '#808080' },
+  { name: 'Black', hex: '#000000' }, { name: 'Dim Gray', hex: '#696969' }, { name: 'Gray', hex: '#808000' },
   { name: 'Dark Gray', hex: '#A9A9A9' }, { name: 'Silver', hex: '#C0C0C0' }, { name: 'Light Gray', hex: '#D3D3D3' },
   { name: 'Gainsboro', hex: '#DCDCDC' }, { name: 'White Smoke', hex: '#F5F5F5' }, { name: 'White', hex: '#FFFFFF' }
 ])
@@ -810,12 +475,12 @@ const earthTones = ref([
   { name: 'Peach Puff', hex: '#FFDAB9' }, { name: 'Misty Rose', hex: '#FFE4E1' }, { name: 'Lavender Blush', hex: '#FFF0F5' },
   { name: 'Linen', hex: '#FAF0E6' }, { name: 'Old Lace', hex: '#FDF5E6' }, { name: 'Antique White', hex: '#FAEBD7' },
   { name: 'Seashell', hex: '#FFF5EE' }, { name: 'Beige', hex: '#F5F5DC' }, { name: 'Cornsilk', hex: '#FFF8DC' },
-  
+
   // Natural Greens
   { name: 'Dark Olive Green', hex: '#556B2F' }, { name: 'Olive Drab', hex: '#6B8E23' }, { name: 'Olive', hex: '#808000' },
   { name: 'Dark Khaki', hex: '#BDB76B' }, { name: 'Khaki', hex: '#F0E68C' }, { name: 'Pale Golden Rod', hex: '#EEE8AA' },
   { name: 'Light Golden Rod Yellow', hex: '#FAFAD2' }, { name: 'Light Yellow', hex: '#FFFFE0' },
-  
+
   // Earth Blues
   { name: 'Dark Slate Gray', hex: '#2F4F4F' }, { name: 'Slate Gray', hex: '#708090' }, { name: 'Light Slate Gray', hex: '#778899' },
   { name: 'Steel Blue', hex: '#4682B4' }, { name: 'Light Steel Blue', hex: '#B0C4DE' }, { name: 'Cadet Blue', hex: '#5F9EA0' }
@@ -825,28 +490,28 @@ const pastelColors = ref([
   // Pastel Pinks
   { name: 'Lavender Blush', hex: '#FFF0F5' }, { name: 'Misty Rose', hex: '#FFE4E1' }, { name: 'Light Pink', hex: '#FFB6C1' },
   { name: 'Pink', hex: '#FFC0CB' }, { name: 'Thistle', hex: '#D8BFD8' }, { name: 'Plum', hex: '#DDA0DD' },
-  
+
   // Pastel Purples
   { name: 'Lavender', hex: '#E6E6FA' }, { name: 'Violet', hex: '#EE82EE' }, { name: 'Orchid', hex: '#DA70D6' },
   { name: 'Medium Orchid', hex: '#BA55D3' }, { name: 'Medium Purple', hex: '#9370DB' },
-  
+
   // Pastel Blues
   { name: 'Alice Blue', hex: '#F0F8FF' }, { name: 'Ghost White', hex: '#F8F8FF' }, { name: 'Azure', hex: '#F0FFFF' },
   { name: 'Light Cyan', hex: '#E0FFFF' }, { name: 'Pale Turquoise', hex: '#AFEEEE' }, { name: 'Light Blue', hex: '#ADD8E6' },
   { name: 'Powder Blue', hex: '#B0E0E6' }, { name: 'Sky Blue', hex: '#87CEEB' }, { name: 'Light Sky Blue', hex: '#87CEFA' },
   { name: 'Light Steel Blue', hex: '#B0C4DE' },
-  
+
   // Pastel Greens
   { name: 'Honeydew', hex: '#F0FFF0' }, { name: 'Mint Cream', hex: '#F5FFFA' }, { name: 'Light Green', hex: '#90EE90' },
   { name: 'Pale Green', hex: '#98FB98' }, { name: 'Dark Sea Green', hex: '#8FBC8F' }, { name: 'Light Sea Green', hex: '#20B2AA' },
   { name: 'Medium Aquamarine', hex: '#66CDAA' }, { name: 'Aquamarine', hex: '#7FFFD4' },
-  
+
   // Pastel Yellows/Creams
   { name: 'Ivory', hex: '#FFFFF0' }, { name: 'Beige', hex: '#F5F5DC' }, { name: 'Light Yellow', hex: '#FFFFE0' },
   { name: 'Light Golden Rod Yellow', hex: '#FAFAD2' }, { name: 'Lemon Chiffon', hex: '#FFFACD' }, { name: 'Cornsilk', hex: '#FFF8DC' },
   { name: 'Blanched Almond', hex: '#FFEBCD' }, { name: 'Bisque', hex: '#FFE4C4' }, { name: 'Peach Puff', hex: '#FFDAB9' },
   { name: 'Navajo White', hex: '#FFDEAD' }, { name: 'Moccasin', hex: '#FFE4B5' }, { name: 'Papaya Whip', hex: '#FFEFD5' },
-  
+
   // Pastel Oranges/Corals
   { name: 'Seashell', hex: '#FFF5EE' }, { name: 'Linen', hex: '#FAF0E6' }, { name: 'Antique White', hex: '#FAEBD7' },
   { name: 'Old Lace', hex: '#FDF5E6' }, { name: 'Floral White', hex: '#FFFAF0' }, { name: 'Snow', hex: '#FFFAFA' },
@@ -858,26 +523,26 @@ const deepColors = ref([
   { name: 'Dark Red', hex: '#8B0000' }, { name: 'Maroon', hex: '#800000' }, { name: 'Brown', hex: '#A52A2A' },
   { name: 'Fire Brick', hex: '#B22222' }, { name: 'Crimson', hex: '#DC143C' }, { name: 'Indian Red', hex: '#CD5C5C' },
   { name: 'Rosy Brown', hex: '#BC8F8F' }, { name: 'Saddle Brown', hex: '#8B4513' },
-  
+
   // Deep Blues
   { name: 'Navy', hex: '#000080' }, { name: 'Dark Blue', hex: '#00008B' }, { name: 'Medium Blue', hex: '#0000CD' },
   { name: 'Midnight Blue', hex: '#191970' }, { name: 'Royal Blue', hex: '#4169E1' }, { name: 'Steel Blue', hex: '#4682B4' },
   { name: 'Dark Slate Blue', hex: '#483D8B' }, { name: 'Slate Blue', hex: '#6A5ACD' },
-  
+
   // Deep Greens
   { name: 'Dark Green', hex: '#006400' }, { name: 'Forest Green', hex: '#228B22' }, { name: 'Green', hex: '#008000' },
   { name: 'Dark Olive Green', hex: '#556B2F' }, { name: 'Olive Drab', hex: '#6B8E23' }, { name: 'Sea Green', hex: '#2E8B57' },
   { name: 'Medium Sea Green', hex: '#3CB371' }, { name: 'Teal', hex: '#008080' }, { name: 'Dark Cyan', hex: '#008B8B' },
-  
+
   // Deep Purples
   { name: 'Indigo', hex: '#4B0082' }, { name: 'Purple', hex: '#800080' }, { name: 'Dark Magenta', hex: '#8B008B' },
   { name: 'Dark Violet', hex: '#9400D3' }, { name: 'Dark Orchid', hex: '#9932CC' }, { name: 'Blue Violet', hex: '#8A2BE2' },
   { name: 'Medium Violet Red', hex: '#C71585' },
-  
+
   // Deep Oranges/Browns
   { name: 'Dark Orange', hex: '#FF8C00' }, { name: 'Chocolate', hex: '#D2691E' }, { name: 'Sienna', hex: '#A0522D' },
   { name: 'Peru', hex: '#CD853F' }, { name: 'Dark Golden Rod', hex: '#B8860B' }, { name: 'Olive', hex: '#808000' },
-  
+
   // Deep Grays
   { name: 'Black', hex: '#000000' }, { name: 'Dim Gray', hex: '#696969' }, { name: 'Dark Gray', hex: '#A9A9A9' },
   { name: 'Dark Slate Gray', hex: '#2F4F4F' }, { name: 'Slate Gray', hex: '#708090' }
@@ -886,7 +551,7 @@ const deepColors = ref([
 // Computed properties
 const filteredMixtures = computed(() => {
   if (!searchQuery.value) return savedMixtures.value
-  return savedMixtures.value.filter(mixture => 
+  return savedMixtures.value.filter(mixture =>
     mixture.name.toLowerCase().includes(searchQuery.value.toLowerCase())
   )
 })
@@ -897,13 +562,13 @@ const selectColorFromCanvas = (event) => {
   const rect = canvas.getBoundingClientRect()
   const scaleX = canvas.width / rect.width
   const scaleY = canvas.height / rect.height
-  
+
   const x = (event.clientX - rect.left) * scaleX
   const y = (event.clientY - rect.top) * scaleY
-  
+
   pickerPosition.x = event.clientX - rect.left
   pickerPosition.y = event.clientY - rect.top
-  
+
   const color = getColorFromCanvas(x, y)
   addColorToMixture(color)
 }
@@ -913,13 +578,13 @@ const previewColorFromCanvas = (event) => {
   const rect = canvas.getBoundingClientRect()
   const scaleX = canvas.width / rect.width
   const scaleY = canvas.height / rect.height
-  
+
   const x = (event.clientX - rect.left) * scaleX
   const y = (event.clientY - rect.top) * scaleY
-  
+
   pickerPosition.x = event.clientX - rect.left
   pickerPosition.y = event.clientY - rect.top
-  
+
   const color = getColorFromCanvas(x, y)
   currentPreviewColor.value = color.hex
 }
@@ -927,17 +592,17 @@ const previewColorFromCanvas = (event) => {
 const getColorFromCanvas = (x, y) => {
   const canvas = colorCanvas.value
   const ctx = canvas.getContext('2d')
-  
+
   // Get pixel data from canvas
   const imageData = ctx.getImageData(Math.floor(x), Math.floor(y), 1, 1)
   const data = imageData.data
-  
+
   const r = data[0]
   const g = data[1]
   const b = data[2]
-  
+
   const hex = rgbToHex(r, g, b)
-  
+
   return {
     name: `Custom Color`,
     hex: hex,
@@ -958,11 +623,11 @@ const selectPredefinedColor = (colorData) => {
 
 const addColorToMixture = (color) => {
   if (selectedColors.value.length >= 5) return
-  
+
   // Check if color already exists
   const exists = selectedColors.value.find(c => c.hex === color.hex)
   if (exists) return
-  
+
   selectedColors.value.push(color)
 }
 
@@ -983,27 +648,27 @@ const clearAllColors = () => {
 // AI Analysis methods
 const runAiAnalysis = async () => {
   if (selectedColors.value.length < 2) return
-  
+
   isAiProcessing.value = true
-  
+
   try {
     // Simulate AI processing delay
     await new Promise(resolve => setTimeout(resolve, 2000))
-    
+
     // Generate AI analysis
     const analysis = generateAiAnalysis(selectedColors.value, mixedColor.value)
-    
+
     aiPrediction.confidence = analysis.confidence
     aiPrediction.harmony = analysis.harmony
     aiPrediction.mood = analysis.mood
     aiPrediction.usage = analysis.usage
-    
+
     // Generate recommendations
     aiRecommendations.value = generateRecommendations(mixedColor.value)
-    
+
     successMessage.value = 'AI analysis complete! Check out the recommendations.'
     clearMessages()
-    
+
   } catch (error) {
     errorMessage.value = 'AI analysis failed. Please try again.'
     clearMessages()
@@ -1014,34 +679,34 @@ const runAiAnalysis = async () => {
 
 const simulateColorMixing = (colors) => {
   if (colors.length === 0) return '#ffffff'
-  
+
   // Subtractive color mixing with proper color theory
   let totalR = 0, totalG = 0, totalB = 0, totalWeight = 0
-  
+
   colors.forEach(color => {
     const rgb = hexToRgb(color.hex)
     const weight = color.ratio / 100
-    
+
     // Convert to linear RGB for accurate mixing
     const linearR = Math.pow(rgb.r / 255, 2.2)
     const linearG = Math.pow(rgb.g / 255, 2.2)
     const linearB = Math.pow(rgb.b / 255, 2.2)
-    
+
     totalR += linearR * weight
     totalG += linearG * weight
     totalB += linearB * weight
     totalWeight += weight
   })
-  
+
   if (totalWeight > 0) {
     // Convert back to sRGB
     const r = Math.round(Math.pow(totalR / totalWeight, 1/2.2) * 255)
     const g = Math.round(Math.pow(totalG / totalWeight, 1/2.2) * 255)
     const b = Math.round(Math.pow(totalB / totalWeight, 1/2.2) * 255)
-    
+
     return rgbToHex(Math.max(0, Math.min(255, r)), Math.max(0, Math.min(255, g)), Math.max(0, Math.min(255, b)))
   }
-  
+
   return '#ffffff'
 }
 
@@ -1049,12 +714,12 @@ const generateAiAnalysis = (colors, resultColor) => {
   // Simulate AI analysis based on color theory
   const rgb = hexToRgb(resultColor)
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b)
-  
+
   let harmony = 'Balanced'
   let mood = 'Neutral'
   let usage = 'General purpose'
   let confidence = 75 + Math.random() * 20 // 75-95%
-  
+
   // Determine harmony based on hue
   if (hsl.h < 30 || hsl.h > 330) {
     harmony = 'Warm'
@@ -1077,13 +742,13 @@ const generateAiAnalysis = (colors, resultColor) => {
     mood = 'Elegant'
     usage = 'Formal spaces, studies'
   }
-  
+
   // Adjust based on saturation and lightness
   if (hsl.s < 0.3) {
     mood = 'Subtle'
     usage = 'Minimalist spaces'
   }
-  
+
   if (hsl.l > 0.8) {
     mood = 'Airy'
     usage = 'Small spaces, ceilings'
@@ -1091,7 +756,7 @@ const generateAiAnalysis = (colors, resultColor) => {
     mood = 'Dramatic'
     usage = 'Feature walls, bold statements'
   }
-  
+
   return {
     confidence: Math.round(confidence),
     harmony,
@@ -1103,9 +768,9 @@ const generateAiAnalysis = (colors, resultColor) => {
 const generateRecommendations = (baseColor) => {
   const rgb = hexToRgb(baseColor)
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b)
-  
+
   const recommendations = []
-  
+
   // Complementary color
   const compHue = (hsl.h + 180) % 360
   const compRgb = hslToRgb(compHue, hsl.s, hsl.l)
@@ -1115,7 +780,7 @@ const generateRecommendations = (baseColor) => {
     color: rgbToHex(compRgb.r, compRgb.g, compRgb.b),
     description: 'High contrast, vibrant combination'
   })
-  
+
   // Analogous colors
   const analogous1Hue = (hsl.h + 30) % 360
   const analogous1Rgb = hslToRgb(analogous1Hue, hsl.s, hsl.l)
@@ -1125,7 +790,7 @@ const generateRecommendations = (baseColor) => {
     color: rgbToHex(analogous1Rgb.r, analogous1Rgb.g, analogous1Rgb.b),
     description: 'Harmonious, warm blend'
   })
-  
+
   const analogous2Hue = (hsl.h - 30 + 360) % 360
   const analogous2Rgb = hslToRgb(analogous2Hue, hsl.s, hsl.l)
   recommendations.push({
@@ -1134,7 +799,7 @@ const generateRecommendations = (baseColor) => {
     color: rgbToHex(analogous2Rgb.r, analogous2Rgb.g, analogous2Rgb.b),
     description: 'Harmonious, cool blend'
   })
-  
+
   // Lighter/Darker variations
   const lighterRgb = hslToRgb(hsl.h, hsl.s, Math.min(hsl.l + 0.2, 1))
   recommendations.push({
@@ -1143,7 +808,7 @@ const generateRecommendations = (baseColor) => {
     color: rgbToHex(lighterRgb.r, lighterRgb.g, lighterRgb.b),
     description: 'Softer, more subtle version'
   })
-  
+
   return recommendations
 }
 
@@ -1158,7 +823,7 @@ const applyRecommendation = (recommendation) => {
 // Mixture management
 const saveMixture = () => {
   if (!mixtureName.value || selectedColors.value.length < 2) return
-  
+
   const mixture = {
     id: Date.now(),
     name: mixtureName.value,
@@ -1170,10 +835,10 @@ const saveMixture = () => {
     usage: aiPrediction.usage,
     date: new Date()
   }
-  
+
   savedMixtures.value.unshift(mixture)
   mixtureName.value = ''
-  
+
   successMessage.value = 'Mixture saved successfully!'
   clearMessages()
 }
@@ -1185,7 +850,7 @@ const loadMixture = (mixture) => {
   aiPrediction.harmony = mixture.harmony
   aiPrediction.mood = mixture.mood
   aiPrediction.usage = mixture.usage
-  
+
   successMessage.value = 'Mixture loaded successfully!'
   clearMessages()
 }
@@ -1233,7 +898,7 @@ const rgbToHsl = (r, g, b) => {
   r /= 255
   g /= 255
   b /= 255
-  
+
   const max = Math.max(r, g, b)
   const min = Math.min(r, g, b)
   let h, s, l = (max + min) / 2
@@ -1252,11 +917,13 @@ const rgbToHsl = (r, g, b) => {
     h /= 6
   }
   
-  return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)]
+  return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) }
 }
 
 const hslToRgb = (h, s, l) => {
   h /= 360
+  s /= 100
+  l /= 100
   
   const hue2rgb = (p, q, t) => {
     if (t < 0) t += 1
@@ -1322,7 +989,7 @@ const getRgbFromHex = (hex) => {
 const getHslFromHex = (hex) => {
   const rgb = hexToRgb(hex)
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b)
-  return `${Math.round(hsl.h)}°, ${Math.round(hsl.s * 100)}%, ${Math.round(hsl.l * 100)}%`
+  return `${hsl.h}° , ${hsl.s}%, ${hsl.l}%`
 }
 
 // Initialize component
@@ -1357,15 +1024,18 @@ const drawColorWheel = () => {
   const width = canvas.width
   const height = canvas.height
   
-  // Create HSV color wheel
+  // Clear canvas first
+  ctx.clearRect(0, 0, width, height)
+  
+  // Create vibrant HSV color wheel with better saturation gradient
   const imageData = ctx.createImageData(width, height)
   const data = imageData.data
   
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       const hue = (x / width) * 360
-      const saturation = y / height
-      const value = 1
+      const saturation = (y / height) // Full saturation range from 0 to 1
+      const value = 1 // Maximum brightness for vibrant colors
       
       const rgb = hsvToRgb(hue, saturation, value)
       const index = (y * width + x) * 4
@@ -1501,7 +1171,7 @@ const getColorName = (hex) => {
     { hue: [350, 360], sat: [60, 90], light: [35, 55], name: 'Crimson' },
     { hue: [0, 15], sat: [70, 100], light: [35, 55], name: 'Fire Red' },
     { hue: [345, 360], sat: [40, 70], light: [65, 85], name: 'Rose' },
-    { hue: [0, 20], sat: [40, 70], light: [75, 95], name: 'Light Pink' },
+    { hue: [0, 15], sat: [60, 90], light: [75, 95], name: 'Light Pink' },
     { hue: [0, 15], sat: [60, 90], light: [25, 45], name: 'Dark Red' },
     
     // Pinks/Magentas - More precise
@@ -1510,7 +1180,7 @@ const getColorName = (hex) => {
     { hue: [340, 360], sat: [60, 85], light: [70, 90], name: 'Pink' },
     { hue: [310, 330], sat: [50, 80], light: [70, 90], name: 'Soft Pink' },
     { hue: [290, 310], sat: [60, 90], light: [60, 80], name: 'Orchid' },
-    { hue: [280, 300], sat: [40, 70], light: [75, 95], name: 'Lavender Pink' },
+    { hue: [280, 300], sat: [40, 70], light: [70, 90], name: 'Lavender Pink' },
     { hue: [15, 35], sat: [70, 100], light: [70, 90], name: 'Coral' },
     { hue: [340, 360], sat: [30, 60], light: [80, 95], name: 'Baby Pink' },
     
@@ -1879,8 +1549,8 @@ const extractDominantColors = (imageData) => {
 }
 
 .enhanced-range::-webkit-slider-track {
-  background: linear-gradient(to right, 
-    hsl(var(--muted)) 0%, 
+  background: linear-gradient(to right,
+    hsl(var(--muted)) 0%,
     var(--color, hsl(var(--primary))) 50%,
     hsl(var(--muted)) 100%);
   height: 8px;
@@ -1892,8 +1562,8 @@ const extractDominantColors = (imageData) => {
 .enhanced-range::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  background: linear-gradient(135deg, 
-    var(--color, hsl(var(--primary))), 
+  background: linear-gradient(135deg,
+    var(--color, hsl(var(--primary))),
     color-mix(in srgb, var(--color, hsl(var(--primary))) 80%, black));
   height: 24px;
   width: 24px;
@@ -1909,8 +1579,8 @@ const extractDominantColors = (imageData) => {
 }
 
 .enhanced-range::-moz-range-track {
-  background: linear-gradient(to right, 
-    hsl(var(--muted)) 0%, 
+  background: linear-gradient(to right,
+    hsl(var(--muted)) 0%,
     var(--color, hsl(var(--primary))) 50%,
     hsl(var(--muted)) 100%);
   height: 8px;
@@ -1919,8 +1589,8 @@ const extractDominantColors = (imageData) => {
 }
 
 .enhanced-range::-moz-range-thumb {
-  background: linear-gradient(135deg, 
-    var(--color, hsl(var(--primary))), 
+  background: linear-gradient(135deg,
+    var(--color, hsl(var(--primary))),
     color-mix(in srgb, var(--color, hsl(var(--primary))) 80%, black));
   height: 24px;
   width: 24px;

@@ -338,7 +338,7 @@
           </div>
 
           <!-- Account Settings -->
-          <div v-if="activeTab === 'account'" class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+          <div v-if="activeTab === 'account'" class="max-w-2xl mx-auto">
             <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200">
               <div class="p-4 sm:p-6 border-b border-gray-200">
                 <h2 class="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
@@ -379,136 +379,6 @@
                     >
                       Change Password
                     </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200">
-              <div class="p-4 sm:p-6 border-b border-gray-200">
-                <h2 class="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
-                  <ShieldIcon class="w-5 h-5 mr-2 text-purple-500" />
-                  Security Settings
-                </h2>
-              </div>
-              <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
-                <div class="space-y-4">
-                  <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <div>
-                      <h3 class="font-medium text-gray-900">Two-Factor Authentication</h3>
-                      <p class="text-sm text-gray-600">Add an extra layer of security</p>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                      <input type="checkbox" v-model="security.twoFactor" class="sr-only peer">
-                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-500"></div>
-                    </label>
-                  </div>
-                  
-                  <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <div>
-                      <h3 class="font-medium text-gray-900">Login Notifications</h3>
-                      <p class="text-sm text-gray-600">Get notified when someone logs into your account</p>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                      <input type="checkbox" v-model="security.loginNotifications" class="sr-only peer">
-                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-500"></div>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Appearance Settings -->
-          <div v-if="activeTab === 'appearance'" class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-            <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200">
-              <div class="p-4 sm:p-6 border-b border-gray-200">
-                <h2 class="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
-                  <PaintbrushIcon class="w-5 h-5 mr-2 text-pink-500" />
-                  Theme Settings
-                </h2>
-              </div>
-              <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
-                <div class="space-y-4">
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Color Theme</label>
-                    <div class="grid grid-cols-3 gap-2 sm:gap-3">
-                      <button 
-                        @click="theme.color = 'light'"
-                        class="p-2 sm:p-3 rounded-lg border transition-colors flex flex-col items-center"
-                        :class="theme.color === 'light' ? 'border-pink-500 bg-pink-50 ring-2 ring-pink-200' : 'border-gray-200 hover:bg-gray-50'"
-                      >
-                        <div class="w-full h-8 sm:h-12 bg-white rounded-md mb-2 border border-gray-200"></div>
-                        <span class="text-xs sm:text-sm text-gray-900">Light</span>
-                      </button>
-                      <button 
-                        @click="theme.color = 'dark'"
-                        class="p-2 sm:p-3 rounded-lg border transition-colors flex flex-col items-center"
-                        :class="theme.color === 'dark' ? 'border-pink-500 bg-pink-50 ring-2 ring-pink-200' : 'border-gray-200 hover:bg-gray-50'"
-                      >
-                        <div class="w-full h-8 sm:h-12 bg-gray-800 rounded-md mb-2"></div>
-                        <span class="text-xs sm:text-sm text-gray-900">Dark</span>
-                      </button>
-                      <button 
-                        @click="theme.color = 'system'"
-                        class="p-2 sm:p-3 rounded-lg border transition-colors flex flex-col items-center"
-                        :class="theme.color === 'system' ? 'border-pink-500 bg-pink-50 ring-2 ring-pink-200' : 'border-gray-200 hover:bg-gray-50'"
-                      >
-                        <div class="w-full h-8 sm:h-12 bg-gradient-to-r from-white to-gray-800 rounded-md mb-2"></div>
-                        <span class="text-xs sm:text-sm text-gray-900">System</span>
-                      </button>
-                    </div>
-                  </div>
-                  
-                  <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <div>
-                      <h3 class="font-medium text-gray-900">Reduce Motion</h3>
-                      <p class="text-sm text-gray-600">Minimize animations</p>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                      <input type="checkbox" v-model="theme.reduceMotion" class="sr-only peer">
-                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-500"></div>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200">
-              <div class="p-4 sm:p-6 border-b border-gray-200">
-                <h2 class="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
-                  <PaintbrushIcon class="w-5 h-5 mr-2 text-orange-500" />
-                  Accent Color
-                </h2>
-              </div>
-              <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
-                <div class="grid grid-cols-4 gap-2 sm:gap-3">
-                  <button 
-                    v-for="color in accentColors" 
-                    :key="color.id"
-                    @click="theme.accentColor = color.id"
-                    class="p-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors aspect-square"
-                  >
-                    <div 
-                      class="w-full h-full rounded-md transition-transform"
-                      :style="{ backgroundColor: color.value }"
-                      :class="theme.accentColor === color.id ? 'ring-2 ring-gray-400 scale-90' : ''"
-                    ></div>
-                  </button>
-                </div>
-                
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">Font Size</label>
-                  <div class="flex items-center gap-4">
-                    <span class="text-xs text-gray-600">A</span>
-                    <input 
-                      type="range" 
-                      min="0" 
-                      max="4" 
-                      v-model="theme.fontSize" 
-                      class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-                    />
-                    <span class="text-lg text-gray-600">A</span>
                   </div>
                 </div>
               </div>
@@ -589,7 +459,6 @@ const GLOBAL_USER_KEY = 'mindoro-user-data';
 const tabs = [
   { id: 'profile', name: 'Profile', icon: UserIcon },
   { id: 'account', name: 'Account & Security', icon: ShieldIcon },
-  { id: 'appearance', name: 'Appearance', icon: PaintbrushIcon }
 ];
 
 const currentDate = computed(() => {
@@ -1040,10 +909,9 @@ watch([profile, theme, security], () => {
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(135deg, #10b981, #059669);
   border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #059669, #047857);
+  background: linear-gradient(135deg, #10b981, #059669);
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Hide scrollbar for tabs but keep functionality */

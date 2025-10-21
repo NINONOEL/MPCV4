@@ -16,19 +16,19 @@
       <button 
         @click="goToHomepage"
         :disabled="isNavigating"
-        class="flex items-center gap-2 px-4 py-2 bg-white/95 backdrop-blur-sm border-2 border-white/30 rounded-xl text-gray-800 hover:bg-white hover:border-white/50 transition-all duration-200 shadow-lg hover:shadow-xl font-semibold disabled:opacity-75 disabled:cursor-not-allowed"
+        class="flex items-center gap-2 px-3 py-1.5 bg-white/95 backdrop-blur-sm border-2 border-white/30 rounded-lg text-gray-800 hover:bg-white hover:border-white/50 transition-all duration-200 shadow-lg hover:shadow-xl text-sm font-semibold disabled:opacity-75 disabled:cursor-not-allowed"
         :class="{ 'transform scale-95': isNavigating }"
       >
         <div class="relative flex items-center">
           <!-- Loading Spinner -->
           <LoaderIcon 
             v-if="isNavigating" 
-            class="h-5 w-5 animate-spin text-blue-600" 
+            class="h-4 w-4 animate-spin text-blue-600" 
           />
           <!-- Arrow Icon -->
           <ArrowLeft 
             v-else 
-            class="h-5 w-5 transition-transform duration-200" 
+            class="h-4 w-4 transition-transform duration-200" 
             :class="{ 'group-hover:-translate-x-1': !isNavigating }"
           />
         </div>
@@ -47,7 +47,7 @@
 
     <!-- Main Content -->
     <div class="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-16">
-      <div class="w-full" :class="activeTab === 'register' ? 'max-w-lg' : 'max-w-md'">
+      <div class="w-full max-w-md">
         <!-- Enhanced Colorful Header -->
         <div class="text-center mb-8 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 w-full max-w-4xl mx-auto">
           <h1 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight text-center">
@@ -96,21 +96,21 @@
               </button>
             </div>
 
-            <div class="p-6 space-y-6 bg-gradient-to-br from-white/95 via-blue-50/50 to-purple-50/50">
+            <div class="p-5 space-y-5 bg-gradient-to-br from-white/95 via-blue-50/50 to-purple-50/50">
               <!-- Colorful Header -->
-              <div class="text-center space-y-3">
-                <h2 class="text-3xl font-bold tracking-tight">
+              <div class="text-center space-y-2">
+                <h2 class="text-2xl font-bold tracking-tight">
                   <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                     {{ activeTab === 'login' ? 'Staff Login' : 'Create Staff Account' }}
                   </span>
                 </h2>
-                <p class="text-gray-700 font-medium">
+                <p class="text-gray-700 text-sm font-medium">
                   {{ activeTab === 'login' ? 'Access your colorful paint management dashboard' : 'Set up your paint center staff account' }}
                 </p>
               </div>
 
               <!-- Staff Registration Form -->
-              <form v-if="activeTab === 'register'" @submit.prevent="createStaffAccount" class="space-y-6">
+              <form v-if="activeTab === 'register'" @submit.prevent="createStaffAccount" class="space-y-4">
                 <!-- First Name Field -->
                 <div class="relative group">
                   <UserIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-500 z-10" />
@@ -196,17 +196,17 @@
                 <!-- Colorful Submit Button -->
                 <button 
                   type="submit" 
-                  class="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl hover:shadow-3xl transform hover:scale-105"
+                  class="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 text-white py-3 rounded-xl font-bold text-base transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl hover:shadow-3xl transform hover:scale-105"
                   :disabled="isLoading"
                 >
-                  <LoaderIcon v-if="isLoading" class="animate-spin h-6 w-6" />
-                  <UserPlus v-else class="h-6 w-6" />
+                  <LoaderIcon v-if="isLoading" class="animate-spin h-5 w-5" />
+                  <UserPlus v-else class="h-5 w-5" />
                   <span>{{ isLoading ? 'Creating Account...' : 'Create Staff Account' }}</span>
                 </button>
 
                 <!-- Login Link -->
                 <div class="text-center">
-                  <p class="text-gray-700 font-medium">
+                  <p class="text-gray-700 text-sm font-medium">
                     Already have an account? 
                     <button 
                       type="button"
@@ -220,7 +220,7 @@
               </form>
 
               <!-- Staff Login Form -->
-              <form v-if="activeTab === 'login'" @submit.prevent="loginStaff" class="space-y-6">
+              <form v-if="activeTab === 'login'" @submit.prevent="loginStaff" class="space-y-4">
                 <!-- Email Field -->
                 <div class="relative group">
                   <MailIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-500 z-10" />
@@ -267,17 +267,17 @@
                 <!-- Colorful Submit Button -->
                 <button 
                   type="submit" 
-                  class="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl hover:shadow-3xl transform hover:scale-105"
+                  class="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white py-3 rounded-xl font-bold text-base transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl hover:shadow-3xl transform hover:scale-105"
                   :disabled="isLoading"
                 >
-                  <LoaderIcon v-if="isLoading" class="animate-spin h-6 w-6" />
-                  <LogIn v-else class="h-6 w-6" />
+                  <LoaderIcon v-if="isLoading" class="animate-spin h-5 w-5" />
+                  <LogIn v-else class="h-5 w-5" />
                   <span>{{ isLoading ? 'Logging in...' : 'Login to Dashboard' }}</span>
                 </button>
                 
                 <!-- Register Link -->
                 <div class="text-center">
-                  <p class="text-gray-700 font-medium">
+                  <p class="text-gray-700 text-sm font-medium">
                     Don't have an account? 
                     <button 
                       type="button"
@@ -612,7 +612,7 @@ const goToHomepage = async () => {
     // Add a small delay to show the loading state
     await new Promise(resolve => setTimeout(resolve, 800))
     
-    router.push('/')
+    router.push('/system')
   } catch (error) {
     console.error('Navigation error:', error)
     // Reset loading state on error

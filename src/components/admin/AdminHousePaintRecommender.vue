@@ -67,7 +67,7 @@
             :class="{ 'hover:bg-orange-100 hover:text-orange-700': $route.path !== '/admin/house-paint-recommender' }"
           >
             <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+            <span>Paint Recommender</span>
           </router-link>
 
           <router-link 
@@ -88,13 +88,9 @@
             <span>Sales Analytics</span>
           </router-link>
 
-          <router-link 
-            to="/admin/reports" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700"
-            :class="{ 'shadow-sm border border-indigo-200 transform scale-105': $route.path === '/admin/reports' }"
-          >
-            <ClipboardIcon class="w-5 h-5" />
-            <span>Reports</span>
+          <router-link to="/admin/visualization" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 shadow-sm border border-indigo-200">
+            <BarChart3Icon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Data Visualization</span>
           </router-link>
 
           <router-link 
@@ -103,16 +99,7 @@
             :class="{ 'shadow-sm border border-amber-200 transform scale-105': $route.path === '/admin/settings' }"
           >
             <SettingsIcon class="w-5 h-5" />
-            <span>System Settings</span>
-          </router-link>
-
-          <router-link 
-            to="/admin/security" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-red-600 bg-red-50 hover:bg-red-100 hover:text-red-700"
-            :class="{ 'shadow-sm border border-red-200 transform scale-105': $route.path === '/admin/security' }"
-          >
-            <ShieldIcon class="w-5 h-5" />
-            <span>Security</span>
+            <span>Settings</span>
           </router-link>
 
           <!-- Perfect spacing -->
@@ -240,20 +227,23 @@
       <!-- Main Content -->
       <main class="flex-1 flex flex-col overflow-auto">
         <!-- Header -->
-        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-8 py-4 shadow-sm">
-          <div class="flex justify-between items-center">
+        <!-- Made header fully responsive with better mobile layout -->
+        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-4 md:px-8 py-4 shadow-sm">
+          <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
             <div>
-              <h1 class="text-2xl font-bold text-gray-900">House Paint Recommender</h1>
-              <p class="text-gray-600">Get personalized paint color recommendations for your house</p>
+              <h1 class="text-xl md:text-2xl font-bold text-gray-900">House Paint Recommender</h1>
+              <p class="text-sm md:text-base text-gray-600">Get personalized paint color recommendations for your house</p>
             </div>
-            <div class="flex items-center gap-4">
-              <div class="hidden md:flex items-center gap-2 text-gray-700">
-                <CalendarIcon class="w-5 h-5 text-orange-500" />
-                <span>{{ currentDate }}</span>
+            <div class="flex items-center justify-between md:justify-end gap-4">
+              <div class="flex items-center gap-2 text-gray-700 text-sm md:text-base">
+                <CalendarIcon class="w-4 h-4 md:w-5 md:h-5 text-orange-500" />
+                <span class="hidden sm:inline">{{ currentDate }}</span>
+                <span class="sm:hidden">{{ currentDate.split(',')[0] }}</span>
               </div>
               <div class="hidden md:block h-6 w-px bg-gray-300"></div>
               <div class="flex items-center gap-3">
-                <span class="text-gray-900">Welcome, Admin</span>
+                <span class="text-gray-900 text-sm md:text-base hidden sm:inline">Welcome, Admin</span>
+                <span class="text-gray-900 text-sm sm:hidden">Admin</span>
                 <div class="relative">
                   <BellIcon class="w-5 h-5 text-orange-500 cursor-pointer hover:text-orange-600" />
                 </div>
@@ -268,12 +258,13 @@
             <div class="flex">
               <button 
                 @click="activeTab = 'recommender'"
-                class="px-6 py-3 font-medium transition-all relative"
+                class="px-4 md:px-6 py-3 font-medium transition-all relative text-sm md:text-base"
                 :class="activeTab === 'recommender' ? 'text-orange-600' : 'text-gray-600 hover:text-orange-500'"
               >
                 <span class="flex items-center gap-2">
-                  <PaintBucketIcon class="w-5 h-5" />
-                  Recommender
+                  <PaintBucketIcon class="w-4 h-4 md:w-5 md:h-5" />
+                  <span class="hidden sm:inline">Recommender</span>
+                  <span class="sm:hidden">Paint</span>
                 </span>
                 <div 
                   v-if="activeTab === 'recommender'" 
@@ -282,11 +273,11 @@
               </button>
               <button 
                 @click="activeTab = 'history'"
-                class="px-6 py-3 font-medium transition-all relative"
+                class="px-4 md:px-6 py-3 font-medium transition-all relative text-sm md:text-base"
                 :class="activeTab === 'history' ? 'text-orange-600' : 'text-gray-600 hover:text-orange-500'"
               >
                 <span class="flex items-center gap-2">
-                  <HistoryIcon class="w-5 h-5" />
+                  <HistoryIcon class="w-4 h-4 md:w-5 md:h-5" />
                   History
                 </span>
                 <div 
@@ -298,20 +289,22 @@
           </div>
 
           <!-- Recommender Tab -->
-          <div v-if="activeTab === 'recommender'" class="flex flex-1">
+          <!-- Made layout fully responsive with flex-col on mobile, flex-row on desktop -->
+          <div v-if="activeTab === 'recommender'" class="flex flex-col lg:flex-row flex-1">
             <!-- Left side - Form -->
-            <div class="w-1/3 p-6 border-r border-gray-200">
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">House Details</h2>
+            <!-- Changed from fixed w-1/3 to responsive width -->
+            <div class="w-full lg:w-1/3 p-4 md:p-6 border-b lg:border-b-0 lg:border-r border-gray-200">
+              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 md:p-6">
+                <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">House Details</h2>
                 
-                <form @submit.prevent="getRecommendations" class="space-y-6">
+                <form @submit.prevent="getRecommendations" class="space-y-4 md:space-y-6">
                   <!-- House Style -->
                   <div>
-                    <label for="houseStyle" class="block text-gray-700 font-medium mb-2">House Style</label>
+                    <label for="houseStyle" class="block text-gray-700 font-medium mb-2 text-sm md:text-base">House Style</label>
                     <select 
                       id="houseStyle" 
                       v-model="formData.houseStyle"
-                      class="w-full bg-white border border-gray-300 rounded-lg text-gray-700 px-4 py-3 focus:ring-2 focus:ring-orange-200 focus:border-orange-400 transition-all"
+                      class="w-full bg-white border border-gray-300 rounded-lg text-gray-700 px-3 md:px-4 py-2 md:py-3 focus:ring-2 focus:ring-orange-200 focus:border-orange-400 transition-all text-sm md:text-base"
                       required
                     >
                       <option value="" disabled>Select a house style</option>
@@ -321,11 +314,11 @@
                   
                   <!-- Surface Material -->
                   <div>
-                    <label for="surfaceMaterial" class="block text-gray-700 font-medium mb-2">Surface Material</label>
+                    <label for="surfaceMaterial" class="block text-gray-700 font-medium mb-2 text-sm md:text-base">Surface Material</label>
                     <select 
                       id="surfaceMaterial" 
                       v-model="formData.surfaceMaterial"
-                      class="w-full bg-white border border-gray-300 rounded-lg text-gray-700 px-4 py-3 focus:ring-2 focus:ring-orange-200 focus:border-orange-400 transition-all"
+                      class="w-full bg-white border border-gray-300 rounded-lg text-gray-700 px-3 md:px-4 py-2 md:py-3 focus:ring-2 focus:ring-orange-200 focus:border-orange-400 transition-all text-sm md:text-base"
                       required
                     >
                       <option value="" disabled>Select a surface material</option>
@@ -335,11 +328,11 @@
                   
                   <!-- Color Preference -->
                   <div>
-                    <label for="colorPreference" class="block text-gray-700 font-medium mb-2">Color Preference</label>
+                    <label for="colorPreference" class="block text-gray-700 font-medium mb-2 text-sm md:text-base">Color Preference</label>
                     <select 
                       id="colorPreference" 
                       v-model="formData.colorPreference"
-                      class="w-full bg-white border border-gray-300 rounded-lg text-gray-700 px-4 py-3 focus:ring-2 focus:ring-orange-200 focus:border-orange-400 transition-all"
+                      class="w-full bg-white border border-gray-300 rounded-lg text-gray-700 px-3 md:px-4 py-2 md:py-3 focus:ring-2 focus:ring-orange-200 focus:border-orange-400 transition-all text-sm md:text-base"
                       required
                     >
                       <option value="" disabled>Select a color preference</option>
@@ -348,9 +341,10 @@
                   </div>
                   
                   <!-- Submit Button -->
+                  <!-- Made button more touch-friendly with better mobile sizing -->
                   <button 
                     type="submit"
-                    class="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-medium py-3 px-4 rounded-lg transition-all flex items-center justify-center gap-2 mt-6 shadow-lg hover:shadow-xl transform hover:scale-105 duration-200"
+                    class="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-medium py-3 md:py-4 px-4 rounded-lg transition-all flex items-center justify-center gap-2 mt-4 md:mt-6 shadow-lg hover:shadow-xl transform hover:scale-105 duration-200 text-sm md:text-base min-h-[48px]"
                     :disabled="loading"
                   >
                     <span v-if="loading" class="flex items-center justify-center">
@@ -367,48 +361,51 @@
             </div>
             
             <!-- Right side - Results -->
-            <div class="w-2/3 p-6">
-              <div v-if="loading" class="flex flex-col items-center justify-center h-full">
-                <div class="w-16 h-16 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mb-6"></div>
-                <h3 class="text-xl font-medium text-gray-800 mb-2">Generating Recommendations</h3>
-                <p class="text-gray-600 text-center max-w-md">We're creating personalized paint color schemes based on your preferences...</p>
+            <!-- Changed from fixed w-2/3 to responsive width -->
+            <div class="w-full lg:w-2/3 p-4 md:p-6">
+              <div v-if="loading" class="flex flex-col items-center justify-center h-64 lg:h-full">
+                <div class="w-12 h-12 md:w-16 md:h-16 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin mb-6"></div>
+                <h3 class="text-lg md:text-xl font-medium text-gray-800 mb-2">Generating Recommendations</h3>
+                <p class="text-gray-600 text-center max-w-md text-sm md:text-base">We're creating personalized paint color schemes based on your preferences...</p>
               </div>
               
-              <div v-else-if="!recommendations.length" class="flex flex-col items-center justify-center h-full">
-                <div class="mb-8">
-                  <PaintBucketIcon class="h-24 w-24 text-gray-300 mx-auto" />
+              <div v-else-if="!recommendations.length" class="flex flex-col items-center justify-center h-64 lg:h-full">
+                <div class="mb-6 md:mb-8">
+                  <PaintBucketIcon class="h-16 w-16 md:h-24 md:w-24 text-gray-300 mx-auto" />
                 </div>
-                <h3 class="text-2xl font-medium text-gray-800 mb-4">No Recommendations Yet</h3>
-                <p class="text-gray-600 text-center max-w-md mb-8">
+                <h3 class="text-lg md:text-2xl font-medium text-gray-800 mb-4">No Recommendations Yet</h3>
+                <p class="text-gray-600 text-center max-w-md mb-6 md:mb-8 text-sm md:text-base px-4">
                   Fill out the form and click "Get Recommendations" to see personalized paint color schemes for your house.
                 </p>
                 
-                <div class="grid grid-cols-3 gap-6 w-full max-w-2xl">
+                <!-- Made feature grid responsive -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 w-full max-w-2xl px-4">
                   <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 text-center hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300">
-                    <HomeIcon class="h-8 w-8 text-orange-400 mx-auto mb-2" />
-                    <h4 class="text-gray-700 font-medium">House Style</h4>
+                    <HomeIcon class="h-6 w-6 md:h-8 md:w-8 text-orange-400 mx-auto mb-2" />
+                    <h4 class="text-gray-700 font-medium text-sm md:text-base">House Style</h4>
                   </div>
                   
                   <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 text-center hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300">
-                    <PaletteIcon class="h-8 w-8 text-pink-400 mx-auto mb-2" />
-                    <h4 class="text-gray-700 font-medium">Color Preference</h4>
+                    <PaletteIcon class="h-6 w-6 md:h-8 md:w-8 text-pink-400 mx-auto mb-2" />
+                    <h4 class="text-gray-700 font-medium text-sm md:text-base">Color Preference</h4>
                   </div>
                   
                   <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 text-center hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300">
-                    <LayersIcon class="h-8 w-8 text-purple-400 mx-auto mb-2" />
-                    <h4 class="text-gray-700 font-medium">Surface Material</h4>
+                    <LayersIcon class="h-6 w-6 md:h-8 md:w-8 text-purple-400 mx-auto mb-2" />
+                    <h4 class="text-gray-700 font-medium text-sm md:text-base">Surface Material</h4>
                   </div>
                 </div>
               </div>
               
               <div v-else>
-                <div class="flex justify-between items-center mb-6">
-                  <h2 class="text-xl font-bold text-gray-800">Recommended Color Schemes</h2>
+                <!-- Made action buttons responsive and stack on mobile -->
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                  <h2 class="text-lg md:text-xl font-bold text-gray-800">Recommended Color Schemes</h2>
                   
                   <div class="flex items-center gap-3">
                     <button 
                       @click="saveRecommendation" 
-                      class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white rounded-lg flex items-center gap-2 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 duration-200"
+                      class="flex-1 sm:flex-none px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 duration-200 text-sm md:text-base min-h-[44px]"
                       :disabled="saving"
                     >
                       <div v-if="saving" class="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
@@ -418,7 +415,7 @@
                     
                     <button 
                       @click="printRecommendation" 
-                      class="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white rounded-lg flex items-center gap-2 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 duration-200"
+                      class="flex-1 sm:flex-none px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 duration-200 text-sm md:text-base min-h-[44px]"
                     >
                       <PrinterIcon class="h-4 w-4" />
                       <span>Print</span>
@@ -427,10 +424,11 @@
                 </div>
                 
                 <!-- House Preview -->
-                <div class="mb-8 bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300">
-                  <h3 class="text-lg font-medium text-gray-800 mb-4">House Preview</h3>
+                <div class="mb-6 md:mb-8 bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300">
+                  <h3 class="text-base md:text-lg font-medium text-gray-800 mb-4">House Preview</h3>
                   
-                  <div class="relative h-96 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg overflow-hidden">
+                  <!-- Made SVG container responsive with better mobile height -->
+                  <div class="relative h-64 sm:h-80 md:h-96 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg overflow-hidden">
                     <!-- SVG House Visualization -->
                     <svg viewBox="0 0 1200 700" class="w-full h-full">
                       <!-- Sky background with gradient -->
@@ -545,7 +543,7 @@
                       <line x1="555" y1="155" x2="645" y2="155" stroke="#374151" strokeWidth="1" opacity="0.5" />
                       <line x1="555" y1="165" x2="645" y2="165" stroke="#374151" strokeWidth="1" opacity="0.5" />
                       <line x1="575" y1="145" x2="575" y2="175" stroke="#374151" strokeWidth="1" opacity="0.5" />
-                      <line x1="595" y1="145" x2="595" y2="175" stroke="#374151" strokeWidth="1" opacity="0.5" />
+                      <line x1="595" y1="145" x2="595" y2="175" stroke="#374151" opacity="0.5" />
                       <line x1="615" y1="145" x2="615" y2="175" stroke="#374151" strokeWidth="1" opacity="0.5" />
                       <line x1="635" y1="145" x2="635" y2="175" stroke="#374151" strokeWidth="1" opacity="0.5" />
 
@@ -714,8 +712,8 @@
                       <rect x="350" y="295" width="500" height="5" fill="#ce1126" rx="2.5" ry="2.5" />
                     </svg>
                     
-                    <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-lg border border-gray-200">
-                      <p class="text-sm text-gray-700">
+                    <div class="absolute bottom-2 md:bottom-4 left-2 md:left-4 right-2 md:right-4 bg-white/90 backdrop-blur-sm p-2 md:p-3 rounded-lg border border-gray-200">
+                      <p class="text-xs md:text-sm text-gray-700">
                         {{ getHouseStyleNameById(formData.houseStyle) }} - This is how your house might look with the recommended color scheme.
                       </p>
                     </div>
@@ -723,22 +721,22 @@
                 </div>
                 
                 <!-- Style Description -->
-                <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-5 mb-8 hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300">
-                  <h3 class="text-lg font-medium text-gray-800 mb-2">{{ getHouseStyleNameById(formData.houseStyle) }}</h3>
-                  <p class="text-gray-600">{{ getHouseStyleDescriptionById(formData.houseStyle) }}</p>
+                <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 md:p-5 mb-6 md:mb-8 hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300">
+                  <h3 class="text-base md:text-lg font-medium text-gray-800 mb-2">{{ getHouseStyleNameById(formData.houseStyle) }}</h3>
+                  <p class="text-gray-600 text-sm md:text-base">{{ getHouseStyleDescriptionById(formData.houseStyle) }}</p>
                 </div>
                 
                 <!-- Color Schemes -->
-                <div class="space-y-6">
+                <div class="space-y-4 md:space-y-6">
                   <div 
                     v-for="(scheme, schemeIndex) in recommendations" 
                     :key="schemeIndex"
-                    class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-5 hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 cursor-pointer"
+                    class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 md:p-5 hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 cursor-pointer"
                     @click="activeSchemeIndex = schemeIndex"
                     :class="{ 'border-orange-400 ring-2 ring-orange-200': activeSchemeIndex === schemeIndex }"
                   >
-                    <div class="flex justify-between items-center mb-4">
-                      <h3 class="text-lg font-medium text-gray-800">Color Scheme {{ schemeIndex + 1 }}</h3>
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
+                      <h3 class="text-base md:text-lg font-medium text-gray-800">Color Scheme {{ schemeIndex + 1 }}</h3>
                       <div class="flex items-center gap-2">
                         <span class="text-xs px-2 py-1 rounded-full bg-gradient-to-r from-orange-100 to-pink-100 text-orange-700 border border-orange-200">
                           {{ getColorPreferenceNameById(formData.colorPreference) }}
@@ -746,27 +744,28 @@
                       </div>
                     </div>
                     
-                    <div class="grid grid-cols-4 gap-4 mb-4">
+                    <!-- Made color grid fully responsive -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-4">
                       <div 
                         v-for="(color, colorIndex) in scheme" 
                         :key="colorIndex"
-                        class="bg-gray-50 p-3 rounded-lg border border-gray-200"
+                        class="bg-gray-50 p-2 md:p-3 rounded-lg border border-gray-200"
                       >
                         <div 
-                          class="h-20 rounded-md mb-3 cursor-pointer border border-gray-200"
+                          class="h-16 md:h-20 rounded-md mb-2 md:mb-3 cursor-pointer border border-gray-200"
                           :style="{ backgroundColor: color.hex }"
                           @click="copyColorToClipboard(color.hex)"
                           title="Click to copy color code"
                         ></div>
-                        <div class="flex justify-between items-center">
-                          <span class="text-gray-800 font-medium">{{ color.name }}</span>
-                          <span class="text-gray-600 text-sm">{{ color.hex.toUpperCase() }}</span>
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
+                          <span class="text-gray-800 font-medium text-xs md:text-sm truncate">{{ color.name }}</span>
+                          <span class="text-gray-600 text-xs">{{ color.hex.toUpperCase() }}</span>
                         </div>
                         <div class="text-gray-500 text-xs mt-1">{{ getColorUsageByIndex(colorIndex) }}</div>
                       </div>
                     </div>
                     
-                    <div class="flex justify-between items-center text-sm text-gray-600">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-xs md:text-sm text-gray-600">
                       <span>{{ getSurfaceMaterialNameById(formData.surfaceMaterial) }}</span>
                       <span>{{ getColorPreferenceNameById(formData.colorPreference) }}</span>
                     </div>
@@ -777,57 +776,62 @@
           </div>
 
           <!-- History Tab -->
-          <div v-if="activeTab === 'history'" class="p-6 h-full overflow-auto">
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-6 h-full flex flex-col">
-              <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-800 flex items-center">
-                  <HistoryIcon class="h-6 w-6 mr-2 text-orange-500" />
-                  Paint Recommendation History
+          <div v-if="activeTab === 'history'" class="p-4 md:p-6 h-full overflow-auto">
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 md:p-6 h-full flex flex-col">
+              <!-- Made history header responsive -->
+              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+                <h2 class="text-xl md:text-2xl font-bold text-gray-800 flex items-center">
+                  <HistoryIcon class="h-5 w-5 md:h-6 md:w-6 mr-2 text-orange-500" />
+                  <span class="hidden sm:inline">Paint Recommendation History</span>
+                  <span class="sm:hidden">History</span>
                 </h2>
                 
                 <div class="flex items-center gap-3">
                   <button 
                     @click="clearAllHistory" 
-                    class="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white rounded-lg flex items-center gap-2 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 duration-200"
+                    class="flex-1 sm:flex-none px-3 md:px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 duration-200 text-sm md:text-base min-h-[44px]"
                     :disabled="historyLoading || historyItems.length === 0"
                     :class="{ 'opacity-50 cursor-not-allowed': historyLoading || historyItems.length === 0 }"
                   >
                     <TrashIcon class="h-4 w-4" />
-                    <span>Clear All</span>
+                    <span class="hidden sm:inline">Clear All</span>
+                    <span class="sm:hidden">Clear</span>
                   </button>
                   
                   <button 
                     @click="activeTab = 'recommender'"
-                    class="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white rounded-lg flex items-center gap-2 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 duration-200"
+                    class="flex-1 sm:flex-none px-3 md:px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 duration-200 text-sm md:text-base min-h-[44px]"
                   >
                     <PlusIcon class="h-4 w-4" />
-                    <span>New Recommendation</span>
+                    <span class="hidden sm:inline">New Recommendation</span>
+                    <span class="sm:hidden">New</span>
                   </button>
                 </div>
               </div>
               
               <!-- Filters -->
-              <div class="flex gap-4 mb-6">
+              <!-- Made filters responsive and stack on mobile -->
+              <div class="flex flex-col sm:flex-row gap-4 mb-6">
                 <div class="flex-1">
                   <input 
                     type="text" 
                     v-model="searchQuery" 
                     placeholder="Search recommendations..." 
-                    class="w-full bg-white border border-gray-300 rounded-lg text-gray-700 px-4 py-3 focus:ring-2 focus:ring-orange-200 focus:border-orange-400 transition-all placeholder-gray-400"
+                    class="w-full bg-white border border-gray-300 rounded-lg text-gray-700 px-3 md:px-4 py-2 md:py-3 focus:ring-2 focus:ring-orange-200 focus:border-orange-400 transition-all placeholder-gray-400 text-sm md:text-base"
                   />
                 </div>
                 
                 <div class="flex gap-3">
-                  <div class="relative">
+                  <div class="relative flex-1 sm:flex-none">
                     <select 
                       v-model="filterUser"
-                      class="bg-white border border-gray-300 rounded-lg text-gray-700 px-4 py-3 pr-10 focus:ring-2 focus:ring-orange-200 focus:border-orange-400 transition-all appearance-none"
+                      class="w-full bg-white border border-gray-300 rounded-lg text-gray-700 px-3 md:px-4 py-2 md:py-3 pr-8 md:pr-10 focus:ring-2 focus:ring-orange-200 focus:border-orange-400 transition-all appearance-none text-sm md:text-base"
                     >
                       <option value="">All Users</option>
                       <option value="admin">Admin</option>
                       <option value="staff">Staff</option>
                     </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-600">
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 md:px-3 text-gray-600">
                       <ChevronDownIcon class="h-4 w-4" />
                     </div>
                   </div>
@@ -837,87 +841,89 @@
               <!-- History Items Container with proper scrolling -->
               <div class="flex-1 overflow-auto">
                 <div v-if="historyLoading" class="flex items-center justify-center py-12">
-                  <div class="w-10 h-10 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin"></div>
+                  <div class="w-8 h-8 md:w-10 md:h-10 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin"></div>
                 </div>
                 
                 <div v-else-if="filteredHistory.length === 0" class="py-12 text-center">
-                  <h3 class="text-xl font-medium text-gray-800 mb-2">No Recommendations Found</h3>
-                  <p class="text-gray-600">Try adjusting your search or filter criteria.</p>
+                  <h3 class="text-lg md:text-xl font-medium text-gray-800 mb-2">No Recommendations Found</h3>
+                  <p class="text-gray-600 text-sm md:text-base">Try adjusting your search or filter criteria.</p>
                 </div>
                 
                 <!-- History Items -->
-                
-<div v-else class="space-y-6 pb-6">
-  <div 
-    v-for="item in filteredHistory" 
-    :key="item.id"
-    class="bg-gray-50 p-5 rounded-lg border border-gray-200 hover:border-orange-300 transition-all"
-  >
-    <div class="flex gap-6">
-      <!-- Left side - Info and Colors -->
-      <div class="flex-1">
-        <div class="flex justify-between items-start mb-3">
-          <div>
-            <h3 class="text-lg font-medium text-gray-800">{{ getHouseStyleNameById(item.houseStyle) }}</h3>
-            <p class="text-sm text-gray-600">{{ formatDate(item.createdAt) }}</p>
-            <div class="mt-1">
-              <span 
-                class="text-xs px-2 py-0.5 rounded-full border" 
-                :class="item.userType === 'admin' ? 'bg-blue-100 text-blue-700 border-blue-200' : 'bg-green-100 text-green-700 border-green-200'"
-              >
-                <span v-if="item.userType === 'admin'">
-                  <ShieldIcon class="h-3 w-3 inline mr-1" />
-                  Admin
-                </span>
-                <span v-else>
-                  <UserIcon class="h-3 w-3 inline mr-1" />
-                  Staff
-                </span>
-              </span>
-            </div>
-          </div>
-          
-          <button 
-            @click="deleteHistoryItem(item.id)"
-            class="p-2 rounded-lg hover:bg-red-50 text-gray-600 hover:text-red-600 transition-colors border border-transparent hover:border-red-200"
-          >
-            <TrashIcon class="w-4 h-4" />
-          </button>
-        </div>
-        
-        <!-- Compact Color Grid -->
-        <div class="grid grid-cols-4 gap-2 mb-4">
-          <div 
-            v-for="(color, colorIndex) in item.scheme" 
-            :key="colorIndex"
-            class="bg-white p-2 rounded-lg border border-gray-200"
-          >
-            <div 
-              class="h-8 rounded-md mb-1 cursor-pointer border border-gray-200"
-              :style="{ backgroundColor: color.hex }"
-              @click="copyColorToClipboard(color.hex)"
-              title="Click to copy color code"
-            ></div>
-            <div class="text-center">
-              <span class="text-gray-800 font-medium text-xs block truncate">{{ color.name }}</span>
-              <span class="text-gray-600 text-xs">{{ color.hex.toUpperCase() }}</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="flex justify-between items-center text-sm text-gray-600">
-          <span>{{ getSurfaceMaterialNameById(item.surfaceMaterial) }}</span>
-          <span>{{ getColorPreferenceNameById(item.colorPreference) }}</span>
-        </div>
-      </div>
-      
-      <!-- Right side - House Preview -->
-      <div class="w-80 flex-shrink-0">
-        <div class="bg-white rounded-lg border border-gray-200 p-3">
-          <h4 class="text-sm font-medium text-gray-700 mb-2">House Preview</h4>
-          <div class="relative h-48 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg overflow-hidden">
-            <!-- Enhanced SVG House Visualization -->
-            <svg viewBox="0 0 800 500" class="w-full h-full">
+                <!-- Made history items fully responsive with stacked layout on mobile -->
+                <div v-else class="space-y-4 md:space-y-6 pb-6">
+                  <div 
+                    v-for="item in filteredHistory" 
+                    :key="item.id"
+                    class="bg-gray-50 p-4 md:p-5 rounded-lg border border-gray-200 hover:border-orange-300 transition-all"
+                  >
+                    <div class="flex flex-col lg:flex-row gap-4 lg:gap-6">
+                      <!-- Left side - Info and Colors -->
+                      <div class="flex-1">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
+                          <div>
+                            <h3 class="text-base md:text-lg font-medium text-gray-800">{{ getHouseStyleNameById(item.houseStyle) }}</h3>
+                            <p class="text-xs md:text-sm text-gray-600">{{ formatDate(item.createdAt) }}</p>
+                            <div class="mt-1">
+                              <span 
+                                class="text-xs px-2 py-0.5 rounded-full border" 
+                                :class="item.userType === 'admin' ? 'bg-blue-100 text-blue-700 border-blue-200' : 'bg-green-100 text-green-700 border-green-200'"
+                              >
+                                <span v-if="item.userType === 'admin'">
+                                  <ShieldIcon class="h-3 w-3 inline mr-1" />
+                                  Admin
+                                </span>
+                                <span v-else>
+                                  <UserIcon class="h-3 w-3 inline mr-1" />
+                                  Staff
+                                </span>
+                              </span>
+                            </div>
+                          </div>
+                          
+                          <button 
+                            @click="deleteHistoryItem(item.id)"
+                            class="p-2 rounded-lg hover:bg-red-50 text-gray-600 hover:text-red-600 transition-colors border border-transparent hover:border-red-200 self-start"
+                          >
+                            <TrashIcon class="w-4 h-4" />
+                          </button>
+                        </div>
+                        
+                        <!-- Compact Color Grid -->
+                        <!-- Made history color grid responsive -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+                          <div 
+                            v-for="(color, colorIndex) in item.scheme" 
+                            :key="colorIndex"
+                            class="bg-white p-2 rounded-lg border border-gray-200"
+                          >
+                            <div 
+                              class="h-6 md:h-8 rounded-md mb-1 cursor-pointer border border-gray-200"
+                              :style="{ backgroundColor: color.hex }"
+                              @click="copyColorToClipboard(color.hex)"
+                              title="Click to copy color code"
+                            ></div>
+                            <div class="text-center">
+                              <span class="text-gray-800 font-medium text-xs block truncate">{{ color.name }}</span>
+                              <span class="text-gray-600 text-xs">{{ color.hex.toUpperCase() }}</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-xs md:text-sm text-gray-600">
+                          <span>{{ getSurfaceMaterialNameById(item.surfaceMaterial) }}</span>
+                          <span>{{ getColorPreferenceNameById(item.colorPreference) }}</span>
+                        </div>
+                      </div>
+                      
+                      <!-- Right side - House Preview -->
+                      <!-- Made house preview responsive and hide on small screens -->
+                      <div class="w-full lg:w-80 flex-shrink-0 hidden md:block">
+                        <div class="bg-white rounded-lg border border-gray-200 p-3">
+                          <h4 class="text-sm font-medium text-gray-700 mb-2">House Preview</h4>
+                          <div class="relative h-32 md:h-48 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg overflow-hidden">
+                            <!-- Enhanced SVG House Visualization -->
+                            <svg viewBox="0 0 800 500" class="w-full h-full">
               <!-- Sky background -->
               <defs>
                 <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -1052,16 +1058,12 @@
               <rect x="250" y="210" width="300" height="3" fill="#0038a8" />
               <rect x="250" y="213" width="300" height="2" fill="#ce1126" />
             </svg>
-          </div>
-          <p class="text-xs text-gray-600 mt-2 text-center">
-            {{ getHouseStyleNameById(item.houseStyle) }}
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1098,7 +1100,8 @@ import {
   Clipboard as ClipboardIcon,
   Settings as SettingsIcon,
   Package as PackageIcon,
-  Users as UsersIcon
+  Users as UsersIcon,
+  BarChart3 as BarChart3Icon,
 } from "lucide-vue-next";
 import { collection, addDoc, getDocs, deleteDoc, doc, orderBy, query, serverTimestamp } from "firebase/firestore";
 import { db } from "../../config/firebase";

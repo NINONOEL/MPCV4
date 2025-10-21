@@ -55,7 +55,7 @@
             :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/admin/house-paint-recommender' }"
           >
             <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+            <span>Paint Recommender</span>
           </router-link>
 
           <router-link 
@@ -76,13 +76,9 @@
             <span>Sales Analytics</span>
           </router-link>
 
-          <router-link 
-            to="/admin/reports" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700"
-            :class="{ 'shadow-sm border border-indigo-200 transform scale-105': $route.path === '/admin/reports' }"
-          >
-            <ClipboardIcon class="w-5 h-5" />
-            <span>Reports</span>
+          <router-link to="/admin/visualization" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 shadow-sm border border-indigo-200">
+            <BarChart3Icon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Data Visualization</span>
           </router-link>
 
           <router-link 
@@ -91,16 +87,7 @@
             :class="{ 'shadow-sm border border-amber-200 transform scale-105': $route.path === '/admin/settings' }"
           >
             <SettingsIcon class="w-5 h-5" />
-            <span>System Settings</span>
-          </router-link>
-
-          <router-link 
-            to="/admin/security" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-red-600 bg-red-50 hover:bg-red-100 hover:text-red-700"
-            :class="{ 'shadow-sm border border-red-200 transform scale-105': $route.path === '/admin/security' }"
-          >
-            <ShieldIcon class="w-5 h-5" />
-            <span>Security</span>
+            <span>Settings</span>
           </router-link>
 
           <!-- Perfect spacing -->
@@ -1156,7 +1143,8 @@ import {
   StarOff as StarOffIcon,
   TrendingUp as TrendingUpIcon,
   Users as UsersIcon,
-  Clipboard as ClipboardIcon
+  Clipboard as ClipboardIcon,
+  BarChart3 as BarChart3Icon,
 } from 'lucide-vue-next'
 import { 
   collection, 

@@ -1,89 +1,96 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-orange-50 to-red-50">
-    <!-- Header Section -->
-    <div class="bg-white/80 backdrop-blur-sm border-b border-orange-100 sticky top-0 z-10">
-      <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3">
+  <div class="min-h-screen bg-gradient-to-b from-cream-50 via-white to-cream-50">
+    <!-- Navigation Header -->
+    <div class="bg-white/70 backdrop-blur-md border-b border-cream-200 sticky top-0 z-20 shadow-sm">
+      <div class="max-w-7xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6 py-2">
+        <button
+          @click="$router.push({ name: 'CustomerPortal' })"
+          class="inline-flex items-center gap-2 px-3 py-1.5 text-xs sm:text-sm font-medium text-gray-700 bg-white hover:bg-cream-50 border border-cream-200 rounded-full transition-all duration-300 hover:shadow-md hover:border-orange-300"
+        >
+          <ChevronLeftIcon class="w-3 h-3 sm:w-4 sm:h-4" />
+          <span>Back to Portal</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Hero Header Section -->
+    <div class="bg-gradient-to-r from-cream-50 via-white to-peach-50 border-b border-cream-200 shadow-sm">
+      <div class="max-w-7xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6 py-3 sm:py-4">
         <div class="text-center">
-          <!-- Reduced header text sizes significantly -->
-          <h1 class="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-gray-900 mb-1 leading-tight">
+          <h1 class="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-gray-900 via-orange-700 to-gray-900 bg-clip-text text-transparent mb-1 leading-tight">
             Transform Your Space with Color
           </h1>
-          <p class="text-xs sm:text-sm md:text-base text-gray-600 max-w-xs sm:max-w-md md:max-w-2xl mx-auto px-2">
-            Explore our range of premium paints, tailored for every project.
+          <p class="text-xs sm:text-sm text-gray-600 max-w-2xl mx-auto">
+            Explore our curated collection of premium paints, expertly crafted for every project
           </p>
         </div>
       </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 md:py-6">
+    <div class="max-w-7xl mx-auto px-2 sm:px-3 md:px-4 lg:px-6 py-3 sm:py-4">
       <!-- Loading State -->
-      <div v-if="loading" class="flex flex-col items-center justify-center py-8 sm:py-12 md:py-16">
+      <div v-if="loading" class="flex flex-col items-center justify-center py-8">
         <div class="relative">
-          <!-- Reduced loading spinner size -->
-          <div class="w-8 h-8 sm:w-10 sm:h-10 border-4 border-orange-200 border-t-orange-500 rounded-full animate-spin"></div>
+          <div class="w-10 h-10 border-4 border-cream-200 border-t-orange-500 rounded-full animate-spin"></div>
           <div class="absolute inset-0 flex items-center justify-center">
-            <PaletteIcon class="w-3 h-3 sm:w-4 sm:h-4 text-orange-500" />
+            <PaletteIcon class="w-4 h-4 text-orange-500" />
           </div>
         </div>
-        <p class="mt-3 text-xs sm:text-sm text-gray-600 text-center px-4">Loading our premium paint collection...</p>
+        <p class="mt-3 text-gray-600 text-xs sm:text-sm text-center">Loading our premium paint collection...</p>
       </div>
 
       <!-- Error State -->
-      <div v-else-if="error" class="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 text-center mx-2 sm:mx-0">
-        <!-- Reduced error icon size -->
-        <AlertTriangleIcon class="w-6 h-6 sm:w-8 sm:h-8 text-red-500 mx-auto mb-2 sm:mb-3" />
-        <h3 class="text-sm sm:text-base font-semibold text-red-800 mb-2">Unable to Load Products</h3>
-        <p class="text-xs sm:text-sm text-red-600 mb-3 px-2">{{ error }}</p>
+      <div v-else-if="error" class="bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-xl p-4 text-center shadow-sm">
+        <AlertTriangleIcon class="w-6 h-6 text-red-500 mx-auto mb-2" />
+        <h3 class="text-sm sm:text-base font-semibold text-red-800 mb-1">Unable to Load Products</h3>
+        <p class="text-red-600 mb-3 text-xs sm:text-sm">{{ error }}</p>
         <button
           @click="fetchProducts"
-          class="inline-flex items-center gap-2 px-3 py-1.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-xs sm:text-sm touch-manipulation"
+          class="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-full hover:shadow-lg transition-all duration-300 font-medium text-xs sm:text-sm"
         >
-          <RefreshCwIcon class="w-3 h-3" />
+          <RefreshCwIcon class="w-3 h-3 sm:w-4 sm:h-4" />
           Try Again
         </button>
       </div>
 
       <!-- Main Content -->
       <div v-else>
-        <!-- Filter Section -->
-        <!-- Reduced filter section padding and spacing -->
-        <div class="bg-white/60 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 border border-orange-100 mx-1 sm:mx-0">
+        <!-- Filter Section - Enhanced Design -->
+        <div class="bg-white rounded-xl p-3 sm:p-4 mb-4 border border-cream-200 shadow-sm hover:shadow-md transition-shadow duration-300">
           <h2 class="text-base sm:text-lg font-bold text-gray-900 mb-3 text-center">Find Your Perfect Paint</h2>
           
-          <!-- Mobile-First Filter Layout -->
           <div class="space-y-3">
-            <!-- Search - Full width on mobile -->
-            <div class="relative w-full">
-              <SearchIcon class="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
+            <!-- Search Input - Premium Style -->
+            <div class="relative">
+              <SearchIcon class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-orange-400" />
               <input
                 v-model="searchQuery"
                 type="text"
-                placeholder="Search products..."
-                class="w-full pl-8 pr-3 py-2 sm:py-1.5 border border-orange-200 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white text-sm touch-manipulation"
+                placeholder="Search by name, color, or category..."
+                class="w-full pl-10 pr-3 py-2 border border-cream-200 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent bg-cream-50 text-xs sm:text-sm text-gray-900 placeholder-gray-500 transition-all duration-300 shadow-sm hover:shadow-md"
               />
             </div>
 
-            <!-- Category Filter - Responsive buttons -->
-            <!-- Reduced button sizes and spacing -->
-            <div class="flex flex-wrap gap-1.5 justify-center">
+            <!-- Category Filter Buttons - Enhanced -->
+            <div class="flex flex-wrap gap-2 justify-center">
               <button
                 @click="filterCategory = ''"
                 :class="[
-                  'px-2.5 sm:px-3 py-1.5 sm:py-1.5 rounded-full font-medium transition-all duration-200 text-xs sm:text-sm touch-manipulation min-h-[36px] sm:min-h-[32px]',
+                  'px-4 py-1.5 rounded-full font-semibold transition-all duration-300 text-xs sm:text-sm',
                   filterCategory === '' 
-                    ? 'bg-orange-500 text-white shadow-lg' 
-                    : 'bg-white text-gray-700 hover:bg-orange-100 border border-orange-200'
+                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg hover:shadow-xl scale-105' 
+                    : 'bg-white text-gray-700 hover:bg-cream-50 border border-cream-200 hover:border-orange-300 hover:shadow-md'
                 ]"
               >
-                All Categories
+                All Products
               </button>
               <button
                 @click="filterCategory = 'interior'"
                 :class="[
-                  'px-2.5 sm:px-3 py-1.5 sm:py-1.5 rounded-full font-medium transition-all duration-200 text-xs sm:text-sm touch-manipulation min-h-[36px] sm:min-h-[32px]',
+                  'px-4 py-1.5 rounded-full font-semibold transition-all duration-300 text-xs sm:text-sm',
                   filterCategory === 'interior' 
-                    ? 'bg-orange-500 text-white shadow-lg' 
-                    : 'bg-white text-gray-700 hover:bg-orange-100 border border-orange-200'
+                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg hover:shadow-xl scale-105' 
+                    : 'bg-white text-gray-700 hover:bg-cream-50 border border-cream-200 hover:border-orange-300 hover:shadow-md'
                 ]"
               >
                 Interior
@@ -91,10 +98,10 @@
               <button
                 @click="filterCategory = 'exterior'"
                 :class="[
-                  'px-2.5 sm:px-3 py-1.5 sm:py-1.5 rounded-full font-medium transition-all duration-200 text-xs sm:text-sm touch-manipulation min-h-[36px] sm:min-h-[32px]',
+                  'px-4 py-1.5 rounded-full font-semibold transition-all duration-300 text-xs sm:text-sm',
                   filterCategory === 'exterior' 
-                    ? 'bg-orange-500 text-white shadow-lg' 
-                    : 'bg-white text-gray-700 hover:bg-orange-100 border border-orange-200'
+                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg hover:shadow-xl scale-105' 
+                    : 'bg-white text-gray-700 hover:bg-cream-50 border border-cream-200 hover:border-orange-300 hover:shadow-md'
                 ]"
               >
                 Exterior
@@ -103,82 +110,64 @@
           </div>
         </div>
 
-        <!-- Products Grid - Fully Responsive -->
-        <div v-if="filteredProducts.length === 0" class="text-center py-8 sm:py-12 px-4">
-          <!-- Reduced no products icon size -->
-          <PackageIcon class="w-8 h-8 sm:w-10 sm:h-10 text-gray-300 mx-auto mb-3" />
-          <h3 class="text-base sm:text-lg font-semibold text-gray-600 mb-2">No Products Found</h3>
+        <!-- Products Grid -->
+        <div v-if="filteredProducts.length === 0" class="text-center py-8">
+          <PackageIcon class="w-10 h-10 text-gray-300 mx-auto mb-2" />
+          <h3 class="text-sm sm:text-base font-semibold text-gray-600 mb-1">No Products Found</h3>
           <p class="text-xs sm:text-sm text-gray-500">Try adjusting your filters or search terms.</p>
         </div>
 
         <!-- Dynamic Grid Layout -->
-        <!-- Very minimal reduction in grid columns to make boxes slightly larger -->
-        <div v-else class="grid grid-cols-3 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-6 2xl:grid-cols-7 gap-2 sm:gap-3">
+        <div v-else class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3">
           <div
             v-for="product in filteredProducts"
             :key="product.id"
-            class="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 overflow-hidden border border-orange-100 group flex flex-col h-full"
+            class="group bg-white rounded-lg overflow-hidden border border-cream-200 shadow-sm hover:shadow-lg transition-all duration-500 hover:border-orange-300 flex flex-col h-full transform hover:-translate-y-0.5"
           >
-            <!-- Product Image Placeholder - Square Box Shape -->
-            <div class="aspect-square bg-gradient-to-br from-orange-100 to-red-100 flex items-center justify-center relative overflow-hidden p-2 sm:p-3 flex-shrink-0">
-              <!-- Display actual product image if available, otherwise show placeholder -->
-              <div v-if="product.image" class="w-full h-full rounded overflow-hidden">
+            <!-- Product Image Container -->
+            <div class="aspect-square bg-gradient-to-br from-cream-100 via-peach-50 to-orange-100 flex items-center justify-center relative overflow-hidden">
+              <div v-if="product.image" class="w-full h-full">
                 <img 
                   :src="product.image" 
                   :alt="product.name"
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   @error="handleImageError"
                 />
               </div>
-              <!-- Placeholder for product image when no image is available -->
-              <div v-else class="w-full h-full flex items-center justify-center bg-white/20 rounded border border-dashed border-orange-200">
-                <PaletteIcon class="w-4 h-4 sm:w-5 sm:h-5 text-orange-400 group-hover:scale-110 transition-transform duration-300" />
+              <div v-else class="w-full h-full flex items-center justify-center">
+                <PaletteIcon class="w-6 h-6 text-orange-300 group-hover:scale-125 transition-transform duration-500" />
               </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <!-- Overlay Gradient on Hover -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
 
-            <!-- Product Info - Added flex-1 and flex flex-col to ensure consistent height and push price to bottom -->
-            <div class="p-2 sm:p-3 flex flex-col flex-1">
+            <!-- Product Info -->
+            <div class="p-2.5 flex flex-col flex-1">
               <div class="flex-1">
-                <h3 class="text-xs sm:text-sm font-bold text-gray-900 mb-1 line-clamp-2">
+                <h3 class="text-xs sm:text-sm font-bold text-gray-900 mb-1 line-clamp-2 group-hover:text-orange-600 transition-colors duration-300">
                   {{ product.name }}
                 </h3>
-                <p class="text-xs text-gray-500 uppercase tracking-wide">
+                <p class="text-xs text-gray-500 uppercase tracking-widest font-semibold">
                   {{ product.category }}
                 </p>
               </div>
 
-              <!-- Price and stocks section now uses mt-auto to stick to bottom -->
-              <div class="mt-auto pt-2 border-t border-gray-100">
-                <div class="flex flex-col gap-1">
-                  <span class="text-xs sm:text-sm font-bold text-orange-600">
-                    ₱{{ product.price ? product.price.toFixed(2) : '0.00' }}
-                  </span>
-                  <span
-                    :class="[
-                      'px-1.5 py-0.5 rounded-full text-xs font-medium self-start',
-                      product.stockLevel > 10 
-                        ? 'bg-green-100 text-green-800' 
-                        : product.stockLevel > 0 
-                          ? 'bg-yellow-100 text-yellow-800' 
-                          : 'bg-red-100 text-red-800'
-                    ]"
-                  >
-                    {{ product.stockLevel > 0 ? `${product.stockLevel} stocks` : '0 stocks' }}
-                  </span>
-                </div>
+              <!-- Price Section -->
+              <div class="mt-2 pt-2 border-t border-cream-200">
+                <span class="text-sm sm:text-base font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
+                  ₱{{ product.price ? product.price.toFixed(2) : '0.00' }}
+                </span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Products Summary - Responsive -->
-        <!-- Reduced summary section size and spacing -->
-        <div v-if="filteredProducts.length > 0" class="mt-6 sm:mt-8 text-center">
-          <div class="bg-white/60 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 border border-orange-100 inline-block mx-2 sm:mx-0">
-            <p class="text-xs sm:text-sm text-gray-600">
-              Showing <span class="font-semibold text-orange-600">{{ filteredProducts.length }}</span> 
-              of <span class="font-semibold text-orange-600">{{ availableProducts.length }}</span> available products
+        <!-- Products Summary -->
+        <div v-if="filteredProducts.length > 0" class="mt-6 text-center">
+          <div class="bg-gradient-to-r from-cream-50 to-peach-50 rounded-lg p-3 border border-cream-200 inline-block shadow-sm">
+            <p class="text-xs sm:text-sm text-gray-700 font-medium">
+              Showing <span class="text-orange-600 font-bold">{{ filteredProducts.length }}</span> 
+              of <span class="text-orange-600 font-bold">{{ availableProducts.length }}</span> products
             </p>
           </div>
         </div>
@@ -201,7 +190,8 @@ import {
   SearchIcon,
   PackageIcon,
   AlertTriangleIcon,
-  RefreshCwIcon
+  RefreshCwIcon,
+  ChevronLeftIcon // Added ChevronLeftIcon import
 } from 'lucide-vue-next'
 
 // State
@@ -313,6 +303,17 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+/* Color Variables */
+:root {
+  --cream-50: #FAF8F3;
+  --cream-100: #F5F1E8;
+  --cream-200: #EDE7DC;
+  --peach-50: #FEF5F0;
+  --orange-400: #FB923C;
+  --orange-500: #F97316;
+  --orange-600: #EA580C;
+}
+
 /* Custom responsive utilities */
 @media (min-width: 475px) {
   .xs\:grid-cols-2 {
@@ -342,11 +343,11 @@ onUnmounted(() => {
   }
 }
 
-/* Line clamp utility with vendor prefix fix */
+/* Line clamp utility */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  line-clamp: 2; /* Added standard property for compatibility */
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -356,8 +357,20 @@ onUnmounted(() => {
   touch-action: manipulation;
 }
 
-/* Added aspect-square utility for perfect square boxes */
+/* Aspect square utility */
 .aspect-square {
   aspect-ratio: 1 / 1;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Gradient text effect */
+.bg-clip-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 </style>

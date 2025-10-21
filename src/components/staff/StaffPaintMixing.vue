@@ -30,7 +30,7 @@
             <LayoutDashboardIcon class="w-5 h-5" />
             <span>Dashboard</span>
           </router-link>
-
+  
           <router-link 
             to="/staff/inventory" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
@@ -39,7 +39,7 @@
             <PackageIcon class="w-5 h-5" />
             <span>Inventory</span>
           </router-link>
-
+  
           <router-link 
             to="/staff/paint-mixing" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 shadow-sm border border-pink-200 transform scale-105"
@@ -48,7 +48,7 @@
             <PaletteIcon class="w-5 h-5" />
             <span>Paint Mixing</span>
           </router-link>
-
+  
           <router-link 
             to="/staff/house-paint-recommender" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
@@ -57,7 +57,7 @@
             <HomeIcon class="w-5 h-5" />
             <span>House Paint Recommender</span>
           </router-link>
-
+  
           <router-link 
             to="/staff/sales-analytics" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
@@ -66,7 +66,7 @@
             <TrendingUpIcon class="w-5 h-5" />
             <span>Sales Analytics</span>
           </router-link>
-
+  
           <router-link 
             to="/staff/settings" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
@@ -75,11 +75,11 @@
             <SettingsIcon class="w-5 h-5" />
             <span>Settings</span>
           </router-link>
-
+  
           <!-- Perfect spacing -->
           <div class="h-4"></div>
         </nav>
-
+  
         <!-- User Menu - Fixed at bottom -->
         <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
@@ -156,7 +156,7 @@
             <PackageIcon class="w-5 h-5" />
             <span>Inventory</span>
           </router-link>
-
+  
           <router-link 
             to="/staff/sales-analytics" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50"
@@ -185,7 +185,7 @@
             <HomeIcon class="w-5 h-5" />
             <span>House Paint Recommender</span>
           </router-link>
-
+  
           <router-link 
             to="/staff/sales-analytics" 
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50"
@@ -231,29 +231,30 @@
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
         <!-- Header -->
-        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-8 py-4 shadow-sm">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-4 md:px-8 py-3 md:py-4 shadow-sm">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-4">
             <div>
-              <h1 class="text-2xl font-bold text-gray-900">Paint Mixing Studio</h1>
-              <p class="text-gray-600">Create and manage custom paint mixtures</p>
+              <!-- Made header text responsive -->
+              <h1 class="text-xl md:text-2xl font-bold text-gray-900">Paint Mixing Studio</h1>
+              <p class="text-sm md:text-base text-gray-600">Create and manage custom paint mixtures</p>
             </div>
-            <div class="flex items-center gap-4">
-              <div class="hidden md:flex items-center gap-2 text-gray-700">
-                <CalendarIcon class="w-5 h-5 text-pink-500" />
+            <div class="flex items-center gap-3 md:gap-4">
+              <div class="hidden md:flex items-center gap-2 text-gray-700 text-sm">
+                <CalendarIcon class="w-4 h-4 md:w-5 md:h-5 text-pink-500" />
                 <span>{{ currentDate }}</span>
               </div>
               <div class="hidden md:block h-6 w-px bg-gray-300"></div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-900">Welcome, {{ userDisplayName || 'Staff' }}</span>
+              <div class="flex items-center gap-2 md:gap-3">
+                <span class="text-sm md:text-base text-gray-900">Welcome, {{ userDisplayName || 'Staff' }}</span>
                 <div class="relative">
-                  <BellIcon class="w-5 h-5 text-pink-500 cursor-pointer hover:text-pink-600" />
+                  <BellIcon class="w-4 h-4 md:w-5 md:h-5 text-pink-500 cursor-pointer hover:text-pink-600" />
                 </div>
               </div>
             </div>
           </div>
         </header>
   
-        <div class="p-6 md:p-8">
+        <div class="p-4 md:p-6 lg:p-8">
           <!-- Loading State -->
           <div v-if="loading" class="flex items-center justify-center p-8">
             <LoaderIcon class="w-8 h-8 text-pink-500 animate-spin mr-2" />
@@ -278,55 +279,60 @@
             </div>
   
             <!-- Quick Actions -->
-            <div class="flex flex-wrap gap-4 mb-8">
+            <!-- Made quick action buttons responsive with smaller padding and text on mobile -->
+            <div class="flex flex-wrap gap-2 md:gap-4 mb-6 md:mb-8">
               <button 
                 @click="toggleColorPalette" 
-                class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:opacity-90 transition-colors shadow-lg"
+                class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:opacity-90 transition-colors shadow-lg text-sm md:text-base"
               >
-                <PaletteIcon class="w-5 h-5" />
+                <PaletteIcon class="w-4 h-4 md:w-5 md:h-5" />
                 <span>Color Palette</span>
               </button>
               <button 
                 @click="toggleMixingTips" 
-                class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg hover:opacity-90 transition-colors shadow-lg"
+                class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg hover:opacity-90 transition-colors shadow-lg text-sm md:text-base"
               >
-                <HelpCircleIcon class="w-5 h-5" />
+                <HelpCircleIcon class="w-4 h-4 md:w-5 md:h-5" />
                 <span>Mixing Tips</span>
               </button>
               <button 
                 @click="showAddNewColorModal" 
-                class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg hover:opacity-90 transition-colors shadow-lg"
+                class="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg hover:opacity-90 transition-colors shadow-lg text-sm md:text-base"
               >
-                <PlusIcon class="w-5 h-5" />
-                <span>Add New Color</span>
+                <PlusIcon class="w-4 h-4 md:w-5 md:h-5" />
+                <span class="hidden sm:inline">Add New Color</span>
+                <span class="sm:hidden">Add Color</span>
               </button>
             </div>
   
             <!-- Paint Mixing Interface -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
               <!-- Left Column: Color Inputs -->
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative p-6">
+              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative p-4 md:p-6">
                 <div class="bg-gradient-to-br from-pink-400 via-rose-500 to-red-600 h-2 absolute top-0 left-0 right-0"></div>
-                <h2 class="text-2xl font-bold mb-6 text-gray-900 flex items-center">
-                  <BeakerIcon class="mr-2 h-6 w-6 text-pink-500" />
+                <!-- Made heading text responsive -->
+                <h2 class="text-lg md:text-2xl font-bold mb-4 md:mb-6 text-gray-900 flex items-center">
+                  <BeakerIcon class="mr-2 h-5 w-5 md:h-6 md:w-6 text-pink-500" />
                   Mix New Paint
                 </h2>
   
-                <form @submit.prevent="createMixture" class="space-y-6">
+                <form @submit.prevent="createMixture" class="space-y-4 md:space-y-6">
                   <!-- Base Color Selection -->
-                  <div class="space-y-4">
-                    <h3 class="text-lg font-semibold text-gray-800 flex items-center">
-                      <DropletIcon class="mr-2 h-5 w-5 text-pink-500" />
+                  <div class="space-y-3 md:space-y-4">
+                    <!-- Made section heading responsive -->
+                    <h3 class="text-base md:text-lg font-semibold text-gray-800 flex items-center">
+                      <DropletIcon class="mr-2 h-4 w-4 md:h-5 md:w-5 text-pink-500" />
                       Base Colors
                     </h3>
                     
-                    <div v-for="(color, index) in mixture.colors" :key="index" class="flex gap-4 items-center animate-fade-in">
-                      <div class="w-8 h-8 rounded-full border-2 border-gray-200 shadow-sm" :style="{ backgroundColor: getColorHex(color.name) }"></div>
-                      <div class="relative flex-1">
+                    <!-- Made color input rows stack on mobile, side-by-side on desktop -->
+                    <div v-for="(color, index) in mixture.colors" :key="index" class="flex flex-col sm:flex-row gap-2 md:gap-4 items-start sm:items-center animate-fade-in">
+                      <div class="w-6 h-6 md:w-8 md:h-8 rounded-full border-2 border-gray-200 shadow-sm flex-shrink-0" :style="{ backgroundColor: getColorHex(color.name) }"></div>
+                      <div class="relative flex-1 w-full">
                         <select 
                           v-model="color.name"
                           @change="updateColorPreview"
-                          class="w-full bg-white border border-gray-200 rounded-lg text-gray-800 px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all placeholder-gray-400 appearance-none pr-10"
+                          class="w-full bg-white border border-gray-200 rounded-lg text-gray-800 px-3 md:px-4 py-2 md:py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all placeholder-gray-400 appearance-none pr-10 text-sm md:text-base"
                         >
                           <option value="" disabled class="bg-white text-gray-800">Select color</option>
                           <option v-for="baseColor in baseColors" :key="baseColor.id" :value="baseColor.name" class="bg-white text-gray-800">
@@ -334,7 +340,7 @@
                           </option>
                         </select>
                         <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                          <ChevronDownIcon class="h-5 w-5 text-gray-500" />
+                          <ChevronDownIcon class="h-4 w-4 md:h-5 md:w-5 text-gray-500" />
                         </div>
                       </div>
                       
@@ -344,16 +350,16 @@
                         @input="updateColorPreview"
                         min="0"
                         max="100"
-                        class="w-32 bg-white border border-gray-200 rounded-lg text-gray-800 px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all placeholder-gray-400"
+                        class="w-full sm:w-24 md:w-32 bg-white border border-gray-200 rounded-lg text-gray-800 px-3 md:px-4 py-2 md:py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all placeholder-gray-400 text-sm md:text-base"
                         placeholder="Ratio %"
                       />
                       
                       <button 
                         type="button"
                         @click="removeColor(index)"
-                        class="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                        class="p-1.5 md:p-2 text-gray-400 hover:text-red-500 transition-colors self-end sm:self-auto"
                       >
-                        <XIcon class="h-5 w-5" />
+                        <XIcon class="h-4 w-4 md:h-5 md:w-5" />
                       </button>
                     </div>
   
@@ -361,69 +367,70 @@
                       <button 
                         type="button"
                         @click="addColorToMixture"
-                        class="flex items-center gap-2 text-pink-600 hover:text-pink-700 transition-colors"
+                        class="flex items-center gap-1.5 md:gap-2 text-pink-600 hover:text-pink-700 transition-colors text-sm md:text-base"
                       >
-                        <PlusIcon class="h-5 w-5" />
+                        <PlusIcon class="h-4 w-4 md:h-5 md:w-5" />
                         Add Color
                       </button>
-                      
                     </div>
                   </div>
   
                   <!-- Color Preview -->
                   <div class="space-y-2">
-                    <h3 class="text-lg font-semibold text-gray-800 flex items-center">
-                      <EyeIcon class="mr-2 h-5 w-5 text-pink-500" />
+                    <!-- Made preview section responsive -->
+                    <h3 class="text-base md:text-lg font-semibold text-gray-800 flex items-center">
+                      <EyeIcon class="mr-2 h-4 w-4 md:h-5 md:w-5 text-pink-500" />
                       Color Preview
                     </h3>
-                    <div class="flex items-center gap-4">
+                    <div class="flex flex-col sm:flex-row items-center gap-3 md:gap-4">
                       <div 
-                        class="w-24 h-24 rounded-full border-4 border-gray-200 shadow-lg transition-all duration-500"
+                        class="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-gray-200 shadow-lg transition-all duration-500"
                         :style="{ backgroundColor: predictedColor }"
                       ></div>
-                      <div>
-                        <p class="text-gray-800 font-medium">Predicted Color</p>
-                        <p class="text-gray-600 text-sm">{{ predictedColor }}</p>
-                        <p class="text-gray-800 text-sm mt-2">Suggested Harmony: {{ colorHarmony }}</p>
+                      <div class="text-center sm:text-left">
+                        <p class="text-gray-800 font-medium text-sm md:text-base">Predicted Color</p>
+                        <p class="text-gray-600 text-xs md:text-sm">{{ predictedColor }}</p>
+                        <p class="text-gray-800 text-xs md:text-sm mt-2">Suggested Harmony: {{ colorHarmony }}</p>
                       </div>
                     </div>
                   </div>
   
                   <!-- Mixture Details -->
-                  <div class="space-y-4">
-                    <h3 class="text-lg font-semibold text-gray-800 flex items-center">
-                      <ClipboardListIcon class="mr-2 h-5 w-5 text-pink-500" />
+                  <div class="space-y-3 md:space-y-4">
+                    <!-- Made form inputs responsive -->
+                    <h3 class="text-base md:text-lg font-semibold text-gray-800 flex items-center">
+                      <ClipboardListIcon class="mr-2 h-4 w-4 md:h-5 md:w-5 text-pink-500" />
                       Mixture Details
                     </h3>
                     
                     <div class="space-y-2">
-                      <label class="block text-sm font-medium text-gray-700">Mixture Name</label>
+                      <label class="block text-xs md:text-sm font-medium text-gray-700">Mixture Name</label>
                       <input 
                         type="text"
                         v-model="mixture.name"
-                        class="w-full bg-white border border-gray-200 rounded-lg text-gray-800 px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all placeholder-gray-400"
+                        class="w-full bg-white border border-gray-200 rounded-lg text-gray-800 px-3 md:px-4 py-2 md:py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all placeholder-gray-400 text-sm md:text-base"
                         placeholder="Enter mixture name"
                       />
                     </div>
   
                     <div class="space-y-2">
-                      <label class="block text-sm font-medium text-gray-700">Quantity (Liters)</label>
+                      <label class="block text-xs md:text-sm font-medium text-gray-700">Quantity (Liters)</label>
                       <input 
                         type="number"
                         v-model="mixture.quantity"
                         min="0"
                         step="0.1"
-                        class="w-full bg-white border border-gray-200 rounded-lg text-gray-800 px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all placeholder-gray-400"
+                        class="w-full bg-white border border-gray-200 rounded-lg text-gray-800 px-3 md:px-4 py-2 md:py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all placeholder-gray-400 text-sm md:text-base"
                         placeholder="Enter quantity in liters"
                       />
                     </div>
   
                     <div class="space-y-2">
-                      <label class="block text-sm font-medium text-gray-700">Finish Type</label>
+                      <label class="block text-xs md:text-sm font-medium text-gray-700">Finish Type</label>
                       <div class="relative">
                         <select 
                           v-model="mixture.finishType"
-                          class="w-full bg-white border border-gray-200 rounded-lg text-gray-800 px-4 py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all placeholder-gray-400 appearance-none pr-10"
+                          class="w-full bg-white border border-gray-200 rounded-lg text-gray-800 px-3 md:px-4 py-2 md:py-3 focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all placeholder-gray-400 appearance-none pr-10 text-sm md:text-base"
                         >
                           <option value="" disabled class="bg-white text-gray-800">Select finish type</option>
                           <option value="matte" class="bg-white text-gray-800">Matte</option>
@@ -433,48 +440,51 @@
                           <option value="gloss" class="bg-white text-gray-800">Gloss</option>
                         </select>
                         <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                          <ChevronDownIcon class="h-5 w-5 text-gray-500" />
+                          <ChevronDownIcon class="h-4 w-4 md:h-5 md:w-5 text-gray-500" />
                         </div>
                       </div>
                     </div>
   
                   </div>
   
+                  <!-- Made submit button responsive -->
                   <button 
                     type="submit"
-                    class="w-full bg-gradient-to-r from-pink-500 to-rose-600 text-white py-4 px-6 rounded-lg hover:opacity-90 transition-all duration-300 font-medium focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-white transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
+                    class="w-full bg-gradient-to-r from-pink-500 to-rose-600 text-white py-3 md:py-4 px-4 md:px-6 rounded-lg hover:opacity-90 transition-all duration-300 font-medium focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 focus:ring-offset-white transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg text-sm md:text-base"
                     :disabled="isSubmitting"
                   >
-                    <LoaderIcon v-if="isSubmitting" class="h-5 w-5 animate-spin" />
-                    <PaletteIcon v-else class="h-5 w-5" />
+                    <LoaderIcon v-if="isSubmitting" class="h-4 w-4 md:h-5 md:w-5 animate-spin" />
+                    <PaletteIcon v-else class="h-4 w-4 md:h-5 md:w-5" />
                     Create Mixture
                   </button>
                 </form>
               </div>
   
               <!-- Right Column: Recent Mixtures -->
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative p-6">
+              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative p-4 md:p-6">
                 <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
-                <h2 class="text-2xl font-bold mb-6 text-gray-900 flex items-center">
-                  <HistoryIcon class="mr-2 h-6 w-6 text-purple-500" />
+                <!-- Made recent mixtures heading responsive -->
+                <h2 class="text-lg md:text-2xl font-bold mb-4 md:mb-6 text-gray-900 flex items-center">
+                  <HistoryIcon class="mr-2 h-5 w-5 md:h-6 md:w-6 text-purple-500" />
                   Recent Mixtures
                 </h2>
                 
                 <!-- Search and Filter -->
-                <div class="mb-4 flex flex-col sm:flex-row gap-4">
+                <!-- Made search and filter responsive -->
+                <div class="mb-4 flex flex-col sm:flex-row gap-2 md:gap-4">
                   <div class="relative flex-1">
-                    <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 md:w-5 md:h-5" />
                     <input 
                       type="text"
                       v-model="searchQuery"
                       placeholder="Search mixtures..."
-                      class="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-800 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all placeholder-gray-400"
+                      class="w-full pl-9 md:pl-10 pr-3 md:pr-4 py-1.5 md:py-2 bg-white border border-gray-200 rounded-lg text-gray-800 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all placeholder-gray-400 text-sm md:text-base"
                     />
                   </div>
                   <div class="relative">
                     <select 
                       v-model="filterFinish"
-                      class="bg-white border border-gray-200 rounded-lg text-gray-800 w-full px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all appearance-none pr-10"
+                      class="bg-white border border-gray-200 rounded-lg text-gray-800 w-full px-3 md:px-4 py-1.5 md:py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all appearance-none pr-10 text-sm md:text-base"
                     >
                       <option value="" class="bg-white text-gray-800">All Finishes</option>
                       <option value="matte" class="bg-white text-gray-800">Matte</option>
@@ -484,47 +494,49 @@
                       <option value="gloss" class="bg-white text-gray-800">Gloss</option>
                     </select>
                     <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                      <ChevronDownIcon class="h-5 w-5 text-gray-500" />
+                      <ChevronDownIcon class="h-4 w-4 md:h-5 md:w-5 text-gray-500" />
                     </div>
                   </div>
                   <div class="relative">
                     <select 
                       v-model="filterCreator"
-                      class="bg-white border border-gray-200 rounded-lg text-gray-800 w-full px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all appearance-none pr-10"
+                      class="bg-white border border-gray-200 rounded-lg text-gray-800 w-full px-3 md:px-4 py-1.5 md:py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all appearance-none pr-10 text-sm md:text-base"
                     >
                       <option value="" class="bg-white text-gray-800">All Users</option>
                       <option value="staff" class="bg-white text-gray-800">Staff Only</option>
                       <option value="admin" class="bg-white text-gray-800">Admin Only</option>
                     </select>
                     <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                      <ChevronDownIcon class="h-5 w-5 text-gray-500" />
+                      <ChevronDownIcon class="h-4 w-4 md:h-5 md:w-5 text-gray-500" />
                     </div>
                   </div>
                 </div>
                 
-                <div class="space-y-4 h-[700px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-gray-100">
+                <!-- Made mixtures list responsive with adjusted height for mobile -->
+                <div class="space-y-3 md:space-y-4 h-[500px] md:h-[700px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-gray-100">
                   <div v-for="mix in filteredMixtures" :key="mix.id" 
-                       class="p-4 bg-white border border-gray-100 rounded-lg group hover:border-purple-200 hover:shadow-md transition-all duration-300 animate-fade-in"
+                       class="p-3 md:p-4 bg-white border border-gray-100 rounded-lg group hover:border-purple-200 hover:shadow-md transition-all duration-300 animate-fade-in"
                   >
                     <div class="flex justify-between items-start mb-2">
-                      <h3 class="font-semibold text-gray-900 text-lg">{{ mix.name }}</h3>
-                      <span class="text-sm text-gray-500">{{ formatDate(mix.date) }}</span>
+                      <h3 class="font-semibold text-gray-900 text-base md:text-lg">{{ mix.name }}</h3>
+                      <span class="text-xs md:text-sm text-gray-500">{{ formatDate(mix.date) }}</span>
                     </div>
                     
-                    <div class="flex items-center gap-4 mb-2">
+                    <!-- Made mixture card content responsive -->
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-2">
                       <div 
-                        class="w-16 h-16 rounded-full border-2 border-gray-200 shadow-md"
+                        class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-gray-200 shadow-md flex-shrink-0"
                         :style="{ backgroundColor: mix.predictedColor }"
                       ></div>
-                      <div class="flex-1">
-                        <div class="flex flex-wrap gap-2">
+                      <div class="flex-1 w-full">
+                        <div class="flex flex-wrap gap-1.5 md:gap-2">
                           <div 
                             v-for="color in mix.colors" 
                             :key="color.name"
                             class="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded-full"
                           >
                             <div 
-                              class="w-3 h-3 rounded-full border border-gray-300"
+                              class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full border border-gray-300"
                               :style="{ backgroundColor: color.hex }"
                             ></div>
                             <span class="text-xs text-gray-700">{{ color.name }} ({{ color.ratio }}%)</span>
@@ -541,38 +553,39 @@
                       </div>
                     </div>
   
-                    <p class="text-sm text-gray-600">Quantity: {{ mix.quantity }} liters</p>
-                    <p class="text-sm text-gray-600">Finish: {{ mix.finishType }}</p>
+                    <p class="text-xs md:text-sm text-gray-600">Quantity: {{ mix.quantity }} liters</p>
+                    <p class="text-xs md:text-sm text-gray-600">Finish: {{ mix.finishType }}</p>
                     
-                    <div class="flex flex-wrap gap-4 mt-3">
+                    <!-- Made action buttons responsive -->
+                    <div class="flex flex-wrap gap-2 md:gap-4 mt-3">
                       <button 
                         @click="duplicateMixture(mix)"
-                        class="flex items-center gap-1 text-purple-600 hover:text-purple-800 transition-colors text-sm"
+                        class="flex items-center gap-1 text-purple-600 hover:text-purple-800 transition-colors text-xs md:text-sm"
                       >
-                        <CopyIcon class="h-4 w-4" />
+                        <CopyIcon class="h-3 w-3 md:h-4 md:w-4" />
                         Duplicate
                       </button>
                       <button 
                         @click="viewDetails(mix)"
-                        class="flex items-center gap-1 text-gray-600 hover:text-gray-800 transition-colors text-sm"
+                        class="flex items-center gap-1 text-gray-600 hover:text-gray-800 transition-colors text-xs md:text-sm"
                       >
-                        <EyeIcon class="h-4 w-4" />
+                        <EyeIcon class="h-3 w-3 md:h-4 md:w-4" />
                         View Details
                       </button>
                       <button 
                         @click="editMixture(mix)"
-                        class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition-colors text-sm"
+                        class="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition-colors text-xs md:text-sm"
                         v-if="mix.createdBy === 'staff'"
                       >
-                        <EditIcon class="h-4 w-4" />
+                        <EditIcon class="h-3 w-3 md:h-4 md:w-4" />
                         Edit
                       </button>
                       <button 
                         @click="deleteMixture(mix.id)"
-                        class="flex items-center gap-1 text-red-600 hover:text-red-800 transition-colors text-sm"
+                        class="flex items-center gap-1 text-red-600 hover:text-red-800 transition-colors text-xs md:text-sm"
                         v-if="mix.createdBy === 'staff'"
                       >
-                        <Trash2Icon class="h-4 w-4" />
+                        <Trash2Icon class="h-3 w-3 md:h-4 md:w-4" />
                         Delete
                       </button>
                     </div>
@@ -580,13 +593,13 @@
   
                   <!-- Empty State -->
                   <div v-if="filteredMixtures.length === 0" 
-                       class="flex flex-col items-center justify-center py-12 text-center"
+                       class="flex flex-col items-center justify-center py-8 md:py-12 text-center"
                   >
-                    <div class="p-4 bg-purple-100 rounded-full mb-4">
-                      <PaletteIcon class="h-12 w-12 text-purple-500" />
+                    <div class="p-3 md:p-4 bg-purple-100 rounded-full mb-3 md:mb-4">
+                      <PaletteIcon class="h-10 w-10 md:h-12 md:w-12 text-purple-500" />
                     </div>
-                    <p class="text-gray-900 mb-2">No Recent Mixtures</p>
-                    <p class="text-gray-600 text-sm">Start by creating a new paint mixture</p>
+                    <p class="text-gray-900 mb-2 text-sm md:text-base">No Recent Mixtures</p>
+                    <p class="text-gray-600 text-xs md:text-sm">Start by creating a new paint mixture</p>
                   </div>
                 </div>
               </div>
@@ -597,6 +610,7 @@
     </div>
   
     <!-- Mixture Details Modal -->
+    <!-- Made modal responsive with proper mobile sizing -->
     <transition name="modal">
       <div v-if="showModal" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -607,22 +621,22 @@
           <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
             <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div class="sm:flex sm:items-start">
-                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                  <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                  <h3 class="text-base md:text-lg leading-6 font-medium text-gray-900" id="modal-title">
                     Mixture Details
                   </h3>
                   <div class="mt-2">
-                    <p class="text-sm text-gray-600">
+                    <p class="text-xs md:text-sm text-gray-600">
                       {{ selectedMixture?.name }}
                     </p>
-                    <div class="mt-4 flex items-center gap-4">
+                    <div class="mt-4 flex flex-col sm:flex-row items-center gap-3 md:gap-4">
                       <div 
-                        class="w-20 h-20 rounded-full border-2 border-gray-200"
+                        class="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-gray-200"
                         :style="{ backgroundColor: selectedMixture?.predictedColor }"
                       ></div>
-                      <div>
-                        <p class="text-gray-900 font-medium">Predicted Color</p>
-                        <p class="text-gray-600 text-sm">{{ selectedMixture?.predictedColor }}</p>
+                      <div class="text-center sm:text-left">
+                        <p class="text-gray-900 font-medium text-sm md:text-base">Predicted Color</p>
+                        <p class="text-gray-600 text-xs md:text-sm">{{ selectedMixture?.predictedColor }}</p>
                         <span 
                           class="text-xs px-2 py-1 rounded-full mt-2 inline-block"
                           :class="selectedMixture?.createdBy === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800'"
@@ -632,31 +646,31 @@
                       </div>
                     </div>
                     <div class="mt-4">
-                      <h4 class="text-sm font-medium text-gray-900">Color Composition</h4>
+                      <h4 class="text-xs md:text-sm font-medium text-gray-900">Color Composition</h4>
                       <ul class="mt-2 space-y-2">
                         <li v-for="color in selectedMixture?.colors" :key="color.name" class="flex items-center gap-2">
                           <div 
-                            class="w-4 h-4 rounded-full border border-gray-300"
+                            class="w-3 h-3 md:w-4 md:h-4 rounded-full border border-gray-300"
                             :style="{ backgroundColor: color.hex }"
                           ></div>
-                          <span class="text-sm text-gray-600">{{ color.name }} ({{ color.ratio }}%)</span>
+                          <span class="text-xs md:text-sm text-gray-600">{{ color.name }} ({{ color.ratio }}%)</span>
                         </li>
                       </ul>
                     </div>
                     <div class="mt-4">
-                      <h4 class="text-sm font-medium text-gray-900">Quantity</h4>
-                      <p class="text-sm text-gray-600">{{ selectedMixture?.quantity }} liters</p>
+                      <h4 class="text-xs md:text-sm font-medium text-gray-900">Quantity</h4>
+                      <p class="text-xs md:text-sm text-gray-600">{{ selectedMixture?.quantity }} liters</p>
                     </div>
                     <div class="mt-4">
-                      <h4 class="text-sm font-medium text-gray-900">Finish Type</h4>
-                      <p class="text-sm text-gray-600">{{ selectedMixture?.finishType }}</p>
+                      <h4 class="text-xs md:text-sm font-medium text-gray-900">Finish Type</h4>
+                      <p class="text-xs md:text-sm text-gray-600">{{ selectedMixture?.finishType }}</p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-              <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-pink-600 text-base font-medium text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" @click="showModal = false">
+              <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-pink-600 text-sm md:text-base font-medium text-white hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 sm:mt-0 sm:ml-3 sm:w-auto" @click="showModal = false">
                 Close
               </button>
             </div>
@@ -666,47 +680,48 @@
     </transition>
   
     <!-- Color Palette Modal -->
+    <!-- Made color palette modal responsive -->
     <transition name="modal">
       <div v-if="showColorPalette" class="fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <div class="fixed inset-0 bg-black/70 transition-opacity" aria-hidden="true" @click="showColorPalette = false"></div>
-
+  
           <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
+  
           <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-            <div class="px-6 pt-6 pb-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
-                <PaletteIcon class="w-6 h-6 mr-2 text-purple-600" />
+            <div class="px-4 md:px-6 pt-4 md:pt-6 pb-4 md:pb-6">
+              <h3 class="text-lg md:text-xl font-bold text-gray-900 mb-4 md:mb-6 flex items-center">
+                <PaletteIcon class="w-5 h-5 md:w-6 md:h-6 mr-2 text-purple-600" />
                 Color Palette
               </h3>
           
           <!-- Add color categories -->
-          <div class="mb-6">
-            <div class="flex flex-wrap gap-2">
+          <div class="mb-4 md:mb-6">
+            <div class="flex flex-wrap gap-1.5 md:gap-2">
               <button 
                 @click="filterColorCategory = ''"
-                class="px-3 py-1 text-sm rounded-full"
+                class="px-2.5 md:px-3 py-1 text-xs md:text-sm rounded-full"
                 :class="filterColorCategory === '' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
               >
                 All Colors
               </button>
               <button 
                 @click="filterColorCategory = 'primary'"
-                class="px-3 py-1 text-sm rounded-full"
+                class="px-2.5 md:px-3 py-1 text-xs md:text-sm rounded-full"
                 :class="filterColorCategory === 'primary' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
               >
                 Primary
               </button>
               <button 
                 @click="filterColorCategory = 'earth'"
-                class="px-3 py-1 text-sm rounded-full"
+                class="px-2.5 md:px-3 py-1 text-xs md:text-sm rounded-full"
                 :class="filterColorCategory === 'earth' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
               >
                 Earth Tones
               </button>
               <button 
                 @click="filterColorCategory = 'custom'"
-                class="px-3 py-1 text-sm rounded-full"
+                class="px-2.5 md:px-3 py-1 text-xs md:text-sm rounded-full"
                 :class="filterColorCategory === 'custom' ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
               >
                 Custom
@@ -715,17 +730,18 @@
           </div>
           
           <!-- Colors grid -->
-          <div class="grid grid-cols-3 gap-6 mb-6">
+          <!-- Made color grid responsive: 2 columns on mobile, 3 on desktop -->
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
             <div v-for="color in filteredPaletteColors" :key="color.id" 
                  class="flex flex-col items-center"
             >
               <div 
-                class="w-16 h-16 rounded-full border-2 border-gray-200 cursor-pointer shadow-md hover:shadow-lg transition-all"
+                class="w-14 h-14 md:w-16 md:h-16 rounded-full border-2 border-gray-200 cursor-pointer shadow-md hover:shadow-lg transition-all"
                 :style="{ backgroundColor: color.hex }"
                 @click="addColorToMixtureFromPalette(color)"
               ></div>
               <div class="flex flex-col items-center mt-2">
-                <span class="text-gray-900 text-sm font-medium text-center">{{ color.name }}</span>
+                <span class="text-gray-900 text-xs md:text-sm font-medium text-center">{{ color.name }}</span>
                 <span class="text-gray-600 text-xs">{{ color.hex }}</span>
                 <button 
                   @click="deleteColor(color.id)" 
@@ -741,7 +757,7 @@
           <div class="flex justify-end">
             <button 
               @click="showColorPalette = false"
-              class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+              class="px-3 md:px-4 py-1.5 md:py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm md:text-base"
             >
               Close
             </button>
@@ -757,9 +773,9 @@
       <div v-if="showAddColorModal" class="fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <div class="fixed inset-0 bg-black/70 transition-opacity" aria-hidden="true" @click="showAddColorModal = false"></div>
-
+  
           <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
+  
           <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full">
             <div class="px-6 pt-6 pb-6">
               <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">

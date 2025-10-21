@@ -7,8 +7,140 @@
     </div>
 
     <div class="relative z-10 flex h-screen">
-      <!-- Sidebar -->
-      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden md:flex md:flex-col shadow-lg">
+      <!-- Enhanced responsive sidebar with better mobile support -->
+      <!-- Desktop Sidebar -->
+      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden lg:flex lg:flex-col shadow-lg">
+        <!-- Logo/Brand -->
+        <div class="p-4 xl:p-6 border-b border-gray-200 flex-shrink-0">
+          <div>
+            <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+          </div>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-2 xl:px-3 py-1 rounded-full inline-flex items-center shadow-sm">
+            <ShieldIcon class="h-3 w-3 mr-1" />
+            Admin Portal
+          </div>
+        </div>
+
+        <!-- Navigation - Scrollable Area -->
+        <nav class="flex-1 p-3 xl:p-4 space-y-1 xl:space-y-2 overflow-y-auto">
+          <router-link 
+            to="/admin/dashboard" 
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+            :class="{ 'shadow-sm border border-blue-200 transform scale-105': isActive('/admin/dashboard') }"
+          >
+            <LayoutDashboardIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Dashboard</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/staff" 
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
+            :class="{ 'shadow-sm border border-green-200 transform scale-105': isActive('/admin/staff') }"
+          >
+            <UsersIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Staff Management</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/inventory" 
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 shadow-sm border border-purple-200 transform scale-105"
+            :class="{ 'hover:bg-purple-100 hover:text-purple-700': !isActive('/admin/inventory') }"
+          >
+            <PackageIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Inventory</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/house-paint-recommender" 
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
+            :class="{ 'shadow-sm border border-orange-200 transform scale-105': isActive('/admin/house-paint-recommender') }"
+          >
+            <HomeIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Paint Recommender</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/paint-mixing" 
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
+            :class="{ 'shadow-sm border border-pink-200 transform scale-105': isActive('/admin/paint-mixing') }"
+          >
+            <PaletteIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Paint Mixing</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/sales-analytics" 
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
+            :class="{ 'shadow-sm border border-teal-200 transform scale-105': isActive('/admin/sales-analytics') }"
+          >
+            <TrendingUpIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Sales Analytics</span>
+          </router-link>
+
+          <router-link to="/admin/visualization" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 shadow-sm border border-indigo-200">
+            <BarChart3Icon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Data Visualization</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/settings" 
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700"
+            :class="{ 'shadow-sm border border-amber-200 transform scale-105': isActive('/admin/settings') }"
+          >
+            <SettingsIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Settings</span>
+          </router-link>
+
+          <div class="h-4"></div>
+        </nav>
+
+        <!-- User Menu - Fixed at bottom -->
+        <div class="p-3 xl:p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+          <div class="flex items-center gap-2 xl:gap-3">
+            <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg flex-shrink-0">
+              <UserIcon class="w-4 xl:w-5 h-4 xl:h-5 text-white" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs xl:text-sm font-medium text-gray-900 truncate">Admin User</p>
+              <p class="text-xs text-gray-600 truncate">admin@example.com</p>
+            </div>
+            <button 
+              @click="handleLogout"
+              class="p-1.5 xl:p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0"
+              title="Logout"
+            >
+              <LogOutIcon class="w-4 xl:w-5 h-4 xl:h-5" />
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Enhanced mobile sidebar toggle with better positioning -->
+      <!-- Mobile Sidebar Toggle -->
+      <div class="fixed top-4 left-4 z-30 lg:hidden">
+        <button 
+          @click="toggleMobileSidebar"
+          class="p-3 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+          aria-label="Toggle navigation menu"
+        >
+          <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
+          <XIcon v-else class="w-6 h-6 text-gray-700" />
+        </button>
+      </div>
+
+      <!-- Enhanced mobile sidebar overlay and design -->
+      <!-- Mobile Sidebar Overlay -->
+      <div 
+        v-if="mobileSidebarOpen" 
+        class="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 lg:hidden"
+        @click="toggleMobileSidebar"
+      ></div>
+
+      <!-- Mobile Sidebar -->
+      <aside 
+        v-if="mobileSidebarOpen"
+        class="fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-30 lg:hidden shadow-2xl flex flex-col"
+      >
         <!-- Logo/Brand -->
         <div class="p-6 border-b border-gray-200 flex-shrink-0">
           <div>
@@ -20,98 +152,105 @@
           </div>
         </div>
 
-        <!-- Navigation - Scrollable Area -->
+        <!-- Mobile Navigation - Scrollable -->
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
           <router-link 
             to="/admin/dashboard" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-            :class="{ 'shadow-sm border border-blue-200 transform scale-105': isActive('/admin/dashboard') }"
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100"
+            :class="{ 'shadow-lg border border-blue-200 scale-105': isActive('/admin/dashboard') }"
+            @click="mobileSidebarOpen = false"
           >
-            <LayoutDashboardIcon class="w-5 h-5" />
-            <span>Dashboard</span>
+            <LayoutDashboardIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Dashboard</span>
           </router-link>
 
           <router-link 
             to="/admin/staff" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
-            :class="{ 'shadow-sm border border-green-200 transform scale-105': isActive('/admin/staff') }"
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100"
+            :class="{ 'shadow-lg border border-green-200 scale-105': isActive('/admin/staff') }"
+            @click="mobileSidebarOpen = false"
           >
-            <UsersIcon class="w-5 h-5" />
-            <span>Staff Management</span>
+            <UsersIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Staff Management</span>
           </router-link>
 
           <router-link 
             to="/admin/inventory" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 shadow-sm border border-purple-200 transform scale-105"
-            :class="{ 'hover:bg-purple-100 hover:text-purple-700': !isActive('/admin/inventory') }"
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 shadow-lg border border-purple-200 scale-105"
+            @click="mobileSidebarOpen = false"
           >
-            <PackageIcon class="w-5 h-5" />
-            <span>Inventory</span>
+            <PackageIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Inventory</span>
           </router-link>
 
           <router-link 
             to="/admin/house-paint-recommender" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
-            :class="{ 'shadow-sm border border-orange-200 transform scale-105': isActive('/admin/house-paint-recommender') }"
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100"
+            :class="{ 'shadow-lg border border-orange-200 scale-105': isActive('/admin/house-paint-recommender') }"
+            @click="mobileSidebarOpen = false"
           >
-            <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+            <HomeIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Paint Recommender</span>
           </router-link>
 
           <router-link 
             to="/admin/paint-mixing" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
-            :class="{ 'shadow-sm border border-pink-200 transform scale-105': isActive('/admin/paint-mixing') }"
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100"
+            :class="{ 'shadow-lg border border-pink-200 scale-105': isActive('/admin/paint-mixing') }"
+            @click="mobileSidebarOpen = false"
           >
-            <PaletteIcon class="w-5 h-5" />
-            <span>Paint Mixing</span>
+            <PaletteIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Paint Mixing</span>
           </router-link>
 
           <router-link 
             to="/admin/sales-analytics" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
-            :class="{ 'shadow-sm border border-teal-200 transform scale-105': isActive('/admin/sales-analytics') }"
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100"
+            :class="{ 'shadow-lg border border-teal-200 scale-105': isActive('/admin/sales-analytics') }"
+            @click="mobileSidebarOpen = false"
           >
-            <TrendingUpIcon class="w-5 h-5" />
-            <span>Sales Analytics</span>
+            <TrendingUpIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Sales Analytics</span>
           </router-link>
 
           <router-link 
             to="/admin/reports" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700"
-            :class="{ 'shadow-sm border border-indigo-200 transform scale-105': isActive('/admin/reports') }"
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100"
+            :class="{ 'shadow-lg border border-indigo-200 scale-105': isActive('/admin/reports') }"
+            @click="mobileSidebarOpen = false"
           >
-            <ClipboardIcon class="w-5 h-5" />
-            <span>Reports</span>
+            <ClipboardIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Reports</span>
           </router-link>
 
           <router-link 
             to="/admin/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700"
-            :class="{ 'shadow-sm border border-amber-200 transform scale-105': isActive('/admin/settings') }"
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100"
+            :class="{ 'shadow-lg border border-amber-200 scale-105': isActive('/admin/settings') }"
+            @click="mobileSidebarOpen = false"
           >
-            <SettingsIcon class="w-5 h-5" />
-            <span>System Settings</span>
+            <SettingsIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">System Settings</span>
           </router-link>
 
           <router-link 
             to="/admin/security" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-red-600 bg-red-50 hover:bg-red-100 hover:text-red-700"
-            :class="{ 'shadow-sm border border-red-200 transform scale-105': isActive('/admin/security') }"
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-red-600 bg-red-50 hover:bg-red-100"
+            :class="{ 'shadow-lg border border-red-200 scale-105': isActive('/admin/security') }"
+            @click="mobileSidebarOpen = false"
           >
-            <ShieldIcon class="w-5 h-5" />
-            <span>Security</span>
+            <ShieldIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Security</span>
           </router-link>
 
-          <!-- Perfect spacing -->
           <div class="h-4"></div>
         </nav>
 
-        <!-- User Menu - Fixed at bottom -->
+        <!-- Mobile User Menu - Fixed at bottom -->
         <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
-              <UserIcon class="w-5 h-5 text-white" />
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg flex-shrink-0">
+              <UserIcon class="w-6 h-6 text-white" />
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
@@ -119,95 +258,8 @@
             </div>
             <button 
               @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
+              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0"
               title="Logout"
-            >
-              <LogOutIcon class="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-      </aside>
-
-      <!-- Mobile Sidebar Toggle -->
-      <div class="fixed top-4 left-4 z-30 md:hidden">
-        <button 
-          @click="toggleMobileSidebar"
-          class="p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg"
-          aria-label="Toggle navigation menu"
-        >
-          <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
-          <XIcon v-else class="w-6 h-6 text-gray-700" />
-        </button>
-      </div>
-
-      <!-- Mobile Sidebar -->
-      <div 
-        v-if="mobileSidebarOpen" 
-        class="fixed inset-0 bg-black/20 z-20 md:hidden"
-        @click="toggleMobileSidebar"
-      ></div>
-
-      <aside 
-        v-if="mobileSidebarOpen"
-        class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-20 md:hidden shadow-xl flex flex-col"
-      >
-        <!-- Same mobile sidebar content as desktop -->
-        <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <ShieldIcon class="h-3 w-3 mr-1" />
-            Admin Portal
-          </div>
-        </div>
-
-        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <!-- Mobile navigation links with same styling -->
-          <router-link 
-            to="/admin/dashboard" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50"
-            :class="{ 'shadow-sm border border-blue-200': isActive('/admin/dashboard') }"
-            @click="mobileSidebarOpen = false"
-          >
-            <LayoutDashboardIcon class="w-5 h-5" />
-            <span>Dashboard</span>
-          </router-link>
-
-          <router-link 
-            to="/admin/staff" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50"
-            :class="{ 'shadow-sm border border-green-200': isActive('/admin/staff') }"
-            @click="mobileSidebarOpen = false"
-          >
-            <UsersIcon class="w-5 h-5" />
-            <span>Staff Management</span>
-          </router-link>
-
-          <router-link 
-            to="/admin/inventory" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 shadow-sm border border-purple-200"
-            @click="mobileSidebarOpen = false"
-          >
-            <PackageIcon class="w-5 h-5" />
-            <span>Inventory</span>
-          </router-link>
-
-          <!-- Other mobile nav links... -->
-        </nav>
-
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
-              <UserIcon class="w-5 h-5 text-white" />
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
-              <p class="text-xs text-gray-600 truncate">admin@example.com</p>
-            </div>
-            <button 
-              @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
             >
               <LogOutIcon class="w-5 h-5" />
             </button>
@@ -217,30 +269,31 @@
 
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
+        <!-- Enhanced responsive header with better mobile layout -->
         <!-- Header -->
-        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-8 py-4 shadow-sm">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <h1 class="text-2xl font-bold text-gray-900">Inventory Management</h1>
-              <p class="text-gray-600">Manage your paint products and stock levels</p>
+        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-4 shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="pl-16 lg:pl-0">
+              <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Inventory Management</h1>
+              <p class="text-sm sm:text-base text-gray-600">Manage your paint products and stock levels</p>
             </div>
-            <div class="flex items-center gap-4">
-              <div class="hidden md:flex items-center gap-2 text-gray-700">
-                <CalendarIcon class="w-5 h-5 text-purple-500" />
-                <span>{{ currentDate }}</span>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+              <div class="flex items-center gap-2 text-gray-700 text-sm sm:text-base">
+                <CalendarIcon class="w-4 sm:w-5 h-4 sm:h-5 text-purple-500 flex-shrink-0" />
+                <span class="truncate">{{ currentDate }}</span>
               </div>
-              <div class="hidden md:block h-6 w-px bg-gray-300"></div>
+              <div class="hidden sm:block h-6 w-px bg-gray-300"></div>
               <div class="flex items-center gap-3">
-                <span class="text-gray-900">Welcome, Admin</span>
+                <span class="text-sm sm:text-base text-gray-900 truncate">Welcome, Admin</span>
                 <div class="relative">
-                  <BellIcon class="w-5 h-5 text-orange-500 cursor-pointer hover:text-orange-600" />
+                  <BellIcon class="w-5 h-5 text-orange-500 cursor-pointer hover:text-orange-600 flex-shrink-0" />
                 </div>
               </div>
             </div>
           </div>
         </header>
 
-        <div class="p-6 md:p-8">
+        <div class="p-4 sm:p-6 lg:p-8">
           <!-- Error Alert -->
           <div 
             v-if="error" 
@@ -267,130 +320,122 @@
             </button>
           </div>
 
+          <!-- Enhanced responsive action buttons -->
           <!-- Action Button -->
-          <div class="flex justify-end gap-3 mb-6">
+          <div class="flex flex-col sm:flex-row justify-end gap-3 mb-6">
             <button 
               @click="showOrderModal = true"
-              class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
+              class="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg text-sm sm:text-base"
             >
               <ShoppingCartIcon class="w-5 h-5" />
               <span>Order Product</span>
             </button>
             <button 
               @click="showAddModal = true"
-              class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
+              class="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg text-sm sm:text-base"
             >
               <PlusIcon class="w-5 h-5" />
               <span>Add Product</span>
             </button>
           </div>
 
+          <!-- Enhanced responsive stats cards with better mobile layout -->
           <!-- Stats Cards -->
-          <!-- Moved icons to upper left and reduced number font sizes -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 mb-6 sm:mb-8">
             <!-- Total Products -->
             <div 
-              class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer h-32"
+              class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer h-28 sm:h-32"
               @click="clearAllFilters"
             >
               <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6 h-full flex flex-col">
-                <!-- Icon moved to upper left -->
+              <div class="p-4 sm:p-6 h-full flex flex-col">
                 <div class="flex justify-start mb-2">
-                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
-                    <PackageIcon class="w-5 h-5 text-white" />
+                  <div class="p-1.5 sm:p-2 rounded-lg shadow-lg bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
+                    <PackageIcon class="w-4 sm:w-5 h-4 sm:h-5 text-white" />
                   </div>
                 </div>
-                <!-- Numbers and text positioned below icon -->
                 <div class="flex-1 flex flex-col justify-center">
                   <p class="text-xs text-gray-600 mb-1">Total Products</p>
-                  <p class="text-xl font-bold text-gray-900">{{ totalProducts }}</p>
+                  <p class="text-lg sm:text-xl font-bold text-gray-900">{{ totalProducts }}</p>
                 </div>
               </div>
             </div>
 
             <!-- Low Stock -->
             <div 
-              class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer h-32"
+              class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer h-28 sm:h-32"
               @click="filterByLowStock"
             >
               <div class="bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6 h-full flex flex-col">
-                <!-- Icon moved to upper left -->
+              <div class="p-4 sm:p-6 h-full flex flex-col">
                 <div class="flex justify-start mb-2">
-                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 transform hover:scale-110 transition-transform duration-200">
-                    <AlertTriangleIcon class="w-5 h-5 text-white" />
+                  <div class="p-1.5 sm:p-2 rounded-lg shadow-lg bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 transform hover:scale-110 transition-transform duration-200">
+                    <AlertTriangleIcon class="w-4 sm:w-5 h-4 sm:h-5 text-white" />
                   </div>
                 </div>
-                <!-- Numbers and text positioned below icon -->
                 <div class="flex-1 flex flex-col justify-center">
                   <p class="text-xs text-gray-600 mb-1">Low Stock Items</p>
-                  <p class="text-xl font-bold text-gray-900">{{ lowStockCount }}</p>
+                  <p class="text-lg sm:text-xl font-bold text-gray-900">{{ lowStockCount }}</p>
                 </div>
               </div>
             </div>
 
             <!-- Out of Stock -->
             <div 
-              class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer h-32"
+              class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer h-28 sm:h-32"
               @click="filterByOutOfStock"
             >
               <div class="bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6 h-full flex flex-col">
-                <!-- Icon moved to upper left -->
+              <div class="p-4 sm:p-6 h-full flex flex-col">
                 <div class="flex justify-start mb-2">
-                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 transform hover:scale-110 transition-transform duration-200">
-                    <XCircleIcon class="w-5 h-5 text-white" />
+                  <div class="p-1.5 sm:p-2 rounded-lg shadow-lg bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 transform hover:scale-110 transition-transform duration-200">
+                    <XCircleIcon class="w-4 sm:w-5 h-4 sm:h-5 text-white" />
                   </div>
                 </div>
-                <!-- Numbers and text positioned below icon -->
                 <div class="flex-1 flex flex-col justify-center">
                   <p class="text-xs text-gray-600 mb-1">Out of Stock</p>
-                  <p class="text-xl font-bold text-gray-900">{{ outOfStockCount }}</p>
+                  <p class="text-lg sm:text-xl font-bold text-gray-900">{{ outOfStockCount }}</p>
                 </div>
               </div>
             </div>
 
             <!-- Total Value -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative h-32">
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative h-28 sm:h-32">
               <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6 h-full flex flex-col">
-                <!-- Icon moved to upper left -->
+              <div class="p-4 sm:p-6 h-full flex flex-col">
                 <div class="flex justify-start mb-2">
-                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
-                    <span class="text-white font-bold text-lg">₱</span>
+                  <div class="p-1.5 sm:p-2 rounded-lg shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
+                    <span class="text-white font-bold text-base sm:text-lg">₱</span>
                   </div>
                 </div>
-                <!-- Numbers and text positioned below icon -->
                 <div class="flex-1 flex flex-col justify-center">
                   <p class="text-xs text-gray-600 mb-1">Total Value</p>
-                  <p class="text-lg font-bold text-gray-900">₱{{ totalValue.toLocaleString() }}</p>
+                  <p class="text-sm sm:text-lg font-bold text-gray-900">₱{{ totalValue.toLocaleString() }}</p>
                 </div>
               </div>
             </div>
 
             <!-- Total Unit Price Value -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative h-32">
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative h-28 sm:h-32">
               <div class="bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6 h-full flex flex-col">
-                <!-- Icon moved to upper left -->
+              <div class="p-4 sm:p-6 h-full flex flex-col">
                 <div class="flex justify-start mb-2">
-                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
-                    <span class="text-white font-bold text-lg">₱</span>
+                  <div class="p-1.5 sm:p-2 rounded-lg shadow-lg bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
+                    <span class="text-white font-bold text-base sm:text-lg">₱</span>
                   </div>
                 </div>
-                <!-- Numbers and text positioned below icon -->
                 <div class="flex-1 flex flex-col justify-center">
                   <p class="text-xs text-gray-600 mb-1">Unit Price Value</p>
-                  <p class="text-lg font-bold text-gray-900">₱{{ totalUnitPriceValue.toLocaleString() }}</p>
+                  <p class="text-sm sm:text-lg font-bold text-gray-900">₱{{ totalUnitPriceValue.toLocaleString() }}</p>
                 </div>
               </div>
             </div>
           </div>
 
+          <!-- Enhanced responsive search and filter bar -->
           <!-- Search and Filter Bar -->
-          <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-6 mb-8">
-            <div class="flex flex-col md:flex-row gap-4">
+          <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6 mb-6 sm:mb-8">
+            <div class="flex flex-col lg:flex-row gap-4">
               <div class="flex-1">
                 <div class="relative">
                   <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -398,14 +443,14 @@
                     type="text"
                     v-model="searchQuery"
                     placeholder="Search products..."
-                    class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
+                    class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 text-sm sm:text-base"
                   />
                 </div>
               </div>
-              <div class="flex flex-col sm:flex-row gap-4">
+              <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <select 
                   v-model="filterCategory"
-                  class="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
+                  class="px-3 sm:px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 text-sm sm:text-base"
                 >
                   <option value="">All Categories</option>
                   <option value="interior">Interior Paint</option>
@@ -415,7 +460,7 @@
                 </select>
                 <select 
                   v-model="filterStock"
-                  class="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
+                  class="px-3 sm:px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 text-sm sm:text-base"
                 >
                   <option value="">All Stock Levels</option>
                   <option value="in-stock">In Stock</option>
@@ -450,13 +495,13 @@
               </button>
             </div>
 
+            <!-- Enhanced responsive mobile view with better touch interactions -->
             <!-- Mobile View -->
-            <div v-else-if="products.length > 0" class="block md:hidden">
-              <div v-for="product in paginatedProducts" :key="product.id" class="p-4 border-b border-gray-100">
-                <div class="flex items-center justify-between mb-2">
-                  <div class="flex items-center gap-3">
-                    <!-- Display product image instead of icon in mobile view -->
-                    <div class="w-12 h-12 rounded-lg shadow-lg overflow-hidden flex items-center justify-center"
+            <div v-else-if="products.length > 0" class="block lg:hidden">
+              <div v-for="product in paginatedProducts" :key="product.id" class="p-4 border-b border-gray-100 hover:bg-gray-50/50 transition-colors">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-3 flex-1 min-w-0">
+                    <div class="w-12 h-12 rounded-lg shadow-lg overflow-hidden flex items-center justify-center flex-shrink-0"
                          :class="product.image ? 'bg-white border border-gray-200' : 'bg-gradient-to-br from-purple-500 to-pink-500'">
                       <img 
                         v-if="product.image" 
@@ -466,12 +511,13 @@
                       />
                       <PackageIcon v-else class="w-6 h-6 text-white" />
                     </div>
-                    <div>
-                      <p class="font-medium text-gray-900">{{ product.name }}</p>
-                      <p class="text-sm text-gray-600">{{ formatCategory(product.category) }}</p>
+                    <div class="flex-1 min-w-0">
+                      <p class="font-medium text-gray-900 truncate">{{ product.name }}</p>
+                      <p class="text-sm text-gray-600 truncate">{{ formatCategory(product.category) }}</p>
+                      <p class="text-xs text-gray-500">SKU: {{ product.sku }}</p>
                     </div>
                   </div>
-                  <div class="flex items-center gap-2">
+                  <div class="flex items-center gap-2 flex-shrink-0">
                     <button 
                       @click="editProduct(product)"
                       class="p-2 hover:bg-blue-50 rounded-lg text-blue-600 hover:text-blue-700 transition-colors"
@@ -488,20 +534,24 @@
                 </div>
                 <div class="flex flex-wrap gap-2 mt-2">
                   <span 
-                    class="px-2 py-1 rounded-full text-sm"
+                    class="px-2 py-1 rounded-full text-xs sm:text-sm"
                     :class="getStockLevelClass(product.stockLevel)"
                   >
                     {{ formatStockLevel(product.stockLevel) }}
                   </span>
-                  <span class="text-sm text-gray-600">
-                    Price: ₱{{ product.price.toLocaleString() }} | Unit: ₱{{ product.unitPrice ? product.unitPrice.toLocaleString() : '0' }}
+                  <span class="text-xs sm:text-sm text-gray-600">
+                    Price: ₱{{ product.price.toLocaleString() }}
+                  </span>
+                  <span class="text-xs sm:text-sm text-gray-600">
+                    Unit: ₱{{ product.unitPrice ? product.unitPrice.toLocaleString() : '0' }}
                   </span>
                 </div>
               </div>
             </div>
 
+            <!-- Enhanced responsive desktop view with better table layout -->
             <!-- Desktop View -->
-            <div v-if="products.length > 0" class="hidden md:block overflow-x-auto">
+            <div v-if="products.length > 0" class="hidden lg:block overflow-x-auto">
               <table class="w-full">
                 <thead>
                   <tr class="border-b border-gray-100">
@@ -531,7 +581,6 @@
                   >
                     <td class="p-4">
                       <div class="flex items-center gap-3">
-                        <!-- Display product image instead of icon in desktop view -->
                         <div class="w-12 h-12 rounded-lg shadow-lg overflow-hidden flex items-center justify-center"
                              :class="product.image ? 'bg-white border border-gray-200' : 'bg-gradient-to-br from-purple-500 to-pink-500'">
                           <img 
@@ -590,6 +639,7 @@
               </table>
             </div>
 
+            <!-- Enhanced responsive pagination -->
             <!-- Pagination -->
             <div v-if="products.length > 0" class="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-4 border-t border-gray-100">
               <div class="flex items-center gap-2">
@@ -628,6 +678,7 @@
       </main>
     </div>
 
+    <!-- Enhanced responsive modals with better mobile support -->
     <!-- Add/Edit Product Modal -->
     <div v-if="showAddModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div class="bg-white rounded-xl w-full max-w-lg max-h-[90vh] shadow-2xl flex flex-col">
@@ -648,7 +699,7 @@
         <form @submit.prevent="handleSubmit" class="flex flex-col flex-1 min-h-0">
           <div class="flex-1 overflow-y-auto p-4">
             <div class="space-y-3">
-              <!-- Updated image upload section with adjust button next to upload button -->
+              <!-- Image upload section -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Product Image</label>
                 
@@ -671,7 +722,7 @@
                 </div>
                 
                 <!-- Upload and Adjust Buttons -->
-                <div class="flex items-center gap-3">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
                   <input 
                     ref="imageInput"
                     type="file" 
@@ -687,7 +738,6 @@
                     <UploadIcon class="w-4 h-4" />
                     {{ imagePreview ? 'Change Image' : 'Upload Image' }}
                   </button>
-                  <!-- Added adjust button next to upload button -->
                   <button 
                     v-if="imagePreview"
                     type="button"
@@ -743,7 +793,7 @@
               </div>
 
               <!-- Price and Unit Price in one row -->
-              <div class="grid grid-cols-2 gap-3">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1">Price</label>
                   <div class="relative">
@@ -792,20 +842,20 @@
             </div>
           </div>
 
-          <div class="flex justify-end gap-3 p-4 border-t border-gray-200 flex-shrink-0">
+          <div class="flex flex-col sm:flex-row justify-end gap-3 p-4 border-t border-gray-200 flex-shrink-0">
             <button 
               type="button"
               @click="closeModal"
-              class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors text-sm"
+              class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors text-sm order-2 sm:order-1"
             >
               Cancel
             </button>
             <button 
               type="submit"
-              class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg text-sm"
+              class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg text-sm order-1 sm:order-2"
               :disabled="modalLoading"
             >
-              <span v-if="modalLoading" class="flex items-center gap-2">
+              <span v-if="modalLoading" class="flex items-center justify-center gap-2">
                 <LoaderIcon class="w-4 h-4 animate-spin" />
                 Saving...
               </span>
@@ -829,19 +879,19 @@
           <p class="text-gray-600 text-center mb-6">
             Are you sure you want to delete {{ selectedProduct?.name }}? This action cannot be undone.
           </p>
-          <div class="flex justify-center gap-3">
+          <div class="flex flex-col sm:flex-row justify-center gap-3">
             <button 
               @click="showDeleteModal = false"
-              class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+              class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors order-2 sm:order-1"
             >
               Cancel
             </button>
             <button 
               @click="deleteProduct"
-              class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200"
+              class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 order-1 sm:order-2"
               :disabled="modalLoading"
             >
-              <span v-if="modalLoading" class="flex items-center gap-2">
+              <span v-if="modalLoading" class="flex items-center justify-center gap-2">
                 <LoaderIcon class="w-5 h-5 animate-spin" />
                 Deleting...
               </span>
@@ -905,6 +955,7 @@
       </div>
     </div>
 
+    <!-- Enhanced responsive order modal with better mobile layout -->
     <!-- Order Product Modal -->
     <div v-if="showOrderModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div class="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] shadow-2xl flex flex-col">
@@ -920,9 +971,9 @@
           </div>
         </div>
         
-        <div class="flex flex-1 min-h-0">
+        <div class="flex flex-col lg:flex-row flex-1 min-h-0">
           <!-- Left Panel - Create New Order -->
-          <div class="w-1/2 p-4 border-r border-gray-200">
+          <div class="w-full lg:w-1/2 p-4 border-b lg:border-b-0 lg:border-r border-gray-200">
             <h4 class="text-md font-semibold text-gray-800 mb-4">Create New Order</h4>
             <form @submit.prevent="handleOrderSubmit" class="space-y-4">
               <!-- Product Selection -->
@@ -941,7 +992,7 @@
                 </select>
               </div>
 
-              <!-- SUPPLIER NAME FIELD - BAGONG FIELD NA ITO -->
+              <!-- Supplier Name Field -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Supplier Name</label>
                 <input 
@@ -993,22 +1044,21 @@
           </div>
 
           <!-- Right Panel - Orders List -->
-          <div class="w-1/2 p-4 flex flex-col">
+          <div class="w-full lg:w-1/2 p-4 flex flex-col">
             <h4 class="text-md font-semibold text-gray-800 mb-4">Current Orders</h4>
             <div class="flex-1 overflow-y-auto space-y-3">
               <div v-if="orders.length === 0" class="text-center py-8 text-gray-500">
                 No orders yet. Create your first order!
               </div>
               <div v-for="order in orders" :key="order.id" class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <div class="flex items-center justify-between mb-2">
-                  <div>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-2">
+                  <div class="flex-1">
                     <p class="font-medium text-gray-900">{{ order.productName }}</p>
-                    <!-- SUPPLIER NAME DISPLAY - BAGONG DISPLAY NA ITO -->
                     <p class="text-sm text-gray-600">Supplier: {{ order.supplierName }}</p>
                     <p class="text-sm text-gray-600">Quantity: {{ order.quantity }}</p>
                     <p class="text-xs text-gray-500">{{ formatDate(order.createdAt) }}</p>
                   </div>
-                  <div class="flex items-center gap-2">
+                  <div class="flex items-center gap-2 flex-shrink-0">
                     <select 
                       :value="order.status"
                       @change="updateOrderStatus(order.id, $event.target.value)"
@@ -1049,9 +1099,10 @@
       </div>
     </div>
 
+    <!-- Enhanced responsive image editor modal -->
     <!-- Simplified image editor modal with side handle cropping -->
-    <div v-if="showImageEditor" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div class="bg-white rounded-lg p-6 max-w-4xl max-h-[90vh] overflow-auto">
+    <div v-if="showImageEditor" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-lg p-4 sm:p-6 w-full max-w-4xl max-h-[90vh] overflow-auto">
         <div class="flex justify-between items-center mb-4">
           <h3 class="text-lg font-semibold">Crop Image</h3>
           <button @click="closeImageEditor" class="text-gray-500 hover:text-gray-700">
@@ -1060,7 +1111,7 @@
         </div>
         
         <div class="space-y-4">
-          <!-- Replaced complex canvas cropping with simple side handle cropping -->
+          <!-- Crop area -->
           <div class="relative border border-gray-300 rounded-lg overflow-hidden bg-gray-100">
             <div class="relative inline-block">
               <img 
@@ -1080,31 +1131,23 @@
                   height: cropBounds.height + 'px'
                 }"
               >
-                <!-- Top handle -->
+                <!-- Handles for cropping -->
                 <div 
                   class="absolute w-full h-2 bg-blue-500 cursor-ns-resize -top-1"
                   @mousedown="startResize('top', $event)"
                 ></div>
-                
-                <!-- Bottom handle -->
                 <div 
                   class="absolute w-full h-2 bg-blue-500 cursor-ns-resize -bottom-1"
                   @mousedown="startResize('bottom', $event)"
                 ></div>
-                
-                <!-- Left handle -->
                 <div 
                   class="absolute h-full w-2 bg-blue-500 cursor-ew-resize -left-1"
                   @mousedown="startResize('left', $event)"
                 ></div>
-                
-                <!-- Right handle -->
                 <div 
                   class="absolute h-full w-2 bg-blue-500 cursor-ew-resize -right-1"
                   @mousedown="startResize('right', $event)"
                 ></div>
-                
-                <!-- Corner handles -->
                 <div 
                   class="absolute w-3 h-3 bg-blue-600 cursor-nw-resize -top-1 -left-1"
                   @mousedown="startResize('top-left', $event)"
@@ -1126,7 +1169,7 @@
           </div>
           
           <!-- Crop controls -->
-          <div class="flex gap-3">
+          <div class="flex flex-col sm:flex-row gap-3">
             <button 
               @click="applyCropImage"
               class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
@@ -1142,16 +1185,16 @@
           </div>
 
           <!-- Action buttons -->
-          <div class="flex justify-end gap-3 pt-4 border-t">
+          <div class="flex flex-col sm:flex-row justify-end gap-3 pt-4 border-t">
             <button 
               @click="closeImageEditor"
-              class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+              class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 order-2 sm:order-1"
             >
               Cancel
             </button>
             <button 
               @click="saveImageChanges"
-              class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+              class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 order-1 sm:order-2"
             >
               Save Changes
             </button>
@@ -1211,13 +1254,15 @@ import {
   ShoppingCart as ShoppingCartIcon,
   Truck as TruckIcon,
   Upload as UploadIcon,
-  Image as ImageIcon
+  Image as ImageIcon,
+  BarChart3 as BarChart3Icon
 } from 'lucide-vue-next'
 
+// Router hooks - always at top level
 const router = useRouter()
 const route = useRoute()
 
-// Core state references
+// Core state references - all declared at top level
 const loading = ref(false)
 const showAddModal = ref(false)
 const showDeleteModal = ref(false)
@@ -1240,7 +1285,7 @@ const showOrderModal = ref(false)
 const orders = ref([])
 const products = ref([])
 
-// Image handling references
+// Image handling references - all declared at top level
 const imagePreview = ref('')
 const imageInput = ref(null)
 const showImageEditor = ref(false)
@@ -1250,7 +1295,7 @@ const currentImage = ref(null)
 const editorCanvas = ref(null)
 const cropImage = ref(null)
 
-// Image adjustment references
+// Image adjustment references - all declared at top level
 const imageAdjustments = ref({
   brightness: 100,
   contrast: 100,
@@ -1258,7 +1303,7 @@ const imageAdjustments = ref({
   rotation: 0
 })
 
-// Crop area references - properly declared
+// Crop area references - all declared at top level
 const cropArea = ref({
   active: false,
   x: 0,
@@ -1272,7 +1317,7 @@ const cropArea = ref({
   endY: 0
 })
 
-// Crop bounds for side handle cropping
+// Crop bounds for side handle cropping - all declared at top level
 const cropBounds = ref({
   left: 0,
   top: 0,
@@ -1280,13 +1325,13 @@ const cropBounds = ref({
   height: 0
 })
 
-// Resize state references
+// Resize state references - all declared at top level
 const isResizing = ref(false)
 const resizeDirection = ref('')
 const startMousePos = ref({ x: 0, y: 0 })
 const startBounds = ref({ left: 0, top: 0, width: 0, height: 0 })
 
-// Form state references
+// Form state references - all declared at top level
 const productForm = ref({
   name: '',
   sku: '',
@@ -1305,12 +1350,7 @@ const orderForm = ref({
   status: 'incomplete'
 })
 
-// Router and utility functions
-const isActive = (path) => {
-  return route.path === path
-}
-
-// Current date
+// Constants - declared at top level
 const currentDate = new Date().toLocaleDateString('en-US', { 
   weekday: 'long', 
   year: 'numeric', 
@@ -1318,10 +1358,10 @@ const currentDate = new Date().toLocaleDateString('en-US', {
   day: 'numeric' 
 })
 
-// Products collection reference
+// Products collection reference - declared at top level with null check
 const productsRef = db ? collection(db, 'products') : null
 
-// Computed properties
+// Computed properties - all declared at top level
 const filteredProducts = computed(() => {
   let filtered = [...products.value]
 
@@ -1368,9 +1408,14 @@ const totalUnitPriceValue = computed(() => products.value.reduce((sum, product) 
 
 const totalPages = computed(() => Math.ceil(filteredProducts.value.length / perPage.value) || 1)
 const paginationStart = computed(() => filteredProducts.value.length ? ((currentPage.value - 1) * perPage.value) + 1 : 0)
-const paginationEnd = computed(() => Math.min(currentPage.value * perPage.value, filteredProducts.length))
+const paginationEnd = computed(() => Math.min(currentPage.value * perPage.value, filteredProducts.value.length))
 
-// Methods
+// Utility functions - all declared at top level
+const isActive = (path) => {
+  return route.path === path
+}
+
+// Image handling methods
 const handleImageUpload = (event) => {
   const file = event.target.files[0]
   if (file) {
@@ -1405,7 +1450,7 @@ const removeImage = () => {
   }
 }
 
-// Fetch products from Firestore with real-time updates
+// Database methods
 const fetchProducts = async () => {
   try {
     loading.value = true;
@@ -2115,7 +2160,7 @@ const closeImageEditor = () => {
   }
 }
 
-// Lifecycle hooks
+// Lifecycle hooks - declared at top level
 onMounted(() => {
   console.log('Component mounted, initializing...');
   fetchProducts().catch(err => {
@@ -2127,7 +2172,7 @@ onMounted(() => {
   setTimeout(() => {
     fetchOrders();
   }, 1000);
-});
+})
 
 // Clean up listeners on component unmount
 onUnmounted(() => {
@@ -2165,8 +2210,37 @@ defineExpose({
   background: linear-gradient(135deg, #2563eb, #7c3aed);
 }
 
+/* Enhanced hover effects and responsive touch interactions */
 /* Add hover effect for clickable cards */
 .cursor-pointer:hover {
   transform: translateY(-2px) scale(1.02);
+}
+
+/* Enhanced mobile touch interactions */
+@media (max-width: 1024px) {
+  .cursor-pointer:active {
+    transform: translateY(0) scale(0.98);
+  }
+  
+  /* Better touch targets for mobile */
+  button {
+    min-height: 44px;
+  }
+  
+  /* Improved mobile table spacing */
+  .lg\:hidden .p-4 {
+    padding: 1rem;
+  }
+}
+
+/* Responsive text scaling */
+@media (max-width: 640px) {
+  .text-xl {
+    font-size: 1.125rem;
+  }
+  
+  .text-2xl {
+    font-size: 1.25rem;
+  }
 }
 </style>

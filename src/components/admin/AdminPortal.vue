@@ -16,25 +16,20 @@
       <button 
         @click="goToHomepage"
         :disabled="isNavigating"
-        class="flex items-center gap-2 px-4 py-2 bg-white/95 backdrop-blur-sm border-2 border-white/30 rounded-xl text-gray-800 hover:bg-white hover:border-white/50 transition-all duration-200 shadow-lg hover:shadow-xl font-semibold disabled:opacity-75 disabled:cursor-not-allowed"
+        class="flex items-center justify-center w-10 h-10 bg-white/95 backdrop-blur-sm border-2 border-white/30 rounded-xl text-gray-800 hover:bg-white hover:border-white/50 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-75 disabled:cursor-not-allowed hover:-translate-y-0.5"
         :class="{ 'transform scale-95': isNavigating }"
+        title="Back to Homepage"
       >
-        <div class="relative flex items-center">
-          <!-- Loading Spinner -->
-          <LoaderIcon 
-            v-if="isNavigating" 
-            class="h-5 w-5 animate-spin text-blue-600" 
-          />
-          <!-- Arrow Icon -->
-          <ArrowLeftIcon 
-            v-else 
-            class="h-5 w-5 transition-transform duration-200" 
-            :class="{ 'group-hover:-translate-x-1': !isNavigating }"
-          />
-        </div>
-        <span class="transition-all duration-200">
-          {{ isNavigating ? 'Loading...' : 'Back to Homepage' }}
-        </span>
+        <!-- Loading Spinner -->
+        <LoaderIcon 
+          v-if="isNavigating" 
+          class="h-5 w-5 animate-spin text-blue-600" 
+        />
+        <!-- Arrow Icon -->
+        <ArrowLeftIcon 
+          v-else 
+          class="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1" 
+        />
       </button>
     </div>
 
@@ -46,8 +41,8 @@
     </div>
 
     <!-- Main Content -->
-    <div class="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-16">
-      <div class="w-full" :class="activeTab === 'register' ? 'max-w-lg' : 'max-w-md'">
+    <div class="relative z-10 min-h-screen flex flex-col items-center justify-start px-4 py-8 sm:py-12 md:py-16">
+      <div class="w-full max-w-sm sm:max-w-md">
         <!-- Enhanced Colorful Header -->
         <div class="text-center mb-8 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 w-full max-w-4xl mx-auto">
           <h1 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight text-center">
@@ -96,21 +91,21 @@
               </button>
             </div>
 
-            <div class="p-6 space-y-6 bg-gradient-to-br from-white/95 via-blue-50/50 to-purple-50/50">
+            <div class="p-4 sm:p-6 space-y-6 bg-gradient-to-br from-white/95 via-blue-50/50 to-purple-50/50">
               <!-- Colorful Header -->
               <div class="text-center space-y-3">
-                <h2 class="text-3xl font-bold tracking-tight">
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">
                   <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                     {{ activeTab === 'login' ? 'Admin Login' : 'Create Admin Account' }}
                   </span>
                 </h2>
-                <p class="text-gray-700 font-medium">
+                <p class="text-sm sm:text-base text-gray-700 font-medium">
                   {{ activeTab === 'login' ? 'Access your colorful paint management dashboard' : 'Set up your paint center administrator account' }}
                 </p>
               </div>
 
               <!-- Admin Registration Form -->
-              <form v-if="activeTab === 'register'" @submit.prevent="createAdminAccount" class="space-y-6">
+              <form v-if="activeTab === 'register'" @submit.prevent="createAdminAccount" class="space-y-4 sm:space-y-6">
                 <!-- Registration Security Code -->
                 <div class="relative group">
                   <ShieldIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-purple-500 z-10" />
@@ -119,7 +114,7 @@
                     id="securityCode" 
                     v-model="adminData.securityCode" 
                     required 
-                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-purple-200 bg-gradient-to-r from-purple-50/90 to-pink-50/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-purple-200 bg-gradient-to-r from-purple-50/90 to-pink-50/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm text-sm sm:text-base"
                     placeholder="Enter admin security code"
                   />
                 </div>
@@ -132,7 +127,7 @@
                     id="lastName" 
                     v-model="adminData.lastName" 
                     required 
-                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-green-200 bg-gradient-to-r from-green-50/90 to-emerald-50/90 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-green-200 bg-gradient-to-r from-green-50/90 to-emerald-50/90 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm text-sm sm:text-base"
                     placeholder="Enter your last name"
                   />
                 </div>
@@ -145,7 +140,7 @@
                     id="firstName" 
                     v-model="adminData.firstName" 
                     required 
-                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50/90 to-cyan-50/90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50/90 to-cyan-50/90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm text-sm sm:text-base"
                     placeholder="Enter your first name"
                   />
                 </div>
@@ -158,7 +153,7 @@
                     id="email" 
                     v-model="adminData.email" 
                     required 
-                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-orange-200 bg-gradient-to-r from-orange-50/90 to-yellow-50/90 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-orange-200 bg-gradient-to-r from-orange-50/90 to-yellow-50/90 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm text-sm sm:text-base"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -171,7 +166,7 @@
                     id="password" 
                     v-model="adminData.password" 
                     required 
-                    class="w-full pl-10 pr-12 py-2.5 rounded-xl border-2 border-red-200 bg-gradient-to-r from-red-50/90 to-pink-50/90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    class="w-full pl-10 pr-12 py-2.5 rounded-xl border-2 border-red-200 bg-gradient-to-r from-red-50/90 to-pink-50/90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm text-sm sm:text-base"
                     placeholder="Create a strong password"
                     minlength="8"
                   />
@@ -185,7 +180,7 @@
                     id="confirmPassword" 
                     v-model="adminData.confirmPassword" 
                     required 
-                    class="w-full pl-10 pr-12 py-2.5 rounded-xl border-2 border-pink-200 bg-gradient-to-r from-pink-50/90 to-rose-50/90 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    class="w-full pl-10 pr-12 py-2.5 rounded-xl border-2 border-pink-200 bg-gradient-to-r from-pink-50/90 to-rose-50/90 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm text-sm sm:text-base"
                     placeholder="Confirm your password"
                   />
                 </div>
@@ -193,7 +188,7 @@
                 <!-- Colorful Submit Button -->
                 <button 
                   type="submit" 
-                  class="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl hover:shadow-3xl transform hover:scale-105"
+                  class="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 text-white py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl hover:shadow-3xl transform hover:scale-105"
                   :disabled="isLoading"
                 >
                   <LoaderIcon v-if="isLoading" class="animate-spin h-6 w-6" />
@@ -203,7 +198,7 @@
               </form>
 
               <!-- Admin Login Form -->
-              <form v-if="activeTab === 'login'" @submit.prevent="loginAdmin" class="space-y-6">
+              <form v-if="activeTab === 'login'" @submit.prevent="loginAdmin" class="space-y-4 sm:space-y-6">
                 <!-- Email Field -->
                 <div class="relative group">
                   <MailIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-500 z-10" />
@@ -212,7 +207,7 @@
                     id="loginEmail" 
                     v-model="loginData.email" 
                     required 
-                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50/90 to-cyan-50/90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50/90 to-cyan-50/90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm text-sm sm:text-base"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -225,7 +220,7 @@
                     id="loginPassword" 
                     v-model="loginData.password" 
                     required 
-                    class="w-full pl-10 pr-12 py-2.5 rounded-xl border-2 border-purple-200 bg-gradient-to-r from-purple-50/90 to-pink-50/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm"
+                    class="w-full pl-10 pr-12 py-2.5 rounded-xl border-2 border-purple-200 bg-gradient-to-r from-purple-50/90 to-pink-50/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm text-sm sm:text-base"
                     placeholder="Enter your password"
                   />
                   <button 
@@ -241,7 +236,7 @@
                   <button 
                     type="button"
                     @click="showForgotPassword = true"
-                    class="text-sm text-purple-600 hover:text-purple-800 transition-colors duration-200 hover:underline font-semibold"
+                    class="text-xs sm:text-sm text-purple-600 hover:text-purple-800 transition-colors duration-200 hover:underline font-semibold"
                   >
                     Forgot Password?
                   </button>
@@ -250,7 +245,7 @@
                 <!-- Colorful Submit Button -->
                 <button 
                   type="submit" 
-                  class="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl hover:shadow-3xl transform hover:scale-105"
+                  class="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl hover:shadow-3xl transform hover:scale-105"
                   :disabled="isLoading"
                 >
                   <LoaderIcon v-if="isLoading" class="animate-spin h-6 w-6" />
@@ -260,7 +255,7 @@
                 
                 <!-- Register Link -->
                 <div class="text-center">
-                  <p class="text-gray-700 font-medium">
+                  <p class="text-sm sm:text-base text-gray-700 font-medium">
                     Don't have an account? 
                     <button 
                       type="button"
@@ -276,19 +271,19 @@
               <!-- Enhanced Alert Message -->
               <div 
                 v-if="alertMessage" 
-                :class="[
+                :class="[ 
                   'p-4 rounded-xl text-sm font-bold transition-all duration-300 border-2 backdrop-blur-sm',
                   alertType === 'success' ? 'bg-gradient-to-r from-green-50/90 to-emerald-50/90 text-green-800 border-green-300' : 'bg-gradient-to-r from-red-50/90 to-pink-50/90 text-red-800 border-red-300'
                 ]"
               >
-                <div class="flex items-center">
-                  <div v-if="alertType === 'success'" class="mr-3 text-green-600">
-                    <CheckCircleIcon class="h-6 w-6" />
+                <div class="flex items-center gap-2">
+                  <div v-if="alertType === 'success'" class="text-green-600 flex-shrink-0">
+                    <CheckCircleIcon class="h-5 w-5 sm:h-6 sm:w-6" />
                   </div>
-                  <div v-else class="mr-3 text-red-600">
-                    <AlertCircleIcon class="h-6 w-6" />
+                  <div v-else class="text-red-600 flex-shrink-0">
+                    <AlertCircleIcon class="h-5 w-5 sm:h-6 sm:w-6" />
                   </div>
-                  {{ alertMessage }}
+                  <span class="text-xs sm:text-sm">{{ alertMessage }}</span>
                 </div>
               </div>
             </div>
@@ -297,9 +292,9 @@
       </div>
       
       <!-- Colorful Footer -->
-      <div class="mt-10 text-center">
-        <p class="text-white font-bold drop-shadow-lg">© 2025 Barcelona Paint Center. All rights reserved.</p>
-        <p class="mt-1 bg-gradient-to-r from-red-400 via-yellow-400 via-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent font-bold drop-shadow-lg">
+      <div class="mt-10 text-center px-4">
+        <p class="text-white font-bold drop-shadow-lg text-sm sm:text-base">© 2025 Barcelona Paint Center. All rights reserved.</p>
+        <p class="mt-1 bg-gradient-to-r from-red-400 via-yellow-400 via-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent font-bold drop-shadow-lg text-sm sm:text-base">
           Secure Admin Portal - Paint Your Success! 🎨
         </p>
       </div>
@@ -365,7 +360,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, watch, nextTick } from 'vue'
+import { ref, reactive, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { auth, db } from '@/config/firebase'
 import { 
@@ -374,7 +369,7 @@ import {
   updateProfile,
   sendPasswordResetEmail
 } from 'firebase/auth'
-import { doc, setDoc, getDoc, collection, getDocs, query, where } from 'firebase/firestore'
+import { doc, setDoc, getDoc, collection, getDocs, query } from 'firebase/firestore'
 import { 
   User as UserIcon,
   Mail as MailIcon,
@@ -395,7 +390,7 @@ import {
 const router = useRouter()
 const isAdminExists = ref(false)
 const isLoading = ref(false)
-const isNavigating = ref(false) // New loading state for navigation
+const isNavigating = ref(false)
 const alertMessage = ref('')
 const alertType = ref('success')
 const showForgotPassword = ref(false)
@@ -427,13 +422,11 @@ const checkAdminExists = async () => {
     const adminQuery = query(collection(db, 'admins'))
     const adminSnapshot = await getDocs(adminQuery)
     
-    // If there are no documents in the admins collection, show register tab
     isAdminExists.value = !adminSnapshot.empty
     console.log('Admin exists check:', isAdminExists.value, 'Admin count:', adminSnapshot.size)
     
   } catch (error) {
     console.error("Error checking admin existence:", error)
-    // If there's an error, assume no admin exists and show register tab
     isAdminExists.value = false
   }
 }
@@ -550,56 +543,35 @@ const handleForgotPassword = async () => {
 }
 
 const switchToRegister = () => {
-  // Ensure register tab is visible immediately
   activeTab.value = 'register'
   alertMessage.value = ''
-  
-  // Force a re-render if needed
-  nextTick(() => {
-    console.log('Switched to register tab')
-  })
 }
 
 const initializeAdminState = async () => {
   await checkAdminExists()
 }
 
-// Enhanced goToHomepage function with loading state
 const goToHomepage = async () => {
   try {
     isNavigating.value = true
     
-    // Add a small delay to show the loading state
     await new Promise(resolve => setTimeout(resolve, 800))
     
-    router.push('/')
+    router.push('/system')
   } catch (error) {
     console.error('Navigation error:', error)
-    // Reset loading state on error
     isNavigating.value = false
   }
 }
 
-onMounted(async () => {
-  try {
-    // Show register tab immediately to avoid delay
-    await initializeAdminState()
-    
-    // Update tab visibility based on admin existence (optional)
-    // You can comment out these lines if you want register always available
-    // showRegisterTab.value = !isAdminExists.value
-    
-    console.log('Show register tab:', showRegisterTab.value)
-    console.log('Active tab:', activeTab.value)
-  } catch (error) {
-    console.error('Error during initialization:', error)
-    // Ensure register tab is always available on error
-    showRegisterTab.value = true
-    activeTab.value = 'login'
-  }
-})
+const onMountedHook = async () => {
+  await initializeAdminState()
+  console.log('Show register tab:', showRegisterTab.value)
+  console.log('Active tab:', activeTab.value)
+}
 
-// Add this watch function after your reactive declarations
+onMounted(onMountedHook)
+
 watch([isAdminExists, showRegisterTab], ([adminExists, showRegister]) => {
   console.log('State changed - Admin exists:', adminExists, 'Show register:', showRegister)
 }, { immediate: true })
