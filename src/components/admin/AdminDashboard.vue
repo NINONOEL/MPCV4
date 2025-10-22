@@ -993,7 +993,7 @@ const confirmLogout = async () => {
   try {
     isLoggingOut.value = true
     await signOut(auth)
-    router.push('/')
+    router.push('/system')
   } catch (error) {
     console.error('Error signing out:', error)
   } finally {

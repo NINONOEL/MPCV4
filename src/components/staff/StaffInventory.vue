@@ -233,6 +233,14 @@
                   <option value="exterior">Exterior Paint</option>
                   <option value="primer">Primers</option>
                   <option value="specialty">Specialty Paints</option>
+                  <option value="house-interior">House Interior</option>
+                  <option value="house-exterior">House Exterior</option>
+                  <option value="automotive">Automotive Paints</option>
+                  <option value="wood-coatings">Wood Coatings</option>
+                  <option value="metal-coatings">Metal Coatings</option>
+                  <option value="waterproofing">Waterproofing Products</option>
+                  <option value="thinners-solvents">Thinners & Solvents</option>
+                  <option value="accessories-tools">Accessories & Tools</option>
                 </select>
                 <select v-model="filterStock" class="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900">
                   <option value="">All Stock Levels</option>
@@ -536,7 +544,15 @@ const formatCategory = (category) => {
     interior: 'Interior Paint',
     exterior: 'Exterior Paint',
     primer: 'Primers',
-    specialty: 'Specialty Paints'
+    specialty: 'Specialty Paints',
+    'house-interior': 'House Interior',
+    'house-exterior': 'House Exterior',
+    'automotive': 'Automotive Paints',
+    'wood-coatings': 'Wood Coatings',
+    'metal-coatings': 'Metal Coatings',
+    'waterproofing': 'Waterproofing Products',
+    'thinners-solvents': 'Thinners & Solvents',
+    'accessories-tools': 'Accessories & Tools'
   }
   return categories[category] || category
 }

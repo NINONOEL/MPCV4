@@ -987,7 +987,6 @@ const setupSalesListener = () => {
 // Set up real-time listener for paint mixing - UPDATED to use paintMixtures collection
 const setupPaintMixingListener = () => {
   if (!db) return null
-  
   try {
     console.log("Setting up real-time listener for paintMixtures collection")
     
@@ -1066,8 +1065,7 @@ const confirmLogout = async () => {
     await signOut(auth)
     console.log('User signed out successfully')
     
-    // Redirect to homepage (root path)
-    router.push('/')
+    router.push('/system')
   } catch (error) {
     console.error('Error signing out:', error)
   } finally {

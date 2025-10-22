@@ -85,26 +85,17 @@
                 All Products
               </button>
               <button
-                @click="filterCategory = 'interior'"
+                v-for="(label, key) in categoryOptions"
+                :key="key"
+                @click="filterCategory = key"
                 :class="[
                   'px-4 py-1.5 rounded-full font-semibold transition-all duration-300 text-xs sm:text-sm',
-                  filterCategory === 'interior' 
+                  filterCategory === key 
                     ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg hover:shadow-xl scale-105' 
                     : 'bg-white text-gray-700 hover:bg-cream-50 border border-cream-200 hover:border-orange-300 hover:shadow-md'
                 ]"
               >
-                Interior
-              </button>
-              <button
-                @click="filterCategory = 'exterior'"
-                :class="[
-                  'px-4 py-1.5 rounded-full font-semibold transition-all duration-300 text-xs sm:text-sm',
-                  filterCategory === 'exterior' 
-                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg hover:shadow-xl scale-105' 
-                    : 'bg-white text-gray-700 hover:bg-cream-50 border border-cream-200 hover:border-orange-300 hover:shadow-md'
-                ]"
-              >
-                Exterior
+                {{ label }}
               </button>
             </div>
           </div>
@@ -200,6 +191,21 @@ const loading = ref(true)
 const error = ref(null)
 const searchQuery = ref('')
 const filterCategory = ref('')
+
+const categoryOptions = {
+  'interior': 'Interior Paint',
+  'exterior': 'Exterior Paint',
+  'primer': 'Primers',
+  'specialty': 'Specialty Paints',
+  'house-interior': 'House Interior',
+  'house-exterior': 'House Exterior',
+  'automotive': 'Automotive Paints',
+  'wood-coatings': 'Wood Coatings',
+  'metal-coatings': 'Metal Coatings',
+  'waterproofing': 'Waterproofing Products',
+  'thinners-solvents': 'Thinners & Solvents',
+  'accessories-tools': 'Accessories & Tools'
+}
 
 // Firebase listener cleanup
 let unsubscribe = null

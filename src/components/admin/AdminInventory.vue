@@ -23,8 +23,8 @@
 
         <!-- Navigation - Scrollable Area -->
         <nav class="flex-1 p-3 xl:p-4 space-y-1 xl:space-y-2 overflow-y-auto">
-          <router-link 
-            to="/admin/dashboard" 
+          <router-link
+            to="/admin/dashboard"
             class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
             :class="{ 'shadow-sm border border-blue-200 transform scale-105': isActive('/admin/dashboard') }"
           >
@@ -32,8 +32,8 @@
             <span class="text-sm xl:text-base truncate">Dashboard</span>
           </router-link>
 
-          <router-link 
-            to="/admin/staff" 
+          <router-link
+            to="/admin/staff"
             class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
             :class="{ 'shadow-sm border border-green-200 transform scale-105': isActive('/admin/staff') }"
           >
@@ -41,8 +41,8 @@
             <span class="text-sm xl:text-base truncate">Staff Management</span>
           </router-link>
 
-          <router-link 
-            to="/admin/inventory" 
+          <router-link
+            to="/admin/inventory"
             class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 shadow-sm border border-purple-200 transform scale-105"
             :class="{ 'hover:bg-purple-100 hover:text-purple-700': !isActive('/admin/inventory') }"
           >
@@ -50,8 +50,8 @@
             <span class="text-sm xl:text-base truncate">Inventory</span>
           </router-link>
 
-          <router-link 
-            to="/admin/house-paint-recommender" 
+          <router-link
+            to="/admin/house-paint-recommender"
             class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
             :class="{ 'shadow-sm border border-orange-200 transform scale-105': isActive('/admin/house-paint-recommender') }"
           >
@@ -59,8 +59,8 @@
             <span class="text-sm xl:text-base truncate">Paint Recommender</span>
           </router-link>
 
-          <router-link 
-            to="/admin/paint-mixing" 
+          <router-link
+            to="/admin/paint-mixing"
             class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
             :class="{ 'shadow-sm border border-pink-200 transform scale-105': isActive('/admin/paint-mixing') }"
           >
@@ -68,8 +68,8 @@
             <span class="text-sm xl:text-base truncate">Paint Mixing</span>
           </router-link>
 
-          <router-link 
-            to="/admin/sales-analytics" 
+          <router-link
+            to="/admin/sales-analytics"
             class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
             :class="{ 'shadow-sm border border-teal-200 transform scale-105': isActive('/admin/sales-analytics') }"
           >
@@ -82,8 +82,8 @@
             <span class="text-sm xl:text-base truncate">Data Visualization</span>
           </router-link>
 
-          <router-link 
-            to="/admin/settings" 
+          <router-link
+            to="/admin/settings"
             class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700"
             :class="{ 'shadow-sm border border-amber-200 transform scale-105': isActive('/admin/settings') }"
           >
@@ -98,27 +98,26 @@
         <div class="p-3 xl:p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-2 xl:gap-3">
             <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg flex-shrink-0">
-              <UserIcon class="w-4 xl:w-5 h-4 xl:h-5 text-white" />
+              <UserIcon class="w-4 xl:w-5 h-4 xl:w-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-xs xl:text-sm font-medium text-gray-900 truncate">Admin User</p>
               <p class="text-xs text-gray-600 truncate">admin@example.com</p>
             </div>
-            <button 
+            <button
               @click="handleLogout"
               class="p-1.5 xl:p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0"
               title="Logout"
             >
-              <LogOutIcon class="w-4 xl:w-5 h-4 xl:h-5" />
+              <LogOutIcon class="w-4 xl:w-5 h-4 xl:w-5" />
             </button>
           </div>
         </div>
       </aside>
 
-      <!-- Enhanced mobile sidebar toggle with better positioning -->
       <!-- Mobile Sidebar Toggle -->
       <div class="fixed top-4 left-4 z-30 lg:hidden">
-        <button 
+        <button
           @click="toggleMobileSidebar"
           class="p-3 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
           aria-label="Toggle navigation menu"
@@ -128,16 +127,15 @@
         </button>
       </div>
 
-      <!-- Enhanced mobile sidebar overlay and design -->
       <!-- Mobile Sidebar Overlay -->
-      <div 
-        v-if="mobileSidebarOpen" 
+      <div
+        v-if="mobileSidebarOpen"
         class="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 lg:hidden"
         @click="toggleMobileSidebar"
       ></div>
 
       <!-- Mobile Sidebar -->
-      <aside 
+      <aside
         v-if="mobileSidebarOpen"
         class="fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-30 lg:hidden shadow-2xl flex flex-col"
       >
@@ -154,8 +152,8 @@
 
         <!-- Mobile Navigation - Scrollable -->
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link 
-            to="/admin/dashboard" 
+          <router-link
+            to="/admin/dashboard"
             class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100"
             :class="{ 'shadow-lg border border-blue-200 scale-105': isActive('/admin/dashboard') }"
             @click="mobileSidebarOpen = false"
@@ -164,8 +162,8 @@
             <span class="text-base">Dashboard</span>
           </router-link>
 
-          <router-link 
-            to="/admin/staff" 
+          <router-link
+            to="/admin/staff"
             class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100"
             :class="{ 'shadow-lg border border-green-200 scale-105': isActive('/admin/staff') }"
             @click="mobileSidebarOpen = false"
@@ -174,8 +172,8 @@
             <span class="text-base">Staff Management</span>
           </router-link>
 
-          <router-link 
-            to="/admin/inventory" 
+          <router-link
+            to="/admin/inventory"
             class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 shadow-lg border border-purple-200 scale-105"
             @click="mobileSidebarOpen = false"
           >
@@ -183,8 +181,8 @@
             <span class="text-base">Inventory</span>
           </router-link>
 
-          <router-link 
-            to="/admin/house-paint-recommender" 
+          <router-link
+            to="/admin/house-paint-recommender"
             class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100"
             :class="{ 'shadow-lg border border-orange-200 scale-105': isActive('/admin/house-paint-recommender') }"
             @click="mobileSidebarOpen = false"
@@ -193,8 +191,8 @@
             <span class="text-base">Paint Recommender</span>
           </router-link>
 
-          <router-link 
-            to="/admin/paint-mixing" 
+          <router-link
+            to="/admin/paint-mixing"
             class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100"
             :class="{ 'shadow-lg border border-pink-200 scale-105': isActive('/admin/paint-mixing') }"
             @click="mobileSidebarOpen = false"
@@ -203,8 +201,8 @@
             <span class="text-base">Paint Mixing</span>
           </router-link>
 
-          <router-link 
-            to="/admin/sales-analytics" 
+          <router-link
+            to="/admin/sales-analytics"
             class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100"
             :class="{ 'shadow-lg border border-teal-200 scale-105': isActive('/admin/sales-analytics') }"
             @click="mobileSidebarOpen = false"
@@ -213,8 +211,8 @@
             <span class="text-base">Sales Analytics</span>
           </router-link>
 
-          <router-link 
-            to="/admin/reports" 
+          <router-link
+            to="/admin/reports"
             class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100"
             :class="{ 'shadow-lg border border-indigo-200 scale-105': isActive('/admin/reports') }"
             @click="mobileSidebarOpen = false"
@@ -223,8 +221,8 @@
             <span class="text-base">Reports</span>
           </router-link>
 
-          <router-link 
-            to="/admin/settings" 
+          <router-link
+            to="/admin/settings"
             class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100"
             :class="{ 'shadow-lg border border-amber-200 scale-105': isActive('/admin/settings') }"
             @click="mobileSidebarOpen = false"
@@ -233,8 +231,8 @@
             <span class="text-base">System Settings</span>
           </router-link>
 
-          <router-link 
-            to="/admin/security" 
+          <router-link
+            to="/admin/security"
             class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-red-600 bg-red-50 hover:bg-red-100"
             :class="{ 'shadow-lg border border-red-200 scale-105': isActive('/admin/security') }"
             @click="mobileSidebarOpen = false"
@@ -256,7 +254,7 @@
               <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
               <p class="text-xs text-gray-600 truncate">admin@example.com</p>
             </div>
-            <button 
+            <button
               @click="handleLogout"
               class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0"
               title="Logout"
@@ -269,7 +267,6 @@
 
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
-        <!-- Enhanced responsive header with better mobile layout -->
         <!-- Header -->
         <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-4 shadow-sm">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -295,15 +292,15 @@
 
         <div class="p-4 sm:p-6 lg:p-8">
           <!-- Error Alert -->
-          <div 
-            v-if="error" 
+          <div
+            v-if="error"
             class="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 flex items-center justify-between"
           >
             <div class="flex items-center gap-2">
               <AlertTriangleIcon class="w-5 h-5 text-red-600" />
               <span class="text-red-800">{{ error }}</span>
             </div>
-            <button 
+            <button
               @click="error = null"
               class="text-red-600 hover:text-red-800"
             >
@@ -320,17 +317,16 @@
             </button>
           </div>
 
-          <!-- Enhanced responsive action buttons -->
           <!-- Action Button -->
           <div class="flex flex-col sm:flex-row justify-end gap-3 mb-6">
-            <button 
+            <button
               @click="showOrderModal = true"
               class="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg text-sm sm:text-base"
             >
               <ShoppingCartIcon class="w-5 h-5" />
               <span>Order Product</span>
             </button>
-            <button 
+            <button
               @click="showAddModal = true"
               class="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg text-sm sm:text-base"
             >
@@ -339,11 +335,10 @@
             </button>
           </div>
 
-          <!-- Enhanced responsive stats cards with better mobile layout -->
           <!-- Stats Cards -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 mb-6 sm:mb-8">
             <!-- Total Products -->
-            <div 
+            <div
               class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer h-28 sm:h-32"
               @click="clearAllFilters"
             >
@@ -362,7 +357,7 @@
             </div>
 
             <!-- Low Stock -->
-            <div 
+            <div
               class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer h-28 sm:h-32"
               @click="filterByLowStock"
             >
@@ -381,7 +376,7 @@
             </div>
 
             <!-- Out of Stock -->
-            <div 
+            <div
               class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative cursor-pointer h-28 sm:h-32"
               @click="filterByOutOfStock"
             >
@@ -432,14 +427,13 @@
             </div>
           </div>
 
-          <!-- Enhanced responsive search and filter bar -->
           <!-- Search and Filter Bar -->
           <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6 mb-6 sm:mb-8">
             <div class="flex flex-col lg:flex-row gap-4">
               <div class="flex-1">
                 <div class="relative">
                   <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input 
+                  <input
                     type="text"
                     v-model="searchQuery"
                     placeholder="Search products..."
@@ -448,7 +442,7 @@
                 </div>
               </div>
               <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <select 
+                <select
                   v-model="filterCategory"
                   class="px-3 sm:px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 text-sm sm:text-base"
                 >
@@ -457,8 +451,16 @@
                   <option value="exterior">Exterior Paint</option>
                   <option value="primer">Primers</option>
                   <option value="specialty">Specialty Paints</option>
+                  <option value="house-interior">House Interior</option>
+                  <option value="house-exterior">House Exterior</option>
+                  <option value="automotive">Automotive Paints</option>
+                  <option value="wood-coatings">Wood Coatings</option>
+                  <option value="metal-coatings">Metal Coatings</option>
+                  <option value="waterproofing">Waterproofing Products</option>
+                  <option value="thinners-solvents">Thinners & Solvents</option>
+                  <option value="accessories-tools">Accessories & Tools</option>
                 </select>
-                <select 
+                <select
                   v-model="filterStock"
                   class="px-3 sm:px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 text-sm sm:text-base"
                 >
@@ -486,7 +488,7 @@
               </div>
               <h3 class="text-lg font-medium text-gray-900 mb-2">No products found</h3>
               <p class="text-gray-600 mb-4">Get started by adding your first product to the inventory.</p>
-              <button 
+              <button
                 @click="showAddModal = true"
                 class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
               >
@@ -495,7 +497,6 @@
               </button>
             </div>
 
-            <!-- Enhanced responsive mobile view with better touch interactions -->
             <!-- Mobile View -->
             <div v-else-if="products.length > 0" class="block lg:hidden">
               <div v-for="product in paginatedProducts" :key="product.id" class="p-4 border-b border-gray-100 hover:bg-gray-50/50 transition-colors">
@@ -503,9 +504,9 @@
                   <div class="flex items-center gap-3 flex-1 min-w-0">
                     <div class="w-12 h-12 rounded-lg shadow-lg overflow-hidden flex items-center justify-center flex-shrink-0"
                          :class="product.image ? 'bg-white border border-gray-200' : 'bg-gradient-to-br from-purple-500 to-pink-500'">
-                      <img 
-                        v-if="product.image" 
-                        :src="product.image" 
+                      <img
+                        v-if="product.image"
+                        :src="product.image"
                         :alt="product.name"
                         class="w-full h-full object-cover"
                       />
@@ -518,13 +519,13 @@
                     </div>
                   </div>
                   <div class="flex items-center gap-2 flex-shrink-0">
-                    <button 
+                    <button
                       @click="editProduct(product)"
                       class="p-2 hover:bg-blue-50 rounded-lg text-blue-600 hover:text-blue-700 transition-colors"
                     >
                       <EditIcon class="w-5 h-5" />
                     </button>
-                    <button 
+                    <button
                       @click="confirmDelete(product)"
                       class="p-2 hover:bg-red-50 rounded-lg text-red-600 hover:text-red-700 transition-colors"
                     >
@@ -533,7 +534,7 @@
                   </div>
                 </div>
                 <div class="flex flex-wrap gap-2 mt-2">
-                  <span 
+                  <span
                     class="px-2 py-1 rounded-full text-xs sm:text-sm"
                     :class="getStockLevelClass(product.stockLevel)"
                   >
@@ -549,7 +550,6 @@
               </div>
             </div>
 
-            <!-- Enhanced responsive desktop view with better table layout -->
             <!-- Desktop View -->
             <div v-if="products.length > 0" class="hidden lg:block overflow-x-auto">
               <table class="w-full">
@@ -574,18 +574,18 @@
                       No products found
                     </td>
                   </tr>
-                  <tr 
-                    v-for="product in paginatedProducts" 
-                    :key="product.id" 
+                  <tr
+                    v-for="product in paginatedProducts"
+                    :key="product.id"
                     class="border-b border-gray-50 hover:bg-gray-50/50 transition-colors"
                   >
                     <td class="p-4">
                       <div class="flex items-center gap-3">
                         <div class="w-12 h-12 rounded-lg shadow-lg overflow-hidden flex items-center justify-center"
                              :class="product.image ? 'bg-white border border-gray-200' : 'bg-gradient-to-br from-purple-500 to-pink-500'">
-                          <img 
-                            v-if="product.image" 
-                            :src="product.image" 
+                          <img
+                            v-if="product.image"
+                            :src="product.image"
                             :alt="product.name"
                             class="w-full h-full object-cover"
                           />
@@ -603,7 +603,7 @@
                       </span>
                     </td>
                     <td class="p-4">
-                      <span 
+                      <span
                         class="px-3 py-1 rounded-full text-sm"
                         :class="getStockLevelClass(product.stockLevel)"
                       >
@@ -618,14 +618,14 @@
                     </td>
                     <td class="p-4">
                       <div class="flex items-center justify-end gap-2">
-                        <button 
+                        <button
                           @click="editProduct(product)"
                           class="p-2 hover:bg-blue-50 rounded-lg text-blue-600 hover:text-blue-700 transition-colors"
                           title="Edit Product"
                         >
                           <EditIcon class="w-5 h-5" />
                         </button>
-                        <button 
+                        <button
                           @click="confirmDelete(product)"
                           class="p-2 hover:bg-red-50 rounded-lg text-red-600 hover:text-red-700 transition-colors"
                           title="Delete Product"
@@ -639,11 +639,10 @@
               </table>
             </div>
 
-            <!-- Enhanced responsive pagination -->
             <!-- Pagination -->
             <div v-if="products.length > 0" class="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-4 border-t border-gray-100">
               <div class="flex items-center gap-2">
-                <select 
+                <select
                   v-model="perPage"
                   class="px-2 py-1 rounded-lg border border-gray-200 text-sm bg-white text-gray-900"
                 >
@@ -656,7 +655,7 @@
                 </span>
               </div>
               <div class="flex items-center gap-2">
-                <button 
+                <button
                   @click="currentPage--"
                   :disabled="currentPage === 1"
                   class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-700"
@@ -664,7 +663,7 @@
                   <ChevronLeftIcon class="w-5 h-5" />
                 </button>
                 <span class="text-sm text-gray-700">Page {{ currentPage }} of {{ totalPages || 1 }}</span>
-                <button 
+                <button
                   @click="currentPage++"
                   :disabled="currentPage >= totalPages"
                   class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-700"
@@ -678,7 +677,7 @@
       </main>
     </div>
 
-    <!-- Enhanced responsive modals with better mobile support -->
+    <!-- Modals -->
     <!-- Add/Edit Product Modal -->
     <div v-if="showAddModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div class="bg-white rounded-xl w-full max-w-lg max-h-[90vh] shadow-2xl flex flex-col">
@@ -687,7 +686,7 @@
             <h3 class="text-lg font-bold text-gray-900">
               {{ editingProduct ? 'Edit Product' : 'Add Product' }}
             </h3>
-            <button 
+            <button
               @click="closeModal"
               class="p-1 hover:bg-gray-100 rounded-lg text-gray-500 hover:text-gray-700 transition-colors"
             >
@@ -695,23 +694,23 @@
             </button>
           </div>
         </div>
-        
+
         <form @submit.prevent="handleSubmit" class="flex flex-col flex-1 min-h-0">
           <div class="flex-1 overflow-y-auto p-4">
             <div class="space-y-3">
               <!-- Image upload section -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Product Image</label>
-                
+
                 <!-- Image Preview -->
                 <div v-if="imagePreview" class="mb-3">
                   <div class="relative inline-block">
-                    <img 
-                      :src="imagePreview" 
-                      alt="Product preview" 
+                    <img
+                      :src="imagePreview"
+                      alt="Product preview"
                       class="w-24 h-24 object-cover rounded-lg border border-gray-200 shadow-sm"
                     />
-                    <button 
+                    <button
                       type="button"
                       @click="removeImage"
                       class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
@@ -720,17 +719,17 @@
                     </button>
                   </div>
                 </div>
-                
+
                 <!-- Upload and Adjust Buttons -->
                 <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-                  <input 
+                  <input
                     ref="imageInput"
-                    type="file" 
-                    accept="image/*" 
+                    type="file"
+                    accept="image/*"
                     @change="handleImageUpload"
                     class="hidden"
                   />
-                  <button 
+                  <button
                     type="button"
                     @click="imageInput?.click()"
                     class="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors text-sm"
@@ -738,7 +737,7 @@
                     <UploadIcon class="w-4 h-4" />
                     {{ imagePreview ? 'Change Image' : 'Upload Image' }}
                   </button>
-                  <button 
+                  <button
                     v-if="imagePreview"
                     type="button"
                     @click="openImageEditor"
@@ -749,14 +748,14 @@
                     </svg>
                     Crop Image
                   </button>
-                  <span class="text-xs text-gray-500">Max 100MB, JPG/PNG</span>
+                  <span class="text-xs text-gray-500">Any image format</span>
                 </div>
               </div>
 
               <!-- Name -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Product Name</label>
-                <input 
+                <input
                   type="text"
                   v-model="productForm.name"
                   required
@@ -768,7 +767,7 @@
               <!-- SKU -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">SKU</label>
-                <input 
+                <input
                   type="text"
                   v-model="productForm.sku"
                   required
@@ -780,7 +779,7 @@
               <!-- Category -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                <select 
+                <select
                   v-model="productForm.category"
                   required
                   class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 text-sm"
@@ -789,6 +788,14 @@
                   <option value="exterior">Exterior Paint</option>
                   <option value="primer">Primers</option>
                   <option value="specialty">Specialty Paints</option>
+                  <option value="house-interior">House Interior</option>
+                  <option value="house-exterior">House Exterior</option>
+                  <option value="automotive">Automotive Paints</option>
+                  <option value="wood-coatings">Wood Coatings</option>
+                  <option value="metal-coatings">Metal Coatings</option>
+                  <option value="waterproofing">Waterproofing Products</option>
+                  <option value="thinners-solvents">Thinners & Solvents</option>
+                  <option value="accessories-tools">Accessories & Tools</option>
                 </select>
               </div>
 
@@ -798,7 +805,7 @@
                   <label class="block text-sm font-medium text-gray-700 mb-1">Price</label>
                   <div class="relative">
                     <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 text-sm">₱</span>
-                    <input 
+                    <input
                       type="number"
                       v-model="productForm.price"
                       required
@@ -814,7 +821,7 @@
                   <label class="block text-sm font-medium text-gray-700 mb-1">Unit Price</label>
                   <div class="relative">
                     <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 text-sm">₱</span>
-                    <input 
+                    <input
                       type="number"
                       v-model="productForm.unitPrice"
                       required
@@ -830,7 +837,7 @@
               <!-- Stock Level -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Stock Level</label>
-                <input 
+                <input
                   type="number"
                   v-model="productForm.stockLevel"
                   required
@@ -843,14 +850,14 @@
           </div>
 
           <div class="flex flex-col sm:flex-row justify-end gap-3 p-4 border-t border-gray-200 flex-shrink-0">
-            <button 
+            <button
               type="button"
               @click="closeModal"
               class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors text-sm order-2 sm:order-1"
             >
               Cancel
             </button>
-            <button 
+            <button
               type="submit"
               class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg text-sm order-1 sm:order-2"
               :disabled="modalLoading"
@@ -880,13 +887,13 @@
             Are you sure you want to delete {{ selectedProduct?.name }}? This action cannot be undone.
           </p>
           <div class="flex flex-col sm:flex-row justify-center gap-3">
-            <button 
+            <button
               @click="showDeleteModal = false"
               class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors order-2 sm:order-1"
             >
               Cancel
             </button>
-            <button 
+            <button
               @click="deleteProduct"
               class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 order-1 sm:order-2"
               :disabled="modalLoading"
@@ -911,7 +918,7 @@
         'opacity-100': showNotification
       }"
     >
-      <div 
+      <div
         class="bg-white rounded-xl shadow-2xl border max-w-sm mx-4 transform transition-all duration-300 ease-out"
         :class="{
           'scale-95 opacity-0 translate-y-4': !showNotification,
@@ -921,7 +928,7 @@
         }"
       >
         <div class="p-6 text-center">
-          <div 
+          <div
             class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
             :class="{
               'bg-green-100': notificationType === 'success',
@@ -931,7 +938,7 @@
             <CheckCircle2Icon v-if="notificationType === 'success'" class="w-8 h-8 text-green-600" />
             <XCircleIcon v-else class="w-8 h-8 text-red-600" />
           </div>
-          <h3 
+          <h3
             class="text-lg font-semibold mb-2"
             :class="{
               'text-green-800': notificationType === 'success',
@@ -940,12 +947,12 @@
           >
             {{ notificationType === 'success' ? 'Success!' : 'Error!' }}
           </h3>
-          <p 
+          <p
             class="text-gray-600 mb-4"
           >
             {{ notificationMessage }}
           </p>
-          <button 
+          <button
             @click="showNotification = false"
             class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors text-sm font-medium"
           >
@@ -955,14 +962,13 @@
       </div>
     </div>
 
-    <!-- Enhanced responsive order modal with better mobile layout -->
     <!-- Order Product Modal -->
     <div v-if="showOrderModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div class="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] shadow-2xl flex flex-col">
         <div class="p-4 border-b border-gray-200 flex-shrink-0">
           <div class="flex items-center justify-between">
             <h3 class="text-lg font-bold text-gray-900">Order Products from Supplier</h3>
-            <button 
+            <button
               @click="closeOrderModal"
               class="p-1 hover:bg-gray-100 rounded-lg text-gray-500 hover:text-gray-700 transition-colors"
             >
@@ -970,7 +976,7 @@
             </button>
           </div>
         </div>
-        
+
         <div class="flex flex-col lg:flex-row flex-1 min-h-0">
           <!-- Left Panel - Create New Order -->
           <div class="w-full lg:w-1/2 p-4 border-b lg:border-b-0 lg:border-r border-gray-200">
@@ -979,7 +985,7 @@
               <!-- Product Selection -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Select Product</label>
-                <select 
+                <select
                   v-model="orderForm.productId"
                   @change="updateSelectedProduct"
                   required
@@ -995,7 +1001,7 @@
               <!-- Supplier Name Field -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Supplier Name</label>
-                <input 
+                <input
                   type="text"
                   v-model="orderForm.supplierName"
                   required
@@ -1007,7 +1013,7 @@
               <!-- Quantity -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Order Quantity</label>
-                <input 
+                <input
                   type="number"
                   v-model="orderForm.quantity"
                   required
@@ -1020,7 +1026,7 @@
               <!-- Status -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Order Status</label>
-                <select 
+                <select
                   v-model="orderForm.status"
                   class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 text-sm"
                 >
@@ -1029,7 +1035,7 @@
                 </select>
               </div>
 
-              <button 
+              <button
                 type="submit"
                 class="w-full px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg text-sm"
                 :disabled="modalLoading"
@@ -1059,7 +1065,7 @@
                     <p class="text-xs text-gray-500">{{ formatDate(order.createdAt) }}</p>
                   </div>
                   <div class="flex items-center gap-2 flex-shrink-0">
-                    <select 
+                    <select
                       :value="order.status"
                       @change="updateOrderStatus(order.id, $event.target.value)"
                       class="px-2 py-1 rounded text-xs border border-gray-300 bg-white"
@@ -1071,7 +1077,7 @@
                       <option value="incomplete">Incomplete</option>
                       <option value="delivered">Delivered</option>
                     </select>
-                    <button 
+                    <button
                       @click="deleteOrder(order.id)"
                       class="p-1 hover:bg-red-50 rounded text-red-600 hover:text-red-700 transition-colors"
                       title="Delete Order"
@@ -1081,7 +1087,7 @@
                   </div>
                 </div>
                 <div class="flex items-center gap-2">
-                  <span 
+                  <span
                     class="px-2 py-1 rounded-full text-xs"
                     :class="{
                       'bg-orange-100 text-orange-800': order.status === 'incomplete',
@@ -1099,8 +1105,7 @@
       </div>
     </div>
 
-    <!-- Enhanced responsive image editor modal -->
-    <!-- Simplified image editor modal with side handle cropping -->
+    <!-- Image Editor Modal -->
     <div v-if="showImageEditor" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div class="bg-white rounded-lg p-4 sm:p-6 w-full max-w-4xl max-h-[90vh] overflow-auto">
         <div class="flex justify-between items-center mb-4">
@@ -1109,20 +1114,20 @@
             <XIcon class="w-6 h-6" />
           </button>
         </div>
-        
+
         <div class="space-y-4">
           <!-- Crop area -->
           <div class="relative border border-gray-300 rounded-lg overflow-hidden bg-gray-100">
             <div class="relative inline-block">
-              <img 
+              <img
                 ref="cropImage"
                 :src="currentImage"
                 class="max-w-full max-h-96 block"
                 @load="initializeCropHandles"
               />
-              
+
               <!-- Crop overlay with side handles -->
-              <div 
+              <div
                 class="absolute border-2 border-blue-500 bg-blue-500 bg-opacity-10"
                 :style="{
                   left: cropBounds.left + 'px',
@@ -1132,51 +1137,51 @@
                 }"
               >
                 <!-- Handles for cropping -->
-                <div 
+                <div
                   class="absolute w-full h-2 bg-blue-500 cursor-ns-resize -top-1"
                   @mousedown="startResize('top', $event)"
                 ></div>
-                <div 
+                <div
                   class="absolute w-full h-2 bg-blue-500 cursor-ns-resize -bottom-1"
                   @mousedown="startResize('bottom', $event)"
                 ></div>
-                <div 
+                <div
                   class="absolute h-full w-2 bg-blue-500 cursor-ew-resize -left-1"
                   @mousedown="startResize('left', $event)"
                 ></div>
-                <div 
+                <div
                   class="absolute h-full w-2 bg-blue-500 cursor-ew-resize -right-1"
                   @mousedown="startResize('right', $event)"
                 ></div>
-                <div 
+                <div
                   class="absolute w-3 h-3 bg-blue-600 cursor-nw-resize -top-1 -left-1"
                   @mousedown="startResize('top-left', $event)"
                 ></div>
-                <div 
+                <div
                   class="absolute w-3 h-3 bg-blue-600 cursor-ne-resize -top-1 -right-1"
                   @mousedown="startResize('top-right', $event)"
                 ></div>
-                <div 
+                <div
                   class="absolute w-3 h-3 bg-blue-600 cursor-sw-resize -bottom-1 -left-1"
                   @mousedown="startResize('bottom-left', $event)"
                 ></div>
-                <div 
+                <div
                   class="absolute w-3 h-3 bg-blue-600 cursor-se-resize -bottom-1 -right-1"
                   @mousedown="startResize('bottom-right', $event)"
                 ></div>
               </div>
             </div>
           </div>
-          
+
           <!-- Crop controls -->
           <div class="flex flex-col sm:flex-row gap-3">
-            <button 
+            <button
               @click="applyCropImage"
               class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
             >
               Apply Crop
             </button>
-            <button 
+            <button
               @click="resetCropImage"
               class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
             >
@@ -1186,13 +1191,13 @@
 
           <!-- Action buttons -->
           <div class="flex flex-col sm:flex-row justify-end gap-3 pt-4 border-t">
-            <button 
+            <button
               @click="closeImageEditor"
               class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 order-2 sm:order-1"
             >
               Cancel
             </button>
-            <button 
+            <button
               @click="saveImageChanges"
               class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 order-1 sm:order-2"
             >
@@ -1208,14 +1213,14 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { 
-  collection, 
-  getDocs, 
-  addDoc, 
-  updateDoc, 
-  deleteDoc, 
-  doc, 
-  query, 
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  query,
   orderBy,
   onSnapshot,
   where,
@@ -1223,7 +1228,7 @@ import {
   getDoc
 } from 'firebase/firestore'
 import { db } from '../../config/firebase'
-import { 
+import {
   LayoutDashboard as LayoutDashboardIcon,
   Users as UsersIcon,
   Package as PackageIcon,
@@ -1351,11 +1356,11 @@ const orderForm = ref({
 })
 
 // Constants - declared at top level
-const currentDate = new Date().toLocaleDateString('en-US', { 
-  weekday: 'long', 
-  year: 'numeric', 
-  month: 'long', 
-  day: 'numeric' 
+const currentDate = new Date().toLocaleDateString('en-US', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
 })
 
 // Products collection reference - declared at top level with null check
@@ -1367,7 +1372,7 @@ const filteredProducts = computed(() => {
 
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
-    filtered = filtered.filter(product => 
+    filtered = filtered.filter(product =>
       product.name.toLowerCase().includes(query) ||
       product.sku?.toLowerCase().includes(query)
     )
@@ -1424,12 +1429,12 @@ const handleImageUpload = (event) => {
       error.value = 'Please select a valid image file'
       return
     }
-    
+
     if (file.size > 100 * 1024 * 1024) {
       error.value = 'Image size must be less than 100MB'
       return
     }
-    
+
     const reader = new FileReader()
     reader.onload = (e) => {
       const base64Image = e.target.result
@@ -1455,16 +1460,13 @@ const fetchProducts = async () => {
   try {
     loading.value = true;
     error.value = null;
-    
-    // Ensure db is properly initialized
+
     if (!db || !productsRef) {
       throw new Error('Database not initialized');
     }
 
-    // Create query with error handling
     const q = query(productsRef);
-    
-    // Set up real-time listener
+
     if (unsubscribe.value) {
       unsubscribe.value();
     }
@@ -1474,10 +1476,9 @@ const fetchProducts = async () => {
       (snapshot) => {
         products.value = snapshot.docs.map(doc => {
           const data = doc.data();
-          // Ensure we use the correct stock value (check both fields)
-          const stockValue = data.stock !== undefined ? Number(data.stock) : 
+          const stockValue = data.stock !== undefined ? Number(data.stock) :
                             data.stockLevel !== undefined ? Number(data.stockLevel) : 0;
-          
+
           return {
             id: doc.id,
             ...data,
@@ -1487,7 +1488,7 @@ const fetchProducts = async () => {
             stock: stockValue
           };
         });
-        
+
         loading.value = false;
         error.value = null;
         console.log('Fetched products with real-time updates:', products.value);
@@ -1507,59 +1508,48 @@ const fetchProducts = async () => {
   }
 };
 
-// Update product stock level
 const updateProductStock = async (productId, newStockLevel) => {
   try {
     if (stockUpdateInProgress.value) {
       console.log('Stock update already in progress, skipping...')
       return false
     }
-    
+
     stockUpdateInProgress.value = true
-    
-    // Get the product document reference
+
     const productRef = doc(db, 'products', productId)
-    
-    // Get current product data to ensure we have the latest
     const productDoc = await getDoc(productRef)
     if (!productDoc.exists()) {
       throw new Error(`Product with ID ${productId} not found`)
     }
-    
-    // Get current product data
+
     const productData = productDoc.data()
-    
-    // Ensure stock level is a number and not negative
     const updatedStockLevel = Math.max(0, Number(newStockLevel))
-    
-    // Update both stockLevel and stock fields for compatibility
+
     await updateDoc(productRef, {
       stockLevel: updatedStockLevel,
-      stock: updatedStockLevel, // Update 'stock' field used by sales component
+      stock: updatedStockLevel,
       updatedAt: serverTimestamp()
     })
-    
+
     console.log(`Stock updated for product ${productId}: ${updatedStockLevel}`)
-    
-    // Show notification
+
     notificationMessage.value = `Stock updated for ${productData.name}`
     notificationType.value = 'success'
     showNotification.value = true
-    
-    // Auto hide notification after 3 seconds
+
     setTimeout(() => {
       showNotification.value = false
     }, 3000)
-    
+
     return true
   } catch (err) {
     console.error('Error updating product stock:', err)
-    
-    // Show error notification
+
     notificationMessage.value = `Failed to update stock: ${err.message}`
     notificationType.value = 'error'
     showNotification.value = true
-    
+
     return false
   } finally {
     stockUpdateInProgress.value = false
@@ -1572,12 +1562,11 @@ const filterByLowStock = () => {
   searchQuery.value = ''
   filterCategory.value = ''
   currentPage.value = 1
-  
-  // Show notification
+
   notificationMessage.value = `Showing ${lowStockCount.value} low stock items`
   notificationType.value = 'success'
   showNotification.value = true
-  
+
   setTimeout(() => {
     showNotification.value = false
   }, 3000)
@@ -1588,12 +1577,11 @@ const filterByOutOfStock = () => {
   searchQuery.value = ''
   filterCategory.value = ''
   currentPage.value = 1
-  
-  // Show notification
+
   notificationMessage.value = `Showing ${outOfStockCount.value} out of stock items`
   notificationType.value = 'success'
   showNotification.value = true
-  
+
   setTimeout(() => {
     showNotification.value = false
   }, 3000)
@@ -1604,12 +1592,11 @@ const clearAllFilters = () => {
   searchQuery.value = ''
   filterCategory.value = ''
   currentPage.value = 1
-  
-  // Show notification
+
   notificationMessage.value = `Showing all ${totalProducts.value} products`
   notificationType.value = 'success'
   showNotification.value = true
-  
+
   setTimeout(() => {
     showNotification.value = false
   }, 3000)
@@ -1620,25 +1607,23 @@ const handleSubmit = async () => {
   try {
     modalLoading.value = true
     error.value = null
-    
+
     if (!db) {
       throw new Error('Firestore is not initialized')
     }
-    
+
     const productData = {
       ...productForm.value,
       price: Number(productForm.value.price),
       unitPrice: Number(productForm.value.unitPrice),
       stockLevel: Number(productForm.value.stockLevel),
       stock: Number(productForm.value.stockLevel),
-      // Include image in product data
       image: productForm.value.image
     }
-    
+
     console.log('Submitting product data:', productData)
-    
+
     if (editingProduct.value) {
-      // Update existing product
       const productRef = doc(db, 'products', editingProduct.value.id)
       await updateDoc(productRef, {
         ...productData,
@@ -1646,14 +1631,13 @@ const handleSubmit = async () => {
       })
       showSuccessNotification('Product updated successfully!')
     } else {
-      // Add new product
       const docRef = await addDoc(productsRef, {
         ...productData,
         createdAt: serverTimestamp()
       })
       showSuccessNotification('Product added successfully!')
     }
-    
+
     closeModal()
   } catch (err) {
     console.error('Error saving product:', err)
@@ -1682,11 +1666,10 @@ const deleteProduct = async () => {
   try {
     modalLoading.value = true
     error.value = null
-    
-    // Delete product from Firestore
+
     const productRef = doc(db, 'products', selectedProduct.value.id)
     await deleteDoc(productRef)
-    
+
     showDeleteModal.value = false
     showSuccessNotification('Product deleted successfully!')
   } catch (err) {
@@ -1724,7 +1707,6 @@ const showSuccessNotification = (message) => {
   notificationType.value = 'success'
   showNotification.value = true
 
-  // Auto hide after 4 seconds (longer for better UX)
   setTimeout(() => {
     showNotification.value = false
   }, 4000)
@@ -1744,10 +1726,18 @@ const formatStockLevel = (stockLevel) => {
 
 const formatCategory = (category) => {
   const categories = {
-    interior: 'Interior Paint',
-    exterior: 'Exterior Paint',
-    primer: 'Primers',
-    specialty: 'Specialty Paints'
+    'interior': 'Interior Paint',
+    'exterior': 'Exterior Paint',
+    'primer': 'Primers',
+    'specialty': 'Specialty Paints',
+    'house-interior': 'House Interior',
+    'house-exterior': 'House Exterior',
+    'automotive': 'Automotive Paints',
+    'wood-coatings': 'Wood Coatings',
+    'metal-coatings': 'Metal Coatings',
+    'waterproofing': 'Waterproofing Products',
+    'thinners-solvents': 'Thinners & Solvents',
+    'accessories-tools': 'Accessories & Tools'
   }
   return categories[category] || category
 }
@@ -1767,13 +1757,12 @@ const fetchOrders = async () => {
       console.log('Database not initialized, skipping orders fetch');
       return;
     }
-    
+
     console.log('Setting up orders listener...');
     const ordersCollection = collection(db, 'orders');
     const q = query(ordersCollection, orderBy('createdAt', 'desc'));
-    
-    // Set up real-time listener with better error handling
-    const unsubscribeOrders = onSnapshot(q, 
+
+    const unsubscribeOrders = onSnapshot(q,
       (snapshot) => {
         console.log('Orders snapshot received, docs count:', snapshot.docs.length);
         orders.value = snapshot.docs.map(doc => {
@@ -1782,20 +1771,18 @@ const fetchOrders = async () => {
           return {
             id: doc.id,
             ...data,
-            // Handle different timestamp formats
             createdAt: data.createdAt || new Date(),
             updatedAt: data.updatedAt || new Date()
           };
         });
         console.log('Orders updated:', orders.value);
-      }, 
+      },
       (error) => {
         console.error('Error in orders listener:', error);
-        // If it's a permission error or collection doesn't exist, try without orderBy
         if (error.code === 'failed-precondition' || error.code === 'permission-denied') {
           console.log('Trying to fetch orders without orderBy...');
           const simpleQuery = collection(db, 'orders');
-          const fallbackUnsubscribe = onSnapshot(simpleQuery, 
+          const fallbackUnsubscribe = onSnapshot(simpleQuery,
             (snapshot) => {
               console.log('Fallback orders snapshot received:', snapshot.docs.length);
               orders.value = snapshot.docs.map(doc => ({
@@ -1816,10 +1803,9 @@ const fetchOrders = async () => {
         }
       }
     );
-    
-    // Store unsubscribe function for cleanup
+
     window.ordersUnsubscribe = unsubscribeOrders;
-    
+
   } catch (err) {
     console.error('Error setting up orders listener:', err);
     orders.value = [];
@@ -1829,17 +1815,15 @@ const fetchOrders = async () => {
 const handleOrderSubmit = async () => {
   try {
     modalLoading.value = true;
-    
+
     if (!orderForm.value.productId || !orderForm.value.quantity || !orderForm.value.supplierName) {
       throw new Error('Please fill in all required fields including supplier name');
     }
 
-    // Ensure db and ordersRef are available
     if (!db) {
       throw new Error('Database not initialized');
     }
 
-    // Create orders collection reference if it doesn't exist
     const ordersCollection = collection(db, 'orders');
 
     const orderData = {
@@ -1854,11 +1838,9 @@ const handleOrderSubmit = async () => {
 
     console.log('Creating order with data:', orderData);
 
-    // Add order to Firestore
     const docRef = await addDoc(ordersCollection, orderData);
     console.log('Order created with ID:', docRef.id);
 
-    // If status is delivered, update product stock immediately
     if (orderForm.value.status === 'delivered') {
       await updateProductStockFromOrder(orderForm.value.productId, Number(orderForm.value.quantity));
     }
@@ -1867,15 +1849,14 @@ const handleOrderSubmit = async () => {
     resetOrderForm();
   } catch (err) {
     console.error('Error creating order:', err);
-    
-    // More specific error messages
+
     let errorMessage = 'Failed to create order';
     if (err.code === 'permission-denied') {
       errorMessage = 'Permission denied. Please check Firestore security rules.';
     } else if (err.message) {
       errorMessage = err.message;
     }
-    
+
     notificationMessage.value = errorMessage;
     notificationType.value = 'error';
     showNotification.value = true;
@@ -1899,13 +1880,12 @@ const updateOrderStatus = async (orderId, newStatus) => {
 
     const orderRef = doc(db, 'orders', orderId);
     const order = orders.value.find(o => o.id === orderId);
-    
+
     await updateDoc(orderRef, {
       status: newStatus,
       updatedAt: new Date()
     });
 
-    // If changing to delivered, update product stock
     if (newStatus === 'delivered' && order.status === 'incomplete') {
       await updateProductStockFromOrder(order.productId, order.quantity);
       showSuccessNotification(`Order delivered! Stock updated for ${order.productName}`);
@@ -1922,11 +1902,11 @@ const updateProductStockFromOrder = async (productId, quantity) => {
   try {
     const productRef = doc(db, 'products', productId);
     const productDoc = await getDoc(productRef);
-    
+
     if (productDoc.exists()) {
       const currentStock = productDoc.data().stockLevel || 0;
       const newStock = currentStock + quantity;
-      
+
       await updateDoc(productRef, {
         stockLevel: newStock,
         stock: newStock,
@@ -1969,19 +1949,16 @@ const resetOrderForm = () => {
 
 const formatDate = (timestamp) => {
   if (!timestamp) return '';
-  
+
   let date;
   if (timestamp.toDate) {
-    // Firestore Timestamp
     date = timestamp.toDate();
   } else if (timestamp instanceof Date) {
-    // Regular Date object
     date = timestamp;
   } else {
-    // String or other format
     date = new Date(timestamp);
   }
-  
+
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
@@ -1996,7 +1973,6 @@ const openImageEditor = () => {
     currentImage.value = imagePreview.value
     originalImage.value = imagePreview.value
     showImageEditor.value = true
-    // Initialize crop bounds after modal opens
     nextTick(() => {
       initializeCropHandles()
     })
@@ -2005,11 +1981,9 @@ const openImageEditor = () => {
 
 const initializeCropHandles = () => {
   if (!cropImage.value) return
-  
   const img = cropImage.value
   const rect = img.getBoundingClientRect()
-  
-  // Set initial crop bounds to cover the entire image
+
   cropBounds.value = {
     left: 0,
     top: 0,
@@ -2024,25 +1998,25 @@ const startResize = (direction, event) => {
   resizeDirection.value = direction
   startMousePos.value = { x: event.clientX, y: event.clientY }
   startBounds.value = { ...cropBounds.value }
-  
+
   document.addEventListener('mousemove', handleResize)
   document.addEventListener('mouseup', stopResize)
 }
 
 const handleResize = (event) => {
   if (!isResizing.value) return
-  
+
   const deltaX = event.clientX - startMousePos.value.x
   const deltaY = event.clientY - startMousePos.value.y
   const img = cropImage.value
-  
+
   if (!img) return
-  
+
   const imgWidth = img.offsetWidth
   const imgHeight = img.offsetHeight
-  
+
   let newBounds = { ...startBounds.value }
-  
+
   switch (resizeDirection.value) {
     case 'top':
       newBounds.top = Math.max(0, Math.min(startBounds.value.top + deltaY, startBounds.value.top + startBounds.value.height - 20))
@@ -2079,7 +2053,7 @@ const handleResize = (event) => {
       newBounds.height = Math.max(20, Math.min(startBounds.value.height + deltaY, imgHeight - startBounds.value.top))
       break
   }
-  
+
   cropBounds.value = newBounds
 }
 
@@ -2092,23 +2066,19 @@ const stopResize = () => {
 
 const applyCropImage = () => {
   if (!cropImage.value || !currentImage.value) return
-  
+
   const img = cropImage.value
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
-  
-  // Calculate the actual image dimensions vs displayed dimensions
+
   const scaleX = img.naturalWidth / img.offsetWidth
   const scaleY = img.naturalHeight / img.offsetHeight
-  
-  // Set canvas size to crop area
+
   canvas.width = cropBounds.value.width * scaleX
   canvas.height = cropBounds.value.height * scaleY
-  
-  // Create image object to draw from
+
   const sourceImg = new Image()
   sourceImg.onload = () => {
-    // Draw the cropped portion
     ctx.drawImage(
       sourceImg,
       cropBounds.value.left * scaleX,
@@ -2120,11 +2090,8 @@ const applyCropImage = () => {
       canvas.width,
       canvas.height
     )
-    
-    // Update the current image with cropped version
+
     currentImage.value = canvas.toDataURL('image/jpeg', 0.9)
-    
-    // Reset crop bounds to full image
     initializeCropHandles()
   }
   sourceImg.src = currentImage.value
@@ -2136,7 +2103,6 @@ const resetCropImage = () => {
 }
 
 const saveImageChanges = () => {
-  // Update form and preview with final image
   productForm.value.image = currentImage.value
   imagePreview.value = currentImage.value
   closeImageEditor()
@@ -2144,14 +2110,12 @@ const saveImageChanges = () => {
 
 const closeImageEditor = () => {
   showImageEditor.value = false
-  // Reset image adjustments
   imageAdjustments.value = {
     brightness: 100,
     contrast: 100,
     saturation: 100,
     rotation: 0
   }
-  // Reset crop bounds
   cropBounds.value = {
     left: 0,
     top: 0,
@@ -2167,8 +2131,7 @@ onMounted(() => {
     console.error('Mount error:', err)
     error.value = 'Failed to initialize inventory. Please refresh the page.'
   });
-  
-  // Add a small delay to ensure Firebase is ready
+
   setTimeout(() => {
     fetchOrders();
   }, 1000);
@@ -2211,7 +2174,6 @@ defineExpose({
 }
 
 /* Enhanced hover effects and responsive touch interactions */
-/* Add hover effect for clickable cards */
 .cursor-pointer:hover {
   transform: translateY(-2px) scale(1.02);
 }
@@ -2221,13 +2183,11 @@ defineExpose({
   .cursor-pointer:active {
     transform: translateY(0) scale(0.98);
   }
-  
-  /* Better touch targets for mobile */
+
   button {
     min-height: 44px;
   }
-  
-  /* Improved mobile table spacing */
+
   .lg\:hidden .p-4 {
     padding: 1rem;
   }
@@ -2238,7 +2198,7 @@ defineExpose({
   .text-xl {
     font-size: 1.125rem;
   }
-  
+
   .text-2xl {
     font-size: 1.25rem;
   }

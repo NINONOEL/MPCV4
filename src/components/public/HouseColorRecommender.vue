@@ -40,12 +40,6 @@
             >
               Reset Colors
             </button>
-            <button 
-              @click="saveCurrentScheme"
-              class="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1.5 rounded-lg hover:from-green-600 hover:to-emerald-600 transition-all duration-300 text-xs md:text-sm font-medium"
-            >
-              Save Scheme
-            </button>
           </div>
         </div>
 
@@ -279,30 +273,30 @@
                   </div>
                 </div>
                 
-                <!-- Enhanced color selection grid with better mobile touch targets -->
+                <!-- Enhanced color selection grid organized by house part with more colors -->
                 <div class="mb-4">
                   <h4 class="text-xs font-medium text-gray-700 mb-2 flex items-center">
                     <svg class="w-3 h-3 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
                       <path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4z" clip-rule="evenodd"/>
                     </svg>
-                    Color Palette
+                    {{ selectedPart ? `Colors for ${formatPartName(selectedPart)}` : 'Select a part to see colors' }}
                   </h4>
-                  <div class="grid grid-cols-5 md:grid-cols-6 gap-1.5">
+                  <div v-if="selectedPart && getColorsForPart(selectedPart).length > 0" class="grid grid-cols-6 md:grid-cols-7 gap-1.5">
                     <div 
-                      v-for="color in colorPalette" 
+                      v-for="color in getColorsForPart(selectedPart)" 
                       :key="color.name"
                       @click="applyColor(color.value)"
                       :class="[ 
                         'aspect-square rounded-lg border-2 cursor-pointer transition-all duration-300 relative group',
-                        selectedPart ? 'hover:scale-105 hover:border-gray-400 hover:shadow-md' : 'opacity-50 cursor-not-allowed',
-                        houseParts[selectedPart] === color.value && selectedPart ? 'ring-2 ring-blue-500 ring-offset-1 scale-105' : '',
+                        'hover:scale-105 hover:border-gray-400 hover:shadow-md',
+                        houseParts[selectedPart] === color.value ? 'ring-2 ring-blue-500 ring-offset-1 scale-105' : '',
                       ]"
                       :style="{ backgroundColor: color.value, borderColor: color.value === '#ffffff' ? '#e5e7eb' : 'transparent' }"
                       :title="color.name"
                     >
                       <!-- Enhanced checkmark with animation -->
                       <div 
-                        v-if="houseParts[selectedPart] === color.value && selectedPart"
+                        v-if="houseParts[selectedPart] === color.value"
                         class="absolute inset-0 flex items-center justify-center"
                       >
                         <svg class="w-3 h-3 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20">
@@ -311,38 +305,8 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                
-                <!-- Enhanced saved schemes section with better mobile layout -->
-                <div v-if="savedSchemes.length > 0" class="mb-4">
-                  <h4 class="text-xs font-medium text-gray-700 mb-2 flex items-center">
-                    <svg class="w-3 h-3 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"/>
-                    </svg>
-                    Saved Schemes
-                  </h4>
-                  <div class="space-y-1 max-h-32 overflow-y-auto custom-scrollbar">
-                    <div 
-                      v-for="(scheme, index) in savedSchemes" 
-                      :key="index"
-                      class="flex items-center justify-between p-2 bg-white rounded-lg border hover:shadow-sm transition-all duration-200 group"
-                    >
-                      <button 
-                        @click="loadScheme(scheme)"
-                        class="flex-1 text-left hover:text-indigo-600 transition-colors text-xs font-medium"
-                      >
-                        {{ scheme.name }}
-                      </button>
-                      <button 
-                        @click="deleteScheme(index)"
-                        class="text-red-400 hover:text-red-600 ml-2 p-1 rounded hover:bg-red-50 transition-all duration-200"
-                        title="Delete scheme"
-                      >
-                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                        </svg>
-                      </button>
-                    </div>
+                  <div v-else class="text-xs text-gray-500 text-center py-4">
+                    Select a house part to view recommended colors
                   </div>
                 </div>
                 
@@ -394,7 +358,6 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const selectedPart = ref(null)
-const savedSchemes = ref([])
 const isMobile = ref(false)
 
 const checkMobile = () => {
@@ -476,39 +439,145 @@ const colorPresets = ref([
   }
 ])
 
-const colorPalette = ref([
-  // Neutrals
-  { name: 'White', value: '#ffffff' },
-  { name: 'Cream', value: '#f5f5dc' },
-  { name: 'Light Gray', value: '#d3d3d3' },
-  { name: 'Dark Gray', value: '#696969' },
-  // Earth tones
-  { name: 'Beige', value: '#f5f5dc' },
-  { name: 'Light Brown', value: '#deb887' },
-  { name: 'Brown', value: '#8b4513' },
-  { name: 'Dark Brown', value: '#654321' },
-  // Blues
-  { name: 'Light Blue', value: '#add8e6' },
-  { name: 'Sky Blue', value: '#87ceeb' },
-  { name: 'Navy Blue', value: '#000080' },
-  { name: 'Steel Blue', value: '#4682B4' },
-  // Greens
-  { name: 'Light Green', value: '#90ee90' },
-  { name: 'Sage Green', value: '#9caf88' },
-  { name: 'Forest Green', value: '#228b22' },
-  { name: 'Olive Green', value: '#808000' },
-  // Warm colors
-  { name: 'Light Yellow', value: '#ffffe0' },
-  { name: 'Yellow', value: '#ffff00' },
-  { name: 'Orange', value: '#ffa500' },
-  { name: 'Red', value: '#ff0000' },
-  // Others
-  { name: 'Light Pink', value: '#ffb6c1' },
-  { name: 'Purple', value: '#800080' },
-  { name: 'Maroon', value: '#800000' },
-  { name: 'Black', value: '#000000' }
-]) 
-
+const colorsByPart = ref({
+  mainWalls: [
+    { name: 'White', value: '#ffffff' },
+    { name: 'Cream', value: '#f5f5dc' },
+    { name: 'Off-White', value: '#f0f0f0' },
+    { name: 'Ivory', value: '#fffff0' },
+    { name: 'Beige', value: '#f5f5dc' },
+    { name: 'Light Tan', value: '#d2b48c' },
+    { name: 'Tan', value: '#d2b48c' },
+    { name: 'Light Gray', value: '#d3d3d3' },
+    { name: 'Gray', value: '#a9a9a9' },
+    { name: 'Dark Gray', value: '#696969' },
+    { name: 'Charcoal', value: '#36454f' },
+    { name: 'Light Yellow', value: '#ffffe0' },
+    { name: 'Pale Yellow', value: '#fffacd' },
+    { name: 'Light Peach', value: '#ffdab9' },
+    { name: 'Peach', value: '#ffdab9' },
+    { name: 'Light Pink', value: '#ffe4e1' },
+    { name: 'Blush', value: '#ffb6c1' },
+    { name: 'Light Blue', value: '#add8e6' },
+    { name: 'Pale Blue', value: '#b0e0e6' },
+    { name: 'Light Green', value: '#90ee90' },
+    { name: 'Sage Green', value: '#9caf88' },
+    { name: 'Pale Green', value: '#98fb98' },
+    { name: 'Mint', value: '#98ff98' },
+    { name: 'Light Lavender', value: '#e6e6fa' },
+    { name: 'Lavender', value: '#e6e6fa' },
+  ],
+  roof: [
+    { name: 'Dark Brown', value: '#654321' },
+    { name: 'Brown', value: '#8b4513' },
+    { name: 'Light Brown', value: '#deb887' },
+    { name: 'Charcoal', value: '#36454f' },
+    { name: 'Dark Gray', value: '#696969' },
+    { name: 'Gray', value: '#a9a9a9' },
+    { name: 'Slate Gray', value: '#708090' },
+    { name: 'Steel Blue', value: '#4682b4' },
+    { name: 'Navy Blue', value: '#000080' },
+    { name: 'Dark Blue', value: '#00008b' },
+    { name: 'Black', value: '#000000' },
+    { name: 'Dark Red', value: '#8b0000' },
+    { name: 'Maroon', value: '#800000' },
+    { name: 'Burgundy', value: '#800020' },
+    { name: 'Dark Green', value: '#013220' },
+    { name: 'Forest Green', value: '#228b22' },
+    { name: 'Olive', value: '#808000' },
+    { name: 'Terracotta', value: '#cd5c5c' },
+    { name: 'Rust', value: '#b7410e' },
+    { name: 'Copper', value: '#b87333' },
+  ],
+  windows: [
+    { name: 'White', value: '#ffffff' },
+    { name: 'Off-White', value: '#f0f0f0' },
+    { name: 'Light Blue', value: '#add8e6' },
+    { name: 'Sky Blue', value: '#87ceeb' },
+    { name: 'Pale Blue', value: '#b0e0e6' },
+    { name: 'Steel Blue', value: '#4682b4' },
+    { name: 'Navy Blue', value: '#000080' },
+    { name: 'Dark Blue', value: '#00008b' },
+    { name: 'Gray', value: '#a9a9a9' },
+    { name: 'Dark Gray', value: '#696969' },
+    { name: 'Charcoal', value: '#36454f' },
+    { name: 'Black', value: '#000000' },
+    { name: 'Light Gray', value: '#d3d3d3' },
+    { name: 'Smoke Gray', value: '#708090' },
+    { name: 'Teal', value: '#008080' },
+    { name: 'Light Teal', value: '#afeeee' },
+    { name: 'Cyan', value: '#00ffff' },
+    { name: 'Light Cyan', value: '#e0ffff' },
+    { name: 'Cream', value: '#f5f5dc' },
+    { name: 'Beige', value: '#f5f5dc' },
+  ],
+  door: [
+    { name: 'Dark Brown', value: '#654321' },
+    { name: 'Brown', value: '#8b4513' },
+    { name: 'Light Brown', value: '#deb887' },
+    { name: 'Black', value: '#000000' },
+    { name: 'Dark Gray', value: '#696969' },
+    { name: 'Charcoal', value: '#36454f' },
+    { name: 'Navy Blue', value: '#000080' },
+    { name: 'Dark Blue', value: '#00008b' },
+    { name: 'Dark Green', value: '#013220' },
+    { name: 'Forest Green', value: '#228b22' },
+    { name: 'Dark Red', value: '#8b0000' },
+    { name: 'Maroon', value: '#800000' },
+    { name: 'Burgundy', value: '#800020' },
+    { name: 'Red', value: '#ff0000' },
+    { name: 'Crimson', value: '#dc143c' },
+    { name: 'Rust', value: '#b7410e' },
+    { name: 'Copper', value: '#b87333' },
+    { name: 'Bronze', value: '#cd7f32' },
+    { name: 'Gold', value: '#ffd700' },
+    { name: 'Olive', value: '#808000' },
+  ],
+  trim: [
+    { name: 'White', value: '#ffffff' },
+    { name: 'Off-White', value: '#f0f0f0' },
+    { name: 'Cream', value: '#f5f5dc' },
+    { name: 'Ivory', value: '#fffff0' },
+    { name: 'Light Gray', value: '#d3d3d3' },
+    { name: 'Gray', value: '#a9a9a9' },
+    { name: 'Dark Gray', value: '#696969' },
+    { name: 'Charcoal', value: '#36454f' },
+    { name: 'Black', value: '#000000' },
+    { name: 'Light Tan', value: '#d2b48c' },
+    { name: 'Tan', value: '#d2b48c' },
+    { name: 'Beige', value: '#f5f5dc' },
+    { name: 'Light Brown', value: '#deb887' },
+    { name: 'Brown', value: '#8b4513' },
+    { name: 'Gold', value: '#ffd700' },
+    { name: 'Silver', value: '#c0c0c0' },
+    { name: 'Pale Yellow', value: '#fffacd' },
+    { name: 'Light Peach', value: '#ffdab9' },
+    { name: 'Pale Green', value: '#98fb98' },
+    { name: 'Light Blue', value: '#add8e6' },
+  ],
+  foundation: [
+    { name: 'Gray', value: '#a9a9a9' },
+    { name: 'Dark Gray', value: '#696969' },
+    { name: 'Charcoal', value: '#36454f' },
+    { name: 'Light Gray', value: '#d3d3d3' },
+    { name: 'Slate Gray', value: '#708090' },
+    { name: 'Black', value: '#000000' },
+    { name: 'Brown', value: '#8b4513' },
+    { name: 'Dark Brown', value: '#654321' },
+    { name: 'Tan', value: '#d2b48c' },
+    { name: 'Beige', value: '#f5f5dc' },
+    { name: 'Stone', value: '#928e85' },
+    { name: 'Concrete', value: '#a0a0a0' },
+    { name: 'Brick Red', value: '#cb4154' },
+    { name: 'Rust', value: '#b7410e' },
+    { name: 'Terracotta', value: '#cd5c5c' },
+    { name: 'Dark Red', value: '#8b0000' },
+    { name: 'Olive', value: '#808000' },
+    { name: 'Dark Green', value: '#013220' },
+    { name: 'Navy Blue', value: '#000080' },
+    { name: 'Charcoal Blue', value: '#36454f' },
+  ]
+})
 
 const selectPart = (partName) => {
   selectedPart.value = partName
@@ -520,6 +589,10 @@ const applyColor = (color) => {
   }
 }
 
+const getColorsForPart = (partName) => {
+  return colorsByPart.value[partName] || []
+}
+
 const resetColors = () => {
   houseParts.value = { ...defaultColors }
   selectedPart.value = null
@@ -528,27 +601,6 @@ const resetColors = () => {
 const applyPreset = (preset) => {
   houseParts.value = { ...preset.colors }
   selectedPart.value = null
-}
-
-const saveCurrentScheme = () => {
-  const schemeName = prompt('Enter a name for this color scheme:')
-  if (schemeName && schemeName.trim()) {
-    savedSchemes.value.push({
-      name: schemeName.trim(),
-      colors: { ...houseParts.value }
-    })
-  }
-}
-
-const loadScheme = (scheme) => {
-  houseParts.value = { ...scheme.colors }
-  selectedPart.value = null
-}
-
-const deleteScheme = (index) => {
-  if (confirm('Are you sure you want to delete this color scheme?')) {
-    savedSchemes.value.splice(index, 1)
-  }
 }
 </script>
 

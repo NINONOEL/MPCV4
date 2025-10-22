@@ -490,11 +490,11 @@
             </div>
             <div>
               <h3 class="text-sm font-bold text-neutral-900 mb-1.5">Visit Our Store</h3>
-              <p class="text-neutral-600 mb-0.5 text-xs">123 Paint Street, Barcelona District</p>
-              <p class="text-neutral-600 mb-2 text-xs">Manila, Philippines 1000</p>
+              <p class="text-neutral-600 mb-0.5 text-xs">Brgy. Masipit, Calapan City</p>
+              <p class="text-neutral-600 mb-2 text-xs">Oriental Mindoto, Philippines 5200</p>
               <div class="space-y-0.5 text-xs">
-                <p class="text-neutral-500">Mon-Sat: 8:00 AM - 6:00 PM</p>
-                <p class="text-neutral-500">Sunday: 9:00 AM - 5:00 PM</p>
+                <p class="text-neutral-500">Mon-Sat: 7:00 AM - 5:00 PM</p>
+                <p class="text-neutral-500">Sunday: 7:00 AM - 11:00 AM</p>
               </div>
             </div>
           </div>
@@ -507,8 +507,7 @@
             </div>
             <div>
               <h3 class="text-sm font-bold text-neutral-900 mb-1.5">Call Us</h3>
-              <p class="text-neutral-600 mb-0.5 text-xs">Landline: +63 2 8123 4567</p>
-              <p class="text-neutral-600 mb-1 text-xs">Mobile: +63 917 123 4567</p>
+              <p class="text-neutral-600 mb-1 text-xs">Mobile: 0906 149 2503</p>
               <p class="text-neutral-500 text-xs mt-1.5">Available during store hours</p>
             </div>
           </div>
@@ -520,9 +519,9 @@
               <MailIcon class="h-4.5 w-4.5 text-white" />
             </div>
             <div>
-              <h3 class="text-sm font-bold text-neutral-900 mb-1.5">Email Us</h3>
-              <p class="text-neutral-600 mb-0.5 text-xs">info@barcelonapaint.com</p>
-              <p class="text-neutral-600 mb-1 text-xs">quotes@barcelonapaint.com</p>
+              <h3 class="text-sm font-bold text-neutral-900 mb-1.5">For Inquires</h3>
+              <p class="text-neutral-600 mb-0.5 text-xs">Facebook Page: BARCELONA PAINT CENTER</p>
+              <p class="text-neutral-600 mb-1 text-xs">Facebook Messenger: Eloise Barcelona or Marvin Barcelona</p>
               <p class="text-neutral-500 text-xs mt-1.5">Response within 24 hours</p>
             </div>
           </div>
