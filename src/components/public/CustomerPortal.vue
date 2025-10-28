@@ -8,7 +8,7 @@
       <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3">
         <div class="flex items-center justify-between">
           <!-- Logo and text - responsive sizing -->
-          <div class="flex items-center space-x-1.5 sm:space-x-2 cursor-pointer hover:opacity-80 transition-opacity min-w-0" @click="() => router.push({ name: 'CustomerPortalDashboard' })">
+          <div class="flex items-center space-x-1.5 sm:space-x-2 cursor-pointer hover:opacity-80 transition-opacity min-w-0" @click="() => router.push({ name: 'CustomerPortal' })">
             <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-red-500 via-red-600 to-orange-500 rounded-lg sm:rounded-xl flex items-center justify-center shadow-md flex-shrink-0">
               <Paintbrush2 class="h-4 w-4 sm:h-5 sm:w-5 text-white" />
             </div>

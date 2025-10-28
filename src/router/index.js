@@ -165,6 +165,12 @@ const routes = [
     beforeEnter: requireCustomer,
   },
   {
+    path: "/customer/portal/dashboard",
+    name: "CustomerPortalDashboard",
+    component: CustomerPortal,
+    beforeEnter: requireCustomer,
+  },
+  {
     path: "/customer/portal/products",
     name: "CustomerPortalProducts",
     component: Products,

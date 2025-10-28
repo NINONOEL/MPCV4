@@ -3,7 +3,7 @@
   <div class="bg-white/80 backdrop-blur-sm border-b border-orange-100 sticky top-0 z-20">
     <div class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3">
       <button
-        @click="$router.push({ name: 'CustomerPortal' })"
+        @click="goBack"
         class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg transition-colors duration-200"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -356,6 +356,12 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const goBack = () => {
+  router.push({ name: 'CustomerPortal' })
+}
 
 const selectedPart = ref(null)
 const isMobile = ref(false)

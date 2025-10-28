@@ -169,6 +169,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { 
   collection, 
   query, 
@@ -210,6 +211,8 @@ const categoryOptions = {
 // Firebase listener cleanup
 let unsubscribe = null
 
+const router = useRouter()
+
 // Computed properties
 const availableProducts = computed(() => {
   return products.value.filter(product => product.stockLevel > 0)
@@ -243,7 +246,7 @@ const fetchProducts = async () => {
     error.value = null
     
     if (!db) {
-      throw new Error('Database not initialized')
+      throw new Error('Database not initialized. Please refresh the page.')
     }
 
     const productsRef = collection(db, 'products')
@@ -254,7 +257,7 @@ const fetchProducts = async () => {
       unsubscribe()
     }
 
-    // Set up real-time listener
+    // Set up real-time listener with better error handling
     unsubscribe = onSnapshot(
       q,
       (snapshot) => {
@@ -275,17 +278,17 @@ const fetchProducts = async () => {
         })
         
         loading.value = false
-        console.log('Products loaded:', products.value.length)
+        console.log('[v0] Products loaded successfully:', products.value.length)
       },
       (err) => {
-        console.error('Error fetching products:', err)
-        error.value = 'Failed to load products. Please try again.'
+        console.error('[v0] Error fetching products:', err)
+        error.value = 'Failed to load products. Please check your connection and try again.'
         loading.value = false
       }
     )
   } catch (err) {
-    console.error('Error setting up products listener:', err)
-    error.value = 'Database connection failed. Please refresh the page.'
+    console.error('[v0] Error setting up products listener:', err)
+    error.value = err.message || 'Database connection failed. Please refresh the page.'
     loading.value = false
   }
 }

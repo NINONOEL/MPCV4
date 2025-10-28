@@ -342,29 +342,13 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 // CHANGE: Added useRouter for navigation
 import { useRouter } from 'vue-router'
-import {
-  PaletteIcon,
-  SparklesIcon,
-  EyeIcon,
-  HistoryIcon,
-  SearchIcon,
-  PlusIcon,
-  XIcon,
-  DownloadIcon,
-  Trash2Icon,
-  SaveIcon,
-  LightbulbIcon,
-  BookOpenIcon,
-  ChevronRightIcon,
-  ChevronDown,
-  // CHANGE: Imported ChevronLeft icon
-  ChevronLeft,
-  X,
-  Palette,
-  Upload
-} from 'lucide-vue-next'
+import ChevronLeft from '~icons/heroicons/chevron-left-solid'
+import ChevronDown from '~icons/heroicons/chevron-down-solid'
+import ChevronRightIcon from '~icons/heroicons/chevron-right-solid'
+import Palette from '~icons/heroicons/paint-brush-solid'
+import X from '~icons/heroicons/x-mark-solid'
+import PlusIcon from '~icons/heroicons/plus-small-solid'
 
-// CHANGE: Added goBack function
 const router = useRouter()
 const goBack = () => {
   router.push({ name: 'CustomerPortal' })
@@ -902,13 +886,13 @@ const rgbToHsl = (r, g, b) => {
   const max = Math.max(r, g, b)
   const min = Math.min(r, g, b)
   let h, s, l = (max + min) / 2
-  
+
   if (max === min) {
     h = s = 0 // achromatic
   } else {
     const d = max - min
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
-    
+
     switch (max) {
       case r: h = (g - b) / d + (g < b ? 6 : 0); break
       case g: h = (b - r) / d + 2; break
@@ -916,7 +900,7 @@ const rgbToHsl = (r, g, b) => {
     }
     h /= 6
   }
-  
+
   return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) }
 }
 
@@ -924,7 +908,7 @@ const hslToRgb = (h, s, l) => {
   h /= 360
   s /= 100
   l /= 100
-  
+
   const hue2rgb = (p, q, t) => {
     if (t < 0) t += 1
     if (t > 1) t -= 1
@@ -933,9 +917,9 @@ const hslToRgb = (h, s, l) => {
     if (t < 2/3) return p + (q - p) * (2/3 - t) * 6
     return p
   }
-  
+
   let r, g, b
-  
+
   if (s === 0) {
     r = g = b = l
   } else {
@@ -945,7 +929,7 @@ const hslToRgb = (h, s, l) => {
     g = hue2rgb(p, q, h)
     b = hue2rgb(p, q, h - 1/3)
   }
-  
+
   return {
     r: Math.round(r * 255),
     g: Math.round(g * 255),
@@ -957,9 +941,9 @@ const hsvToRgb = (h, s, v) => {
   const c = v * s
   const x = c * (1 - Math.abs((h / 60) % 2 - 1))
   const m = v - c
-  
+
   let r, g, b
-  
+
   if (h >= 0 && h < 60) {
     r = c; g = x; b = 0
   } else if (h >= 60 && h < 120) {
@@ -973,7 +957,7 @@ const hsvToRgb = (h, s, v) => {
   } else {
     r = c; g = 0; b = x
   }
-  
+
   return {
     r: Math.round((r + m) * 255),
     g: Math.round((g + m) * 255),
@@ -1018,35 +1002,34 @@ savedMixtures.value = new Proxy(savedMixtures.value, {
 
 const drawColorWheel = () => {
   if (!colorCanvas.value) return
-  
   const canvas = colorCanvas.value
   const ctx = canvas.getContext('2d')
   const width = canvas.width
   const height = canvas.height
-  
+
   // Clear canvas first
   ctx.clearRect(0, 0, width, height)
-  
+
   // Create vibrant HSV color wheel with better saturation gradient
   const imageData = ctx.createImageData(width, height)
   const data = imageData.data
-  
+
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       const hue = (x / width) * 360
       const saturation = (y / height) // Full saturation range from 0 to 1
       const value = 1 // Maximum brightness for vibrant colors
-      
+
       const rgb = hsvToRgb(hue, saturation, value)
       const index = (y * width + x) * 4
-      
+
       data[index] = rgb.r     // Red
       data[index + 1] = rgb.g // Green
       data[index + 2] = rgb.b // Blue
       data[index + 3] = 255   // Alpha
     }
   }
-  
+
   ctx.putImageData(imageData, 0, 0)
 }
 
@@ -1100,7 +1083,7 @@ const processFile = (file) => {
     alert('File size must be less than 10MB')
     return
   }
-  
+
   const reader = new FileReader()
   reader.onload = (e) => {
     uploadedImage.value = e.target?.result
@@ -1111,7 +1094,7 @@ const processFile = (file) => {
 
 const analyzeImage = () => {
   if (!uploadedImage.value) return
-  
+
   const img = new Image()
   img.onload = () => {
     const canvas = document.createElement('canvas')
@@ -1119,22 +1102,22 @@ const analyzeImage = () => {
     canvas.height = img.height
     const ctx = canvas.getContext('2d')
     ctx.drawImage(img, 0, 0)
-    
+
     const imageData = ctx.getImageData(0, 0, img.width, img.height)
-    
+
     isAnalyzing.value = true
     analysisProgress.value = 0
-    
+
     // Simulate analysis progress
     const interval = setInterval(() => {
       analysisProgress.value += 10
       if (analysisProgress.value >= 100) {
         clearInterval(interval)
-        
+
         // Extract dominant colors
         const colors = extractDominantColors(imageData)
         analysisResults.value = colors
-        
+
         isAnalyzing.value = false
         analysisProgress.value = 0
       }
@@ -1159,21 +1142,21 @@ const addAnalyzedColor = (result) => {
 const getColorName = (hex) => {
   const rgb = hexToRgb(hex)
   if (!rgb) return 'Unknown Color'
-  
+
   const { r, g, b } = rgb
   const [h, s, l] = rgbToHsl(r, g, b)
-  
+
   // Enhanced color database with more precise ranges
   const colorNames = [
     // Reds - More specific ranges
     { hue: [355, 360], sat: [80, 100], light: [45, 65], name: 'True Red' },
     { hue: [0, 5], sat: [80, 100], light: [45, 65], name: 'True Red' },
-    { hue: [350, 360], sat: [60, 90], light: [35, 55], name: 'Crimson' },
+    { hue: [350, 360], sat: [60, 70], light: [35, 55], name: 'Crimson' },
     { hue: [0, 15], sat: [70, 100], light: [35, 55], name: 'Fire Red' },
-    { hue: [345, 360], sat: [40, 70], light: [65, 85], name: 'Rose' },
+    { hue: [345, 360], sat: [40, 60], light: [65, 85], name: 'Rose' },
     { hue: [0, 15], sat: [60, 90], light: [75, 95], name: 'Light Pink' },
     { hue: [0, 15], sat: [60, 90], light: [25, 45], name: 'Dark Red' },
-    
+
     // Pinks/Magentas - More precise
     { hue: [320, 340], sat: [80, 100], light: [50, 70], name: 'Hot Pink' },
     { hue: [300, 320], sat: [75, 100], light: [45, 65], name: 'Magenta' },
@@ -1183,15 +1166,15 @@ const getColorName = (hex) => {
     { hue: [280, 300], sat: [40, 70], light: [70, 90], name: 'Lavender Pink' },
     { hue: [15, 35], sat: [70, 100], light: [70, 90], name: 'Coral' },
     { hue: [340, 360], sat: [30, 60], light: [80, 95], name: 'Baby Pink' },
-    
+
     // Purples - Enhanced ranges
     { hue: [270, 290], sat: [70, 100], light: [35, 55], name: 'Royal Purple' },
     { hue: [250, 270], sat: [60, 90], light: [40, 60], name: 'Purple' },
     { hue: [240, 260], sat: [40, 70], light: [70, 90], name: 'Lavender' },
-    { hue: [280, 300], sat: [30, 60], light: [50, 70], name: 'Plum' },
+    { hue: [280, 300], sat: [30, 60], light: [60, 80], name: 'Plum' },
     { hue: [260, 280], sat: [80, 100], light: [25, 45], name: 'Deep Purple' },
     { hue: [290, 310], sat: [40, 70], light: [60, 80], name: 'Mauve' },
-    
+
     // Blues - More specific
     { hue: [210, 230], sat: [80, 100], light: [45, 65], name: 'Royal Blue' },
     { hue: [190, 210], sat: [70, 100], light: [50, 70], name: 'Sky Blue' },
@@ -1200,14 +1183,14 @@ const getColorName = (hex) => {
     { hue: [230, 250], sat: [70, 100], light: [40, 60], name: 'Blue' },
     { hue: [200, 240], sat: [30, 60], light: [80, 95], name: 'Powder Blue' },
     { hue: [190, 210], sat: [90, 100], light: [30, 50], name: 'Ocean Blue' },
-    
+
     // Cyans/Teals - Refined
     { hue: [170, 190], sat: [70, 100], light: [45, 65], name: 'Teal' },
     { hue: [180, 200], sat: [80, 100], light: [50, 70], name: 'Turquoise' },
     { hue: [160, 180], sat: [60, 90], light: [60, 80], name: 'Aqua' },
     { hue: [150, 170], sat: [50, 80], light: [40, 60], name: 'Dark Teal' },
     { hue: [175, 195], sat: [40, 70], light: [75, 95], name: 'Light Cyan' },
-    
+
     // Greens - More varieties
     { hue: [120, 140], sat: [70, 100], light: [35, 55], name: 'Forest Green' },
     { hue: [100, 120], sat: [80, 100], light: [40, 60], name: 'Emerald Green' },
@@ -1216,21 +1199,21 @@ const getColorName = (hex) => {
     { hue: [140, 160], sat: [30, 60], light: [50, 70], name: 'Sage Green' },
     { hue: [90, 110], sat: [40, 70], light: [75, 95], name: 'Light Green' },
     { hue: [120, 140], sat: [80, 100], light: [20, 40], name: 'Dark Green' },
-    
+
     // Yellows - Better precision
     { hue: [50, 65], sat: [80, 100], light: [70, 90], name: 'Yellow' },
     { hue: [45, 55], sat: [70, 100], light: [50, 70], name: 'Golden Yellow' },
     { hue: [55, 70], sat: [40, 70], light: [80, 95], name: 'Cream' },
     { hue: [40, 50], sat: [60, 90], light: [60, 80], name: 'Gold' },
     { hue: [65, 80], sat: [50, 80], light: [70, 90], name: 'Light Yellow' },
-    
+
     // Oranges - Enhanced
     { hue: [25, 40], sat: [80, 100], light: [50, 70], name: 'Orange' },
     { hue: [15, 30], sat: [70, 100], light: [60, 80], name: 'Peach' },
     { hue: [20, 35], sat: [60, 90], light: [35, 55], name: 'Burnt Orange' },
     { hue: [30, 45], sat: [50, 80], light: [75, 95], name: 'Light Orange' },
     { hue: [10, 25], sat: [90, 100], light: [40, 60], name: 'Red Orange' },
-    
+
     // Browns - More specific
     { hue: [25, 45], sat: [40, 80], light: [25, 45], name: 'Chocolate Brown' },
     { hue: [30, 50], sat: [50, 90], light: [35, 55], name: 'Brown' },
@@ -1238,21 +1221,21 @@ const getColorName = (hex) => {
     { hue: [20, 40], sat: [60, 100], light: [15, 35], name: 'Dark Brown' },
     { hue: [40, 60], sat: [20, 50], light: [70, 90], name: 'Beige' },
   ]
-  
+
   // Find the best matching color name with weighted scoring
   let bestMatch = null
   let bestScore = 0
-  
+
   for (const color of colorNames) {
     let score = 0
-    
+
     // Hue matching with wraparound handling
-    const hueMatch = (h >= color.hue[0] && h <= color.hue[1]) || 
+    const hueMatch = (h >= color.hue[0] && h <= color.hue[1]) ||
                      (color.hue[0] > color.hue[1] && (h >= color.hue[0] || h <= color.hue[1]))
-    
+
     if (hueMatch) {
       score += 40 // Hue is most important
-      
+
       // Saturation matching
       if (s >= color.sat[0] && s <= color.sat[1]) {
         score += 30
@@ -1261,7 +1244,7 @@ const getColorName = (hex) => {
         const satDistance = Math.min(Math.abs(s - color.sat[0]), Math.abs(s - color.sat[1]))
         score += Math.max(0, 30 - satDistance / 2)
       }
-      
+
       // Lightness matching
       if (l >= color.light[0] && l <= color.light[1]) {
         score += 30
@@ -1270,18 +1253,18 @@ const getColorName = (hex) => {
         const lightDistance = Math.min(Math.abs(l - color.light[0]), Math.abs(l - color.light[1]))
         score += Math.max(0, 30 - lightDistance / 2)
       }
-      
+
       if (score > bestScore) {
         bestScore = score
         bestMatch = color.name
       }
     }
   }
-  
+
   if (bestMatch && bestScore > 60) {
     return bestMatch
   }
-  
+
   // Enhanced fallback for grays and neutrals
   if (s < 15) {
     if (l < 15) return 'Black'
@@ -1292,10 +1275,10 @@ const getColorName = (hex) => {
     if (l < 95) return 'Off White'
     return 'White'
   }
-  
+
   // Better generic fallback with saturation consideration
   const intensity = s > 50 ? 'Bright ' : s > 25 ? '' : 'Muted '
-  
+
   if (h < 15 || h >= 345) return intensity + 'Red'
   if (h < 45) return intensity + 'Orange'
   if (h < 75) return intensity + 'Yellow'
@@ -1311,19 +1294,19 @@ const extractDominantColors = (imageData) => {
   const width = imageData.width
   const height = imageData.height
   const colorMap = new Map()
-  
+
   // Multi-stage object detection
   const centerX = width / 2
   const centerY = height / 2
   const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY)
-  
+
   // First pass: Identify potential background colors from edges
   const edgeColors = new Set()
   const edgeThickness = Math.min(width, height) * 0.05 // 5% of image size
-  
+
   for (let y = 0; y < height; y += 3) {
     for (let x = 0; x < width; x += 3) {
-      if (x < edgeThickness || x > width - edgeThickness || 
+      if (x < edgeThickness || x > width - edgeThickness ||
           y < edgeThickness || y > height - edgeThickness) {
         const i = (y * width + x) * 4
         const r = Math.round(data[i] / 20) * 20
@@ -1333,7 +1316,7 @@ const extractDominantColors = (imageData) => {
       }
     }
   }
-  
+
   // Second pass: Extract colors with advanced weighting
   for (let y = 0; y < height; y += 2) {
     for (let x = 0; x < width; x += 2) {
@@ -1342,62 +1325,62 @@ const extractDominantColors = (imageData) => {
       const g = data[i + 1]
       const b = data[i + 2]
       const a = data[i + 3]
-      
+
       if (a < 128) continue // Skip transparent pixels
-      
+
       // Skip very dark shadows and bright highlights
       const brightness = (r + g + b) / 3
       if (brightness < 25 || brightness > 245) continue
-      
+
       // Calculate multiple weighting factors
       const dx = x - centerX
       const dy = y - centerY
       const distance = Math.sqrt(dx * dx + dy * dy)
-      
+
       // Center weighting (objects usually in center)
       const centerWeight = Math.max(0.2, 1 - (distance / maxDistance))
-      
+
       // Color vibrancy weighting (prefer colorful objects over dull backgrounds)
       const [h, s, l] = rgbToHsl(r, g, b)
       const vibrancyWeight = Math.max(0.3, s / 100)
-      
+
       // Background exclusion (avoid detected edge colors)
       const qr = Math.round(r / 20) * 20
       const qg = Math.round(g / 20) * 20
       const qb = Math.round(b / 20) * 20
       const isBackground = edgeColors.has(`${qr},${qg},${qb}`)
       const backgroundWeight = isBackground ? 0.1 : 1.0
-      
+
       // Final weighting
       const totalWeight = centerWeight * vibrancyWeight * backgroundWeight
-      
+
       // Better quantization for color accuracy
       const finalR = Math.round(r / 12) * 12
       const finalG = Math.round(g / 12) * 12
       const finalB = Math.round(b / 12) * 12
-      
+
       const key = `${finalR},${finalG},${finalB}`
       const current = colorMap.get(key) || { count: 0, r: finalR, g: finalG, b: finalB }
       current.count += totalWeight
       colorMap.set(key, current)
     }
   }
-  
+
   // Filter and sort colors
   const colors = Array.from(colorMap.values())
     .filter(color => color.count > 3) // Lower threshold for better detection
     .sort((a, b) => b.count - a.count)
     .slice(0, 6) // Top 6 most significant colors
-  
+
   if (colors.length === 0) return []
-  
+
   const totalCount = colors.reduce((sum, color) => sum + color.count, 0)
-  
+
   return colors.map(color => {
     const hex = `#${color.r.toString(16).padStart(2, '0')}${color.g.toString(16).padStart(2, '0')}${color.b.toString(16).padStart(2, '0')}`
     const percentage = Math.round((color.count / totalCount) * 100)
     const colorName = getColorName(hex)
-    
+
     return {
       hex,
       rgb: { r: color.r, g: color.g, b: color.b },

@@ -343,9 +343,9 @@ const sendWelcomeEmail = async (userEmail, userName) => {
     console.log('📧 Sending welcome email to:', userEmail)
     
     const emailData = {
-      service_id: 'service_barcelona_paint', // Replace with your EmailJS service ID
-      template_id: 'template_welcome', // Replace with your EmailJS template ID
-      user_id: 'your_emailjs_public_key', // Replace with your EmailJS public key
+      service_id: import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_barcelona_paint',
+      template_id: import.meta.env.VITE_EMAILJS_TEMPLATE_WELCOME || 'template_welcome',
+      user_id: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'your_emailjs_public_key',
       template_params: {
         to_email: userEmail,
         to_name: userName,
@@ -396,9 +396,9 @@ const sendWelcomeBackEmail = async (userEmail, userName) => {
     console.log('📧 Sending welcome back email to:', userEmail)
     
     const emailData = {
-      service_id: 'service_barcelona_paint', // Replace with your EmailJS service ID
-      template_id: 'template_welcome_back', // Replace with your EmailJS template ID
-      user_id: 'your_emailjs_public_key', // Replace with your EmailJS public key
+      service_id: import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_barcelona_paint',
+      template_id: import.meta.env.VITE_EMAILJS_TEMPLATE_WELCOME_BACK || 'template_welcome_back',
+      user_id: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'your_emailjs_public_key',
       template_params: {
         to_email: userEmail,
         to_name: userName,
@@ -576,6 +576,9 @@ const handleSocialLogin = async (provider) => {
   try {
     let result
     if (provider === 'google') {
+      googleProvider.setCustomParameters({
+        'prompt': 'select_account'
+      })
       result = await signInWithPopup(auth, googleProvider)
     }
     
@@ -640,13 +643,17 @@ const handleSocialLogin = async (provider) => {
     let message = `Failed to sign in with ${provider}. Please try again.`
     
     if (error.code === 'auth/popup-closed-by-user') {
-      message = 'Sign in was cancelled.'
+      message = 'Sign in was cancelled. Please try again.'
     } else if (error.code === 'auth/popup-blocked') {
-      message = 'Popup was blocked. Please allow popups and try again.'
+      message = 'Popup was blocked. Please allow popups in your browser settings and try again.'
     } else if (error.code === 'auth/network-request-failed') {
       message = 'Network error. Please check your internet connection.'
     } else if (error.code === 'auth/account-exists-with-different-credential') {
-      message = 'An account already exists with the same email address but different sign-in credentials.'
+      message = 'An account already exists with this email. Please use email/password login instead.'
+    } else if (error.code === 'auth/operation-not-allowed') {
+      message = 'Google sign-in is not enabled. Please contact support.'
+    } else if (error.code === 'auth/invalid-api-key') {
+      message = 'Configuration error. Please contact support.'
     }
     
     errorMessage.value = message

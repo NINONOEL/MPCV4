@@ -526,11 +526,10 @@ const sendWelcomeEmail = async (customerData) => {
   try {
     console.log('📧 Sending welcome email to:', customerData.email)
     
-    // Using EmailJS to send emails directly to customers
     const emailData = {
-      service_id: 'service_barcelona_paint',
-      template_id: 'template_welcome',
-      user_id: 'your_emailjs_public_key',
+      service_id: import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_barcelona_paint',
+      template_id: import.meta.env.VITE_EMAILJS_TEMPLATE_WELCOME || 'template_welcome',
+      user_id: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'your_emailjs_public_key',
       template_params: {
         to_email: customerData.email,
         to_name: `${customerData.firstName} ${customerData.lastName}`,
@@ -555,9 +554,8 @@ The Barcelona Paint Center Team`
       }
     }
     
-    console.log('📤 Sending email via EmailJS:', emailData)
+    console.log('📤 Sending email via EmailJS')
     
-    // Send email using EmailJS API
     const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
       method: 'POST',
       headers: {
@@ -783,6 +781,9 @@ const handleSocialSignup = async (provider) => {
   try {
     let result
     if (provider === 'google') {
+      googleProvider.setCustomParameters({
+        'prompt': 'select_account'
+      })
       result = await signInWithPopup(auth, googleProvider)
     }
     
@@ -836,11 +837,15 @@ const handleSocialSignup = async (provider) => {
     let message = `Failed to sign up with ${provider}. Please try again.`
     
     if (error.code === 'auth/popup-closed-by-user') {
-      message = 'Sign up was cancelled.'
+      message = 'Sign up was cancelled. Please try again.'
     } else if (error.code === 'auth/popup-blocked') {
-      message = 'Popup was blocked. Please allow popups and try again.'
+      message = 'Popup was blocked. Please allow popups in your browser settings and try again.'
     } else if (error.code === 'auth/network-request-failed') {
       message = 'Network error. Please check your internet connection.'
+    } else if (error.code === 'auth/operation-not-allowed') {
+      message = 'Google sign-in is not enabled. Please contact support.'
+    } else if (error.code === 'auth/invalid-api-key') {
+      message = 'Configuration error. Please contact support.'
     }
     
     errorMessage.value = message

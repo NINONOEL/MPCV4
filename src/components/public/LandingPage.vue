@@ -413,6 +413,7 @@
                   class="input-field-customer"
                   placeholder="Enter your first name"
                   required
+                  :disabled="isSubmitting"
                 />
               </div>
               <div class="space-y-1">
@@ -424,6 +425,7 @@
                   class="input-field-customer"
                   placeholder="Enter your last name"
                   required
+                  :disabled="isSubmitting"
                 />
               </div>
             </div>
@@ -437,6 +439,7 @@
                 class="input-field-customer"
                 placeholder="your.email@gmail.com"
                 required
+                :disabled="isSubmitting"
               />
             </div>
                       
@@ -447,6 +450,7 @@
                 v-model="form.service"
                 class="input-field-customer"
                 required
+                :disabled="isSubmitting"
               >
                 <option value="">Choose your service</option>
                 <option value="color-matching">Custom Color Matching</option>
@@ -463,15 +467,19 @@
                 v-model="form.message"
                 class="input-field-customer"
                 placeholder="Please describe your project, the colors you are considering, or any questions you have."
+                :disabled="isSubmitting"
               ></textarea>
             </div>
                       
             <button 
               type="submit"
-              class="w-full btn-customer-primary text-xs py-2.5 shadow-customer-lg hover:shadow-customer-xl"
+              class="w-full btn-customer-primary text-xs py-2.5 shadow-customer-lg hover:shadow-customer-xl disabled:opacity-50 disabled:cursor-not-allowed"
+              :disabled="isSubmitting"
             >
-              <SparklesIcon class="h-4 w-4 mr-1.5" />
-              Send Message & Get FREE Quote
+              <!-- Added loading state indicator -->
+              <SparklesIcon v-if="!isSubmitting" class="h-4 w-4 mr-1.5" />
+              <span v-if="isSubmitting" class="inline-block animate-spin mr-1.5">⏳</span>
+              {{ isSubmitting ? 'Sending...' : 'Send Message & Get FREE Quote' }}
             </button>
                       
             <div class="flex items-center justify-center space-x-1.5 text-xs">
@@ -633,8 +641,13 @@ const form = ref({
 // Add loading state for form submission
 const isSubmitting = ref(false)
 
-// Submit contact form handler
 const submitForm = async () => {
+  // Validate form before submission
+  if (!form.value.firstName.trim() || !form.value.lastName.trim() || !form.value.email.trim() || !form.value.service) {
+    alert('Please fill in all required fields.')
+    return
+  }
+
   isSubmitting.value = true
   try {
     const result = await quoteService.saveQuote(form.value)
@@ -649,12 +662,15 @@ const submitForm = async () => {
         message: ''
       }
       alert('Thank you for your message! We will contact you within 2 hours with a personalized quote and consultation.')
+      // Scroll back to top
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     } else {
-      alert('Error submitting form. Please try again.')
+      alert('Error submitting form. Please try again or contact us directly.')
+      console.error('[v0] Quote submission error:', result.error)
     }
   } catch (error) {
-    console.error('Error submitting form:', error)
-    alert('Error submitting form. Please try again.')
+    console.error('[v0] Form submission error:', error)
+    alert('Error submitting form. Please try again or contact us directly.')
   } finally {
     isSubmitting.value = false
   }
