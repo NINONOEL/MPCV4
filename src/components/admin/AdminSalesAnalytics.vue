@@ -15,78 +15,78 @@
             <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
           </div>
           <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <ShieldIcon class="h-3 w-3 mr-1" />
+            <Shield class="h-3 w-3 mr-1" />
             Admin Portal
           </div>
         </div>
 
         <!-- Navigation - Scrollable Area -->
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link 
-            to="/admin/dashboard" 
+          <router-link
+            to="/admin/dashboard"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
             :class="{ 'shadow-sm border border-blue-200 transform scale-105': $route.path === '/admin/dashboard' }"
           >
-            <LayoutDashboardIcon class="w-5 h-5" />
+            <LayoutDashboard class="w-5 h-5" />
             <span>Dashboard</span>
           </router-link>
 
-          <router-link 
-            to="/admin/staff" 
+          <router-link
+            to="/admin/staff"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
             :class="{ 'shadow-sm border border-green-200 transform scale-105': $route.path === '/admin/staff' }"
           >
-            <UsersIcon class="w-5 h-5" />
+            <Users class="w-5 h-5" />
             <span>Staff Management</span>
           </router-link>
 
-          <router-link 
-            to="/admin/inventory" 
+          <router-link
+            to="/admin/inventory"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
             :class="{ 'shadow-sm border border-purple-200 transform scale-105': $route.path === '/admin/inventory' }"
           >
-            <PackageIcon class="w-5 h-5" />
+            <Package class="w-5 h-5" />
             <span>Inventory</span>
           </router-link>
 
-          <router-link 
-            to="/admin/house-paint-recommender" 
+          <router-link
+            to="/admin/house-paint-recommender"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
             :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/admin/house-paint-recommender' }"
           >
-            <HomeIcon class="w-5 h-5" />
+            <Home class="w-5 h-5" />
             <span>Paint Recommender</span>
           </router-link>
 
-          <router-link 
-            to="/admin/paint-mixing" 
+          <router-link
+            to="/admin/paint-mixing"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
             :class="{ 'shadow-sm border border-pink-200 transform scale-105': $route.path === '/admin/paint-mixing' }"
           >
-            <PaletteIcon class="w-5 h-5" />
+            <Palette class="w-5 h-5" />
             <span>Paint Mixing</span>
           </router-link>
 
-          <router-link 
-            to="/admin/sales-analytics" 
+          <router-link
+            to="/admin/sales-analytics"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 shadow-sm border border-teal-200 transform scale-105"
             :class="{ 'hover:bg-teal-100 hover:text-teal-700': $route.path !== '/admin/sales-analytics' }"
           >
-            <TrendingUpIcon class="w-5 h-5" />
+            <TrendingUp class="w-5 h-5" />
             <span>Sales Analytics</span>
           </router-link>
 
           <router-link to="/admin/visualization" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 shadow-sm border border-indigo-200">
-            <BarChart3Icon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <BarChart3 class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Data Visualization</span>
           </router-link>
 
-          <router-link 
-            to="/admin/settings" 
+          <router-link
+            to="/admin/settings"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700"
             :class="{ 'shadow-sm border border-amber-200 transform scale-105': $route.path === '/admin/settings' }"
           >
-            <SettingsIcon class="w-5 h-5" />
+            <Settings class="w-5 h-5" />
             <span>Settings</span>
           </router-link>
 
@@ -98,18 +98,18 @@
         <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
-              <UserIcon class="w-5 h-5 text-white" />
+              <User class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
               <p class="text-xs text-gray-600 truncate">admin@example.com</p>
             </div>
-            <button 
+            <button
               @click="handleLogout"
               class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
               title="Logout"
             >
-              <LogOutIcon class="w-5 h-5" />
+              <LogOut class="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -117,24 +117,24 @@
 
       <!-- Mobile Sidebar Toggle -->
       <div class="fixed top-4 left-4 z-30 md:hidden">
-        <button 
+        <button
           @click="toggleMobileSidebar"
           class="p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg"
           aria-label="Toggle navigation menu"
         >
-          <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
-          <XIcon v-else class="w-6 h-6 text-gray-700" />
+          <Menu v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
+          <X v-else class="w-6 h-6 text-gray-700" />
         </button>
       </div>
 
       <!-- Mobile Sidebar -->
-      <div 
-        v-if="mobileSidebarOpen" 
+      <div
+        v-if="mobileSidebarOpen"
         class="fixed inset-0 bg-black/20 z-20 md:hidden"
         @click="toggleMobileSidebar"
       ></div>
 
-      <aside 
+      <aside
         v-if="mobileSidebarOpen"
         class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-20 md:hidden shadow-xl flex flex-col"
       >
@@ -144,99 +144,99 @@
             <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
           </div>
           <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <ShieldIcon class="h-3 w-3 mr-1" />
+            <Shield class="h-3 w-3 mr-1" />
             Admin Portal
           </div>
         </div>
 
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
           <!-- Mobile navigation links with same styling -->
-          <router-link 
-            to="/admin/dashboard" 
+          <router-link
+            to="/admin/dashboard"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50"
             :class="{ 'shadow-sm border border-blue-200': $route.path === '/admin/dashboard' }"
             @click="mobileSidebarOpen = false"
           >
-            <LayoutDashboardIcon class="w-5 h-5" />
+            <LayoutDashboard class="w-5 h-5" />
             <span>Dashboard</span>
           </router-link>
 
-          <router-link 
-            to="/admin/staff" 
+          <router-link
+            to="/admin/staff"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50"
             :class="{ 'shadow-sm border border-green-200': $route.path === '/admin/staff' }"
             @click="mobileSidebarOpen = false"
           >
-            <UsersIcon class="w-5 h-5" />
+            <Users class="w-5 h-5" />
             <span>Staff Management</span>
           </router-link>
 
-          <router-link 
-            to="/admin/inventory" 
+          <router-link
+            to="/admin/inventory"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50"
             :class="{ 'shadow-sm border border-purple-200': $route.path === '/admin/inventory' }"
             @click="mobileSidebarOpen = false"
           >
-            <PackageIcon class="w-5 h-5" />
+            <Package class="w-5 h-5" />
             <span>Inventory</span>
           </router-link>
 
-          <router-link 
-            to="/admin/house-paint-recommender" 
+          <router-link
+            to="/admin/house-paint-recommender"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50"
             :class="{ 'shadow-sm border border-orange-200': $route.path === '/admin/house-paint-recommender' }"
             @click="mobileSidebarOpen = false"
           >
-            <HomeIcon class="w-5 h-5" />
+            <Home class="w-5 h-5" />
             <span>House Paint Recommender</span>
           </router-link>
 
-          <router-link 
-            to="/admin/paint-mixing" 
+          <router-link
+            to="/admin/paint-mixing"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50"
             :class="{ 'shadow-sm border border-pink-200': $route.path === '/admin/paint-mixing' }"
             @click="mobileSidebarOpen = false"
           >
-            <PaletteIcon class="w-5 h-5" />
+            <Palette class="w-5 h-5" />
             <span>Paint Mixing</span>
           </router-link>
 
-          <router-link 
-            to="/admin/sales-analytics" 
+          <router-link
+            to="/admin/sales-analytics"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 shadow-sm border border-teal-200"
             @click="mobileSidebarOpen = false"
           >
-            <TrendingUpIcon class="w-5 h-5" />
+            <TrendingUp class="w-5 h-5" />
             <span>Sales Analytics</span>
           </router-link>
 
-          <router-link 
-            to="/admin/reports" 
+          <router-link
+            to="/admin/reports"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50"
             :class="{ 'shadow-sm border border-indigo-200': $route.path === '/admin/reports' }"
             @click="mobileSidebarOpen = false"
           >
-            <ClipboardIcon class="w-5 h-5" />
+            <Clipboard class="w-5 h-5" />
             <span>Reports</span>
           </router-link>
 
-          <router-link 
-            to="/admin/settings" 
+          <router-link
+            to="/admin/settings"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50"
             :class="{ 'shadow-sm border border-amber-200': $route.path === '/admin/settings' }"
             @click="mobileSidebarOpen = false"
           >
-            <SettingsIcon class="w-5 h-5" />
+            <Settings class="w-5 h-5" />
             <span>System Settings</span>
           </router-link>
 
-          <router-link 
-            to="/admin/security" 
+          <router-link
+            to="/admin/security"
             class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-red-600 bg-red-50"
             :class="{ 'shadow-sm border border-red-200': $route.path === '/admin/security' }"
             @click="mobileSidebarOpen = false"
           >
-            <ShieldIcon class="w-5 h-5" />
+            <Shield class="w-5 h-5" />
             <span>Security</span>
           </router-link>
 
@@ -248,17 +248,17 @@
         <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
-              <UserIcon class="w-5 h-5 text-white" />
+              <User class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
               <p class="text-xs text-gray-600 truncate">admin@example.com</p>
             </div>
-            <button 
+            <button
               @click="handleLogout"
               class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
             >
-              <LogOutIcon class="w-5 h-5" />
+              <LogOut class="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -275,14 +275,14 @@
             </div>
             <div class="flex items-center gap-4">
               <div class="hidden md:flex items-center gap-2 text-gray-700">
-                <CalendarIcon class="w-5 h-5 text-teal-500" />
+                <Calendar class="w-5 h-5 text-teal-500" />
                 <span>{{ currentDate }}</span>
               </div>
               <div class="hidden md:block h-6 w-px bg-gray-300"></div>
               <div class="flex items-center gap-3">
                 <span class="text-gray-900">Welcome, Admin</span>
                 <div class="relative">
-                  <BellIcon class="w-5 h-5 text-orange-500 cursor-pointer hover:text-orange-600" />
+                  <Bell class="w-5 h-5 text-orange-500 cursor-pointer hover:text-orange-600" />
                 </div>
               </div>
             </div>
@@ -298,33 +298,33 @@
                 @click="showAddSaleModal = true"
                 class="px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2 shadow-lg"
               >
-                <PlusIcon class="w-5 h-5" />
+                <Plus class="w-5 h-5" />
                 Add Sale
               </button>
-              
+
               <!-- Daily Report Button -->
               <button
                 @click="generateDailyReport"
                 class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2 shadow-lg"
               >
-                <ClipboardIcon class="w-5 h-5" />
+                <Clipboard class="w-5 h-5" />
                 Daily Report
               </button>
-              
+
               <!-- Delete All Sales Button -->
               <button
                 @click="confirmDeleteAllSales"
                 class="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2 shadow-lg"
               >
-                <Trash2Icon class="w-5 h-5" />
+                <Trash2 class="w-5 h-5" />
                 Delete All Sales
               </button>
             </div>
-            
+
             <!-- Date Range Selector -->
             <div class="flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-lg border border-gray-200 p-1 shadow-sm">
-              <button 
-                v-for="range in dateRanges" 
+              <button
+                v-for="range in dateRanges"
                 :key="range.value"
                 @click="selectedRange = range.value"
                 class="px-3 py-1 rounded-md text-sm transition-colors"
@@ -337,21 +337,21 @@
 
           <!-- Loading State -->
           <div v-if="loading && !error" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-8 mb-6 text-center">
-            <LoaderIcon class="w-8 h-8 text-gray-400 animate-spin mx-auto mb-4" />
+            <Loader class="w-8 h-8 text-gray-400 animate-spin mx-auto mb-4" />
             <p class="text-gray-600">Loading sales data...</p>
           </div>
 
           <!-- Error State -->
           <div v-if="error" class="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 flex items-center justify-between">
             <div class="flex items-center gap-2">
-              <AlertTriangleIcon class="w-5 h-5 text-red-600" />
+              <AlertTriangle class="w-5 h-5 text-red-600" />
               <span class="text-red-800">{{ error }}</span>
             </div>
-            <button 
+            <button
               @click="fetchSalesData"
               class="text-red-600 hover:text-red-700"
             >
-              <RefreshCwIcon class="w-5 h-5" />
+              <RefreshCw class="w-5 h-5" />
             </button>
           </div>
 
@@ -363,14 +363,14 @@
               <div class="p-4">
                 <div class="flex items-center gap-3">
                   <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
-                    <DollarSignIcon class="w-5 h-5 text-white" />
+                    <DollarSign class="w-5 h-5 text-white" />
                   </div>
                   <div class="flex-1 min-w-0">
                     <p class="text-xs sm:text-sm text-gray-600">Total Revenue</p>
                     <!-- reduced font size from text-2xl to text-lg to handle millions -->
                     <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ formatCurrency(totalRevenue) }}</p>
                     <div class="flex items-center gap-1 mt-1">
-                      <TrendingUpIcon class="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
+                      <TrendingUp class="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
                       <span class="text-xs font-medium text-green-600">12.5%</span>
                       <span class="text-xs text-gray-600">vs last period</span>
                     </div>
@@ -385,14 +385,14 @@
               <div class="p-4">
                 <div class="flex items-center gap-3">
                   <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
-                    <ShoppingCartIcon class="w-5 h-5 text-white" />
+                    <ShoppingCart class="w-5 h-5 text-white" />
                   </div>
                   <div class="flex-1 min-w-0">
                     <p class="text-xs sm:text-sm text-gray-600">Total Orders</p>
                     <!-- reduced font size from text-2xl to text-lg to handle millions -->
                     <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ totalOrders }}</p>
                     <div class="flex items-center gap-1 mt-1">
-                      <TrendingUpIcon class="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
+                      <TrendingUp class="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
                       <span class="text-xs font-medium text-blue-600">8.2%</span>
                       <span class="text-xs text-gray-600">vs last period</span>
                     </div>
@@ -407,14 +407,14 @@
               <div class="p-4">
                 <div class="flex items-center gap-3">
                   <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
-                    <PackageIcon class="w-5 h-5 text-white" />
+                    <Package class="w-5 h-5 text-white" />
                   </div>
                   <div class="flex-1 min-w-0">
                     <p class="text-xs sm:text-sm text-gray-600">Products Sold</p>
                     <!-- reduced font size from text-2xl to text-lg to handle millions -->
                     <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ totalProductsSold }}</p>
                     <div class="flex items-center gap-1 mt-1">
-                      <TrendingDownIcon class="w-3 h-3 sm:w-4 sm:h-4 text-red-600" />
+                      <TrendingDown class="w-3 h-3 sm:w-4 sm:h-4 text-red-600" />
                       <span class="text-xs font-medium text-red-600">3.1%</span>
                       <span class="text-xs text-gray-600">vs last period</span>
                     </div>
@@ -429,14 +429,14 @@
               <div class="p-4">
                 <div class="flex items-center gap-3">
                   <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 transform hover:scale-110 transition-transform duration-200">
-                    <TrendingUpIcon class="w-5 h-5 text-white" />
+                    <TrendingUp class="w-5 h-5 text-white" />
                   </div>
                   <div class="flex-1 min-w-0">
                     <p class="text-xs sm:text-sm text-gray-600">Average Order Value</p>
                     <!-- reduced font size from text-2xl to text-lg to handle millions -->
                     <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ formatCurrency(averageOrderValue) }}</p>
                     <div class="flex items-center gap-1 mt-1">
-                      <TrendingUpIcon class="w-3 h-3 sm:w-4 sm:h-4 text-amber-600" />
+                      <TrendingUp class="w-3 h-3 sm:w-4 sm:h-4 text-amber-600" />
                       <span class="text-xs font-medium text-amber-600">5.3%</span>
                       <span class="text-xs text-gray-600">vs last period</span>
                     </div>
@@ -451,7 +451,7 @@
             <h2 class="text-lg font-semibold text-gray-900 mb-4">Best Seller</h2>
             <div v-if="sortedTopProducts.length > 0" class="flex flex-col md:flex-row items-start md:items-center gap-6">
               <div class="w-20 h-20 rounded-lg bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center shadow-sm">
-                <PackageIcon class="w-10 h-10 text-green-600" />
+                <Package class="w-10 h-10 text-green-600" />
               </div>
               <div class="flex-1">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">
@@ -476,7 +476,7 @@
               </div>
             </div>
             <div v-else class="text-center py-8">
-              <PackageIcon class="w-8 h-8 text-gray-300 mx-auto mb-2" />
+              <Package class="w-8 h-8 text-gray-300 mx-auto mb-2" />
               <p class="text-gray-600">No product data available</p>
             </div>
           </div>
@@ -484,23 +484,23 @@
           <!-- Empty State -->
           <div v-if="!loading && sales.length === 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-8 mb-8 text-center">
             <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center">
-              <ShoppingCartIcon class="w-8 h-8 text-teal-600" />
+              <ShoppingCart class="w-8 h-8 text-teal-600" />
             </div>
             <h3 class="text-lg font-medium text-gray-900 mb-2">No sales data yet</h3>
             <p class="text-gray-600 mb-4">Start recording sales to see analytics and insights.</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
-              <button 
+              <button
                 @click="showAddSaleModal = true"
                 class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
               >
-                <PlusIcon class="w-5 h-5" />
+                <Plus class="w-5 h-5" />
                 Record Sale
               </button>
-              <button 
+              <button
                 @click="createSampleSale"
                 class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
               >
-                <ClipboardIcon class="w-5 h-5" />
+                <Clipboard class="w-5 h-5" />
                 Create Sample Sale
               </button>
             </div>
@@ -512,7 +512,7 @@
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <h2 class="text-lg font-semibold text-gray-900">Top Products</h2>
-                <select 
+                <select
                   v-model="selectedProductMetric"
                   class="px-3 py-1 rounded-lg border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 >
@@ -521,13 +521,13 @@
                 </select>
               </div>
               <div class="space-y-4">
-                <div 
-                  v-for="product in sortedTopProducts" 
+                <div
+                  v-for="product in sortedTopProducts"
                   :key="product.id"
                   class="flex items-center gap-4 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
                 >
                   <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
-                    <PackageIcon class="w-6 h-6 text-purple-600" />
+                    <Package class="w-6 h-6 text-purple-600" />
                   </div>
                   <div class="flex-1 min-w-0">
                     <p class="font-medium text-gray-900 truncate">{{ product.name }}</p>
@@ -538,10 +538,10 @@
                     <p class="text-sm text-gray-600">{{ product.units }} units</p>
                   </div>
                 </div>
-                
+
                 <!-- Empty state for top products -->
                 <div v-if="topProducts.length === 0" class="text-center py-8">
-                  <PackageIcon class="w-8 h-8 text-gray-300 mx-auto mb-2" />
+                  <Package class="w-8 h-8 text-gray-300 mx-auto mb-2" />
                   <p class="text-gray-600">No product data available</p>
                 </div>
               </div>
@@ -552,7 +552,7 @@
           <div v-if="!loading && sales.length > 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6 mb-8">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <h2 class="text-lg font-semibold text-gray-900">Sales by Category</h2>
-              <select 
+              <select
                 v-model="selectedCategoryView"
                 class="px-3 py-1 rounded-lg border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               >
@@ -562,8 +562,8 @@
               </select>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div 
-                v-for="category in salesByCategory" 
+              <div
+                v-for="category in salesByCategory"
                 :key="category.name"
                 class="p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
               >
@@ -574,17 +574,17 @@
                   <h3 class="font-medium text-gray-900">{{ category.name }}</h3>
                 </div>
                 <p class="text-2xl font-bold text-gray-900 mb-2">
-                  {{ selectedCategoryView === 'revenue' ? formatCurrency(category.revenue) : 
-                     selectedCategoryView === 'units' ? `${category.units} units` : 
+                  {{ selectedCategoryView === 'revenue' ? formatCurrency(category.revenue) :
+                     selectedCategoryView === 'units' ? `${category.units} units` :
                      `${category.orders} orders` }}
                 </p>
                 <div class="flex items-center gap-1">
-                  <component 
-                    :is="category.trend > 0 ? TrendingUpIcon : TrendingDownIcon" 
+                  <component
+                    :is="category.trend > 0 ? TrendingUp : TrendingDown"
                     class="w-4 h-4"
                     :class="category.trend > 0 ? 'text-green-600' : 'text-red-600'"
                   />
-                  <span 
+                  <span
                     class="text-sm font-medium"
                     :class="category.trend > 0 ? 'text-green-600' : 'text-red-600'"
                   >
@@ -592,10 +592,10 @@
                   </span>
                 </div>
               </div>
-              
+
               <!-- Empty state for categories -->
               <div v-if="salesByCategory.length === 0" class="col-span-4 text-center py-8">
-                <PaletteIcon class="w-8 h-8 text-gray-300 mx-auto mb-2" />
+                <Palette class="w-8 h-8 text-gray-300 mx-auto mb-2" />
                 <p class="text-gray-600">No category data available</p>
               </div>
             </div>
@@ -607,8 +607,8 @@
               <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <h2 class="text-lg font-semibold text-gray-900">Recent Sales</h2>
                 <div class="relative">
-                  <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                  <input 
+                  <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <input
                     type="text"
                     v-model="searchQuery"
                     placeholder="Search sales..."
@@ -633,8 +633,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr 
-                    v-for="sale in filteredSales" 
+                  <tr
+                    v-for="sale in filteredSales"
                     :key="sale.id"
                     class="border-b border-gray-100 hover:bg-gray-50"
                   >
@@ -644,7 +644,7 @@
                     <td class="p-4">
                       <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
-                          <UserIcon class="w-4 h-4 text-blue-600" />
+                          <User class="w-4 h-4 text-blue-600" />
                         </div>
                         <div>
                           <p class="font-medium text-gray-900">{{ sale.customerName }}</p>
@@ -660,7 +660,7 @@
                       <p class="font-medium text-gray-900">{{ formatCurrency(sale.total) }}</p>
                     </td>
                     <td class="p-4">
-                      <span 
+                      <span
                         class="px-2 py-1 rounded-full text-sm font-medium"
                         :class="{
                           'bg-green-100 text-green-800 border border-green-200': sale.status === 'completed',
@@ -675,12 +675,12 @@
                       {{ formatDate(sale.date) }}
                     </td>
                     <td class="p-4">
-                      <button 
+                      <button
                         @click="confirmDeleteSale(sale)"
                         class="p-2 hover:bg-red-50 rounded-lg text-red-600 hover:text-red-700 transition-colors"
                         title="Delete Sale"
                       >
-                        <Trash2Icon class="w-4 h-4" />
+                        <Trash2 class="w-4 h-4" />
                       </button>
                     </td>
                   </tr>
@@ -694,20 +694,20 @@
                 Showing {{ paginationStart }} to {{ paginationEnd }} of {{ filteredSales.length }} results
               </p>
               <div class="flex items-center gap-2">
-                <button 
+                <button
                   @click="currentPage--"
                   :disabled="currentPage === 1"
                   class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-700"
                 >
-                  <ChevronLeftIcon class="w-5 h-5" />
+                  <ChevronLeft class="w-5 h-5" />
                 </button>
                 <span class="text-sm text-gray-700">Page {{ currentPage }} of {{ totalPages }}</span>
-                <button 
+                <button
                   @click="currentPage++"
                   :disabled="currentPage === totalPages"
                   class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-700"
                 >
-                  <ChevronRightIcon class="w-5 h-5" />
+                  <ChevronRight class="w-5 h-5" />
                 </button>
               </div>
             </div>
@@ -716,14 +716,14 @@
       </main>
     </div>
   </div>
-  
+
   <!-- Add Sale Modal -->
   <div v-if="showAddSaleModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
     <div class="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
       <div class="p-6 border-b border-gray-200">
         <h3 class="text-xl font-bold text-gray-900">Record New Sale</h3>
       </div>
-      
+
       <form @submit.prevent="handleAddSale" class="p-4 md:p-6">
         <div class="space-y-4">
           <!-- Customer Information -->
@@ -732,7 +732,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm text-gray-600 mb-1">Customer Name</label>
-                <input 
+                <input
                   type="text"
                   v-model="saleForm.customerName"
                   required
@@ -741,7 +741,7 @@
               </div>
               <div>
                 <label class="block text-sm text-gray-600 mb-1">Contact No.</label>
-                <input 
+                <input
                   type="tel"
                   v-model="saleForm.customerContactNo"
                   placeholder="09XX-XXX-XXXX"
@@ -755,32 +755,32 @@
           <div>
             <div class="flex items-center justify-between mb-3">
               <h4 class="text-sm font-medium text-gray-900">Products</h4>
-              <button 
+              <button
                 type="button"
                 @click="addProductToSale"
                 class="text-sm text-teal-600 hover:text-teal-700 flex items-center gap-1"
               >
-                <PlusIcon class="w-4 h-4" />
+                <Plus class="w-4 h-4" />
                 Add Product
               </button>
             </div>
-            
+
             <div v-for="(product, index) in saleForm.products" :key="index" class="mb-3 p-3 border border-gray-200 rounded-lg bg-gray-50">
               <div class="flex justify-between mb-2">
                 <h5 class="text-sm font-medium text-gray-900">Product {{ index + 1 }}</h5>
-                <button 
+                <button
                   type="button"
                   @click="removeProductFromSale(index)"
                   class="text-red-600 hover:text-red-700"
                 >
-                  <XIcon class="w-4 h-4" />
+                  <X class="w-4 h-4" />
                 </button>
               </div>
-              
+
               <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div class="md:col-span-3">
                   <label class="block text-xs text-gray-600 mb-1">Product</label>
-                  <select 
+                  <select
                     v-model="product.id"
                     required
                     class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900"
@@ -794,7 +794,7 @@
                 </div>
                 <div>
                   <label class="block text-xs text-gray-600 mb-1">Quantity</label>
-                  <input 
+                  <input
                     type="number"
                     v-model.number="product.quantity"
                     min="1"
@@ -805,7 +805,7 @@
                 </div>
                 <div>
                   <label class="block text-xs text-gray-600 mb-1">Price</label>
-                  <input 
+                  <input
                     type="number"
                     v-model.number="product.price"
                     min="0"
@@ -817,7 +817,7 @@
                 </div>
                 <div>
                   <label class="block text-xs text-gray-600 mb-1">Subtotal</label>
-                  <input 
+                  <input
                     type="text"
                     :value="formatCurrency(product.price * product.quantity)"
                     readonly
@@ -826,17 +826,17 @@
                 </div>
               </div>
             </div>
-            
+
             <div v-if="saleForm.products.length === 0" class="text-center p-4 border border-dashed border-gray-300 rounded-lg">
               <p class="text-gray-600">No products added yet</p>
             </div>
           </div>
 
           <!-- Sale Details -->
-          
+
           <div>
             <label class="block text-sm text-gray-600 mb-1">Payment Method</label>
-            <select 
+            <select
               v-model="saleForm.paymentMethod"
               required
               class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900"
@@ -858,20 +858,20 @@
         </div>
 
         <div class="flex justify-end gap-3 mt-6">
-          <button 
+          <button
             type="button"
             @click="showAddSaleModal = false"
             class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
           >
             Cancel
           </button>
-          <button 
+          <button
             type="submit"
             class="px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
             :disabled="isSubmitting"
           >
             <span v-if="isSubmitting" class="flex items-center gap-2">
-              <LoaderIcon class="w-5 h-5 animate-spin" />
+              <Loader class="w-5 h-5 animate-spin" />
               Saving...
             </span>
             <span v-else>Record Sale</span>
@@ -887,31 +887,31 @@
       <div class="p-6 border-b border-gray-200">
         <div class="flex items-center justify-between">
           <h3 class="text-xl font-bold text-gray-900">Daily Sales Report</h3>
-          <button 
+          <button
             @click="showDailyReportModal = false"
             class="text-gray-400 hover:text-gray-600"
           >
-            <XIcon class="w-6 h-6" />
+            <X class="w-6 h-6" />
           </button>
         </div>
       </div>
-    
+
       <div class="p-4 md:p-6">
         <!-- Daily Sales Report Preview -->
         <div id="daily-report-content" class="bg-gradient-to-br from-blue-50 to-purple-50 p-4 rounded-lg mb-4 text-sm">
           <div class="text-center mb-6">
             <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-              <TrendingUpIcon class="w-8 h-8 text-white" />
+              <TrendingUp class="w-8 h-8 text-white" />
             </div>
             <h2 class="text-xl font-bold text-gray-900">Barcelona Paint Center</h2>
             <p class="text-blue-600 font-medium">Admin Daily Sales Report</p>
             <p class="text-xs text-gray-500 mt-1">{{ formatDateTime(new Date()) }}</p>
           </div>
-        
+
           <!-- Admin Information -->
           <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200">
             <h3 class="font-semibold text-gray-900 mb-2 flex items-center">
-              <ShieldIcon class="w-4 h-4 mr-2 text-blue-600" />
+              <Shield class="w-4 h-4 mr-2 text-blue-600" />
               Admin Report
             </h3>
             <div class="grid grid-cols-2 gap-2 text-xs">
@@ -933,11 +933,11 @@
               </div>
             </div>
           </div>
-        
+
           <!-- Performance Summary -->
           <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200">
             <h3 class="font-semibold text-gray-900 mb-3 flex items-center">
-              <DollarSignIcon class="w-4 h-4 mr-2 text-green-600" />
+              <DollarSign class="w-4 h-4 mr-2 text-green-600" />
               Overall Performance ({{ selectedRange.toUpperCase() }})
             </h3>
             <div class="grid grid-cols-2 gap-3">
@@ -963,12 +963,12 @@
           <!-- Top Products -->
           <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200" v-if="sortedTopProducts.length > 0">
             <h3 class="font-semibold text-gray-900 mb-3 flex items-center">
-              <PackageIcon class="w-4 h-4 mr-2 text-purple-600" />
+              <Package class="w-4 h-4 mr-2 text-purple-600" />
               Top Products ({{ selectedRange.toUpperCase() }})
             </h3>
             <div class="space-y-3">
-              <div 
-                v-for="(product, index) in sortedTopProducts.slice(0, 5)" 
+              <div
+                v-for="(product, index) in sortedTopProducts.slice(0, 5)"
                 :key="product.id"
                 class="grid grid-cols-12 gap-3 p-3 bg-gray-50 rounded text-xs border border-gray-100 items-center"
               >
@@ -976,31 +976,31 @@
                 <div class="col-span-1">
                   <span class="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs flex items-center justify-center font-bold">{{ index + 1 }}</span>
                 </div>
-                
+
                 <!-- Product Info -->
                 <div class="col-span-3">
                   <div class="font-bold text-gray-900 text-sm">{{ product.name }}</div>
                   <div class="text-gray-600 text-xs">{{ product.category || 'N/A' }}</div>
                 </div>
-                
+
                 <!-- Units -->
                 <div class="col-span-2 text-center">
                   <div class="text-purple-600 text-sm font-bold">{{ product.units }}</div>
                   <div class="text-gray-600 text-xs">units sold</div>
                 </div>
-                
+
                 <!-- Revenue -->
                 <div class="col-span-3 text-center">
                   <div class="font-bold text-green-700 text-sm">{{ formatCurrency(product.revenue) }}</div>
                   <div class="text-gray-600 text-xs">total revenue</div>
                 </div>
-                
+
                 <!-- Amount (Average Price) -->
                 <div class="col-span-2 text-center">
                   <div class="font-bold text-blue-700 text-sm">{{ formatCurrency(product.units > 0 ? product.revenue / product.units : 0) }}</div>
                   <div class="text-gray-600 text-xs">per unit</div>
                 </div>
-                
+
                 <!-- Percentage -->
                 <div class="col-span-1 text-right">
                   <div class="text-purple-600 text-xs font-medium">{{ totalRevenue > 0 ? ((product.revenue / totalRevenue) * 100).toFixed(1) : 0 }}%</div>
@@ -1013,12 +1013,12 @@
           <!-- Recent Sales -->
           <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200" v-if="sales.length > 0">
             <h3 class="font-semibold text-gray-900 mb-3 flex items-center">
-              <ShoppingCartIcon class="w-4 h-4 mr-2 text-blue-600" />
+              <ShoppingCart class="w-4 h-4 mr-2 text-blue-600" />
               Recent Transactions (Last 5)
             </h3>
             <div class="space-y-3">
-              <div 
-                v-for="sale in sales.slice(0, 5)" 
+              <div
+                v-for="sale in sales.slice(0, 5)"
                 :key="sale.id"
                 class="p-3 bg-gray-50 rounded border border-gray-100"
               >
@@ -1030,7 +1030,7 @@
                   </div>
                   <span class="font-bold text-green-700 text-lg">{{ formatCurrency(sale.total) }}</span>
                 </div>
-                
+
                 <!-- Second Row: Customer and Contact -->
                 <div class="flex justify-between items-center mb-2">
                   <div class="flex items-center gap-4">
@@ -1041,7 +1041,7 @@
                     <span class="text-blue-600 text-sm font-medium">{{ sale.products.length }} items</span>
                   </div>
                 </div>
-                
+
                 <!-- Third Row: Product, Payment, Status -->
                 <div class="flex justify-between items-center">
                   <span class="text-gray-600 text-sm min-w-[150px]">{{ sale.products[0]?.name || 'N/A' }}</span>
@@ -1071,23 +1071,23 @@
             </div>
           </div>
         </div>
-      
-        <div class="flex gap-3">
-          <button 
-            @click="downloadDailyReport"
-            class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
-          >
-            <DownloadIcon class="w-5 h-5" />
-            Save as Image
-          </button>
-          <button 
-            @click="printDailyReport"
-            class="flex-1 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
-          >
-            <PrinterIcon class="w-5 h-5" />
-            Print
-          </button>
-        </div>
+      </div>
+
+      <div class="flex gap-3">
+        <button
+          @click="downloadDailyReport"
+          class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
+        >
+          <Download class="w-5 h-5" />
+          Save as Image
+        </button>
+        <button
+          @click="printDailyReport"
+          class="flex-1 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
+        >
+          <Printer class="w-5 h-5" />
+          Print
+        </button>
       </div>
     </div>
   </div>
@@ -1098,15 +1098,15 @@
       <div class="p-6 border-b border-gray-200">
         <div class="flex items-center justify-between">
           <h3 class="text-xl font-bold text-gray-900">Receipt Generated</h3>
-          <button 
+          <button
             @click="showReceiptModal = false"
             class="text-gray-400 hover:text-gray-600"
           >
-            <XIcon class="w-6 h-6" />
+            <X class="w-6 h-6" />
           </button>
         </div>
       </div>
-      
+
       <div class="p-6">
         <!-- Receipt Preview -->
         <div id="receipt-content" class="bg-white p-6 border border-gray-200 rounded-lg mb-4 text-sm">
@@ -1115,7 +1115,7 @@
             <p class="text-gray-600">Sales Receipt</p>
             <p class="text-xs text-gray-500">{{ formatDateTime(new Date()) }}</p>
           </div>
-          
+
           <div class="border-t border-gray-200 pt-4 mb-4">
             <div class="flex justify-between mb-2">
               <span class="font-medium">Order ID:</span>
@@ -1134,7 +1134,7 @@
               <span>{{ formatPaymentMethod(lastSaleData.paymentMethod) }}</span>
             </div>
           </div>
-          
+
           <div class="border-t border-gray-200 pt-4 mb-4">
             <h3 class="font-medium mb-2">Items:</h3>
             <div v-for="product in lastSaleData.products" :key="product.id" class="flex justify-between mb-1">
@@ -1145,33 +1145,33 @@
               <div class="font-medium">{{ formatCurrency(product.price * product.quantity) }}</div>
             </div>
           </div>
-          
+
           <div class="border-t border-gray-200 pt-4">
             <div class="flex justify-between text-lg font-bold">
               <span>Total:</span>
               <span>{{ formatCurrency(lastSaleData.total) }}</span>
             </div>
           </div>
-          
+
           <div class="text-center mt-4 text-xs text-gray-500">
             <p>Thank you for your business!</p>
             <p>Visit us again soon.</p>
           </div>
         </div>
-        
+
         <div class="flex gap-3">
-          <button 
+          <button
             @click="downloadReceipt"
             class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
           >
-            <DownloadIcon class="w-5 h-5" />
+            <Download class="w-5 h-5" />
             Download
           </button>
-          <button 
+          <button
             @click="printReceipt"
             class="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
           >
-            <PrinterIcon class="w-5 h-5" />
+            <Printer class="w-5 h-5" />
             Print
           </button>
         </div>
@@ -1184,21 +1184,21 @@
     <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
       <div class="p-6">
         <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
-          <AlertTriangleIcon class="w-8 h-8 text-red-600" />
+          <AlertTriangle class="w-8 h-8 text-red-600" />
         </div>
         <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Delete Sale</h3>
         <p class="text-gray-600 text-center mb-6">
-          Are you sure you want to delete sale <strong>{{ saleToDelete?.orderId }}</strong>? 
+          Are you sure you want to delete sale <strong>{{ saleToDelete?.orderId }}</strong>?
           This will restore the product stock and cannot be undone.
         </p>
         <div class="flex justify-center gap-3">
-          <button 
+          <button
             @click="showDeleteModal = false"
             class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
           >
             Cancel
           </button>
-          <button 
+          <button
             @click="deleteSale"
             class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200"
           >
@@ -1214,21 +1214,21 @@
     <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
       <div class="p-6">
         <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
-          <AlertTriangleIcon class="w-8 h-8 text-red-600" />
+          <AlertTriangle class="w-8 h-8 text-red-600" />
         </div>
         <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Delete All Sales</h3>
         <p class="text-gray-600 text-center mb-6">
-          Are you sure you want to delete <strong>ALL {{ sales.length }} sales</strong>? 
+          Are you sure you want to delete <strong>ALL {{ sales.length }} sales</strong>?
           This will restore all product stock and cannot be undone.
         </p>
         <div class="flex justify-center gap-3">
-          <button 
+          <button
             @click="showDeleteAllModal = false"
             class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
           >
             Cancel
           </button>
-          <button 
+          <button
             @click="deleteAllSales"
             class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200"
           >
@@ -1243,12 +1243,12 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { 
-  collection, 
-  query, 
-  where, 
-  orderBy, 
-  limit, 
+import {
+  collection,
+  query,
+  where,
+  orderBy,
+  limit,
   getDocs,
   onSnapshot,
   Timestamp,
@@ -1260,56 +1260,30 @@ import {
   deleteDoc
 } from 'firebase/firestore'
 import { db } from '../../config/firebase'
+import { auth } from '../../config/firebase'
+
+// Icons Import
 import {
-  LayoutDashboard as LayoutDashboardIcon,
-  Users as UsersIcon,
-  Package as PackageIcon,
-  Home as HomeIcon,
-  Palette as PaletteIcon,
-  TrendingUp as TrendingUpIcon,
-  TrendingDown as TrendingDownIcon,
-  Clipboard as ClipboardIcon,
-  Settings as SettingsIcon,
-  Shield as ShieldIcon,
-  User as UserIcon,
-  LogOut as LogOutIcon,
-  Menu as MenuIcon,
-  X as XIcon,
-  DollarSign as DollarSignIcon,
-  ShoppingCart as ShoppingCartIcon,
-  Search as SearchIcon,
-  ChevronLeft as ChevronLeftIcon,
-  ChevronRight as ChevronRightIcon,
-  Droplets as DropletsIcon,
-  Paintbrush as PaintbrushIcon,
-  Calendar as CalendarIcon,
-  Bell as BellIcon,
-  Plus as PlusIcon,
-  AlertTriangle as AlertTriangleIcon,
-  RefreshCw as RefreshCwIcon,
-  Loader as LoaderIcon,
-  Trash2 as Trash2Icon,
-  Download as DownloadIcon,
-  Printer as PrinterIcon,
-  BarChart3 as BarChart3Icon,
+  Palette, TrendingUp, BarChart3, Settings, User, Menu, X, Calendar, Bell,
+  Plus, Trash2, Search, ChevronLeft, ChevronRight, Loader, AlertTriangle,
+  RefreshCw, ShoppingCart, TrendingDown, Droplets, Paintbrush, Clipboard,
+  Download, Printer, LogOut, DollarSign, Shield, LayoutDashboard, Users,
+  Package, Home
 } from 'lucide-vue-next'
 
-// Current date
-const currentDate = new Date().toLocaleDateString('en-US', { 
-  weekday: 'long', 
-  year: 'numeric', 
-  month: 'long', 
-  day: 'numeric' 
+const currentDate = new Date().toLocaleDateString('en-US', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
 })
 
-// Today's date formatted
 const todayFormatted = new Date().toLocaleDateString('en-US', {
   month: 'short',
   day: 'numeric',
   year: 'numeric'
 })
 
-// State
 const sales = ref([])
 const loading = ref(true)
 const error = ref(null)
@@ -1327,13 +1301,13 @@ const isSubmitting = ref(false)
 const mobileSidebarOpen = ref(false)
 const router = useRouter()
 const route = useRoute()
-const lastSaleData = ref({}) // Store last sale data for receipt
+const lastSaleData = ref({})
 const showDeleteModal = ref(false)
 const saleToDelete = ref(null)
 const showDeleteAllModal = ref(false)
 const dailySales = ref([])
+let unsubscribeSales = null
 
-// Date range selector
 const dateRanges = [
   { label: '1D', value: '1d' },
   { label: '7D', value: '7d' },
@@ -1342,17 +1316,12 @@ const dateRanges = [
   { label: '1Y', value: '1y' },
 ]
 const selectedRange = ref('30d')
-
-// Chart controls
 const selectedProductMetric = ref('revenue')
 const selectedCategoryView = ref('revenue')
-
-// Recent sales table
 const searchQuery = ref('')
 const currentPage = ref(1)
 const itemsPerPage = 10
 
-// Sale form
 const saleForm = ref({
   orderId: '',
   customerId: '',
@@ -1362,6 +1331,27 @@ const saleForm = ref({
   total: 0,
   status: 'completed',
   paymentMethod: 'cash'
+})
+
+onMounted(() => {
+  console.log("Component mounted, initializing data...")
+  fetchAvailableProducts()
+  unsubscribeSales = fetchSalesData()
+})
+
+onUnmounted(() => {
+  console.log("Component unmounting, cleaning up...")
+  if (typeof unsubscribeSales === 'function') {
+    unsubscribeSales()
+  }
+})
+
+watch(selectedRange, () => {
+  fetchSalesData()
+})
+
+watch(searchQuery, () => {
+  currentPage.value = 1
 })
 
 // Calculate daily sales
@@ -1395,7 +1385,7 @@ const fetchSalesData = async () => {
     // Calculate date range
     const now = new Date()
     let startDate = new Date()
-    
+
     switch(selectedRange.value) {
       case '1d':
         startDate.setDate(now.getDate() - 1)
@@ -1429,13 +1419,13 @@ const fetchSalesData = async () => {
       const salesData = []
       let revenue = 0
       let productsSold = 0
-      
+
       snapshot.forEach((doc) => {
         const data = doc.data()
         console.log(`Processing sale document: ${doc.id}`, data)
-        
+
         // Create sale object with proper data conversion
-        const sale = { 
+        const sale = {
           id: doc.id,
           orderId: data.orderId || `ORD-${doc.id.substring(0, 8)}`,
           customerName: data.customerName || 'Unknown Customer',
@@ -1446,24 +1436,24 @@ const fetchSalesData = async () => {
           paymentMethod: data.paymentMethod || 'cash',
           date: data.date
         }
-        
+
         // Convert Firestore timestamp to JS Date
         if (sale.date && typeof sale.date.toDate === 'function') {
           sale.date = sale.date.toDate()
         } else if (!sale.date) {
           sale.date = new Date() // Default to current date if missing
         }
-        
+
         // Filter by date range in memory
         if (sale.date >= startDate && sale.date <= now) {
           salesData.push(sale)
           revenue += Number(sale.total) || 0
-          
+
           // Calculate products sold
           const soldItems = sale.products?.reduce((sum, product) => {
             return sum + (Number(product.quantity) || 0)
           }, 0) || 0
-          
+
           productsSold += soldItems
           console.log(`Added sale ${sale.orderId} with ${soldItems} items, total: ${sale.total}`)
         }
@@ -1478,12 +1468,12 @@ const fetchSalesData = async () => {
       totalOrders.value = salesData.length
       totalProductsSold.value = productsSold
       averageOrderValue.value = salesData.length ? revenue / salesData.length : 0
-      
+
       // Calculate derived data
       calculateTopProducts(salesData)
       calculateSalesByCategory(salesData)
       calculateDailySales(salesData)
-      
+
       loading.value = false
     }, (err) => {
       console.error('Error fetching sales:', err)
@@ -1508,9 +1498,9 @@ const fetchAvailableProducts = async () => {
     const productsRef = collection(db, 'products')
     const q = query(productsRef, orderBy('name'))
     const snapshot = await getDocs(q)
-    
+
     console.log(`Found ${snapshot.docs.length} products`)
-    
+
     availableProducts.value = snapshot.docs.map(doc => {
       const data = doc.data()
       console.log(`Product ${data.name}, price: ${data.price}, stock: ${data.stock}`)
@@ -1522,7 +1512,7 @@ const fetchAvailableProducts = async () => {
         stock: Number(data.stock) || 0
       }
     })
-    
+
     console.log("Available products loaded successfully")
   } catch (err) {
     console.error('Error fetching products:', err)
@@ -1533,7 +1523,7 @@ const fetchAvailableProducts = async () => {
 // Calculate top products
 const calculateTopProducts = (salesData) => {
   const productMap = new Map()
-  
+
   salesData.forEach(sale => {
     sale.products.forEach(product => {
       const existing = productMap.get(product.id) || {
@@ -1543,7 +1533,7 @@ const calculateTopProducts = (salesData) => {
         revenue: 0,
         units: 0
       }
-      
+
       existing.revenue += Number(product.price) * Number(product.quantity)
       existing.units += Number(product.quantity)
       productMap.set(product.id, existing)
@@ -1553,14 +1543,14 @@ const calculateTopProducts = (salesData) => {
   topProducts.value = Array.from(productMap.values())
     .sort((a, b) => b.revenue - a.revenue)
     .slice(0, 4)
-    
+
   console.log(`Calculated ${topProducts.value.length} top products`)
 }
 
 // Calculate sales by category
 const calculateSalesByCategory = (salesData) => {
   const categoryMap = new Map()
-  
+
   salesData.forEach(sale => {
     sale.products.forEach(product => {
       const category = product.category || 'Uncategorized'
@@ -1571,7 +1561,7 @@ const calculateSalesByCategory = (salesData) => {
         orders: 0,
         trend: Math.floor(Math.random() * 20) - 5 // Random trend for demo
       }
-      
+
       existing.revenue += Number(product.price) * Number(product.quantity)
       existing.units += Number(product.quantity)
       existing.orders += 1
@@ -1593,35 +1583,35 @@ const confirmDeleteSale = (sale) => {
 const deleteSale = async () => {
   try {
     if (!saleToDelete.value) return
-    
+
     // Delete from Firestore
     const saleRef = doc(db, 'sales', saleToDelete.value.id)
     await deleteDoc(saleRef)
-    
+
     // Restore stock for deleted sale products
     for (const product of saleToDelete.value.products) {
       if (product.id && product.id !== 'sample-product') {
         const productRef = doc(db, 'products', product.id)
         const productDoc = await getDoc(productRef)
-        
+
         if (productDoc.exists()) {
           const currentStock = productDoc.data().stock || 0
           const restoredStock = currentStock + product.quantity
-          
+
           await updateDoc(productRef, {
             stock: restoredStock,
             lastUpdated: serverTimestamp()
           })
-          
+
           console.log(`Restored stock for ${product.name}: ${currentStock} -> ${restoredStock}`)
         }
       }
     }
-    
+
     alert('Sale deleted successfully and stock restored!')
     showDeleteModal.value = false
     saleToDelete.value = null
-    
+
   } catch (err) {
     console.error('Error deleting sale:', err)
     alert('Failed to delete sale: ' + err.message)
@@ -1641,23 +1631,23 @@ const confirmDeleteAllSales = () => {
 const deleteAllSales = async () => {
   try {
     if (sales.value.length === 0) return
-    
+
     // Delete all sales and restore stock
     for (const sale of sales.value) {
       // Delete from Firestore
       const saleRef = doc(db, 'sales', sale.id)
       await deleteDoc(saleRef)
-      
+
       // Restore stock for each product in the sale
       for (const product of sale.products) {
         if (product.id && product.id !== 'sample-product') {
           const productRef = doc(db, 'products', product.id)
           const productDoc = await getDoc(productRef)
-          
+
           if (productDoc.exists()) {
             const currentStock = productDoc.data().stock || 0
             const restoredStock = currentStock + product.quantity
-            
+
             await updateDoc(productRef, {
               stock: restoredStock,
               lastUpdated: serverTimestamp()
@@ -1666,10 +1656,10 @@ const deleteAllSales = async () => {
         }
       }
     }
-    
+
     alert(`Successfully deleted ${sales.value.length} sales and restored all stock!`)
     showDeleteAllModal.value = false
-    
+
   } catch (err) {
     console.error('Error deleting all sales:', err)
     alert('Failed to delete all sales: ' + err.message)
@@ -1687,7 +1677,7 @@ const formatCurrency = (value) => {
 // Format date
 const formatDate = (dateString) => {
   if (!dateString) return 'N/A'
-  
+
   const date = dateString instanceof Date ? dateString : new Date(dateString)
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -1699,7 +1689,7 @@ const formatDate = (dateString) => {
 // Format time for sales
 const formatTime = (date) => {
   if (!date) return 'N/A'
-  
+
   const dateObj = date instanceof Date ? date : new Date(date)
   return dateObj.toLocaleTimeString('en-US', {
     hour: '2-digit',
@@ -1732,13 +1722,13 @@ const formatPaymentMethod = (method) => {
 // Get icon for category
 const getCategoryIcon = (category) => {
   const icons = {
-    'Interior': DropletsIcon,
-    'Exterior': PaintbrushIcon,
-    'Primers': PackageIcon,
-    'Specialty': PaletteIcon
+    'Interior': Droplets,
+    'Exterior': Paintbrush,
+    'Primers': Package, // Using Lucide icons for some
+    'Specialty': Palette // Using Lucide icons for some
   }
-  
-  return icons[category] || PackageIcon
+
+  return icons[category] || Package // Default to Lucide Package
 }
 
 // Sorted top products based on selected metric
@@ -1755,21 +1745,21 @@ const sortedTopProducts = computed(() => {
 // Filtered sales for the table
 const filteredSales = computed(() => {
   let filtered = [...sales.value]
-  
+
   // Apply search filter only
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
-    filtered = filtered.filter(sale => 
+    filtered = filtered.filter(sale =>
       sale.orderId?.toLowerCase().includes(query) ||
       sale.customerName?.toLowerCase().includes(query) ||
       sale.customerContactNo?.toLowerCase().includes(query)
     )
   }
-  
+
   // Apply pagination
   const start = (currentPage.value - 1) * itemsPerPage
   const end = start + itemsPerPage
-  
+
   return filtered.slice(start, end)
 })
 
@@ -1799,7 +1789,7 @@ const removeProductFromSale = (index) => {
 const updateProductDetails = (index) => {
   const productId = saleForm.value.products[index].id
   if (!productId) return
-  
+
   const product = availableProducts.value.find(p => p.id === productId)
   if (product) {
     console.log(`Selected product: ${product.name}, price: ${product.price}, stock: ${product.stock}`)
@@ -1829,7 +1819,7 @@ const generateOrderId = () => {
   const month = (date.getMonth() + 1).toString().padStart(2, '0')
   const day = date.getDate().toString().padStart(2, '0')
   const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0')
-  
+
   return `ORD-${year}${month}${day}-${random}`
 }
 
@@ -1851,7 +1841,7 @@ const generateDailyReport = () => {
     recentSales: sales.value.slice(0, 3),
     totalSales: sales.value.length
   }
-  
+
   lastSaleData.value = reportData
   showDailyReportModal.value = true
 }
@@ -1868,7 +1858,7 @@ const downloadDailyReport = async () => {
     // Create a canvas element with better dimensions for complete details
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
-    
+
     // Set canvas size for complete report
     canvas.width = 800
     canvas.height = 1600 // Increased height for better spacing
@@ -1882,7 +1872,7 @@ const downloadDailyReport = async () => {
         }
       }
     }
-    
+
     // Header section with company branding
     const headerHeight = 130
     const headerGradient = ctx.createLinearGradient(0, 0, 0, headerHeight)
@@ -1890,43 +1880,43 @@ const downloadDailyReport = async () => {
     headerGradient.addColorStop(1, '#8b5cf6')
     ctx.fillStyle = headerGradient
     ctx.fillRect(0, 0, canvas.width, headerHeight)
-    
+
     // Company name
     ctx.fillStyle = '#ffffff'
     ctx.font = 'bold 32px Arial'
     ctx.textAlign = 'center'
     ctx.fillText('BARCELONA PAINT CENTER', canvas.width / 2, 45)
-    
+
     // Report title
     ctx.fillStyle = '#a7f3d0'
     ctx.font = 'bold 20px Arial'
     ctx.fillText('ADMIN DAILY SALES REPORT', canvas.width / 2, 75)
-    
+
     // Date and time
     ctx.fillStyle = '#e6fffa'
     ctx.font = '16px Arial'
     ctx.fillText(formatDateTime(new Date()), canvas.width / 2, 100)
-    
+
     // Report ID
     ctx.fillStyle = '#cbd5e1'
     ctx.font = '12px Arial'
     ctx.fillText(`Report ID: ADM-${Date.now().toString().slice(-8)}`, canvas.width / 2, 120)
-    
+
     let currentY = headerHeight + 25
-    
+
     // Admin Report Section - Complete Details
     ctx.fillStyle = '#ffffff'
     ctx.fillRect(25, currentY, canvas.width - 50, 100)
     ctx.strokeStyle = '#e2e8f0'
     ctx.lineWidth = 2
     ctx.strokeRect(25, currentY, canvas.width - 50, 100)
-    
+
     // Admin section header
     ctx.fillStyle = '#3b82f6'
     ctx.font = 'bold 18px Arial'
     ctx.textAlign = 'left'
     ctx.fillText('🛡️ ADMIN INFORMATION', 45, currentY + 25)
-    
+
     // Admin details - Complete
     ctx.fillStyle = '#374151'
     ctx.font = '14px Arial'
@@ -1934,28 +1924,28 @@ const downloadDailyReport = async () => {
     ctx.fillText(`Admin ID: ADM-001`, 45, currentY + 70)
     ctx.fillText(`Date: ${todayFormatted}`, 350, currentY + 50)
     ctx.fillText(`Period: ${selectedRange.value.toUpperCase()}`, 350, currentY + 70)
-    
+
     // Status badge
     ctx.fillStyle = '#059669'
     ctx.fillRect(45, currentY + 80, 120, 15)
     ctx.fillStyle = '#ffffff'
     ctx.font = 'bold 12px Arial'
     ctx.fillText('✓ SYSTEM ACTIVE', 50, currentY + 90)
-    
+
     currentY += 120
-    
+
     // Performance Section - Complete Metrics
     ctx.fillStyle = '#ffffff'
     ctx.fillRect(25, currentY, canvas.width - 50, 160)
     ctx.strokeStyle = '#e2e8f0'
     ctx.lineWidth = 2
     ctx.strokeRect(25, currentY, canvas.width - 50, 160)
-    
+
     // Performance header
     ctx.fillStyle = '#059669'
     ctx.font = 'bold 18px Arial'
     ctx.fillText(`💰 OVERALL PERFORMANCE (${selectedRange.value.toUpperCase()})`, 45, currentY + 25)
-    
+
     // Performance metrics in a detailed grid
     const metrics = [
       { label: 'Total Revenue', value: formatCurrency(totalRevenue.value), color: '#059669', icon: '💰' },
@@ -1963,40 +1953,40 @@ const downloadDailyReport = async () => {
       { label: 'Items Sold', value: `${totalProductsSold.value} pieces`, color: '#7c3aed', icon: '📦' },
       { label: 'Average Order', value: formatCurrency(averageOrderValue.value), color: '#ea580c', icon: '📊' }
     ]
-    
+
     metrics.forEach((metric, index) => {
       const x = 45 + (index % 2) * 280
       const y = currentY + 55 + Math.floor(index / 2) * 50
-      
+
       // Metric background with border
       ctx.fillStyle = metric.color + '15'
       ctx.fillRect(x - 5, y - 25, 270, 45)
       ctx.strokeStyle = metric.color + '40'
       ctx.lineWidth = 1
       ctx.strokeRect(x - 5, y - 25, 270, 45)
-      
+
       // Icon
       ctx.fillStyle = metric.color
       ctx.font = '16px Arial'
       ctx.fillText(metric.icon, x, y - 5)
-      
+
       // Metric label
       ctx.fillStyle = '#6b7280'
       ctx.font = '13px Arial'
       ctx.fillText(metric.label, x + 25, y - 5)
-      
+
       // Metric value
       ctx.fillStyle = metric.color
       ctx.font = 'bold 20px Arial'
       ctx.fillText(metric.value, x + 25, y + 15)
     })
-    
+
     currentY += 180
-    
+
     // Top Products Section - Complete Details with Fixed Layout
     if (sortedTopProducts.value.length > 0) {
       const productsToShow = Math.min(sortedTopProducts.value.length, 5)
-      const sectionHeight = productsToShow * 80 + 120 // Increased spacing
+      const sectionHeight = productsToShow * 80 + 120 // Increased spacing between rows
       
       ctx.fillStyle = '#ffffff'
       ctx.fillRect(25, currentY, canvas.width - 50, sectionHeight)
@@ -2200,7 +2190,7 @@ const downloadDailyReport = async () => {
         // Alternating row background
         if (index % 2 === 0) {
           ctx.fillStyle = '#f8fafc'
-          ctx.fillRect(35, y - 30, canvas.width - 70, 95)
+          ctx.fillRect(35, y - 25, canvas.width - 70, 95)
         }
         
         // Transaction border
@@ -2529,6 +2519,15 @@ const handleAddSale = async () => {
     isSubmitting.value = true
     console.log("Processing sale submission...")
     
+    if (!auth.currentUser) {
+      console.error("[v0] Authentication failed: No user currently logged in")
+      alert('Authentication failed. Please log in again.')
+      isSubmitting.value = false
+      return
+    }
+    
+    console.log("[v0] Current user authenticated:", auth.currentUser.uid)
+    
     // Validate form
     if (saleForm.value.products.length === 0) {
       alert('Please add at least one product')
@@ -2585,7 +2584,9 @@ const handleAddSale = async () => {
       total: Number(saleForm.value.total),
       status: saleForm.value.status,
       paymentMethod: saleForm.value.paymentMethod,
-      date: serverTimestamp()
+      date: serverTimestamp(),
+      createdBy: auth.currentUser.uid,
+      createdAt: serverTimestamp()
     }
     
     console.log("Sale data prepared:", saleData)
@@ -2611,27 +2612,44 @@ const handleAddSale = async () => {
       }
     }
 
-    // Add sale to Firestore after stock updates
-    const salesRef = collection(db, 'sales')
-    const docRef = await addDoc(salesRef, saleData)
-    
-    console.log('Sale added successfully with ID:', docRef.id)
-    
-    // Show success message
-    alert('Sale recorded successfully and inventory updated!')
-    
-    // Generate receipt
-    generateReceipt({
-      ...saleData,
-      date: new Date() // Use current date for receipt display
-    })
-    
-    // Reset form and close modal
-    resetSaleForm()
-    showAddSaleModal.value = false
+    try {
+      console.log("[v0] Attempting to write to sales collection...")
+      const salesRef = collection(db, 'sales')
+      const docRef = await addDoc(salesRef, saleData)
+      
+      console.log('Sale added successfully with ID:', docRef.id)
+      
+      // Show success message
+      alert('Sale recorded successfully and inventory updated!')
+      
+      // Generate receipt
+      generateReceipt({
+        ...saleData,
+        date: new Date() // Use current date for receipt display
+      })
+      
+      // Reset form and close modal
+      resetSaleForm()
+      showAddSaleModal.value = false
+      
+      fetchSalesData()
+      
+    } catch (firestoreError) {
+      console.error('[v0] Firestore write error:', firestoreError)
+      console.error('[v0] Error code:', firestoreError.code)
+      console.error('[v0] Error message:', firestoreError.message)
+      
+      if (firestoreError.code === 'permission-denied') {
+        alert('Permission denied: You do not have permission to add sales. Please contact an administrator.')
+      } else if (firestoreError.code === 'unauthenticated') {
+        alert('Authentication required: Please log in again.')
+      } else {
+        alert('Failed to record sale: ' + firestoreError.message)
+      }
+    }
     
   } catch (err) {
-    console.error('Error adding sale:', err)
+    console.error('[v0] Error in handleAddSale:', err)
     alert('Failed to add sale. Please try again. Error: ' + err.message)
   } finally {
     isSubmitting.value = false
@@ -2690,31 +2708,6 @@ const createSampleSale = () => {
   // Show the modal
   showAddSaleModal.value = true
 }
-
-// Watch for date range changes
-watch(selectedRange, () => {
-  fetchSalesData()
-})
-
-// Watch for search query and filter changes
-watch(searchQuery, () => {
-  currentPage.value = 1
-})
-
-// Initialize data on component mount
-onMounted(() => {
-  console.log("Component mounted, initializing data...")
-  fetchAvailableProducts()
-  const unsubscribe = fetchSalesData()
-  
-  // Clean up on unmount
-  onUnmounted(() => {
-    console.log("Component unmounting, cleaning up...")
-    if (typeof unsubscribe === 'function') {
-      unsubscribe()
-    }
-  })
-})
 
 // Toggle mobile sidebar
 const toggleMobileSidebar = () => {
