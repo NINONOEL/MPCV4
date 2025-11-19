@@ -354,9 +354,9 @@
             <div class="mb-8">
               <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4">Quick Add</h2>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                <button
-                  @click="showAddProductModal = true"
-                  class="group relative bg-gradient-to-br from-purple-50 to-violet-50 border-2 border-dashed border-purple-300 rounded-xl p-6 hover:border-purple-500 hover:shadow-lg hover:bg-purple-50/80 transition-all duration-300 cursor-pointer"
+                <router-link
+                  to="/admin/inventory"
+                  class="group relative bg-gradient-to-br from-purple-50 to-violet-50 border-2 border-dashed border-purple-300 rounded-xl p-6 hover:border-purple-500 hover:shadow-lg hover:bg-purple-50/80 transition-all duration-300 cursor-pointer block"
                 >
                   <div class="flex flex-col items-center text-center">
                     <div class="p-4 rounded-xl bg-gradient-to-br from-purple-400 to-violet-500 text-white mb-3 group-hover:scale-110 transition-transform duration-300">
@@ -365,11 +365,11 @@
                     <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-1">Add Product</h3>
                     <p class="text-xs sm:text-sm text-gray-600">Add new paint to inventory</p>
                   </div>
-                </button>
+                </router-link>
 
-                <button
-                  @click="showAddStaffModal = true"
-                  class="group relative bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-dashed border-green-300 rounded-xl p-6 hover:border-green-500 hover:shadow-lg hover:bg-green-50/80 transition-all duration-300 cursor-pointer"
+                <router-link
+                  to="/admin/staff"
+                  class="group relative bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-dashed border-green-300 rounded-xl p-6 hover:border-green-500 hover:shadow-lg hover:bg-green-50/80 transition-all duration-300 cursor-pointer block"
                 >
                   <div class="flex flex-col items-center text-center">
                     <div class="p-4 rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 text-white mb-3 group-hover:scale-110 transition-transform duration-300">
@@ -378,12 +378,11 @@
                     <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-1">Add Staff</h3>
                     <p class="text-xs sm:text-sm text-gray-600">Hire new team member</p>
                   </div>
-                </button>
+                </router-link>
 
                 <router-link
                   to="/admin/sales-analytics"
                   class="group relative bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-dashed border-blue-300 rounded-xl p-6 hover:border-blue-500 hover:shadow-lg hover:bg-blue-50/80 transition-all duration-300 cursor-pointer block"
-                  @click="showAddSaleModal = true"
                 >
                   <div class="flex flex-col items-center text-center">
                     <div class="p-4 rounded-xl bg-gradient-to-br from-blue-400 to-cyan-500 text-white mb-3 group-hover:scale-110 transition-transform duration-300">
@@ -867,6 +866,9 @@ const showAddSaleModal = ref(false)
 const handleSaleAdded = () => {
   showAddSaleModal.value = false
 }
+
+// const showAddProductModal = ref(false)
+// const showAddStaffModal = ref(false)
 
 const setupSalesListener = () => {
   const salesRef = collection(db, 'sales')

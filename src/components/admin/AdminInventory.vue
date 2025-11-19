@@ -335,6 +335,46 @@
             </button>
           </div>
 
+          <!-- Products vs Orders vs Categories Tabs -->
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-0">
+              <button
+                @click="activeTab = 'products'"
+                :class="[
+                  'flex-1 px-4 py-2 rounded-lg font-medium transition-all duration-200 text-center',
+                  activeTab === 'products'
+                    ? 'bg-purple-600 text-white shadow-lg'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                ]"
+              >
+                Products ({{ products.length }})
+              </button>
+              <button
+                @click="activeTab = 'orders'"
+                :class="[
+                  'flex-1 px-4 py-2 rounded-lg font-medium transition-all duration-200 text-center',
+                  activeTab === 'orders'
+                    ? 'bg-purple-600 text-white shadow-lg'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                ]"
+              >
+                Orders ({{ orders.length }})
+              </button>
+              <!-- CHANGE: Added Categories Tab -->
+              <button
+                @click="activeTab = 'categories'"
+                :class="[
+                  'flex-1 px-4 py-2 rounded-lg font-medium transition-all duration-200 text-center',
+                  activeTab === 'categories'
+                    ? 'bg-purple-600 text-white shadow-lg'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                ]"
+              >
+                Categories ({{ categories.length }})
+              </button>
+            </div>
+          </div>
+
           <!-- Stats Cards -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 mb-6 sm:mb-8">
             <!-- Total Products -->
@@ -447,18 +487,7 @@
                   class="px-3 sm:px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 text-sm sm:text-base"
                 >
                   <option value="">All Categories</option>
-                  <option value="interior">Interior Paint</option>
-                  <option value="exterior">Exterior Paint</option>
-                  <option value="primer">Primers</option>
-                  <option value="specialty">Specialty Paints</option>
-                  <option value="house-interior">House Interior</option>
-                  <option value="house-exterior">House Exterior</option>
-                  <option value="automotive">Automotive Paints</option>
-                  <option value="wood-coatings">Wood Coatings</option>
-                  <option value="metal-coatings">Metal Coatings</option>
-                  <option value="waterproofing">Waterproofing Products</option>
-                  <option value="thinners-solvents">Thinners & Solvents</option>
-                  <option value="accessories-tools">Accessories & Tools</option>
+                  <option v-for="cat in categories" :key="cat.key" :value="cat.key">{{ cat.value }}</option>
                 </select>
                 <select
                   v-model="filterStock"
@@ -482,7 +511,7 @@
             </div>
 
             <!-- Empty State -->
-            <div v-if="!loading && products.length === 0" class="p-8 text-center">
+            <div v-if="!loading && products.length === 0 && activeTab === 'products'" class="p-8 text-center">
               <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
                 <PackageIcon class="w-8 h-8 text-purple-600" />
               </div>
@@ -498,7 +527,7 @@
             </div>
 
             <!-- Mobile View -->
-            <div v-else-if="products.length > 0" class="block lg:hidden">
+            <div v-if="activeTab === 'products' && products.length > 0" class="block lg:hidden">
               <div v-for="product in paginatedProducts" :key="product.id" class="p-4 border-b border-gray-100 hover:bg-gray-50/50 transition-colors">
                 <div class="flex items-center justify-between mb-3">
                   <div class="flex items-center gap-3 flex-1 min-w-0">
@@ -551,7 +580,7 @@
             </div>
 
             <!-- Desktop View -->
-            <div v-if="products.length > 0" class="hidden lg:block overflow-x-auto">
+            <div v-if="activeTab === 'products' && products.length > 0" class="hidden lg:block overflow-x-auto">
               <table class="w-full">
                 <thead>
                   <tr class="border-b border-gray-100">
@@ -639,8 +668,117 @@
               </table>
             </div>
 
+            <!-- Orders Table -->
+            <div v-if="activeTab === 'orders' && orders.length > 0" class="block lg:hidden">
+              <div v-for="order in orders" :key="order.id" class="p-4 border-b border-gray-100 hover:bg-gray-50/50 transition-colors">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex-1 min-w-0">
+                    <p class="font-medium text-gray-900 truncate">{{ order.productName }}</p>
+                    <p class="text-sm text-gray-600 truncate">Supplier: {{ order.supplierName }}</p>
+                    <p class="text-xs text-gray-500">Qty: {{ order.quantity }} | {{ formatDate(order.createdAt) }}</p>
+                  </div>
+                  <div class="flex items-center gap-2 flex-shrink-0">
+                    <select
+                      :value="order.status"
+                      @change="updateOrderStatus(order.id, $event.target.value)"
+                      class="px-2 py-1 rounded text-xs border border-gray-300"
+                      :class="{
+                        'text-orange-700 bg-orange-50 border-orange-200': order.status === 'incomplete',
+                        'text-green-700 bg-green-50 border-green-200': order.status === 'delivered'
+                      }"
+                    >
+                      <option value="incomplete">Incomplete</option>
+                      <option value="delivered">Delivered</option>
+                    </select>
+                    <button
+                      @click="deleteOrder(order.id)"
+                      class="p-2 hover:bg-red-50 rounded-lg text-red-600 hover:text-red-700 transition-colors"
+                      title="Delete Order"
+                    >
+                      <Trash2Icon class="w-5 h-5" />
+                    </button>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 mt-2">
+                  <span
+                    class="px-2 py-1 rounded-full text-xs flex items-center gap-1"
+                    :class="{
+                      'bg-orange-100 text-orange-800': order.status === 'incomplete',
+                      'bg-green-100 text-green-800': order.status === 'delivered'
+                    }"
+                  >
+                    <TruckIcon class="w-3 h-3" />
+                    {{ order.status === 'incomplete' ? 'Pending' : 'Delivered' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div v-if="activeTab === 'orders' && orders.length === 0 && !loading" class="p-8 text-center">
+              <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center">
+                <ShoppingCartIcon class="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 class="text-lg font-medium text-gray-900 mb-2">No orders placed yet</h3>
+              <p class="text-gray-600 mb-4">Click the 'Order Product' button to start placing orders.</p>
+            </div>
+
+            <!-- Categories Management Section -->
+            <div v-if="activeTab === 'categories'" class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+              <div class="space-y-6">
+                <!-- Add Category Form -->
+                <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-4 border border-purple-200">
+                  <h3 class="font-semibold text-gray-900 mb-4">Add New Category</h3>
+                  <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                    <input
+                      v-model="newCategoryForm.value"
+                      type="text"
+                      placeholder="Enter category name"
+                      class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    />
+                    <input
+                      v-model="newCategoryForm.key"
+                      type="text"
+                      placeholder="Category key (e.g., specialty-paint)"
+                      class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    />
+                    <button
+                      @click="addCategory"
+                      class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium whitespace-nowrap"
+                    >
+                      Add Category
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Categories List -->
+                <div>
+                  <h3 class="font-semibold text-gray-900 mb-4">Existing Categories</h3>
+                  <div v-if="categories.length === 0" class="text-center py-8 text-gray-500">
+                    No categories found
+                  </div>
+                  <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <div
+                      v-for="(cat, index) in categories"
+                      :key="index"
+                      class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-4 border border-gray-200 flex items-center justify-between hover:shadow-md transition-shadow"
+                    >
+                      <div class="flex-1 min-w-0">
+                        <p class="font-medium text-gray-900 truncate">{{ cat.value }}</p>
+                        <p class="text-sm text-gray-500 truncate">{{ cat.key }}</p>
+                      </div>
+                      <button
+                        @click="deleteCategory(index)"
+                        class="ml-3 px-3 py-1 bg-red-100 text-red-600 rounded hover:bg-red-200 transition-colors text-sm font-medium flex-shrink-0"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- Pagination -->
-            <div v-if="products.length > 0" class="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-4 border-t border-gray-100">
+            <div v-if="activeTab === 'products' && products.length > 0" class="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-4 border-t border-gray-100">
               <div class="flex items-center gap-2">
                 <select
                   v-model="perPage"
@@ -1053,7 +1191,7 @@
           <div class="w-full lg:w-1/2 p-4 flex flex-col">
             <h4 class="text-md font-semibold text-gray-800 mb-4">Current Orders</h4>
             <div class="flex-1 overflow-y-auto space-y-3">
-              <div v-if="orders.length === 0" class="text-center py-8 text-gray-500">
+              <div v-if="orders.length === 0 && activeTab === 'orders'" class="text-center py-8 text-gray-500">
                 No orders yet. Create your first order!
               </div>
               <div v-for="order in orders" :key="order.id" class="bg-gray-50 rounded-lg p-4 border border-gray-200">
@@ -1280,7 +1418,7 @@ const currentPage = ref(1)
 const perPage = ref(10)
 const mobileSidebarOpen = ref(false)
 const error = ref(null)
-const unsubscribe = ref(null)
+const unsubscribe = ref(null) // For product listener
 const showNotification = ref(false)
 const notificationMessage = ref('')
 const notificationType = ref('success')
@@ -1353,6 +1491,27 @@ const orderForm = ref({
   supplierName: '',
   quantity: 0,
   status: 'incomplete'
+})
+
+// Category management state
+const activeTab = ref('products') // 'products', 'orders', 'categories'
+const categories = ref([
+  { key: 'interior', value: 'Interior Paint' },
+  { key: 'exterior', value: 'Exterior Paint' },
+  { key: 'primer', value: 'Primers' },
+  { key: 'specialty', value: 'Specialty Paints' },
+  { key: 'house-interior', value: 'House Interior' },
+  { key: 'house-exterior', value: 'House Exterior' },
+  { key: 'automotive', value: 'Automotive Paints' },
+  { key: 'wood-coatings', value: 'Wood Coatings' },
+  { key: 'metal-coatings', value: 'Metal Coatings' },
+  { key: 'waterproofing', value: 'Waterproofing Products' },
+  { key: 'thinners-solvents', value: 'Thinners & Solvents' },
+  { key: 'accessories-tools', value: 'Accessories & Tools' }
+])
+const newCategoryForm = ref({
+  key: '',
+  value: ''
 })
 
 // Constants - declared at top level
@@ -1762,7 +1921,8 @@ const fetchOrders = async () => {
     const ordersCollection = collection(db, 'orders');
     const q = query(ordersCollection, orderBy('createdAt', 'desc'));
 
-    const unsubscribeOrders = onSnapshot(q,
+    const unsubscribeOrders = onSnapshot(
+      q,
       (snapshot) => {
         console.log('Orders snapshot received, docs count:', snapshot.docs.length);
         orders.value = snapshot.docs.map(doc => {
@@ -1968,6 +2128,68 @@ const formatDate = (timestamp) => {
   });
 };
 
+// Category management methods
+const fetchCategories = async () => {
+  try {
+    if (!db) return;
+    const docRef = doc(db, 'settings', 'categories');
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      categories.value = docSnap.data().list || [];
+    }
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+  }
+};
+
+const addCategory = async () => {
+  if (!newCategoryForm.value.value.trim() || !newCategoryForm.value.key.trim()) {
+    notificationMessage.value = 'Category name and key are required.';
+    notificationType.value = 'error';
+    showNotification.value = true;
+    return;
+  }
+  try {
+    const updatedCategories = [...categories.value, { value: newCategoryForm.value.value, key: newCategoryForm.value.key }];
+    const settingsRef = doc(db, 'settings', 'categories');
+    await updateDoc(settingsRef, { list: updatedCategories });
+    categories.value = updatedCategories;
+    newCategoryForm.value = { value: '', key: '' };
+    notificationMessage.value = 'Category added successfully!';
+    notificationType.value = 'success';
+    showNotification.value = true;
+  } catch (error) {
+    console.error("Error adding category:", error);
+    notificationMessage.value = 'Failed to add category.';
+    notificationType.value = 'error';
+    showNotification.value = true;
+  }
+};
+
+const deleteCategory = async (index) => {
+  if (categories.value[index].key === 'interior' || categories.value[index].key === 'exterior') {
+    notificationMessage.value = 'Cannot delete default categories.';
+    notificationType.value = 'error';
+    showNotification.value = true;
+    return;
+  }
+  try {
+    const updatedCategories = categories.value.filter((_, i) => i !== index);
+    const settingsRef = doc(db, 'settings', 'categories');
+    await updateDoc(settingsRef, { list: updatedCategories });
+    categories.value = updatedCategories;
+    notificationMessage.value = 'Category deleted successfully!';
+    notificationType.value = 'success';
+    showNotification.value = true;
+  } catch (error) {
+    console.error("Error deleting category:", error);
+    notificationMessage.value = 'Failed to delete category.';
+    notificationType.value = 'error';
+    showNotification.value = true;
+  }
+};
+
+// Image editor methods
 const openImageEditor = () => {
   if (imagePreview.value) {
     currentImage.value = imagePreview.value
@@ -2020,32 +2242,32 @@ const handleResize = (event) => {
   switch (resizeDirection.value) {
     case 'top':
       newBounds.top = Math.max(0, Math.min(startBounds.value.top + deltaY, startBounds.value.top + startBounds.value.height - 20))
-      newBounds.height = startBounds.value.height - (newBounds.top - newBounds.value.top)
+      newBounds.height = startBounds.value.height - (newBounds.top - startBounds.value.top)
       break
     case 'bottom':
       newBounds.height = Math.max(20, Math.min(startBounds.value.height + deltaY, imgHeight - startBounds.value.top))
       break
     case 'left':
       newBounds.left = Math.max(0, Math.min(startBounds.value.left + deltaX, startBounds.value.left + startBounds.value.width - 20))
-      newBounds.width = startBounds.value.width - (newBounds.left - newBounds.value.left)
+      newBounds.width = startBounds.value.width - (newBounds.left - startBounds.value.left)
       break
     case 'right':
       newBounds.width = Math.max(20, Math.min(startBounds.value.width + deltaX, imgWidth - startBounds.value.left))
       break
     case 'top-left':
       newBounds.top = Math.max(0, Math.min(startBounds.value.top + deltaY, startBounds.value.top + startBounds.value.height - 20))
+      newBounds.height = startBounds.value.height - (newBounds.top - startBounds.value.top)
       newBounds.left = Math.max(0, Math.min(startBounds.value.left + deltaX, startBounds.value.left + startBounds.value.width - 20))
-      newBounds.height = startBounds.value.height - (newBounds.top - newBounds.top)
-      newBounds.width = startBounds.value.width - (newBounds.left - newBounds.left)
+      newBounds.width = startBounds.value.width - (newBounds.left - startBounds.value.left)
       break
     case 'top-right':
       newBounds.top = Math.max(0, Math.min(startBounds.value.top + deltaY, startBounds.value.top + startBounds.value.height - 20))
-      newBounds.height = startBounds.value.height - (newBounds.top - newBounds.top)
+      newBounds.height = startBounds.value.height - (newBounds.top - startBounds.value.top)
       newBounds.width = Math.max(20, Math.min(startBounds.value.width + deltaX, imgWidth - startBounds.value.left))
       break
     case 'bottom-left':
       newBounds.left = Math.max(0, Math.min(startBounds.value.left + deltaX, startBounds.value.left + startBounds.value.width - 20))
-      newBounds.width = startBounds.value.width - (newBounds.left - newBounds.left)
+      newBounds.width = startBounds.value.width - (newBounds.left - startBounds.value.left)
       newBounds.height = Math.max(20, Math.min(startBounds.value.height + deltaY, imgHeight - startBounds.value.top))
       break
     case 'bottom-right':
@@ -2131,6 +2353,8 @@ onMounted(() => {
     console.error('Mount error:', err)
     error.value = 'Failed to initialize inventory. Please refresh the page.'
   });
+
+  fetchCategories();
 
   setTimeout(() => {
     fetchOrders();

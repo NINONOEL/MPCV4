@@ -356,7 +356,7 @@
           </div>
 
           <!-- Stats Cards -->
-          <div v-if="!loading || sales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div v-if="!loading || sales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
             <!-- Total Revenue -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
@@ -422,64 +422,9 @@
                 </div>
               </div>
             </div>
-
-            <!-- Average Order Value -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-4">
-                <div class="flex items-center gap-3">
-                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 transform hover:scale-110 transition-transform duration-200">
-                    <TrendingUp class="w-5 h-5 text-white" />
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-xs sm:text-sm text-gray-600">Average Order Value</p>
-                    <!-- reduced font size from text-2xl to text-lg to handle millions -->
-                    <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ formatCurrency(averageOrderValue) }}</p>
-                    <div class="flex items-center gap-1 mt-1">
-                      <TrendingUp class="w-3 h-3 sm:w-4 sm:h-4 text-amber-600" />
-                      <span class="text-xs font-medium text-amber-600">5.3%</span>
-                      <span class="text-xs text-gray-600">vs last period</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
-          <!-- Best Seller Section -->
-          <div v-if="!loading && topProducts.length > 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6 mb-8">
-            <h2 class="text-lg font-semibold text-gray-900 mb-4">Best Seller</h2>
-            <div v-if="sortedTopProducts.length > 0" class="flex flex-col md:flex-row items-start md:items-center gap-6">
-              <div class="w-20 h-20 rounded-lg bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center shadow-sm">
-                <Package class="w-10 h-10 text-green-600" />
-              </div>
-              <div class="flex-1">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">
-                  <div>
-                    <h3 class="text-xl font-bold text-gray-900">{{ sortedTopProducts[0].name }}</h3>
-                    <p class="text-gray-600">{{ sortedTopProducts[0].category }}</p>
-                  </div>
-                  <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium border border-green-200">
-                    Top Seller
-                  </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                  <div>
-                    <p class="text-sm text-gray-600">Total Revenue</p>
-                    <p class="text-xl font-bold text-gray-900">{{ formatCurrency(sortedTopProducts[0].revenue) }}</p>
-                  </div>
-                  <div>
-                    <p class="text-sm text-gray-600">Units Sold</p>
-                    <p class="text-xl font-bold text-gray-900">{{ sortedTopProducts[0].units }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div v-else class="text-center py-8">
-              <Package class="w-8 h-8 text-gray-300 mx-auto mb-2" />
-              <p class="text-gray-600">No product data available</p>
-            </div>
-          </div>
+          <!-- Removed the Average Order Value card and Best Seller section to lighten the page -->
 
           <!-- Empty State -->
           <div v-if="!loading && sales.length === 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-8 mb-8 text-center">
@@ -1656,6 +1601,8 @@ const deleteAllSales = async () => {
         }
       }
     }
+
+    localStorage.setItem('nextOrderId', '1')
 
     alert(`Successfully deleted ${sales.value.length} sales and restored all stock!`)
     showDeleteAllModal.value = false
