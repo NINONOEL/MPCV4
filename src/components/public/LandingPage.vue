@@ -286,7 +286,7 @@
                 
         <div class="space-y-4">
           <div class="flex items-start space-x-2.5">
-            <div class="w-9 h-9 bg-customer-primary-gradient rounded-xl flex items-center justify-center shadow-customer-md flex-shrink-0">
+            <div class="w-9 h-9 bg-customer-primary-gradient rounded-xl flex items-center justify-center mr-3 shadow-customer-md flex-shrink-0">
               <AwardIcon class="h-4.5 w-4.5 text-white" />
             </div>
             <div>
@@ -296,7 +296,7 @@
           </div>
                     
           <div class="flex items-start space-x-2.5">
-            <div class="w-9 h-9 bg-admin-primary-gradient rounded-xl flex items-center justify-center shadow-admin-md flex-shrink-0">
+            <div class="w-9 h-9 bg-admin-primary-gradient rounded-xl flex items-center justify-center mr-3 shadow-admin-md flex-shrink-0">
               <UsersIcon class="h-4.5 w-4.5 text-white" />
             </div>
             <div>
@@ -306,7 +306,7 @@
           </div>
                     
           <div class="flex items-start space-x-2.5">
-            <div class="w-9 h-9 bg-staff-primary-gradient rounded-xl flex items-center justify-center shadow-staff-md flex-shrink-0">
+            <div class="w-9 h-9 bg-staff-primary-gradient rounded-xl flex items-center justify-center mr-3 shadow-staff-md flex-shrink-0">
               <ShieldCheckIcon class="h-4.5 w-4.5 text-white" />
             </div>
             <div>
@@ -438,6 +438,19 @@
                 v-model="form.email"
                 class="input-field-customer"
                 placeholder="your.email@gmail.com"
+                required
+                :disabled="isSubmitting"
+              />
+            </div>
+
+            <div class="space-y-1">
+              <label for="contactNo" class="block text-xs font-bold text-neutral-800">Contact No. *</label>
+              <input 
+                type="tel"
+                id="contactNo"
+                v-model="form.contactNo"
+                class="input-field-customer"
+                placeholder="09XX XXX XXXX"
                 required
                 :disabled="isSubmitting"
               />
@@ -634,6 +647,7 @@ const form = ref({
   firstName: '',
   lastName: '',
   email: '',
+  contactNo: '',
   service: '',
   message: ''
 })
@@ -643,7 +657,7 @@ const isSubmitting = ref(false)
 
 const submitForm = async () => {
   // Validate form before submission
-  if (!form.value.firstName.trim() || !form.value.lastName.trim() || !form.value.email.trim() || !form.value.service) {
+  if (!form.value.firstName.trim() || !form.value.lastName.trim() || !form.value.email.trim() || !form.value.contactNo.trim() || !form.value.service) {
     alert('Please fill in all required fields.')
     return
   }
@@ -658,6 +672,7 @@ const submitForm = async () => {
         firstName: '',
         lastName: '',
         email: '',
+        contactNo: '',
         service: '',
         message: ''
       }

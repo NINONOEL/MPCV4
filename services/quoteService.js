@@ -21,6 +21,7 @@ export const quoteService = {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
+        contactNo: data.contactNo, // Added contactNo to the saved data
         service: data.service,
         message: data.message,
         status: "new", // new, contacted, completed

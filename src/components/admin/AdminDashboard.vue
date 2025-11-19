@@ -380,9 +380,10 @@
                   </div>
                 </button>
 
-                <button
+                <router-link
+                  to="/admin/sales-analytics"
+                  class="group relative bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-dashed border-blue-300 rounded-xl p-6 hover:border-blue-500 hover:shadow-lg hover:bg-blue-50/80 transition-all duration-300 cursor-pointer block"
                   @click="showAddSaleModal = true"
-                  class="group relative bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-dashed border-blue-300 rounded-xl p-6 hover:border-blue-500 hover:shadow-lg hover:bg-blue-50/80 transition-all duration-300 cursor-pointer"
                 >
                   <div class="flex flex-col items-center text-center">
                     <div class="p-4 rounded-xl bg-gradient-to-br from-blue-400 to-cyan-500 text-white mb-3 group-hover:scale-110 transition-transform duration-300">
@@ -391,91 +392,7 @@
                     <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-1">Add Sale</h3>
                     <p class="text-xs sm:text-sm text-gray-600">Record new transaction</p>
                   </div>
-                </button>
-              </div>
-            </div>
-
-            <!-- Performance Charts Section -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-              <!-- Top Products Chart -->
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6">
-                <div class="flex items-center justify-between mb-6">
-                  <div>
-                    <h3 class="text-base sm:text-lg font-bold text-gray-900">Top Products</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-1">Most sold this month</p>
-                  </div>
-                  <div class="p-3 rounded-lg bg-gradient-to-br from-purple-400 to-violet-500 text-white">
-                    <PackageIcon class="w-5 h-5" />
-                  </div>
-                </div>
-                <div class="space-y-3 sm:space-y-4">
-                  <div v-for="(product, index) in topProductsData.slice(0, 3)" :key="index" class="flex items-center gap-3 sm:gap-4">
-                    <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-purple-400 to-violet-500 text-white flex items-center justify-center text-xs sm:text-sm font-bold">
-                      {{ index + 1 }}
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <p class="text-sm sm:text-base font-semibold text-gray-900 truncate">{{ product.name }}</p>
-                      <p class="text-xs text-gray-600">{{ product.units }} sales</p>
-                    </div>
-                    <div class="flex-shrink-0 w-16 sm:w-20 h-6 bg-gray-100 rounded-full overflow-hidden">
-                      <div class="h-full bg-gradient-to-r from-purple-400 to-violet-500 transition-all duration-300" :style="{ width: (product.units / maxProductUnits) * 100 + '%' }"></div>
-                    </div>
-                  </div>
-                  <div v-if="topProductsData.length === 0" class="text-center py-4">
-                    <p class="text-sm text-gray-600">No product data available yet</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Revenue Summary -->
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6">
-                <div class="flex items-center justify-between mb-6">
-                  <div>
-                    <h3 class="text-base sm:text-lg font-bold text-gray-900">Revenue Summary</h3>
-                    <p class="text-xs sm:text-sm text-gray-600 mt-1">Financial overview</p>
-                  </div>
-                  <div class="p-3 rounded-lg bg-gradient-to-br from-teal-400 to-cyan-500 text-white">
-                    <DollarSignIcon class="w-5 h-5" />
-                  </div>
-                </div>
-
-                <div class="space-y-3">
-                  <div class="p-4 sm:p-5 bg-gradient-to-br from-emerald-50 to-green-50 rounded-lg border border-green-200">
-                    <div class="flex items-start justify-between">
-                      <div>
-                        <p class="text-xs sm:text-sm text-gray-600 font-medium">Today's Revenue</p>
-                        <p class="text-xl sm:text-2xl font-bold text-gray-900 mt-2">₱{{ todayRevenue.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</p>
-                      </div>
-                      <div class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs sm:text-sm font-semibold">
-                        {{ todayGrowth }}%
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="p-4 sm:p-5 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg border border-blue-200">
-                    <div class="flex items-start justify-between">
-                      <div>
-                        <p class="text-xs sm:text-sm text-gray-600 font-medium">This Week</p>
-                        <p class="text-xl sm:text-2xl font-bold text-gray-900 mt-2">₱{{ weekRevenue.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</p>
-                      </div>
-                      <div class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs sm:text-sm font-semibold">
-                        {{ weekGrowth }}%
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="p-4 sm:p-5 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg border border-purple-200">
-                    <div class="flex items-start justify-between">
-                      <div>
-                        <p class="text-xs sm:text-sm text-gray-600 font-medium">This Month</p>
-                        <p class="text-xl sm:text-2xl font-bold text-gray-900 mt-2">₱{{ monthRevenue.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</p>
-                      </div>
-                      <div class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs sm:text-sm font-semibold">
-                        {{ monthGrowth }}%
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                </router-link>
               </div>
             </div>
 
@@ -557,6 +474,7 @@
                       <tr>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Name</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Email</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Contact No.</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Service</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Status</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Date</th>
@@ -570,6 +488,9 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                           <div class="text-sm text-gray-600">{{ quote.email }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-sm text-gray-600">{{ quote.contactNo || 'N/A' }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                           <div class="text-sm text-gray-600 capitalize">{{ formatService(quote.service) }}</div>
@@ -645,6 +566,11 @@
                     <div>
                       <label class="text-xs font-semibold text-gray-600 uppercase">Email</label>
                       <p class="text-gray-900 font-medium mt-1">{{ selectedQuote.email }}</p>
+                    </div>
+
+                    <div>
+                      <label class="text-xs font-semibold text-gray-600 uppercase">Contact No.</label>
+                      <p class="text-gray-900 font-medium mt-1">{{ selectedQuote.contactNo || 'N/A' }}</p>
                     </div>
 
                     <div>
@@ -836,72 +762,7 @@ const isLoggingOut = ref(false)
 const userEmail = ref('')
 const userDisplayName = ref('')
 
-const todayRevenue = ref(0)
-const weekRevenue = ref(0)
-const monthRevenue = ref(0)
-const todayGrowth = ref(8.2)
-const weekGrowth = ref(5.1)
-const monthGrowth = ref(12.5)
-
-const showAddProductModal = ref(false)
-const showAddStaffModal = ref(false)
-const showAddSaleModal = ref(false)
-
-const topProductsData = ref([])
-const last7DaysSales = ref([])
-const peakHoursData = ref([])
-const maxDailySales = ref(1)
-const maxProductUnits = ref(1)
-const maxHourlyValue = ref(1)
-
-// Define helper functions before using them
-const calculateLast7DaysSales = (sales) => {
-  last7DaysSales.value = sales.slice(0, 7) // Assuming sales are sorted by date
-  maxDailySales.value = Math.max(...last7DaysSales.value.map(s => s.total || 0), 1)
-}
-
-const calculateTopProducts = (sales) => {
-  const productMap = new Map()
-  sales.forEach(sale => {
-    if (sale.items) {
-      sale.items.forEach(item => {
-        const currentCount = productMap.get(item.name) || { units: 0, name: item.name }
-        currentCount.units += item.quantity
-        productMap.set(item.name, currentCount)
-      })
-    }
-  })
-  topProductsData.value = Array.from(productMap.values()).sort((a, b) => b.units - a.units)
-  maxProductUnits.value = Math.max(...topProductsData.value.map(p => p.units), 1)
-}
-
-const calculatePeakHours = (sales) => {
-  const hourMap = new Map()
-  sales.forEach(sale => {
-    const hour = sale.date.getHours()
-    const currentCount = hourMap.get(hour) || { count: 0, hour: hour }
-    currentCount.count += 1
-    hourMap.set(hour, currentCount)
-  })
-  peakHoursData.value = Array.from(hourMap.values()).sort((a, b) => a.hour - b.hour)
-  maxHourlyValue.value = Math.max(...peakHoursData.value.map(h => h.count), 1)
-}
-
-const salesTrendData = ref([
-  { label: 'Mon', value: 45 },
-  { label: 'Tue', value: 52 },
-  { label: 'Wed', value: 38 },
-  { label: 'Thu', value: 65 },
-  { label: 'Fri', value: 78 },
-  { label: 'Sat', value: 92 },
-  { label: 'Sun', value: 68 }
-])
-
-const topProducts = ref([
-  { name: 'Premium White Paint', sales: 45 },
-  { name: 'Matte Black Finish', sales: 38 },
-  { name: 'Glossy Red Paint', sales: 32 }
-])
+// removed Performance Charts Section (Top Products and Revenue Summary)
 
 const activeTab = ref('dashboard')
 
@@ -1002,6 +863,7 @@ const confirmLogout = async () => {
   }
 }
 
+const showAddSaleModal = ref(false)
 const handleSaleAdded = () => {
   showAddSaleModal.value = false
 }
@@ -1015,23 +877,7 @@ const setupSalesListener = () => {
     let salesTotal = 0
     let ordersCount = 0
 
-    todayRevenue.value = 0
-    weekRevenue.value = 0
-    monthRevenue.value = 0
-
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-
-    const tomorrow = new Date(today)
-    tomorrow.setDate(tomorrow.getDate() + 1)
-
-    const weekAgo = new Date()
-    weekAgo.setDate(weekAgo.getDate() - 7)
-    weekAgo.setHours(0, 0, 0, 0)
-
-    const monthStart = new Date()
-    monthStart.setDate(1)
-    monthStart.setHours(0, 0, 0, 0)
+    // Removed todayRevenue, weekRevenue, monthRevenue as these were part of the removed section
 
     snapshot.forEach((doc) => {
       const data = doc.data()
@@ -1046,30 +892,14 @@ const setupSalesListener = () => {
       }
 
       allSales.push(sale)
-
       salesTotal += saleAmount
-
-      if (saleDate >= today && saleDate < tomorrow) {
-        todayRevenue.value += saleAmount
-      }
-
-      if (saleDate >= weekAgo) {
-        weekRevenue.value += saleAmount
-      }
-
-      if (saleDate >= monthStart) {
-        monthRevenue.value += saleAmount
-      }
-
       ordersCount++
     })
 
     totalSales.value = salesTotal
     totalOrders.value = ordersCount
 
-    calculateLast7DaysSales(allSales)
-    calculateTopProducts(allSales)
-    calculatePeakHours(allSales)
+    // Removed calls to calculateLast7DaysSales, calculateTopProducts, calculatePeakHours
   })
 }
 
