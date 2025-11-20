@@ -750,29 +750,27 @@
                 </div>
 
                 <!-- Categories List -->
-                <div>
-                  <h3 class="font-semibold text-gray-900 mb-4">Existing Categories</h3>
-                  <div v-if="categories.length === 0" class="text-center py-8 text-gray-500">
-                    No categories found
+                <h3 class="font-semibold text-gray-900 mb-4">Existing Categories</h3>
+                <div v-if="categories.length === 0" class="text-center py-8 text-gray-500">
+                  No categories found
+                </div>
+
+                <!-- CHANGE: Updated to ensure Delete button is properly functional and category updates are reflected -->
+                <div
+                  v-for="(cat, index) in categories"
+                  :key="cat.key"
+                  class="flex items-center justify-between bg-gradient-to-r from-gray-50 to-white p-4 rounded-lg border border-gray-200 hover:border-gray-300 transition-all mb-3"
+                >
+                  <div class="flex-1">
+                    <h4 class="font-medium text-gray-900">{{ cat.value }}</h4>
+                    <p class="text-sm text-gray-600">{{ cat.key }}</p>
                   </div>
-                  <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                    <div
-                      v-for="(cat, index) in categories"
-                      :key="index"
-                      class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-4 border border-gray-200 flex items-center justify-between hover:shadow-md transition-shadow"
-                    >
-                      <div class="flex-1 min-w-0">
-                        <p class="font-medium text-gray-900 truncate">{{ cat.value }}</p>
-                        <p class="text-sm text-gray-500 truncate">{{ cat.key }}</p>
-                      </div>
-                      <button
-                        @click="deleteCategory(index)"
-                        class="ml-3 px-3 py-1 bg-red-100 text-red-600 rounded hover:bg-red-200 transition-colors text-sm font-medium flex-shrink-0"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
+                  <button
+                    @click="deleteCategory(index)"
+                    class="px-4 py-2 bg-red-100 text-red-700 hover:bg-red-200 font-medium rounded-lg transition-colors"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
@@ -1363,7 +1361,8 @@ import {
   onSnapshot,
   where,
   serverTimestamp,
-  getDoc
+  getDoc,
+  setDoc // Import setDoc
 } from 'firebase/firestore'
 import { db } from '../../config/firebase'
 import {
@@ -1868,7 +1867,7 @@ const showSuccessNotification = (message) => {
 
   setTimeout(() => {
     showNotification.value = false
-  }, 4000)
+  }, 3000)
 }
 
 const getStockLevelClass = (stockLevel) => {
@@ -2152,7 +2151,7 @@ const addCategory = async () => {
   try {
     const updatedCategories = [...categories.value, { value: newCategoryForm.value.value, key: newCategoryForm.value.key }];
     const settingsRef = doc(db, 'settings', 'categories');
-    await updateDoc(settingsRef, { list: updatedCategories });
+    await setDoc(settingsRef, { list: updatedCategories }, { merge: true });
     categories.value = updatedCategories;
     newCategoryForm.value = { value: '', key: '' };
     notificationMessage.value = 'Category added successfully!';
@@ -2176,7 +2175,7 @@ const deleteCategory = async (index) => {
   try {
     const updatedCategories = categories.value.filter((_, i) => i !== index);
     const settingsRef = doc(db, 'settings', 'categories');
-    await updateDoc(settingsRef, { list: updatedCategories });
+    await setDoc(settingsRef, { list: updatedCategories }, { merge: true });
     categories.value = updatedCategories;
     notificationMessage.value = 'Category deleted successfully!';
     notificationType.value = 'success';

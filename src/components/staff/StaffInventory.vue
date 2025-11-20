@@ -229,18 +229,7 @@
               <div class="flex flex-col sm:flex-row gap-4">
                 <select v-model="filterCategory" class="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900">
                   <option value="">All Categories</option>
-                  <option value="interior">Interior Paint</option>
-                  <option value="exterior">Exterior Paint</option>
-                  <option value="primer">Primers</option>
-                  <option value="specialty">Specialty Paints</option>
-                  <option value="house-interior">House Interior</option>
-                  <option value="house-exterior">House Exterior</option>
-                  <option value="automotive">Automotive Paints</option>
-                  <option value="wood-coatings">Wood Coatings</option>
-                  <option value="metal-coatings">Metal Coatings</option>
-                  <option value="waterproofing">Waterproofing Products</option>
-                  <option value="thinners-solvents">Thinners & Solvents</option>
-                  <option value="accessories-tools">Accessories & Tools</option>
+                  <option v-for="cat in categories" :key="cat.key" :value="cat.key">{{ cat.value }}</option>
                 </select>
                 <select v-model="filterStock" class="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900">
                   <option value="">All Stock Levels</option>
@@ -402,7 +391,7 @@ import {
   Bell as BellIcon,
   TrendingUp as TrendingUpIcon
 } from 'lucide-vue-next'
-import { collection, query, onSnapshot } from 'firebase/firestore'
+import { collection, query, onSnapshot, doc, getDoc } from 'firebase/firestore'
 import { db } from '../../config/firebase'
 
 // Router and reactive state
@@ -417,6 +406,7 @@ const loading = ref(false)
 const error = ref(null)
 const unsubscribe = ref(null)
 const products = ref([])
+const categories = ref([])
 
 // Database reference
 const productsRef = db ? collection(db, 'products') : null
@@ -527,6 +517,20 @@ const fetchProducts = async () => {
   }
 }
 
+const fetchCategories = async () => {
+  try {
+    if (!db) return
+    const docRef = doc(db, 'settings', 'categories')
+    const docSnap = await getDoc(docRef)
+    if (docSnap.exists()) {
+      categories.value = docSnap.data().list || []
+      console.log('[v0] Categories fetched:', categories.value)
+    }
+  } catch (error) {
+    console.error('[v0] Error fetching categories:', error)
+  }
+}
+
 const getStockLevelClass = (stockLevel) => {
   if (stockLevel === 0) return 'bg-red-100 text-red-800 border border-red-200'
   if (stockLevel <= 10) return 'bg-amber-100 text-amber-800 border border-amber-200'
@@ -540,21 +544,8 @@ const formatStockLevel = (stockLevel) => {
 }
 
 const formatCategory = (category) => {
-  const categories = {
-    interior: 'Interior Paint',
-    exterior: 'Exterior Paint',
-    primer: 'Primers',
-    specialty: 'Specialty Paints',
-    'house-interior': 'House Interior',
-    'house-exterior': 'House Exterior',
-    'automotive': 'Automotive Paints',
-    'wood-coatings': 'Wood Coatings',
-    'metal-coatings': 'Metal Coatings',
-    'waterproofing': 'Waterproofing Products',
-    'thinners-solvents': 'Thinners & Solvents',
-    'accessories-tools': 'Accessories & Tools'
-  }
-  return categories[category] || category
+  const cat = categories.value.find(cat => cat.key === category)
+  return cat ? cat.value : category
 }
 
 const toggleMobileSidebar = () => {
@@ -570,6 +561,10 @@ onMounted(() => {
   fetchProducts().catch(err => {
     console.error('Mount error:', err)
     error.value = 'Failed to initialize inventory. Please refresh the page.'
+  })
+  fetchCategories().catch(err => {
+    console.error('Mount error:', err)
+    error.value = 'Failed to initialize categories. Please refresh the page.'
   })
 })
 

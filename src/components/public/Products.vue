@@ -174,7 +174,8 @@ import {
   collection, 
   query, 
   onSnapshot,
-  where
+  doc,
+  getDoc
 } from 'firebase/firestore'
 import { db } from '../../config/firebase'
 import { 
@@ -193,20 +194,8 @@ const error = ref(null)
 const searchQuery = ref('')
 const filterCategory = ref('')
 
-const categoryOptions = {
-  'interior': 'Interior Paint',
-  'exterior': 'Exterior Paint',
-  'primer': 'Primers',
-  'specialty': 'Specialty Paints',
-  'house-interior': 'House Interior',
-  'house-exterior': 'House Exterior',
-  'automotive': 'Automotive Paints',
-  'wood-coatings': 'Wood Coatings',
-  'metal-coatings': 'Metal Coatings',
-  'waterproofing': 'Waterproofing Products',
-  'thinners-solvents': 'Thinners & Solvents',
-  'accessories-tools': 'Accessories & Tools'
-}
+const categories = ref([])
+const categoryOptions = ref({})
 
 // Firebase listener cleanup
 let unsubscribe = null
@@ -293,6 +282,26 @@ const fetchProducts = async () => {
   }
 }
 
+const fetchCategories = async () => {
+  try {
+    if (!db) return
+    const docRef = doc(db, 'settings', 'categories')
+    const docSnap = await getDoc(docRef)
+    if (docSnap.exists()) {
+      const categoryList = docSnap.data().list || []
+      // Convert array to object for categoryOptions
+      categoryOptions.value = {}
+      categoryList.forEach(cat => {
+        categoryOptions.value[cat.key] = cat.value
+      })
+      categories.value = categoryList
+      console.log('[v0] Categories loaded for Products:', categoryOptions.value)
+    }
+  } catch (error) {
+    console.error('[v0] Error fetching categories:', error)
+  }
+}
+
 const handleImageError = (event) => {
   console.log('[v0] Image failed to load:', event.target.src)
   // Hide the image container and show placeholder instead
@@ -302,6 +311,7 @@ const handleImageError = (event) => {
 // Lifecycle
 onMounted(() => {
   fetchProducts()
+  fetchCategories()
 })
 
 onUnmounted(() => {
