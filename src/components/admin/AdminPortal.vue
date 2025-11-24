@@ -1,12 +1,98 @@
 <template>
   <div class="min-h-screen relative overflow-hidden">
-    <!-- Background Image -->
+    <!-- Background Image - Embedded directly -->
     <div class="absolute inset-0 z-0">
-      <img 
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/top-view-colorful-paint-cans-arrangement.jpg-yZXnuIzCCqtvvx8TxTHtxPhUMvA5cP.jpeg" 
-        alt="Colorful paint cans background" 
-        class="w-full h-full object-cover"
-      />
+      <svg 
+        viewBox="0 0 1200 800" 
+        preserveAspectRatio="xMidYMid slice" 
+        class="w-full h-full"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <!-- Base gradient background -->
+        <defs>
+          <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#f5e6d3;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#fdeee7;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#e8f5e9;stop-opacity:1" />
+          </linearGradient>
+          
+          <radialGradient id="redPaint" cx="30%" cy="30%">
+            <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#d32f2f;stop-opacity:1" />
+          </radialGradient>
+          
+          <radialGradient id="bluePaint" cx="70%" cy="40%">
+            <stop offset="0%" style="stop-color:#2196f3;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1565c0;stop-opacity:1" />
+          </radialGradient>
+          
+          <radialGradient id="yellowPaint" cx="50%" cy="60%">
+            <stop offset="0%" style="stop-color:#ffd54f;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#f9a825;stop-opacity:1" />
+          </radialGradient>
+          
+          <radialGradient id="greenPaint" cx="40%" cy="70%">
+            <stop offset="0%" style="stop-color:#81c784;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#388e3c;stop-opacity:1" />
+          </radialGradient>
+          
+          <radialGradient id="purplePaint" cx="80%" cy="60%">
+            <stop offset="0%" style="stop-color:#ce93d8;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#8e24aa;stop-opacity:1" />
+          </radialGradient>
+        </defs>
+        
+        <!-- Base background -->
+        <rect width="1200" height="800" fill="url(#bgGradient)"/>
+        
+        <!-- Paint cans representation -->
+        <!-- Red paint can (left side) -->
+        <g id="redCan">
+          <rect x="150" y="300" width="120" height="180" rx="8" fill="url(#redPaint)" opacity="0.9"/>
+          <ellipse cx="210" cy="300" rx="60" ry="20" fill="#cc0000" opacity="0.8"/>
+          <rect x="195" y="280" width="30" height="25" fill="#b30000" rx="3"/>
+          <circle cx="180" cy="380" r="8" fill="rgba(255,255,255,0.3)"/>
+        </g>
+        
+        <!-- Blue paint can (top center) -->
+        <g id="blueCan">
+          <rect x="500" y="150" width="120" height="180" rx="8" fill="url(#bluePaint)" opacity="0.9"/>
+          <ellipse cx="560" cy="150" rx="60" ry="20" fill="#0d47a1" opacity="0.8"/>
+          <rect x="545" y="130" width="30" height="25" fill="#0a3d91" rx="3"/>
+          <circle cx="530" cy="230" r="8" fill="rgba(255,255,255,0.3)"/>
+        </g>
+        
+        <!-- Yellow paint can (center) -->
+        <g id="yellowCan">
+          <rect x="350" y="450" width="120" height="180" rx="8" fill="url(#yellowPaint)" opacity="0.9"/>
+          <ellipse cx="410" cy="450" rx="60" ry="20" fill="#f57f17" opacity="0.8"/>
+          <rect x="395" y="430" width="30" height="25" fill="#e65100" rx="3"/>
+          <circle cx="380" cy="530" r="8" fill="rgba(255,255,255,0.3)"/>
+        </g>
+        
+        <!-- Green paint can (right side) -->
+        <g id="greenCan">
+          <rect x="800" y="350" width="120" height="180" rx="8" fill="url(#greenPaint)" opacity="0.9"/>
+          <ellipse cx="860" cy="350" rx="60" ry="20" fill="#1b5e20" opacity="0.8"/>
+          <rect x="845" y="330" width="30" height="25" fill="#0d3317" rx="3"/>
+          <circle cx="830" cy="430" r="8" fill="rgba(255,255,255,0.3)"/>
+        </g>
+        
+        <!-- Purple paint can (top right) -->
+        <g id="purpleCan">
+          <rect x="950" y="200" width="120" height="180" rx="8" fill="url(#purplePaint)" opacity="0.9"/>
+          <ellipse cx="1010" cy="200" rx="60" ry="20" fill="#6a1b9a" opacity="0.8"/>
+          <rect x="995" y="180" width="30" height="25" fill="#4a148c" rx="3"/>
+          <circle cx="980" cy="280" r="8" fill="rgba(255,255,255,0.3)"/>
+        </g>
+        
+        <!-- Spilled paint effects -->
+        <circle cx="280" cy="520" r="25" fill="url(#redPaint)" opacity="0.4"/>
+        <circle cx="700" cy="600" r="35" fill="url(#bluePaint)" opacity="0.3"/>
+        <circle cx="450" cy="650" r="30" fill="url(#yellowPaint)" opacity="0.35"/>
+        <circle cx="1050" cy="550" r="28" fill="url(#greenPaint)" opacity="0.3"/>
+      </svg>
+      
       <!-- Dark overlay for better text readability -->
       <div class="absolute inset-0 bg-black/50"></div>
     </div>
@@ -401,7 +487,7 @@ const showPassword = ref(false)
 const showConfirmPassword = ref(false)
 const showRegisterTab = ref(true)
 
-const ADMIN_SECURITY_CODE = "BPC2025"
+const ADMIN_SECURITY_CODE = import.meta.env.VITE_ADMIN_SECURITY_CODE || "BPC2025"
 
 const loginData = reactive({
   email: '',
@@ -423,11 +509,13 @@ const checkAdminExists = async () => {
     const adminSnapshot = await getDocs(adminQuery)
     
     isAdminExists.value = !adminSnapshot.empty
+    showRegisterTab.value = adminSnapshot.empty
     console.log('Admin exists check:', isAdminExists.value, 'Admin count:', adminSnapshot.size)
     
   } catch (error) {
     console.error("Error checking admin existence:", error)
     isAdminExists.value = false
+    showRegisterTab.value = true
   }
 }
 
@@ -470,20 +558,6 @@ const createAdminAccount = async () => {
       throw new Error('Passwords do not match')
     }
 
-    const adminQuery = query(collection(db, 'admins'))
-    const adminSnapshot = await getDocs(adminQuery)
-    
-    if (!adminSnapshot.empty) {
-      const existingAdminsCount = adminSnapshot.size
-      
-      if (existingAdminsCount > 0) {
-        const adminSecurityCheck = await checkAdminSecurityPermission()
-        if (!adminSecurityCheck) {
-          throw new Error('You do not have permission to create additional admin accounts')
-        }
-      }
-    }
-
     const { user } = await createUserWithEmailAndPassword(
       auth,
       adminData.email,
@@ -502,6 +576,7 @@ const createAdminAccount = async () => {
       createdAt: new Date().toISOString()
     })
 
+    showRegisterTab.value = false
     alertMessage.value = 'Admin account created successfully!'
     alertType.value = 'success'
     isAdminExists.value = true

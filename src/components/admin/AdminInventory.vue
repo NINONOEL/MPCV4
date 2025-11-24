@@ -721,6 +721,55 @@
               <p class="text-gray-600 mb-4">Click the 'Order Product' button to start placing orders.</p>
             </div>
 
+            <!-- CHANGE: Added desktop Orders table display that was missing -->
+            <div v-if="activeTab === 'orders' && orders.length > 0" class="hidden lg:block bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+              <div class="overflow-x-auto">
+                <table class="w-full">
+                  <thead class="bg-gradient-to-r from-purple-50 to-blue-50 border-b border-gray-200">
+                    <tr>
+                      <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700">Product Name</th>
+                      <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700">Supplier</th>
+                      <th class="px-6 py-3 text-center text-xs font-semibold text-gray-700">Quantity</th>
+                      <th class="px-6 py-3 text-center text-xs font-semibold text-gray-700">Status</th>
+                      <th class="px-6 py-3 text-center text-xs font-semibold text-gray-700">Date</th>
+                      <th class="px-6 py-3 text-center text-xs font-semibold text-gray-700">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-200">
+                    <tr v-for="order in orders" :key="order.id" class="hover:bg-gray-50 transition-colors">
+                      <td class="px-6 py-4 text-sm font-medium text-gray-900">{{ order.productName }}</td>
+                      <td class="px-6 py-4 text-sm text-gray-600">{{ order.supplierName }}</td>
+                      <td class="px-6 py-4 text-sm text-center text-gray-600">{{ order.quantity }}</td>
+                      <td class="px-6 py-4 text-center">
+                        <select
+                          :value="order.status"
+                          @change="updateOrderStatus(order.id, $event.target.value)"
+                          class="px-3 py-1 rounded text-xs border border-gray-300 bg-white font-medium"
+                          :class="{
+                            'text-orange-700 bg-orange-50 border-orange-200': order.status === 'incomplete',
+                            'text-green-700 bg-green-50 border-green-200': order.status === 'delivered'
+                          }"
+                        >
+                          <option value="incomplete">Incomplete</option>
+                          <option value="delivered">Delivered</option>
+                        </select>
+                      </td>
+                      <td class="px-6 py-4 text-sm text-center text-gray-600">{{ formatDate(order.createdAt) }}</td>
+                      <td class="px-6 py-4 text-center">
+                        <button
+                          @click="deleteOrder(order.id)"
+                          class="p-2 hover:bg-red-50 rounded-lg text-red-600 hover:text-red-700 transition-colors"
+                          title="Delete Order"
+                        >
+                          <Trash2Icon class="w-5 h-5" />
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
             <!-- Categories Management Section -->
             <div v-if="activeTab === 'categories'" class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
               <div class="space-y-6">
@@ -915,23 +964,16 @@
               <!-- Category -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <!-- Replace hardcoded options with dynamic rendering from categories ref -->
                 <select
                   v-model="productForm.category"
                   required
                   class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 text-sm"
                 >
-                  <option value="interior">Interior Paint</option>
-                  <option value="exterior">Exterior Paint</option>
-                  <option value="primer">Primers</option>
-                  <option value="specialty">Specialty Paints</option>
-                  <option value="house-interior">House Interior</option>
-                  <option value="house-exterior">House Exterior</option>
-                  <option value="automotive">Automotive Paints</option>
-                  <option value="wood-coatings">Wood Coatings</option>
-                  <option value="metal-coatings">Metal Coatings</option>
-                  <option value="waterproofing">Waterproofing Products</option>
-                  <option value="thinners-solvents">Thinners & Solvents</option>
-                  <option value="accessories-tools">Accessories & Tools</option>
+                  <option value="">Select a category</option>
+                  <option v-for="cat in categories" :key="cat.key" :value="cat.key">
+                    {{ cat.value }}
+                  </option>
                 </select>
               </div>
 
@@ -1358,7 +1400,7 @@ import {
   doc,
   query,
   orderBy,
-  onSnapshot,
+  onSnapshot, // Import onSnapshot
   where,
   serverTimestamp,
   getDoc,
@@ -1513,6 +1555,8 @@ const newCategoryForm = ref({
   value: ''
 })
 
+const unsubscribeCategories = ref(null)
+
 // Constants - declared at top level
 const currentDate = new Date().toLocaleDateString('en-US', {
   weekday: 'long',
@@ -1614,57 +1658,7 @@ const removeImage = () => {
 }
 
 // Database methods
-const fetchProducts = async () => {
-  try {
-    loading.value = true;
-    error.value = null;
-
-    if (!db || !productsRef) {
-      throw new Error('Database not initialized');
-    }
-
-    const q = query(productsRef);
-
-    if (unsubscribe.value) {
-      unsubscribe.value();
-    }
-
-    unsubscribe.value = onSnapshot(
-      q,
-      (snapshot) => {
-        products.value = snapshot.docs.map(doc => {
-          const data = doc.data();
-          const stockValue = data.stock !== undefined ? Number(data.stock) :
-                            data.stockLevel !== undefined ? Number(data.stockLevel) : 0;
-
-          return {
-            id: doc.id,
-            ...data,
-            price: Number(data.price) || 0,
-            unitPrice: Number(data.unitPrice) || 0,
-            stockLevel: stockValue,
-            stock: stockValue
-          };
-        });
-
-        loading.value = false;
-        error.value = null;
-        console.log('Fetched products with real-time updates:', products.value);
-      },
-      (err) => {
-        console.error('Firestore error:', err);
-        loading.value = false;
-        error.value = 'Unable to connect to database. Please try again.';
-        products.value = [];
-      }
-    );
-  } catch (err) {
-    console.error('Error in fetchProducts:', err);
-    loading.value = false;
-    error.value = 'Database connection failed. Please refresh the page.';
-    products.value = [];
-  }
-};
+// /** rest of code here **/
 
 const updateProductStock = async (productId, newStockLevel) => {
   try {
@@ -2131,13 +2125,20 @@ const formatDate = (timestamp) => {
 const fetchCategories = async () => {
   try {
     if (!db) return;
+    
     const docRef = doc(db, 'settings', 'categories');
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      categories.value = docSnap.data().list || [];
-    }
+    // Use unsubscribeCategories.value to store the onSnapshot listener
+    unsubscribeCategories.value = onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists() && docSnap.data().list) {
+        categories.value = docSnap.data().list;
+        console.log('[v0] Categories updated in real-time:', categories.value);
+      } else {
+        // Handle case where the document doesn't exist or has no list
+        categories.value = []; 
+      }
+    });
   } catch (error) {
-    console.error("Error fetching categories:", error);
+    console.error("Error setting up category listener:", error);
   }
 };
 
@@ -2152,7 +2153,6 @@ const addCategory = async () => {
     const updatedCategories = [...categories.value, { value: newCategoryForm.value.value, key: newCategoryForm.value.key }];
     const settingsRef = doc(db, 'settings', 'categories');
     await setDoc(settingsRef, { list: updatedCategories }, { merge: true });
-    categories.value = updatedCategories;
     newCategoryForm.value = { value: '', key: '' };
     notificationMessage.value = 'Category added successfully!';
     notificationType.value = 'success';
@@ -2166,7 +2166,8 @@ const addCategory = async () => {
 };
 
 const deleteCategory = async (index) => {
-  if (categories.value[index].key === 'interior' || categories.value[index].key === 'exterior') {
+  // Prevent deletion of default categories
+  if (categories.value[index]?.key === 'interior' || categories.value[index]?.key === 'exterior') {
     notificationMessage.value = 'Cannot delete default categories.';
     notificationType.value = 'error';
     showNotification.value = true;
@@ -2176,7 +2177,6 @@ const deleteCategory = async (index) => {
     const updatedCategories = categories.value.filter((_, i) => i !== index);
     const settingsRef = doc(db, 'settings', 'categories');
     await setDoc(settingsRef, { list: updatedCategories }, { merge: true });
-    categories.value = updatedCategories;
     notificationMessage.value = 'Category deleted successfully!';
     notificationType.value = 'success';
     showNotification.value = true;
@@ -2346,18 +2346,60 @@ const closeImageEditor = () => {
 }
 
 // Lifecycle hooks - declared at top level
-onMounted(() => {
+onMounted(async () => {
   console.log('Component mounted, initializing...');
-  fetchProducts().catch(err => {
-    console.error('Mount error:', err)
-    error.value = 'Failed to initialize inventory. Please refresh the page.'
-  });
+  
+  // Setup products listener
+  try {
+    loading.value = true;
+    error.value = null;
 
-  fetchCategories();
+    if (!db || !productsRef) {
+      throw new Error('Database not initialized');
+    }
 
-  setTimeout(() => {
-    fetchOrders();
-  }, 1000);
+    const q = query(productsRef);
+    unsubscribe.value = onSnapshot(
+      q,
+      (snapshot) => {
+        products.value = snapshot.docs.map(doc => {
+          const data = doc.data();
+          const stockValue = data.stock !== undefined ? Number(data.stock) :
+                            data.stockLevel !== undefined ? Number(data.stockLevel) : 0;
+
+          return {
+            id: doc.id,
+            ...data,
+            price: Number(data.price) || 0,
+            unitPrice: Number(data.unitPrice) || 0,
+            stockLevel: stockValue,
+            stock: stockValue
+          };
+        });
+
+        loading.value = false;
+        error.value = null;
+        console.log('Fetched products with real-time updates:', products.value);
+      },
+      (err) => {
+        console.error('Firestore error:', err);
+        loading.value = false;
+        error.value = 'Unable to connect to database. Please try again.';
+        products.value = [];
+      }
+    );
+  } catch (err) {
+    console.error('Error in products setup:', err);
+    loading.value = false;
+    error.value = 'Database connection failed. Please refresh the page.';
+    products.value = [];
+  }
+
+  // Setup categories listener
+  fetchCategories() // Call fetchCategories
+
+  // Setup orders listener
+  fetchOrders() // Call fetchOrders
 })
 
 // Clean up listeners on component unmount
@@ -2367,6 +2409,9 @@ onUnmounted(() => {
   }
   if (window.ordersUnsubscribe) {
     window.ordersUnsubscribe()
+  }
+  if (unsubscribeCategories.value) {
+    unsubscribeCategories.value()
   }
 })
 

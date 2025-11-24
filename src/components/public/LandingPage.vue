@@ -218,7 +218,7 @@
             </div>
           </div>
                     
-          <button @click="scrollToSection('contact')" class="w-full btn-customer-primary text-xs">
+          <button @click="$router.push('/signup')" class="w-full btn-customer-primary text-xs">
             <PaletteIcon class="h-3.5 w-3.5 mr-1.5" />
             Get Color Match
           </button>
@@ -257,7 +257,7 @@
             </div>
           </div>
                     
-          <button @click="scrollToSection('contact')" class="w-full btn-admin-primary text-xs">
+          <button @click="$router.push('/signup')" class="w-full btn-admin-primary text-xs">
             <HomeIcon class="h-3.5 w-3.5 mr-1.5" />
             Get Recommendation
           </button>
