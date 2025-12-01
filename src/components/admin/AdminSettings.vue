@@ -306,6 +306,29 @@
               </div>
 
               <div class="space-y-4 sm:space-y-6">
+                <!-- Admin Security Code Section -->
+                <div class="p-4 sm:p-5 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200 shadow-sm">
+                  <div class="flex flex-col gap-3 sm:gap-4">
+                    <div class="flex items-start gap-3">
+                      <div class="p-2 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-500 shadow-lg flex-shrink-0">
+                        <ShieldIcon class="w-5 h-5 text-white" />
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <h3 class="text-base font-semibold text-gray-900">Admin Security Code</h3>
+                        <p class="text-xs sm:text-sm text-gray-600 mt-1">Manage the security code required for admin registration</p>
+                        <p class="text-xs text-blue-600 mt-1 font-medium">Current code: {{ adminSecurityCode || 'Not set' }}</p>
+                      </div>
+                    </div>
+                    <button 
+                      @click="showSecurityCodeModal = true"
+                      class="w-full px-4 py-2 text-sm bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
+                    >
+                      <ShieldIcon class="w-4 h-4" />
+                      {{ adminSecurityCode ? 'Change Security Code' : 'Set Security Code' }}
+                    </button>
+                  </div>
+                </div>
+
                 <!-- Password Section -->
                 <div class="p-4 sm:p-5 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-200 shadow-sm">
                   <div class="flex flex-col gap-3 sm:gap-4">
@@ -316,7 +339,7 @@
                       <div class="flex-1 min-w-0">
                         <h3 class="text-base font-semibold text-gray-900">Change Password</h3>
                         <p class="text-xs sm:text-sm text-gray-600 mt-1">Update your account password for better security</p>
-                        <p class="text-xs text-purple-600 mt-1">Last changed 30 days ago</p>
+                        <p class="text-xs text-purple-600 mt-1">{{ passwordLastChangedText }}</p>
                       </div>
                     </div>
                     <button 
@@ -346,12 +369,13 @@
                     </div>
                     <button 
                       @click="deleteAccount"
-                      class="w-full px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2 hover:from-red-700 hover:to-red-800 text-sm"
+                      :disabled="isDeletingAccount"
+                      class="w-full px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2 hover:from-red-700 hover:to-red-800 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                       </svg>
-                      Delete Account
+                      {{ isDeletingAccount ? 'Deleting...' : 'Delete Account' }}
                     </button>
                   </div>
                 </div>
@@ -400,6 +424,72 @@
         >
           <XIcon class="w-5 h-5" />
         </button>
+      </div>
+    </div>
+
+    <!-- Admin Security Code Modal -->
+    <div v-if="showSecurityCodeModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-xl w-full max-w-md border border-gray-200 shadow-2xl">
+        <div class="p-4 sm:p-6 border-b border-gray-200">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="p-2 rounded-lg bg-blue-100">
+                <ShieldIcon class="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+              </div>
+              <h3 class="text-lg sm:text-xl font-bold text-gray-900">Admin Security Code</h3>
+            </div>
+            <button 
+              @click="showSecurityCodeModal = false"
+              class="text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <XIcon class="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+        
+        <form @submit.prevent="updateSecurityCode" class="p-4 sm:p-6 space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">New Security Code</label>
+            <input 
+              type="text"
+              v-model="securityCodeForm.newCode"
+              required
+              minlength="4"
+              class="w-full px-3 py-2 text-sm sm:text-base rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
+              placeholder="Enter new security code (min. 4 characters)"
+            />
+            <p class="text-xs text-gray-500 mt-1">This code will be required for new admin registrations</p>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Security Code</label>
+            <input 
+              type="text"
+              v-model="securityCodeForm.confirmCode"
+              required
+              minlength="4"
+              class="w-full px-3 py-2 text-sm sm:text-base rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
+              placeholder="Confirm security code"
+            />
+          </div>
+
+          <div class="flex flex-col sm:flex-row justify-end gap-3 mt-6">
+            <button 
+              type="button"
+              @click="showSecurityCodeModal = false"
+              class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+            >
+              Cancel
+            </button>
+            <button 
+              type="submit"
+              :disabled="isSavingSecurityCode"
+              class="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {{ isSavingSecurityCode ? 'Saving...' : 'Save Security Code' }}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
 
@@ -459,9 +549,10 @@
             </button>
             <button 
               type="submit"
-              class="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
+              :disabled="isUpdatingPassword"
+              class="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Update Password
+              {{ isUpdatingPassword ? 'Updating...' : 'Update Password' }}
             </button>
           </div>
         </form>
@@ -471,8 +562,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { auth, db } from '@/config/firebase'
+import { 
+  updatePassword as updateUserPassword, 
+  reauthenticateWithCredential, 
+  EmailAuthProvider,
+  deleteUser,
+  signOut
+} from 'firebase/auth'
+import { doc, getDoc, setDoc, deleteDoc, updateDoc } from 'firebase/firestore'
 import {
   LayoutDashboard as LayoutDashboardIcon,
   Users as UsersIcon,
@@ -500,8 +600,14 @@ const showToast = ref(false)
 const toastMessage = ref('')
 const notificationType = ref('success')
 const showPasswordModal = ref(false)
+const showSecurityCodeModal = ref(false)
+const adminSecurityCode = ref('')
+const isSavingSecurityCode = ref(false)
+const isUpdatingPassword = ref(false)
+const isDeletingAccount = ref(false)
 const userDisplayName = ref('Nino Noel Monsanto')
 const userEmail = ref('nnmonsanto23@gmail.com')
+const lastPasswordChange = ref(null)
 
 const passwordForm = ref({
   current: '',
@@ -509,11 +615,61 @@ const passwordForm = ref({
   confirm: ''
 })
 
+const securityCodeForm = ref({
+  newCode: '',
+  confirmCode: ''
+})
+
+// Computed property for password last changed text
+const passwordLastChangedText = computed(() => {
+  if (!lastPasswordChange.value) {
+    return 'Password change date not available'
+  }
+  
+  const lastChangeDate = new Date(lastPasswordChange.value)
+  const now = new Date()
+  const diffTime = Math.abs(now - lastChangeDate)
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+  const diffHours = Math.floor(diffTime / (1000 * 60 * 60))
+  const diffMinutes = Math.floor(diffTime / (1000 * 60))
+  
+  if (diffDays === 0) {
+    if (diffHours === 0) {
+      if (diffMinutes === 0) {
+        return 'Just changed'
+      }
+      return `Last changed ${diffMinutes} minute${diffMinutes > 1 ? 's' : ''} ago`
+    }
+    return `Last changed ${diffHours} hour${diffHours > 1 ? 's' : ''} ago`
+  } else if (diffDays === 1) {
+    return 'Last changed 1 day ago'
+  } else if (diffDays < 30) {
+    return `Last changed ${diffDays} days ago`
+  } else if (diffDays < 365) {
+    const months = Math.floor(diffDays / 30)
+    return `Last changed ${months} month${months > 1 ? 's' : ''} ago`
+  } else {
+    const years = Math.floor(diffDays / 365)
+    return `Last changed ${years} year${years > 1 ? 's' : ''} ago`
+  }
+})
+
 const changePassword = () => {
   showPasswordModal.value = true
 }
 
 const updatePassword = async () => {
+  // Validation
+  if (!passwordForm.value.current || !passwordForm.value.new || !passwordForm.value.confirm) {
+    toastMessage.value = 'Please fill in all password fields!'
+    notificationType.value = 'error'
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 3000)
+    return
+  }
+
   if (passwordForm.value.new !== passwordForm.value.confirm) {
     toastMessage.value = 'New passwords do not match!'
     notificationType.value = 'error'
@@ -533,10 +689,44 @@ const updatePassword = async () => {
     }, 3000)
     return
   }
+
+  if (!auth.currentUser) {
+    toastMessage.value = 'You must be logged in to change your password!'
+    notificationType.value = 'error'
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 3000)
+    return
+  }
   
   try {
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    isUpdatingPassword.value = true
+
+    // Reauthenticate user with current password
+    const credential = EmailAuthProvider.credential(
+      auth.currentUser.email,
+      passwordForm.value.current
+    )
     
+    await reauthenticateWithCredential(auth.currentUser, credential)
+    
+    // Update password
+    await updateUserPassword(auth.currentUser, passwordForm.value.new)
+    
+    // Update last password change date in Firestore
+    try {
+      const currentDate = new Date().toISOString()
+      await updateDoc(doc(db, 'admins', auth.currentUser.uid), {
+        lastPasswordChange: currentDate
+      })
+      lastPasswordChange.value = currentDate
+    } catch (error) {
+      console.error('Error updating last password change date:', error)
+      // Continue even if Firestore update fails
+    }
+    
+    // Clear form
     passwordForm.value = {
       current: '',
       new: '',
@@ -551,27 +741,98 @@ const updatePassword = async () => {
       showToast.value = false
     }, 3000)
   } catch (error) {
-    toastMessage.value = 'Failed to update password. Please try again.'
+    console.error('Error updating password:', error)
+    
+    let errorMessage = 'Failed to update password. Please try again.'
+    if (error.code === 'auth/wrong-password') {
+      errorMessage = 'Current password is incorrect!'
+    } else if (error.code === 'auth/weak-password') {
+      errorMessage = 'New password is too weak. Please use a stronger password!'
+    } else if (error.code === 'auth/requires-recent-login') {
+      errorMessage = 'For security, please log out and log back in before changing your password.'
+    } else if (error.code === 'auth/invalid-credential') {
+      errorMessage = 'Current password is incorrect!'
+    }
+    
+    toastMessage.value = errorMessage
     notificationType.value = 'error'
     showToast.value = true
     setTimeout(() => {
       showToast.value = false
     }, 3000)
+  } finally {
+    isUpdatingPassword.value = false
   }
 }
 
-const deleteAccount = () => {
-  if (confirm('⚠️ WARNING: This will permanently delete your account and all associated data.\n\nThis action cannot be undone. Are you absolutely sure you want to proceed?')) {
-    if (confirm('Please confirm one more time: Delete your account permanently?')) {
-      toastMessage.value = 'Account deletion initiated. You will be logged out shortly.'
-      notificationType.value = 'success'
-      showToast.value = true
-      
-      setTimeout(() => {
-        showToast.value = false
-        router.push('/admin')
-      }, 3000)
+const deleteAccount = async () => {
+  if (!auth.currentUser) {
+    toastMessage.value = 'You must be logged in to delete your account!'
+    notificationType.value = 'error'
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 3000)
+    return
+  }
+
+  // First confirmation
+  if (!confirm('⚠️ WARNING: This will permanently delete your admin account and all associated data.\n\nThis action cannot be undone. Are you absolutely sure you want to proceed?')) {
+    return
+  }
+
+  // Second confirmation
+  if (!confirm('Please confirm one more time: Delete your account permanently?')) {
+    return
+  }
+
+  try {
+    isDeletingAccount.value = true
+
+    const userId = auth.currentUser.uid
+
+    // Delete admin document from Firestore
+    try {
+      await deleteDoc(doc(db, 'admins', userId))
+      console.log('Admin document deleted from Firestore')
+    } catch (error) {
+      console.error('Error deleting admin document:', error)
+      // Continue with account deletion even if Firestore delete fails
     }
+
+    // Delete user from Firebase Auth
+    await deleteUser(auth.currentUser)
+
+    toastMessage.value = 'Account deleted successfully. You will be logged out now.'
+    notificationType.value = 'success'
+    showToast.value = true
+    
+    // Sign out and redirect after a short delay
+    setTimeout(async () => {
+      try {
+        await signOut(auth)
+      } catch (error) {
+        console.error('Error signing out:', error)
+      }
+      showToast.value = false
+      router.push('/admin')
+    }, 2000)
+  } catch (error) {
+    console.error('Error deleting account:', error)
+    
+    let errorMessage = 'Failed to delete account. Please try again.'
+    if (error.code === 'auth/requires-recent-login') {
+      errorMessage = 'For security, please log out and log back in before deleting your account.'
+    }
+    
+    toastMessage.value = errorMessage
+    notificationType.value = 'error'
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 3000)
+  } finally {
+    isDeletingAccount.value = false
   }
 }
 
@@ -588,6 +849,135 @@ const currentDate = new Date().toLocaleDateString('en-US', {
   year: 'numeric', 
   month: 'long', 
   day: 'numeric' 
+})
+
+// Load admin security code from Firestore
+const loadAdminSecurityCode = async () => {
+  try {
+    const settingsDoc = await getDoc(doc(db, 'settings', 'adminSecurityCode'))
+    if (settingsDoc.exists()) {
+      adminSecurityCode.value = settingsDoc.data().code || ''
+    } else {
+      // If no security code exists, use default from env or set empty
+      adminSecurityCode.value = import.meta.env.VITE_ADMIN_SECURITY_CODE || ''
+    }
+  } catch (error) {
+    console.error('Error loading admin security code:', error)
+    // Fallback to env variable if Firestore fails
+    adminSecurityCode.value = import.meta.env.VITE_ADMIN_SECURITY_CODE || ''
+  }
+}
+
+// Save admin security code to Firestore
+const updateSecurityCode = async () => {
+  if (securityCodeForm.value.newCode !== securityCodeForm.value.confirmCode) {
+    toastMessage.value = 'Security codes do not match!'
+    notificationType.value = 'error'
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 3000)
+    return
+  }
+  
+  if (securityCodeForm.value.newCode.length < 4) {
+    toastMessage.value = 'Security code must be at least 4 characters long!'
+    notificationType.value = 'error'
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 3000)
+    return
+  }
+  
+  try {
+    isSavingSecurityCode.value = true
+    
+    // Check if user is authenticated and is admin
+    if (!auth.currentUser) {
+      throw new Error('You must be logged in to update the security code')
+    }
+    
+    // Check if user is admin
+    const adminDoc = await getDoc(doc(db, 'admins', auth.currentUser.uid))
+    if (!adminDoc.exists()) {
+      throw new Error('Only admins can update the security code')
+    }
+    
+    // Save to Firestore settings collection
+    await setDoc(doc(db, 'settings', 'adminSecurityCode'), {
+      code: securityCodeForm.value.newCode,
+      updatedAt: new Date().toISOString(),
+      updatedBy: auth.currentUser.uid
+    }, { merge: true })
+    
+    // Update local state
+    adminSecurityCode.value = securityCodeForm.value.newCode
+    
+    // Reset form
+    securityCodeForm.value = {
+      newCode: '',
+      confirmCode: ''
+    }
+    showSecurityCodeModal.value = false
+    
+    toastMessage.value = 'Admin security code updated successfully!'
+    notificationType.value = 'success'
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 3000)
+  } catch (error) {
+    console.error('Error updating security code:', error)
+    toastMessage.value = error.message || 'Failed to update security code. Please try again.'
+    notificationType.value = 'error'
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 3000)
+  } finally {
+    isSavingSecurityCode.value = false
+  }
+}
+
+// Load admin info including last password change
+const loadAdminInfo = async () => {
+  if (!auth.currentUser) return
+  
+  try {
+    const adminDoc = await getDoc(doc(db, 'admins', auth.currentUser.uid))
+    if (adminDoc.exists()) {
+      const adminData = adminDoc.data()
+      userDisplayName.value = `${adminData.firstName || ''} ${adminData.lastName || ''}`.trim() || auth.currentUser.displayName || 'Admin'
+      
+      // Load last password change date
+      if (adminData.lastPasswordChange) {
+        lastPasswordChange.value = adminData.lastPasswordChange
+      } else {
+        // If no lastPasswordChange exists, set it to createdAt or current date
+        lastPasswordChange.value = adminData.createdAt || new Date().toISOString()
+      }
+    } else {
+      // If admin doc doesn't exist, set default values
+      userDisplayName.value = auth.currentUser.displayName || 'Admin'
+      lastPasswordChange.value = new Date().toISOString()
+    }
+  } catch (error) {
+    console.error('Error loading admin info:', error)
+    userDisplayName.value = auth.currentUser.displayName || 'Admin'
+    lastPasswordChange.value = new Date().toISOString()
+  }
+}
+
+// Load security code on component mount
+onMounted(async () => {
+  await loadAdminSecurityCode()
+  
+  // Get current user info
+  if (auth.currentUser) {
+    userEmail.value = auth.currentUser.email || ''
+    await loadAdminInfo()
+  }
 })
 </script>
 

@@ -191,7 +191,7 @@
               </div>
 
               <!-- Admin Registration Form -->
-              <form v-if="activeTab === 'register'" @submit.prevent="createAdminAccount" class="space-y-4 sm:space-y-6">
+              <form v-if="activeTab === 'register' && showRegisterTab" @submit.prevent="createAdminAccount" class="space-y-4 sm:space-y-6">
                 <!-- Registration Security Code -->
                 <div class="relative group">
                   <ShieldIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-purple-500 z-10" />
@@ -340,7 +340,7 @@
                 </button>
                 
                 <!-- Register Link -->
-                <div class="text-center">
+                <div v-if="showRegisterTab" class="text-center">
                   <p class="text-sm sm:text-base text-gray-700 font-medium">
                     Don't have an account? 
                     <button 
@@ -487,7 +487,7 @@ const showPassword = ref(false)
 const showConfirmPassword = ref(false)
 const showRegisterTab = ref(true)
 
-const ADMIN_SECURITY_CODE = import.meta.env.VITE_ADMIN_SECURITY_CODE || "BPC2025"
+const adminSecurityCode = ref(import.meta.env.VITE_ADMIN_SECURITY_CODE || "BPC2025")
 
 const loginData = reactive({
   email: '',
@@ -536,6 +536,9 @@ const loginAdmin = async () => {
       throw new Error('Unauthorized access. Admin privileges required.')
     }
 
+    // Re-check admin existence to ensure register tab is hidden
+    await checkAdminExists()
+    
     router.push('/admin/dashboard')
   } catch (err) {
     alertMessage.value = err.message
@@ -550,7 +553,16 @@ const createAdminAccount = async () => {
     isLoading.value = true
     alertMessage.value = ''
 
-    if (adminData.securityCode !== ADMIN_SECURITY_CODE) {
+    // Check if admin already exists before allowing registration
+    await checkAdminExists()
+    if (isAdminExists.value) {
+      throw new Error('Admin account already exists. Registration is disabled.')
+    }
+
+    // Load security code from Firestore before validation
+    await loadAdminSecurityCode()
+    
+    if (adminData.securityCode !== adminSecurityCode.value) {
       throw new Error('Invalid admin security code')
     }
 
@@ -576,10 +588,11 @@ const createAdminAccount = async () => {
       createdAt: new Date().toISOString()
     })
 
-    showRegisterTab.value = false
-    alertMessage.value = 'Admin account created successfully!'
+    // Re-check admin existence to ensure state is updated
+    await checkAdminExists()
+    
+    alertMessage.value = 'Admin account created successfully! Registration is now disabled.'
     alertType.value = 'success'
-    isAdminExists.value = true
     activeTab.value = 'login'
 
     adminData.firstName = ''
@@ -618,12 +631,36 @@ const handleForgotPassword = async () => {
 }
 
 const switchToRegister = () => {
+  // Prevent switching to register if admin already exists
+  if (!showRegisterTab.value) {
+    alertMessage.value = 'Admin account already exists. Registration is disabled.'
+    alertType.value = 'error'
+    return
+  }
   activeTab.value = 'register'
   alertMessage.value = ''
 }
 
+// Load admin security code from Firestore
+const loadAdminSecurityCode = async () => {
+  try {
+    const settingsDoc = await getDoc(doc(db, 'settings', 'adminSecurityCode'))
+    if (settingsDoc.exists() && settingsDoc.data().code) {
+      adminSecurityCode.value = settingsDoc.data().code
+    } else {
+      // Fallback to env variable if not set in Firestore
+      adminSecurityCode.value = import.meta.env.VITE_ADMIN_SECURITY_CODE || "BPC2025"
+    }
+  } catch (error) {
+    console.error('Error loading admin security code:', error)
+    // Fallback to env variable on error
+    adminSecurityCode.value = import.meta.env.VITE_ADMIN_SECURITY_CODE || "BPC2025"
+  }
+}
+
 const initializeAdminState = async () => {
   await checkAdminExists()
+  await loadAdminSecurityCode()
 }
 
 const goToHomepage = async () => {
@@ -649,6 +686,10 @@ onMounted(onMountedHook)
 
 watch([isAdminExists, showRegisterTab], ([adminExists, showRegister]) => {
   console.log('State changed - Admin exists:', adminExists, 'Show register:', showRegister)
+  // Force switch to login tab if register tab is hidden
+  if (!showRegister && activeTab.value === 'register') {
+    activeTab.value = 'login'
+  }
 }, { immediate: true })
 </script>
 
