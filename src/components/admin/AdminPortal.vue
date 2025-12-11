@@ -1,98 +1,12 @@
 <template>
   <div class="min-h-screen relative overflow-hidden">
-    <!-- Background Image - Embedded directly -->
+    <!-- Paint Cans Background Image -->
     <div class="absolute inset-0 z-0">
-      <svg 
-        viewBox="0 0 1200 800" 
-        preserveAspectRatio="xMidYMid slice" 
-        class="w-full h-full"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <!-- Base gradient background -->
-        <defs>
-          <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#f5e6d3;stop-opacity:1" />
-            <stop offset="50%" style="stop-color:#fdeee7;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#e8f5e9;stop-opacity:1" />
-          </linearGradient>
-          
-          <radialGradient id="redPaint" cx="30%" cy="30%">
-            <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#d32f2f;stop-opacity:1" />
-          </radialGradient>
-          
-          <radialGradient id="bluePaint" cx="70%" cy="40%">
-            <stop offset="0%" style="stop-color:#2196f3;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#1565c0;stop-opacity:1" />
-          </radialGradient>
-          
-          <radialGradient id="yellowPaint" cx="50%" cy="60%">
-            <stop offset="0%" style="stop-color:#ffd54f;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#f9a825;stop-opacity:1" />
-          </radialGradient>
-          
-          <radialGradient id="greenPaint" cx="40%" cy="70%">
-            <stop offset="0%" style="stop-color:#81c784;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#388e3c;stop-opacity:1" />
-          </radialGradient>
-          
-          <radialGradient id="purplePaint" cx="80%" cy="60%">
-            <stop offset="0%" style="stop-color:#ce93d8;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#8e24aa;stop-opacity:1" />
-          </radialGradient>
-        </defs>
-        
-        <!-- Base background -->
-        <rect width="1200" height="800" fill="url(#bgGradient)"/>
-        
-        <!-- Paint cans representation -->
-        <!-- Red paint can (left side) -->
-        <g id="redCan">
-          <rect x="150" y="300" width="120" height="180" rx="8" fill="url(#redPaint)" opacity="0.9"/>
-          <ellipse cx="210" cy="300" rx="60" ry="20" fill="#cc0000" opacity="0.8"/>
-          <rect x="195" y="280" width="30" height="25" fill="#b30000" rx="3"/>
-          <circle cx="180" cy="380" r="8" fill="rgba(255,255,255,0.3)"/>
-        </g>
-        
-        <!-- Blue paint can (top center) -->
-        <g id="blueCan">
-          <rect x="500" y="150" width="120" height="180" rx="8" fill="url(#bluePaint)" opacity="0.9"/>
-          <ellipse cx="560" cy="150" rx="60" ry="20" fill="#0d47a1" opacity="0.8"/>
-          <rect x="545" y="130" width="30" height="25" fill="#0a3d91" rx="3"/>
-          <circle cx="530" cy="230" r="8" fill="rgba(255,255,255,0.3)"/>
-        </g>
-        
-        <!-- Yellow paint can (center) -->
-        <g id="yellowCan">
-          <rect x="350" y="450" width="120" height="180" rx="8" fill="url(#yellowPaint)" opacity="0.9"/>
-          <ellipse cx="410" cy="450" rx="60" ry="20" fill="#f57f17" opacity="0.8"/>
-          <rect x="395" y="430" width="30" height="25" fill="#e65100" rx="3"/>
-          <circle cx="380" cy="530" r="8" fill="rgba(255,255,255,0.3)"/>
-        </g>
-        
-        <!-- Green paint can (right side) -->
-        <g id="greenCan">
-          <rect x="800" y="350" width="120" height="180" rx="8" fill="url(#greenPaint)" opacity="0.9"/>
-          <ellipse cx="860" cy="350" rx="60" ry="20" fill="#1b5e20" opacity="0.8"/>
-          <rect x="845" y="330" width="30" height="25" fill="#0d3317" rx="3"/>
-          <circle cx="830" cy="430" r="8" fill="rgba(255,255,255,0.3)"/>
-        </g>
-        
-        <!-- Purple paint can (top right) -->
-        <g id="purpleCan">
-          <rect x="950" y="200" width="120" height="180" rx="8" fill="url(#purplePaint)" opacity="0.9"/>
-          <ellipse cx="1010" cy="200" rx="60" ry="20" fill="#6a1b9a" opacity="0.8"/>
-          <rect x="995" y="180" width="30" height="25" fill="#4a148c" rx="3"/>
-          <circle cx="980" cy="280" r="8" fill="rgba(255,255,255,0.3)"/>
-        </g>
-        
-        <!-- Spilled paint effects -->
-        <circle cx="280" cy="520" r="25" fill="url(#redPaint)" opacity="0.4"/>
-        <circle cx="700" cy="600" r="35" fill="url(#bluePaint)" opacity="0.3"/>
-        <circle cx="450" cy="650" r="30" fill="url(#yellowPaint)" opacity="0.35"/>
-        <circle cx="1050" cy="550" r="28" fill="url(#greenPaint)" opacity="0.3"/>
-      </svg>
-      
+      <img 
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/top-view-colorful-paint-cans.jpg-78zC5PSDkb02uzttCxHJXuCVzpRioD.jpeg" 
+        alt="Colorful paint cans background" 
+        class="w-full h-full object-cover"
+      />
       <!-- Dark overlay for better text readability -->
       <div class="absolute inset-0 bg-black/50"></div>
     </div>
@@ -119,12 +33,6 @@
       </button>
     </div>
 
-    <!-- Enhanced Background Elements with Paint Colors -->
-    <div class="absolute inset-0 z-5">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-red-200 via-orange-200 to-yellow-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-green-200 via-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
-      <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-br from-pink-200 via-rose-200 to-red-200 opacity-15 rounded-full filter blur-2xl transform -translate-x-1/2 -translate-y-1/2"></div>
-    </div>
 
     <!-- Main Content -->
     <div class="relative z-10 min-h-screen flex flex-col items-center justify-start px-4 py-8 sm:py-12 md:py-16">
@@ -199,6 +107,7 @@
                     type="password" 
                     id="securityCode" 
                     v-model="adminData.securityCode" 
+                    @blur="adminData.securityCode = adminData.securityCode.trim()"
                     required 
                     class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-purple-200 bg-gradient-to-r from-purple-50/90 to-pink-50/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm text-sm sm:text-base"
                     placeholder="Enter admin security code"
@@ -489,6 +398,7 @@ const showRegisterTab = ref(true)
 
 const adminSecurityCode = ref(import.meta.env.VITE_ADMIN_SECURITY_CODE || "BPC2025")
 
+
 const loginData = reactive({
   email: '',
   password: ''
@@ -562,8 +472,20 @@ const createAdminAccount = async () => {
     // Load security code from Firestore before validation
     await loadAdminSecurityCode()
     
-    if (adminData.securityCode !== adminSecurityCode.value) {
-      throw new Error('Invalid admin security code')
+    // Trim whitespace from both values for comparison
+    const enteredCode = String(adminData.securityCode).trim()
+    const expectedCode = String(adminSecurityCode.value).trim()
+    
+    // Debug logging
+    console.log('=== Security Code Validation ===')
+    console.log('Entered security code:', `"${enteredCode}"`, `(length: ${enteredCode.length})`)
+    console.log('Expected security code:', `"${expectedCode}"`, `(length: ${expectedCode.length})`)
+    console.log('Env variable (raw):', import.meta.env.VITE_ADMIN_SECURITY_CODE)
+    console.log('Codes match:', enteredCode === expectedCode)
+    console.log('================================')
+    
+    if (enteredCode !== expectedCode) {
+      throw new Error(`Invalid admin security code. Expected: "${expectedCode}", Got: "${enteredCode}". Please check your .env file for VITE_ADMIN_SECURITY_CODE and restart the dev server.`)
     }
 
     if (adminData.password !== adminData.confirmPassword) {
@@ -641,20 +563,45 @@ const switchToRegister = () => {
   alertMessage.value = ''
 }
 
-// Load admin security code from Firestore
+// Load admin security code - Smart priority based on admin existence
 const loadAdminSecurityCode = async () => {
   try {
+    // First, check if there's a code in Firestore (set by admin in settings)
     const settingsDoc = await getDoc(doc(db, 'settings', 'adminSecurityCode'))
-    if (settingsDoc.exists() && settingsDoc.data().code) {
-      adminSecurityCode.value = settingsDoc.data().code
+    const hasFirestoreCode = settingsDoc.exists() && settingsDoc.data().code
+    
+    // Check if admin exists
+    await checkAdminExists()
+    
+    if (!isAdminExists.value && !hasFirestoreCode) {
+      // FIRST REGISTRATION: No admin exists AND no Firestore code
+      // Use .env file for initial registration
+      const envCode = import.meta.env.VITE_ADMIN_SECURITY_CODE
+      adminSecurityCode.value = envCode ? String(envCode).trim() : "BPC2025"
+      console.log('First registration - Using .env file code:', `"${adminSecurityCode.value}"`)
+    } else if (hasFirestoreCode) {
+      // ADMIN EXISTS OR WAS DELETED BUT FIRESTORE HAS CODE
+      // Use Firestore code (set by admin in settings)
+      adminSecurityCode.value = String(settingsDoc.data().code).trim()
+      console.log('Using Firestore code (set by admin in settings):', `"${adminSecurityCode.value}"`)
+      if (!isAdminExists.value) {
+        console.log('Note: Admin was deleted, but using Firestore code instead of .env')
+      }
     } else {
-      // Fallback to env variable if not set in Firestore
-      adminSecurityCode.value = import.meta.env.VITE_ADMIN_SECURITY_CODE || "BPC2025"
+      // Fallback: Admin exists but no Firestore code (shouldn't happen, but just in case)
+      const envCode = import.meta.env.VITE_ADMIN_SECURITY_CODE
+      adminSecurityCode.value = envCode ? String(envCode).trim() : "BPC2025"
+      console.log('Fallback - Using .env file code:', `"${adminSecurityCode.value}"`)
     }
+    
+    console.log('Final security code value for registration:', `"${adminSecurityCode.value}"`)
   } catch (error) {
     console.error('Error loading admin security code:', error)
     // Fallback to env variable on error
-    adminSecurityCode.value = import.meta.env.VITE_ADMIN_SECURITY_CODE || "BPC2025"
+    const envCode = import.meta.env.VITE_ADMIN_SECURITY_CODE
+    adminSecurityCode.value = envCode ? String(envCode).trim() : "BPC2025"
+    console.log('Using fallback security code from .env:', envCode ? `Found: "${envCode}"` : 'Not found, using default')
+    console.log('Final security code value:', adminSecurityCode.value)
   }
 }
 

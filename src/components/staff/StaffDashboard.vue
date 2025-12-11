@@ -278,7 +278,7 @@
               </div>
             </div>
 
-            <!-- Sales/Orders -->
+            <!-- Orders -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
               <div class="p-6">
@@ -287,19 +287,19 @@
                     <ShoppingCartIcon class="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p class="text-sm text-gray-600">Sales</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ salesStats.total }}</p>
+                    <p class="text-sm text-gray-600">Orders</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ salesStats.today }}</p>
                   </div>
                 </div>
                 <div class="mt-4 flex items-center justify-between">
-                  <span class="text-sm text-gray-600">Completed orders</span>
-                  <div v-if="salesStats.total === 0" class="flex items-center text-gray-500 bg-gray-100 px-3 py-1 rounded-full border border-gray-200">
+                  <span class="text-sm text-gray-600">Today's orders</span>
+                  <div v-if="salesStats.today === 0" class="flex items-center text-gray-500 bg-gray-100 px-3 py-1 rounded-full border border-gray-200">
                     <InfoIcon class="w-4 h-4 mr-1" />
-                    <span class="text-sm font-medium">No sales yet</span>
+                    <span class="text-sm font-medium">No orders yet</span>
                   </div>
                   <div v-else class="flex items-center text-green-700 bg-green-100 px-3 py-1 rounded-full border border-green-200">
-                    <DollarSignIcon class="w-4 h-4 mr-1" />
-                    <span class="text-sm font-medium">₱{{ formatCurrency(salesStats.totalValue) }}</span>
+                    <CheckCircleIcon class="w-4 h-4 mr-1" />
+                    <span class="text-sm font-medium">Active</span>
                   </div>
                 </div>
               </div>
@@ -345,202 +345,74 @@
             </div>
           </div>
 
-          <!-- Main Content Sections -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            <!-- Inventory Quick Status -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
-              <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center gap-3">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 transform hover:scale-110 transition-transform duration-200">
-                    <PackageIcon class="w-6 h-6 text-white" />
+          <!-- Quick Actions -->
+          <div class="mb-8">
+            <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+              <router-link
+                to="/staff/inventory"
+                class="group relative bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+              >
+                <div class="flex flex-col items-center text-center">
+                  <div class="p-3 rounded-lg bg-gradient-to-br from-purple-400 to-violet-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                    <PackageIcon class="w-5 h-5" />
                   </div>
-                  <h3 class="text-xl font-bold text-gray-900">Inventory Quick Status</h3>
+                  <p class="text-xs sm:text-sm font-semibold text-gray-900">Inventory</p>
+                  <p class="text-xs text-gray-600 mt-1">{{ inventoryStats.totalProducts }} items</p>
                 </div>
-                <button @click="fetchInventoryData" class="text-gray-600 hover:text-gray-900 transition-colors">
-                  <RefreshCwIcon class="w-5 h-5" />
-                </button>
-              </div>
-              
-              <div class="grid grid-cols-2 gap-4">
-                <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg p-4 border border-amber-200">
-                  <div class="flex items-center gap-3 mb-2">
-                    <div class="p-2 bg-amber-100 rounded-lg border border-amber-200">
-                      <AlertTriangleIcon class="w-5 h-5 text-amber-600" />
-                    </div>
-                    <span class="text-gray-900 font-medium">Low Stock</span>
-                  </div>
-                  <p class="text-2xl font-bold text-gray-900">{{ inventoryStats.lowStock }}</p>
-                  <p class="text-xs text-gray-600">Items below threshold</p>
-                </div>
-                
-                <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-lg p-4 border border-red-200">
-                  <div class="flex items-center gap-3 mb-2">
-                    <div class="p-2 bg-red-100 rounded-lg border border-red-200">
-                      <XCircleIcon class="w-5 h-5 text-red-600" />
-                    </div>
-                    <span class="text-gray-900 font-medium">Out of Stock</span>
-                  </div>
-                  <p class="text-2xl font-bold text-gray-900">{{ inventoryStats.outOfStock }}</p>
-                  <p class="text-xs text-gray-600">Items need reordering</p>
-                </div>
-              </div>
-            </div>
+              </router-link>
 
-            <!-- Paint Mixing Stats -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
-              <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center gap-3">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-pink-400 via-rose-500 to-red-600 transform hover:scale-110 transition-transform duration-200">
-                    <PaletteIcon class="w-6 h-6 text-white" />
+              <router-link
+                to="/staff/paint-mixing"
+                class="group relative bg-gradient-to-br from-pink-50 to-rose-50 border border-pink-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+              >
+                <div class="flex flex-col items-center text-center">
+                  <div class="p-3 rounded-lg bg-gradient-to-br from-pink-400 to-rose-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                    <PaletteIcon class="w-5 h-5" />
                   </div>
-                  <h3 class="text-xl font-bold text-gray-900">Paint Mixing</h3>
+                  <p class="text-xs sm:text-sm font-semibold text-gray-900">Paint Mix</p>
+                  <p class="text-xs text-gray-600 mt-1">Color mixing</p>
                 </div>
-                <button @click="fetchPaintMixingData" class="text-gray-600 hover:text-gray-900 transition-colors">
-                  <RefreshCwIcon class="w-5 h-5" />
-                </button>
-              </div>
-              
-              <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
-                  <div class="flex items-center gap-3 mb-2">
-                    <div class="p-2 bg-green-100 rounded-lg border border-green-200">
-                      <UserIcon class="w-5 h-5 text-green-600" />
-                    </div>
-                    <span class="text-gray-900 font-medium">By Staff</span>
-                  </div>
-                  <p class="text-2xl font-bold text-gray-900">{{ paintMixingStats.byStaff }}</p>
-                  <p class="text-xs text-gray-600">Recommendations</p>
-                </div>
-                
-                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-200">
-                  <div class="flex items-center gap-3 mb-2">
-                    <div class="p-2 bg-blue-100 rounded-lg border border-blue-200">
-                      <ShieldIcon class="w-5 h-5 text-blue-600" />
-                    </div>
-                    <span class="text-gray-900 font-medium">By Admin</span>
-                  </div>
-                  <p class="text-2xl font-bold text-gray-900">{{ paintMixingStats.byAdmin }}</p>
-                  <p class="text-xs text-gray-600">Recommendations</p>
-                </div>
-              </div>
-              
-              <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-4 border border-purple-200">
-                <div class="flex items-center gap-3 mb-2">
-                  <div class="p-2 bg-purple-100 rounded-lg border border-purple-200">
-                    <TrendingUpIcon class="w-5 h-5 text-purple-600" />
-                  </div>
-                  <span class="text-gray-900 font-medium">Total</span>
-                </div>
-                <p class="text-2xl font-bold text-gray-900">{{ paintMixingStats.total }}</p>
-                <p class="text-xs text-gray-600">All recommendations</p>
-              </div>
-            </div>
-          </div>
+              </router-link>
 
-          <!-- House Paint Recommender and Quick Actions -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            <!-- House Paint Recommender -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
-              <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center gap-3">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-teal-400 via-cyan-500 to-blue-600 transform hover:scale-110 transition-transform duration-200">
-                    <HomeIcon class="w-6 h-6 text-white" />
+              <router-link
+                to="/staff/house-paint-recommender"
+                class="group relative bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+              >
+                <div class="flex flex-col items-center text-center">
+                  <div class="p-3 rounded-lg bg-gradient-to-br from-orange-400 to-amber-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                    <HomeIcon class="w-5 h-5" />
                   </div>
-                  <h3 class="text-xl font-bold text-gray-900">House Paint Recommender</h3>
+                  <p class="text-xs sm:text-sm font-semibold text-gray-900">Recommender</p>
+                  <p class="text-xs text-gray-600 mt-1">Paint advisor</p>
                 </div>
-                <button @click="fetchRecommenderData" class="text-gray-600 hover:text-gray-900 transition-colors">
-                  <RefreshCwIcon class="w-5 h-5" />
-                </button>
-              </div>
-              
-              <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
-                  <div class="flex items-center gap-3 mb-2">
-                    <div class="p-2 bg-green-100 rounded-lg border border-green-200">
-                      <UserIcon class="w-5 h-5 text-green-600" />
-                    </div>
-                    <span class="text-gray-900 font-medium">By Staff</span>
-                  </div>
-                  <p class="text-2xl font-bold text-gray-900">{{ recommenderStats.byStaff }}</p>
-                  <p class="text-xs text-gray-600">Recommendations</p>
-                </div>
-                
-                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-200">
-                  <div class="flex items-center gap-3 mb-2">
-                    <div class="p-2 bg-blue-100 rounded-lg border border-blue-200">
-                      <ShieldIcon class="w-5 h-5 text-blue-600" />
-                    </div>
-                    <span class="text-gray-900 font-medium">By Admin</span>
-                  </div>
-                  <p class="text-2xl font-bold text-gray-900">{{ recommenderStats.byAdmin }}</p>
-                  <p class="text-xs text-gray-600">Recommendations</p>
-                </div>
-              </div>
-              
-              <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-4 border border-purple-200">
-                <div class="flex items-center gap-3 mb-2">
-                  <div class="p-2 bg-purple-100 rounded-lg border border-purple-200">
-                    <TrendingUpIcon class="w-5 h-5 text-purple-600" />
-                  </div>
-                  <span class="text-gray-900 font-medium">Total</span>
-                </div>
-                <p class="text-2xl font-bold text-gray-900">{{ recommenderStats.total }}</p>
-                <p class="text-xs text-gray-600">All recommendations</p>
-              </div>
-            </div>
+              </router-link>
 
-            <!-- Quick Actions -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
-              <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center gap-3">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-600 transform hover:scale-110 transition-transform duration-200">
-                    <TrendingUpIcon class="w-6 h-6 text-white" />
+              <router-link
+                to="/staff/sales-analytics"
+                class="group relative bg-gradient-to-br from-teal-50 to-cyan-50 border border-teal-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+              >
+                <div class="flex flex-col items-center text-center">
+                  <div class="p-3 rounded-lg bg-gradient-to-br from-teal-400 to-cyan-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                    <TrendingUpIcon class="w-5 h-5" />
                   </div>
-                  <h3 class="text-xl font-bold text-gray-900">Quick Actions</h3>
+                  <p class="text-xs sm:text-sm font-semibold text-gray-900">Analytics</p>
+                  <p class="text-xs text-gray-600 mt-1">Sales data</p>
                 </div>
-              </div>
-              
-              <div class="space-y-3">
-                <router-link 
-                  to="/staff/inventory" 
-                  class="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-200 hover:bg-purple-100 transition-colors"
-                >
-                  <PackageIcon class="w-5 h-5 text-purple-600" />
-                  <span class="text-gray-900 font-medium">Manage Inventory</span>
-                </router-link>
-                
-                <router-link 
-                  to="/staff/paint-mixing" 
-                  class="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-pink-50 to-rose-50 border border-pink-200 hover:bg-pink-100 transition-colors"
-                >
-                  <PaletteIcon class="w-5 h-5 text-pink-600" />
-                  <span class="text-gray-900 font-medium">Mix Paint</span>
-                </router-link>
-                
-                <router-link 
-                  to="/staff/house-paint-recommender" 
-                  class="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-teal-50 to-cyan-50 border border-teal-200 hover:bg-teal-100 transition-colors"
-                >
-                  <HomeIcon class="w-5 h-5 text-teal-600" />
-                  <span class="text-gray-900 font-medium">Recommend Paint</span>
-                </router-link>
-                
-                <router-link 
-                  to="/staff/sales-analytics" 
-                  class="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200 hover:bg-emerald-100 transition-colors"
-                >
-                  <TrendingUpIcon class="w-5 h-5 text-emerald-600" />
-                  <span class="text-gray-900 font-medium">Sales Analytics</span>
-                </router-link>
-                
-                <router-link 
-                  to="/staff/settings" 
-                  class="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-200 hover:bg-gray-100 transition-colors"
-                >
-                  <SettingsIcon class="w-5 h-5 text-gray-600" />
-                  <span class="text-gray-900 font-medium">Settings</span>
-                </router-link>
-              </div>
+              </router-link>
+
+              <router-link
+                to="/staff/settings"
+                class="group relative bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+              >
+                <div class="flex flex-col items-center text-center">
+                  <div class="p-3 rounded-lg bg-gradient-to-br from-gray-400 to-slate-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                    <SettingsIcon class="w-5 h-5" />
+                  </div>
+                  <p class="text-xs sm:text-sm font-semibold text-gray-900">Settings</p>
+                  <p class="text-xs text-gray-600 mt-1">Preferences</p>
+                </div>
+              </router-link>
             </div>
           </div>
         </div>
@@ -649,8 +521,10 @@ const inventoryStats = ref({
   categories: 0
 })
 
-// Sales statistics
+// Orders statistics (today only - resets daily)
 const salesStats = ref({
+  today: 0,
+  todayValue: 0,
   total: 0,
   pending: 0,
   completed: 0,
@@ -690,6 +564,9 @@ let unsubscribeInventory = null
 let unsubscribePaintMixing = null
 let unsubscribeRecommender = null
 let unsubscribeSales = null
+
+// Interval for checking date change (to reset orders at midnight)
+let dateCheckInterval = null
 
 // Format currency
 const formatCurrency = (value) => {
@@ -773,51 +650,101 @@ const fetchInventoryData = async () => {
   }
 }
 
-// Fetch sales data
+// Fetch orders data (today only - resets daily, counts from both admin and staff)
 const fetchSalesData = async () => {
   try {
     if (!db) return
     
+    console.log("Setting up real-time listener for orders (sales collection)")
+    
     const salesRef = collection(db, 'sales')
     
-    // Get all completed orders (sales)
-    const completedOrdersQuery = query(salesRef, where('status', '==', 'completed'))
-    const completedSnapshot = await getDocs(completedOrdersQuery)
-    
-    // Get pending orders
-    const pendingOrdersQuery = query(salesRef, where('status', '==', 'pending'))
-    const pendingSnapshot = await getDocs(pendingOrdersQuery)
-    
-    // Get orders from this month
-    const oneMonthAgo = new Date()
-    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1)
-    
-    const oneMonthAgoTimestamp = Timestamp.fromDate(oneMonthAgo)
-    
-    const thisMonthQuery = query(
-      salesRef, 
-      where('status', '==', 'completed'),
-      where('date', '>=', oneMonthAgoTimestamp)
+    // Query all sales and filter in memory (more reliable than date range queries)
+    // This matches the pattern used in Staff Sales Analytics
+    const allSalesQuery = query(
+      salesRef,
+      orderBy('date', 'desc')
     )
-    const thisMonthSnapshot = await getDocs(thisMonthQuery)
     
-    // Calculate total value of completed orders
-    let totalValue = 0
-    completedSnapshot.forEach(doc => {
-      const sale = doc.data()
-      totalValue += Number(sale.total) || 0
-    })
-    
-    salesStats.value = {
-      total: completedSnapshot.size,
-      pending: pendingSnapshot.size,
-      completed: completedSnapshot.size,
-      totalValue: totalValue,
-      thisMonth: thisMonthSnapshot.size
+    // Set up real-time listener for all sales (we'll filter for today in memory)
+    if (unsubscribeSales) {
+      unsubscribeSales()
     }
     
+    unsubscribeSales = onSnapshot(allSalesQuery, (snapshot) => {
+      console.log(`Received ${snapshot.docs.length} total orders from query`)
+      
+      // Calculate today's date range INSIDE the callback so it always uses current date
+      // This ensures automatic reset at midnight even if page is kept open
+      const now = new Date()
+      const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0)
+      const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999)
+      
+      let todayCount = 0
+      let todayValue = 0
+      let totalCount = 0
+      let totalValue = 0
+      let pendingCount = 0
+      let thisMonthCount = 0
+      
+      // Get one month ago for this month calculation
+      const oneMonthAgo = new Date()
+      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1)
+      
+      snapshot.forEach(doc => {
+        const sale = doc.data()
+        
+        // Convert Firestore timestamp to JS Date
+        let saleDate = sale.date
+        if (saleDate && typeof saleDate.toDate === 'function') {
+          saleDate = saleDate.toDate()
+        } else if (!saleDate) {
+          saleDate = new Date() // Default to current date if missing
+        }
+        
+        const saleTotal = Number(sale.total) || 0
+        const saleStatus = sale.status || 'completed'
+        
+        // Count all completed orders
+        if (saleStatus === 'completed') {
+          totalCount++
+          totalValue += saleTotal
+          
+          // Count today's orders (resets daily - date range recalculated each time)
+          if (saleDate >= startOfDay && saleDate <= endOfDay) {
+            todayCount++
+            todayValue += saleTotal
+            console.log(`Today's order: ${sale.orderId || doc.id}, Total: ₱${saleTotal}`)
+          }
+          
+          // Count this month's orders
+          if (saleDate >= oneMonthAgo) {
+            thisMonthCount++
+          }
+        } else if (saleStatus === 'pending') {
+          pendingCount++
+        }
+      })
+      
+      // Update stats
+      salesStats.value = {
+        today: todayCount,
+        todayValue: todayValue,
+        total: totalCount,
+        pending: pendingCount,
+        completed: totalCount,
+        totalValue: totalValue,
+        thisMonth: thisMonthCount
+      }
+      
+      console.log(`Today's orders: ${todayCount}, Today's value: ₱${todayValue}`)
+      console.log(`Total orders: ${totalCount}, Total value: ₱${totalValue}`)
+    }, (error) => {
+      console.error('Error listening to orders changes:', error)
+    })
+    
   } catch (error) {
-    console.error('Error fetching sales data:', error)
+    console.error('Error fetching orders data:', error)
   }
 }
 
@@ -967,22 +894,7 @@ const checkSystemStatus = async () => {
 }
 
 // Set up real-time listener for sales
-const setupSalesListener = () => {
-  if (!db) return null
-
-  try {
-    const salesRef = collection(db, 'sales')
-    
-    return onSnapshot(salesRef, async () => {
-      await fetchSalesData()
-    }, (error) => {
-      console.error('Error listening to sales changes:', error)
-    })
-  } catch (error) {
-    console.error('Error setting up sales listener:', error)
-    return null
-  }
-}
+// setupSalesListener is no longer needed - fetchSalesData now sets up its own real-time listener
 
 // Set up real-time listener for paint mixing - UPDATED to use paintMixtures collection
 const setupPaintMixingListener = () => {
@@ -1092,7 +1004,20 @@ onMounted(async () => {
   unsubscribeInventory = setupInventoryListener()
   unsubscribePaintMixing = setupPaintMixingListener()
   unsubscribeRecommender = setupRecommenderListener()
-  unsubscribeSales = setupSalesListener()
+  // fetchSalesData now sets up its own real-time listener, so no need for setupSalesListener
+  
+  // Set up interval to check if date has changed (for automatic reset at midnight)
+  // Check every minute to see if we've crossed into a new day
+  let lastCheckedDate = new Date().toDateString()
+  dateCheckInterval = setInterval(() => {
+    const currentDate = new Date().toDateString()
+    if (currentDate !== lastCheckedDate) {
+      console.log('Date changed! Resetting orders count for new day.')
+      lastCheckedDate = currentDate
+      // Re-fetch sales data to recalculate with new date range
+      fetchSalesData()
+    }
+  }, 60000) // Check every minute
 })
 
 // Clean up on component unmount
@@ -1112,6 +1037,11 @@ onUnmounted(() => {
   
   if (unsubscribeSales) {
     unsubscribeSales()
+  }
+  
+  // Clear date check interval
+  if (dateCheckInterval) {
+    clearInterval(dateCheckInterval)
   }
 })
 </script>

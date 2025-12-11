@@ -16,25 +16,20 @@
       <button 
         @click="goToHomepage"
         :disabled="isNavigating"
-        class="flex items-center gap-2 px-3 py-1.5 bg-white/95 backdrop-blur-sm border-2 border-white/30 rounded-lg text-gray-800 hover:bg-white hover:border-white/50 transition-all duration-200 shadow-lg hover:shadow-xl text-sm font-semibold disabled:opacity-75 disabled:cursor-not-allowed"
+        class="flex items-center justify-center w-10 h-10 bg-white/95 backdrop-blur-sm border-2 border-white/30 rounded-xl text-gray-800 hover:bg-white hover:border-white/50 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-75 disabled:cursor-not-allowed hover:-translate-y-0.5"
         :class="{ 'transform scale-95': isNavigating }"
+        title="Back to Homepage"
       >
-        <div class="relative flex items-center">
-          <!-- Loading Spinner -->
-          <LoaderIcon 
-            v-if="isNavigating" 
-            class="h-4 w-4 animate-spin text-blue-600" 
-          />
-          <!-- Arrow Icon -->
-          <ArrowLeft 
-            v-else 
-            class="h-4 w-4 transition-transform duration-200" 
-            :class="{ 'group-hover:-translate-x-1': !isNavigating }"
-          />
-        </div>
-        <span class="transition-all duration-200">
-          {{ isNavigating ? 'Loading...' : 'Back to Homepage' }}
-        </span>
+        <!-- Loading Spinner -->
+        <LoaderIcon 
+          v-if="isNavigating" 
+          class="h-5 w-5 animate-spin text-blue-600" 
+        />
+        <!-- Arrow Icon -->
+        <ArrowLeft 
+          v-else 
+          class="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-1" 
+        />
       </button>
     </div>
 

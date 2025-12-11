@@ -42,15 +42,15 @@
           </div>
 
           <!-- FLAT OVAL Portal Buttons - More Visible Color Tints -->
-          <div class="flex flex-col sm:flex-row justify-center gap-6 mb-32 w-full max-w-xl mx-auto mt-12">
+          <div class="flex flex-col sm:flex-row justify-center gap-4 mb-32 w-full max-w-lg mx-auto mt-12">
             <!-- Staff Portal Button - More Orange Tinted -->
             <div 
               @click="handleStaffClick"
               :class="['group relative flex-1 bg-gradient-to-br from-orange-100 via-orange-50 to-white backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden border-2 border-orange-200', staffClicked ? 'scale-95' : '']"
-              style="border-radius: 32px; padding: 24px 20px;"
+              style="border-radius: 24px; padding: 16px 14px;"
             >
               <!-- Simple Loading State - Staff -->
-              <div v-if="staffClicked" class="absolute inset-0 bg-white/98 backdrop-blur-sm flex items-center justify-center z-30" style="border-radius: 32px;">
+              <div v-if="staffClicked" class="absolute inset-0 bg-white/98 backdrop-blur-sm flex items-center justify-center z-30" style="border-radius: 24px;">
                 <div class="flex flex-col items-center gap-4">
                   <!-- Simple Spinner -->
                   <div class="w-8 h-8 border-3 border-orange-200 border-t-orange-500 rounded-full animate-spin"></div>
@@ -70,23 +70,23 @@
               </div>
               
               <!-- Normal Button Content - Icon on Left -->
-              <div v-if="!staffClicked" class="flex flex-col items-center text-center space-y-4">
+              <div v-if="!staffClicked" class="flex flex-col items-center text-center space-y-3">
                 <!-- Title with Icon on Left -->
-                <div class="flex items-center gap-3 justify-center">
-                  <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center shadow-md">
-                    <UserIcon class="h-5 w-5 text-white" />
+                <div class="flex items-center gap-2 justify-center">
+                  <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center shadow-md">
+                    <UserIcon class="h-4 w-4 text-white" />
                   </div>
-                  <h3 class="text-xl font-bold text-gray-800">Staff Portal</h3>
+                  <h3 class="text-lg font-bold text-gray-800">Staff Portal</h3>
                 </div>
                 
                 <!-- Description -->
-                <p class="text-gray-600 text-sm leading-relaxed px-2">Tools for efficient frontline operations</p>
+                <p class="text-gray-600 text-xs leading-relaxed px-2">Tools for efficient frontline operations</p>
                 
                 <!-- Enter Button -->
                 <div class="w-full pt-1">
-                  <div class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 text-sm font-medium flex items-center justify-center gap-2 shadow-md group-hover:shadow-lg transition-all duration-300" style="border-radius: 24px;">
+                  <div class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 text-xs font-medium flex items-center justify-center gap-2 shadow-md group-hover:shadow-lg transition-all duration-300" style="border-radius: 20px;">
                     <span>Enter Portal</span>
-                    <ChevronRightIcon class="h-4 w-4" />
+                    <ChevronRightIcon class="h-3 w-3" />
                   </div>
                 </div>
               </div>
@@ -96,10 +96,10 @@
             <div 
               @click="handleAdminClick"
               :class="['group relative flex-1 bg-gradient-to-br from-blue-100 via-blue-50 to-white backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden border-2 border-blue-200', adminClicked ? 'scale-95' : '']"
-              style="border-radius: 32px; padding: 24px 20px;"
+              style="border-radius: 24px; padding: 16px 14px;"
             >
               <!-- Simple Loading State - Admin -->
-              <div v-if="adminClicked" class="absolute inset-0 bg-white/98 backdrop-blur-sm flex items-center justify-center z-30" style="border-radius: 32px;">
+              <div v-if="adminClicked" class="absolute inset-0 bg-white/98 backdrop-blur-sm flex items-center justify-center z-30" style="border-radius: 24px;">
                 <div class="flex flex-col items-center gap-4">
                   <!-- Simple Spinner -->
                   <div class="w-8 h-8 border-3 border-blue-200 border-t-blue-500 rounded-full animate-spin"></div>
@@ -119,23 +119,23 @@
               </div>
               
               <!-- Normal Button Content - Icon on Left -->
-              <div v-if="!adminClicked" class="flex flex-col items-center text-center space-y-4">
+              <div v-if="!adminClicked" class="flex flex-col items-center text-center space-y-3">
                 <!-- Title with Icon on Left -->
-                <div class="flex items-center gap-3 justify-center">
-                  <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-md">
-                    <ShieldIcon class="h-5 w-5 text-white" />
+                <div class="flex items-center gap-2 justify-center">
+                  <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center shadow-md">
+                    <ShieldIcon class="h-4 w-4 text-white" />
                   </div>
-                  <h3 class="text-xl font-bold text-gray-800">Admin Portal</h3>
+                  <h3 class="text-lg font-bold text-gray-800">Admin Portal</h3>
                 </div>
                 
                 <!-- Description -->
-                <p class="text-gray-600 text-sm leading-relaxed px-2">Full access to system and sale analytics</p>
+                <p class="text-gray-600 text-xs leading-relaxed px-2">Full access to system and sale analytics</p>
                 
                 <!-- Enter Button -->
                 <div class="w-full pt-1">
-                  <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 text-sm font-medium flex items-center justify-center gap-2 shadow-md group-hover:shadow-lg transition-all duration-300" style="border-radius: 24px;">
+                  <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 text-xs font-medium flex items-center justify-center gap-2 shadow-md group-hover:shadow-lg transition-all duration-300" style="border-radius: 20px;">
                     <span>Enter Portal</span>
-                    <ChevronRightIcon class="h-4 w-4" />
+                    <ChevronRightIcon class="h-3 w-3" />
                   </div>
                 </div>
               </div>

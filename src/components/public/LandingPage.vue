@@ -185,7 +185,7 @@
       </p>
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
       <div class="group card-customer p-4">
         <div class="relative z-10">
           <div class="w-11 h-11 bg-customer-primary-gradient rounded-2xl flex items-center justify-center shadow-customer-md group-hover:scale-110 transition-transform duration-300 mb-4">
@@ -193,7 +193,7 @@
           </div>
                     
           <h3 class="text-base md:text-lg font-black text-neutral-900 mb-2.5">Custom Paint Mixing</h3>
-          <p class="text-neutral-600 mb-4 leading-relaxed text-sm">
+          <p class="text-neutral-600 mb-4 leading-relaxed text-sm flex-1">
             Precision color matching using advanced spectrophotometer technology. Bring any sample and we'll create the perfect match with 99% accuracy guarantee.
           </p>
                     
@@ -218,21 +218,21 @@
             </div>
           </div>
                     
-          <button @click="$router.push('/signup')" class="w-full btn-customer-primary text-xs">
+          <button @click="$router.push('/signup')" class="w-full btn-customer-primary text-xs mt-auto">
             <PaletteIcon class="h-3.5 w-3.5 mr-1.5" />
             Get Color Match
           </button>
         </div>
       </div>
       
-      <div class="group card-admin p-4">
-        <div class="relative z-10">
+      <div class="group card-admin p-4 flex flex-col">
+        <div class="relative z-10 flex-1 flex flex-col">
           <div class="w-11 h-11 bg-admin-primary-gradient rounded-2xl flex items-center justify-center shadow-admin-md group-hover:scale-110 transition-transform duration-300 mb-4">
             <HomeIcon class="h-5.5 w-5.5 text-white" />
           </div>
                     
           <h3 class="text-base md:text-lg font-black text-neutral-900 mb-2.5">House Color Recommender</h3>
-          <p class="text-neutral-600 mb-4 leading-relaxed text-sm">
+          <p class="text-neutral-600 mb-4 leading-relaxed text-sm flex-1">
             Professional color consultation for interior and exterior projects. Our certified experts help you choose the perfect palette that matches your house color style.
           </p>
                     
@@ -257,9 +257,65 @@
             </div>
           </div>
                     
-          <button @click="$router.push('/signup')" class="w-full btn-admin-primary text-xs">
+          <button @click="$router.push('/signup')" class="w-full btn-admin-primary text-xs mt-auto">
             <HomeIcon class="h-3.5 w-3.5 mr-1.5" />
             Get Recommendation
+          </button>
+        </div>
+      </div>
+      
+      <!-- Products Box - Same style as the two service boxes -->
+      <div class="group card-staff p-4 flex flex-col">
+        <div class="relative z-10 flex-1 flex flex-col">
+          <div class="w-11 h-11 bg-staff-primary-gradient rounded-2xl flex items-center justify-center shadow-staff-md group-hover:scale-110 transition-transform duration-300 mb-4">
+            <PackageIcon class="h-5.5 w-5.5 text-white" />
+          </div>
+                    
+          <h3 class="text-base md:text-lg font-black text-neutral-900 mb-2.5">Our Products</h3>
+          <p class="text-neutral-600 mb-4 leading-relaxed text-sm flex-1">
+            Browse our wide range of premium paint products and supplies. View prices and availability for all our quality products.
+          </p>
+                    
+          <div v-if="loadingProducts" class="space-y-1.5 mb-4">
+            <div class="flex items-center justify-center py-2">
+              <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-staff-primary-600"></div>
+              <span class="text-neutral-700 font-medium text-xs ml-2">Loading products...</span>
+            </div>
+          </div>
+          
+          <div v-else-if="products.length === 0" class="space-y-1.5 mb-4">
+            <div class="flex items-center">
+              <div class="w-3.5 h-3.5 bg-gradient-to-br from-staff-primary-500 to-staff-accent-500 rounded-full flex items-center justify-center mr-2.5">
+                <PackageIcon class="h-2 w-2 text-white" />
+              </div>
+              <span class="text-neutral-700 font-medium text-xs">Products coming soon</span>
+            </div>
+          </div>
+          
+          <div v-else class="space-y-1.5 mb-4">
+            <div class="flex items-center">
+              <div class="w-3.5 h-3.5 bg-gradient-to-br from-staff-primary-500 to-staff-accent-500 rounded-full flex items-center justify-center mr-2.5">
+                <CheckIcon class="h-2 w-2 text-white" />
+              </div>
+              <span class="text-neutral-700 font-medium text-xs">{{ products.length }} products available</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-3.5 h-3.5 bg-gradient-to-br from-admin-primary-500 to-admin-accent-500 rounded-full flex items-center justify-center mr-2.5">
+                <CheckIcon class="h-2 w-2 text-white" />
+              </div>
+              <span class="text-neutral-700 font-medium text-xs">View prices & stock levels</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-3.5 h-3.5 bg-gradient-to-br from-admin-secondary-500 to-pink-500 rounded-full flex items-center justify-center mr-2.5">
+                <CheckIcon class="h-2 w-2 text-white" />
+              </div>
+              <span class="text-neutral-700 font-medium text-xs">Premium quality guaranteed</span>
+            </div>
+          </div>
+                    
+          <button @click="$router.push('/signup')" class="w-full btn-staff-primary text-xs mt-auto">
+            <PackageIcon class="h-3.5 w-3.5 mr-1.5" />
+            View Products
           </button>
         </div>
       </div>
@@ -614,7 +670,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import {
   Menu as MenuIcon,
   X as XIcon,
@@ -635,9 +691,13 @@ import {
   ArrowRight as ArrowRightIcon,
   Trophy as TrophyIcon,
   Clock as ClockIcon,
-  User as UserIcon
+  User as UserIcon,
+  Package as PackageIcon
 } from 'lucide-vue-next'
 import { quoteService } from '../../../services/quoteService'
+import { auth, db } from '../../config/firebase'
+import { onAuthStateChanged } from 'firebase/auth'
+import { collection, query, onSnapshot, limit } from 'firebase/firestore'
 
 // Mobile menu state
 const mobileMenuOpen = ref(false)
@@ -654,6 +714,13 @@ const form = ref({
 
 // Add loading state for form submission
 const isSubmitting = ref(false)
+
+// Authentication and Products state
+const isLoggedIn = ref(false)
+const products = ref([])
+const loadingProducts = ref(false)
+let unsubscribeAuth = null
+let unsubscribeProducts = null
 
 const submitForm = async () => {
   // Validate form before submission
@@ -699,6 +766,77 @@ const scrollToSection = (sectionId) => {
     mobileMenuOpen.value = false
   }
 }
+
+// Format price
+const formatPrice = (price) => {
+  return new Intl.NumberFormat('en-PH', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(price)
+}
+
+// Fetch products from Firestore
+const fetchProducts = () => {
+  if (!db) return
+  
+  loadingProducts.value = true
+  
+  // Clean up existing listener
+  if (unsubscribeProducts) {
+    unsubscribeProducts()
+  }
+  
+  const productsRef = collection(db, 'products')
+  // Limit to 12 products for display
+  const q = query(productsRef, limit(12))
+  
+  unsubscribeProducts = onSnapshot(
+    q,
+    (snapshot) => {
+      products.value = snapshot.docs.map(doc => {
+        const data = doc.data()
+        const stockValue = data.stock !== undefined ? Number(data.stock) :
+                          data.stockLevel !== undefined ? Number(data.stockLevel) : 0
+        
+        return {
+          id: doc.id,
+          name: data.name || 'Unnamed Product',
+          category: data.category || '',
+          price: Number(data.price) || Number(data.unitPrice) || 0,
+          stockLevel: stockValue,
+          image: data.image || null
+        }
+      })
+      loadingProducts.value = false
+    },
+    (error) => {
+      console.error('Error fetching products:', error)
+      loadingProducts.value = false
+      products.value = []
+    }
+  )
+}
+
+// Initialize - Fetch products for all visitors
+onMounted(() => {
+  // Fetch products for all visitors (not just logged in users)
+  fetchProducts()
+  
+  // Still listen to auth state for other purposes if needed
+  unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+    isLoggedIn.value = !!user
+  })
+})
+
+// Cleanup on unmount
+onUnmounted(() => {
+  if (unsubscribeAuth) {
+    unsubscribeAuth()
+  }
+  if (unsubscribeProducts) {
+    unsubscribeProducts()
+  }
+})
 </script>
 
 <style scoped>
@@ -799,6 +937,25 @@ html {
 .btn-admin-primary:hover {
   transform: translateY(-1px);
   box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+}
+
+.btn-staff-primary {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-staff-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
 }
 
 /* Card styles */

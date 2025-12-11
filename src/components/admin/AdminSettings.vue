@@ -295,89 +295,106 @@
 
         <!-- Enhanced responsive padding and spacing -->
         <div class="p-4 sm:p-6 lg:p-8">
-          <!-- Account & Security Section -->
-          <div class="max-w-lg mx-auto">
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-4 sm:p-6">
-              <div class="flex items-center gap-3 mb-4 sm:mb-6">
-                <div class="p-2 sm:p-3 rounded-xl shadow-lg bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 transform hover:scale-110 transition-transform duration-200">
-                  <ShieldIcon class="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+          <!-- Settings Content - Better Layout -->
+          <div class="max-w-4xl mx-auto">
+            <!-- Page Title -->
+            <div class="mb-6 sm:mb-8">
+              <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Account Settings</h2>
+              <p class="text-gray-600 text-sm sm:text-base">Manage your account security and preferences</p>
+            </div>
+
+            <!-- Settings Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 max-w-3xl mx-auto">
+              <!-- Admin Security Code Card -->
+              <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden">
+                <div class="p-5 sm:p-6">
+                  <div class="flex items-center gap-4 mb-4">
+                    <div class="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg">
+                      <ShieldIcon class="w-6 h-6 text-white" />
+                    </div>
+                    <div class="flex-1">
+                      <h3 class="text-lg font-bold text-gray-900">Admin Security Code</h3>
+                      <p class="text-sm text-gray-500 mt-1">Manage registration security code</p>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                    <p class="text-xs text-gray-600 mb-1">Current Code:</p>
+                    <p class="text-sm font-mono font-semibold text-blue-700">{{ adminSecurityCode || 'Not set' }}</p>
+                  </div>
+                  
+                  <button 
+                    @click="showSecurityCodeModal = true"
+                    class="w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium"
+                  >
+                    <ShieldIcon class="w-4 h-4" />
+                    {{ adminSecurityCode ? 'Change Security Code' : 'Set Security Code' }}
+                  </button>
                 </div>
-                <h2 class="text-lg sm:text-xl font-bold text-gray-900">Account & Security</h2>
               </div>
 
-              <div class="space-y-4 sm:space-y-6">
-                <!-- Admin Security Code Section -->
-                <div class="p-4 sm:p-5 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200 shadow-sm">
-                  <div class="flex flex-col gap-3 sm:gap-4">
-                    <div class="flex items-start gap-3">
-                      <div class="p-2 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-500 shadow-lg flex-shrink-0">
-                        <ShieldIcon class="w-5 h-5 text-white" />
-                      </div>
-                      <div class="flex-1 min-w-0">
-                        <h3 class="text-base font-semibold text-gray-900">Admin Security Code</h3>
-                        <p class="text-xs sm:text-sm text-gray-600 mt-1">Manage the security code required for admin registration</p>
-                        <p class="text-xs text-blue-600 mt-1 font-medium">Current code: {{ adminSecurityCode || 'Not set' }}</p>
-                      </div>
+              <!-- Change Password Card -->
+              <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden">
+                <div class="p-5 sm:p-6">
+                  <div class="flex items-center gap-4 mb-4">
+                    <div class="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 shadow-lg">
+                      <KeyIcon class="w-6 h-6 text-white" />
                     </div>
-                    <button 
-                      @click="showSecurityCodeModal = true"
-                      class="w-full px-4 py-2 text-sm bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
-                    >
-                      <ShieldIcon class="w-4 h-4" />
-                      {{ adminSecurityCode ? 'Change Security Code' : 'Set Security Code' }}
-                    </button>
+                    <div class="flex-1">
+                      <h3 class="text-lg font-bold text-gray-900">Change Password</h3>
+                      <p class="text-sm text-gray-500 mt-1">Update your account password</p>
+                    </div>
                   </div>
-                </div>
-
-                <!-- Password Section -->
-                <div class="p-4 sm:p-5 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-200 shadow-sm">
-                  <div class="flex flex-col gap-3 sm:gap-4">
-                    <div class="flex items-start gap-3">
-                      <div class="p-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg flex-shrink-0">
-                        <KeyIcon class="w-5 h-5 text-white" />
-                      </div>
-                      <div class="flex-1 min-w-0">
-                        <h3 class="text-base font-semibold text-gray-900">Change Password</h3>
-                        <p class="text-xs sm:text-sm text-gray-600 mt-1">Update your account password for better security</p>
-                        <p class="text-xs text-purple-600 mt-1">{{ passwordLastChangedText }}</p>
-                      </div>
-                    </div>
-                    <button 
-                      @click="changePassword"
-                      class="w-full px-4 py-2 text-sm bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
-                    >
-                      <KeyIcon class="w-4 h-4" />
-                      Change Password
-                    </button>
+                  
+                  <div class="mb-4 p-3 bg-purple-50 rounded-lg border border-purple-200">
+                    <p class="text-xs text-gray-600 mb-1">Last Changed:</p>
+                    <p class="text-sm font-medium text-purple-700">{{ passwordLastChangedText }}</p>
                   </div>
+                  
+                  <button 
+                    @click="changePassword"
+                    class="w-full px-4 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-lg hover:from-purple-600 hover:to-pink-700 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium"
+                  >
+                    <KeyIcon class="w-4 h-4" />
+                    Change Password
+                  </button>
                 </div>
+              </div>
 
-                <!-- Delete Account Section -->
-                <div class="p-4 sm:p-5 bg-gradient-to-r from-red-50 to-orange-50 rounded-xl border border-red-200 shadow-sm">
-                  <div class="flex flex-col gap-3 sm:gap-4">
-                    <div class="flex items-start gap-3">
-                      <div class="p-2 rounded-lg bg-gradient-to-r from-red-500 to-orange-500 shadow-lg flex-shrink-0">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                        </svg>
-                      </div>
-                      <div class="flex-1 min-w-0">
-                        <h3 class="text-base font-semibold text-red-900">Delete Account</h3>
-                        <p class="text-xs sm:text-sm text-red-700 mt-1">Permanently delete your account and all associated data</p>
-                        <p class="text-xs text-red-600 mt-1 font-medium">⚠️ This action cannot be undone</p>
-                      </div>
-                    </div>
-                    <button 
-                      @click="deleteAccount"
-                      :disabled="isDeletingAccount"
-                      class="w-full px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2 hover:from-red-700 hover:to-red-800 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <!-- Delete Account Card - Full Width -->
+              <div class="md:col-span-2 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border-2 border-red-200 overflow-hidden max-w-2xl mx-auto">
+                <div class="p-5 sm:p-6">
+                  <div class="flex items-center gap-4 mb-4">
+                    <div class="p-3 rounded-xl bg-gradient-to-br from-red-500 to-orange-600 shadow-lg">
+                      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                       </svg>
-                      {{ isDeletingAccount ? 'Deleting...' : 'Delete Account' }}
-                    </button>
+                    </div>
+                    <div class="flex-1">
+                      <h3 class="text-lg font-bold text-red-900">Delete Account</h3>
+                      <p class="text-sm text-red-700 mt-1">Permanently delete your account and all data</p>
+                    </div>
                   </div>
+                  
+                  <div class="mb-4 p-4 bg-red-50 rounded-lg border border-red-200">
+                    <p class="text-sm text-red-800 font-medium flex items-center gap-2">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                      </svg>
+                      This action cannot be undone. All your data will be permanently deleted.
+                    </p>
+                  </div>
+                  
+                  <button 
+                    @click="deleteAccount"
+                    :disabled="isDeletingAccount"
+                    class="w-full px-4 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                    {{ isDeletingAccount ? 'Deleting Account...' : 'Delete Account' }}
+                  </button>
                 </div>
               </div>
             </div>

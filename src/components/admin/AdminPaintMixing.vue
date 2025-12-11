@@ -1,59 +1,305 @@
 <template>
-  <div class="min-h-screen bg-background p-2 sm:p-3">
-    <div class="max-w-5xl mx-auto space-y-3 sm:space-y-4">
-      <!-- Navigation header with back button -->
-      <div class="flex items-center gap-3 mb-3">
-        <button
-          @click="goBack"
-          class="flex items-center gap-2 px-3 py-1.5 bg-card border border-border rounded-lg hover:bg-accent transition-colors text-sm"
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute inset-0">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-200 to-blue-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+    </div>
+
+    <div class="relative z-10 flex h-screen">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden lg:flex lg:flex-col shadow-lg">
+        <!-- Logo/Brand -->
+        <div class="p-4 xl:p-6 border-b border-gray-200 flex-shrink-0">
+          <div>
+            <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+          </div>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-2 xl:px-3 py-1 rounded-full inline-flex items-center shadow-sm">
+            <ShieldIcon class="h-3 w-3 mr-1" />
+            Admin Portal
+          </div>
+        </div>
+
+        <!-- Navigation - Scrollable Area -->
+        <nav class="flex-1 p-3 xl:p-4 space-y-1 xl:space-y-2 overflow-y-auto">
+          <router-link 
+            to="/admin/dashboard" 
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+            :class="{ 'shadow-sm border border-blue-200': $route.path === '/admin/dashboard' }"
+          >
+            <LayoutDashboardIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Dashboard</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/staff" 
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
+            :class="{ 'shadow-sm border border-green-200': $route.path === '/admin/staff' }"
+          >
+            <UsersIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Staff Management</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/inventory" 
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
+            :class="{ 'shadow-sm border border-purple-200': $route.path === '/admin/inventory' }"
+          >
+            <PackageIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Inventory</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/house-paint-recommender" 
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
+            :class="{ 'shadow-sm border border-orange-200': $route.path === '/admin/house-paint-recommender' }"
+          >
+            <HomeIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Paint Recommender</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/paint-mixing" 
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 shadow-sm border border-pink-200"
+          >
+            <PaletteIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Paint Mixing</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/sales-analytics" 
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
+            :class="{ 'shadow-sm border border-teal-200': $route.path === '/admin/sales-analytics' }"
+          >
+            <TrendingUpIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Sales Analytics</span>
+          </router-link>
+
+          <router-link
+            to="/admin/visualization"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700"
+            active-class="bg-indigo-100 border border-indigo-200 shadow-sm font-semibold"
+            :class="{ 'shadow-sm border border-indigo-200': $route.path === '/admin/visualization' }"
+          >
+            <BarChart3Icon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Data Visualization</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/settings" 
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700"
+            :class="{ 'shadow-sm border border-amber-200': $route.path === '/admin/settings' }"
+          >
+            <SettingsIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Settings</span>
+          </router-link>
+        </nav>
+
+        <!-- User Menu - Fixed at bottom -->
+        <div class="p-3 xl:p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+          <div class="flex items-center gap-2 xl:gap-3">
+            <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg flex-shrink-0">
+              <UserIcon class="w-4 xl:w-5 h-4 xl:w-5 text-white" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs xl:text-sm font-medium text-gray-900 truncate">{{ userDisplayName || 'Admin User' }}</p>
+              <p class="text-xs text-gray-600 truncate">{{ userEmail || 'admin@example.com' }}</p>
+            </div>
+            <button 
+              @click="handleLogout"
+              class="p-1.5 xl:p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0"
+              title="Logout"
+            >
+              <LogOutIcon class="w-4 xl:w-5 h-4 xl:w-5" />
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Mobile Sidebar Toggle -->
+      <div class="fixed top-4 left-4 z-30 lg:hidden">
+        <button 
+          @click="toggleMobileSidebar"
+          class="p-3 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+          aria-label="Toggle navigation menu"
         >
-          <ChevronLeft class="w-4 h-4" />
-          <span class="text-xs font-medium">Back to Admin</span>
+          <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
+          <XIcon v-else class="w-6 h-6 text-gray-700" />
         </button>
       </div>
 
-      <!-- Header -->
-      <div class="text-center space-y-1">
-        <h1 class="text-xl sm:text-2xl font-bold text-foreground">Paint Mixing Studio</h1>
-        <p class="text-xs sm:text-sm text-muted-foreground">Create perfect color combinations with AI Predictions</p>
-      </div>
+      <!-- Mobile Sidebar Overlay -->
+      <div 
+        v-if="mobileSidebarOpen" 
+        class="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 lg:hidden"
+        @click="toggleMobileSidebar"
+      ></div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
-        <!-- Left Panel: Color Selection -->
-        <div class="space-y-3 sm:space-y-4">
+      <!-- Mobile Sidebar -->
+      <aside 
+        v-if="mobileSidebarOpen"
+        class="fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-30 lg:hidden shadow-2xl flex flex-col"
+      >
+        <!-- Logo/Brand -->
+        <div class="p-6 border-b border-gray-200 flex-shrink-0">
+          <div>
+            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+          </div>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
+            <ShieldIcon class="h-3 w-3 mr-1" />
+            Admin Portal
+          </div>
+        </div>
 
-          <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-3 sm:space-y-4">
-            <div class="space-y-3">
-              <!-- Fixed color picker with accurate HSV color wheel and reduced sizes -->
-              <div class="space-y-2">
-                <h3 class="text-sm sm:text-base font-semibold text-foreground">Interactive Color Picker</h3>
-                <div class="relative">
-                  <!-- Reduced canvas height for more compact layout -->
-                  <canvas
-                    ref="colorCanvas"
-                    class="w-full h-32 sm:h-40 rounded-lg cursor-crosshair border-2 border-border shadow-md"
-                    width="400"
-                    height="200"
-                    @click="selectColorFromCanvas"
-                    @mousemove="previewColorFromCanvas">
-                  </canvas>
-                  <!-- Color picker cursor -->
-                  <div v-if="pickerPosition.x !== null && pickerPosition.y !== null"
-                       class="absolute w-3 h-3 border-2 border-white rounded-full shadow-lg transform -translate-x-1.5 -translate-y-1.5 pointer-events-none"
-                       :style="{ left: pickerPosition.x + 'px', top: pickerPosition.y + 'px' }">
-                    <div class="w-full h-full rounded border border-black/30"></div>
-                  </div>
-                </div>
-                <!-- Added current color preview for accuracy verification -->
-                <div class="flex items-center gap-2">
-                  <div class="w-8 h-8 rounded-lg border-2 border-gray-300 shadow-sm" :style="{ backgroundColor: currentPreviewColor }"></div>
-                  <span class="text-xs font-mono text-muted-foreground">{{ currentPreviewColor }}</span>
-                </div>
-              </div>
+        <!-- Mobile Navigation - Scrollable -->
+        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+          <router-link 
+            to="/admin/dashboard" 
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100"
+            :class="{ 'shadow-sm border border-blue-200': $route.path === '/admin/dashboard' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <LayoutDashboardIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Dashboard</span>
+          </router-link>
 
-              <!-- Enhanced Quick Color Selection with smooth animations -->
-              <div>
-                <h3 class="text-sm sm:text-base font-semibold text-card-foreground mb-2">Quick Color Selection</h3>
+          <router-link 
+            to="/admin/staff" 
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100"
+            :class="{ 'shadow-sm border border-green-200': $route.path === '/admin/staff' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <UsersIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Staff Management</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/inventory" 
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100"
+            :class="{ 'shadow-sm border border-purple-200': $route.path === '/admin/inventory' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <PackageIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Inventory</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/house-paint-recommender" 
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100"
+            :class="{ 'shadow-sm border border-orange-200': $route.path === '/admin/house-paint-recommender' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <HomeIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Paint Recommender</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/paint-mixing" 
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 shadow-sm border border-pink-200"
+            @click="mobileSidebarOpen = false"
+          >
+            <PaletteIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Paint Mix</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/sales-analytics" 
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100"
+            :class="{ 'shadow-sm border border-teal-200': $route.path === '/admin/sales-analytics' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <TrendingUpIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Sales Analytics</span>
+          </router-link>
+
+          <router-link
+            to="/admin/visualization"
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100"
+            active-class="bg-indigo-100 border border-indigo-200 shadow-sm font-semibold"
+            :class="{ 'shadow-sm border border-indigo-200': $route.path === '/admin/visualization' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <BarChart3Icon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Visualize</span>
+          </router-link>
+
+          <router-link 
+            to="/admin/settings" 
+            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100"
+            :class="{ 'shadow-sm border border-amber-200': $route.path === '/admin/settings' }"
+            @click="mobileSidebarOpen = false"
+          >
+            <SettingsIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">System Settings</span>
+          </router-link>
+        </nav>
+
+        <!-- User Menu -->
+        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg flex-shrink-0">
+              <UserIcon class="w-6 h-6 text-white" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900 truncate">{{ userDisplayName || 'Admin User' }}</p>
+              <p class="text-xs text-gray-600 truncate">{{ userEmail || 'admin@example.com' }}</p>
+            </div>
+            <button 
+              @click="handleLogout"
+              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0"
+              title="Logout"
+            >
+              <LogOutIcon class="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 overflow-auto">
+        <div class="bg-background p-2 sm:p-3 min-h-full">
+          <div class="max-w-5xl mx-auto space-y-3 sm:space-y-4">
+            <!-- Header -->
+            <div class="text-center space-y-1 pt-4">
+              <h1 class="text-xl sm:text-2xl font-bold text-foreground">Paint Mixing Studio</h1>
+              <p class="text-xs sm:text-sm text-muted-foreground">Create perfect color combinations with AI Predictions</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+              <!-- Left Panel: Color Selection -->
+              <div class="space-y-3 sm:space-y-4">
+                <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-3 sm:space-y-4">
+                  <div class="space-y-3">
+                    <!-- Fixed color picker with accurate HSV color wheel and reduced sizes -->
+                    <div class="space-y-2">
+                      <h3 class="text-sm sm:text-base font-semibold text-foreground">Interactive Color Picker</h3>
+                      <div class="relative">
+                        <!-- Reduced canvas height for more compact layout -->
+                        <canvas
+                          ref="colorCanvas"
+                          class="w-full h-32 sm:h-40 rounded-lg cursor-crosshair border-2 border-border shadow-md"
+                          width="400"
+                          height="200"
+                          @click="selectColorFromCanvas"
+                          @mousemove="previewColorFromCanvas">
+                        </canvas>
+                        <!-- Color picker cursor -->
+                        <div v-if="pickerPosition.x !== null && pickerPosition.y !== null"
+                             class="absolute w-3 h-3 border-2 border-white rounded-full shadow-lg transform -translate-x-1.5 -translate-y-1.5 pointer-events-none"
+                             :style="{ left: pickerPosition.x + 'px', top: pickerPosition.y + 'px' }">
+                          <div class="w-full h-full rounded border border-black/30"></div>
+                        </div>
+                      </div>
+                      <!-- Added current color preview for accuracy verification -->
+                      <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg border-2 border-gray-300 shadow-sm" :style="{ backgroundColor: currentPreviewColor }"></div>
+                        <span class="text-xs font-mono text-muted-foreground">{{ currentPreviewColor }}</span>
+                      </div>
+                    </div>
+
+                    <!-- Enhanced Quick Color Selection with smooth animations -->
+                    <div>
+                      <h3 class="text-sm sm:text-base font-semibold text-card-foreground mb-2">Quick Color Selection</h3>
 
                 <!-- Primary & Basic Colors -->
                 <div class="mb-2">
@@ -240,129 +486,216 @@
 
             <!-- Selected Colors for Mixing -->
             <div class="space-y-2">
-              <div class="flex items-center justify-between">
-                <h3 class="text-sm sm:text-base font-semibold text-foreground">Selected Colors</h3>
-                <!-- Reduced button size and padding -->
-                <button v-if="selectedColors.length > 0"
-                        @click="clearAllColors"
-                        class="px-2 py-1 text-xs font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg transition-all duration-200 hover:shadow-md hover:scale-105 flex items-center gap-1">
-                  <X class="w-3 h-3" />
-                  Clear
-                </button>
-              </div>
-
-              <div v-if="selectedColors.length === 0" class="text-center py-3 text-muted-foreground text-xs">
-                Select colors to start mixing
-              </div>
-
-              <div v-else class="space-y-1.5">
-                <div v-for="(color, index) in selectedColors" :key="index"
-                     class="flex items-center gap-2 p-2 bg-muted/50 rounded-lg border border-muted hover:border-primary/30 transition-colors">
-                  <div class="w-6 h-6 rounded-lg border-2 border-gray-300 shadow-sm flex-shrink-0" :style="{ backgroundColor: color.hex }"></div>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-xs font-medium text-foreground truncate">{{ color.name }}</p>
-                    <p class="text-xs text-muted-foreground">{{ color.hex }}</p>
+                  <div class="flex items-center justify-between">
+                    <h3 class="text-sm sm:text-base font-semibold text-foreground">Selected Colors</h3>
+                    <!-- Reduced button size and padding -->
+                    <button v-if="selectedColors.length > 0"
+                            @click="clearAllColors"
+                            class="px-2 py-1 text-xs font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg transition-all duration-200 hover:shadow-md hover:scale-105 flex items-center gap-1">
+                      <X class="w-3 h-3" />
+                      Clear
+                    </button>
                   </div>
-                  <!-- Reduced range slider size and padding -->
-                  <div class="flex items-center gap-2 bg-gradient-to-r from-background to-muted/30 rounded-lg p-2 border shadow-sm">
-                    <input type="range"
-                           v-model="color.ratio"
-                           min="1"
-                           max="100"
-                           class="enhanced-range w-16"
-                           :style="{ '--color': color.hex }">
-                    <span class="text-xs font-bold text-foreground min-w-[2rem] text-right">{{ color.ratio }}%</span>
+
+                  <div v-if="selectedColors.length === 0" class="text-center py-3 text-muted-foreground text-xs">
+                    Select colors to start mixing
                   </div>
-                  <button @click="removeColor(index)"
-                          class="text-red-500 hover:text-red-600 hover:bg-red-50 p-1 rounded-lg transition-all duration-200 hover:scale-110 flex-shrink-0">
-                    <X class="w-3 h-3" />
+
+                  <div v-else class="space-y-1.5">
+                    <div v-for="(color, index) in selectedColors" :key="index"
+                         class="flex items-center gap-2 p-2 bg-muted/50 rounded-lg border border-muted hover:border-primary/30 transition-colors">
+                      <div class="w-6 h-6 rounded-lg border-2 border-gray-300 shadow-sm flex-shrink-0" :style="{ backgroundColor: color.hex }"></div>
+                      <div class="flex-1 min-w-0">
+                        <p class="text-xs font-medium text-foreground truncate">{{ color.name }}</p>
+                        <p class="text-xs text-muted-foreground">{{ color.hex }}</p>
+                      </div>
+                      <!-- Reduced range slider size and padding -->
+                      <div class="flex items-center gap-2 bg-gradient-to-r from-background to-muted/30 rounded-lg p-2 border shadow-sm">
+                        <input type="range"
+                               v-model="color.ratio"
+                               min="1"
+                               max="100"
+                               class="enhanced-range w-16"
+                               :style="{ '--color': color.hex }">
+                        <span class="text-xs font-bold text-foreground min-w-[2rem] text-right">{{ color.ratio }}%</span>
+                      </div>
+                      <button @click="removeColor(index)"
+                              class="text-red-500 hover:text-red-600 hover:bg-red-50 p-1 rounded-lg transition-all duration-200 hover:scale-110 flex-shrink-0">
+                        <X class="w-3 h-3" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-3 sm:space-y-4">
+                <!-- Color Palette Display -->
+                <div class="bg-card border border-border rounded-lg p-3 sm:p-4 shadow-sm">
+                  <h3 class="font-semibold text-sm text-foreground mb-2">Current Palette</h3>
+                  <div class="grid grid-cols-5 gap-1.5 mb-3">
+                    <div
+                      v-for="(color, index) in selectedColors"
+                      :key="index"
+                      class="aspect-square rounded-lg border-2 border-border cursor-pointer hover:scale-105 transition-transform"
+                      :style="{ backgroundColor: color.hex }"
+                      @click="removeColor(index)"
+                      :title="`Remove ${color.name || color.hex}`"
+                    ></div>
+                    <div
+                      v-for="n in Math.max(0, 5 - selectedColors.length)"
+                      :key="`empty-${n}`"
+                      class="aspect-square rounded-lg border-2 border-dashed border-muted-foreground/30 flex items-center justify-center text-muted-foreground/50"
+                    >
+                      <PlusIcon class="w-3 h-3" />
+                    </div>
+                  </div>
+                <p class="text-xs text-muted-foreground">
+                  Click colors to add them to your palette (max 5)
+                </p>
+                </div>
+
+                <!-- Mixed Result -->
+                <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-2">
+                  <h3 class="text-sm sm:text-base font-semibold text-foreground">Mixed Result</h3>
+
+                  <div class="relative">
+                    <div class="w-full h-24 sm:h-32 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center"
+                         :style="{ backgroundColor: mixedColor }">
+                      <div v-if="!mixedColor || mixedColor === '#ffffff'" class="text-center text-muted-foreground">
+                        <Palette class="w-6 h-6 mx-auto mb-1 opacity-50" />
+                        <p class="text-xs">Mixed color will appear here</p>
+                      </div>
+                    </div>
+
+                    <div v-if="mixedColor && mixedColor !== '#ffffff'" class="mt-2 text-center">
+                      <p class="text-xs font-mono text-muted-foreground">{{ mixedColor }}</p>
+                      <div class="flex justify-center gap-1 mt-1 flex-wrap">
+                        <span class="text-xs px-1.5 py-0.5 bg-muted rounded">RGB: {{ getRgbFromHex(mixedColor) }}</span>
+                        <span class="text-xs px-1.5 py-0.5 bg-muted rounded">HSL: {{ getHslFromHex(mixedColor) }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Save Mixture Section -->
+                <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-3">
+                  <h3 class="text-sm sm:text-base font-semibold text-foreground">Save Mixture</h3>
+                  <input
+                    type="text"
+                    v-model="mixtureName"
+                    placeholder="Enter mixture name..."
+                    class="w-full px-3 py-2 border border-border rounded-lg focus:ring-primary focus:border-primary text-sm shadow-sm"
+                  />
+                  <button
+                    @click="saveMixture"
+                    :disabled="!mixtureName || selectedColors.length === 0"
+                    class="w-full px-3 py-2 font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-1"
+                    :class="!mixtureName || selectedColors.length === 0 ? 'bg-primary/40 text-white/70 cursor-not-allowed' : 'bg-primary hover:bg-primary-hover shadow-md hover:scale-105 text-white'"
+                  >
+                    <SaveIcon class="w-4 h-4" />
+                    Save Mixture
                   </button>
+                  <div v-if="successMessage" class="text-xs text-green-500 mt-2">{{ successMessage }}</div>
+                  <div v-if="errorMessage" class="text-xs text-red-500 mt-2">{{ errorMessage }}</div>
+                </div>
+
+                <!-- Mixture History Section -->
+                <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-3">
+                  <div class="flex items-center justify-between">
+                    <h3 class="text-sm sm:text-base font-semibold text-foreground">Saved Mixtures</h3>
+                    <span class="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full">
+                      {{ savedMixtures.length }}
+                    </span>
+                  </div>
+                  
+                  <div v-if="savedMixtures.length === 0" class="text-center py-6 text-muted-foreground text-xs">
+                    <Palette class="w-8 h-8 mx-auto mb-2 opacity-50" />
+                    <p>No saved mixtures yet</p>
+                    <p class="text-xs mt-1">Save your first mixture to see it here</p>
+                  </div>
+                  
+                  <div v-else class="space-y-2 max-h-96 overflow-y-auto">
+                    <div
+                      v-for="mixture in savedMixtures"
+                      :key="mixture.id"
+                      class="bg-muted/50 rounded-lg border border-border p-3 hover:border-primary/30 transition-all duration-200 hover:shadow-md group"
+                    >
+                      <div class="flex items-start gap-3">
+                        <!-- Color Preview -->
+                        <div
+                          class="w-12 h-12 rounded-lg border-2 border-border shadow-sm flex-shrink-0"
+                          :style="{ backgroundColor: mixture.mixedColor }"
+                          :title="mixture.mixedColor"
+                        ></div>
+                        
+                        <!-- Mixture Info -->
+                        <div class="flex-1 min-w-0">
+                          <h4 class="text-sm font-semibold text-foreground truncate">{{ mixture.name }}</h4>
+                          <p class="text-xs text-muted-foreground mt-1 font-mono">{{ mixture.mixedColor }}</p>
+                          <div class="flex items-center gap-1 mt-2 flex-wrap">
+                            <span
+                              v-for="(color, idx) in mixture.colors.slice(0, 3)"
+                              :key="idx"
+                              class="text-xs px-1.5 py-0.5 rounded bg-background border border-border"
+                              :style="{ color: color.hex }"
+                            >
+                              {{ color.name }} ({{ color.ratio }}%)
+                            </span>
+                            <span v-if="mixture.colors.length > 3" class="text-xs text-muted-foreground">
+                              +{{ mixture.colors.length - 3 }} more
+                            </span>
+                          </div>
+                          <div class="flex items-center gap-2 mt-1">
+                            <p class="text-xs text-muted-foreground">
+                              {{ formatDate(mixture.timestamp) }}
+                            </p>
+                            <span class="text-xs px-1.5 py-0.5 rounded bg-primary/10 text-primary font-medium">
+                              By {{ mixture.createdBy === 'admin' ? 'Admin' : 'Staff' }}
+                            </span>
+                          </div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="flex items-center gap-1 flex-shrink-0">
+                          <button
+                            @click="loadMixture(mixture)"
+                            class="p-1.5 rounded-lg hover:bg-primary/10 text-primary hover:text-primary-hover transition-colors"
+                            title="Load mixture"
+                          >
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                            </svg>
+                          </button>
+                          <button
+                            @click="deleteMixture(mixture.id)"
+                            class="p-1.5 rounded-lg hover:bg-red-50 text-red-500 hover:text-red-600 transition-colors"
+                            title="Delete mixture"
+                          >
+                            <X class="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Right Column -->
-        <div class="space-y-3 sm:space-y-4">
-          <!-- Color Palette Display -->
-          <div class="bg-card border border-border rounded-lg p-3 sm:p-4 shadow-sm">
-            <h3 class="font-semibold text-sm text-foreground mb-2">Current Palette</h3>
-            <div class="grid grid-cols-5 gap-1.5 mb-3">
-              <div
-                v-for="(color, index) in selectedColors"
-                :key="index"
-                class="aspect-square rounded-lg border-2 border-border cursor-pointer hover:scale-105 transition-transform"
-                :style="{ backgroundColor: color.hex }"
-                @click="removeColor(index)"
-                :title="`Remove ${color.name || color.hex}`"
-              ></div>
-              <div
-                v-for="n in Math.max(0, 5 - selectedColors.length)"
-                :key="`empty-${n}`"
-                class="aspect-square rounded-lg border-2 border-dashed border-muted-foreground/30 flex items-center justify-center text-muted-foreground/50"
-              >
-                <PlusIcon class="w-3 h-3" />
-              </div>
-            </div>
-            <p class="text-xs text-muted-foreground">
-              Click colors to add them to your palette (max 5)
-            </p>
-          </div>
-
-          <!-- Mixed Result -->
-          <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-2">
-            <h3 class="text-sm sm:text-base font-semibold text-foreground">Mixed Result</h3>
-
-            <div class="relative">
-              <div class="w-full h-24 sm:h-32 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center"
-                   :style="{ backgroundColor: mixedColor }">
-                <div v-if="!mixedColor || mixedColor === '#ffffff'" class="text-center text-muted-foreground">
-                  <Palette class="w-6 h-6 mx-auto mb-1 opacity-50" />
-                  <p class="text-xs">Mixed color will appear here</p>
-                </div>
-              </div>
-
-              <div v-if="mixedColor && mixedColor !== '#ffffff'" class="mt-2 text-center">
-                <p class="text-xs font-mono text-muted-foreground">{{ mixedColor }}</p>
-                <div class="flex justify-center gap-1 mt-1 flex-wrap">
-                  <span class="text-xs px-1.5 py-0.5 bg-muted rounded">RGB: {{ getRgbFromHex(mixedColor) }}</span>
-                  <span class="text-xs px-1.5 py-0.5 bg-muted rounded">HSL: {{ getHslFromHex(mixedColor) }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Save Mixture Section -->
-          <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-3">
-            <h3 class="text-sm sm:text-base font-semibold text-foreground">Save Mixture</h3>
-            <input
-              type="text"
-              v-model="mixtureName"
-              placeholder="Enter mixture name..."
-              class="w-full px-3 py-2 border border-border rounded-lg focus:ring-primary focus:border-primary text-sm shadow-sm"
-            />
-            <button
-              @click="saveMixture"
-              :disabled="!mixtureName || selectedColors.length === 0"
-              class="w-full px-3 py-2 font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-1"
-              :class="!mixtureName || selectedColors.length === 0 ? 'bg-primary/40 text-white/70 cursor-not-allowed' : 'bg-primary hover:bg-primary-hover shadow-md hover:scale-105 text-white'"
-            >
-              <SaveIcon class="w-4 h-4" />
-              Save Mixture
-            </button>
-            <div v-if="successMessage" class="text-xs text-green-500 mt-2">{{ successMessage }}</div>
-            <div v-if="errorMessage" class="text-xs text-red-500 mt-2">{{ errorMessage }}</div>
-          </div>
-        </div>
-      </div>
+      </main>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { auth, db } from '@/config/firebase'
+import { signOut } from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth'
+import { collection, addDoc, getDocs, query, orderBy, onSnapshot, deleteDoc, doc, Timestamp } from 'firebase/firestore'
 import ChevronLeft from '~icons/heroicons/chevron-left-solid'
 import ChevronDown from '~icons/heroicons/chevron-down-solid'
 import ChevronRightIcon from '~icons/heroicons/chevron-right-solid'
@@ -373,11 +706,49 @@ import PlusIcon from '~icons/heroicons/plus-small-solid'
 import SaveIcon from '~icons/heroicons/arrow-down-tray-solid'
 // import LoaderIcon from '~icons/heroicons/arrow-path-solid'
 // import ColorSwatchIcon from '~icons/heroicons/swatch-solid' // For AI prediction graphic
+import {
+  LayoutDashboard as LayoutDashboardIcon,
+  Users as UsersIcon,
+  Package as PackageIcon,
+  Home as HomeIcon,
+  Palette as PaletteIcon,
+  TrendingUp as TrendingUpIcon,
+  Settings as SettingsIcon,
+  User as UserIcon,
+  LogOut as LogOutIcon,
+  Menu as MenuIcon,
+  X as XIcon,
+  Shield as ShieldIcon,
+  BarChart3 as BarChart3Icon,
+} from 'lucide-vue-next'
 
 const router = useRouter()
-const goBack = () => {
-  router.push({ name: 'AdminDashboard' })
+const mobileSidebarOpen = ref(false)
+const userDisplayName = ref('')
+const userEmail = ref('')
+
+const toggleMobileSidebar = () => {
+  mobileSidebarOpen.value = !mobileSidebarOpen.value
 }
+
+const handleLogout = async () => {
+  try {
+    await signOut(auth)
+    router.push('/admin')
+  } catch (error) {
+    console.error('Error signing out:', error)
+  }
+}
+
+// Get user info
+onMounted(() => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      userDisplayName.value = user.displayName || 'Admin User'
+      userEmail.value = user.email || 'admin@example.com'
+    }
+  })
+})
 
 // Reactive state
 const showColorSelector = ref(false)
@@ -802,42 +1173,59 @@ const getHslFromHex = (hex) => {
   return `${hsl.h}° , ${hsl.s}%, ${hsl.l}%`
 }
 
+// Firestore collection name
+const MIXTURES_COLLECTION = 'paintMixtures'
+
+// Load mixtures from Firestore
+const loadMixturesFromFirestore = () => {
+  try {
+    const mixturesCollection = collection(db, MIXTURES_COLLECTION)
+    const q = query(mixturesCollection, orderBy('timestamp', 'desc'))
+    
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      savedMixtures.value = snapshot.docs.map(doc => {
+        const data = doc.data()
+        return {
+          id: doc.id,
+          name: data.name,
+          colors: data.colors || [],
+          mixedColor: data.mixedColor,
+          timestamp: data.timestamp?.toDate ? data.timestamp.toDate().toISOString() : (data.timestamp || new Date().toISOString()),
+          createdBy: data.createdBy || 'admin'
+        }
+      })
+    }, (error) => {
+      console.error('Error loading mixtures:', error)
+      errorMessage.value = 'Failed to load mixtures. Please refresh the page.'
+      clearMessages()
+    })
+    
+    // Store unsubscribe function for cleanup
+    return unsubscribe
+  } catch (error) {
+    console.error('Error setting up mixtures listener:', error)
+    errorMessage.value = 'Failed to connect to database.'
+    clearMessages()
+  }
+}
+
 // Initialize component
+let mixturesUnsubscribe = null
 onMounted(() => {
   drawColorWheel()
   updateMixedColor() // Ensure mixedColor is initialized correctly
   updateCurrentPreviewColor() // Initialize current preview color
 
-  // Load saved mixtures from localStorage
-  const saved = localStorage.getItem('paintMixtures')
-  if (saved) {
-    savedMixtures.value = JSON.parse(saved)
-  }
+  // Load saved mixtures from Firestore
+  mixturesUnsubscribe = loadMixturesFromFirestore()
 })
 
-// Watch for changes to save mixtures
-const saveMixturesToStorage = () => {
-  localStorage.setItem('paintMixtures', JSON.stringify(savedMixtures.value))
-}
-
-// Using a proxy to automatically save mixtures on change
-// Note: This is a simple approach. For more complex state management, consider Pinia or Vuex.
-const savedMixturesProxy = new Proxy(savedMixtures.value, {
-  set(target, property, value) {
-    target[property] = value
-    saveMixturesToStorage()
-    return true
-  },
-  deleteProperty(target, property) {
-    const deleted = delete target[property]
-    if (deleted) {
-      saveMixturesToStorage()
-    }
-    return deleted
+// Cleanup on unmount
+onUnmounted(() => {
+  if (mixturesUnsubscribe) {
+    mixturesUnsubscribe()
   }
 })
-// Assign the proxy back to savedMixtures.value
-savedMixtures.value = savedMixturesProxy
 
 
 const drawColorWheel = () => {
@@ -1037,36 +1425,80 @@ const addAnalyzedColor = (result) => {
 // Remove AI processing function and related helpers
 // analyzeColorForAI, getHarmony, getMood, getUsage, generateRecommendations, addRecommendedColor
 
-const saveMixture = () => {
+const saveMixture = async () => {
   if (!mixtureName.value || selectedColors.value.length === 0) {
     errorMessage.value = 'Please enter a mixture name and select colors.'
     clearMessages()
     return
   }
 
-  const newMixture = {
-    id: Date.now().toString(),
-    name: mixtureName.value,
-    colors: selectedColors.value.map(c => ({ hex: c.hex, name: c.name, ratio: c.ratio })),
-    mixedColor: mixedColor.value,
-    timestamp: new Date().toISOString()
+  try {
+    const newMixture = {
+      name: mixtureName.value,
+      colors: selectedColors.value.map(c => ({ hex: c.hex, name: c.name, ratio: c.ratio })),
+      mixedColor: mixedColor.value,
+      timestamp: Timestamp.now(),
+      createdBy: 'admin'
+    }
+
+    const mixturesCollection = collection(db, MIXTURES_COLLECTION)
+    await addDoc(mixturesCollection, newMixture)
+    
+    successMessage.value = 'Mixture saved successfully!'
+    clearMessages()
+
+    // Clear form after saving
+    mixtureName.value = ''
+    selectedColors.value = []
+    updateMixedColor()
+    updateCurrentPreviewColor()
+  } catch (error) {
+    console.error('Error saving mixture:', error)
+    errorMessage.value = 'Failed to save mixture. Please try again.'
+    clearMessages()
   }
+}
 
-  savedMixtures.value.push(newMixture)
-  successMessage.value = 'Mixture saved successfully!'
-  clearMessages()
-
-  // Clear form after saving
-  mixtureName.value = ''
-  selectedColors.value = []
-  // aiPrediction.color = '#ffffff'
-  // aiPrediction.confidence = 0
-  // aiPrediction.harmony = ''
-  // aiPrediction.mood = ''
-  // aiPrediction.usage = ''
-  // aiRecommendations.value = []
+const loadMixture = (mixture) => {
+  if (!mixture || !mixture.colors) {
+    errorMessage.value = 'Invalid mixture data'
+    clearMessages()
+    return
+  }
+  
+  selectedColors.value = mixture.colors.map(c => ({
+    hex: c.hex,
+    name: c.name,
+    ratio: c.ratio
+  }))
+  
+  mixtureName.value = mixture.name
+  
   updateMixedColor()
   updateCurrentPreviewColor()
+  
+  successMessage.value = `Mixture "${mixture.name}" loaded successfully!`
+  clearMessages()
+  
+  // Scroll to top to show the loaded colors
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+const deleteMixture = async (id) => {
+  if (!confirm('Are you sure you want to delete this mixture?')) {
+    return
+  }
+  
+  try {
+    const mixtureDoc = doc(db, MIXTURES_COLLECTION, id)
+    await deleteDoc(mixtureDoc)
+    successMessage.value = 'Mixture deleted successfully!'
+    clearMessages()
+  } catch (error) {
+    console.error('Error deleting mixture:', error)
+    errorMessage.value = 'Failed to delete mixture. Please try again.'
+    clearMessages()
+  }
 }
 
 // Helper to get Color Name for detected colors
