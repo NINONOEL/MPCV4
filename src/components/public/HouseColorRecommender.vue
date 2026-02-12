@@ -69,103 +69,254 @@
                     <!-- Sky background with gradient -->
                     <defs>
                       <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#e6f3ff;stop-opacity:1" />
+                        <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+                        <stop offset="30%" style="stop-color:#6BB6FF;stop-opacity:1" />
+                        <stop offset="60%" style="stop-color:#87CEEB;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#B0E0E6;stop-opacity:1" />
                       </linearGradient>
-                      <!-- Changed roof gradient from brown to blue -->
-                      <linearGradient id="roofGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#4682B4;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#2F4F4F;stop-opacity:1" />
+                      <radialGradient id="sunGradient" cx="50%" cy="30%">
+                        <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.9" />
+                        <stop offset="70%" style="stop-color:#FFA500;stop-opacity:0.6" />
+                        <stop offset="100%" style="stop-color:#FFA500;stop-opacity:0" />
+                      </radialGradient>
+                      <linearGradient id="groundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#7CB342;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#689F38;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#558B2F;stop-opacity:1" />
                       </linearGradient>
+                      <linearGradient id="grassTexture" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#8BC34A;stop-opacity:0.3" />
+                        <stop offset="100%" style="stop-color:#558B2F;stop-opacity:0.2" />
+                      </linearGradient>
+                      <linearGradient id="roofShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:rgba(0,0,0,0.2);stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:rgba(0,0,0,0.05);stop-opacity:1" />
+                      </linearGradient>
+                      <filter id="shadow">
+                        <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                      </filter>
+                      <filter id="cloudBlur">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+                      </filter>
                     </defs>
 
-                    <!-- Added pointer-events: none to sky so clicks pass through to roof -->
+                    <!-- Sky background with beautiful gradient -->
                     <rect
                       width="600" height="200"
                       fill="url(#skyGradient)"
                       style="pointer-events: none"
                     />
+                    
+                    <!-- Sun with glow effect -->
+                    <circle cx="500" cy="50" r="35" fill="url(#sunGradient)" style="pointer-events: none"/>
+                    <circle cx="500" cy="50" r="30" fill="#FFD700" opacity="0.8" style="pointer-events: none"/>
+                    
+                    <!-- Enhanced clouds for atmosphere -->
+                    <g filter="url(#cloudBlur)" style="pointer-events: none">
+                      <ellipse cx="100" cy="50" rx="45" ry="28" fill="rgba(255,255,255,0.85)"/>
+                      <ellipse cx="120" cy="50" rx="40" ry="25" fill="rgba(255,255,255,0.85)"/>
+                      <ellipse cx="110" cy="45" rx="35" ry="22" fill="rgba(255,255,255,0.9)"/>
+                      
+                      <ellipse cx="80" cy="80" rx="35" ry="22" fill="rgba(255,255,255,0.7)"/>
+                      <ellipse cx="95" cy="80" rx="30" ry="20" fill="rgba(255,255,255,0.7)"/>
+                      
+                      <ellipse cx="200" cy="70" rx="50" ry="30" fill="rgba(255,255,255,0.75)"/>
+                      <ellipse cx="220" cy="70" rx="45" ry="28" fill="rgba(255,255,255,0.75)"/>
+                      <ellipse cx="210" cy="65" rx="40" ry="25" fill="rgba(255,255,255,0.8)"/>
+                      
+                      <ellipse cx="350" cy="40" rx="40" ry="25" fill="rgba(255,255,255,0.7)"/>
+                      <ellipse cx="370" cy="40" rx="35" ry="22" fill="rgba(255,255,255,0.7)"/>
+                    </g>
 
-                    <!-- Added click handler to ground to deselect parts -->
+                    <!-- Ground with enhanced gradient and texture -->
                     <rect
                       y="300" width="600" height="100"
-                      fill="#90EE90"
+                      fill="url(#groundGradient)"
                       @click="selectedPart = null"
                       class="cursor-pointer"
                     />
-
-                    <!-- Simplified main structure without excessive trim details -->
-                    <!-- Main hip roof - centered and simplified -->
-                    <polygon
-                      points="150,120 300,40 450,120"
-                      :fill="houseParts.roof"
-                      :stroke="selectedPart === 'roof' ? '#3B82F6' : '#333'"
-                      :stroke-width="selectedPart === 'roof' ? '4' : '2'"
-                      @click="selectPart('roof')"
-                      class="cursor-pointer hover:opacity-80 transition-all duration-200"
-                    />
-
-                    <!-- Left dormer roof -->
-                    <polygon
-                      points="210,120 240,90 270,120"
-                      :fill="houseParts.roof"
-                      :stroke="selectedPart === 'roof' ? '#3B82F6' : '#333'"
-                      :stroke-width="selectedPart === 'roof' ? '4' : '2'"
-                      @click="selectPart('roof')"
-                      class="cursor-pointer hover:opacity-80 transition-all duration-200"
-                    />
-
-                    <!-- Right dormer roof -->
-                    <polygon
-                      points="330,120 360,90 390,120"
-                      :fill="houseParts.roof"
-                      :stroke="selectedPart === 'roof' ? '#3B82F6' : '#333'"
-                      :stroke-width="selectedPart === 'roof' ? '4' : '2'"
-                      @click="selectPart('roof')"
-                      class="cursor-pointer hover:opacity-80 transition-all duration-200"
-                    />
-
-                    <!-- Second floor - properly aligned -->
+                    <!-- Grass texture overlay -->
                     <rect
-                      x="150" y="120" width="300" height="70"
-                      :fill="houseParts.mainWalls"
-                      :stroke="selectedPart === 'mainWalls' ? '#3B82F6' : '#333'"
-                      :stroke-width="selectedPart === 'mainWalls' ? '4' : '2'"
-                      @click="selectPart('mainWalls')"
+                      y="300" width="600" height="100"
+                      fill="url(#grassTexture)"
+                      style="pointer-events: none"
+                    />
+                    <!-- Grass detail lines -->
+                    <g style="pointer-events: none; opacity: 0.3;">
+                      <line x1="50" y1="310" x2="50" y2="330" stroke="#4A7C59" stroke-width="1"/>
+                      <line x1="80" y1="315" x2="80" y2="335" stroke="#4A7C59" stroke-width="1"/>
+                      <line x1="150" y1="312" x2="150" y2="332" stroke="#4A7C59" stroke-width="1"/>
+                      <line x1="250" y1="318" x2="250" y2="338" stroke="#4A7C59" stroke-width="1"/>
+                      <line x1="350" y1="314" x2="350" y2="334" stroke="#4A7C59" stroke-width="1"/>
+                      <line x1="450" y1="316" x2="450" y2="336" stroke="#4A7C59" stroke-width="1"/>
+                      <line x1="550" y1="313" x2="550" y2="333" stroke="#4A7C59" stroke-width="1"/>
+                    </g>
+
+                    <!-- Foundation/Base with shadow -->
+                    <rect
+                      x="115" y="295" width="370" height="35"
+                      fill="url(#roofShadow)"
+                      style="pointer-events: none"
+                    />
+                    <rect
+                      x="120" y="300" width="360" height="30"
+                      :fill="houseParts.foundation"
+                      :stroke="selectedPart === 'foundation' ? '#3B82F6' : '#555'"
+                      :stroke-width="selectedPart === 'foundation' ? '4' : '2'"
+                      @click="selectPart('foundation')"
                       class="cursor-pointer hover:opacity-80 transition-all duration-200"
+                      filter="url(#shadow)"
                     />
 
-                    <!-- First floor - properly aligned -->
+                    <!-- Main house structure with shadow -->
+                    <rect
+                      x="125" y="195" width="350" height="105"
+                      fill="url(#roofShadow)"
+                      style="pointer-events: none"
+                    />
+                    
+                    <!-- First floor main wall -->
                     <rect
                       x="120" y="190" width="360" height="110"
                       :fill="houseParts.mainWalls"
-                      :stroke="selectedPart === 'mainWalls' ? '#3B82F6' : '#333'"
+                      :stroke="selectedPart === 'mainWalls' ? '#3B82F6' : '#555'"
                       :stroke-width="selectedPart === 'mainWalls' ? '4' : '2'"
                       @click="selectPart('mainWalls')"
                       class="cursor-pointer hover:opacity-80 transition-all duration-200"
+                      filter="url(#shadow)"
                     />
 
-                    <!-- Left dormer wall -->
+                    <!-- Second floor main wall -->
+                    <rect
+                      x="150" y="120" width="300" height="70"
+                      :fill="houseParts.mainWalls"
+                      :stroke="selectedPart === 'mainWalls' ? '#3B82F6' : '#555'"
+                      :stroke-width="selectedPart === 'mainWalls' ? '4' : '2'"
+                      @click="selectPart('mainWalls')"
+                      class="cursor-pointer hover:opacity-80 transition-all duration-200"
+                      filter="url(#shadow)"
+                    />
+
+                    <!-- Main roof with shadow effect -->
+                    <polygon
+                      points="145,125 300,35 455,125"
+                      fill="url(#roofShadow)"
+                      style="pointer-events: none"
+                    />
+                    <polygon
+                      points="150,120 300,40 450,120"
+                      :fill="houseParts.roof"
+                      :stroke="selectedPart === 'roof' ? '#3B82F6' : '#555'"
+                      :stroke-width="selectedPart === 'roof' ? '4' : '2'"
+                      @click="selectPart('roof')"
+                      class="cursor-pointer hover:opacity-80 transition-all duration-200"
+                      filter="url(#shadow)"
+                    />
+                    <!-- Roof shingle lines for detail -->
+                    <line x1="200" y1="80" x2="200" y2="120" stroke="rgba(0,0,0,0.1)" stroke-width="1" style="pointer-events: none"/>
+                    <line x1="250" y1="60" x2="250" y2="120" stroke="rgba(0,0,0,0.1)" stroke-width="1" style="pointer-events: none"/>
+                    <line x1="350" y1="60" x2="350" y2="120" stroke="rgba(0,0,0,0.1)" stroke-width="1" style="pointer-events: none"/>
+                    <line x1="400" y1="80" x2="400" y2="120" stroke="rgba(0,0,0,0.1)" stroke-width="1" style="pointer-events: none"/>
+
+                    <!-- Left dormer structure -->
+                    <rect
+                      x="215" y="125" width="55" height="65"
+                      fill="url(#roofShadow)"
+                      style="pointer-events: none"
+                    />
                     <rect
                       x="210" y="120" width="60" height="70"
                       :fill="houseParts.mainWalls"
-                      :stroke="selectedPart === 'mainWalls' ? '#3B82F6' : '#333'"
+                      :stroke="selectedPart === 'mainWalls' ? '#3B82F6' : '#555'"
                       :stroke-width="selectedPart === 'mainWalls' ? '4' : '2'"
                       @click="selectPart('mainWalls')"
                       class="cursor-pointer hover:opacity-80 transition-all duration-200"
+                      filter="url(#shadow)"
+                    />
+                    <polygon
+                      points="205,125 240,90 275,125"
+                      fill="url(#roofShadow)"
+                      style="pointer-events: none"
+                    />
+                    <polygon
+                      points="210,120 240,90 270,120"
+                      :fill="houseParts.roof"
+                      :stroke="selectedPart === 'roof' ? '#3B82F6' : '#555'"
+                      :stroke-width="selectedPart === 'roof' ? '4' : '2'"
+                      @click="selectPart('roof')"
+                      class="cursor-pointer hover:opacity-80 transition-all duration-200"
+                      filter="url(#shadow)"
                     />
 
-                    <!-- Right dormer wall -->
+                    <!-- Right dormer structure -->
+                    <rect
+                      x="335" y="125" width="55" height="65"
+                      fill="url(#roofShadow)"
+                      style="pointer-events: none"
+                    />
                     <rect
                       x="330" y="120" width="60" height="70"
                       :fill="houseParts.mainWalls"
-                      :stroke="selectedPart === 'mainWalls' ? '#3B82F6' : '#333'"
+                      :stroke="selectedPart === 'mainWalls' ? '#3B82F6' : '#555'"
                       :stroke-width="selectedPart === 'mainWalls' ? '4' : '2'"
                       @click="selectPart('mainWalls')"
                       class="cursor-pointer hover:opacity-80 transition-all duration-200"
+                      filter="url(#shadow)"
+                    />
+                    <polygon
+                      points="325,125 360,90 395,125"
+                      fill="url(#roofShadow)"
+                      style="pointer-events: none"
+                    />
+                    <polygon
+                      points="330,120 360,90 390,120"
+                      :fill="houseParts.roof"
+                      :stroke="selectedPart === 'roof' ? '#3B82F6' : '#555'"
+                      :stroke-width="selectedPart === 'roof' ? '4' : '2'"
+                      @click="selectPart('roof')"
+                      class="cursor-pointer hover:opacity-80 transition-all duration-200"
+                      filter="url(#shadow)"
                     />
 
-                    <!-- Left dormer window -->
+                    <!-- Window trim/accents -->
+                    <rect
+                      x="145" y="215" width="60" height="70"
+                      :fill="houseParts.trim"
+                      :stroke="selectedPart === 'trim' ? '#3B82F6' : '#555'"
+                      :stroke-width="selectedPart === 'trim' ? '3' : '1.5'"
+                      @click="selectPart('trim')"
+                      class="cursor-pointer hover:opacity-80 transition-all duration-200"
+                      opacity="0.8"
+                    />
+                    <rect
+                      x="395" y="215" width="60" height="70"
+                      :fill="houseParts.trim"
+                      :stroke="selectedPart === 'trim' ? '#3B82F6' : '#555'"
+                      :stroke-width="selectedPart === 'trim' ? '3' : '1.5'"
+                      @click="selectPart('trim')"
+                      class="cursor-pointer hover:opacity-80 transition-all duration-200"
+                      opacity="0.8"
+                    />
+                    <rect
+                      x="220" y="130" width="40" height="40"
+                      :fill="houseParts.trim"
+                      :stroke="selectedPart === 'trim' ? '#3B82F6' : '#555'"
+                      :stroke-width="selectedPart === 'trim' ? '3' : '1.5'"
+                      @click="selectPart('trim')"
+                      class="cursor-pointer hover:opacity-80 transition-all duration-200"
+                      opacity="0.8"
+                    />
+                    <rect
+                      x="340" y="130" width="40" height="40"
+                      :fill="houseParts.trim"
+                      :stroke="selectedPart === 'trim' ? '#3B82F6' : '#555'"
+                      :stroke-width="selectedPart === 'trim' ? '3' : '1.5'"
+                      @click="selectPart('trim')"
+                      class="cursor-pointer hover:opacity-80 transition-all duration-200"
+                      opacity="0.8"
+                    />
+
+                    <!-- Left dormer window with frame -->
                     <rect
                       x="225" y="135" width="30" height="30"
                       :fill="houseParts.windows"
@@ -174,8 +325,11 @@
                       @click="selectPart('windows')"
                       class="cursor-pointer hover:opacity-80 transition-all duration-200"
                     />
+                    <!-- Window cross -->
+                    <line x1="240" y1="135" x2="240" y2="165" stroke="#333" stroke-width="1.5" opacity="0.5" style="pointer-events: none"/>
+                    <line x1="225" y1="150" x2="255" y2="150" stroke="#333" stroke-width="1.5" opacity="0.5" style="pointer-events: none"/>
 
-                    <!-- Right dormer window -->
+                    <!-- Right dormer window with frame -->
                     <rect
                       x="345" y="135" width="30" height="30"
                       :fill="houseParts.windows"
@@ -184,8 +338,11 @@
                       @click="selectPart('windows')"
                       class="cursor-pointer hover:opacity-80 transition-all duration-200"
                     />
+                    <!-- Window cross -->
+                    <line x1="360" y1="135" x2="360" y2="165" stroke="#333" stroke-width="1.5" opacity="0.5" style="pointer-events: none"/>
+                    <line x1="345" y1="150" x2="375" y2="150" stroke="#333" stroke-width="1.5" opacity="0.5" style="pointer-events: none"/>
 
-                    <!-- First floor left window -->
+                    <!-- First floor left window with frame -->
                     <rect
                       x="150" y="220" width="50" height="60"
                       :fill="houseParts.windows"
@@ -194,8 +351,11 @@
                       @click="selectPart('windows')"
                       class="cursor-pointer hover:opacity-80 transition-all duration-200"
                     />
+                    <!-- Window panes -->
+                    <line x1="175" y1="220" x2="175" y2="280" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events: none"/>
+                    <line x1="150" y1="250" x2="200" y2="250" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events: none"/>
 
-                    <!-- First floor right window -->
+                    <!-- First floor right window with frame -->
                     <rect
                       x="400" y="220" width="50" height="60"
                       :fill="houseParts.windows"
@@ -204,8 +364,22 @@
                       @click="selectPart('windows')"
                       class="cursor-pointer hover:opacity-80 transition-all duration-200"
                     />
+                    <!-- Window panes -->
+                    <line x1="425" y1="220" x2="425" y2="280" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events: none"/>
+                    <line x1="400" y1="250" x2="450" y2="250" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events: none"/>
 
-                    <!-- Main entrance door -->
+                    <!-- Door trim/accents -->
+                    <rect
+                      x="265" y="235" width="70" height="90"
+                      :fill="houseParts.trim"
+                      :stroke="selectedPart === 'trim' ? '#3B82F6' : '#555'"
+                      :stroke-width="selectedPart === 'trim' ? '3' : '1.5'"
+                      @click="selectPart('trim')"
+                      class="cursor-pointer hover:opacity-80 transition-all duration-200"
+                      opacity="0.8"
+                    />
+
+                    <!-- Main entrance door with details -->
                     <rect
                       x="270" y="240" width="60" height="80"
                       :fill="houseParts.door"
@@ -213,17 +387,36 @@
                       :stroke-width="selectedPart === 'door' ? '4' : '2'"
                       @click="selectPart('door')"
                       class="cursor-pointer hover:opacity-80 transition-all duration-200"
+                      filter="url(#shadow)"
                     />
-
-                    <!-- Foundation/Base -->
-                    <rect
-                      x="120" y="300" width="360" height="30"
-                      :fill="houseParts.foundation"
-                      :stroke="selectedPart === 'foundation' ? '#3B82F6' : '#333'"
-                      :stroke-width="selectedPart === 'foundation' ? '4' : '2'"
-                      @click="selectPart('foundation')"
-                      class="cursor-pointer hover:opacity-80 transition-all duration-200"
-                    />
+                    <!-- Door panel lines -->
+                    <rect x="280" y="250" width="40" height="25" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" style="pointer-events: none"/>
+                    <rect x="280" y="280" width="40" height="25" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="1.5" style="pointer-events: none"/>
+                    <!-- Door handle -->
+                    <circle cx="315" cy="280" r="3" fill="#FFD700" style="pointer-events: none"/>
+                    
+                    <!-- Enhanced decorative plants/shrubs with better detail -->
+                    <!-- Left side shrubs -->
+                    <ellipse cx="100" cy="295" rx="28" ry="18" fill="#2d5016" opacity="0.8" style="pointer-events: none"/>
+                    <ellipse cx="105" cy="290" rx="22" ry="14" fill="#3d6b2a" opacity="0.9" style="pointer-events: none"/>
+                    <ellipse cx="98" cy="292" rx="18" ry="12" fill="#4a7c2a" opacity="0.85" style="pointer-events: none"/>
+                    <ellipse cx="95" cy="298" rx="20" ry="13" fill="#2d5016" opacity="0.75" style="pointer-events: none"/>
+                    
+                    <!-- Right side shrubs -->
+                    <ellipse cx="500" cy="295" rx="32" ry="20" fill="#2d5016" opacity="0.8" style="pointer-events: none"/>
+                    <ellipse cx="505" cy="290" rx="26" ry="16" fill="#3d6b2a" opacity="0.9" style="pointer-events: none"/>
+                    <ellipse cx="498" cy="292" rx="22" ry="14" fill="#4a7c2a" opacity="0.85" style="pointer-events: none"/>
+                    <ellipse cx="495" cy="298" rx="24" ry="15" fill="#2d5016" opacity="0.75" style="pointer-events: none"/>
+                    
+                    <!-- Small flowers/accents -->
+                    <circle cx="90" cy="300" r="2" fill="#FFB6C1" opacity="0.8" style="pointer-events: none"/>
+                    <circle cx="95" cy="305" r="1.5" fill="#FFD700" opacity="0.7" style="pointer-events: none"/>
+                    <circle cx="510" cy="300" r="2" fill="#FFB6C1" opacity="0.8" style="pointer-events: none"/>
+                    <circle cx="515" cy="305" r="1.5" fill="#FFD700" opacity="0.7" style="pointer-events: none"/>
+                    
+                    <!-- Pathway/stone path in front -->
+                    <ellipse cx="300" cy="320" rx="80" ry="8" fill="#A0A0A0" opacity="0.4" style="pointer-events: none"/>
+                    <ellipse cx="300" cy="320" rx="75" ry="6" fill="#C0C0C0" opacity="0.3" style="pointer-events: none"/>
                   </svg>
                 </div>
               </div>
@@ -243,7 +436,7 @@
                   {{ selectedPart ? `Choose a color for the ${formatPartName(selectedPart)}:` : 'Select a house part first' }}
                 </p>
 
-                <!-- Enhanced color scheme presets with better mobile layout -->
+                <!-- Enhanced color scheme presets with dropdown -->
                 <div class="mb-4">
                   <h4 class="text-xs font-medium text-gray-700 mb-2 flex items-center">
                     <svg class="w-3 h-3 mr-2 text-indigo-500" fill="currentColor" viewBox="0 0 20 20">
@@ -251,26 +444,19 @@
                     </svg>
                     Popular Schemes
                   </h4>
-                  <div class="space-y-1">
-                    <button
+                  <select
+                    @change="applyPresetFromSelect($event)"
+                    class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  >
+                    <option value="">Select a color scheme...</option>
+                    <option
                       v-for="preset in colorPresets"
                       :key="preset.name"
-                      @click="applyPreset(preset)"
-                      class="w-full text-left p-2 bg-white rounded-lg border-2 border-transparent hover:border-indigo-300 hover:shadow-sm transition-all duration-300 text-xs group"
+                      :value="preset.name"
                     >
-                      <div class="flex items-center gap-2">
-                        <div class="flex gap-1">
-                          <div
-                            v-for="color in preset.preview"
-                            :key="color"
-                            class="w-3 h-3 rounded-full border border-white shadow-sm"
-                            :style="{ backgroundColor: color }"
-                          />
-                        </div>
-                        <span class="font-medium text-gray-700 text-xs">{{ preset.name }}</span>
-                      </div>
-                    </button>
-                  </div>
+                      {{ preset.name }}
+                    </option>
+                  </select>
                 </div>
 
                 <!-- Enhanced color selection grid organized by house part with more colors -->
@@ -509,16 +695,184 @@ const colorPresets = ref([
       trim: '#ffffff',
       foundation: '#A9A9A9'
     }
+  },
+  {
+    name: 'Filipino Pastel Pink',
+    preview: ['#FFB6C1', '#FF69B4', '#FFFFFF'],
+    colors: {
+      mainWalls: '#FFB6C1',
+      roof: '#FF69B4',
+      windows: '#FFFFFF',
+      door: '#FF1493',
+      trim: '#FFFFFF',
+      foundation: '#C0C0C0'
+    }
+  },
+  {
+    name: 'Filipino Pastel Blue',
+    preview: ['#B0E0E6', '#4682B4', '#FFFFFF'],
+    colors: {
+      mainWalls: '#B0E0E6',
+      roof: '#4682B4',
+      windows: '#FFFFFF',
+      door: '#1E90FF',
+      trim: '#FFFFFF',
+      foundation: '#708090'
+    }
+  },
+  {
+    name: 'Filipino Pastel Yellow',
+    preview: ['#FFFACD', '#FFD700', '#FFFFFF'],
+    colors: {
+      mainWalls: '#FFFACD',
+      roof: '#FFD700',
+      windows: '#FFFFFF',
+      door: '#FFA500',
+      trim: '#FFFFFF',
+      foundation: '#D2B48C'
+    }
+  },
+  {
+    name: 'Filipino Pastel Green',
+    preview: ['#98FB98', '#228B22', '#FFFFFF'],
+    colors: {
+      mainWalls: '#98FB98',
+      roof: '#228B22',
+      windows: '#FFFFFF',
+      door: '#32CD32',
+      trim: '#FFFFFF',
+      foundation: '#696969'
+    }
+  },
+  {
+    name: 'Filipino Pastel Purple',
+    preview: ['#DDA0DD', '#9370DB', '#FFFFFF'],
+    colors: {
+      mainWalls: '#DDA0DD',
+      roof: '#9370DB',
+      windows: '#FFFFFF',
+      door: '#8A2BE2',
+      trim: '#FFFFFF',
+      foundation: '#A9A9A9'
+    }
+  },
+  {
+    name: 'Filipino Pastel Orange',
+    preview: ['#FFE4B5', '#FF8C00', '#FFFFFF'],
+    colors: {
+      mainWalls: '#FFE4B5',
+      roof: '#FF8C00',
+      windows: '#FFFFFF',
+      door: '#FF6347',
+      trim: '#FFFFFF',
+      foundation: '#D2691E'
+    }
+  },
+  {
+    name: 'Spanish Colonial',
+    preview: ['#F5DEB3', '#8B4513', '#FFFFFF'],
+    colors: {
+      mainWalls: '#F5DEB3',
+      roof: '#8B4513',
+      windows: '#FFFFFF',
+      door: '#654321',
+      trim: '#DEB887',
+      foundation: '#696969'
+    }
+  },
+  {
+    name: 'Tropical Paradise',
+    preview: ['#E0F8F7', '#FF6347', '#FFD700'],
+    colors: {
+      mainWalls: '#E0F8F7',
+      roof: '#FF6347',
+      windows: '#87CEEB',
+      door: '#FFD700',
+      trim: '#FFFFFF',
+      foundation: '#708090'
+    }
+  },
+  {
+    name: 'Bahay Kubo Style',
+    preview: ['#DEB887', '#8B4513', '#90EE90'],
+    colors: {
+      mainWalls: '#DEB887',
+      roof: '#8B4513',
+      windows: '#90EE90',
+      door: '#654321',
+      trim: '#D2B48C',
+      foundation: '#A0522D'
+    }
+  },
+  {
+    name: 'Modern Filipino',
+    preview: ['#F0F0F0', '#2F4F4F', '#FF6B6B'],
+    colors: {
+      mainWalls: '#F0F0F0',
+      roof: '#2F4F4F',
+      windows: '#FFFFFF',
+      door: '#FF6B6B',
+      trim: '#FFFFFF',
+      foundation: '#696969'
+    }
+  },
+  {
+    name: 'Filipino Cream',
+    preview: ['#FFF8DC', '#DAA520', '#FFFFFF'],
+    colors: {
+      mainWalls: '#FFF8DC',
+      roof: '#DAA520',
+      windows: '#FFFFFF',
+      door: '#CD853F',
+      trim: '#FFFFFF',
+      foundation: '#D2B48C'
+    }
+  },
+  {
+    name: 'Filipino Sky Blue',
+    preview: ['#E6F3FF', '#4169E1', '#FFFFFF'],
+    colors: {
+      mainWalls: '#E6F3FF',
+      roof: '#4169E1',
+      windows: '#FFFFFF',
+      door: '#1E90FF',
+      trim: '#FFFFFF',
+      foundation: '#708090'
+    }
+  },
+  {
+    name: 'Filipino Mint',
+    preview: ['#F0FFF0', '#228B22', '#FFFFFF'],
+    colors: {
+      mainWalls: '#F0FFF0',
+      roof: '#228B22',
+      windows: '#FFFFFF',
+      door: '#32CD32',
+      trim: '#FFFFFF',
+      foundation: '#808080'
+    }
+  },
+  {
+    name: 'Filipino Coral',
+    preview: ['#FFE4E1', '#FF6347', '#FFFFFF'],
+    colors: {
+      mainWalls: '#FFE4E1',
+      roof: '#FF6347',
+      windows: '#FFFFFF',
+      door: '#FF4500',
+      trim: '#FFFFFF',
+      foundation: '#CD5C5C'
+    }
   }
 ])
 
 const defaultColors = {
-  mainWalls: '#f5f5f5',
-  roof: '#8B4513',
-  windows: '#87CEEB',
-  door: '#8B4513',
+  mainWalls: '#ffffff',
+  roof: '#ffffff',
+  windows: '#ffffff',
+  door: '#ffffff',
   trim: '#ffffff',
-  foundation: '#A9A9A9'
+  foundation: '#ffffff'
 }
 
 const houseParts = ref({ ...defaultColors })
@@ -623,7 +977,25 @@ const colorsByPart = ref({
     { name: 'Gold', value: '#ffd700' },
     { name: 'Black', value: '#000000' },
     { name: 'White Tile', value: '#FFFFFF' },
-    { name: 'Cream Tile', value: '#F5F5DC' }
+    { name: 'Cream Tile', value: '#F5F5DC' },
+    { name: 'Filipino Red', value: '#DC143C' },
+    { name: 'Filipino Terracotta', value: '#E2725B' },
+    { name: 'Filipino Brown', value: '#8B4513' },
+    { name: 'Filipino Orange', value: '#FF8C00' },
+    { name: 'Filipino Gold', value: '#FFD700' },
+    { name: 'Filipino Maroon', value: '#800000' },
+    { name: 'Filipino Burgundy', value: '#800020' },
+    { name: 'Filipino Rust', value: '#B7410E' },
+    { name: 'Filipino Copper', value: '#B87333' },
+    { name: 'Filipino Bronze', value: '#CD7F32' },
+    { name: 'Filipino Dark Green', value: '#013220' },
+    { name: 'Filipino Forest', value: '#228B22' },
+    { name: 'Filipino Navy', value: '#000080' },
+    { name: 'Filipino Royal Blue', value: '#4169E1' },
+    { name: 'Filipino Steel Blue', value: '#4682B4' },
+    { name: 'Filipino Teal', value: '#008080' },
+    { name: 'Filipino Slate', value: '#708090' },
+    { name: 'Filipino Charcoal', value: '#36454F' }
   ],
   windows: [
     { name: 'White', value: '#ffffff' },
@@ -661,7 +1033,23 @@ const colorsByPart = ref({
     { name: 'Bronze', value: '#CD7F32' },
     { name: 'Copper', value: '#B87333' },
     { name: 'Gold Trim', value: '#FFD700' },
-    { name: 'Silver', value: '#C0C0C0' }
+    { name: 'Silver', value: '#C0C0C0' },
+    { name: 'Filipino Sky Blue', value: '#87CEEB' },
+    { name: 'Filipino Light Blue', value: '#B0E0E6' },
+    { name: 'Filipino Baby Blue', value: '#E0F6FF' },
+    { name: 'Filipino Aqua', value: '#00FFFF' },
+    { name: 'Filipino Cyan', value: '#00CED1' },
+    { name: 'Filipino Turquoise', value: '#40E0D0' },
+    { name: 'Filipino Periwinkle', value: '#CCCCFF' },
+    { name: 'Filipino Lavender Blue', value: '#E6E6FA' },
+    { name: 'Filipino Ice Blue', value: '#F0F8FF' },
+    { name: 'Filipino Powder Blue', value: '#B0E0E6' },
+    { name: 'Filipino Mint Blue', value: '#AFEEEE' },
+    { name: 'Filipino Seafoam', value: '#93E9BE' },
+    { name: 'Filipino Light Cyan', value: '#E0FFFF' },
+    { name: 'Filipino Azure', value: '#F0FFFF' },
+    { name: 'Filipino Alice Blue', value: '#F0F8FF' },
+    { name: 'Filipino Cornflower', value: '#6495ED' }
   ],
   door: [
     { name: 'Dark Brown', value: '#654321' },
@@ -709,7 +1097,31 @@ const colorsByPart = ref({
     { name: 'Bronze', value: '#cd7f32' },
     { name: 'Gold', value: '#ffd700' },
     { name: 'Orange', value: '#FF8C00' },
-    { name: 'Dark Orange', value: '#FF6347' }
+    { name: 'Dark Orange', value: '#FF6347' },
+    { name: 'Filipino Red', value: '#DC143C' },
+    { name: 'Filipino Crimson', value: '#DC143C' },
+    { name: 'Filipino Scarlet', value: '#FF2400' },
+    { name: 'Filipino Coral', value: '#FF7F50' },
+    { name: 'Filipino Salmon', value: '#FA8072' },
+    { name: 'Filipino Terracotta', value: '#E2725B' },
+    { name: 'Filipino Brick', value: '#CB4154' },
+    { name: 'Filipino Rust', value: '#B7410E' },
+    { name: 'Filipino Maroon', value: '#800000' },
+    { name: 'Filipino Burgundy', value: '#800020' },
+    { name: 'Filipino Brown', value: '#8B4513' },
+    { name: 'Filipino Dark Brown', value: '#654321' },
+    { name: 'Filipino Chocolate', value: '#D2691E' },
+    { name: 'Filipino Saddle Brown', value: '#8B4513' },
+    { name: 'Filipino Sienna', value: '#A0522D' },
+    { name: 'Filipino Burnt Sienna', value: '#8B3A3A' },
+    { name: 'Filipino Tan', value: '#D2B48C' },
+    { name: 'Filipino Beige', value: '#F5F5DC' },
+    { name: 'Filipino Khaki', value: '#F0E68C' },
+    { name: 'Filipino Gold', value: '#FFD700' },
+    { name: 'Filipino Orange', value: '#FF8C00' },
+    { name: 'Filipino Dark Orange', value: '#FF6347' },
+    { name: 'Filipino Peach', value: '#FFDAB9' },
+    { name: 'Filipino Apricot', value: '#FBCEB1' }
   ],
   trim: [
     { name: 'White', value: '#ffffff' },
@@ -743,7 +1155,24 @@ const colorsByPart = ref({
     { name: 'Lavender', value: '#E6E6FA' },
     { name: 'Copper', value: '#B87333' },
     { name: 'Bronze', value: '#CD7F32' },
-    { name: 'Wheat', value: '#F5DEB3' }
+    { name: 'Wheat', value: '#F5DEB3' },
+    { name: 'Filipino White', value: '#FFFFFF' },
+    { name: 'Filipino Cream', value: '#FFF8DC' },
+    { name: 'Filipino Ivory', value: '#FFFFF0' },
+    { name: 'Filipino Beige', value: '#F5F5DC' },
+    { name: 'Filipino Pink', value: '#FFB6C1' },
+    { name: 'Filipino Light Pink', value: '#FFC0CB' },
+    { name: 'Filipino Blue', value: '#B0E0E6' },
+    { name: 'Filipino Yellow', value: '#FFFACD' },
+    { name: 'Filipino Green', value: '#98FB98' },
+    { name: 'Filipino Lavender', value: '#E6E6FA' },
+    { name: 'Filipino Mint', value: '#F0FFF0' },
+    { name: 'Filipino Peach', value: '#FFDAB9' },
+    { name: 'Filipino Coral', value: '#FF7F50' },
+    { name: 'Filipino Gold', value: '#FFD700' },
+    { name: 'Filipino Silver', value: '#C0C0C0' },
+    { name: 'Filipino Tan', value: '#D2B48C' },
+    { name: 'Filipino Brown', value: '#8B4513' }
   ],
   foundation: [
     { name: 'Gray', value: '#a9a9a9' },
@@ -827,6 +1256,18 @@ const resetColors = () => {
 const applyPreset = (preset) => {
   houseParts.value = { ...preset.colors }
   selectedPart.value = null
+}
+
+const applyPresetFromSelect = (event) => {
+  const presetName = event.target.value
+  if (presetName) {
+    const preset = colorPresets.value.find(p => p.name === presetName)
+    if (preset) {
+      applyPreset(preset)
+      // Reset dropdown to show placeholder
+      event.target.value = ''
+    }
+  }
 }
 
 // Hooks - called unconditionally at top level after all state is defined

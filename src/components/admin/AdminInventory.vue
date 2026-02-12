@@ -372,6 +372,18 @@
               >
                 Categories ({{ categories.length }})
               </button>
+              <!-- Sizes Tab -->
+              <button
+                @click="activeTab = 'sizes'"
+                :class="[
+                  'flex-1 px-4 py-2 rounded-lg font-medium transition-all duration-200 text-center',
+                  activeTab === 'sizes'
+                    ? 'bg-purple-600 text-white shadow-lg'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                ]"
+              >
+                Sizes ({{ totalSizesCount }})
+              </button>
             </div>
           </div>
 
@@ -674,8 +686,13 @@
                 <div class="flex items-center justify-between mb-3">
                   <div class="flex-1 min-w-0">
                     <p class="font-medium text-gray-900 truncate">{{ order.productName }}</p>
+                    <p class="text-sm text-gray-600 truncate">Size: {{ order.size || 'N/A' }}</p>
                     <p class="text-sm text-gray-600 truncate">Supplier: {{ order.supplierName }}</p>
                     <p class="text-xs text-gray-500">Qty: {{ order.quantity }} | {{ formatDate(order.createdAt) }}</p>
+                    <div class="flex items-center gap-3 mt-2">
+                      <p class="text-xs text-gray-600">Net Price: <span class="font-medium">{{ formatCurrency(getOrderNetPrice(order)) }}</span></p>
+                      <p class="text-xs text-gray-900 font-semibold">Total: <span class="font-bold">{{ formatCurrency(getOrderTotalPrice(order)) }}</span></p>
+                    </div>
                   </div>
                   <div class="flex items-center gap-2 flex-shrink-0">
                     <select
@@ -721,6 +738,7 @@
               <p class="text-gray-600 mb-4">Click the 'Order Product' button to start placing orders.</p>
             </div>
 
+
             <!-- CHANGE: Added desktop Orders table display that was missing -->
             <div v-if="activeTab === 'orders' && orders.length > 0" class="hidden lg:block bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
               <div class="overflow-x-auto">
@@ -728,8 +746,11 @@
                   <thead class="bg-gradient-to-r from-purple-50 to-blue-50 border-b border-gray-200">
                     <tr>
                       <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700">Product Name</th>
+                      <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700">Size</th>
                       <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700">Supplier</th>
                       <th class="px-6 py-3 text-center text-xs font-semibold text-gray-700">Quantity</th>
+                      <th class="px-6 py-3 text-center text-xs font-semibold text-gray-700">Net Price</th>
+                      <th class="px-6 py-3 text-center text-xs font-semibold text-gray-700">Total Price</th>
                       <th class="px-6 py-3 text-center text-xs font-semibold text-gray-700">Status</th>
                       <th class="px-6 py-3 text-center text-xs font-semibold text-gray-700">Date</th>
                       <th class="px-6 py-3 text-center text-xs font-semibold text-gray-700">Actions</th>
@@ -738,8 +759,15 @@
                   <tbody class="divide-y divide-gray-200">
                     <tr v-for="order in orders" :key="order.id" class="hover:bg-gray-50 transition-colors">
                       <td class="px-6 py-4 text-sm font-medium text-gray-900">{{ order.productName }}</td>
+                      <td class="px-6 py-4 text-sm text-gray-600">{{ order.size || 'N/A' }}</td>
                       <td class="px-6 py-4 text-sm text-gray-600">{{ order.supplierName }}</td>
                       <td class="px-6 py-4 text-sm text-center text-gray-600">{{ order.quantity }}</td>
+                      <td class="px-6 py-4 text-sm text-center text-gray-600 font-medium">
+                        {{ formatCurrency(getOrderNetPrice(order)) }}
+                      </td>
+                      <td class="px-6 py-4 text-sm text-center text-gray-900 font-semibold">
+                        {{ formatCurrency(getOrderTotalPrice(order)) }}
+                      </td>
                       <td class="px-6 py-4 text-center">
                         <select
                           :value="order.status"
@@ -816,6 +844,90 @@
                   </div>
                   <button
                     @click="deleteCategory(index)"
+                    class="px-4 py-2 bg-red-100 text-red-700 hover:bg-red-200 font-medium rounded-lg transition-colors"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sizes Management Section -->
+            <div v-if="activeTab === 'sizes'" class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+              <div class="space-y-6">
+                <!-- Add Size Form -->
+                <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-4 border border-purple-200">
+                  <h3 class="font-semibold text-gray-900 mb-4">Add New Size for Product</h3>
+                  <div class="space-y-3">
+                    <!-- Product Selection -->
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-1">Select Product</label>
+                      <select
+                        v-model="newSizeForm.productId"
+                        required
+                        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
+                      >
+                        <option value="">Choose a product...</option>
+                        <optgroup
+                          v-for="category in categoriesWithProducts"
+                          :key="category.key"
+                          :label="category.value"
+                        >
+                          <option
+                            v-for="product in getProductsByCategory(category.key)"
+                            :key="product.id"
+                            :value="product.id"
+                          >
+                            {{ product.name }} ({{ product.sku }})
+                          </option>
+                        </optgroup>
+                      </select>
+                    </div>
+                    <!-- Size Inputs -->
+                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                      <input
+                        v-model="newSizeForm.value"
+                        type="text"
+                        placeholder="Enter size name (e.g., 1 Liter, 4 Liters, 16 Liters)"
+                        class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      />
+                      <input
+                        v-model="newSizeForm.key"
+                        type="text"
+                        placeholder="Size key (e.g., 1l, 4l, 16l)"
+                        class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      />
+                      <button
+                        @click="addSize"
+                        :disabled="!newSizeForm.productId"
+                        class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        Add Size
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Sizes List -->
+                <h3 class="font-semibold text-gray-900 mb-4">All Product Sizes</h3>
+                <div v-if="filteredSizesForView.length === 0" class="text-center py-8 text-gray-500">
+                  No sizes found. Add new sizes above.
+                </div>
+
+                <div
+                  v-for="(sizeItem, index) in filteredSizesForView"
+                  :key="`${sizeItem.productId}-${sizeItem.key}`"
+                  class="flex items-center justify-between bg-gradient-to-r from-gray-50 to-white p-4 rounded-lg border border-gray-200 hover:border-gray-300 transition-all mb-3"
+                >
+                  <div class="flex-1">
+                    <h4 class="font-medium text-gray-900">{{ sizeItem.value }}</h4>
+                    <p class="text-sm text-gray-600">Key: {{ sizeItem.key }}</p>
+                    <p class="text-xs text-gray-500 mt-1">
+                      Product: {{ getProductName(sizeItem.productId) }}
+                    </p>
+                  </div>
+                  <button
+                    @click="deleteSize(sizeItem.productId, index)"
                     class="px-4 py-2 bg-red-100 text-red-700 hover:bg-red-200 font-medium rounded-lg transition-colors"
                   >
                     Delete
@@ -1158,7 +1270,30 @@
         <div class="flex flex-col lg:flex-row flex-1 min-h-0">
           <!-- Left Panel - Create New Order -->
           <div class="w-full lg:w-1/2 p-4 border-b lg:border-b-0 lg:border-r border-gray-200">
-            <h4 class="text-md font-semibold text-gray-800 mb-4">Create New Order</h4>
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="text-md font-semibold text-gray-800">Create New Order</h4>
+              <!-- Print Orders Button -->
+              <div class="flex items-center gap-2">
+                <select
+                  v-model="selectedPrintMonth"
+                  class="px-2 py-1.5 rounded-lg border border-gray-300 bg-white text-gray-900 text-xs focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                >
+                  <option value="">Select Month</option>
+                  <option v-for="month in availableMonths" :key="month.value" :value="month.value">
+                    {{ month.label }}
+                  </option>
+                </select>
+                <button
+                  @click="printOrdersByMonth"
+                  :disabled="!selectedPrintMonth"
+                  class="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 shadow-md text-xs disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  title="Print Orders by Month"
+                >
+                  <PrinterIcon class="w-4 h-4" />
+                  <span class="hidden sm:inline">Print</span>
+                </button>
+              </div>
+            </div>
             <form @submit.prevent="handleOrderSubmit" class="space-y-4">
               <!-- Product Selection -->
               <div>
@@ -1170,10 +1305,54 @@
                   class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 text-sm"
                 >
                   <option value="">Choose a product...</option>
-                  <option v-for="product in products" :key="product.id" :value="product.id">
-                    {{ product.name }} ({{ product.sku }}) - Current Stock: {{ product.stockLevel }}
+                  <optgroup
+                    v-for="category in categoriesWithProducts"
+                    :key="category.key"
+                    :label="category.value"
+                  >
+                    <option
+                      v-for="product in getProductsByCategory(category.key)"
+                      :key="product.id"
+                      :value="product.id"
+                    >
+                      {{ product.name }} ({{ product.sku }}) - Stock: {{ product.stockLevel }}
+                    </option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <!-- Size Selection -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Size
+                  <span v-if="orderForm.productId && sizesForSelectedProduct.length === 0" class="text-xs text-orange-600 ml-2">
+                    (No sizes available - add sizes in Sizes tab)
+                  </span>
+                </label>
+                <select
+                  v-model="orderForm.size"
+                  :disabled="!orderForm.productId"
+                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
+                >
+                  <option value="">
+                    {{ !orderForm.productId 
+                      ? 'Select product first' 
+                      : sizesForSelectedProduct.length === 0 
+                        ? 'No sizes available for this product' 
+                        : 'Select size...' }}
+                  </option>
+                  <option
+                    v-for="size in sizesForSelectedProduct"
+                    :key="size.key"
+                    :value="size.value"
+                  >
+                    {{ size.value }}
                   </option>
                 </select>
+                <!-- Debug info (remove in production) -->
+                <p v-if="orderForm.productId && sizesForSelectedProduct.length === 0" class="text-xs text-gray-500 mt-1">
+                  Product ID: {{ orderForm.productId }} | Available sizes: {{ Object.keys(sizes).length }} products have sizes
+                </p>
               </div>
 
               <!-- Supplier Name Field -->
@@ -1238,9 +1417,14 @@
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-2">
                   <div class="flex-1">
                     <p class="font-medium text-gray-900">{{ order.productName }}</p>
+                    <p class="text-sm text-gray-600">Size: {{ order.size || 'N/A' }}</p>
                     <p class="text-sm text-gray-600">Supplier: {{ order.supplierName }}</p>
                     <p class="text-sm text-gray-600">Quantity: {{ order.quantity }}</p>
-                    <p class="text-xs text-gray-500">{{ formatDate(order.createdAt) }}</p>
+                    <div class="flex items-center gap-3 mt-1">
+                      <p class="text-xs text-gray-600">Net Price: <span class="font-medium">{{ formatCurrency(getOrderNetPrice(order)) }}</span></p>
+                      <p class="text-xs text-gray-900 font-semibold">Total: <span class="font-bold">{{ formatCurrency(getOrderTotalPrice(order)) }}</span></p>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">{{ formatDate(order.createdAt) }}</p>
                   </div>
                   <div class="flex items-center gap-2 flex-shrink-0">
                     <select
@@ -1437,6 +1621,7 @@ import {
   Bell as BellIcon,
   ShoppingCart as ShoppingCartIcon,
   Truck as TruckIcon,
+  Printer as PrinterIcon,
   Upload as UploadIcon,
   Image as ImageIcon,
   BarChart3 as BarChart3Icon
@@ -1468,6 +1653,7 @@ const modalLoading = ref(false)
 const showOrderModal = ref(false)
 const orders = ref([])
 const products = ref([])
+const selectedPrintMonth = ref('')
 
 // Image handling references - all declared at top level
 const imagePreview = ref('')
@@ -1529,13 +1715,14 @@ const productForm = ref({
 const orderForm = ref({
   productId: '',
   productName: '',
+  size: '',
   supplierName: '',
   quantity: 0,
   status: 'incomplete'
 })
 
 // Category management state
-const activeTab = ref('products') // 'products', 'orders', 'categories'
+const activeTab = ref('products') // 'products', 'orders', 'categories', 'sizes'
 const categories = ref([
   { key: 'interior', value: 'Interior Paint' },
   { key: 'exterior', value: 'Exterior Paint' },
@@ -1557,6 +1744,15 @@ const newCategoryForm = ref({
 
 const unsubscribeCategories = ref(null)
 
+// Size management state - product-specific
+const sizes = ref({}) // Structure: { productId: [{ key, value }] }
+const newSizeForm = ref({
+  productId: '',
+  key: '',
+  value: ''
+})
+const unsubscribeSizes = ref(null)
+
 // Constants - declared at top level
 const currentDate = new Date().toLocaleDateString('en-US', {
   weekday: 'long',
@@ -1569,6 +1765,13 @@ const currentDate = new Date().toLocaleDateString('en-US', {
 const productsRef = db ? collection(db, 'products') : null
 
 // Computed properties - all declared at top level
+// Filter categories to only show those with products
+const categoriesWithProducts = computed(() => {
+  return categories.value.filter(category => {
+    return products.value.some(product => product.category === category.key)
+  })
+})
+
 const filteredProducts = computed(() => {
   let filtered = [...products.value]
 
@@ -1616,6 +1819,60 @@ const totalUnitPriceValue = computed(() => products.value.reduce((sum, product) 
 const totalPages = computed(() => Math.ceil(filteredProducts.value.length / perPage.value) || 1)
 const paginationStart = computed(() => filteredProducts.value.length ? ((currentPage.value - 1) * perPage.value) + 1 : 0)
 const paginationEnd = computed(() => Math.min(currentPage.value * perPage.value, filteredProducts.value.length))
+
+// Computed property for sizes in order form (based on selected product)
+const sizesForSelectedProduct = computed(() => {
+  if (!orderForm.value.productId) {
+    console.log('[v0] No product selected in order form')
+    return []
+  }
+  
+  console.log('[v0] Looking for sizes for product ID:', orderForm.value.productId)
+  console.log('[v0] Available sizes object:', sizes.value)
+  console.log('[v0] Available product IDs in sizes:', Object.keys(sizes.value))
+  
+  const productSizes = sizes.value[orderForm.value.productId] || []
+  console.log('[v0] Found sizes for product:', productSizes)
+  
+  if (productSizes.length === 0) {
+    console.log('[v0] WARNING: No sizes found for product ID:', orderForm.value.productId)
+    // Try to find by product name as fallback
+    const selectedProduct = products.value.find(p => p.id === orderForm.value.productId)
+    if (selectedProduct) {
+      console.log('[v0] Selected product name:', selectedProduct.name)
+      // Check if sizes are stored with a different key
+      const allProductIds = Object.keys(sizes.value)
+      console.log('[v0] Checking all product IDs in sizes for matches...')
+      allProductIds.forEach(id => {
+        console.log('[v0] Product ID in sizes:', id, 'Sizes:', sizes.value[id])
+      })
+    }
+  }
+  
+  return productSizes
+})
+
+// Computed property for filtered sizes in sizes management view - shows all sizes
+const filteredSizesForView = computed(() => {
+  // Show all sizes from all products
+  const allSizes = []
+  Object.keys(sizes.value).forEach(productId => {
+    const productSizes = sizes.value[productId] || []
+    productSizes.forEach(size => {
+      allSizes.push({ ...size, productId })
+    })
+  })
+  return allSizes
+})
+
+// Total sizes count for tab display
+const totalSizesCount = computed(() => {
+  let count = 0
+  Object.keys(sizes.value).forEach(productId => {
+    count += (sizes.value[productId] || []).length
+  })
+  return count
+})
 
 // Utility functions - all declared at top level
 const isActive = (path) => {
@@ -1894,6 +2151,17 @@ const formatCategory = (category) => {
   return categories[category] || category
 }
 
+// Helper function to get products by category for the order dropdown
+const getProductsByCategory = (categoryKey) => {
+  return products.value.filter(product => product.category === categoryKey)
+}
+
+// Helper function to get product name by ID
+const getProductName = (productId) => {
+  const product = products.value.find(p => p.id === productId)
+  return product ? product.name : 'Unknown Product'
+}
+
 const toggleMobileSidebar = () => {
   mobileSidebarOpen.value = !mobileSidebarOpen.value
 }
@@ -1982,6 +2250,7 @@ const handleOrderSubmit = async () => {
     const orderData = {
       productId: orderForm.value.productId,
       productName: orderForm.value.productName,
+      size: orderForm.value.size || '',
       supplierName: orderForm.value.supplierName,
       quantity: Number(orderForm.value.quantity),
       status: orderForm.value.status,
@@ -2022,6 +2291,37 @@ const updateSelectedProduct = () => {
   const selectedProduct = products.value.find(p => p.id === orderForm.value.productId);
   if (selectedProduct) {
     orderForm.value.productName = selectedProduct.name;
+    // Clear size when product changes
+    orderForm.value.size = '';
+    
+    // Debug logging
+    console.log('[v0] ===== PRODUCT SELECTED IN ORDER FORM =====');
+    console.log('[v0] Selected Product ID:', orderForm.value.productId);
+    console.log('[v0] Selected Product Name:', selectedProduct.name);
+    console.log('[v0] All sizes object:', sizes.value);
+    console.log('[v0] All product IDs in sizes:', Object.keys(sizes.value));
+    console.log('[v0] Sizes for this product ID:', sizes.value[orderForm.value.productId]);
+    
+    // Check if product ID exists in sizes
+    if (!sizes.value[orderForm.value.productId]) {
+      console.warn('[v0] ⚠️ WARNING: No sizes found for product ID:', orderForm.value.productId);
+      console.warn('[v0] Available product IDs with sizes:', Object.keys(sizes.value));
+      
+      // Try to find by product name (case-insensitive)
+      const productNameLower = selectedProduct.name.toLowerCase();
+      Object.keys(sizes.value).forEach(sizeProductId => {
+        const sizeProduct = products.value.find(p => p.id === sizeProductId);
+        if (sizeProduct && sizeProduct.name.toLowerCase() === productNameLower) {
+          console.warn('[v0] Found product with matching name but different ID:', {
+            foundId: sizeProductId,
+            selectedId: orderForm.value.productId,
+            name: sizeProduct.name
+          });
+        }
+      });
+    } else {
+      console.log('[v0] ✅ Found', sizes.value[orderForm.value.productId].length, 'sizes for this product');
+    }
   }
 };
 
@@ -2094,6 +2394,7 @@ const resetOrderForm = () => {
   orderForm.value = {
     productId: '',
     productName: '',
+    size: '',
     supplierName: '',
     quantity: 0,
     status: 'incomplete'
@@ -2119,6 +2420,440 @@ const formatDate = (timestamp) => {
     hour: '2-digit',
     minute: '2-digit'
   });
+};
+
+const formatCurrency = (value) => {
+  if (value === null || value === undefined || isNaN(value)) {
+    return '₱0.00';
+  }
+  return `₱${Number(value).toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })}`;
+};
+
+// Get Net Price (Unit Price) for an order
+const getOrderNetPrice = (order) => {
+  if (!order || !order.productId) {
+    return 0;
+  }
+  
+  // Find the product in the products array
+  const product = products.value.find(p => p.id === order.productId);
+  if (product && product.unitPrice) {
+    return Number(product.unitPrice) || 0;
+  }
+  
+  return 0;
+};
+
+// Get Total Price for an order (Quantity * Net Price)
+const getOrderTotalPrice = (order) => {
+  const quantity = Number(order.quantity) || 0;
+  const netPrice = getOrderNetPrice(order);
+  return quantity * netPrice;
+};
+
+// Get available months from orders
+const availableMonths = computed(() => {
+  const monthsSet = new Set();
+  
+  orders.value.forEach(order => {
+    if (order.createdAt) {
+      let date;
+      if (order.createdAt.toDate) {
+        date = order.createdAt.toDate();
+      } else if (order.createdAt instanceof Date) {
+        date = order.createdAt;
+      } else {
+        date = new Date(order.createdAt);
+      }
+      
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      const monthKey = `${year}-${String(month + 1).padStart(2, '0')}`;
+      monthsSet.add(monthKey);
+    }
+  });
+  
+  const months = Array.from(monthsSet).sort().reverse();
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                      'July', 'August', 'September', 'October', 'November', 'December'];
+  
+  return months.map(monthKey => {
+    const [year, month] = monthKey.split('-');
+    const monthIndex = parseInt(month) - 1;
+    return {
+      value: monthKey,
+      label: `${monthNames[monthIndex]} ${year}`
+    };
+  });
+});
+
+// Filter orders by selected month
+const getOrdersByMonth = (monthKey) => {
+  if (!monthKey) return [];
+  
+  const [year, month] = monthKey.split('-');
+  
+  return orders.value.filter(order => {
+    if (!order.createdAt) return false;
+    
+    let date;
+    if (order.createdAt.toDate) {
+      date = order.createdAt.toDate();
+    } else if (order.createdAt instanceof Date) {
+      date = order.createdAt;
+    } else {
+      date = new Date(order.createdAt);
+    }
+    
+    return date.getFullYear() === parseInt(year) && 
+           (date.getMonth() + 1) === parseInt(month);
+  });
+};
+
+// Print orders by month
+const printOrdersByMonth = () => {
+  if (!selectedPrintMonth.value) {
+    showNotification.value = true;
+    notificationMessage.value = 'Please select a month to print';
+    notificationType.value = 'error';
+    return;
+  }
+  
+  const filteredOrders = getOrdersByMonth(selectedPrintMonth.value);
+  
+  if (filteredOrders.length === 0) {
+    showNotification.value = true;
+    notificationMessage.value = 'No orders found for the selected month';
+    notificationType.value = 'error';
+    return;
+  }
+  
+  // Calculate totals
+  let totalQuantity = 0;
+  let totalAmount = 0;
+  
+  filteredOrders.forEach(order => {
+    totalQuantity += Number(order.quantity) || 0;
+    totalAmount += getOrderTotalPrice(order);
+  });
+  
+  // Get month label
+  const selectedMonth = availableMonths.value.find(m => m.value === selectedPrintMonth.value);
+  const monthLabel = selectedMonth ? selectedMonth.label : selectedPrintMonth.value;
+  
+  // Create print window
+  const printWindow = window.open('', '_blank');
+  
+  const printContent = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Orders Report - ${monthLabel}</title>
+      <style>
+        @media print {
+          @page {
+            size: A4;
+            margin: 1cm;
+          }
+        }
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          color: #1f2937;
+          background: white;
+          padding: 20px;
+        }
+        .header {
+          text-align: center;
+          margin-bottom: 35px;
+          padding: 25px 20px;
+          background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+          border-radius: 12px;
+          border: 2px solid #7c3aed;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+          color: #7c3aed;
+          font-size: 32px;
+          font-weight: bold;
+          margin-bottom: 8px;
+          letter-spacing: 0.5px;
+        }
+        .header h2 {
+          color: #6b7280;
+          font-size: 20px;
+          font-weight: 500;
+        }
+        .info-section {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 30px;
+          padding: 20px;
+          background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+          border-radius: 10px;
+          border: 1px solid #e5e7eb;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .info-item {
+          text-align: center;
+        }
+        .info-label {
+          font-size: 12px;
+          color: #6b7280;
+          margin-bottom: 5px;
+        }
+        .info-value {
+          font-size: 18px;
+          font-weight: bold;
+          color: #1f2937;
+        }
+        table {
+          width: 100%;
+          border-collapse: separate;
+          border-spacing: 0;
+          margin-bottom: 30px;
+          background: white;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        thead {
+          background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+          color: white;
+        }
+        thead tr {
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        th {
+          padding: 14px 16px;
+          text-align: left;
+          font-weight: 600;
+          font-size: 12px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          white-space: nowrap;
+        }
+        th.text-center {
+          text-align: center;
+        }
+        th:first-child {
+          padding-left: 20px;
+        }
+        th:last-child {
+          padding-right: 20px;
+        }
+        tbody tr {
+          border-bottom: 1px solid #e5e7eb;
+        }
+        tbody tr:hover {
+          background: #f9fafb;
+        }
+        tbody tr:last-child {
+          border-bottom: 2px solid #7c3aed;
+        }
+        td {
+          padding: 14px 16px;
+          font-size: 13px;
+          color: #374151;
+          white-space: nowrap;
+        }
+        td.text-center {
+          text-align: center;
+        }
+        td:first-child {
+          padding-left: 20px;
+        }
+        td:last-child {
+          padding-right: 20px;
+        }
+        .status-badge {
+          display: inline-block;
+          padding: 4px 12px;
+          border-radius: 12px;
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+        .status-incomplete {
+          background: #fed7aa;
+          color: #9a3412;
+        }
+        .status-delivered {
+          background: #bbf7d0;
+          color: #166534;
+        }
+        .summary {
+          margin-top: 30px;
+          padding: 20px;
+          background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+          border-radius: 8px;
+          border: 2px solid #7c3aed;
+        }
+        .summary-row {
+          display: flex;
+          justify-content: space-between;
+          padding: 10px 0;
+          border-bottom: 1px solid #d1d5db;
+        }
+        .summary-row:last-child {
+          border-bottom: none;
+          font-size: 18px;
+          font-weight: bold;
+          color: #7c3aed;
+          margin-top: 10px;
+          padding-top: 15px;
+        }
+        .summary-label {
+          font-weight: 600;
+          color: #374151;
+        }
+        .summary-value {
+          font-weight: bold;
+          color: #1f2937;
+        }
+        .footer {
+          margin-top: 30px;
+          text-align: center;
+          padding-top: 20px;
+          border-top: 2px solid #e5e7eb;
+          color: #6b7280;
+          font-size: 12px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="header">
+        <h1>Barcelona Paint Center</h1>
+        <h2>Orders Report - ${monthLabel}</h2>
+      </div>
+      
+      <div class="info-section">
+        <div class="info-item">
+          <div class="info-label">Report Period</div>
+          <div class="info-value">${monthLabel}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Total Orders</div>
+          <div class="info-value">${filteredOrders.length}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Total Quantity</div>
+          <div class="info-value">${totalQuantity.toLocaleString()}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Total Amount</div>
+          <div class="info-value">${formatCurrency(totalAmount)}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Generated</div>
+          <div class="info-value">${new Date().toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          })}</div>
+        </div>
+      </div>
+      
+      <table>
+        <thead>
+          <tr>
+            <th class="text-center" style="width: 50px; padding: 14px 20px;">#</th>
+            <th style="min-width: 200px; padding: 14px 20px;">Product Name</th>
+            <th style="min-width: 120px; padding: 14px 20px;">Size</th>
+            <th style="min-width: 180px; padding: 14px 20px;">Supplier</th>
+            <th class="text-center" style="min-width: 100px; padding: 14px 20px;">Quantity</th>
+            <th class="text-center" style="min-width: 120px; padding: 14px 20px;">Net Price</th>
+            <th class="text-center" style="min-width: 130px; padding: 14px 20px;">Total Price</th>
+            <th class="text-center" style="min-width: 120px; padding: 14px 20px;">Status</th>
+            <th class="text-center" style="min-width: 130px; padding: 14px 20px;">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${filteredOrders.map((order, index) => {
+            const netPrice = getOrderNetPrice(order);
+            const totalPrice = getOrderTotalPrice(order);
+            let orderDate = '';
+            if (order.createdAt) {
+              if (order.createdAt.toDate) {
+                orderDate = order.createdAt.toDate().toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                });
+              } else if (order.createdAt instanceof Date) {
+                orderDate = order.createdAt.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                });
+              } else {
+                orderDate = new Date(order.createdAt).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                });
+              }
+            }
+            return `
+              <tr>
+                <td class="text-center" style="padding: 14px 20px;">${index + 1}</td>
+                <td style="padding: 14px 20px; word-wrap: break-word;">${order.productName || 'N/A'}</td>
+                <td style="padding: 14px 20px; word-wrap: break-word;">${order.size || 'N/A'}</td>
+                <td style="padding: 14px 20px; word-wrap: break-word;">${order.supplierName || 'N/A'}</td>
+                <td class="text-center" style="padding: 14px 20px;">${order.quantity || 0}</td>
+                <td class="text-center" style="padding: 14px 20px; font-weight: 500;">${formatCurrency(netPrice)}</td>
+                <td class="text-center" style="padding: 14px 20px; font-weight: 700; color: #7c3aed;"><strong>${formatCurrency(totalPrice)}</strong></td>
+                <td class="text-center" style="padding: 14px 20px;">
+                  <span class="status-badge status-${order.status || 'incomplete'}">
+                    ${(order.status || 'incomplete').charAt(0).toUpperCase() + (order.status || 'incomplete').slice(1)}
+                  </span>
+                </td>
+                <td class="text-center" style="padding: 14px 20px;">${orderDate}</td>
+              </tr>
+            `;
+          }).join('')}
+        </tbody>
+      </table>
+      
+      <div class="summary">
+        <div class="summary-row">
+          <span class="summary-label">Total Orders:</span>
+          <span class="summary-value">${filteredOrders.length}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Total Quantity:</span>
+          <span class="summary-value">${totalQuantity.toLocaleString()}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Total Amount:</span>
+          <span class="summary-value">${formatCurrency(totalAmount)}</span>
+        </div>
+      </div>
+      
+      <div class="footer">
+        <p>Generated by Barcelona Paint Center Admin Portal</p>
+        <p>This is an automated report. For inquiries, please contact the administrator.</p>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  printWindow.document.write(printContent);
+  printWindow.document.close();
+  
+  // Wait for content to load, then print
+  setTimeout(() => {
+    printWindow.print();
+  }, 250);
 };
 
 // Category management methods
@@ -2183,6 +2918,129 @@ const deleteCategory = async (index) => {
   } catch (error) {
     console.error("Error deleting category:", error);
     notificationMessage.value = 'Failed to delete category.';
+    notificationType.value = 'error';
+    showNotification.value = true;
+  }
+};
+
+// Size management methods - product-specific
+const fetchSizes = async () => {
+  try {
+    if (!db) return;
+    
+    const docRef = doc(db, 'settings', 'sizes');
+    unsubscribeSizes.value = onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        console.log('[v0] Sizes document data received:', data);
+        if (data.products) {
+          // Force reactivity by creating a new object
+          sizes.value = { ...data.products }; // Structure: { productId: [{ key, value }] }
+          console.log('[v0] Sizes updated in real-time:', sizes.value);
+          console.log('[v0] Product IDs with sizes:', Object.keys(sizes.value));
+          // Log each product's sizes
+          Object.keys(sizes.value).forEach(productId => {
+            console.log(`[v0] Product ${productId} has ${sizes.value[productId].length} sizes:`, sizes.value[productId]);
+          });
+        } else {
+          sizes.value = {};
+          console.log('[v0] No products field found, initializing empty sizes');
+        }
+      } else {
+        sizes.value = {};
+        console.log('[v0] Sizes document does not exist, initializing empty sizes');
+      }
+    }, (error) => {
+      console.error('[v0] Error in sizes listener:', error);
+    });
+  } catch (error) {
+    console.error("Error setting up size listener:", error);
+  }
+};
+
+const addSize = async () => {
+  if (!newSizeForm.value.productId || !newSizeForm.value.value.trim() || !newSizeForm.value.key.trim()) {
+    notificationMessage.value = 'Product, size name and key are required.';
+    notificationType.value = 'error';
+    showNotification.value = true;
+    return;
+  }
+  try {
+    const productId = newSizeForm.value.productId
+    const productSizes = sizes.value[productId] || []
+    
+    // Check if size key already exists for this product
+    if (productSizes.some(s => s.key === newSizeForm.value.key)) {
+      notificationMessage.value = 'Size key already exists for this product.';
+      notificationType.value = 'error';
+      showNotification.value = true;
+      return;
+    }
+    
+    // Create a deep copy to ensure reactivity
+    // Ensure we have a proper object structure
+    const updatedSizes = sizes.value ? { ...sizes.value } : {}
+    if (!updatedSizes[productId]) {
+      updatedSizes[productId] = []
+    }
+    updatedSizes[productId] = [...updatedSizes[productId], { 
+      value: newSizeForm.value.value, 
+      key: newSizeForm.value.key 
+    }]
+    
+    console.log('[v0] Adding size for product ID:', productId)
+    console.log('[v0] Product name:', getProductName(productId))
+    console.log('[v0] Size being added:', { key: newSizeForm.value.key, value: newSizeForm.value.value })
+    console.log('[v0] Updated sizes structure:', updatedSizes)
+    
+    const settingsRef = doc(db, 'settings', 'sizes');
+    await setDoc(settingsRef, { products: updatedSizes }, { merge: true });
+    
+    // Force update local state immediately for better UX
+    // Use Object.assign to ensure reactivity
+    Object.keys(sizes.value).forEach(key => delete sizes.value[key])
+    Object.assign(sizes.value, updatedSizes)
+    
+    // Force Vue to detect the change
+    sizes.value = { ...updatedSizes }
+    
+    console.log('[v0] Local sizes state updated:', sizes.value)
+    
+    newSizeForm.value = { productId: '', value: '', key: '' };
+    notificationMessage.value = 'Size added successfully!';
+    notificationType.value = 'success';
+    showNotification.value = true;
+  } catch (error) {
+    console.error("Error adding size:", error);
+    notificationMessage.value = 'Failed to add size.';
+    notificationType.value = 'error';
+    showNotification.value = true;
+  }
+};
+
+const deleteSize = async (productId, index) => {
+  try {
+    const updatedSizes = { ...sizes.value }
+    const productSizes = updatedSizes[productId] || []
+    updatedSizes[productId] = productSizes.filter((_, i) => i !== index)
+    
+    // Remove product entry if no sizes left
+    if (updatedSizes[productId].length === 0) {
+      delete updatedSizes[productId]
+    }
+    
+    const settingsRef = doc(db, 'settings', 'sizes');
+    await setDoc(settingsRef, { products: updatedSizes }, { merge: true });
+    
+    // Force update local state
+    sizes.value = { ...updatedSizes }
+    
+    notificationMessage.value = 'Size deleted successfully!';
+    notificationType.value = 'success';
+    showNotification.value = true;
+  } catch (error) {
+    console.error("Error deleting size:", error);
+    notificationMessage.value = 'Failed to delete size.';
     notificationType.value = 'error';
     showNotification.value = true;
   }
@@ -2398,8 +3256,26 @@ onMounted(async () => {
   // Setup categories listener
   fetchCategories() // Call fetchCategories
 
+  // Setup sizes listener
+  fetchSizes() // Call fetchSizes
+
   // Setup orders listener
   fetchOrders() // Call fetchOrders
+})
+
+// Watch for order modal opening to ensure sizes are loaded
+watch(showOrderModal, (isOpen) => {
+  if (isOpen) {
+    console.log('[v0] Order modal opened, checking sizes...');
+    console.log('[v0] Current sizes state:', sizes.value);
+    console.log('[v0] Sizes keys:', Object.keys(sizes.value));
+    
+    // Ensure sizes are loaded
+    if (Object.keys(sizes.value).length === 0) {
+      console.log('[v0] No sizes found, attempting to fetch...');
+      fetchSizes();
+    }
+  }
 })
 
 // Clean up listeners on component unmount
@@ -2412,6 +3288,9 @@ onUnmounted(() => {
   }
   if (unsubscribeCategories.value) {
     unsubscribeCategories.value()
+  }
+  if (unsubscribeSizes.value) {
+    unsubscribeSizes.value()
   }
 })
 

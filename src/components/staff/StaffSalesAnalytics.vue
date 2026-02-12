@@ -295,21 +295,41 @@
           </div>
 
           <!-- Today's Stats Cards -->
-          <div v-if="!loading || todaysSales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div v-if="!loading || todaysSales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 mb-8">
             <!-- Today's Revenue -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
-                    <DollarSignIcon class="w-6 h-6 text-white" />
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
+              <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-1.5 absolute top-0 left-0 right-0"></div>
+              <div class="p-4">
+                <div class="flex items-center gap-2.5">
+                  <div class="p-2 rounded-lg shadow-md bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
+                    <DollarSignIcon class="w-4 h-4 text-white" />
                   </div>
-                  <div>
-                    <p class="text-sm text-gray-600">Today's Revenue</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ formatCurrency(todaysRevenue) }}</p>
-                    <div class="flex items-center gap-1 mt-1">
-                      <TrendingUpIcon class="w-4 h-4 text-green-600" />
-                      <span class="text-sm font-medium text-green-600">Daily Target</span>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs text-gray-600">Today's Revenue</p>
+                    <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ formatCurrency(todaysRevenue) }}</p>
+                    <div class="flex items-center gap-1 mt-0.5">
+                      <TrendingUpIcon class="w-3 h-3 text-green-600" />
+                      <span class="text-xs font-medium text-green-600">Daily Target</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Today's Net Gross (Profit) -->
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
+              <div class="bg-gradient-to-br from-amber-400 via-orange-500 to-yellow-600 h-1.5 absolute top-0 left-0 right-0"></div>
+              <div class="p-4">
+                <div class="flex items-center gap-2.5">
+                  <div class="p-2 rounded-lg shadow-md bg-gradient-to-br from-amber-400 via-orange-500 to-yellow-600 transform hover:scale-110 transition-transform duration-200">
+                    <TrendingUpIcon class="w-4 h-4 text-white" />
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs text-gray-600">Today's Net Gross</p>
+                    <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ formatCurrency(todaysNetGross) }}</p>
+                    <div class="flex items-center gap-1 mt-0.5">
+                      <TrendingUpIcon class="w-3 h-3 text-amber-600" />
+                      <span class="text-xs font-medium text-amber-600">{{ profitMarginPercentage }}% margin</span>
                     </div>
                   </div>
                 </div>
@@ -317,19 +337,19 @@
             </div>
 
             <!-- Today's Orders -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
-                    <ShoppingCartIcon class="w-6 h-6 text-white" />
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
+              <div class="bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 h-1.5 absolute top-0 left-0 right-0"></div>
+              <div class="p-4">
+                <div class="flex items-center gap-2.5">
+                  <div class="p-2 rounded-lg shadow-md bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
+                    <ShoppingCartIcon class="w-4 h-4 text-white" />
                   </div>
-                  <div>
-                    <p class="text-sm text-gray-600">Today's Orders</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ todaysOrders }}</p>
-                    <div class="flex items-center gap-1 mt-1">
-                      <TrendingUpIcon class="w-4 h-4 text-blue-600" />
-                      <span class="text-sm font-medium text-blue-600">Orders Today</span>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs text-gray-600">Today's Orders</p>
+                    <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ todaysOrders }}</p>
+                    <div class="flex items-center gap-1 mt-0.5">
+                      <TrendingUpIcon class="w-3 h-3 text-blue-600" />
+                      <span class="text-xs font-medium text-blue-600">Orders Today</span>
                     </div>
                   </div>
                 </div>
@@ -337,19 +357,19 @@
             </div>
 
             <!-- Today's Products Sold -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
-                    <PackageIcon class="w-6 h-6 text-white" />
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
+              <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-1.5 absolute top-0 left-0 right-0"></div>
+              <div class="p-4">
+                <div class="flex items-center gap-2.5">
+                  <div class="p-2 rounded-lg shadow-md bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
+                    <PackageIcon class="w-4 h-4 text-white" />
                   </div>
-                  <div>
-                    <p class="text-sm text-gray-600">Products Sold Today</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ todaysProductsSold }}</p>
-                    <div class="flex items-center gap-1 mt-1">
-                      <PackageIcon class="w-4 h-4 text-purple-600" />
-                      <span class="text-sm font-medium text-purple-600">Items Sold</span>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs text-gray-600">Products Sold Today</p>
+                    <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ todaysProductsSold }}</p>
+                    <div class="flex items-center gap-1 mt-0.5">
+                      <PackageIcon class="w-3 h-3 text-purple-600" />
+                      <span class="text-xs font-medium text-purple-600">Items Sold</span>
                     </div>
                   </div>
                 </div>
@@ -357,19 +377,19 @@
             </div>
 
             <!-- Today's Average Order Value -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 transform hover:scale-110 transition-transform duration-200">
-                    <TrendingUpIcon class="w-6 h-6 text-white" />
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
+              <div class="bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 h-1.5 absolute top-0 left-0 right-0"></div>
+              <div class="p-4">
+                <div class="flex items-center gap-2.5">
+                  <div class="p-2 rounded-lg shadow-md bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 transform hover:scale-110 transition-transform duration-200">
+                    <TrendingUpIcon class="w-4 h-4 text-white" />
                   </div>
-                  <div>
-                    <p class="text-sm text-gray-600">Avg Order Value</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ formatCurrency(todaysAverageOrderValue) }}</p>
-                    <div class="flex items-center gap-1 mt-1">
-                      <TrendingUpIcon class="w-4 h-4 text-amber-600" />
-                      <span class="text-sm font-medium text-amber-600">Per Order</span>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs text-gray-600">Avg Order Value</p>
+                    <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ formatCurrency(todaysAverageOrderValue) }}</p>
+                    <div class="flex items-center gap-1 mt-0.5">
+                      <TrendingUpIcon class="w-3 h-3 text-amber-600" />
+                      <span class="text-xs font-medium text-amber-600">Per Order</span>
                     </div>
                   </div>
                 </div>
@@ -893,6 +913,10 @@
                 <p class="text-xs text-green-700 font-medium">Total Revenue</p>
                 <p class="text-lg font-bold text-green-800">{{ formatCurrency(todaysRevenue) }}</p>
               </div>
+              <div class="bg-gradient-to-r from-amber-50 to-orange-50 p-3 rounded-lg border border-amber-200">
+                <p class="text-xs text-amber-700 font-medium">Net Gross (Profit)</p>
+                <p class="text-lg font-bold text-amber-800">{{ formatCurrency(todaysNetGross) }}</p>
+              </div>
               <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-3 rounded-lg border border-blue-200">
                 <p class="text-xs text-blue-700 font-medium">Orders</p>
                 <p class="text-lg font-bold text-blue-800">{{ todaysOrders }}</p>
@@ -1144,9 +1168,12 @@ const todaysSales = ref([])
 const loading = ref(true)
 const error = ref(null)
 const todaysRevenue = ref(0)
+const todaysNetGross = ref(0)
 const todaysOrders = ref(0)
 const todaysProductsSold = ref(0)
 const todaysAverageOrderValue = ref(0)
+// Profit margin: 30% means cost is 70% of selling price (same as Admin)
+const profitMargin = 0.30 // 30% profit margin
 const todaysTopProducts = ref([])
 const todaysSalesByCategory = ref([])
 const availableProducts = ref([])
@@ -1256,9 +1283,16 @@ const fetchTodaysSalesData = async () => {
       console.log(`Processed ${salesData.length} sales for today`)
       console.log(`Today's revenue: ${revenue}, Products sold: ${productsSold}`)
 
+      // Calculate Today's Net Gross (Profit)
+      // Net Gross = Revenue - Cost of Goods Sold
+      // Cost of Goods Sold = Revenue * (1 - profit margin)
+      const costOfGoodsSold = revenue * (1 - profitMargin)
+      const netGross = revenue - costOfGoodsSold
+
       // Update reactive refs for today's data
       todaysSales.value = salesData
       todaysRevenue.value = revenue
+      todaysNetGross.value = netGross
       todaysOrders.value = salesData.length
       todaysProductsSold.value = productsSold
       todaysAverageOrderValue.value = salesData.length ? revenue / salesData.length : 0
@@ -1486,6 +1520,10 @@ const getCategoryIcon = (category) => {
 }
 
 // Sorted today's top products based on selected metric
+const profitMarginPercentage = computed(() => {
+  return (profitMargin * 100).toFixed(1)
+})
+
 const sortedTodaysTopProducts = computed(() => {
   return [...todaysTopProducts.value].sort((a, b) => {
     if (selectedProductMetric.value === 'revenue') {
@@ -2400,6 +2438,7 @@ Barcelona Paint Center Staff Portal
 
 💰 TODAY'S RESULTS:
 • Total Revenue: ${formatCurrency(todaysRevenue.value)}
+• Net Gross (Profit): ${formatCurrency(todaysNetGross.value)} (${profitMarginPercentage.value}% margin)
 • Total Orders: ${todaysOrders.value} orders
 • Items Sold: ${todaysProductsSold.value} pieces
 • Average Order: ${formatCurrency(todaysAverageOrderValue.value)}

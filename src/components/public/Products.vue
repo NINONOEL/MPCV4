@@ -59,37 +59,31 @@
         <div class="bg-white rounded-xl p-3 sm:p-4 mb-4 border border-cream-200 shadow-sm hover:shadow-md transition-shadow duration-300">
           <h2 class="text-base sm:text-lg font-bold text-gray-900 mb-3 text-center">Find Your Perfect Paint</h2>
           
-          <div class="space-y-3">
-            <!-- Search Input - Premium Style -->
-            <div class="relative">
-              <SearchIcon class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-orange-400" />
-              <input
-                v-model="searchQuery"
-                type="text"
-                placeholder="Search by name, color, or category..."
-                class="w-full pl-10 pr-3 py-2 border border-cream-200 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent bg-cream-50 text-xs sm:text-sm text-gray-900 placeholder-gray-500 transition-all duration-300 shadow-sm hover:shadow-md"
-              />
-            </div>
+          <!-- Category Filter Slider -->
+          <div class="relative">
+            <!-- Scroll Left Button -->
+            <button
+              @click="scrollCategories('left')"
+              class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-1.5 shadow-lg border border-cream-200 hover:bg-cream-50 transition-all duration-300 hover:scale-110"
+              :class="{ 'opacity-50 cursor-not-allowed pointer-events-none': categoryScrollLeft <= 0 }"
+              :disabled="categoryScrollLeft <= 0"
+            >
+              <ChevronLeftIcon class="w-4 h-4 text-orange-500" />
+            </button>
 
-            <!-- Category Filter Buttons - Enhanced -->
-            <div class="flex flex-wrap gap-2 justify-center">
-              <button
-                @click="filterCategory = ''"
-                :class="[
-                  'px-4 py-1.5 rounded-full font-semibold transition-all duration-300 text-xs sm:text-sm',
-                  filterCategory === '' 
-                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg hover:shadow-xl scale-105' 
-                    : 'bg-white text-gray-700 hover:bg-cream-50 border border-cream-200 hover:border-orange-300 hover:shadow-md'
-                ]"
-              >
-                All Products
-              </button>
+            <!-- Category Slider Container -->
+            <div 
+              ref="categorySlider"
+              class="flex gap-2 overflow-x-auto scrollbar-hide px-8 scroll-smooth"
+              style="scrollbar-width: none; -ms-overflow-style: none;"
+              @scroll="updateScrollButtons"
+            >
               <button
                 v-for="(label, key) in categoryOptions"
                 :key="key"
                 @click="filterCategory = key"
                 :class="[
-                  'px-4 py-1.5 rounded-full font-semibold transition-all duration-300 text-xs sm:text-sm',
+                  'px-4 py-1.5 rounded-full font-semibold transition-all duration-300 text-xs sm:text-sm whitespace-nowrap flex-shrink-0',
                   filterCategory === key 
                     ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg hover:shadow-xl scale-105' 
                     : 'bg-white text-gray-700 hover:bg-cream-50 border border-cream-200 hover:border-orange-300 hover:shadow-md'
@@ -98,6 +92,16 @@
                 {{ label }}
               </button>
             </div>
+
+            <!-- Scroll Right Button -->
+            <button
+              @click="scrollCategories('right')"
+              class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-1.5 shadow-lg border border-cream-200 hover:bg-cream-50 transition-all duration-300 hover:scale-110"
+              :class="{ 'opacity-50 cursor-not-allowed pointer-events-none': categoryScrollRight <= 5 }"
+              :disabled="categoryScrollRight <= 5"
+            >
+              <ChevronRightIcon class="w-4 h-4 text-orange-500" />
+            </button>
           </div>
         </div>
 
@@ -105,7 +109,7 @@
         <div v-if="filteredProducts.length === 0" class="text-center py-8">
           <PackageIcon class="w-10 h-10 text-gray-300 mx-auto mb-2" />
           <h3 class="text-sm sm:text-base font-semibold text-gray-600 mb-1">No Products Found</h3>
-          <p class="text-xs sm:text-sm text-gray-500">Try adjusting your filters or search terms.</p>
+          <p class="text-xs sm:text-sm text-gray-500">Try selecting a different category.</p>
         </div>
 
         <!-- Dynamic Grid Layout -->
@@ -180,11 +184,11 @@ import {
 import { db } from '../../config/firebase'
 import { 
   PaletteIcon,
-  SearchIcon,
   PackageIcon,
   AlertTriangleIcon,
   RefreshCwIcon,
-  ChevronLeftIcon // Added ChevronLeftIcon import
+  ChevronLeftIcon,
+  ChevronRightIcon
 } from 'lucide-vue-next'
 
 // State
@@ -196,6 +200,11 @@ const filterCategory = ref('')
 
 const categories = ref([])
 const categoryOptions = ref({})
+
+// Category slider refs
+const categorySlider = ref(null)
+const categoryScrollLeft = ref(0)
+const categoryScrollRight = ref(1)
 
 // Firebase listener cleanup
 let unsubscribe = null
@@ -210,17 +219,7 @@ const availableProducts = computed(() => {
 const filteredProducts = computed(() => {
   let filtered = [...availableProducts.value]
 
-  // Search filter
-  if (searchQuery.value) {
-    const query = searchQuery.value.toLowerCase()
-    filtered = filtered.filter(product => 
-      product.name.toLowerCase().includes(query) ||
-      product.sku?.toLowerCase().includes(query) ||
-      product.category?.toLowerCase().includes(query)
-    )
-  }
-
-  // Category filter
+  // Category filter only (search removed)
   if (filterCategory.value) {
     filtered = filtered.filter(product => product.category === filterCategory.value)
   }
@@ -308,16 +307,48 @@ const handleImageError = (event) => {
   event.target.parentElement.style.display = 'none'
 }
 
+// Category slider methods
+const scrollCategories = (direction) => {
+  if (!categorySlider.value) return
+  
+  const scrollAmount = 200
+  const currentScroll = categorySlider.value.scrollLeft
+  
+  if (direction === 'left') {
+    categorySlider.value.scrollLeft = currentScroll - scrollAmount
+  } else {
+    categorySlider.value.scrollLeft = currentScroll + scrollAmount
+  }
+  
+  // Update scroll buttons after a short delay
+  setTimeout(updateScrollButtons, 100)
+}
+
+const updateScrollButtons = () => {
+  if (!categorySlider.value) return
+  
+  const { scrollLeft, scrollWidth, clientWidth } = categorySlider.value
+  categoryScrollLeft.value = scrollLeft
+  categoryScrollRight.value = scrollWidth - scrollLeft - clientWidth
+}
+
 // Lifecycle
 onMounted(() => {
   fetchProducts()
   fetchCategories()
+  // Update scroll buttons after categories are loaded
+  setTimeout(() => {
+    updateScrollButtons()
+    // Also update on window resize
+    window.addEventListener('resize', updateScrollButtons)
+  }, 500)
 })
 
 onUnmounted(() => {
   if (unsubscribe) {
     unsubscribe()
   }
+  window.removeEventListener('resize', updateScrollButtons)
 })
 </script>
 
@@ -391,5 +422,15 @@ onUnmounted(() => {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Hide scrollbar for category slider */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 </style>

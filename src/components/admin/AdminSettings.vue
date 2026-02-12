@@ -304,97 +304,142 @@
             </div>
 
             <!-- Settings Grid Layout -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 max-w-3xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 max-w-3xl mx-auto">
               <!-- Admin Security Code Card -->
-              <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden">
-                <div class="p-5 sm:p-6">
-                  <div class="flex items-center gap-4 mb-4">
-                    <div class="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg">
-                      <ShieldIcon class="w-6 h-6 text-white" />
+              <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden flex flex-col h-full">
+                <div class="p-4 flex flex-col flex-1">
+                  <div class="flex items-center gap-2.5 mb-3">
+                    <div class="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md flex-shrink-0">
+                      <ShieldIcon class="w-4 h-4 text-white" />
                     </div>
-                    <div class="flex-1">
-                      <h3 class="text-lg font-bold text-gray-900">Admin Security Code</h3>
-                      <p class="text-sm text-gray-500 mt-1">Manage registration security code</p>
+                    <div class="flex-1 min-w-0">
+                      <h3 class="text-sm sm:text-base font-bold text-gray-900 truncate">Admin Security Code</h3>
+                      <p class="text-xs text-gray-500 mt-0.5">Manage registration security code</p>
                     </div>
                   </div>
                   
-                  <div class="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
-                    <p class="text-xs text-gray-600 mb-1">Current Code:</p>
-                    <p class="text-sm font-mono font-semibold text-blue-700">{{ adminSecurityCode || 'Not set' }}</p>
+                  <div class="mb-3 p-2.5 bg-blue-50 rounded-lg border border-blue-200 flex-shrink-0">
+                    <p class="text-xs text-gray-600 mb-0.5">Current Code:</p>
+                    <p class="text-xs font-mono font-semibold text-blue-700 break-all">{{ adminSecurityCode || 'Not set' }}</p>
                   </div>
                   
-                  <button 
-                    @click="showSecurityCodeModal = true"
-                    class="w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium"
-                  >
-                    <ShieldIcon class="w-4 h-4" />
-                    {{ adminSecurityCode ? 'Change Security Code' : 'Set Security Code' }}
-                  </button>
+                  <div class="mt-auto">
+                    <button 
+                      @click="showSecurityCodeModal = true"
+                      class="w-full px-3 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium text-xs sm:text-sm"
+                    >
+                      <ShieldIcon class="w-3.5 h-3.5" />
+                      <span class="truncate">{{ adminSecurityCode ? 'Change Security Code' : 'Set Security Code' }}</span>
+                    </button>
+                  </div>
                 </div>
               </div>
 
               <!-- Change Password Card -->
-              <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden">
-                <div class="p-5 sm:p-6">
-                  <div class="flex items-center gap-4 mb-4">
-                    <div class="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 shadow-lg">
-                      <KeyIcon class="w-6 h-6 text-white" />
+              <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden flex flex-col h-full">
+                <div class="p-4 flex flex-col flex-1">
+                  <div class="flex items-center gap-2.5 mb-3">
+                    <div class="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 shadow-md flex-shrink-0">
+                      <KeyIcon class="w-4 h-4 text-white" />
                     </div>
-                    <div class="flex-1">
-                      <h3 class="text-lg font-bold text-gray-900">Change Password</h3>
-                      <p class="text-sm text-gray-500 mt-1">Update your account password</p>
+                    <div class="flex-1 min-w-0">
+                      <h3 class="text-sm sm:text-base font-bold text-gray-900 truncate">Change Password</h3>
+                      <p class="text-xs text-gray-500 mt-0.5">Update your account password</p>
                     </div>
                   </div>
                   
-                  <div class="mb-4 p-3 bg-purple-50 rounded-lg border border-purple-200">
-                    <p class="text-xs text-gray-600 mb-1">Last Changed:</p>
-                    <p class="text-sm font-medium text-purple-700">{{ passwordLastChangedText }}</p>
+                  <div class="mb-3 p-2.5 bg-purple-50 rounded-lg border border-purple-200 flex-shrink-0">
+                    <p class="text-xs text-gray-600 mb-0.5">Last Changed:</p>
+                    <p class="text-xs font-medium text-purple-700 break-words">{{ passwordLastChangedText }}</p>
                   </div>
                   
-                  <button 
-                    @click="changePassword"
-                    class="w-full px-4 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-lg hover:from-purple-600 hover:to-pink-700 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium"
-                  >
-                    <KeyIcon class="w-4 h-4" />
-                    Change Password
-                  </button>
+                  <div class="mt-auto">
+                    <button 
+                      @click="changePassword"
+                      class="w-full px-3 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-lg hover:from-purple-600 hover:to-pink-700 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium text-xs sm:text-sm"
+                    >
+                      <KeyIcon class="w-3.5 h-3.5" />
+                      Change Password
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <!-- Delete Account Card - Full Width -->
-              <div class="md:col-span-2 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border-2 border-red-200 overflow-hidden max-w-2xl mx-auto">
-                <div class="p-5 sm:p-6">
-                  <div class="flex items-center gap-4 mb-4">
-                    <div class="p-3 rounded-xl bg-gradient-to-br from-red-500 to-orange-600 shadow-lg">
-                      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <!-- Erase All Data Card -->
+              <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border-2 border-orange-200 overflow-hidden flex flex-col h-full">
+                <div class="p-4 flex flex-col flex-1">
+                  <div class="flex items-center gap-2.5 mb-3">
+                    <div class="p-2 rounded-lg bg-gradient-to-br from-orange-500 to-red-600 shadow-md flex-shrink-0">
+                      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                       </svg>
                     </div>
-                    <div class="flex-1">
-                      <h3 class="text-lg font-bold text-red-900">Delete Account</h3>
-                      <p class="text-sm text-red-700 mt-1">Permanently delete your account and all data</p>
+                    <div class="flex-1 min-w-0">
+                      <h3 class="text-sm sm:text-base font-bold text-orange-900 truncate">Erase All Data</h3>
+                      <p class="text-xs text-orange-700 mt-0.5">Reset all system data</p>
                     </div>
                   </div>
                   
-                  <div class="mb-4 p-4 bg-red-50 rounded-lg border border-red-200">
-                    <p class="text-sm text-red-800 font-medium flex items-center gap-2">
-                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <div class="mb-3 p-2.5 bg-orange-50 rounded-lg border border-orange-200 flex-shrink-0">
+                    <p class="text-xs text-orange-800 font-medium flex items-start gap-1.5">
+                      <svg class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
                       </svg>
-                      This action cannot be undone. All your data will be permanently deleted.
+                      <span class="text-xs leading-snug">This will permanently delete all products, sales, orders, paint mixtures, recommendations, quotes, staff, and customer data. This action cannot be undone.</span>
                     </p>
                   </div>
                   
-                  <button 
-                    @click="deleteAccount"
-                    :disabled="isDeletingAccount"
-                    class="w-full px-4 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                    </svg>
-                    {{ isDeletingAccount ? 'Deleting Account...' : 'Delete Account' }}
-                  </button>
+                  <div class="mt-auto">
+                    <button 
+                      @click="eraseAllData"
+                      :disabled="isErasingData"
+                      class="w-full px-3 py-2 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-lg hover:from-orange-700 hover:to-red-700 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium text-xs sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                      </svg>
+                      <span class="truncate">{{ isErasingData ? 'Erasing All Data...' : 'Erase All Data' }}</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Delete Account Card -->
+              <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border-2 border-red-200 overflow-hidden flex flex-col h-full">
+                <div class="p-4 flex flex-col flex-1">
+                  <div class="flex items-center gap-2.5 mb-3">
+                    <div class="p-2 rounded-lg bg-gradient-to-br from-red-500 to-orange-600 shadow-md flex-shrink-0">
+                      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                      </svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <h3 class="text-sm sm:text-base font-bold text-red-900 truncate">Delete Account</h3>
+                      <p class="text-xs text-red-700 mt-0.5">Permanently delete your account</p>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-3 p-2.5 bg-red-50 rounded-lg border border-red-200 flex-shrink-0">
+                    <p class="text-xs text-red-800 font-medium flex items-start gap-1.5">
+                      <svg class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                      </svg>
+                      <span class="text-xs leading-snug">This action cannot be undone. All your data will be permanently deleted.</span>
+                    </p>
+                  </div>
+                  
+                  <div class="mt-auto">
+                    <button 
+                      @click="deleteAccount"
+                      :disabled="isDeletingAccount"
+                      class="w-full px-3 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium text-xs sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                      </svg>
+                      <span class="truncate">{{ isDeletingAccount ? 'Deleting Account...' : 'Delete Account' }}</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -589,7 +634,7 @@ import {
   deleteUser,
   signOut
 } from 'firebase/auth'
-import { doc, getDoc, setDoc, deleteDoc, updateDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc, deleteDoc, updateDoc, collection, getDocs } from 'firebase/firestore'
 import {
   LayoutDashboard as LayoutDashboardIcon,
   Users as UsersIcon,
@@ -622,6 +667,7 @@ const adminSecurityCode = ref('')
 const isSavingSecurityCode = ref(false)
 const isUpdatingPassword = ref(false)
 const isDeletingAccount = ref(false)
+const isErasingData = ref(false)
 const userDisplayName = ref('Nino Noel Monsanto')
 const userEmail = ref('nnmonsanto23@gmail.com')
 const lastPasswordChange = ref(null)
@@ -779,6 +825,98 @@ const updatePassword = async () => {
     }, 3000)
   } finally {
     isUpdatingPassword.value = false
+  }
+}
+
+const eraseAllData = async () => {
+  if (!auth.currentUser) {
+    toastMessage.value = 'You must be logged in to erase data!'
+    notificationType.value = 'error'
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 3000)
+    return
+  }
+
+  // First confirmation
+  if (!confirm('⚠️ WARNING: This will permanently delete ALL data from the system:\n\n• All Products\n• All Sales Records\n• All Orders\n• All Paint Mixtures\n• All Paint Recommendations\n• All Quotes\n• All Staff Members\n• All Customers\n\nThis action cannot be undone. Are you absolutely sure you want to proceed?')) {
+    return
+  }
+
+  // Second confirmation
+  if (!confirm('⚠️ FINAL WARNING: This will erase EVERYTHING. Type "ERASE ALL" to confirm (case sensitive):')) {
+    return
+  }
+
+  const confirmation = prompt('Type "ERASE ALL" to confirm:')
+  if (confirmation !== 'ERASE ALL') {
+    toastMessage.value = 'Confirmation text did not match. Operation cancelled.'
+    notificationType.value = 'error'
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 3000)
+    return
+  }
+
+  try {
+    isErasingData.value = true
+
+    // Collections to erase
+    const collectionsToErase = [
+      'products',
+      'sales',
+      'orders',
+      'paintMixtures',
+      'paintRecommendations',
+      'quotes',
+      'staff',
+      'customers'
+    ]
+
+    let totalDeleted = 0
+    let errors = []
+
+    // Delete all documents from each collection
+    for (const collectionName of collectionsToErase) {
+      try {
+        const collectionRef = collection(db, collectionName)
+        const snapshot = await getDocs(collectionRef)
+        
+        const deletePromises = snapshot.docs.map(doc => deleteDoc(doc.ref))
+        await Promise.all(deletePromises)
+        
+        totalDeleted += snapshot.docs.length
+        console.log(`✅ Deleted ${snapshot.docs.length} documents from ${collectionName}`)
+      } catch (error) {
+        console.error(`Error deleting from ${collectionName}:`, error)
+        errors.push(`${collectionName}: ${error.message}`)
+      }
+    }
+
+    if (errors.length > 0) {
+      toastMessage.value = `Data erased with some errors. Deleted ${totalDeleted} documents. Check console for details.`
+      notificationType.value = 'error'
+    } else {
+      toastMessage.value = `Successfully erased all data! Deleted ${totalDeleted} documents.`
+      notificationType.value = 'success'
+    }
+    
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 5000)
+  } catch (error) {
+    console.error('Error erasing all data:', error)
+    toastMessage.value = `Failed to erase all data: ${error.message}`
+    notificationType.value = 'error'
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 5000)
+  } finally {
+    isErasingData.value = false
   }
 }
 

@@ -943,8 +943,8 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, onErrorCaptured, watch, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
-import { collection, getDocs, updateDoc, deleteDoc, doc, onSnapshot } from 'firebase/firestore'
-import { db } from '@/config/firebase.js'
+import { collection, getDocs, updateDoc, deleteDoc, doc, onSnapshot, getDoc } from 'firebase/firestore'
+import { db, auth } from '@/config/firebase.js'
 import { 
   LayoutDashboard as LayoutDashboardIcon,
   Users as UsersIcon,
@@ -1083,9 +1083,69 @@ const reloadComponent = () => {
 }
 
 // Setup real-time listener for staff collection
-const setupRealtimeListener = () => {
+const setupRealtimeListener = async () => {
   try {
     console.log('🔄 Setting up real-time listener for staff collection...')
+    
+    // Check if user is authenticated
+    if (!auth || !auth.currentUser) {
+      console.error('❌ User not authenticated, cannot setup real-time listener')
+      connectionStatus.value = {
+        success: false,
+        title: 'Authentication Required',
+        message: 'Please log in to access staff management.'
+      }
+      setTimeout(() => {
+        connectionStatus.value = null
+        router.push('/admin')
+      }, 3000)
+      return
+    }
+    
+    // Verify user is an admin
+    try {
+      const adminDoc = await getDoc(doc(db, 'admins', auth.currentUser.uid))
+      if (!adminDoc.exists()) {
+        console.error('❌ User is not an admin, cannot setup real-time listener')
+        connectionStatus.value = {
+          success: false,
+          title: 'Access Denied',
+          message: 'You do not have admin privileges. Redirecting to login...'
+        }
+        setTimeout(() => {
+          connectionStatus.value = null
+          router.push('/admin')
+        }, 3000)
+        return
+      }
+      console.log('✅ Admin verification successful for real-time listener')
+    } catch (adminCheckError) {
+      console.error('❌ Error checking admin status:', adminCheckError)
+      connectionStatus.value = {
+        success: false,
+        title: 'Verification Failed',
+        message: 'Unable to verify admin status. Please try logging in again.'
+      }
+      setTimeout(() => {
+        connectionStatus.value = null
+        router.push('/admin')
+      }, 3000)
+      return
+    }
+    
+    // Check if database is initialized
+    if (!db) {
+      console.error('❌ Database not initialized')
+      connectionStatus.value = {
+        success: false,
+        title: 'Database Error',
+        message: 'Firebase database is not initialized. Please refresh the page.'
+      }
+      setTimeout(() => {
+        connectionStatus.value = null
+      }, 5000)
+      return
+    }
     
     const staffCollection = collection(db, 'staff')
     
@@ -1134,10 +1194,25 @@ const setupRealtimeListener = () => {
       console.log('✅ Real-time data updated:', staffData.length, 'staff members')
     }, (error) => {
       console.error('❌ Real-time listener error:', error)
+      console.error('Error details:', error.code, error.message)
+      
+      // Provide more specific error messages
+      let errorMessage = error.message
+      if (error.code === 'permission-denied') {
+        errorMessage = 'Permission denied. Please ensure you are logged in as an admin and have proper access rights.'
+      } else if (error.code === 'unauthenticated') {
+        errorMessage = 'Authentication required. Please log in again.'
+        setTimeout(() => {
+          router.push('/admin')
+        }, 3000)
+      } else if (error.code === 'unavailable') {
+        errorMessage = 'Firebase service is temporarily unavailable. Please try again later.'
+      }
+      
       connectionStatus.value = {
         success: false,
         title: 'Real-time Updates Failed',
-        message: `Error: ${error.message}. Falling back to manual refresh.`
+        message: `Error: ${errorMessage}. Falling back to manual refresh.`
       }
       
       setTimeout(() => {
@@ -1194,6 +1269,70 @@ const fetchStaffMembers = async () => {
     loading.value = true
     console.log('📊 Manual refresh: Fetching staff members from Firestore...')
     
+    // Check if user is authenticated
+    if (!auth || !auth.currentUser) {
+      console.error('❌ User not authenticated')
+      connectionStatus.value = {
+        success: false,
+        title: 'Authentication Required',
+        message: 'Please log in to access staff management. Redirecting to login...'
+      }
+      
+      setTimeout(() => {
+        connectionStatus.value = null
+        router.push('/admin')
+      }, 3000)
+      return
+    }
+    
+    // Verify user is an admin
+    try {
+      const adminDoc = await getDoc(doc(db, 'admins', auth.currentUser.uid))
+      if (!adminDoc.exists()) {
+        console.error('❌ User is not an admin')
+        connectionStatus.value = {
+          success: false,
+          title: 'Access Denied',
+          message: 'You do not have admin privileges. Redirecting to login...'
+        }
+        
+        setTimeout(() => {
+          connectionStatus.value = null
+          router.push('/admin')
+        }, 3000)
+        return
+      }
+      console.log('✅ Admin verification successful')
+    } catch (adminCheckError) {
+      console.error('❌ Error checking admin status:', adminCheckError)
+      connectionStatus.value = {
+        success: false,
+        title: 'Verification Failed',
+        message: 'Unable to verify admin status. Please try logging in again.'
+      }
+      
+      setTimeout(() => {
+        connectionStatus.value = null
+        router.push('/admin')
+      }, 3000)
+      return
+    }
+    
+    // Check if database is initialized
+    if (!db) {
+      console.error('❌ Database not initialized')
+      connectionStatus.value = {
+        success: false,
+        title: 'Database Error',
+        message: 'Firebase database is not initialized. Please refresh the page.'
+      }
+      
+      setTimeout(() => {
+        connectionStatus.value = null
+      }, 5000)
+      return
+    }
+    
     const staffCollection = collection(db, 'staff')
     const staffSnapshot = await getDocs(staffCollection)
     
@@ -1235,10 +1374,50 @@ const fetchStaffMembers = async () => {
     console.error('❌ Error fetching staff members:', error)
     console.error('Error details:', error.code, error.message)
     
+    // Provide more specific error messages and retry logic
+    let errorMessage = error.message
+    let shouldRetry = false
+    
+    if (error.code === 'permission-denied') {
+      // Double-check admin status before showing error
+      try {
+        if (auth.currentUser) {
+          const adminDoc = await getDoc(doc(db, 'admins', auth.currentUser.uid))
+          if (!adminDoc.exists()) {
+            errorMessage = 'You are not authorized as an admin. Please contact the system administrator.'
+            setTimeout(() => {
+              router.push('/admin')
+            }, 3000)
+          } else {
+            errorMessage = 'Permission denied. This may be a Firestore security rules issue. Please check your Firebase console settings.'
+            shouldRetry = true
+          }
+        } else {
+          errorMessage = 'Please log in again to refresh your session.'
+          setTimeout(() => {
+            router.push('/admin')
+          }, 3000)
+        }
+      } catch (checkError) {
+        errorMessage = 'Unable to verify permissions. Please try logging out and logging back in.'
+      }
+    } else if (error.code === 'unauthenticated') {
+      errorMessage = 'Your session has expired. Please log in again.'
+      setTimeout(() => {
+        router.push('/admin')
+      }, 3000)
+    } else if (error.code === 'unavailable') {
+      errorMessage = 'Firebase service is temporarily unavailable. Please try again in a few moments.'
+      shouldRetry = true
+    } else if (error.code === 'failed-precondition') {
+      errorMessage = 'Database connection issue. Please refresh the page and try again.'
+      shouldRetry = true
+    }
+    
     connectionStatus.value = {
       success: false,
       title: 'Manual Refresh Failed',
-      message: `Error: ${error.message}. Please check your Firebase configuration.`
+      message: `Error: ${errorMessage}${shouldRetry ? ' You can try clicking Refresh again.' : ''}`
     }
     
     setTimeout(() => {

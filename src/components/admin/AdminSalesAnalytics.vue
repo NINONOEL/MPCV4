@@ -356,7 +356,7 @@
           </div>
 
           <!-- Stats Cards -->
-          <div v-if="!loading || sales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div v-if="!loading || sales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             <!-- Total Revenue -->
             <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
               <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
@@ -373,6 +373,27 @@
                       <TrendingUp class="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
                       <span class="text-xs font-medium text-green-600">12.5%</span>
                       <span class="text-xs text-gray-600">vs last period</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Net Gross (Profit) -->
+            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
+              <div class="bg-gradient-to-br from-amber-400 via-orange-500 to-yellow-600 h-2 absolute top-0 left-0 right-0"></div>
+              <div class="p-4">
+                <div class="flex items-center gap-3">
+                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-amber-400 via-orange-500 to-yellow-600 transform hover:scale-110 transition-transform duration-200">
+                    <TrendingUp class="w-5 h-5 text-white" />
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs sm:text-sm text-gray-600">Net Gross (Profit)</p>
+                    <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ formatCurrency(totalNetGross) }}</p>
+                    <div class="flex items-center gap-1 mt-1">
+                      <TrendingUp class="w-3 h-3 sm:w-4 sm:h-4 text-amber-600" />
+                      <span class="text-xs font-medium text-amber-600">{{ profitMarginPercentage }}%</span>
+                      <span class="text-xs text-gray-600">profit margin</span>
                     </div>
                   </div>
                 </div>
@@ -1233,9 +1254,12 @@ const sales = ref([])
 const loading = ref(true)
 const error = ref(null)
 const totalRevenue = ref(0)
+const totalNetGross = ref(0)
 const totalOrders = ref(0)
 const totalProductsSold = ref(0)
 const averageOrderValue = ref(0)
+// Profit margin: 30% means cost is 70% of selling price
+const profitMargin = 0.30 // 30% profit margin
 const topProducts = ref([])
 const salesByCategory = ref([])
 const availableProducts = ref([])
@@ -1407,9 +1431,16 @@ const fetchSalesData = async () => {
       console.log(`Processed ${salesData.length} sales within date range`)
       console.log(`Total revenue: ${revenue}, Products sold: ${productsSold}`)
 
+      // Calculate Net Gross (Profit)
+      // Net Gross = Revenue - Cost of Goods Sold
+      // Cost of Goods Sold = Revenue * (1 - profit margin)
+      const costOfGoodsSold = revenue * (1 - profitMargin)
+      const netGross = revenue - costOfGoodsSold
+
       // Update reactive refs
       sales.value = salesData
       totalRevenue.value = revenue
+      totalNetGross.value = netGross
       totalOrders.value = salesData.length
       totalProductsSold.value = productsSold
       averageOrderValue.value = salesData.length ? revenue / salesData.length : 0
@@ -1679,6 +1710,10 @@ const getCategoryIcon = (category) => {
 }
 
 // Sorted top products based on selected metric
+const profitMarginPercentage = computed(() => {
+  return (profitMargin * 100).toFixed(1)
+})
+
 const sortedTopProducts = computed(() => {
   return [...topProducts.value].sort((a, b) => {
     if (selectedProductMetric.value === 'revenue') {
