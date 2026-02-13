@@ -1,142 +1,123 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
+  <div class="min-h-screen bg-gradient-to-b from-slate-50/95 via-white to-purple-50/30 relative overflow-hidden">
     <!-- Background Elements -->
-    <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-200 to-blue-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-0 right-0 w-[min(90vw,520px)] h-[min(90vw,520px)] bg-gradient-to-br from-purple-300/20 via-violet-200/15 to-fuchsia-100/10 rounded-full blur-3xl -translate-y-1/4 translate-x-1/4"></div>
+      <div class="absolute bottom-0 left-0 w-[min(70vw,440px)] h-[min(70vw,440px)] bg-gradient-to-tr from-violet-200/15 to-purple-100/10 rounded-full blur-3xl -translate-x-1/4 translate-y-1/4"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(139,92,246,0.06),transparent)] pointer-events-none"></div>
     </div>
 
     <div class="relative z-10 flex h-screen">
-      <!-- Sidebar -->
-      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden md:flex md:flex-col shadow-lg">
-        <!-- Logo/Brand -->
-        <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+      <!-- Sidebar - match Staff Dashboard / Admin Inventory -->
+      <aside class="w-64 bg-white/98 backdrop-blur-xl border-r border-gray-200/80 hidden lg:flex lg:flex-col shadow-lg shadow-gray-200/30">
+        <div class="p-4 xl:p-5 border-b border-gray-100 flex-shrink-0">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500 to-fuchsia-600 flex items-center justify-center shadow-md shadow-purple-500/20 flex-shrink-0">
+              <PackageIcon class="w-4 h-4 text-white" />
+            </div>
+            <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight tracking-tight">Barcelona Paint Center</h1>
           </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <UserIcon class="h-3 w-3 mr-1" />
+          <div class="mt-2.5 text-xs text-white bg-gradient-to-r from-purple-500 via-violet-500 to-fuchsia-600 px-2.5 xl:px-3 py-1.5 rounded-lg inline-flex items-center shadow-md shadow-purple-500/25 font-medium">
+            <UserIcon class="h-3.5 w-3.5 mr-1.5 flex-shrink-0" />
             Staff Portal
           </div>
         </div>
-
-        <!-- Navigation -->
-        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link to="/staff/dashboard" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700">
-            <LayoutDashboardIcon class="w-5 h-5" />
-            <span>Dashboard</span>
+        <nav class="flex-1 p-3 xl:p-4 space-y-1 xl:space-y-2 overflow-y-auto">
+          <router-link to="/staff/dashboard" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700">
+            <LayoutDashboardIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Dashboard</span>
           </router-link>
-
-          <router-link to="/staff/inventory" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 shadow-sm border border-purple-200 transform scale-105">
-            <PackageIcon class="w-5 h-5" />
-            <span>Inventory</span>
+          <router-link to="/staff/inventory" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-purple-700 bg-purple-100 shadow-sm border-l-4 border-purple-500">
+            <PackageIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Inventory</span>
           </router-link>
-
-          <router-link to="/staff/paint-mixing" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700">
-            <PaletteIcon class="w-5 h-5" />
-            <span>Paint Mixing</span>
+          <router-link to="/staff/paint-mixing" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700">
+            <PaletteIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Paint Mixing</span>
           </router-link>
-
-          <router-link to="/staff/house-paint-recommender" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700">
-            <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+          <router-link to="/staff/house-paint-recommender" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700">
+            <HomeIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">House Paint Recommender</span>
           </router-link>
-
-          <router-link to="/staff/sales-analytics" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700">
-            <TrendingUpIcon class="w-5 h-5" />
-            <span>Sales Analytics</span>
+          <router-link to="/staff/sales-analytics" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700">
+            <TrendingUpIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Sales Analytics</span>
           </router-link>
-
-          <router-link to="/staff/settings" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700">
-            <SettingsIcon class="w-5 h-5" />
-            <span>Settings</span>
+          <router-link to="/staff/settings" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700">
+            <SettingsIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Settings</span>
           </router-link>
+          <div class="h-4"></div>
         </nav>
-
-        <!-- User Menu -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg">
-              <UserIcon class="w-5 h-5 text-white" />
+        <div class="p-3 xl:p-4 border-t border-gray-200 bg-gradient-to-r from-purple-50/95 to-fuchsia-50/95 backdrop-blur-sm flex-shrink-0">
+          <div class="flex items-center gap-2 xl:gap-3">
+            <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-600 flex items-center justify-center shadow-lg shadow-purple-500/25 flex-shrink-0">
+              <UserIcon class="w-4 xl:w-5 h-4 xl:h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">Staff User</p>
+              <p class="text-xs xl:text-sm font-medium text-gray-900 truncate">Staff User</p>
               <p class="text-xs text-gray-600 truncate">staff@example.com</p>
             </div>
-            <button @click="handleLogout" class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors" title="Logout">
-              <LogOutIcon class="w-5 h-5" />
+            <button @click="handleLogout" class="p-1.5 xl:p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0" title="Logout">
+              <LogOutIcon class="w-4 xl:w-5 h-4 xl:h-5" />
             </button>
           </div>
         </div>
       </aside>
 
-      <!-- Mobile Sidebar Toggle -->
-      <div class="fixed top-4 left-4 z-30 md:hidden">
-        <button @click="toggleMobileSidebar" class="p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg" aria-label="Toggle navigation menu">
+      <!-- Mobile Toggle -->
+      <div class="fixed top-4 left-4 z-30 lg:hidden">
+        <button @click="toggleMobileSidebar" class="p-3 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200" aria-label="Toggle menu">
           <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
           <XIcon v-else class="w-6 h-6 text-gray-700" />
         </button>
       </div>
-
-      <!-- Mobile Sidebar -->
-      <div v-if="mobileSidebarOpen" class="fixed inset-0 bg-black/20 z-20 md:hidden" @click="toggleMobileSidebar"></div>
-
-      <aside v-if="mobileSidebarOpen" class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-20 md:hidden shadow-xl flex flex-col">
-        <!-- Mobile Logo -->
+      <div v-if="mobileSidebarOpen" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 lg:hidden" @click="toggleMobileSidebar"></div>
+      <aside v-if="mobileSidebarOpen" class="fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-white border-r border-gray-200 z-30 lg:hidden shadow-2xl flex flex-col">
         <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <UserIcon class="h-3 w-3 mr-1" />
+          <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-purple-500 to-fuchsia-600 px-3 py-1.5 rounded-lg inline-flex items-center font-medium">
+            <UserIcon class="h-3.5 w-3.5 mr-1.5" />
             Staff Portal
           </div>
         </div>
-
-        <!-- Mobile Navigation -->
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link to="/staff/dashboard" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50" @click="mobileSidebarOpen = false">
-            <LayoutDashboardIcon class="w-5 h-5" />
-            <span>Dashboard</span>
+          <router-link to="/staff/dashboard" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-blue-600 bg-blue-50 hover:bg-blue-100" @click="mobileSidebarOpen = false">
+            <LayoutDashboardIcon class="w-6 h-6" />
+            <span class="text-base">Dashboard</span>
           </router-link>
-
-          <router-link to="/staff/inventory" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 shadow-sm border border-purple-200" @click="mobileSidebarOpen = false">
-            <PackageIcon class="w-5 h-5" />
-            <span>Inventory</span>
+          <router-link to="/staff/inventory" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-purple-700 bg-purple-100 border-l-4 border-purple-500 shadow-sm" @click="mobileSidebarOpen = false">
+            <PackageIcon class="w-6 h-6" />
+            <span class="text-base font-semibold">Inventory</span>
           </router-link>
-
-          <router-link to="/staff/paint-mixing" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50" @click="mobileSidebarOpen = false">
-            <PaletteIcon class="w-5 h-5" />
-            <span>Paint Mixing</span>
+          <router-link to="/staff/paint-mixing" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-pink-600 bg-pink-50 hover:bg-pink-100" @click="mobileSidebarOpen = false">
+            <PaletteIcon class="w-6 h-6" />
+            <span class="text-base">Paint Mixing</span>
           </router-link>
-
-          <router-link to="/staff/house-paint-recommender" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50" @click="mobileSidebarOpen = false">
-            <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+          <router-link to="/staff/house-paint-recommender" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-orange-600 bg-orange-50 hover:bg-orange-100" @click="mobileSidebarOpen = false">
+            <HomeIcon class="w-6 h-6" />
+            <span class="text-base">House Paint Recommender</span>
           </router-link>
-
-          <router-link to="/staff/sales-analytics" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50" @click="mobileSidebarOpen = false">
-            <TrendingUpIcon class="w-5 h-5" />
-            <span>Sales Analytics</span>
+          <router-link to="/staff/sales-analytics" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-teal-600 bg-teal-50 hover:bg-teal-100" @click="mobileSidebarOpen = false">
+            <TrendingUpIcon class="w-6 h-6" />
+            <span class="text-base">Sales Analytics</span>
           </router-link>
-
-          <router-link to="/staff/settings" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50" @click="mobileSidebarOpen = false">
-            <SettingsIcon class="w-5 h-5" />
-            <span>Settings</span>
+          <router-link to="/staff/settings" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-green-600 bg-green-50 hover:bg-green-100" @click="mobileSidebarOpen = false">
+            <SettingsIcon class="w-6 h-6" />
+            <span class="text-base">Settings</span>
           </router-link>
+          <div class="h-4"></div>
         </nav>
-
-        <!-- Mobile User Menu -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-purple-50 to-fuchsia-50 flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg">
-              <UserIcon class="w-5 h-5 text-white" />
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-600 flex items-center justify-center shadow-lg flex-shrink-0">
+              <UserIcon class="w-6 h-6 text-white" />
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-900 truncate">Staff User</p>
               <p class="text-xs text-gray-600 truncate">staff@example.com</p>
             </div>
-            <button @click="handleLogout" class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors" title="Logout">
+            <button @click="handleLogout" class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0" title="Logout">
               <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
@@ -145,93 +126,95 @@
 
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
-        <!-- Header -->
-        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-8 py-4 shadow-sm">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <h1 class="text-2xl font-bold text-gray-900">Inventory Management</h1>
-              <p class="text-gray-600">View and manage product inventory</p>
-            </div>
-            <div class="flex items-center gap-4">
-              <div class="hidden md:flex items-center gap-2 text-gray-700">
-                <CalendarIcon class="w-5 h-5 text-purple-500" />
-                <span>{{ currentDate }}</span>
+        <!-- Header - match Staff Dashboard style -->
+        <header class="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-gray-200/90 shadow-sm">
+          <div class="h-1 w-full bg-gradient-to-r from-purple-500 via-violet-500 to-fuchsia-500 rounded-b-full"></div>
+          <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="pl-14 sm:pl-16 lg:pl-0 flex items-center gap-3">
+                <div class="hidden sm:flex w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-fuchsia-600 items-center justify-center shadow-lg shadow-purple-500/20 flex-shrink-0">
+                  <PackageIcon class="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">Inventory Management</h1>
+                  <p class="text-sm text-gray-500 mt-0.5">View and manage product inventory</p>
+                </div>
               </div>
-              <div class="hidden md:block h-6 w-px bg-gray-300"></div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-900">Welcome, Staff</span>
-                <div class="relative">
-                  <BellIcon class="w-5 h-5 text-orange-500 cursor-pointer hover:text-orange-600" />
+              <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-100/90 text-gray-700 text-sm border border-gray-200/60">
+                  <CalendarIcon class="w-4 h-4 text-purple-500 flex-shrink-0" />
+                  <span class="truncate font-medium">{{ currentDate }}</span>
+                </div>
+                <div class="hidden sm:block h-8 w-px bg-gray-200"></div>
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-purple-50 to-fuchsia-50 text-gray-800 text-sm border border-purple-200/60">
+                  <span class="font-medium truncate">Welcome, Staff</span>
+                  <BellIcon class="w-4 h-4 text-purple-500 cursor-pointer hover:text-purple-600 flex-shrink-0" />
                 </div>
               </div>
             </div>
           </div>
         </header>
 
-        <div class="p-6 md:p-8">
+        <div class="p-5 sm:p-6 lg:p-8">
           <!-- Stats Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
-                    <PackageIcon class="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <p class="text-sm text-gray-600">Total Products</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ totalProducts }}</p>
-                  </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <div class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-purple-100/80 shadow-lg shadow-purple-500/5 hover:shadow-xl hover:shadow-purple-500/10 hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent pointer-events-none"></div>
+              <div class="h-1.5 bg-gradient-to-r from-purple-500 via-violet-500 to-fuchsia-500"></div>
+              <div class="relative p-4 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-fuchsia-600 flex items-center justify-center shadow-lg shadow-purple-500/30 group-hover:scale-105 transition-transform shrink-0">
+                  <PackageIcon class="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Total Products</p>
+                  <p class="text-2xl font-black text-slate-900 tabular-nums">{{ totalProducts }}</p>
                 </div>
               </div>
             </div>
-
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 transform hover:scale-110 transition-transform duration-200">
-                    <AlertTriangleIcon class="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <p class="text-sm text-gray-600">Low Stock Items</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ lowStockCount }}</p>
-                  </div>
+            <div class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-amber-100/80 shadow-lg shadow-amber-500/5 hover:shadow-xl hover:shadow-amber-500/10 hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent pointer-events-none"></div>
+              <div class="h-1.5 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500"></div>
+              <div class="relative p-4 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/30 group-hover:scale-105 transition-transform shrink-0">
+                  <AlertTriangleIcon class="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Low Stock</p>
+                  <p class="text-2xl font-black text-slate-900 tabular-nums">{{ lowStockCount }}</p>
                 </div>
               </div>
             </div>
-
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-red-400 via-pink-500 to-rose-600 transform hover:scale-110 transition-transform duration-200">
-                    <XCircleIcon class="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <p class="text-sm text-gray-600">Out of Stock</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ outOfStockCount }}</p>
-                  </div>
+            <div class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-rose-100/80 shadow-lg shadow-rose-500/5 hover:shadow-xl hover:shadow-rose-500/10 hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-transparent pointer-events-none"></div>
+              <div class="h-1.5 bg-gradient-to-r from-red-500 via-rose-500 to-pink-500"></div>
+              <div class="relative p-4 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center shadow-lg shadow-rose-500/30 group-hover:scale-105 transition-transform shrink-0">
+                  <XCircleIcon class="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Out of Stock</p>
+                  <p class="text-2xl font-black text-slate-900 tabular-nums">{{ outOfStockCount }}</p>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Search and Filter Bar -->
-          <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-6 mb-8">
+          <div class="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-lg shadow-slate-200/30 p-5 mb-6 overflow-hidden">
+            <div class="h-1 w-full bg-gradient-to-r from-purple-500/50 via-violet-500/50 to-fuchsia-500/50 rounded-t-2xl -mx-5 -mt-5 mb-4"></div>
             <div class="flex flex-col md:flex-row gap-4">
               <div class="flex-1">
                 <div class="relative">
-                  <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input type="text" v-model="searchQuery" placeholder="Search products..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500" />
+                  <SearchIcon class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5 pointer-events-none" />
+                  <input type="text" v-model="searchQuery" placeholder="Search by name or SKU..." class="w-full pl-11 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-400 bg-white text-gray-900 placeholder-gray-400 transition-all" />
                 </div>
               </div>
-              <div class="flex flex-col sm:flex-row gap-4">
-                <select v-model="filterCategory" class="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900">
+              <div class="flex flex-col sm:flex-row gap-3">
+                <select v-model="filterCategory" class="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-400 bg-white text-gray-900 font-medium">
                   <option value="">All Categories</option>
                   <option v-for="cat in categories" :key="cat.key" :value="cat.key">{{ cat.value }}</option>
                 </select>
-                <select v-model="filterStock" class="px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900">
+                <select v-model="filterStock" class="px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-400 bg-white text-gray-900 font-medium">
                   <option value="">All Stock Levels</option>
                   <option value="in-stock">In Stock</option>
                   <option value="low-stock">Low Stock</option>
@@ -242,45 +225,43 @@
           </div>
 
           <!-- Products Table -->
-          <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg overflow-hidden">
+          <div class="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-lg shadow-slate-200/30 overflow-hidden">
             <!-- Loading State -->
-            <div v-if="loading && products.length === 0" class="p-8 text-center">
-              <LoaderIcon class="w-8 h-8 text-gray-400 animate-spin mx-auto mb-4" />
-              <p class="text-gray-600">Loading inventory data...</p>
+            <div v-if="loading && products.length === 0" class="p-12 text-center">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-100 to-fuchsia-100 flex items-center justify-center mx-auto mb-4">
+                <LoaderIcon class="w-7 h-7 text-purple-500 animate-spin" />
+              </div>
+              <p class="text-slate-600 font-medium">Loading inventory...</p>
+              <p class="text-sm text-slate-500 mt-1">Fetching products from database</p>
             </div>
 
             <!-- Empty State -->
-            <div v-if="!loading && products.length === 0" class="p-8 text-center">
-              <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
-                <PackageIcon class="w-8 h-8 text-purple-600" />
+            <div v-if="!loading && products.length === 0" class="p-12 text-center">
+              <div class="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-purple-100 to-fuchsia-100 flex items-center justify-center shadow-inner">
+                <PackageIcon class="w-10 h-10 text-purple-500" />
               </div>
-              <h3 class="text-lg font-medium text-gray-900 mb-2">No products found</h3>
-              <p class="text-gray-600 mb-4">Products added by admin will appear here.</p>
+              <h3 class="text-xl font-bold text-slate-900 mb-2">No products yet</h3>
+              <p class="text-slate-600 max-w-sm mx-auto">Products added by admin will appear here. Check back later or ask your admin to add inventory.</p>
             </div>
 
             <!-- Mobile View -->
-            <div v-else-if="products.length > 0" class="block md:hidden">
-              <div v-for="product in paginatedProducts" :key="product.id" class="p-4 border-b border-gray-100">
-                <div class="flex items-center justify-between mb-2">
-                  <div class="flex items-center gap-3">
-                    <!-- Updated to show product images instead of generic icons -->
-                    <div class="w-12 h-12 rounded-lg overflow-hidden shadow-lg flex items-center justify-center" :class="product.image ? 'bg-white' : 'bg-gradient-to-br from-purple-500 to-pink-500'">
-                      <img v-if="product.image" :src="product.image" :alt="product.name" class="w-full h-full object-cover" />
-                      <PackageIcon v-else class="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <p class="font-medium text-gray-900">{{ product.name }}</p>
-                      <p class="text-sm text-gray-600">{{ formatCategory(product.category) }}</p>
+            <div v-else-if="products.length > 0" class="block md:hidden divide-y divide-slate-100">
+              <div v-for="product in paginatedProducts" :key="product.id" class="p-4 hover:bg-slate-50/50 transition-colors">
+                <div class="flex items-center gap-3">
+                  <div class="w-14 h-14 rounded-xl overflow-hidden shadow-md flex items-center justify-center shrink-0 ring-2 ring-slate-100" :class="product.image ? 'bg-white' : 'bg-gradient-to-br from-purple-500 to-fuchsia-500'">
+                    <img v-if="product.image" :src="product.image" :alt="product.name" class="w-full h-full object-cover" />
+                    <PackageIcon v-else class="w-7 h-7 text-white" />
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-semibold text-slate-900 truncate">{{ product.name }}</p>
+                    <p class="text-sm text-slate-500">{{ formatCategory(product.category) }}</p>
+                    <div class="flex flex-wrap items-center gap-2 mt-1.5">
+                      <span class="px-2.5 py-0.5 rounded-lg text-xs font-semibold" :class="getStockLevelClass(product.stockLevel)">
+                        {{ formatStockLevel(product.stockLevel) }}
+                      </span>
+                      <span class="text-sm font-medium text-slate-700">₱{{ product.price.toLocaleString() }}</span>
                     </div>
                   </div>
-                </div>
-                <div class="flex flex-wrap gap-2 mt-2">
-                  <span class="px-2 py-1 rounded-full text-sm" :class="getStockLevelClass(product.stockLevel)">
-                    {{ formatStockLevel(product.stockLevel) }}
-                  </span>
-                  <span class="text-sm text-gray-600">
-                    Price: ₱{{ product.price.toLocaleString() }}
-                  </span>
                 </div>
               </div>
             </div>
@@ -289,49 +270,48 @@
             <div v-if="products.length > 0" class="hidden md:block overflow-x-auto">
               <table class="w-full">
                 <thead>
-                  <tr class="border-b border-gray-100">
-                    <th class="text-left p-4 text-sm font-medium text-gray-600">Product</th>
-                    <th class="text-left p-4 text-sm font-medium text-gray-600">Category</th>
-                    <th class="text-left p-4 text-sm font-medium text-gray-600">Stock Level</th>
-                    <th class="text-left p-4 text-sm font-medium text-gray-600">Price</th>
+                  <tr class="border-b border-slate-200 bg-slate-50/80">
+                    <th class="text-left p-4 text-xs font-semibold text-slate-600 uppercase tracking-wider">Product</th>
+                    <th class="text-left p-4 text-xs font-semibold text-slate-600 uppercase tracking-wider">Category</th>
+                    <th class="text-left p-4 text-xs font-semibold text-slate-600 uppercase tracking-wider">Stock Level</th>
+                    <th class="text-left p-4 text-xs font-semibold text-slate-600 uppercase tracking-wider">Price</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-if="loading" class="border-b border-gray-100">
-                    <td colspan="4" class="p-8 text-center">
-                      <LoaderIcon class="w-6 h-6 text-gray-400 animate-spin mx-auto" />
+                  <tr v-if="loading" class="border-b border-slate-100">
+                    <td colspan="4" class="p-10 text-center">
+                      <LoaderIcon class="w-6 h-6 text-purple-500 animate-spin mx-auto" />
                     </td>
                   </tr>
-                  <tr v-else-if="paginatedProducts.length === 0" class="border-b border-gray-100">
-                    <td colspan="4" class="p-8 text-center text-gray-600">
-                      No products found
+                  <tr v-else-if="paginatedProducts.length === 0" class="border-b border-slate-100">
+                    <td colspan="4" class="p-8 text-center text-slate-500 font-medium">
+                      No products match your filters
                     </td>
                   </tr>
-                  <tr v-for="product in paginatedProducts" :key="product.id" class="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
+                  <tr v-for="(product, idx) in paginatedProducts" :key="product.id" class="border-b border-slate-100 hover:bg-purple-50/30 transition-colors" :class="{ 'bg-slate-50/30': idx % 2 === 1 }">
                     <td class="p-4">
                       <div class="flex items-center gap-3">
-                        <!-- Updated to show product images instead of generic icons -->
-                        <div class="w-12 h-12 rounded-lg overflow-hidden shadow-lg flex items-center justify-center" :class="product.image ? 'bg-white' : 'bg-gradient-to-br from-purple-500 to-pink-500'">
+                        <div class="w-12 h-12 rounded-xl overflow-hidden shadow-md flex items-center justify-center ring-2 ring-slate-100 shrink-0" :class="product.image ? 'bg-white' : 'bg-gradient-to-br from-purple-500 to-fuchsia-500'">
                           <img v-if="product.image" :src="product.image" :alt="product.name" class="w-full h-full object-cover" />
                           <PackageIcon v-else class="w-6 h-6 text-white" />
                         </div>
                         <div>
-                          <p class="font-medium text-gray-900">{{ product.name }}</p>
-                          <p class="text-sm text-gray-600">SKU: {{ product.sku || 'N/A' }}</p>
+                          <p class="font-semibold text-slate-900">{{ product.name }}</p>
+                          <p class="text-sm text-slate-500">SKU: {{ product.sku || 'N/A' }}</p>
                         </div>
                       </div>
                     </td>
                     <td class="p-4">
-                      <span class="px-3 py-1 rounded-full text-sm bg-purple-100 text-purple-800 border border-purple-200">
+                      <span class="px-3 py-1.5 rounded-xl text-sm font-medium bg-purple-50 text-purple-800 border border-purple-100">
                         {{ formatCategory(product.category) }}
                       </span>
                     </td>
                     <td class="p-4">
-                      <span class="px-3 py-1 rounded-full text-sm" :class="getStockLevelClass(product.stockLevel)">
+                      <span class="px-3 py-1.5 rounded-xl text-sm font-semibold" :class="getStockLevelClass(product.stockLevel)">
                         {{ formatStockLevel(product.stockLevel) }}
                       </span>
                     </td>
-                    <td class="p-4 text-gray-900">
+                    <td class="p-4 font-semibold text-slate-900 tabular-nums">
                       ₱{{ product.price.toLocaleString() }}
                     </td>
                   </tr>
@@ -340,23 +320,23 @@
             </div>
 
             <!-- Pagination -->
-            <div v-if="products.length > 0" class="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-4 border-t border-gray-100">
-              <div class="flex items-center gap-2">
-                <select v-model="perPage" class="px-2 py-1 rounded-lg border border-gray-200 text-sm bg-white text-gray-900">
+            <div v-if="products.length > 0" class="flex flex-col sm:flex-row items-center justify-between gap-4 px-5 py-4 border-t border-slate-200 bg-slate-50/50">
+              <div class="flex items-center gap-3">
+                <select v-model="perPage" class="px-3 py-2 rounded-xl border border-slate-200 text-sm font-medium bg-white text-gray-900 focus:ring-2 focus:ring-purple-500/30 focus:border-purple-400">
                   <option value="10">10 per page</option>
                   <option value="25">25 per page</option>
                   <option value="50">50 per page</option>
                 </select>
-                <span class="text-sm text-gray-600">
-                  Showing {{ paginationStart }} - {{ paginationEnd }} of {{ filteredProducts.length }}
+                <span class="text-sm text-slate-600">
+                  Showing <span class="font-semibold text-slate-900">{{ paginationStart }}</span> – <span class="font-semibold text-slate-900">{{ paginationEnd }}</span> of <span class="font-semibold text-slate-900">{{ filteredProducts.length }}</span>
                 </span>
               </div>
               <div class="flex items-center gap-2">
-                <button @click="currentPage--" :disabled="currentPage === 1" class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-700">
+                <button @click="currentPage--" :disabled="currentPage === 1" class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed text-slate-700 transition-colors">
                   <ChevronLeftIcon class="w-5 h-5" />
                 </button>
-                <span class="text-sm text-gray-700">Page {{ currentPage }} of {{ totalPages || 1 }}</span>
-                <button @click="currentPage++" :disabled="currentPage >= totalPages" class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-700">
+                <span class="text-sm font-medium text-slate-700 min-w-[120px] text-center">Page {{ currentPage }} of {{ totalPages || 1 }}</span>
+                <button @click="currentPage++" :disabled="currentPage >= totalPages" class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed text-slate-700 transition-colors">
                   <ChevronRightIcon class="w-5 h-5" />
                 </button>
               </div>

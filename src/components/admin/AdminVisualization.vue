@@ -1,17 +1,18 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
-    <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-200 to-blue-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+  <div class="min-h-screen bg-gradient-to-b from-slate-50 via-indigo-50/30 to-slate-100/80 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="absolute top-0 right-0 w-[480px] h-[480px] bg-gradient-to-br from-indigo-200/30 to-purple-200/25 rounded-full filter blur-3xl transform translate-x-1/4 -translate-y-1/4"></div>
+      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-br from-violet-200/25 to-indigo-200/20 rounded-full filter blur-3xl transform -translate-x-1/4 translate-y-1/4"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(99,102,241,0.08),transparent)]"></div>
     </div>
 
     <div class="relative z-10 flex flex-col lg:flex-row h-screen">
       <!-- Mobile Header -->
-      <div class="lg:hidden bg-white/90 backdrop-blur-sm border-b border-gray-200 p-4 flex items-center justify-between shadow-sm">
+      <div class="lg:hidden bg-white/95 backdrop-blur-sm border-b border-gray-200 p-4 flex items-center justify-between shadow-sm">
         <div>
           <h1 class="text-lg font-bold text-gray-900">Barcelona Paint Center</h1>
-          <div class="text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-2 py-1 rounded-full inline-flex items-center mt-1">
-            <ShieldIcon class="h-3 w-3 mr-1" />
+          <div class="text-xs text-white bg-gradient-to-r from-indigo-500 to-purple-600 px-2.5 py-1.5 rounded-lg inline-flex items-center mt-1 font-medium">
+            <ShieldIcon class="h-3.5 w-3.5 mr-1" />
             Admin Portal
           </div>
         </div>
@@ -27,8 +28,8 @@
         <div class="fixed inset-y-0 left-0 w-64 bg-white shadow-xl" @click.stop>
           <div class="p-4 border-b border-gray-200">
             <h1 class="text-lg font-bold text-gray-900">Barcelona Paint Center</h1>
-            <div class="text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-2 py-1 rounded-full inline-flex items-center mt-1">
-              <ShieldIcon class="h-3 w-3 mr-1" />
+            <div class="text-xs text-white bg-gradient-to-r from-indigo-500 to-purple-600 px-2.5 py-1.5 rounded-lg inline-flex items-center mt-1 font-medium">
+              <ShieldIcon class="h-3.5 w-3.5 mr-1" />
               Admin Portal
             </div>
           </div>
@@ -69,7 +70,7 @@
               <span class="text-base">Sales Analytics</span>
             </router-link>
 
-            <router-link to="/admin/visualization" @click="toggleMobileMenu" class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 shadow-sm border border-indigo-200">
+            <router-link to="/admin/visualization" @click="toggleMobileMenu" class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 shadow-sm border-l-4 border-indigo-500">
               <BarChart3Icon class="w-5 h-5 flex-shrink-0" />
               <span class="text-base">Data Visualization</span>
             </router-link>
@@ -80,9 +81,9 @@
             </router-link>
           </nav>
 
-          <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50">
+          <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-gradient-to-r from-indigo-50 to-purple-50">
             <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg flex-shrink-0">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-md flex-shrink-0">
                 <UserIcon class="w-5 h-5 text-white" />
               </div>
               <div class="flex-1 min-w-0">
@@ -98,65 +99,63 @@
       </div>
 
       <!-- Desktop Sidebar -->
-      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden lg:flex lg:flex-col shadow-lg">
-        <div class="p-4 xl:p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-2 xl:px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <ShieldIcon class="h-3 w-3 mr-1" />
+      <aside class="w-64 bg-white/95 backdrop-blur-sm border-r border-gray-200/80 hidden lg:flex lg:flex-col shadow-sm">
+        <div class="p-4 xl:p-5 border-b border-gray-100 flex-shrink-0">
+          <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight tracking-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-indigo-500 to-purple-600 px-2.5 xl:px-3 py-1.5 rounded-lg inline-flex items-center shadow-sm font-medium">
+            <ShieldIcon class="h-3.5 w-3.5 mr-1.5 flex-shrink-0" />
             Admin Portal
           </div>
         </div>
 
-        <nav class="flex-1 p-3 xl:p-4 space-y-1 xl:space-y-2 overflow-y-auto">
+        <nav class="flex-1 p-3 xl:p-4 space-y-1 overflow-y-auto">
           <router-link 
             to="/admin/dashboard" 
-            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
           >
             <LayoutDashboardIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Dashboard</span>
           </router-link>
 
-          <router-link to="/admin/staff" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700">
+          <router-link to="/admin/staff" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700">
             <UsersIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Staff Management</span>
           </router-link>
 
-          <router-link to="/admin/inventory" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700">
+          <router-link to="/admin/inventory" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700">
             <PackageIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Inventory</span>
           </router-link>
 
-          <router-link to="/admin/house-paint-recommender" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700">
+          <router-link to="/admin/house-paint-recommender" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700">
             <HomeIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Paint Recommender</span>
           </router-link>
 
-          <router-link to="/admin/paint-mixing" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700">
+          <router-link to="/admin/paint-mixing" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700">
             <PaletteIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Paint Mixing</span>
           </router-link>
 
-          <router-link to="/admin/sales-analytics" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700">
+          <router-link to="/admin/sales-analytics" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700">
             <TrendingUpIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Sales Analytics</span>
           </router-link>
 
-          <router-link to="/admin/visualization" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 shadow-sm border border-indigo-200">
+          <router-link to="/admin/visualization" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700 shadow-sm border-l-4 border-indigo-500">
             <BarChart3Icon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Data Visualization</span>
           </router-link>
 
-          <router-link to="/admin/settings" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700">
+          <router-link to="/admin/settings" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700">
             <SettingsIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Settings</span>
           </router-link>
         </nav>
 
-        <div class="p-3 xl:p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
-          <div class="flex items-center gap-2 xl:gap-3">
-            <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg flex-shrink-0">
+        <div class="p-4 border-t border-gray-100 bg-gradient-to-r from-indigo-50/80 to-purple-50/80 backdrop-blur-sm flex-shrink-0">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-md flex-shrink-0">
               <UserIcon class="w-4 xl:w-5 h-4 xl:h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
@@ -172,60 +171,65 @@
 
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
-        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-4 shadow-sm">
+        <header class="relative bg-white/80 backdrop-blur-md border-b border-gray-200/90 px-4 sm:px-6 lg:px-8 py-5 shadow-sm">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div class="lg:pl-0">
-              <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Data Visualization</h1>
-              <p class="text-sm sm:text-base text-gray-600">Visual analytics and business insights</p>
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/25">
+                <BarChart3Icon class="w-7 h-7 text-white" />
+              </div>
+              <div>
+                <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">Data Visualization</h1>
+                <p class="text-sm sm:text-base text-gray-500 mt-0.5">Visual analytics and business insights</p>
+              </div>
             </div>
-            <!-- Updated to match AdminDashboard header format with calendar icon, proper date formatting, and dynamic user name -->
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-              <div class="flex items-center gap-2 text-gray-700 text-sm sm:text-base">
-                <CalendarIcon class="w-4 sm:w-5 h-4 sm:h-5 text-blue-500 flex-shrink-0" />
+              <div class="flex items-center gap-2 px-3 py-2 rounded-xl bg-indigo-50/80 border border-indigo-100 text-indigo-700 text-sm font-medium">
+                <CalendarIcon class="w-4 h-4 flex-shrink-0" />
                 <span class="truncate">{{ currentDate }}</span>
               </div>
-              <div class="hidden sm:block h-6 w-px bg-gray-300"></div>
+              <div class="hidden sm:block h-8 w-px bg-gray-200"></div>
               <div class="flex items-center gap-3">
-                <span class="text-sm sm:text-base text-gray-900 truncate">Welcome, {{ userDisplayName || 'Admin' }}</span>
-                <div class="relative">
-                  <BellIcon class="w-5 h-5 text-orange-500 cursor-pointer hover:text-orange-600 flex-shrink-0" />
-                </div>
+                <span class="text-sm text-gray-700 truncate">Welcome, <strong class="text-gray-900">{{ userDisplayName || 'Admin' }}</strong></span>
+                <button class="p-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-colors">
+                  <BellIcon class="w-5 h-5" />
+                </button>
               </div>
             </div>
           </div>
         </header>
 
-        <!-- Enhanced controls section with better UI and TODAY option -->
-        <div class="bg-gradient-to-r from-white to-gray-50 border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-4">
+        <!-- Controls: time range + refresh -->
+        <div class="bg-white/60 backdrop-blur-sm border-b border-gray-200/80 px-4 sm:px-6 lg:px-8 py-4">
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 justify-between">
-            <div class="flex items-center gap-2">
-              <CalendarIcon class="w-5 h-5 text-indigo-600" />
-              <h3 class="text-lg font-semibold text-gray-800">Analytics Dashboard</h3>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center">
+                <CalendarIcon class="w-5 h-5 text-indigo-600" />
+              </div>
+              <div>
+                <h3 class="text-base font-semibold text-gray-900">Analytics Dashboard</h3>
+                <p class="text-xs text-gray-500">Select period and refresh to update charts</p>
+              </div>
             </div>
-            
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-              <!-- Enhanced dropdown with TODAY option and better styling -->
+            <div class="flex flex-wrap items-center gap-3">
               <div class="relative">
                 <select 
                   v-model="selectedRange" 
                   @change="fetchSalesData"
-                  class="appearance-none px-4 py-2.5 pr-10 bg-white border-2 border-gray-200 rounded-xl text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 hover:border-gray-300 transition-all duration-200 w-full sm:w-auto shadow-sm"
+                  class="appearance-none pl-4 pr-10 py-3 bg-white border-2 border-gray-200 rounded-xl text-sm font-medium text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-400 hover:border-indigo-200 transition-all duration-200 w-full sm:w-auto shadow-sm min-w-[160px]"
                 >
-                  <option value="today">📅 Today</option>
-                  <option value="7d">📊 Last 7 days</option>
-                  <option value="30d">📈 Last 30 days</option>
-                  <option value="3m">📉 Last 3 months</option>
-                  <option value="1y">🗓️ Last year</option>
+                  <option value="today">Today</option>
+                  <option value="7d">Last 7 days</option>
+                  <option value="30d">Last 30 days</option>
+                  <option value="3m">Last 3 months</option>
+                  <option value="1y">Last year</option>
                 </select>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <ChevronDownIcon class="w-4 h-4 text-gray-400" />
+                  <ChevronDownIcon class="w-4 h-4 text-indigo-500" />
                 </div>
               </div>
-              
-              <!-- Enhanced refresh button with better styling -->
               <button 
                 @click="refreshData" 
-                class="flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 w-full sm:w-auto shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 font-medium"
+                class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-semibold shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
               >
                 <RefreshCwIcon class="w-4 h-4" />
                 <span>Refresh Data</span>
@@ -234,105 +238,121 @@
           </div>
         </div>
 
-        <div class="p-3 sm:p-4 lg:p-6 xl:p-8">
+        <div class="p-4 sm:p-6 lg:p-8">
           <!-- Loading State -->
-          <div v-if="loading" class="flex items-center justify-center py-12">
-            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
-            <span class="ml-2 text-gray-600">Loading data...</span>
+          <div v-if="loading" class="flex flex-col items-center justify-center py-20">
+            <div class="w-14 h-14 rounded-2xl bg-indigo-100 flex items-center justify-center mb-4">
+              <div class="animate-spin rounded-full h-8 w-8 border-2 border-indigo-500 border-t-transparent"></div>
+            </div>
+            <p class="text-gray-600 font-medium">Loading analytics...</p>
+            <p class="text-sm text-gray-400 mt-1">Fetching sales data and building charts</p>
+            <p v-if="loadProgress" class="text-xs text-indigo-500 mt-2">{{ loadProgress.loaded.toLocaleString() }} records loaded (batch {{ loadProgress.batches }})</p>
           </div>
 
           <!-- Error State -->
-          <div v-else-if="error" class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-            <p class="text-red-800">{{ error }}</p>
-            <button @click="fetchSalesData" class="mt-2 text-red-600 hover:text-red-800 underline">Try again</button>
+          <div v-else-if="error" class="max-w-xl mx-auto bg-white rounded-2xl border-2 border-red-200 shadow-lg p-6 sm:p-8 text-center">
+            <div class="w-14 h-14 rounded-2xl bg-red-100 flex items-center justify-center mx-auto mb-4">
+              <AlertTriangle class="w-7 h-7 text-red-600" />
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Couldn't load data</h3>
+            <p class="text-red-700 text-sm mb-4">{{ error }}</p>
+            <button @click="fetchSalesData" class="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition-colors">
+              Try again
+            </button>
           </div>
 
           <!-- Content -->
-          <div v-else>
+          <div v-else class="space-y-6 lg:space-y-8">
             <!-- Summary Cards -->
-            <!-- Improved responsive grid for summary cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 lg:mb-8">
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6">
-                <div class="flex items-center justify-between">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6">
+              <div class="group bg-white rounded-2xl border border-gray-200/90 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 hover:border-emerald-200 transition-all duration-300 p-5 sm:p-6 overflow-hidden relative">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-emerald-400/20 to-transparent rounded-bl-full"></div>
+                <div class="flex items-start justify-between relative">
                   <div class="min-w-0 flex-1">
-                    <p class="text-xs sm:text-sm font-medium text-gray-600 truncate">Total Revenue</p>
-                    <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ formatCurrency(totalRevenue) }}</p>
-                    <p class="text-xs sm:text-sm text-green-600 mt-1">+12.5% from last period</p>
+                    <p class="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider">Total Revenue</p>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-900 mt-1 truncate">{{ formatCurrency(totalRevenue) }}</p>
+                    <p class="text-xs sm:text-sm text-emerald-600 font-medium mt-2 flex items-center gap-1">+12.5% vs last period</p>
                   </div>
-                  <div class="p-2 sm:p-3 bg-green-100 rounded-full flex-shrink-0 ml-2">
-                    <DollarSignIcon class="w-4 sm:w-6 h-4 sm:h-6 text-green-600" />
+                  <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/30 flex-shrink-0 ml-3 group-hover:scale-110 transition-transform duration-300">
+                    <DollarSignIcon class="w-6 h-6 text-white" />
                   </div>
                 </div>
               </div>
 
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6">
-                <div class="flex items-center justify-between">
+              <div class="group bg-white rounded-2xl border border-gray-200/90 shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-200 transition-all duration-300 p-5 sm:p-6 overflow-hidden relative">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-400/20 to-transparent rounded-bl-full"></div>
+                <div class="flex items-start justify-between relative">
                   <div class="min-w-0 flex-1">
-                    <p class="text-xs sm:text-sm font-medium text-gray-600 truncate">Total Orders</p>
-                    <p class="text-lg sm:text-xl font-bold text-gray-900">{{ formatLargeNumber(totalOrders) }}</p>
-                    <p class="text-xs sm:text-sm text-blue-600 mt-1">+8.3% from last period</p>
+                    <p class="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider">Total Orders</p>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-900 mt-1">{{ formatLargeNumber(totalOrders) }}</p>
+                    <p class="text-xs sm:text-sm text-blue-600 font-medium mt-2 flex items-center gap-1">+8.3% vs last period</p>
                   </div>
-                  <div class="p-2 sm:p-3 bg-blue-100 rounded-full flex-shrink-0 ml-2">
-                    <ShoppingCartIcon class="w-4 sm:w-6 h-4 sm:h-6 text-blue-600" />
+                  <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30 flex-shrink-0 ml-3 group-hover:scale-110 transition-transform duration-300">
+                    <ShoppingCartIcon class="w-6 h-6 text-white" />
                   </div>
                 </div>
               </div>
 
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6">
-                <div class="flex items-center justify-between">
+              <div class="group bg-white rounded-2xl border border-gray-200/90 shadow-sm hover:shadow-xl hover:shadow-purple-500/10 hover:border-purple-200 transition-all duration-300 p-5 sm:p-6 overflow-hidden relative">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-purple-400/20 to-transparent rounded-bl-full"></div>
+                <div class="flex items-start justify-between relative">
                   <div class="min-w-0 flex-1">
-                    <p class="text-xs sm:text-sm font-medium text-gray-600 truncate">Products Sold</p>
-                    <p class="text-lg sm:text-xl font-bold text-gray-900">{{ formatLargeNumber(totalProductsSold) }}</p>
-                    <p class="text-xs sm:text-sm text-purple-600 mt-1">+15.7% from last period</p>
+                    <p class="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider">Products Sold</p>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-900 mt-1">{{ formatLargeNumber(totalProductsSold) }}</p>
+                    <p class="text-xs sm:text-sm text-purple-600 font-medium mt-2 flex items-center gap-1">+15.7% vs last period</p>
                   </div>
-                  <div class="p-2 sm:p-3 bg-purple-100 rounded-full flex-shrink-0 ml-2">
-                    <PackageIcon class="w-4 sm:w-6 h-4 sm:h-6 text-purple-600" />
+                  <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30 flex-shrink-0 ml-3 group-hover:scale-110 transition-transform duration-300">
+                    <PackageIcon class="w-6 h-6 text-white" />
                   </div>
                 </div>
               </div>
 
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6">
-                <div class="flex items-center justify-between">
+              <div class="group bg-white rounded-2xl border border-gray-200/90 shadow-sm hover:shadow-xl hover:shadow-amber-500/10 hover:border-amber-200 transition-all duration-300 p-5 sm:p-6 overflow-hidden relative">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-amber-400/20 to-transparent rounded-bl-full"></div>
+                <div class="flex items-start justify-between relative">
                   <div class="min-w-0 flex-1">
-                    <p class="text-xs sm:text-sm font-medium text-gray-600 truncate">Avg Order Value</p>
-                    <p class="text-lg sm:text-xl font-bold text-gray-900 truncate">{{ formatCurrency(averageOrderValue) }}</p>
-                    <p class="text-xs sm:text-sm text-orange-600 mt-1">+3.2% from last period</p>
+                    <p class="text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-wider">Avg Order Value</p>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-900 mt-1 truncate">{{ formatCurrency(averageOrderValue) }}</p>
+                    <p class="text-xs sm:text-sm text-amber-600 font-medium mt-2 flex items-center gap-1">+3.2% vs last period</p>
                   </div>
-                  <div class="p-2 sm:p-3 bg-orange-100 rounded-full flex-shrink-0 ml-2">
-                    <TrendingUpIcon class="w-4 sm:w-6 h-4 sm:h-6 text-orange-600" />
+                  <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/30 flex-shrink-0 ml-3 group-hover:scale-110 transition-transform duration-300">
+                    <TrendingUpIcon class="w-6 h-6 text-white" />
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Charts Section -->
-            <!-- Made charts responsive with better mobile layout -->
-            <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 mb-6 lg:mb-8">
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6">
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6">
+              <div class="bg-white rounded-2xl border border-gray-200/90 shadow-sm hover:shadow-lg transition-shadow duration-300 p-5 sm:p-6">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
-                  <h3 class="text-base sm:text-lg font-bold text-gray-900">Daily Sales Trend</h3>
-                  <div class="flex items-center gap-2">
-                    <button @click="toggleSalesChartType" class="text-xs sm:text-sm text-blue-600 hover:text-blue-800 px-2 py-1 rounded">
-                      {{ salesChartType === 'line' ? 'Bar View' : 'Line View' }}
-                    </button>
-                  </div>
+                  <h3 class="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-indigo-500 rounded-full"></span>
+                    Daily Sales Trend
+                  </h3>
+                  <button @click="toggleSalesChartType" class="text-xs sm:text-sm font-medium text-indigo-600 hover:text-indigo-800 hover:bg-indigo-50 px-3 py-2 rounded-xl transition-colors">
+                    {{ salesChartType === 'line' ? 'Bar View' : 'Line View' }}
+                  </button>
                 </div>
-                <div class="h-48 sm:h-64 relative">
+                <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50">
                   <canvas ref="salesChart" class="w-full h-full"></canvas>
-                  <div v-if="dailySales.length === 0" class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm text-center px-4">
+                  <div v-if="dailySales.length === 0" class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm text-center px-4 rounded-xl bg-gray-50/80">
                     No sales data available for the selected period
                   </div>
                 </div>
               </div>
 
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6">
+              <div class="bg-white rounded-2xl border border-gray-200/90 shadow-sm hover:shadow-lg transition-shadow duration-300 p-5 sm:p-6">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
-                  <h3 class="text-base sm:text-lg font-bold text-gray-900">Sales by Category</h3>
-                  <span class="text-xs sm:text-sm text-gray-600">{{ salesByCategory.length }} categories</span>
+                  <h3 class="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-purple-500 rounded-full"></span>
+                    Sales by Category
+                  </h3>
+                  <span class="text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1.5 rounded-lg">{{ salesByCategory.length }} categories</span>
                 </div>
-                <div class="h-48 sm:h-64 relative">
+                <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50">
                   <canvas ref="categoryChart" class="w-full h-full"></canvas>
-                  <div v-if="salesByCategory.length === 0" class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm text-center px-4">
+                  <div v-if="salesByCategory.length === 0" class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm text-center px-4 rounded-xl bg-gray-50/80">
                     No category data available
                   </div>
                 </div>
@@ -340,28 +360,34 @@
             </div>
 
             <!-- Additional Charts -->
-            <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 mb-6 lg:mb-8">
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6">
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6">
+              <div class="bg-white rounded-2xl border border-gray-200/90 shadow-sm hover:shadow-lg transition-shadow duration-300 p-5 sm:p-6">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
-                  <h3 class="text-base sm:text-lg font-bold text-gray-900">Top Products Performance</h3>
-                  <span class="text-xs sm:text-sm text-gray-600">Top {{ topProducts.length }} products</span>
+                  <h3 class="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-emerald-500 rounded-full"></span>
+                    Top Products Performance
+                  </h3>
+                  <span class="text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1.5 rounded-lg">Top {{ topProducts.length }} products</span>
                 </div>
-                <div class="h-48 sm:h-64 relative">
+                <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50">
                   <canvas ref="productsChart" class="w-full h-full"></canvas>
-                  <div v-if="topProducts.length === 0" class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm text-center px-4">
+                  <div v-if="topProducts.length === 0" class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm text-center px-4 rounded-xl bg-gray-50/80">
                     No product sales data available
                   </div>
                 </div>
               </div>
 
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6">
+              <div class="bg-white rounded-2xl border border-gray-200/90 shadow-sm hover:shadow-lg transition-shadow duration-300 p-5 sm:p-6">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
-                  <h3 class="text-base sm:text-lg font-bold text-gray-900">Payment Methods Distribution</h3>
-                  <span class="text-xs sm:text-sm text-gray-600">{{ totalOrders }} transactions</span>
+                  <h3 class="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-amber-500 rounded-full"></span>
+                    Payment Methods Distribution
+                  </h3>
+                  <span class="text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1.5 rounded-lg">{{ totalOrders }} transactions</span>
                 </div>
-                <div class="h-48 sm:h-64 relative">
+                <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50">
                   <canvas ref="paymentChart" class="w-full h-full"></canvas>
-                  <div v-if="sales.length === 0" class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm text-center px-4">
+                  <div v-if="sales.length === 0" class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm text-center px-4 rounded-xl bg-gray-50/80">
                     No payment data available
                   </div>
                 </div>
@@ -369,75 +395,83 @@
             </div>
 
             <!-- Monthly Comparison Chart -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6 mb-6 lg:mb-8">
+            <div class="bg-white rounded-2xl border border-gray-200/90 shadow-sm hover:shadow-lg transition-shadow duration-300 p-5 sm:p-6">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
-                <h3 class="text-base sm:text-lg font-bold text-gray-900">Monthly Revenue Comparison</h3>
-                <span class="text-xs sm:text-sm text-gray-600">Last 12 months</span>
+                <h3 class="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-2">
+                  <span class="w-1 h-6 bg-violet-500 rounded-full"></span>
+                  Monthly Revenue Comparison
+                </h3>
+                <span class="text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1.5 rounded-lg">Last 12 months</span>
               </div>
-              <div class="h-48 sm:h-64 relative">
+              <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50">
                 <canvas ref="monthlyChart" class="w-full h-full"></canvas>
               </div>
             </div>
 
             <!-- Data Tables -->
-            <!-- Made data tables responsive with horizontal scrolling on mobile -->
-            <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6">
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6">
+              <div class="bg-white rounded-2xl border border-gray-200/90 shadow-sm hover:shadow-lg transition-shadow duration-300 p-5 sm:p-6">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
-                  <h3 class="text-base sm:text-lg font-bold text-gray-900">Top Selling Products</h3>
-                  <button @click="exportProductData" class="text-xs sm:text-sm text-blue-600 hover:text-blue-800 px-2 py-1 rounded self-start sm:self-auto">
+                  <h3 class="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-indigo-500 rounded-full"></span>
+                    Top Selling Products
+                  </h3>
+                  <button @click="exportProductData" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-indigo-600 hover:text-indigo-800 hover:bg-indigo-50 px-3 py-2 rounded-xl transition-colors">
                     Export Data
                   </button>
                 </div>
-                <div class="space-y-2 sm:space-y-3 max-h-60 sm:max-h-80 overflow-y-auto">
-                  <div v-for="(product, index) in topProducts" :key="product.id" class="flex items-center justify-between p-2 sm:p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                    <div class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-                      <div class="w-5 h-5 sm:w-6 sm:h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold flex-shrink-0">
+                <div class="space-y-2 max-h-60 sm:max-h-80 overflow-y-auto pr-1">
+                  <div v-for="(product, index) in topProducts" :key="product.id" class="flex items-center justify-between p-3 rounded-xl bg-gray-50/80 hover:bg-indigo-50/50 border border-transparent hover:border-indigo-100 transition-all duration-200">
+                    <div class="flex items-center gap-3 min-w-0 flex-1">
+                      <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 text-white flex items-center justify-center text-sm font-bold flex-shrink-0 shadow-sm">
                         {{ index + 1 }}
                       </div>
                       <div class="min-w-0 flex-1">
-                        <p class="font-medium text-gray-900 text-sm sm:text-base truncate">{{ product.name }}</p>
-                        <p class="text-xs sm:text-sm text-gray-600 truncate">{{ product.category }}</p>
+                        <p class="font-semibold text-gray-900 text-sm sm:text-base truncate">{{ product.name }}</p>
+                        <p class="text-xs text-gray-500 truncate">{{ product.category }}</p>
                       </div>
                     </div>
-                    <div class="text-right flex-shrink-0 ml-2">
-                      <p class="font-bold text-gray-900 text-sm sm:text-base">{{ formatLargeNumber(product.units) }} sold</p>
-                      <p class="text-xs sm:text-sm text-green-600">{{ formatCurrency(product.revenue) }}</p>
+                    <div class="text-right flex-shrink-0 ml-3">
+                      <p class="font-bold text-gray-900 text-sm">{{ formatLargeNumber(product.units) }} sold</p>
+                      <p class="text-xs font-medium text-emerald-600">{{ formatCurrency(product.revenue) }}</p>
                     </div>
                   </div>
-                  <div v-if="topProducts.length === 0" class="text-center py-6 sm:py-8 text-gray-500">
-                    <PackageIcon class="w-8 sm:w-12 h-8 sm:h-12 mx-auto mb-2 text-gray-300" />
-                    <p class="text-sm">No product data available</p>
+                  <div v-if="topProducts.length === 0" class="text-center py-10 text-gray-500 rounded-xl bg-gray-50/80">
+                    <PackageIcon class="w-10 h-10 mx-auto mb-2 text-gray-300" />
+                    <p class="text-sm font-medium">No product data available</p>
                   </div>
                 </div>
               </div>
 
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6">
+              <div class="bg-white rounded-2xl border border-gray-200/90 shadow-sm hover:shadow-lg transition-shadow duration-300 p-5 sm:p-6">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
-                  <h3 class="text-base sm:text-lg font-bold text-gray-900">Sales by Category</h3>
-                  <button @click="exportCategoryData" class="text-xs sm:text-sm text-blue-600 hover:text-blue-800 px-2 py-1 rounded self-start sm:self-auto">
+                  <h3 class="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-purple-500 rounded-full"></span>
+                    Sales by Category
+                  </h3>
+                  <button @click="exportCategoryData" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-purple-600 hover:text-purple-800 hover:bg-purple-50 px-3 py-2 rounded-xl transition-colors">
                     Export Data
                   </button>
                 </div>
-                <div class="space-y-2 sm:space-y-3 max-h-60 sm:max-h-80 overflow-y-auto">
-                  <div v-for="(category, index) in salesByCategory" :key="category.name" class="flex items-center justify-between p-2 sm:p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                    <div class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-                      <div class="w-5 h-5 sm:w-6 sm:h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold flex-shrink-0">
+                <div class="space-y-2 max-h-60 sm:max-h-80 overflow-y-auto pr-1">
+                  <div v-for="(category, index) in salesByCategory" :key="category.name" class="flex items-center justify-between p-3 rounded-xl bg-gray-50/80 hover:bg-purple-50/50 border border-transparent hover:border-purple-100 transition-all duration-200">
+                    <div class="flex items-center gap-3 min-w-0 flex-1">
+                      <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 text-white flex items-center justify-center text-sm font-bold flex-shrink-0 shadow-sm">
                         {{ index + 1 }}
                       </div>
                       <div class="min-w-0 flex-1">
-                        <p class="font-medium text-gray-900 text-sm sm:text-base truncate">{{ category.name }}</p>
-                        <p class="text-xs sm:text-sm text-gray-600">{{ formatLargeNumber(category.units) }} units sold</p>
+                        <p class="font-semibold text-gray-900 text-sm sm:text-base truncate">{{ category.name }}</p>
+                        <p class="text-xs text-gray-500">{{ formatLargeNumber(category.units) }} units sold</p>
                       </div>
                     </div>
-                    <div class="text-right flex-shrink-0 ml-2">
-                      <p class="font-bold text-gray-900 text-sm sm:text-base">{{ formatCurrency(category.revenue) }}</p>
-                      <p class="text-xs sm:text-sm text-blue-600">{{ formatLargeNumber(category.orders) }} orders</p>
+                    <div class="text-right flex-shrink-0 ml-3">
+                      <p class="font-bold text-gray-900 text-sm">{{ formatCurrency(category.revenue) }}</p>
+                      <p class="text-xs font-medium text-blue-600">{{ formatLargeNumber(category.orders) }} orders</p>
                     </div>
                   </div>
-                  <div v-if="salesByCategory.length === 0" class="text-center py-6 sm:py-8 text-gray-500">
-                    <BarChart3Icon class="w-8 sm:w-12 h-8 sm:h-12 mx-auto mb-2 text-gray-300" />
-                    <p class="text-sm">No category data available</p>
+                  <div v-if="salesByCategory.length === 0" class="text-center py-10 text-gray-500 rounded-xl bg-gray-50/80">
+                    <BarChart3Icon class="w-10 h-10 mx-auto mb-2 text-gray-300" />
+                    <p class="text-sm font-medium">No category data available</p>
                   </div>
                 </div>
               </div>
@@ -469,9 +503,10 @@ import {
   ShoppingCart as ShoppingCartIcon,
   Calendar as CalendarIcon,
   Bell as BellIcon,
-  ChevronDown as ChevronDownIcon
+  ChevronDown as ChevronDownIcon,
+  AlertTriangle
 } from 'lucide-vue-next'
-import { collection, query, getDocs, orderBy, onSnapshot, where } from 'firebase/firestore'
+import { collection, query, getDocs, orderBy, limit, startAfter } from 'firebase/firestore'
 import { db, auth } from '../../config/firebase'
 import { signOut } from 'firebase/auth'
 import Chart from 'chart.js/auto'
@@ -501,15 +536,17 @@ const monthlySales = ref([])
 const pageSize = ref(100)
 const currentPage = ref(0)
 const totalSalesCount = ref(0)
+const loadProgress = ref(null) // { loaded: number, batches: number } when loading in batches
 
 const dataCache = new Map()
 const calculationCache = new Map()
+const BATCH_SIZE = 3000
+const MAX_TOTAL_SALES = 200000
 let salesChartInstance = null
 let categoryChartInstance = null
 let productsChartInstance = null
 let paymentChartInstance = null
 let monthlyChartInstance = null
-let unsubscribe = null
 
 const toggleMobileMenu = () => {
   showMobileMenu.value = !showMobileMenu.value
@@ -566,10 +603,18 @@ const fetchUserInfo = () => {
   }
 }
 
+const normalizeSaleDate = (dateVal) => {
+  if (!dateVal) return new Date()
+  if (typeof dateVal.toDate === 'function') return dateVal.toDate()
+  if (dateVal instanceof Date) return dateVal
+  return new Date(dateVal)
+}
+
 const fetchSalesData = async () => {
   try {
     loading.value = true
     error.value = null
+    loadProgress.value = { loaded: 0, batches: 0 }
 
     const { startDate, endDate } = getDateRange()
     const cacheKey = `${selectedRange.value}_${startDate.getTime()}`
@@ -577,73 +622,68 @@ const fetchSalesData = async () => {
     if (dataCache.has(cacheKey)) {
       const cachedData = dataCache.get(cacheKey)
       sales.value = cachedData
+      totalSalesCount.value = cachedData.length
+      loadProgress.value = null
       processData(cachedData)
       loading.value = false
+      nextTick(() => createCharts())
       return
     }
 
     const salesRef = collection(db, 'sales')
-    const q = query(salesRef, orderBy('date', 'desc'))
+    const salesData = []
+    let lastDoc = null
+    let batchNum = 0
 
-    if (unsubscribe) {
-      unsubscribe()
-    }
+    while (true) {
+      batchNum += 1
+      let q = query(salesRef, orderBy('date', 'desc'), limit(BATCH_SIZE))
+      if (lastDoc) q = query(salesRef, orderBy('date', 'desc'), startAfter(lastDoc), limit(BATCH_SIZE))
 
-    unsubscribe = onSnapshot(q, (snapshot) => {
-      const salesData = []
-      let revenue = 0
-      let productsSold = 0
-      
-      snapshot.forEach((doc) => {
-        const data = doc.data()
-        const sale = { 
-          id: doc.id,
-          orderId: data.orderId || `ORD-${doc.id.substring(0, 8)}`,
+      const snapshot = await getDocs(q)
+      if (snapshot.empty) break
+
+      let passedRange = false
+      snapshot.docs.forEach((docSnap) => {
+        const data = docSnap.data()
+        const sale = {
+          id: docSnap.id,
+          orderId: data.orderId || `ORD-${docSnap.id.substring(0, 8)}`,
           customerName: data.customerName || 'Unknown Customer',
-          products: data.products || [],
+          products: Array.isArray(data.products) ? data.products : [],
           total: Number(data.total) || 0,
           status: data.status || 'completed',
           paymentMethod: data.paymentMethod || 'cash',
-          date: data.date
+          date: normalizeSaleDate(data.date)
         }
-        
-        if (sale.date && typeof sale.date.toDate === 'function') {
-          sale.date = sale.date.toDate()
-        } else if (!sale.date) {
-          sale.date = new Date()
+
+        if (sale.date < startDate) {
+          passedRange = true
+          return
         }
-        
         if (sale.date >= startDate && sale.date <= endDate) {
           salesData.push(sale)
-          revenue += Number(sale.total) || 0
-          
-          const soldItems = sale.products?.reduce((sum, product) => {
-            return sum + (Number(product.quantity) || 0)
-          }, 0) || 0
-          
-          productsSold += soldItems
         }
       })
 
-      dataCache.set(cacheKey, salesData)
-      sales.value = salesData
-      totalSalesCount.value = salesData.length
-      
-      processData(salesData)
-      loading.value = false
-      
-      nextTick(() => {
-        createCharts()
-      })
-    }, (err) => {
-      console.error('Error fetching sales:', err)
-      error.value = 'Failed to load sales data: ' + err.message
-      loading.value = false
-    })
+      loadProgress.value = { loaded: salesData.length, batches: batchNum }
+      lastDoc = snapshot.docs[snapshot.docs.length - 1]
 
+      if (passedRange || snapshot.docs.length < BATCH_SIZE) break
+      if (salesData.length >= MAX_TOTAL_SALES) break
+    }
+
+    loadProgress.value = null
+    dataCache.set(cacheKey, salesData)
+    sales.value = salesData
+    totalSalesCount.value = salesData.length
+    processData(salesData)
+    loading.value = false
+    nextTick(() => createCharts())
   } catch (err) {
     console.error('Error in fetchSalesData:', err)
-    error.value = 'Failed to fetch sales data: ' + err.message
+    error.value = 'Failed to fetch sales data: ' + (err?.message ?? 'Unknown error')
+    loadProgress.value = null
     loading.value = false
   }
 }
@@ -667,7 +707,7 @@ const processData = (salesData) => {
   let revenue = 0
   let productsSold = 0
   
-  const maxProcessRecords = 50000
+  const maxProcessRecords = 200000
   const recordsToProcess = salesData.slice(0, maxProcessRecords)
   
   recordsToProcess.forEach(sale => {
@@ -706,6 +746,7 @@ const calculateTopProducts = (salesData) => {
   const productMap = new Map()
   
   salesData.forEach(sale => {
+    if (!sale.products || !Array.isArray(sale.products)) return
     sale.products.forEach(product => {
       const existing = productMap.get(product.id) || {
         id: product.id,
@@ -730,6 +771,7 @@ const calculateSalesByCategory = (salesData) => {
   const categoryMap = new Map()
   
   salesData.forEach(sale => {
+    if (!sale.products || !Array.isArray(sale.products)) return
     sale.products.forEach(product => {
       const category = product.category || 'Uncategorized'
       const existing = categoryMap.get(category) || {
@@ -766,7 +808,8 @@ const calculateDailySales = (salesData) => {
   }
 
   salesData.forEach(sale => {
-    const dateStr = sale.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+    const d = sale.date instanceof Date ? sale.date : new Date(sale.date)
+    const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
     if (dailySalesMap.has(dateStr)) {
       const existing = dailySalesMap.get(dateStr)
       existing.revenue += Number(sale.total)
@@ -792,7 +835,8 @@ const calculateMonthlySales = (salesData) => {
   }
 
   salesData.forEach(sale => {
-    const monthStr = sale.date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+    const d = sale.date instanceof Date ? sale.date : new Date(sale.date)
+    const monthStr = d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
     if (monthlySalesMap.has(monthStr)) {
       const existing = monthlySalesMap.get(monthStr)
       existing.revenue += Number(sale.total)
@@ -931,7 +975,7 @@ const createProductsChart = () => {
   productsChartInstance = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: topProducts.value.map(p => p.name.substring(0, 15)),
+      labels: topProducts.value.map(p => (p.name || 'Unknown').substring(0, 15)),
       datasets: [{
         label: 'Units Sold',
         data: topProducts.value.map(p => p.units),
@@ -1130,7 +1174,6 @@ onMounted(() => {
 
 onUnmounted(() => {
   destroyCharts()
-  if (unsubscribe) unsubscribe()
   dataCache.clear()
   calculationCache.clear()
 })
@@ -1139,40 +1182,40 @@ onUnmounted(() => {
 <style scoped>
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
   background: #f1f5f9;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
 }
 
-/* Added responsive chart styles */
 @media (max-width: 640px) {
   canvas {
     max-height: 200px !important;
   }
 }
 
-/* Improved mobile scrollbar styling */
 @media (max-width: 768px) {
   ::-webkit-scrollbar {
     width: 4px;
   }
-  
+
   ::-webkit-scrollbar-track {
     background: #f8fafc;
   }
-  
+
   ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: #c4b5fd;
     border-radius: 2px;
   }
 }

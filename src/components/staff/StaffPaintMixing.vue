@@ -1,215 +1,123 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-pink-50 relative overflow-hidden">
+  <div class="min-h-screen bg-gradient-to-b from-slate-50/95 via-white to-pink-50/30 relative overflow-hidden">
     <!-- Background Elements -->
-    <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-orange-200 to-yellow-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-200 to-orange-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-0 right-0 w-[min(90vw,520px)] h-[min(90vw,520px)] bg-gradient-to-br from-pink-300/20 via-rose-200/15 to-fuchsia-100/10 rounded-full blur-3xl -translate-y-1/4 translate-x-1/4"></div>
+      <div class="absolute bottom-0 left-0 w-[min(70vw,440px)] h-[min(70vw,440px)] bg-gradient-to-tr from-rose-200/15 to-pink-100/10 rounded-full blur-3xl -translate-x-1/4 translate-y-1/4"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(236,72,153,0.06),transparent)] pointer-events-none"></div>
     </div>
 
     <div class="relative z-10 flex h-screen">
-      <!-- Sidebar -->
-      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden md:flex md:flex-col shadow-lg">
-        <!-- Logo/Brand -->
-        <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+      <!-- Sidebar - match Staff Dashboard / Inventory -->
+      <aside class="w-64 bg-white/98 backdrop-blur-xl border-r border-gray-200/80 hidden lg:flex lg:flex-col shadow-lg shadow-gray-200/30">
+        <div class="p-4 xl:p-5 border-b border-gray-100 flex-shrink-0">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-md shadow-pink-500/20 flex-shrink-0">
+              <PaletteIcon class="w-4 h-4 text-white" />
+            </div>
+            <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight tracking-tight">Barcelona Paint Center</h1>
           </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <UserIcon class="h-3 w-3 mr-1" />
+          <div class="mt-2.5 text-xs text-white bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-600 px-2.5 xl:px-3 py-1.5 rounded-lg inline-flex items-center shadow-md shadow-pink-500/25 font-medium">
+            <UserIcon class="h-3.5 w-3.5 mr-1.5 flex-shrink-0" />
             Staff Portal
           </div>
         </div>
-
-        <!-- Navigation - Scrollable Area -->
-        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link 
-            to="/staff/dashboard" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-            :class="{ 'shadow-sm border border-blue-200 transform scale-105': $route.path === '/staff/dashboard' }"
-          >
-            <LayoutDashboardIcon class="w-5 h-5" />
-            <span>Dashboard</span>
+        <nav class="flex-1 p-3 xl:p-4 space-y-1 xl:space-y-2 overflow-y-auto">
+          <router-link to="/staff/dashboard" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700">
+            <LayoutDashboardIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Dashboard</span>
           </router-link>
-
-          <router-link 
-            to="/staff/inventory" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
-            :class="{ 'shadow-sm border border-purple-200 transform scale-105': $route.path === '/staff/inventory' }"
-          >
-            <PackageIcon class="w-5 h-5" />
-            <span>Inventory</span>
+          <router-link to="/staff/inventory" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700">
+            <PackageIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Inventory</span>
           </router-link>
-
-          <router-link 
-            to="/staff/house-paint-recommender" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
-            :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/staff/house-paint-recommender' }"
-          >
-            <HomeIcon class="w-5 h-5" />
-            <span>Paint Recommender</span>
+          <router-link to="/staff/house-paint-recommender" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700">
+            <HomeIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Paint Recommender</span>
           </router-link>
-
-          <router-link 
-            to="/staff/paint-mixing" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 shadow-sm border border-pink-200 transform scale-105"
-          >
-            <PaletteIcon class="w-5 h-5" />
-            <span>Paint Mixing</span>
+          <router-link to="/staff/paint-mixing" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-pink-700 bg-pink-100 shadow-sm border-l-4 border-pink-500">
+            <PaletteIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Paint Mixing</span>
           </router-link>
-
-          <router-link 
-            to="/staff/sales-analytics" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
-            :class="{ 'shadow-sm border border-teal-200 transform scale-105': $route.path === '/staff/sales-analytics' }"
-          >
-            <TrendingUpIcon class="w-5 h-5" />
-            <span>Sales Analytics</span>
+          <router-link to="/staff/sales-analytics" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700">
+            <TrendingUpIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Sales Analytics</span>
           </router-link>
-
-          <router-link 
-            to="/staff/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 shadow-sm border border-amber-200"
-            :class="{ 'transform scale-105': $route.path === '/staff/settings' }"
-          >
-            <SettingsIcon class="w-5 h-5" />
-            <span>Settings</span>
+          <router-link to="/staff/settings" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700">
+            <SettingsIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Settings</span>
           </router-link>
-
-          <!-- Perfect spacing -->
           <div class="h-4"></div>
         </nav>
-
-        <!-- User Menu - Fixed at bottom -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-orange-50 to-yellow-50 backdrop-blur-sm flex-shrink-0">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg">
-              <UserIcon class="w-5 h-5 text-white" />
+        <div class="p-3 xl:p-4 border-t border-gray-200 bg-gradient-to-r from-pink-50/95 to-rose-50/95 backdrop-blur-sm flex-shrink-0">
+          <div class="flex items-center gap-2 xl:gap-3">
+            <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg shadow-pink-500/25 flex-shrink-0">
+              <UserIcon class="w-4 xl:w-5 h-4 xl:h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">{{ userDisplayName || 'Staff User' }}</p>
+              <p class="text-xs xl:text-sm font-medium text-gray-900 truncate">{{ userDisplayName || 'Staff User' }}</p>
               <p class="text-xs text-gray-600 truncate">{{ userEmail || 'staff@example.com' }}</p>
             </div>
-            <button 
-              @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
-              title="Logout"
-            >
-              <LogOutIcon class="w-5 h-5" />
+            <button @click="handleLogout" class="p-1.5 xl:p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0" title="Logout">
+              <LogOutIcon class="w-4 xl:w-5 h-4 xl:h-5" />
             </button>
           </div>
         </div>
       </aside>
 
-      <!-- Mobile Sidebar Toggle -->
-      <div class="fixed top-4 left-4 z-30 md:hidden">
-        <button 
-          @click="toggleMobileSidebar"
-          class="p-3 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
-          aria-label="Toggle navigation menu"
-        >
+      <!-- Mobile Toggle -->
+      <div class="fixed top-4 left-4 z-30 lg:hidden">
+        <button @click="toggleMobileSidebar" class="p-3 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200" aria-label="Toggle menu">
           <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
           <XIcon v-else class="w-6 h-6 text-gray-700" />
         </button>
       </div>
-
-      <!-- Mobile Sidebar -->
-      <div 
-        v-if="mobileSidebarOpen" 
-        class="fixed inset-0 bg-black/20 z-20 md:hidden"
-        @click="toggleMobileSidebar"
-      ></div>
-
-      <aside 
-        v-if="mobileSidebarOpen"
-        class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-20 md:hidden shadow-xl flex flex-col"
-      >
-        <!-- Logo/Brand -->
+      <div v-if="mobileSidebarOpen" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 lg:hidden" @click="toggleMobileSidebar"></div>
+      <aside v-if="mobileSidebarOpen" class="fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-white border-r border-gray-200 z-30 lg:hidden shadow-2xl flex flex-col">
         <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <UserIcon class="h-3 w-3 mr-1" />
+          <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-pink-500 to-rose-600 px-3 py-1.5 rounded-lg inline-flex items-center font-medium">
+            <UserIcon class="h-3.5 w-3.5 mr-1.5" />
             Staff Portal
           </div>
         </div>
-
-        <!-- Mobile Navigation - Scrollable -->
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link 
-            to="/staff/dashboard" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50"
-            :class="{ 'shadow-sm border border-blue-200': $route.path === '/staff/dashboard' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <LayoutDashboardIcon class="w-5 h-5" />
-            <span>Dashboard</span>
+          <router-link to="/staff/dashboard" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-blue-600 bg-blue-50 hover:bg-blue-100" @click="mobileSidebarOpen = false">
+            <LayoutDashboardIcon class="w-6 h-6" />
+            <span class="text-base">Dashboard</span>
           </router-link>
-
-          <router-link 
-            to="/staff/inventory" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50"
-            :class="{ 'shadow-sm border border-purple-200': $route.path === '/staff/inventory' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <PackageIcon class="w-5 h-5" />
-            <span>Inventory</span>
+          <router-link to="/staff/inventory" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-purple-600 bg-purple-50 hover:bg-purple-100" @click="mobileSidebarOpen = false">
+            <PackageIcon class="w-6 h-6" />
+            <span class="text-base">Inventory</span>
           </router-link>
-
-          <router-link 
-            to="/staff/house-paint-recommender" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50"
-            :class="{ 'shadow-sm border border-orange-200': $route.path === '/staff/house-paint-recommender' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <HomeIcon class="w-5 h-5" />
-            <span>Paint Recommender</span>
+          <router-link to="/staff/house-paint-recommender" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-orange-600 bg-orange-50 hover:bg-orange-100" @click="mobileSidebarOpen = false">
+            <HomeIcon class="w-6 h-6" />
+            <span class="text-base">Paint Recommender</span>
           </router-link>
-
-          <router-link 
-            to="/staff/paint-mixing" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 shadow-sm border border-pink-200"
-            @click="mobileSidebarOpen = false"
-          >
-            <PaletteIcon class="w-5 h-5" />
-            <span>Paint Mixing</span>
+          <router-link to="/staff/paint-mixing" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-pink-700 bg-pink-100 border-l-4 border-pink-500 shadow-sm" @click="mobileSidebarOpen = false">
+            <PaletteIcon class="w-6 h-6" />
+            <span class="text-base font-semibold">Paint Mixing</span>
           </router-link>
-
-          <router-link 
-            to="/staff/sales-analytics" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50"
-            :class="{ 'shadow-sm border border-teal-200': $route.path === '/staff/sales-analytics' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <TrendingUpIcon class="w-5 h-5" />
-            <span>Sales Analytics</span>
+          <router-link to="/staff/sales-analytics" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-teal-600 bg-teal-50 hover:bg-teal-100" @click="mobileSidebarOpen = false">
+            <TrendingUpIcon class="w-6 h-6" />
+            <span class="text-base">Sales Analytics</span>
           </router-link>
-
-          <router-link 
-            to="/staff/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 shadow-sm border border-amber-200"
-            @click="mobileSidebarOpen = false"
-          >
-            <SettingsIcon class="w-5 h-5" />
-            <span>Settings</span>
+          <router-link to="/staff/settings" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-green-600 bg-green-50 hover:bg-green-100" @click="mobileSidebarOpen = false">
+            <SettingsIcon class="w-6 h-6" />
+            <span class="text-base">Settings</span>
           </router-link>
+          <div class="h-4"></div>
         </nav>
-
-        <!-- User Menu -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-orange-50 to-yellow-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-pink-50 to-rose-50 flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg">
-              <UserIcon class="w-5 h-5 text-white" />
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg flex-shrink-0">
+              <UserIcon class="w-6 h-6 text-white" />
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-900 truncate">{{ userDisplayName || 'Staff User' }}</p>
               <p class="text-xs text-gray-600 truncate">{{ userEmail || 'staff@example.com' }}</p>
             </div>
-            <button 
-              @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
-              title="Logout"
-            >
+            <button @click="handleLogout" class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0" title="Logout">
               <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
@@ -218,27 +126,51 @@
 
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
-        <div class="bg-background p-2 sm:p-3 min-h-full">
-          <div class="max-w-5xl mx-auto space-y-3 sm:space-y-4">
-            <!-- Header -->
-            <div class="text-center space-y-1 pt-4">
-              <h1 class="text-xl sm:text-2xl font-bold text-foreground">Paint Mixing Studio</h1>
-              <p class="text-xs sm:text-sm text-muted-foreground">Create perfect color combinations with AI Predictions</p>
+        <!-- Header - match Staff Dashboard / Inventory -->
+        <header class="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-gray-200/90 shadow-sm">
+          <div class="h-1 w-full bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-500 rounded-b-full"></div>
+          <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="pl-14 sm:pl-16 lg:pl-0 flex items-center gap-3">
+                <div class="hidden sm:flex w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 items-center justify-center shadow-lg shadow-pink-500/20 flex-shrink-0">
+                  <PaletteIcon class="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">Paint Mixing Studio</h1>
+                  <p class="text-sm text-gray-500 mt-0.5">Create perfect color combinations with AI predictions</p>
+                </div>
+              </div>
+              <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-100/90 text-gray-700 text-sm border border-gray-200/60">
+                  <CalendarIcon class="w-4 h-4 text-pink-500 flex-shrink-0" />
+                  <span class="truncate font-medium">{{ currentDate }}</span>
+                </div>
+                <div class="hidden sm:block h-8 w-px bg-gray-200"></div>
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-pink-50 to-rose-50 text-gray-800 text-sm border border-pink-200/60">
+                  <span class="font-medium truncate">Welcome, {{ userDisplayName || 'Staff' }}</span>
+                  <BellIcon class="w-4 h-4 text-pink-500 cursor-pointer hover:text-pink-600 flex-shrink-0" />
+                </div>
             </div>
+          </div>
+          </div>
+        </header>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+        <div class="p-5 sm:p-6 lg:p-8 min-h-full">
+          <div class="max-w-5xl mx-auto space-y-4 sm:space-y-5">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               <!-- Left Panel: Color Selection -->
-              <div class="space-y-3 sm:space-y-4">
-                <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-3 sm:space-y-4">
-                  <div class="space-y-3">
-                    <!-- Fixed color picker with accurate HSV color wheel and reduced sizes -->
-                    <div class="space-y-2">
-                      <h3 class="text-sm sm:text-base font-semibold text-foreground">Interactive Color Picker</h3>
-                      <div class="relative">
-                        <!-- Reduced canvas height for more compact layout -->
-                        <canvas
-                          ref="colorCanvas"
-                          class="w-full h-32 sm:h-40 rounded-lg cursor-crosshair border-2 border-border shadow-md"
+              <div class="space-y-4 sm:space-y-5">
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl border border-pink-100/80 shadow-lg shadow-pink-500/5 overflow-hidden">
+                  <div class="h-1.5 bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-500"></div>
+                  <div class="p-4 sm:p-5 space-y-4">
+                    <div class="space-y-3">
+                      <div class="space-y-2">
+                        <h3 class="text-sm sm:text-base font-bold text-gray-900">Interactive Color Picker</h3>
+                        <div class="relative">
+                          <canvas
+                            ref="colorCanvas"
+                            class="w-full h-32 sm:h-40 rounded-xl cursor-crosshair border-2 border-slate-200 shadow-md ring-2 ring-pink-500/10"
                           width="400"
                           height="200"
                           @click="selectColorFromCanvas"
@@ -251,16 +183,14 @@
                           <div class="w-full h-full rounded border border-black/30"></div>
                         </div>
                       </div>
-                      <!-- Added current color preview for accuracy verification -->
                       <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-lg border-2 border-gray-300 shadow-sm" :style="{ backgroundColor: currentPreviewColor }"></div>
-                        <span class="text-xs font-mono text-muted-foreground">{{ currentPreviewColor }}</span>
+                        <div class="w-9 h-9 rounded-xl border-2 border-slate-200 shadow-md" :style="{ backgroundColor: currentPreviewColor }"></div>
+                        <span class="text-xs font-mono text-slate-600">{{ currentPreviewColor }}</span>
                       </div>
                     </div>
 
-                    <!-- Enhanced Quick Color Selection with smooth animations -->
                     <div>
-                      <h3 class="text-sm sm:text-base font-semibold text-card-foreground mb-2">Quick Color Selection</h3>
+                      <h3 class="text-sm sm:text-base font-bold text-gray-900 mb-2">Quick Color Selection</h3>
 
                 <!-- Primary & Basic Colors -->
                 <div class="mb-2">
@@ -399,7 +329,7 @@
                 </div>
 
                 <!-- Deep & Rich Colors -->
-                <div>
+                <div class="mb-2">
                   <button
                     @click="toggleCategory('deep')"
                     class="flex items-center gap-2 w-full text-left bg-card hover:bg-accent/50 rounded-lg px-3 py-2 transition-all duration-200 group border border-border hover:border-primary/30 shadow-sm hover:shadow-md"
@@ -442,29 +372,27 @@
                     </div>
                   </transition>
                 </div>
-              </div>
-            </div>
+                  </div>
+                  </div>
+                </div>
 
             <!-- Selected Colors for Mixing -->
-            <div class="space-y-2">
+            <div class="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-lg p-4 sm:p-5 space-y-3">
                   <div class="flex items-center justify-between">
-                    <h3 class="text-sm sm:text-base font-semibold text-foreground">Selected Colors</h3>
-                    <!-- Reduced button size and padding -->
+                    <h3 class="text-sm sm:text-base font-bold text-gray-900">Selected Colors</h3>
                     <button v-if="selectedColors.length > 0"
                             @click="clearAllColors"
-                            class="px-2 py-1 text-xs font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg transition-all duration-200 hover:shadow-md hover:scale-105 flex items-center gap-1">
-                      <X class="w-3 h-3" />
+                            class="px-3 py-1.5 text-xs font-semibold text-white bg-red-500 hover:bg-red-600 rounded-xl transition-all duration-200 hover:shadow-md flex items-center gap-1.5">
+                      <X class="w-3.5 h-3.5" />
                       Clear
                     </button>
                   </div>
-
-                  <div v-if="selectedColors.length === 0" class="text-center py-3 text-muted-foreground text-xs">
-                    Select colors to start mixing
+                  <div v-if="selectedColors.length === 0" class="text-center py-6 rounded-xl bg-slate-50/80 border-2 border-dashed border-slate-200 text-slate-500 text-sm">
+                    Select colors from the picker or quick colors to start mixing
                   </div>
-
-                  <div v-else class="space-y-1.5">
+                  <div v-else class="space-y-2">
                     <div v-for="(color, index) in selectedColors" :key="index"
-                         class="flex items-center gap-2 p-2 bg-muted/50 rounded-lg border border-muted hover:border-primary/30 transition-colors">
+                         class="flex items-center gap-3 p-3 bg-slate-50/80 rounded-xl border border-slate-200/80 hover:border-pink-200 transition-colors">
                       <div class="w-6 h-6 rounded-lg border-2 border-gray-300 shadow-sm flex-shrink-0" :style="{ backgroundColor: color.hex }"></div>
                       <div class="flex-1 min-w-0">
                         <p class="text-xs font-medium text-foreground truncate">{{ color.name }}</p>
@@ -491,10 +419,12 @@
             </div>
 
             <!-- Right Column -->
-            <div class="space-y-3 sm:space-y-4">
+            <div class="space-y-4 sm:space-y-5">
                 <!-- Color Palette Display -->
-                <div class="bg-card border border-border rounded-lg p-3 sm:p-4 shadow-sm">
-                  <h3 class="font-semibold text-sm text-foreground mb-2">Current Palette</h3>
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-lg shadow-pink-500/5 overflow-hidden">
+                  <div class="h-1 bg-gradient-to-r from-pink-500/50 to-rose-500/50"></div>
+                  <div class="p-4 sm:p-5">
+                  <h3 class="font-bold text-sm text-gray-900 mb-3">Current Palette</h3>
                   <div class="grid grid-cols-5 gap-1.5 mb-3">
                     <div
                       v-for="(color, index) in selectedColors"
@@ -512,76 +442,81 @@
                       <PlusIcon class="w-3 h-3" />
                     </div>
                   </div>
-                <p class="text-xs text-muted-foreground">
-                  Click colors to add them to your palette (max 5)
+                <p class="text-xs text-slate-500 mt-2">
+                  Click colors to add to palette (max 5)
                 </p>
+                  </div>
                 </div>
 
                 <!-- Mixed Result -->
-                <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-2">
-                  <h3 class="text-sm sm:text-base font-semibold text-foreground">Mixed Result</h3>
-
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-lg overflow-hidden">
+                  <div class="h-1 bg-gradient-to-r from-rose-500/50 to-fuchsia-500/50"></div>
+                  <div class="p-4 sm:p-5 space-y-3">
+                  <h3 class="text-sm sm:text-base font-bold text-gray-900">Mixed Result</h3>
                   <div class="relative">
-                    <div class="w-full h-24 sm:h-32 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center"
+                    <div class="w-full h-24 sm:h-32 rounded-xl border-2 border-dashed border-slate-200 flex items-center justify-center shadow-inner"
                          :style="{ backgroundColor: mixedColor }">
-                      <div v-if="!mixedColor || mixedColor === '#ffffff'" class="text-center text-muted-foreground">
+                      <div v-if="!mixedColor || mixedColor === '#ffffff'" class="text-center text-slate-500">
                         <Palette class="w-6 h-6 mx-auto mb-1 opacity-50" />
                         <p class="text-xs">Mixed color will appear here</p>
                       </div>
                     </div>
-
                     <div v-if="mixedColor && mixedColor !== '#ffffff'" class="mt-2 text-center">
-                      <p class="text-xs font-mono text-muted-foreground">{{ mixedColor }}</p>
-                      <div class="flex justify-center gap-1 mt-1 flex-wrap">
-                        <span class="text-xs px-1.5 py-0.5 bg-muted rounded">RGB: {{ getRgbFromHex(mixedColor) }}</span>
-                        <span class="text-xs px-1.5 py-0.5 bg-muted rounded">HSL: {{ getHslFromHex(mixedColor) }}</span>
+                      <p class="text-xs font-mono text-slate-600 font-medium">{{ mixedColor }}</p>
+                      <div class="flex justify-center gap-2 mt-2 flex-wrap">
+                        <span class="text-xs px-2 py-1 bg-slate-100 rounded-lg font-medium text-slate-700">RGB: {{ getRgbFromHex(mixedColor) }}</span>
+                        <span class="text-xs px-2 py-1 bg-slate-100 rounded-lg font-medium text-slate-700">HSL: {{ getHslFromHex(mixedColor) }}</span>
                       </div>
                     </div>
+                  </div>
                   </div>
                 </div>
 
                 <!-- Save Mixture Section -->
-                <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-3">
-                  <h3 class="text-sm sm:text-base font-semibold text-foreground">Save Mixture</h3>
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-lg overflow-hidden">
+                  <div class="h-1 bg-gradient-to-r from-emerald-500/50 to-teal-500/50"></div>
+                  <div class="p-4 sm:p-5 space-y-3">
+                  <h3 class="text-sm sm:text-base font-bold text-gray-900">Save Mixture</h3>
                   <input
                     type="text"
                     v-model="mixtureName"
                     placeholder="Enter mixture name..."
-                    class="w-full px-3 py-2 border border-border rounded-lg focus:ring-primary focus:border-primary text-sm shadow-sm"
+                    class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-pink-500/30 focus:border-pink-400 text-sm"
                   />
                   <button
                     @click="saveMixture"
                     :disabled="!mixtureName || selectedColors.length === 0"
-                    class="w-full px-3 py-2 font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-1"
-                    :class="!mixtureName || selectedColors.length === 0 ? 'bg-primary/40 text-white/70 cursor-not-allowed' : 'bg-primary hover:bg-primary-hover shadow-md hover:scale-105 text-white'"
+                    class="w-full px-4 py-3 font-semibold rounded-xl transition-all duration-200 flex items-center justify-center gap-2"
+                    :class="!mixtureName || selectedColors.length === 0 ? 'bg-slate-300 text-white cursor-not-allowed' : 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-lg shadow-pink-500/25 hover:shadow-xl hover:-translate-y-0.5'"
                   >
                     <SaveIcon class="w-4 h-4" />
                     Save Mixture
                   </button>
-                  <div v-if="successMessage" class="text-xs text-green-500 mt-2">{{ successMessage }}</div>
-                  <div v-if="errorMessage" class="text-xs text-red-500 mt-2">{{ errorMessage }}</div>
+                  <div v-if="successMessage" class="text-xs text-green-600 font-medium mt-2">{{ successMessage }}</div>
+                  <div v-if="errorMessage" class="text-xs text-red-600 font-medium mt-2">{{ errorMessage }}</div>
+                  </div>
                 </div>
 
                 <!-- Mixture History Section -->
-                <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-3">
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-lg overflow-hidden">
+                  <div class="h-1 bg-gradient-to-r from-violet-500/50 to-purple-500/50"></div>
+                  <div class="p-4 sm:p-5 space-y-3">
                   <div class="flex items-center justify-between">
-                    <h3 class="text-sm sm:text-base font-semibold text-foreground">Saved Mixtures</h3>
-                    <span class="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full">
+                    <h3 class="text-sm sm:text-base font-bold text-gray-900">Saved Mixtures</h3>
+                    <span class="text-xs font-semibold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-xl">
                       {{ savedMixtures.length }}
                     </span>
                   </div>
-                  
-                  <div v-if="savedMixtures.length === 0" class="text-center py-6 text-muted-foreground text-xs">
-                    <Palette class="w-8 h-8 mx-auto mb-2 opacity-50" />
-                    <p>No saved mixtures yet</p>
+                  <div v-if="savedMixtures.length === 0" class="text-center py-8 rounded-xl bg-slate-50/80 border-2 border-dashed border-slate-200 text-slate-500">
+                    <Palette class="w-10 h-10 mx-auto mb-3 opacity-50" />
+                    <p class="text-sm font-medium">No saved mixtures yet</p>
                     <p class="text-xs mt-1">Save your first mixture to see it here</p>
                   </div>
-                  
                   <div v-else class="space-y-2 max-h-96 overflow-y-auto">
                     <div
                       v-for="mixture in savedMixtures"
                       :key="mixture.id"
-                      class="bg-muted/50 rounded-lg border border-border p-3 hover:border-primary/30 transition-all duration-200 hover:shadow-md group"
+                      class="bg-slate-50/80 rounded-xl border border-slate-200/80 p-3 hover:border-pink-200 hover:shadow-md transition-all duration-200 group"
                     >
                       <div class="flex items-start gap-3">
                         <!-- Color Preview -->
@@ -643,6 +578,7 @@
                 </div>
               </div>
             </div>
+            </div>
           </div>
         </div>
       </main>
@@ -676,12 +612,18 @@ import {
   LogOut as LogOutIcon,
   Menu as MenuIcon,
   X as XIcon,
+  Calendar as CalendarIcon,
+  Bell as BellIcon,
 } from 'lucide-vue-next'
 
 const router = useRouter()
 const mobileSidebarOpen = ref(false)
 const userDisplayName = ref('')
 const userEmail = ref('')
+
+const currentDate = computed(() =>
+  new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+)
 
 const toggleMobileSidebar = () => {
   mobileSidebarOpen.value = !mobileSidebarOpen.value

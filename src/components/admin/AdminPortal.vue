@@ -104,14 +104,23 @@
                 <div class="relative group">
                   <ShieldIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-purple-500 z-10" />
                   <input 
-                    type="password" 
+                    :type="showSecurityCode ? 'text' : 'password'" 
                     id="securityCode" 
                     v-model="adminData.securityCode" 
                     @blur="adminData.securityCode = adminData.securityCode.trim()"
                     required 
-                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border-2 border-purple-200 bg-gradient-to-r from-purple-50/90 to-pink-50/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm text-sm sm:text-base"
+                    class="w-full pl-10 pr-12 py-2.5 rounded-xl border-2 border-purple-200 bg-gradient-to-r from-purple-50/90 to-pink-50/90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm text-sm sm:text-base"
                     placeholder="Enter admin security code"
                   />
+                  <button 
+                    type="button" 
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-purple-400 hover:text-purple-600 focus:outline-none transition-colors duration-200 z-10"
+                    :aria-label="showSecurityCode ? 'Hide security code' : 'Show security code'"
+                    @click="showSecurityCode = !showSecurityCode"
+                  >
+                    <EyeIcon v-if="!showSecurityCode" class="h-5 w-5" />
+                    <EyeOffIcon v-else class="h-5 w-5" />
+                  </button>
                 </div>
 
                 <!-- Last Name Field -->
@@ -165,6 +174,15 @@
                     placeholder="Create a strong password"
                     minlength="8"
                   />
+                  <button 
+                    type="button" 
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-red-400 hover:text-red-600 focus:outline-none transition-colors duration-200 z-10"
+                    :aria-label="showPassword ? 'Hide password' : 'Show password'"
+                    @click="showPassword = !showPassword"
+                  >
+                    <EyeIcon v-if="!showPassword" class="h-5 w-5" />
+                    <EyeOffIcon v-else class="h-5 w-5" />
+                  </button>
                 </div>
 
                 <!-- Confirm Password Field -->
@@ -178,6 +196,15 @@
                     class="w-full pl-10 pr-12 py-2.5 rounded-xl border-2 border-pink-200 bg-gradient-to-r from-pink-50/90 to-rose-50/90 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 text-gray-900 placeholder-gray-500 shadow-lg hover:shadow-xl font-medium backdrop-blur-sm text-sm sm:text-base"
                     placeholder="Confirm your password"
                   />
+                  <button 
+                    type="button" 
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-pink-400 hover:text-pink-600 focus:outline-none transition-colors duration-200 z-10"
+                    :aria-label="showConfirmPassword ? 'Hide password' : 'Show password'"
+                    @click="showConfirmPassword = !showConfirmPassword"
+                  >
+                    <EyeIcon v-if="!showConfirmPassword" class="h-5 w-5" />
+                    <EyeOffIcon v-else class="h-5 w-5" />
+                  </button>
                 </div>
 
                 <!-- Colorful Submit Button -->
@@ -394,6 +421,7 @@ const resetEmail = ref('')
 const activeTab = ref('login')
 const showPassword = ref(false)
 const showConfirmPassword = ref(false)
+const showSecurityCode = ref(false)
 const showRegisterTab = ref(true)
 
 const adminSecurityCode = ref(import.meta.env.VITE_ADMIN_SECURITY_CODE || "BPC2025")
@@ -510,12 +538,15 @@ const createAdminAccount = async () => {
       createdAt: new Date().toISOString()
     })
 
-    // Re-check admin existence to ensure state is updated
+    // Hide Register section immediately (admin now exists)
+    isAdminExists.value = true
+    showRegisterTab.value = false
+    activeTab.value = 'login'
+    // Re-check from server so state stays in sync (e.g. if multiple tabs)
     await checkAdminExists()
     
     alertMessage.value = 'Admin account created successfully! Registration is now disabled.'
     alertType.value = 'success'
-    activeTab.value = 'login'
 
     adminData.firstName = ''
     adminData.lastName = ''

@@ -1,224 +1,148 @@
 <template>
-  <!-- Toast notification -->
-  <div 
-    v-if="showToast" 
-    class="fixed inset-0 flex items-center justify-center z-50"
-  >
-    <div class="bg-black/50 fixed inset-0" @click="showToast = false"></div>
-    <div class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-4 rounded-lg shadow-lg flex items-center z-10 max-w-md animate-bounce-in">
-      <component :is="toastIcon" class="h-6 w-6 mr-3 text-white" />
+  <!-- Toast -->
+  <div v-if="showToast" class="fixed inset-0 flex items-center justify-center z-50 p-4">
+    <div class="bg-black/40 fixed inset-0 backdrop-blur-sm" @click="showToast = false"></div>
+    <div class="bg-white px-5 py-4 rounded-2xl shadow-xl flex items-center gap-3 z-10 max-w-md animate-bounce-in border border-emerald-200/80 ring-2 ring-emerald-500/10">
+      <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
+        <component :is="toastIcon" class="h-5 w-5 text-emerald-600" />
+      </div>
       <div>
-        <h3 class="font-medium">{{ toastTitle }}</h3>
-        <p class="text-sm text-white/80">{{ toastMessage }}</p>
+        <h3 class="font-semibold text-gray-900">{{ toastTitle }}</h3>
+        <p class="text-sm text-gray-600 mt-0.5">{{ toastMessage }}</p>
       </div>
     </div>
   </div>
 
   <!-- Loading overlay -->
-  <div v-if="loading" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-6 flex items-center gap-3">
-      <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-green-500"></div>
-      <span>Loading...</span>
+  <div v-if="loading" class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl p-6 flex items-center gap-4 shadow-xl border border-emerald-100">
+      <div class="w-10 h-10 border-4 border-emerald-200 border-t-emerald-500 rounded-full animate-spin"></div>
+      <span class="font-medium text-gray-700">Loading...</span>
     </div>
   </div>
 
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
-    <!-- Background Elements -->
-    <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-200 to-blue-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+  <div class="min-h-screen bg-gradient-to-b from-slate-50/95 via-white to-emerald-50/30 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-0 right-0 w-[min(90vw,520px)] h-[min(90vw,520px)] bg-gradient-to-br from-emerald-300/20 via-green-200/15 to-teal-100/10 rounded-full blur-3xl -translate-y-1/4 translate-x-1/4"></div>
+      <div class="absolute bottom-0 left-0 w-[min(70vw,440px)] h-[min(70vw,440px)] bg-gradient-to-tr from-green-200/15 to-emerald-100/10 rounded-full blur-3xl -translate-x-1/4 translate-y-1/4"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(16,185,129,0.06),transparent)] pointer-events-none"></div>
     </div>
 
     <div class="relative z-10 flex h-screen">
       <!-- Sidebar -->
-      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden md:flex md:flex-col shadow-lg">
-        <!-- Logo/Brand -->
-        <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <UserIcon class="h-3 w-3 mr-1" />
+      <aside class="w-64 bg-white/98 backdrop-blur-xl border-r border-gray-200/80 hidden lg:flex lg:flex-col shadow-lg shadow-gray-200/30">
+        <div class="p-4 xl:p-5 border-b border-gray-100 flex-shrink-0">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-md shadow-emerald-500/20 flex-shrink-0">
+              <SettingsIcon class="w-4 h-4 text-white" />
+            </div>
+            <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight tracking-tight">Barcelona Paint Center</h1>
+          </div>
+          <div class="mt-2.5 text-xs text-white bg-gradient-to-r from-emerald-500 via-green-500 to-teal-600 px-2.5 xl:px-3 py-1.5 rounded-lg inline-flex items-center shadow-md shadow-emerald-500/25 font-medium">
+            <UserIcon class="h-3.5 w-3.5 mr-1.5 flex-shrink-0" />
             Staff Portal
           </div>
         </div>
 
-        <!-- Navigation -->
-        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link 
-            to="/staff/dashboard" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-            :class="{ 'shadow-sm border border-blue-200 transform scale-105': $route.path === '/staff/dashboard' }"
-          >
-            <LayoutDashboardIcon class="w-5 h-5" />
-            <span>Dashboard</span>
+        <nav class="flex-1 p-3 xl:p-4 space-y-1 xl:space-y-2 overflow-y-auto">
+          <router-link to="/staff/dashboard" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700" :class="{ 'shadow-sm border border-blue-200': $route.path === '/staff/dashboard' }">
+            <LayoutDashboardIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Dashboard</span>
           </router-link>
-
-          <router-link 
-            to="/staff/inventory" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
-            :class="{ 'shadow-sm border border-purple-200 transform scale-105': $route.path === '/staff/inventory' }"
-          >
-            <PackageIcon class="w-5 h-5" />
-            <span>Inventory</span>
+          <router-link to="/staff/inventory" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700" :class="{ 'shadow-sm border border-purple-200': $route.path === '/staff/inventory' }">
+            <PackageIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Inventory</span>
           </router-link>
-
-          <router-link 
-            to="/staff/paint-mixing" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
-            :class="{ 'shadow-sm border border-pink-200 transform scale-105': $route.path === '/staff/paint-mixing' }"
-          >
-            <PaletteIcon class="w-5 h-5" />
-            <span>Paint Mixing</span>
+          <router-link to="/staff/house-paint-recommender" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700" :class="{ 'shadow-sm border border-orange-200': $route.path === '/staff/house-paint-recommender' }">
+            <HomeIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Paint Recommender</span>
           </router-link>
-
-          <router-link 
-            to="/staff/house-paint-recommender" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
-            :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/staff/house-paint-recommender' }"
-          >
-            <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+          <router-link to="/staff/paint-mixing" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700" :class="{ 'shadow-sm border border-pink-200': $route.path === '/staff/paint-mixing' }">
+            <PaletteIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Paint Mixing</span>
           </router-link>
-
-          <router-link 
-            to="/staff/sales-analytics" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 shadow-sm border border-teal-200 transform scale-105"
-            :class="{ 'hover:bg-teal-100 hover:text-teal-700': $route.path !== '/staff/sales-analytics' }"
-          >
-            <TrendingUpIcon class="w-5 h-5" />
-            <span>Sales Analytics</span>
+          <router-link to="/staff/sales-analytics" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700" :class="{ 'shadow-sm border border-teal-200': $route.path === '/staff/sales-analytics' }">
+            <TrendingUpIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Sales Analytics</span>
           </router-link>
-
-          <router-link 
-            to="/staff/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 shadow-sm border border-green-200 transform scale-105"
-            :class="{ 'hover:bg-green-100 hover:text-green-700': $route.path !== '/staff/settings' }"
-          >
-            <SettingsIcon class="w-5 h-5" />
-            <span>Settings</span>
+          <router-link to="/staff/settings" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-emerald-700 bg-emerald-100 shadow-sm border-l-4 border-emerald-500" :class="{ 'hover:bg-emerald-50': $route.path !== '/staff/settings' }">
+            <SettingsIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Settings</span>
           </router-link>
-
-          <!-- Perfect spacing -->
           <div class="h-4"></div>
         </nav>
 
-        <!-- User Menu -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg overflow-hidden">
+        <div class="p-3 xl:p-4 border-t border-gray-200 bg-gradient-to-r from-emerald-50/95 to-green-50/95 backdrop-blur-sm flex-shrink-0">
+          <div class="flex items-center gap-2 xl:gap-3">
+            <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg shadow-emerald-500/25 flex-shrink-0 overflow-hidden">
               <img v-if="userPhotoURL" :src="userPhotoURL" alt="Profile" class="w-full h-full object-cover" />
-              <UserIcon v-else class="w-5 h-5 text-white" />
+              <UserIcon v-else class="w-4 xl:w-5 h-4 xl:h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">{{ profile.fullName || 'Staff User' }}</p>
+              <p class="text-xs xl:text-sm font-medium text-gray-900 truncate">{{ profile.fullName || 'Staff User' }}</p>
               <p class="text-xs text-gray-600 truncate">{{ profile.email || 'staff@example.com' }}</p>
             </div>
-            <button 
-              @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              <LogOutIcon class="w-5 h-5" />
+            <button @click="handleLogout" class="p-1.5 xl:p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0" title="Logout">
+              <LogOutIcon class="w-4 xl:w-5 h-4 xl:h-5" />
             </button>
           </div>
         </div>
       </aside>
 
-      <!-- Mobile Sidebar Toggle -->
-      <div class="fixed top-4 left-4 z-30 md:hidden">
-        <button 
-          @click="toggleMobileSidebar"
-          class="p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg"
-          aria-label="Toggle navigation menu"
-        >
+      <!-- Mobile Toggle -->
+      <div class="fixed top-4 left-4 z-30 lg:hidden">
+        <button @click="toggleMobileSidebar" class="p-3 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200" aria-label="Toggle menu">
           <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
           <XIcon v-else class="w-6 h-6 text-gray-700" />
         </button>
       </div>
-
-      <!-- Mobile Sidebar -->
-      <div 
-        v-if="mobileSidebarOpen" 
-        class="fixed inset-0 bg-black/20 z-20 md:hidden"
-        @click="toggleMobileSidebar"
-      ></div>
-
-      <aside 
-        v-if="mobileSidebarOpen"
-        class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-20 md:hidden shadow-xl flex flex-col overflow-y-auto"
-      >
-        <!-- Same content as desktop sidebar -->
+      <div v-if="mobileSidebarOpen" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 lg:hidden" @click="toggleMobileSidebar"></div>
+      <aside v-if="mobileSidebarOpen" class="fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-white border-r border-gray-200 z-30 lg:hidden shadow-2xl flex flex-col">
         <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <h1 class="text-lg font-bold text-gray-900 leading-tight">Mindoro Paint Center</h1>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <UserIcon class="h-3 w-3 mr-1" />
+          <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-emerald-500 to-green-600 px-3 py-1.5 rounded-lg inline-flex items-center font-medium">
+            <UserIcon class="h-3.5 w-3.5 mr-1.5" />
             Staff Portal
           </div>
         </div>
-
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link 
-            to="/staff/dashboard" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50"
-            :class="{ 'shadow-sm border border-blue-200': $route.path === '/staff/dashboard' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <LayoutDashboardIcon class="w-5 h-5" />
-            <span>Dashboard</span>
+          <router-link to="/staff/dashboard" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-blue-600 bg-blue-50 hover:bg-blue-100" @click="mobileSidebarOpen = false">
+            <LayoutDashboardIcon class="w-6 h-6" />
+            <span class="text-base">Dashboard</span>
           </router-link>
-
-          <router-link 
-            to="/staff/inventory" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50"
-            :class="{ 'shadow-sm border border-purple-200': $route.path === '/staff/inventory' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <PackageIcon class="w-5 h-5" />
-            <span>Inventory</span>
+          <router-link to="/staff/inventory" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-purple-600 bg-purple-50 hover:bg-purple-100" @click="mobileSidebarOpen = false">
+            <PackageIcon class="w-6 h-6" />
+            <span class="text-base">Inventory</span>
           </router-link>
-
-          <router-link 
-            to="/staff/paint-mixing" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50"
-            :class="{ 'shadow-sm border border-pink-200': $route.path === '/staff/paint-mixing' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <PaletteIcon class="w-5 h-5" />
-            <span>Paint Mixing</span>
+          <router-link to="/staff/house-paint-recommender" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-orange-600 bg-orange-50 hover:bg-orange-100" @click="mobileSidebarOpen = false">
+            <HomeIcon class="w-6 h-6" />
+            <span class="text-base">Paint Recommender</span>
           </router-link>
-
-          <router-link 
-            to="/staff/house-paint-recommender" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50"
-            :class="{ 'shadow-sm border border-orange-200': $route.path === '/staff/house-paint-recommender' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+          <router-link to="/staff/paint-mixing" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-pink-600 bg-pink-50 hover:bg-pink-100" @click="mobileSidebarOpen = false">
+            <PaletteIcon class="w-6 h-6" />
+            <span class="text-base">Paint Mixing</span>
           </router-link>
-
-          <router-link 
-            to="/staff/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 shadow-sm border border-green-200"
-            @click="mobileSidebarOpen = false"
-          >
-            <SettingsIcon class="w-5 h-5" />
-            <span>Settings</span>
+          <router-link to="/staff/sales-analytics" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-teal-600 bg-teal-50 hover:bg-teal-100" @click="mobileSidebarOpen = false">
+            <TrendingUpIcon class="w-6 h-6" />
+            <span class="text-base">Sales Analytics</span>
           </router-link>
+          <router-link to="/staff/settings" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-emerald-700 bg-emerald-100 border-l-4 border-emerald-500 shadow-sm" @click="mobileSidebarOpen = false">
+            <SettingsIcon class="w-6 h-6" />
+            <span class="text-base font-semibold">Settings</span>
+          </router-link>
+          <div class="h-4"></div>
         </nav>
-
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-emerald-50 to-green-50 flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg overflow-hidden">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg flex-shrink-0 overflow-hidden">
               <img v-if="userPhotoURL" :src="userPhotoURL" alt="Profile" class="w-full h-full object-cover" />
-              <UserIcon v-else class="w-5 h-5 text-white" />
+              <UserIcon v-else class="w-6 h-6 text-white" />
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-900 truncate">{{ profile.fullName || 'Staff User' }}</p>
               <p class="text-xs text-gray-600 truncate">{{ profile.email || 'staff@example.com' }}</p>
             </div>
-            <button 
-              @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
-            >
+            <button @click="handleLogout" class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0" title="Logout">
               <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
@@ -227,110 +151,91 @@
 
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
-        <!-- Header -->
-        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-4 sm:px-6 md:px-8 py-4 shadow-sm">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Settings</h1>
-              <p class="text-sm sm:text-base text-gray-600">Manage your account and preferences</p>
-            </div>
-            <div class="flex items-center gap-4">
-              <div class="hidden md:flex items-center gap-2 text-gray-700">
-                <CalendarIcon class="w-5 h-5 text-green-500" />
-                <span>{{ currentDate }}</span>
+        <header class="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-gray-200/90 shadow-sm">
+          <div class="h-1 w-full bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 rounded-b-full"></div>
+          <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="pl-14 sm:pl-16 lg:pl-0 flex items-center gap-3">
+                <div class="hidden sm:flex w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 items-center justify-center shadow-lg shadow-emerald-500/20 flex-shrink-0">
+                  <SettingsIcon class="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">Settings</h1>
+                  <p class="text-sm text-gray-500 mt-0.5">Manage your account and preferences</p>
+                </div>
               </div>
-              <div class="hidden md:block h-6 w-px bg-gray-300"></div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-900 text-sm sm:text-base">Welcome, {{ firstName }}</span>
-                <div class="relative">
-                  <BellIcon class="w-5 h-5 text-green-500 cursor-pointer hover:text-green-600" />
+              <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-100/90 text-gray-700 text-sm border border-gray-200/60">
+                  <CalendarIcon class="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                  <span class="truncate font-medium">{{ currentDate }}</span>
+                </div>
+                <div class="hidden sm:block h-8 w-px bg-gray-200"></div>
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-emerald-50 to-green-50 text-gray-800 text-sm border border-emerald-200/60">
+                  <span class="font-medium truncate">Welcome, {{ firstName }}</span>
+                  <BellIcon class="w-4 h-4 text-emerald-500 cursor-pointer hover:text-emerald-600 flex-shrink-0" />
                 </div>
               </div>
             </div>
           </div>
         </header>
 
-        <div class="p-4 sm:p-6 md:p-8 space-y-6">
-          <!-- Settings Tabs -->
-          <div class="bg-white/50 backdrop-blur-sm rounded-lg p-1 flex overflow-x-auto hide-scrollbar border border-gray-200 shadow-sm">
+        <div class="p-4 sm:p-6 lg:p-8 space-y-6">
+          <!-- Tabs -->
+          <div class="flex gap-1 p-1 rounded-xl bg-gray-100/80 border border-gray-200/60 w-fit">
             <button 
               v-for="tab in tabs" 
               :key="tab.id"
               @click="activeTab = tab.id"
-              class="px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium whitespace-nowrap transition-colors"
-              :class="activeTab === tab.id ? 'bg-green-500 text-white shadow-sm' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'"
+              class="px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-medium whitespace-nowrap transition-all flex items-center gap-2"
+              :class="activeTab === tab.id ? 'bg-white text-emerald-600 shadow-sm border border-emerald-200/60' : 'text-gray-600 hover:text-emerald-500'"
             >
-              <div class="flex items-center gap-1 sm:gap-2">
-                <component :is="tab.icon" class="w-4 h-4" />
-                <span>{{ tab.name }}</span>
-              </div>
+              <component :is="tab.icon" class="w-4 h-4 sm:w-5 sm:h-5" />
+              <span>{{ tab.name }}</span>
             </button>
           </div>
 
           <!-- Profile Settings -->
-          <div v-if="activeTab === 'profile'" class="max-w-2xl mx-auto">
-            <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200">
-              <div class="p-4 sm:p-6 border-b border-gray-200">
-                <h2 class="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
-                  <UserIcon class="w-5 h-5 mr-2 text-green-500" />
+          <div v-if="activeTab === 'profile'" class="max-w-2xl">
+            <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-emerald-100/80 overflow-hidden">
+              <div class="h-1.5 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500"></div>
+              <div class="p-5 sm:p-6 border-b border-gray-100">
+                <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                  <div class="w-9 h-9 rounded-xl bg-emerald-100 flex items-center justify-center">
+                    <UserIcon class="w-5 h-5 text-emerald-600" />
+                  </div>
                   Profile Settings
                 </h2>
               </div>
-              <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
-                <div class="flex flex-col sm:flex-row items-center gap-4">
+              <div class="p-5 sm:p-6 space-y-5">
+                <div class="flex flex-col sm:flex-row items-center gap-5">
                   <div class="relative">
-                    <div class="w-20 h-20 rounded-full bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center overflow-hidden border-4 border-white shadow-lg">
+                    <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-emerald-100 to-green-100 flex items-center justify-center overflow-hidden border-4 border-white shadow-lg ring-2 ring-emerald-200/50">
                       <img v-if="userPhotoURL" :src="userPhotoURL" alt="Profile" class="w-full h-full object-cover" />
-                      <UserIcon v-else class="w-10 h-10 text-green-600" />
+                      <UserIcon v-else class="w-12 h-12 text-emerald-600" />
                     </div>
-                    <input 
-                      type="file" 
-                      ref="photoInput" 
-                      accept="image/*" 
-                      class="hidden" 
-                      @change="handlePhotoUpload"
-                    />
+                    <input type="file" ref="photoInput" accept="image/*" class="hidden" @change="handlePhotoUpload" />
                   </div>
                   <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-                    <button 
-                      @click="$refs.photoInput.click()" 
-                      class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all text-sm"
-                    >
+                    <button @click="triggerPhotoInput" class="px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-green-500 text-white rounded-xl font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all text-sm flex items-center gap-2">
                       Change Photo
                     </button>
-                    <button 
-                      v-if="userPhotoURL" 
-                      @click="removePhoto" 
-                      class="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-lg font-medium hover:shadow-lg transition-all text-sm"
-                    >
+                    <button v-if="userPhotoURL" @click="removePhoto" class="px-4 py-2.5 bg-white border border-red-200 text-red-600 rounded-xl font-medium hover:bg-red-50 transition-all text-sm">
                       Remove Photo
                     </button>
                   </div>
                 </div>
                 <div class="space-y-4">
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                    <input 
-                      type="text" 
-                      v-model="profile.fullName"
-                      class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                    />
+                    <label class="block text-sm font-semibold text-gray-700 mb-1.5">Full Name</label>
+                    <input type="text" v-model="profile.fullName" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:ring-2 focus:ring-emerald-200 focus:border-emerald-400 transition-all shadow-sm" />
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                    <input 
-                      type="email" 
-                      v-model="profile.email"
-                      class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                    />
+                    <label class="block text-sm font-semibold text-gray-700 mb-1.5">Email</label>
+                    <input type="email" v-model="profile.email" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:ring-2 focus:ring-emerald-200 focus:border-emerald-400 transition-all shadow-sm" />
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                    <input 
-                      type="tel" 
-                      v-model="profile.phone"
-                      class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                    />
+                    <label class="block text-sm font-semibold text-gray-700 mb-1.5">Phone Number</label>
+                    <input type="tel" v-model="profile.phone" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:ring-2 focus:ring-emerald-200 focus:border-emerald-400 transition-all shadow-sm" />
                   </div>
                 </div>
               </div>
@@ -338,60 +243,44 @@
           </div>
 
           <!-- Account Settings -->
-          <div v-if="activeTab === 'account'" class="max-w-2xl mx-auto">
-            <div class="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200">
-              <div class="p-4 sm:p-6 border-b border-gray-200">
-                <h2 class="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
-                  <ShieldIcon class="w-5 h-5 mr-2 text-blue-500" />
+          <div v-if="activeTab === 'account'" class="max-w-2xl">
+            <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-emerald-100/80 overflow-hidden">
+              <div class="h-1.5 bg-gradient-to-r from-blue-500/80 via-indigo-500/80 to-violet-500/80"></div>
+              <div class="p-5 sm:p-6 border-b border-gray-100">
+                <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                  <div class="w-9 h-9 rounded-xl bg-blue-100 flex items-center justify-center">
+                    <ShieldIcon class="w-5 h-5 text-blue-600" />
+                  </div>
                   Change Password
                 </h2>
               </div>
-              <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
-                <div class="space-y-4">
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
-                    <input 
-                      type="password" 
-                      v-model="account.currentPassword"
-                      class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    />
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">New Password</label>
-                    <input 
-                      type="password" 
-                      v-model="account.newPassword"
-                      class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    />
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
-                    <input 
-                      type="password" 
-                      v-model="account.confirmPassword"
-                      class="w-full p-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    />
-                  </div>
-                  <div class="pt-2">
-                    <button 
-                      @click="changePassword" 
-                      class="w-full py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg font-medium hover:shadow-lg transition-all"
-                    >
-                      Change Password
-                    </button>
-                  </div>
+              <div class="p-5 sm:p-6 space-y-5">
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-1.5">Current Password</label>
+                  <input type="password" v-model="account.currentPassword" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all shadow-sm" placeholder="Enter current password" />
                 </div>
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-1.5">New Password</label>
+                  <input type="password" v-model="account.newPassword" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all shadow-sm" placeholder="Enter new password" />
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-1.5">Confirm New Password</label>
+                  <input type="password" v-model="account.confirmPassword" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all shadow-sm" placeholder="Confirm new password" />
+                </div>
+                <button @click="changePassword" class="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white rounded-xl font-semibold hover:shadow-lg transition-all">
+                  Change Password
+                </button>
               </div>
             </div>
           </div>
 
           <!-- Save Button -->
-          <div class="flex justify-end">
+          <div class="flex justify-end pt-2">
             <button 
               @click="saveSettings" 
-              class="save-button px-4 sm:px-6 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center gap-2"
+              class="save-button px-5 py-2.5 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 hover:from-emerald-600 hover:via-green-600 hover:to-teal-600 text-white rounded-xl font-semibold shadow-lg shadow-emerald-500/25 hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center gap-2"
             >
-              <SaveIcon class="w-4 h-4" />
+              <SaveIcon class="w-5 h-5" />
               Save Changes
             </button>
           </div>
@@ -693,6 +582,10 @@ const toggleMobileSidebar = () => {
   mobileSidebarOpen.value = !mobileSidebarOpen.value;
 };
 
+const triggerPhotoInput = () => {
+  if (photoInput.value) photoInput.value.click();
+};
+
 const handleLogout = async () => {
   try {
     await signOut(auth);
@@ -900,18 +793,20 @@ watch([profile, theme, security], () => {
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #d1fae5;
 }
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(135deg, #10b981, #059669);
   border-radius: 3px;
-  background: linear-gradient(135deg, #10b981, #059669);
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #059669, #047857);
 }
 
 /* Hide scrollbar for tabs but keep functionality */

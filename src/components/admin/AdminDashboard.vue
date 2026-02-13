@@ -1,18 +1,17 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
-    <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-200 to-blue-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+  <div class="min-h-screen bg-gradient-to-b from-slate-50 via-gray-50/95 to-slate-100/80 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="absolute top-0 right-0 w-[480px] h-[480px] bg-gradient-to-br from-blue-200/25 to-indigo-200/20 rounded-full filter blur-3xl transform translate-x-1/4 -translate-y-1/4"></div>
+      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-br from-violet-200/20 to-purple-200/15 rounded-full filter blur-3xl transform -translate-x-1/4 translate-y-1/4"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(59,130,246,0.06),transparent)]"></div>
     </div>
 
     <div class="relative z-10 flex h-screen">
-      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden lg:flex lg:flex-col shadow-lg">
-        <div class="p-4 xl:p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-2 xl:px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <ShieldIcon class="h-3 w-3 mr-1" />
+      <aside class="w-64 bg-white/95 backdrop-blur-sm border-r border-gray-200/80 hidden lg:flex lg:flex-col shadow-sm">
+        <div class="p-4 xl:p-5 border-b border-gray-100 flex-shrink-0">
+          <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight tracking-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-indigo-500 px-2.5 xl:px-3 py-1.5 rounded-lg inline-flex items-center shadow-sm font-medium">
+            <ShieldIcon class="h-3.5 w-3.5 mr-1.5 flex-shrink-0" />
             Admin Portal
           </div>
         </div>
@@ -21,9 +20,9 @@
           <button
             @click="activeTab = 'dashboard'"
             :class="[
-              'w-full flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium',
+              'w-full flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium',
               activeTab === 'dashboard'
-                ? 'text-blue-600 bg-blue-50 shadow-sm border border-blue-200'
+                ? 'text-blue-700 bg-blue-100 shadow-sm border-l-4 border-blue-500'
                 : 'text-gray-600 hover:bg-gray-100'
             ]"
           >
@@ -31,12 +30,12 @@
             <span class="text-sm xl:text-base truncate">Dashboard</span>
           </button>
 
-          <router-link to="/admin/staff" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700">
+          <router-link to="/admin/staff" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700" :class="{ 'shadow-sm border border-green-200': $route.path === '/admin/staff' }">
             <UsersIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Staff Management</span>
           </router-link>
 
-          <router-link to="/admin/inventory" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700">
+          <router-link to="/admin/inventory" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700" :class="{ 'shadow-sm border border-purple-200': $route.path === '/admin/inventory' }">
             <PackageIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Inventory</span>
           </router-link>
@@ -71,10 +70,10 @@
           </router-link>
         </nav>
 
-        <div class="p-3 xl:p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-3 xl:p-4 border-t border-gray-100 bg-gradient-to-r from-blue-50/80 to-indigo-50/80 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-2 xl:gap-3">
-            <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg flex-shrink-0">
-              <UserIcon class="w-4 xl:w-5 h-4 xl:w-5 text-white" />
+            <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-md flex-shrink-0">
+              <UserIcon class="w-4 xl:w-5 h-4 xl:h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-xs xl:text-sm font-medium text-gray-900 truncate">{{ userDisplayName }}</p>
@@ -96,13 +95,11 @@
 
       <div v-if="mobileSidebarOpen" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 lg:hidden" @click="toggleMobileSidebar"></div>
 
-      <aside v-if="mobileSidebarOpen" class="fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-30 lg:hidden shadow-2xl flex flex-col">
-        <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <ShieldIcon class="h-3 w-3 mr-1" />
+      <aside v-if="mobileSidebarOpen" class="fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-white/95 backdrop-blur-sm border-r border-gray-200/80 z-30 lg:hidden shadow-xl flex flex-col">
+        <div class="p-5 border-b border-gray-100 flex-shrink-0">
+          <h1 class="text-lg font-bold text-gray-900 leading-tight tracking-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-indigo-500 px-3 py-1.5 rounded-lg inline-flex items-center shadow-sm font-medium">
+            <ShieldIcon class="h-3.5 w-3.5 mr-1.5" />
             Admin Portal
           </div>
         </div>
@@ -179,88 +176,94 @@
       </aside>
 
       <main class="flex-1 overflow-auto">
-        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-4 shadow-sm">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div class="pl-16 lg:pl-0">
-              <h1 class="text-xl sm:text-2xl font-bold text-gray-900">{{ activeTab === 'dashboard' ? 'Dashboard' : 'Customer Quotes' }}</h1>
-              <p class="text-sm sm:text-base text-gray-600">{{ activeTab === 'dashboard' ? 'Manage your paint store operations' : 'View and manage customer quote requests' }}</p>
-            </div>
-            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-              <div class="flex items-center gap-2 text-gray-700 text-sm sm:text-base">
-                <CalendarIcon class="w-4 sm:w-5 h-4 sm:h-5 text-blue-500 flex-shrink-0" />
-                <span class="truncate">{{ currentDate }}</span>
+        <header class="sticky top-0 z-20 bg-white/90 backdrop-blur-xl border-b border-gray-200/90 shadow-sm">
+          <div class="h-1 w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500"></div>
+          <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="pl-14 sm:pl-16 lg:pl-0 flex items-center gap-3">
+                <div class="hidden sm:flex w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 items-center justify-center shadow-lg shadow-blue-500/20 flex-shrink-0">
+                  <LayoutDashboardIcon class="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">{{ activeTab === 'dashboard' ? 'Dashboard' : 'Customer Quotes' }}</h1>
+                  <p class="text-sm text-gray-500 mt-0.5">{{ activeTab === 'dashboard' ? 'Manage your paint store operations' : 'View and manage customer quote requests' }}</p>
+                </div>
               </div>
-              <div class="hidden sm:block h-6 w-px bg-gray-300"></div>
-              <div class="flex items-center gap-3">
-                <span class="text-sm sm:text-base text-gray-900 truncate">Welcome, {{ userDisplayName || 'Admin' }}</span>
-                <div class="relative">
-                  <BellIcon class="w-5 h-5 text-orange-500 cursor-pointer hover:text-orange-600 flex-shrink-0" />
+              <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-100/90 text-gray-700 text-sm border border-gray-200/60">
+                  <CalendarIcon class="w-4 h-4 text-blue-500 flex-shrink-0" />
+                  <span class="truncate font-medium">{{ currentDate }}</span>
+                </div>
+                <div class="hidden sm:block h-8 w-px bg-gray-200"></div>
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 text-gray-800 text-sm border border-blue-200/60">
+                  <span class="font-medium truncate">Welcome, {{ userDisplayName || 'Admin' }}</span>
+                  <BellIcon class="w-4 h-4 text-blue-500 cursor-pointer hover:text-blue-600 flex-shrink-0" />
                 </div>
               </div>
             </div>
           </div>
         </header>
 
-        <div class="p-4 sm:p-6 lg:p-8">
+        <div class="p-4 sm:p-6 lg:p-8 max-w-[1600px] mx-auto">
           <div v-if="activeTab === 'dashboard'">
             <!-- Key Metrics Section -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-10">
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-                <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
-                <div class="p-4 sm:p-6">
-                  <div class="flex items-start justify-between mb-4">
-                    <div class="flex-1">
-                      <h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-2">Total Sales</h3>
-                      <p class="text-lg sm:text-xl font-bold text-gray-900 mb-1 break-words">₱{{ totalSales.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-8 sm:mb-10">
+              <div class="bg-white border border-gray-200/90 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 hover:border-emerald-200/50 transition-all duration-300 overflow-hidden relative group h-28 sm:h-32">
+                <div class="bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 h-1.5 absolute top-0 left-0 right-0"></div>
+                <div class="p-4 sm:p-5 h-full flex flex-col">
+                  <div class="flex justify-between items-start mb-2">
+                    <div class="p-2 rounded-xl bg-emerald-100 text-emerald-600 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-emerald-500/20 transition-all duration-300">
+                      <DollarSignIcon class="w-5 h-5" />
                     </div>
-                    <div class="p-2 rounded-xl shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200 flex-shrink-0">
-                      <DollarSignIcon class="h-5 w-5 text-white" />
-                    </div>
+                  </div>
+                  <div class="flex-1 flex flex-col justify-end">
+                    <p class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-0.5">Total Sales</p>
+                    <p class="text-lg sm:text-xl font-bold text-gray-900 tabular-nums truncate" title="₱{{ totalSales.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}">₱{{ totalSales.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</p>
                   </div>
                 </div>
               </div>
 
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-                <div class="bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 h-2 absolute top-0 left-0 right-0"></div>
-                <div class="p-4 sm:p-6">
-                  <div class="flex items-start justify-between mb-4">
-                    <div class="flex-1">
-                      <h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-2">Orders</h3>
-                      <p class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">{{ totalOrders }}</p>
+              <div class="bg-white border border-gray-200/90 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 hover:border-blue-200/50 transition-all duration-300 overflow-hidden relative group h-28 sm:h-32">
+                <div class="bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-500 h-1.5 absolute top-0 left-0 right-0"></div>
+                <div class="p-4 sm:p-5 h-full flex flex-col">
+                  <div class="flex justify-between items-start mb-2">
+                    <div class="p-2 rounded-xl bg-cyan-100 text-cyan-600 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-cyan-500/20 transition-all duration-300">
+                      <ShoppingCartIcon class="w-5 h-5" />
                     </div>
-                    <div class="p-2 rounded-xl shadow-lg bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200 flex-shrink-0">
-                      <ShoppingCartIcon class="h-5 w-5 text-white" />
-                    </div>
+                  </div>
+                  <div class="flex-1 flex flex-col justify-end">
+                    <p class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-0.5">Orders</p>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-900 tabular-nums">{{ totalOrders }}</p>
                   </div>
                 </div>
               </div>
 
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-                <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
-                <div class="p-4 sm:p-6">
-                  <div class="flex items-start justify-between mb-4">
-                    <div class="flex-1">
-                      <h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-2">Products</h3>
-                      <p class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">{{ totalProducts }}</p>
+              <div class="bg-white border border-gray-200/90 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 hover:border-purple-200/50 transition-all duration-300 overflow-hidden relative group h-28 sm:h-32">
+                <div class="bg-gradient-to-br from-purple-500 via-violet-500 to-fuchsia-500 h-1.5 absolute top-0 left-0 right-0"></div>
+                <div class="p-4 sm:p-5 h-full flex flex-col">
+                  <div class="flex justify-between items-start mb-2">
+                    <div class="p-2 rounded-xl bg-purple-100 text-purple-600 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-purple-500/20 transition-all duration-300">
+                      <PackageIcon class="w-5 h-5" />
                     </div>
-                    <div class="p-2 rounded-xl shadow-lg bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200 flex-shrink-0">
-                      <PackageIcon class="h-5 w-5 text-white" />
-                    </div>
+                  </div>
+                  <div class="flex-1 flex flex-col justify-end">
+                    <p class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-0.5">Products</p>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-900 tabular-nums">{{ totalProducts }}</p>
                   </div>
                 </div>
               </div>
 
-              <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-                <div class="bg-gradient-to-br from-orange-400 via-amber-500 to-red-500 h-2 absolute top-0 left-0 right-0"></div>
-                <div class="p-4 sm:p-6">
-                  <div class="flex items-start justify-between mb-4">
-                    <div class="flex-1">
-                      <h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-2">Staff</h3>
-                      <p class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">{{ totalStaff }}</p>
+              <div class="bg-white border border-gray-200/90 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 hover:border-amber-200/50 transition-all duration-300 overflow-hidden relative group h-28 sm:h-32">
+                <div class="bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 h-1.5 absolute top-0 left-0 right-0"></div>
+                <div class="p-4 sm:p-5 h-full flex flex-col">
+                  <div class="flex justify-between items-start mb-2">
+                    <div class="p-2 rounded-xl bg-amber-100 text-amber-600 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-amber-500/20 transition-all duration-300">
+                      <UsersIcon class="w-5 h-5" />
                     </div>
-                    <div class="p-2 rounded-xl shadow-lg bg-gradient-to-br from-orange-400 via-amber-500 to-red-500 transform hover:scale-110 transition-transform duration-200 flex-shrink-0">
-                      <UsersIcon class="h-5 w-5 text-white" />
-                    </div>
+                  </div>
+                  <div class="flex-1 flex flex-col justify-end">
+                    <p class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-0.5">Staff</p>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-900 tabular-nums">{{ totalStaff }}</p>
                   </div>
                 </div>
               </div>
@@ -268,83 +271,83 @@
 
             <!-- Quick Action Shortcuts Section -->
             <div class="mb-8">
-              <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
+              <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4 tracking-tight">Quick Actions</h2>
               <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
                 <router-link
                   to="/admin/staff"
-                  class="group relative bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                  class="group relative bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm hover:shadow-lg hover:-translate-y-0.5 hover:border-green-200/80 transition-all duration-300 cursor-pointer"
                 >
                   <div class="flex flex-col items-center text-center">
-                    <div class="p-3 rounded-lg bg-gradient-to-br from-green-400 to-emerald-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                    <div class="p-3 rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 text-white mb-2 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-green-500/25 transition-all duration-300">
                       <UsersIcon class="w-5 h-5" />
                     </div>
                     <p class="text-xs sm:text-sm font-semibold text-gray-900">Staff</p>
-                    <p class="text-xs text-gray-600 mt-1">{{ totalStaff }} members</p>
+                    <p class="text-xs text-gray-500 mt-1">{{ totalStaff }} members</p>
                   </div>
                 </router-link>
 
                 <router-link
                   to="/admin/inventory"
-                  class="group relative bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                  class="group relative bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm hover:shadow-lg hover:-translate-y-0.5 hover:border-purple-200/80 transition-all duration-300 cursor-pointer"
                 >
                   <div class="flex flex-col items-center text-center">
-                    <div class="p-3 rounded-lg bg-gradient-to-br from-purple-400 to-violet-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                    <div class="p-3 rounded-xl bg-gradient-to-br from-purple-400 to-violet-500 text-white mb-2 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-purple-500/25 transition-all duration-300">
                       <PackageIcon class="w-5 h-5" />
                     </div>
                     <p class="text-xs sm:text-sm font-semibold text-gray-900">Inventory</p>
-                    <p class="text-xs text-gray-600 mt-1">{{ totalProducts }} items</p>
+                    <p class="text-xs text-gray-500 mt-1">{{ totalProducts }} items</p>
                   </div>
                 </router-link>
 
                 <router-link
                   to="/admin/house-paint-recommender"
-                  class="group relative bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                  class="group relative bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm hover:shadow-lg hover:-translate-y-0.5 hover:border-orange-200/80 transition-all duration-300 cursor-pointer"
                 >
                   <div class="flex flex-col items-center text-center">
-                    <div class="p-3 rounded-lg bg-gradient-to-br from-orange-400 to-amber-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                    <div class="p-3 rounded-xl bg-gradient-to-br from-orange-400 to-amber-500 text-white mb-2 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-orange-500/25 transition-all duration-300">
                       <HomeIcon class="w-5 h-5" />
                     </div>
                     <p class="text-xs sm:text-sm font-semibold text-gray-900">Recommender</p>
-                    <p class="text-xs text-gray-600 mt-1">Paint advisor</p>
+                    <p class="text-xs text-gray-500 mt-1">Paint advisor</p>
                   </div>
                 </router-link>
 
                 <router-link
                   to="/admin/paint-mixing"
-                  class="group relative bg-gradient-to-br from-pink-50 to-rose-50 border border-pink-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                  class="group relative bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm hover:shadow-lg hover:-translate-y-0.5 hover:border-pink-200/80 transition-all duration-300 cursor-pointer"
                 >
                   <div class="flex flex-col items-center text-center">
-                    <div class="p-3 rounded-lg bg-gradient-to-br from-pink-400 to-rose-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                    <div class="p-3 rounded-xl bg-gradient-to-br from-pink-400 to-rose-500 text-white mb-2 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-pink-500/25 transition-all duration-300">
                       <PaletteIcon class="w-5 h-5" />
                     </div>
                     <p class="text-xs sm:text-sm font-semibold text-gray-900">Paint Mix</p>
-                    <p class="text-xs text-gray-600 mt-1">Color mixing</p>
+                    <p class="text-xs text-gray-500 mt-1">Color mixing</p>
                   </div>
                 </router-link>
 
                 <router-link
                   to="/admin/sales-analytics"
-                  class="group relative bg-gradient-to-br from-teal-50 to-cyan-50 border border-teal-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                  class="group relative bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm hover:shadow-lg hover:-translate-y-0.5 hover:border-teal-200/80 transition-all duration-300 cursor-pointer"
                 >
                   <div class="flex flex-col items-center text-center">
-                    <div class="p-3 rounded-lg bg-gradient-to-br from-teal-400 to-cyan-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                    <div class="p-3 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-500 text-white mb-2 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-teal-500/25 transition-all duration-300">
                       <TrendingUpIcon class="w-5 h-5" />
                     </div>
                     <p class="text-xs sm:text-sm font-semibold text-gray-900">Analytics</p>
-                    <p class="text-xs text-gray-600 mt-1">Sales data</p>
+                    <p class="text-xs text-gray-500 mt-1">Sales data</p>
                   </div>
                 </router-link>
 
                 <router-link
                   to="/admin/visualization"
-                  class="group relative bg-gradient-to-br from-indigo-50 to-blue-50 border border-indigo-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                  class="group relative bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm hover:shadow-lg hover:-translate-y-0.5 hover:border-indigo-200/80 transition-all duration-300 cursor-pointer"
                 >
                   <div class="flex flex-col items-center text-center">
-                    <div class="p-3 rounded-lg bg-gradient-to-br from-indigo-400 to-blue-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                    <div class="p-3 rounded-xl bg-gradient-to-br from-indigo-400 to-blue-500 text-white mb-2 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-indigo-500/25 transition-all duration-300">
                       <BarChart3Icon class="w-5 h-5" />
                     </div>
                     <p class="text-xs sm:text-sm font-semibold text-gray-900">Visualize</p>
-                    <p class="text-xs text-gray-600 mt-1">Charts & graphs</p>
+                    <p class="text-xs text-gray-500 mt-1">Charts & graphs</p>
                   </div>
                 </router-link>
               </div>
@@ -352,44 +355,44 @@
 
             <!-- Quick Add Buttons Section -->
             <div class="mb-8">
-              <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4">Quick Add</h2>
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4 tracking-tight">Quick Add</h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 <router-link
                   to="/admin/inventory"
-                  class="group relative bg-gradient-to-br from-purple-50 to-violet-50 border-2 border-dashed border-purple-300 rounded-xl p-6 hover:border-purple-500 hover:shadow-lg hover:bg-purple-50/80 transition-all duration-300 cursor-pointer block"
+                  class="group relative bg-white border-2 border-dashed border-purple-200 rounded-2xl p-6 hover:border-purple-400 hover:shadow-lg hover:bg-purple-50/50 transition-all duration-300 cursor-pointer block"
                 >
                   <div class="flex flex-col items-center text-center">
-                    <div class="p-4 rounded-xl bg-gradient-to-br from-purple-400 to-violet-500 text-white mb-3 group-hover:scale-110 transition-transform duration-300">
+                    <div class="p-4 rounded-2xl bg-gradient-to-br from-purple-400 to-violet-500 text-white mb-3 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-purple-500/25 transition-all duration-300">
                       <PlusIcon class="w-6 h-6" />
                     </div>
                     <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-1">Add Product</h3>
-                    <p class="text-xs sm:text-sm text-gray-600">Add new paint to inventory</p>
+                    <p class="text-xs sm:text-sm text-gray-500">Add new paint to inventory</p>
                   </div>
                 </router-link>
 
                 <router-link
                   to="/admin/staff"
-                  class="group relative bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-dashed border-green-300 rounded-xl p-6 hover:border-green-500 hover:shadow-lg hover:bg-green-50/80 transition-all duration-300 cursor-pointer block"
+                  class="group relative bg-white border-2 border-dashed border-green-200 rounded-2xl p-6 hover:border-green-400 hover:shadow-lg hover:bg-green-50/50 transition-all duration-300 cursor-pointer block"
                 >
                   <div class="flex flex-col items-center text-center">
-                    <div class="p-4 rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 text-white mb-3 group-hover:scale-110 transition-transform duration-300">
+                    <div class="p-4 rounded-2xl bg-gradient-to-br from-green-400 to-emerald-500 text-white mb-3 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-green-500/25 transition-all duration-300">
                       <PlusIcon class="w-6 h-6" />
                     </div>
                     <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-1">Add Staff</h3>
-                    <p class="text-xs sm:text-sm text-gray-600">Hire new team member</p>
+                    <p class="text-xs sm:text-sm text-gray-500">Hire new team member</p>
                   </div>
                 </router-link>
 
                 <router-link
                   to="/admin/sales-analytics"
-                  class="group relative bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-dashed border-blue-300 rounded-xl p-6 hover:border-blue-500 hover:shadow-lg hover:bg-blue-50/80 transition-all duration-300 cursor-pointer block"
+                  class="group relative bg-white border-2 border-dashed border-blue-200 rounded-2xl p-6 hover:border-blue-400 hover:shadow-lg hover:bg-blue-50/50 transition-all duration-300 cursor-pointer block"
                 >
                   <div class="flex flex-col items-center text-center">
-                    <div class="p-4 rounded-xl bg-gradient-to-br from-blue-400 to-cyan-500 text-white mb-3 group-hover:scale-110 transition-transform duration-300">
+                    <div class="p-4 rounded-2xl bg-gradient-to-br from-blue-400 to-cyan-500 text-white mb-3 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300">
                       <PlusIcon class="w-6 h-6" />
                     </div>
                     <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-1">Add Sale</h3>
-                    <p class="text-xs sm:text-sm text-gray-600">Record new transaction</p>
+                    <p class="text-xs sm:text-sm text-gray-500">Record new transaction</p>
                   </div>
                 </router-link>
               </div>
@@ -399,11 +402,11 @@
             <div class="mt-8 sm:mt-10">
               <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
                 <div>
-                  <h2 class="text-lg sm:text-xl font-bold text-gray-900">Customer Quotes</h2>
-                  <p class="text-sm text-gray-600 mt-1">Recent quote requests from customers</p>
+                  <h2 class="text-lg sm:text-xl font-bold text-gray-900 tracking-tight">Customer Quotes</h2>
+                  <p class="text-sm text-gray-500 mt-1">Recent quote requests from customers</p>
                 </div>
-                <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg border border-gray-200">
-                  <span class="text-sm font-semibold text-gray-700">Total:</span>
+                <div class="flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl border border-gray-200 shadow-sm">
+                  <span class="text-sm font-semibold text-gray-600">Total:</span>
                   <span class="text-lg font-bold text-blue-600">{{ quotes.length }}</span>
                 </div>
               </div>
@@ -413,10 +416,10 @@
                 <button
                   @click="filterStatus = 'all'"
                   :class="[
-                    'px-4 py-2 rounded-lg font-medium transition-all duration-200',
+                    'px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200',
                     filterStatus === 'all'
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300'
+                      ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg shadow-blue-500/25'
+                      : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300 hover:bg-gray-50'
                   ]"
                 >
                   All ({{ quotes.length }})
@@ -424,10 +427,10 @@
                 <button
                   @click="filterStatus = 'new'"
                   :class="[
-                    'px-4 py-2 rounded-lg font-medium transition-all duration-200',
+                    'px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200',
                     filterStatus === 'new'
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300'
+                      ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg shadow-blue-500/25'
+                      : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300 hover:bg-gray-50'
                   ]"
                 >
                   New ({{ newCount }})
@@ -435,10 +438,10 @@
                 <button
                   @click="filterStatus = 'contacted'"
                   :class="[
-                    'px-4 py-2 rounded-lg font-medium transition-all duration-200',
+                    'px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200',
                     filterStatus === 'contacted'
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300'
+                      ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg shadow-blue-500/25'
+                      : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300 hover:bg-gray-50'
                   ]"
                 >
                   Contacted ({{ contactedCount }})
@@ -446,10 +449,10 @@
                 <button
                   @click="filterStatus = 'completed'"
                   :class="[
-                    'px-4 py-2 rounded-lg font-medium transition-all duration-200',
+                    'px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200',
                     filterStatus === 'completed'
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300'
+                      ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg shadow-blue-500/25'
+                      : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300 hover:bg-gray-50'
                   ]"
                 >
                   Completed ({{ completedCount }})
@@ -457,19 +460,20 @@
               </div>
 
               <!-- Quotes Table -->
-              <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-                <div v-if="filteredQuotes.length === 0" class="p-8 text-center">
-                  <div class="text-gray-400 mb-2">
-                    <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="bg-white rounded-2xl shadow-md border border-gray-200/90 overflow-hidden ring-1 ring-black/5">
+                <div v-if="filteredQuotes.length === 0" class="p-12 text-center">
+                  <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-blue-100 flex items-center justify-center">
+                    <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                   </div>
-                  <p class="text-gray-600 font-medium">No quotes found</p>
+                  <p class="text-gray-900 font-semibold">No quotes found</p>
+                  <p class="text-sm text-gray-500 mt-1">Quote requests will appear here</p>
                 </div>
 
                 <div v-else class="overflow-x-auto">
                   <table class="w-full">
-                    <thead class="bg-gray-50 border-b border-gray-200">
+                    <thead class="bg-gradient-to-r from-gray-50 to-slate-50 border-b border-gray-200">
                       <tr>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Name</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Email</th>
@@ -481,7 +485,7 @@
                       </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                      <tr v-for="quote in filteredQuotes" :key="quote.id" class="hover:bg-gray-50 transition-colors duration-200">
+                      <tr v-for="quote in filteredQuotes" :key="quote.id" class="hover:bg-blue-50/40 transition-colors duration-200">
                         <td class="px-6 py-4 whitespace-nowrap">
                           <div class="font-medium text-gray-900">{{ quote.firstName }} {{ quote.lastName }}</div>
                         </td>
@@ -543,12 +547,13 @@
               </div>
 
               <!-- Quote Details Modal -->
-              <div v-if="selectedQuote" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                <div class="bg-white rounded-xl w-full max-w-md max-h-[90vh] overflow-auto border border-gray-200 shadow-2xl">
-                  <div class="p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
+              <div v-if="selectedQuote" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div class="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-hidden flex flex-col border border-gray-200/80 shadow-xl">
+                  <div class="h-1 w-full bg-gradient-to-r from-blue-500 to-indigo-500"></div>
+                  <div class="p-5 border-b border-gray-200 sticky top-0 bg-white z-10">
                     <div class="flex justify-between items-center">
-                      <h3 class="text-lg font-bold text-gray-900">Quote Details</h3>
-                      <button @click="selectedQuote = null" class="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-gray-900">
+                      <h3 class="text-lg font-bold text-gray-900 tracking-tight">Quote Details</h3>
+                      <button @click="selectedQuote = null" class="p-2 hover:bg-gray-100 rounded-xl text-gray-500 hover:text-gray-700 transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -602,24 +607,25 @@
   </div>
 
   <!-- Logout Confirmation Modal -->
-  <div v-if="showLogoutConfirmation" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-sm max-h-[90vh] overflow-auto border border-gray-200 shadow-2xl">
-      <div class="p-4 sm:p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
+  <div v-if="showLogoutConfirmation" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl w-full max-w-sm overflow-hidden border border-gray-200/80 shadow-xl">
+      <div class="h-1 w-full bg-gradient-to-r from-red-500 to-orange-500"></div>
+      <div class="p-5 border-b border-gray-200">
         <div class="flex justify-between items-center">
-          <h3 class="text-lg sm:text-xl font-bold text-gray-900">Confirm Logout</h3>
-          <button @click="showLogoutConfirmation = false" class="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-gray-900">
+          <h3 class="text-lg font-bold text-gray-900 tracking-tight">Confirm Logout</h3>
+          <button @click="showLogoutConfirmation = false" class="p-2 hover:bg-gray-100 rounded-xl text-gray-500 transition-colors">
             <XIcon class="w-5 h-5" />
           </button>
         </div>
       </div>
 
-      <div class="p-4 sm:p-6 text-center">
-        <p class="text-sm sm:text-base text-gray-600 mb-6">Are you sure you want to log out of your admin session?</p>
-        <div class="flex justify-center gap-4">
-          <button @click="showLogoutConfirmation = false" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+      <div class="p-5 text-center">
+        <p class="text-sm text-gray-600 mb-6">Are you sure you want to log out of your admin session?</p>
+        <div class="flex justify-center gap-3">
+          <button @click="showLogoutConfirmation = false" class="px-5 py-2.5 border border-gray-300 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition-colors">
             Cancel
           </button>
-          <button @click="confirmLogout" class="bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200" :disabled="isLoggingOut">
+          <button @click="confirmLogout" class="px-5 py-2.5 bg-red-500 text-white font-semibold rounded-xl shadow-sm hover:bg-red-600 transition-colors disabled:opacity-60" :disabled="isLoggingOut">
             <LoaderIcon v-if="isLoggingOut" class="animate-spin w-4 h-4 mr-2" />
             <span>{{ isLoggingOut ? 'Logging out...' : 'Logout' }}</span>
           </button>
@@ -628,12 +634,13 @@
     </div>
   </div>
 
-  <div v-if="showSetupGuide" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-auto border border-gray-200 shadow-2xl">
-      <div class="p-4 sm:p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
+  <div v-if="showSetupGuide" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col border border-gray-200/80 shadow-xl">
+      <div class="h-1 w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500"></div>
+      <div class="p-5 border-b border-gray-200 sticky top-0 bg-white z-10">
         <div class="flex justify-between items-center">
-          <h3 class="text-lg sm:text-xl font-bold text-gray-900">Setup Guide</h3>
-          <button @click="showSetupGuide = false" class="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-gray-900">
+          <h3 class="text-lg font-bold text-gray-900 tracking-tight">Setup Guide</h3>
+          <button @click="showSetupGuide = false" class="p-2 hover:bg-gray-100 rounded-xl text-gray-500 transition-colors">
             <XIcon class="w-5 h-5" />
           </button>
         </div>
@@ -655,11 +662,11 @@
           </div>
         </div>
 
-        <div class="mt-8 flex justify-end">
-          <button @click="showSetupGuide = false" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors order-2 sm:order-1">
+        <div class="mt-8 flex justify-end gap-3">
+          <button @click="showSetupGuide = false" class="px-5 py-2.5 border border-gray-300 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition-colors">
             Cancel
           </button>
-          <button @click="confirmLogout" class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-medium px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center justify-center order-1 sm:order-2" :disabled="isLoggingOut">
+          <button @click="confirmLogout" class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-xl flex items-center justify-center disabled:opacity-60 transition-all" :disabled="isLoggingOut">
             <LoaderIcon v-if="isLoggingOut" class="animate-spin w-4 h-4 mr-2" />
             <span>{{ isLoggingOut ? 'Logging out...' : 'Got it!' }}</span>
           </button>
@@ -669,19 +676,20 @@
   </div>
 
   <!-- Add Product Modal -->
-  <div v-if="showAddProductModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-md max-h-[90vh] overflow-auto border border-gray-200 shadow-2xl">
-      <div class="p-4 sm:p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
+  <div v-if="showAddProductModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md overflow-hidden border border-gray-200/80 shadow-xl">
+      <div class="h-1 w-full bg-gradient-to-r from-purple-500 to-violet-500"></div>
+      <div class="p-5 border-b border-gray-200">
         <div class="flex justify-between items-center">
-          <h3 class="text-lg sm:text-xl font-bold text-gray-900">Add New Product</h3>
-          <button @click="showAddProductModal = false" class="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-gray-900">
+          <h3 class="text-lg font-bold text-gray-900 tracking-tight">Add New Product</h3>
+          <button @click="showAddProductModal = false" class="p-2 hover:bg-gray-100 rounded-xl text-gray-500 transition-colors">
             <XIcon class="w-5 h-5" />
           </button>
         </div>
       </div>
-      <div class="p-4 sm:p-6">
+      <div class="p-5">
         <p class="text-sm text-gray-600 mb-4">Navigate to Inventory to add new products with full details.</p>
-        <router-link to="/admin/inventory" @click="showAddProductModal = false" class="w-full bg-gradient-to-r from-purple-500 to-violet-600 text-white font-medium px-4 py-2 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 inline-block text-center">
+        <router-link to="/admin/inventory" @click="showAddProductModal = false" class="w-full bg-gradient-to-r from-purple-500 to-violet-600 text-white font-semibold px-4 py-2.5 rounded-xl hover:shadow-lg transition-all inline-block text-center">
           Go to Inventory
         </router-link>
       </div>
@@ -689,19 +697,20 @@
   </div>
 
   <!-- Add Staff Modal -->
-  <div v-if="showAddStaffModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-md max-h-[90vh] overflow-auto border border-gray-200 shadow-2xl">
-      <div class="p-4 sm:p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
+  <div v-if="showAddStaffModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md overflow-hidden border border-gray-200/80 shadow-xl">
+      <div class="h-1 w-full bg-gradient-to-r from-green-500 to-emerald-500"></div>
+      <div class="p-5 border-b border-gray-200">
         <div class="flex justify-between items-center">
-          <h3 class="text-lg sm:text-xl font-bold text-gray-900">Add New Staff</h3>
-          <button @click="showAddStaffModal = false" class="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-gray-900">
+          <h3 class="text-lg font-bold text-gray-900 tracking-tight">Add New Staff</h3>
+          <button @click="showAddStaffModal = false" class="p-2 hover:bg-gray-100 rounded-xl text-gray-500 transition-colors">
             <XIcon class="w-5 h-5" />
           </button>
         </div>
       </div>
-      <div class="p-4 sm:p-6">
+      <div class="p-5">
         <p class="text-sm text-gray-600 mb-4">Navigate to Staff Management to add new team members.</p>
-        <router-link to="/admin/staff" @click="showAddStaffModal = false" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-medium px-4 py-2 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 inline-block text-center">
+        <router-link to="/admin/staff" @click="showAddStaffModal = false" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold px-4 py-2.5 rounded-xl hover:shadow-lg transition-all inline-block text-center">
           Go to Staff Management
         </router-link>
       </div>

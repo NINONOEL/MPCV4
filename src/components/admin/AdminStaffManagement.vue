@@ -1,39 +1,40 @@
 <template>
   <!-- biome-ignore lint/correctness/useHookAtTopLevel: False positive - all hooks are at top level -->
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
+  <div class="min-h-screen bg-gradient-to-b from-slate-50 via-gray-50 to-slate-50 relative overflow-hidden">
     <!-- Background Elements -->
-    <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-200 to-blue-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-0 right-0 w-[480px] h-[480px] bg-gradient-to-br from-green-200/25 to-emerald-200/20 rounded-full filter blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
+      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-br from-blue-200/20 to-cyan-200/20 rounded-full filter blur-3xl transform -translate-x-1/3 translate-y-1/3"></div>
     </div>
 
     <!-- Added keyboard shortcuts overlay -->
     <!-- Keyboard Shortcuts Help -->
-    <div v-if="showKeyboardHelp" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div class="bg-white rounded-xl max-w-md w-full shadow-2xl">
-        <div class="p-6">
+    <div v-if="showKeyboardHelp" class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-2xl max-w-sm w-full shadow-xl border border-gray-200/80 overflow-hidden">
+        <div class="h-1 w-full bg-gradient-to-r from-green-500 to-emerald-500"></div>
+        <div class="p-5">
           <div class="flex justify-between items-center mb-4">
-            <h3 class="text-lg font-bold text-gray-900">Keyboard Shortcuts</h3>
-            <button @click="showKeyboardHelp = false" class="p-1 hover:bg-gray-100 rounded">
-              <XIcon class="w-5 h-5" />
+            <h3 class="text-lg font-bold text-gray-900 tracking-tight">Keyboard Shortcuts</h3>
+            <button @click="showKeyboardHelp = false" class="p-2 hover:bg-gray-100 rounded-xl transition-colors">
+              <XIcon class="w-5 h-5 text-gray-500" />
             </button>
           </div>
-          <div class="space-y-2 text-sm">
-            <div class="flex justify-between">
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between items-center py-1.5 border-b border-gray-100">
               <span class="text-gray-600">Search</span>
-              <kbd class="px-2 py-1 bg-gray-100 rounded text-xs">Ctrl + K</kbd>
+              <kbd class="px-2.5 py-1 bg-gray-100 rounded-lg text-xs font-medium">Ctrl + K</kbd>
             </div>
-            <div class="flex justify-between">
+            <div class="flex justify-between items-center py-1.5 border-b border-gray-100">
               <span class="text-gray-600">Refresh</span>
-              <kbd class="px-2 py-1 bg-gray-100 rounded text-xs">Ctrl + R</kbd>
+              <kbd class="px-2.5 py-1 bg-gray-100 rounded-lg text-xs font-medium">Ctrl + R</kbd>
             </div>
-            <div class="flex justify-between">
+            <div class="flex justify-between items-center py-1.5 border-b border-gray-100">
               <span class="text-gray-600">Help</span>
-              <kbd class="px-2 py-1 bg-gray-100 rounded text-xs">?</kbd>
+              <kbd class="px-2.5 py-1 bg-gray-100 rounded-lg text-xs font-medium">?</kbd>
             </div>
-            <div class="flex justify-between">
+            <div class="flex justify-between items-center py-1.5">
               <span class="text-gray-600">Escape</span>
-              <kbd class="px-2 py-1 bg-gray-100 rounded text-xs">Esc</kbd>
+              <kbd class="px-2.5 py-1 bg-gray-100 rounded-lg text-xs font-medium">Esc</kbd>
             </div>
           </div>
         </div>
@@ -41,17 +42,17 @@
     </div>
 
     <!-- Error Boundary -->
-    <div v-if="componentError" class="fixed inset-0 bg-red-50 flex items-center justify-center z-50">
-      <div class="bg-white rounded-lg shadow-lg p-8 max-w-md mx-4">
+    <div v-if="componentError" class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full border border-gray-200/80">
         <div class="text-center">
-          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
-            <AlertTriangleIcon class="w-8 h-8 text-red-600" />
+          <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-red-100 flex items-center justify-center">
+            <AlertTriangleIcon class="w-7 h-7 text-red-600" />
           </div>
           <h2 class="text-xl font-bold text-gray-900 mb-2">Component Error</h2>
-          <p class="text-gray-600 mb-4">{{ componentError }}</p>
+          <p class="text-gray-600 text-sm mb-6">{{ componentError }}</p>
           <button 
             @click="reloadComponent"
-            class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+            class="px-5 py-2.5 bg-red-500 text-white rounded-xl font-semibold text-sm hover:bg-red-600 transition-colors shadow-sm"
           >
             Reload Component
           </button>
@@ -61,14 +62,12 @@
 
     <div v-else class="relative z-10 flex h-screen">
       <!-- Desktop Sidebar -->
-      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden lg:flex lg:flex-col shadow-lg">
+      <aside class="w-64 bg-white/95 backdrop-blur-sm border-r border-gray-200/80 hidden lg:flex lg:flex-col shadow-sm">
         <!-- Logo/Brand -->
-        <div class="p-4 xl:p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-2 xl:px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <ShieldIcon class="h-3 w-3 mr-1" />
+        <div class="p-4 xl:p-5 border-b border-gray-100 flex-shrink-0">
+          <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight tracking-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-green-500 to-emerald-500 px-2.5 xl:px-3 py-1.5 rounded-lg inline-flex items-center shadow-sm font-medium">
+            <ShieldIcon class="h-3.5 w-3.5 mr-1.5 flex-shrink-0" />
             Admin Portal
           </div>
         </div>
@@ -87,8 +86,8 @@
 
           <router-link 
             to="/admin/staff" 
-            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 shadow-sm border border-green-200 transform scale-105"
-            :class="{ 'hover:bg-green-100 hover:text-green-700': $route.path !== '/admin/staff' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-green-700 bg-green-100 shadow-sm border-l-4 border-green-500"
+            :class="{ 'hover:bg-green-100 hover:text-green-800': $route.path !== '/admin/staff' }"
           >
             <UsersIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Staff Management</span>
@@ -148,9 +147,9 @@
         </nav>
 
         <!-- User Menu - Fixed at bottom -->
-        <div class="p-3 xl:p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-3 xl:p-4 border-t border-gray-100 bg-gradient-to-r from-green-50/80 to-emerald-50/80 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-2 xl:gap-3">
-            <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg flex-shrink-0">
+            <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-md flex-shrink-0">
               <UserIcon class="w-4 xl:w-5 h-4 xl:h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
@@ -303,217 +302,212 @@
 
       <!-- Main Content -->
       <main class="flex-1 overflow-auto w-full lg:w-auto">
-        <!-- Improved responsive header layout -->
         <!-- Header -->
-        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-4 shadow-sm">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div class="pl-16 lg:pl-0">
-              <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">Staff Management</h1>
-              <p class="text-sm sm:text-base text-gray-600 mt-1">Manage your staff members and their roles</p>
-            </div>
-            <div class="flex items-center gap-4">
-              <div class="hidden sm:flex items-center gap-2 text-gray-700">
-                <CalendarIcon class="w-5 h-5 text-green-500" />
-                <span class="text-sm lg:text-base">{{ currentDate }}</span>
+        <header class="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-gray-200/80 shadow-sm">
+          <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="pl-14 sm:pl-16 lg:pl-0">
+                <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">Staff Management</h1>
+                <p class="text-sm text-gray-500 mt-0.5">Manage staff members and roles</p>
               </div>
-              <div class="hidden sm:block h-6 w-px bg-gray-300"></div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-900 text-sm lg:text-base">Welcome, Admin</span>
-                <div class="relative">
-                  <BellIcon class="w-5 h-5 text-green-500 cursor-pointer hover:text-green-600" />
+              <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-100/80 text-gray-700 text-sm">
+                  <CalendarIcon class="w-4 h-4 text-green-500 flex-shrink-0" />
+                  <span class="truncate font-medium">{{ currentDate }}</span>
+                </div>
+                <div class="hidden sm:block h-8 w-px bg-gray-200"></div>
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-green-50/80 text-gray-800 text-sm border border-green-100">
+                  <span class="font-medium truncate">Welcome, Admin</span>
+                  <BellIcon class="w-4 h-4 text-green-500 cursor-pointer hover:text-green-600 flex-shrink-0" />
                 </div>
               </div>
             </div>
           </div>
         </header>
 
-        <div class="p-4 sm:p-6 lg:p-8 space-y-6">
+        <div class="p-4 sm:p-6 lg:p-8 max-w-[1600px] mx-auto space-y-6">
           <!-- Connection Status -->
-          <div v-if="connectionStatus" class="mb-6">
+          <div v-if="connectionStatus">
             <div 
               :class="[ 
-                'p-4 rounded-lg border-2 flex items-center gap-3',
+                'rounded-2xl border p-4 flex items-center gap-4 shadow-sm',
                 connectionStatus.success 
-                  ? 'bg-green-50 border-green-200 text-green-800' 
-                  : 'bg-red-50 border-red-200 text-red-800'
+                  ? 'bg-emerald-50/90 border-emerald-200 text-emerald-800' 
+                  : 'bg-red-50/90 border-red-200 text-red-800'
               ]"
             >
-              <CheckCircleIcon v-if="connectionStatus.success" class="w-6 h-6 text-green-600" />
-              <XCircleIcon v-else class="w-6 h-6 text-red-600" />
-              <div>
-                <h3 class="font-medium">{{ connectionStatus.title }}</h3>
-                <p class="text-sm">{{ connectionStatus.message }}</p>
+              <div class="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center" :class="connectionStatus.success ? 'bg-emerald-100' : 'bg-red-100'">
+                <CheckCircleIcon v-if="connectionStatus.success" class="w-5 h-5 text-emerald-600" />
+                <XCircleIcon v-else class="w-5 h-5 text-red-600" />
+              </div>
+              <div class="min-w-0">
+                <h3 class="font-semibold">{{ connectionStatus.title }}</h3>
+                <p class="text-sm opacity-90">{{ connectionStatus.message }}</p>
               </div>
             </div>
           </div>
 
           <!-- New Staff Notification -->
-          <div v-if="newStaffNotification" class="mb-6">
-            <div class="p-4 rounded-lg border-2 bg-blue-50 border-blue-200 text-blue-800 flex items-center gap-3">
-              <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+          <div v-if="newStaffNotification">
+            <div class="rounded-2xl border border-blue-200 bg-blue-50/90 p-4 flex items-center gap-4 shadow-sm">
+              <div class="w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center flex-shrink-0">
                 <span class="text-white text-sm font-bold">!</span>
               </div>
-              <div>
-                <h3 class="font-medium">New Staff Member Registered!</h3>
-                <p class="text-sm">{{ newStaffNotification }}</p>
+              <div class="flex-1 min-w-0">
+                <h3 class="font-semibold text-blue-900">New Staff Member Registered!</h3>
+                <p class="text-sm text-blue-800">{{ newStaffNotification }}</p>
               </div>
               <button 
                 @click="newStaffNotification = null"
-                class="ml-auto p-1 hover:bg-blue-100 rounded"
+                class="flex-shrink-0 p-2 rounded-xl text-blue-600 hover:bg-blue-100 transition-colors"
               >
-                <XIcon class="w-4 h-4" />
+                <XIcon class="w-5 h-5" />
               </button>
             </div>
           </div>
 
-          <!-- Improved responsive stats cards layout -->
           <!-- Stats Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             <!-- Total Staff Card -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-4 sm:p-6">
-                <div class="flex items-center gap-3 sm:gap-4">
-                  <div class="p-2 sm:p-3 rounded-xl shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
-                    <UsersIcon class="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+            <div class="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transform transition-all duration-200 overflow-hidden relative group h-28 sm:h-32">
+              <div class="bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 h-1.5 absolute top-0 left-0 right-0"></div>
+              <div class="p-4 sm:p-5 h-full flex flex-col">
+                <div class="flex justify-between items-start mb-2">
+                  <div class="p-2 rounded-xl bg-emerald-100 text-emerald-600 group-hover:scale-105 transition-transform">
+                    <UsersIcon class="w-5 h-5" />
                   </div>
-                  <div>
-                    <p class="text-xs sm:text-sm text-gray-600">Total Staff</p>
-                    <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ totalStaff }}</p>
-                  </div>
+                </div>
+                <div class="flex-1 flex flex-col justify-end">
+                  <p class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-0.5">Total Staff</p>
+                  <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ totalStaff }}</p>
                 </div>
               </div>
             </div>
 
             <!-- Active Staff Card -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-4 sm:p-6">
-                <div class="flex items-center gap-3 sm:gap-4">
-                  <div class="p-2 sm:p-3 rounded-xl shadow-lg bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
-                    <UserCheckIcon class="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+            <div class="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transform transition-all duration-200 overflow-hidden relative group h-28 sm:h-32">
+              <div class="bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-500 h-1.5 absolute top-0 left-0 right-0"></div>
+              <div class="p-4 sm:p-5 h-full flex flex-col">
+                <div class="flex justify-between items-start mb-2">
+                  <div class="p-2 rounded-xl bg-cyan-100 text-cyan-600 group-hover:scale-105 transition-transform">
+                    <UserCheckIcon class="w-5 h-5" />
                   </div>
-                  <div>
-                    <p class="text-xs sm:text-sm text-gray-600">Active Staff</p>
-                    <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ activeStaff }}</p>
-                  </div>
+                </div>
+                <div class="flex-1 flex flex-col justify-end">
+                  <p class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-0.5">Active Staff</p>
+                  <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ activeStaff }}</p>
                 </div>
               </div>
             </div>
 
             <!-- Regular Staff Card -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative sm:col-span-2 lg:col-span-1">
-              <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-4 sm:p-6">
-                <div class="flex items-center gap-3 sm:gap-4">
-                  <div class="p-2 sm:p-3 rounded-xl shadow-lg bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
-                    <UserIcon class="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+            <div class="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transform transition-all duration-200 overflow-hidden relative group h-28 sm:h-32 sm:col-span-2 lg:col-span-1">
+              <div class="bg-gradient-to-br from-purple-500 via-violet-500 to-fuchsia-500 h-1.5 absolute top-0 left-0 right-0"></div>
+              <div class="p-4 sm:p-5 h-full flex flex-col">
+                <div class="flex justify-between items-start mb-2">
+                  <div class="p-2 rounded-xl bg-purple-100 text-purple-600 group-hover:scale-105 transition-transform">
+                    <UserIcon class="w-5 h-5" />
                   </div>
-                  <div>
-                    <p class="text-xs sm:text-sm text-gray-600">Regular Staff</p>
-                    <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ regularStaffCount }}</p>
-                  </div>
+                </div>
+                <div class="flex-1 flex flex-col justify-end">
+                  <p class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-0.5">Regular Staff</p>
+                  <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ regularStaffCount }}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Debug Info -->
-          <div v-if="staffMembers.length === 0 && !loading" class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-            <div class="flex items-center gap-2 mb-2">
-              <AlertTriangleIcon class="w-5 h-5 text-yellow-600" />
-              <h3 class="font-medium text-yellow-800">No Staff Members Found</h3>
+          <!-- No Staff Debug -->
+          <div v-if="staffMembers.length === 0 && !loading" class="rounded-2xl border border-amber-200 bg-amber-50/90 p-5 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
+                <AlertTriangleIcon class="w-5 h-5 text-amber-600" />
+              </div>
+              <h3 class="font-semibold text-amber-800">No Staff Members Found</h3>
             </div>
-            <p class="text-yellow-700 text-sm mb-3">
-              Staff members registered through the Staff Portal should appear here automatically with real-time updates.
+            <p class="text-amber-700 text-sm mb-4">
+              Staff members registered through the Staff Portal should appear here with real-time updates.
             </p>
-            <div class="space-y-2 text-sm">
+            <div class="flex flex-col sm:flex-row gap-2">
               <button 
                 @click="testConnection" 
-                class="block w-full text-left px-3 py-2 bg-yellow-100 hover:bg-yellow-200 rounded border border-yellow-300 transition-colors"
+                class="px-4 py-2.5 bg-amber-100 hover:bg-amber-200 rounded-xl text-amber-800 font-medium text-sm transition-colors border border-amber-200"
               >
                 1. Test Firebase/Firestore connection
               </button>
               <button 
                 @click="fetchStaffMembers" 
-                class="block w-full text-left px-3 py-2 bg-yellow-100 hover:bg-yellow-200 rounded border border-yellow-300 transition-colors"
+                class="px-4 py-2.5 bg-amber-100 hover:bg-amber-200 rounded-xl text-amber-800 font-medium text-sm transition-colors border border-amber-200"
               >
-                2. Manual refresh to check for new staff registrations
+                2. Manual refresh
               </button>
             </div>
           </div>
 
-          <!-- Enhanced search and filter bar with bulk operations -->
-          <!-- Improved responsive search and filter bar -->
           <!-- Search and Filter Bar -->
-          <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-4 sm:p-6 mb-8">
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 sm:p-5">
             <div class="flex flex-col lg:flex-row gap-4">
               <div class="flex-1">
                 <div class="relative">
-                  <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <SearchIcon class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input 
                     type="text"
                     v-model="searchQuery"
                     placeholder="Search by name, email, or position..."
                     ref="searchInput"
-                    class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 transition-all duration-200"
+                    class="w-full pl-11 pr-10 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-50/50 text-gray-900 placeholder-gray-400 text-sm"
                   />
                   <button 
                     v-if="searchQuery" 
                     @click="searchQuery = ''"
-                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition-colors"
                   >
                     <XIcon class="w-4 h-4" />
                   </button>
                 </div>
               </div>
-              
-              <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <div class="flex flex-col sm:flex-row gap-3">
                 <select 
                   v-model="filterStatus"
-                  class="px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 min-w-[120px]"
+                  class="px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900 text-sm font-medium min-w-[120px]"
                 >
                   <option value="">All Status</option>
                   <option value="active">Active</option>
                   <option value="inactive">Inactive</option>
                 </select>
-                
                 <button 
                   @click="fetchStaffMembers"
-                  class="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 text-sm font-medium min-w-[100px]"
+                  class="flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-xl font-semibold text-sm shadow-lg shadow-green-500/20 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-60 min-w-[100px]"
                   :disabled="loading"
                 >
                   <RefreshCwIcon class="w-4 h-4" :class="{ 'animate-spin': loading }" />
-                  <span class="hidden sm:inline">{{ loading ? 'Loading...' : 'Refresh' }}</span>
-                  <span class="sm:hidden">{{ loading ? '...' : 'Refresh' }}</span>
+                  {{ loading ? 'Loading...' : 'Refresh' }}
                 </button>
               </div>
             </div>
           </div>
 
-          <!-- Enhanced staff table with better mobile responsiveness and bulk selection -->
-          <!-- Improved responsive staff table -->
           <!-- Staff Table -->
-          <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg overflow-hidden">
+          <div class="bg-white rounded-2xl shadow-md border border-gray-200/90 overflow-hidden">
             <!-- Mobile View -->
-            <div class="block lg:hidden">
-              <div v-if="loading" class="p-8 text-center">
-                <div class="flex flex-col items-center gap-4">
-                  <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                  <p class="text-gray-600">Loading staff members...</p>
+            <div class="block lg:hidden p-4 sm:p-5 space-y-4">
+              <div v-if="loading" class="p-10 text-center">
+                <div class="w-12 h-12 mx-auto mb-4 rounded-2xl bg-green-100 flex items-center justify-center">
+                  <RefreshCwIcon class="w-6 h-6 text-green-600 animate-spin" />
                 </div>
+                <p class="text-gray-600 font-medium">Loading staff...</p>
               </div>
-              <div v-else-if="paginatedStaff.length === 0" class="p-8 text-center text-gray-600">
-                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
+              <div v-else-if="paginatedStaff.length === 0" class="p-10 text-center">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gray-100 flex items-center justify-center">
                   <UsersIcon class="w-8 h-8 text-gray-400" />
                 </div>
-                <p class="text-lg font-medium mb-2">No staff members found</p>
-                <p class="text-sm">Try adjusting your search or filters</p>
+                <p class="text-lg font-semibold text-gray-900 mb-1">No staff members found</p>
+                <p class="text-sm text-gray-500">Try adjusting your search or filters</p>
               </div>
-              <div v-else class="divide-y divide-gray-100">
-                <div v-for="staff in paginatedStaff" :key="staff.id" class="p-4 hover:bg-gray-50/50 transition-colors">
+              <div v-else class="space-y-4">
+                <div v-for="staff in paginatedStaff" :key="staff.id" class="bg-gray-50 rounded-xl p-4 border border-gray-200/80 hover:shadow-md transition-all">
                   <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden shadow-lg flex-shrink-0">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center overflow-hidden shadow-md flex-shrink-0 ring-2 ring-white">
                       <img 
                         v-if="staff.photoURL" 
                         :src="staff.photoURL" 
@@ -531,40 +525,37 @@
                           <p class="text-sm text-gray-600 truncate">{{ staff.email }}</p>
                           <p class="text-xs text-gray-500 mt-1">{{ staff.position || 'Staff Member' }}</p>
                         </div>
-                        <!-- Made action buttons always visible and properly aligned to the right -->
-                        <div class="flex gap-1 flex-shrink-0">
+                        <div class="flex gap-1.5 flex-shrink-0">
                           <button 
                             @click="editStaff(staff)"
-                            class="p-2 hover:bg-blue-50 rounded-lg text-blue-600 hover:text-blue-700 transition-colors"
+                            class="p-2.5 hover:bg-blue-100 rounded-xl text-blue-600 transition-colors"
                             :title="`Edit ${getFullName(staff)}`"
                           >
                             <EditIcon class="w-4 h-4" />
                           </button>
                           <button 
                             @click="confirmDelete(staff)"
-                            class="p-2 hover:bg-red-50 rounded-lg text-red-600 hover:text-red-700 transition-colors"
+                            class="p-2.5 hover:bg-red-100 rounded-xl text-red-600 transition-colors"
                             :title="`Delete ${getFullName(staff)}`"
                           >
                             <Trash2Icon class="w-4 h-4" />
                           </button>
                         </div>
                       </div>
-                      <div class="flex flex-wrap gap-2">
+                      <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-gray-200/60">
                         <span 
-                          class="px-2 py-1 rounded-full text-xs font-medium"
+                          class="px-2.5 py-1 rounded-lg text-xs font-medium"
                           :class="getRoleBadgeClass(staff.role)"
                         >
                           {{ formatRole(staff.role) }}
                         </span>
                         <span 
-                          class="px-2 py-1 rounded-full text-xs font-medium"
+                          class="px-2.5 py-1 rounded-lg text-xs font-medium"
                           :class="getStatusBadgeClass(staff.status || 'active')"
                         >
                           {{ formatStatus(staff.status || 'active') }}
                         </span>
-                        <span class="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">
-                          {{ formatDate(staff.createdAt) }}
-                        </span>
+                        <span class="text-xs text-gray-500">{{ formatDate(staff.createdAt) }}</span>
                       </div>
                     </div>
                   </div>
@@ -576,59 +567,54 @@
             <div class="hidden lg:block overflow-x-auto">
               <table class="w-full">
                 <thead>
-                  <tr class="border-b border-gray-100 bg-gray-50/50">
-                    <!-- Checkbox for bulk selection -->
-                    <th class="pl-4 py-3 text-left text-sm font-semibold text-gray-700 w-10">
+                  <tr class="bg-gradient-to-r from-gray-50 to-slate-50 border-b border-gray-200">
+                    <th class="pl-5 py-4 text-left w-10">
                       <input 
                         type="checkbox" 
                         :checked="isAllSelected" 
                         @change="toggleSelectAll" 
-                        class="form-checkbox h-4 w-4 text-blue-600 rounded focus:ring-blue-500"
+                        class="form-checkbox h-4 w-4 text-green-600 rounded focus:ring-green-500"
                       />
                     </th>
-                    <th class="text-left p-4 text-sm font-semibold text-gray-700">Staff Member</th>
-                    <th class="text-left p-4 text-sm font-semibold text-gray-700">Position</th>
-                    <th class="text-left p-4 text-sm font-semibold text-gray-700">Role</th>
-                    <th class="text-left p-4 text-sm font-semibold text-gray-700">Status</th>
-                    <th class="text-left p-4 text-sm font-semibold text-gray-700">Created</th>
-                    <th class="text-right p-4 text-sm font-semibold text-gray-700">Actions</th>
+                    <th class="text-left px-5 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Staff Member</th>
+                    <th class="text-left px-5 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Position</th>
+                    <th class="text-left px-5 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Role</th>
+                    <th class="text-left px-5 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
+                    <th class="text-left px-5 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Created</th>
+                    <th class="text-right px-5 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr v-if="loading">
-                    <td colspan="7" class="p-8 text-center">
-                      <div class="flex flex-col items-center gap-4">
-                        <div class="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                        <p class="text-gray-600">Loading staff members...</p>
-                      </div>
+                <tbody class="divide-y divide-gray-100">
+                  <tr v-if="loading" class="bg-white">
+                    <td colspan="7" class="px-5 py-12 text-center">
+                      <RefreshCwIcon class="w-6 h-6 text-green-500 animate-spin mx-auto" />
                     </td>
                   </tr>
-                  <tr v-else-if="paginatedStaff.length === 0">
-                    <td colspan="7" class="p-12 text-center text-gray-600">
-                      <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
-                        <UsersIcon class="w-8 h-8 text-gray-400" />
+                  <tr v-else-if="paginatedStaff.length === 0" class="bg-white">
+                    <td colspan="7" class="px-5 py-12 text-center">
+                      <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-gray-100 flex items-center justify-center">
+                        <UsersIcon class="w-7 h-7 text-gray-400" />
                       </div>
-                      <p class="text-lg font-medium mb-2">No staff members found</p>
-                      <p class="text-sm">Try adjusting your search or filters</p>
+                      <p class="font-medium text-gray-900">No staff members found</p>
+                      <p class="text-sm text-gray-500 mt-1">Try adjusting your search or filters</p>
                     </td>
                   </tr>
                   <tr 
                     v-for="staff in paginatedStaff" 
                     :key="staff.id" 
-                    class="border-b border-gray-50 hover:bg-gray-50/50 transition-colors group"
+                    class="bg-white hover:bg-green-50/30 transition-colors"
                   >
-                    <!-- Checkbox for individual row selection -->
-                    <td class="pl-4 py-3 w-10">
+                    <td class="pl-5 py-4 w-10 align-middle">
                       <input 
                         type="checkbox" 
                         :checked="selectedStaffIds.includes(staff.id)" 
                         @change="toggleStaffSelection(staff.id)" 
-                        class="form-checkbox h-4 w-4 text-blue-600 rounded focus:ring-blue-500"
+                        class="form-checkbox h-4 w-4 text-green-600 rounded focus:ring-green-500"
                       />
                     </td>
-                    <td class="p-4">
+                    <td class="px-5 py-4 align-middle">
                       <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden shadow-lg">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center overflow-hidden ring-1 ring-gray-200/80 flex-shrink-0">
                           <img 
                             v-if="staff.photoURL" 
                             :src="staff.photoURL" 
@@ -640,45 +626,44 @@
                         </div>
                         <div>
                           <p class="font-semibold text-gray-900">{{ getFullName(staff) }}</p>
-                          <p class="text-sm text-gray-600">{{ staff.email }}</p>
+                          <p class="text-sm text-gray-500">{{ staff.email }}</p>
                         </div>
                       </div>
                     </td>
-                    <td class="p-4">
-                      <span class="text-gray-900 font-medium">{{ staff.position || 'Staff Member' }}</span>
+                    <td class="px-5 py-4 align-middle">
+                      <span class="text-gray-900 font-medium whitespace-nowrap">{{ staff.position || 'Staff Member' }}</span>
                     </td>
-                    <td class="p-4">
+                    <td class="px-5 py-4 align-middle">
                       <span 
-                        class="px-3 py-1 rounded-full text-sm font-medium"
+                        class="inline-flex px-2.5 py-1 rounded-lg text-xs font-medium"
                         :class="getRoleBadgeClass(staff.role)"
                       >
                         {{ formatRole(staff.role) }}
                       </span>
                     </td>
-                    <td class="p-4">
+                    <td class="px-5 py-4 align-middle">
                       <span 
-                        class="px-3 py-1 rounded-full text-sm font-medium"
+                        class="inline-flex px-2.5 py-1 rounded-lg text-xs font-medium"
                         :class="getStatusBadgeClass(staff.status || 'active')"
                       >
                         {{ formatStatus(staff.status || 'active') }}
                       </span>
                     </td>
-                    <td class="p-4 text-gray-600 font-medium">
+                    <td class="px-5 py-4 text-gray-600 text-sm font-medium whitespace-nowrap align-middle">
                       {{ formatDate(staff.createdAt) }}
                     </td>
-                    <td class="p-4">
-                      <!-- Made desktop action buttons always visible and properly aligned -->
-                      <div class="flex items-center justify-end gap-1">
+                    <td class="px-5 py-4 align-middle">
+                      <div class="flex items-center justify-end gap-1.5">
                         <button 
                           @click="editStaff(staff)"
-                          class="p-2 hover:bg-blue-50 rounded-lg text-blue-600 hover:text-blue-700 transition-colors"
+                          class="p-2.5 hover:bg-blue-100 rounded-xl text-blue-600 transition-colors"
                           :title="`Edit ${getFullName(staff)}`"
                         >
                           <EditIcon class="w-4 h-4" />
                         </button>
                         <button 
                           @click="confirmDelete(staff)"
-                          class="p-2 hover:bg-red-50 rounded-lg text-red-600 hover:text-red-700 transition-colors"
+                          class="p-2.5 hover:bg-red-100 rounded-xl text-red-600 transition-colors"
                           :title="`Delete ${getFullName(staff)}`"
                         >
                           <Trash2Icon class="w-4 h-4" />
@@ -691,52 +676,49 @@
             </div>
 
             <!-- Bulk Actions Bar -->
-            <div v-if="selectedStaffIds.length > 0" class="bg-blue-50 border-t border-blue-200 p-3 flex justify-between items-center">
-              <div class="flex items-center gap-3">
-                <span class="text-sm font-medium text-blue-700">
+            <div v-if="selectedStaffIds.length > 0" class="bg-green-50 border-t border-green-200 px-5 py-3 flex flex-wrap justify-between items-center gap-3">
+              <div class="flex items-center gap-3 flex-wrap">
+                <span class="text-sm font-semibold text-green-800">
                   {{ selectedStaffIds.length }} selected
                 </span>
-                <button @click="bulkUpdateStatus('active')" class="text-sm text-blue-700 font-medium hover:underline">Activate</button>
-                <button @click="bulkUpdateStatus('inactive')" class="text-sm text-blue-700 font-medium hover:underline">Deactivate</button>
+                <button @click="bulkUpdateStatus('active')" class="px-3 py-1.5 rounded-lg bg-green-200/80 text-green-800 font-medium text-sm hover:bg-green-200 transition-colors">Activate</button>
+                <button @click="bulkUpdateStatus('inactive')" class="px-3 py-1.5 rounded-lg bg-gray-200 text-gray-700 font-medium text-sm hover:bg-gray-300 transition-colors">Deactivate</button>
               </div>
-              <button @click="selectedStaffIds = []" class="text-sm text-blue-700 font-medium hover:underline">Clear Selection</button>
+              <button @click="selectedStaffIds = []" class="text-sm font-medium text-green-700 hover:text-green-800 hover:underline">Clear Selection</button>
             </div>
 
-            <!-- Improved responsive pagination -->
             <!-- Pagination -->
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-4 border-t border-gray-100 bg-gray-50/30">
-              <div class="flex items-center gap-2 sm:gap-4 text-sm">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-5 py-4 border-t border-gray-200 bg-gray-50/50">
+              <div class="flex items-center gap-3 flex-wrap justify-center sm:justify-start">
                 <select 
                   v-model="perPage"
-                  class="px-2 sm:px-3 py-2 rounded-lg border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-blue-500"
+                  class="px-3 py-2 rounded-xl border border-gray-200 text-sm font-medium bg-white text-gray-900 focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 >
                   <option value="10">10 per page</option>
                   <option value="25">25 per page</option>
                   <option value="50">50 per page</option>
                 </select>
-                <span class="text-gray-600 text-xs sm:text-sm">
-                  {{ paginationStart }} - {{ paginationEnd }} of {{ filteredStaff.length }}
+                <span class="text-sm text-gray-600 font-medium">
+                  {{ paginationStart }} – {{ paginationEnd }} of {{ filteredStaff.length }}
                 </span>
               </div>
-              <div class="flex items-center gap-1 sm:gap-2">
+              <div class="flex items-center gap-2">
                 <button 
                   @click="currentPage--"
                   :disabled="currentPage === 1"
-                  class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed text-gray-700 transition-colors"
+                  class="p-2.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed text-gray-700 transition-colors"
                   title="Previous page"
                 >
-                  <ChevronLeftIcon class="w-4 h-4" />
+                  <ChevronLeftIcon class="w-5 h-5" />
                 </button>
-                <span class="text-sm text-gray-700 px-2 sm:px-3 py-2 bg-white rounded-lg border border-gray-200 font-medium min-w-[60px] text-center">
-                  {{ currentPage }} / {{ totalPages }}
-                </span>
+                <span class="text-sm font-medium text-gray-700 min-w-[80px] text-center">Page {{ currentPage }} of {{ totalPages }}</span>
                 <button 
                   @click="currentPage++"
                   :disabled="currentPage >= totalPages"
-                  class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed text-gray-700 transition-colors"
+                  class="p-2.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed text-gray-700 transition-colors"
                   title="Next page"
                 >
-                  <ChevronRightIcon class="w-4 h-4" />
+                  <ChevronRightIcon class="w-5 h-5" />
                 </button>
               </div>
             </div>
@@ -746,28 +728,28 @@
     </div>
   </div>
 
-  <!-- Enhanced modal with drag and drop photo upload -->
   <!-- Edit Staff Modal -->
   <div v-if="showAddModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-lg shadow-2xl max-h-[90vh] overflow-y-auto">
-      <div class="p-6 border-b border-gray-200 flex justify-between items-center sticky top-0 bg-white rounded-t-xl">
-        <h3 class="text-xl font-bold text-gray-900">
-          Edit Staff Member
-        </h3>
-        <button 
-          @click="closeModal"
-          class="p-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors"
-          aria-label="Close modal"
-        >
-          <XIcon class="w-5 h-5" />
-        </button>
+    <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl max-h-[90vh] overflow-hidden flex flex-col border border-gray-200/80">
+      <div class="flex-shrink-0 px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-emerald-50">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-bold text-gray-900 tracking-tight">
+            Edit Staff Member
+          </h3>
+          <button 
+            @click="closeModal"
+            class="p-2 rounded-xl hover:bg-white/80 text-gray-500 hover:text-gray-700 transition-colors"
+            aria-label="Close modal"
+          >
+            <XIcon class="w-5 h-5" />
+          </button>
+        </div>
       </div>
       
-      <form @submit.prevent="handleSubmit" class="p-6">
-        <div class="space-y-6">
-          <!-- Enhanced photo upload with drag and drop -->
-          <!-- Profile Photo with Drag & Drop -->
-          <div class="flex flex-col items-center gap-4">
+      <form @submit.prevent="handleSubmit" class="flex-1 overflow-y-auto p-6">
+        <div class="space-y-5">
+          <!-- Profile Photo -->
+          <div class="flex flex-col items-center gap-4 rounded-xl bg-gray-50 p-4 border border-gray-200/80">
             <div 
               class="relative group"
               @dragover.prevent="isDragOver = true"
@@ -775,17 +757,17 @@
               @drop.prevent="handlePhotoDrop"
             >
               <div 
-                class="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden shadow-lg transition-all duration-200"
-                :class="{ 'scale-105 ring-4 ring-blue-200': isDragOver }"
+                class="w-24 h-24 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center overflow-hidden shadow-md transition-all duration-200 ring-2 ring-white"
+                :class="{ 'scale-105 ring-4 ring-green-200': isDragOver }"
               >
                 <img v-if="staffForm.photoURL" :src="staffForm.photoURL" alt="Profile" class="w-full h-full object-cover" />
                 <UserIcon v-else class="w-12 h-12 text-white" />
               </div>
               <div 
                 v-if="isDragOver"
-                class="absolute inset-0 rounded-full bg-blue-500/20 flex items-center justify-center"
+                class="absolute inset-0 rounded-2xl bg-green-500/20 flex items-center justify-center"
               >
-                <span class="text-blue-600 text-xs font-medium">Drop photo</span>
+                <span class="text-green-700 text-xs font-medium">Drop photo</span>
               </div>
               <input 
                 type="file" 
@@ -795,11 +777,11 @@
                 @change="handleStaffPhotoUpload"
               />
             </div>
-            <div class="flex gap-2">
+            <div class="flex gap-2 flex-wrap justify-center">
               <button 
                 type="button"
-                @click="$refs.photoInput.click()" 
-                class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-medium hover:shadow-lg transform hover:scale-105 transition-all duration-200 text-sm"
+                @click="triggerPhotoInput" 
+                class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-xl font-medium text-sm hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all"
               >
                 Change Photo
               </button>
@@ -807,24 +789,22 @@
                 v-if="staffForm.photoURL" 
                 type="button"
                 @click="removeStaffPhoto" 
-                class="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg font-medium hover:shadow-lg transform hover:scale-105 transition-all duration-200 text-sm"
+                class="px-4 py-2 border border-red-200 bg-red-50 text-red-600 rounded-xl font-medium text-sm hover:bg-red-100 transition-colors"
               >
                 Remove
               </button>
             </div>
-            <p class="text-xs text-gray-500 text-center">
-              Drag & drop an image or click to browse
-            </p>
+            <p class="text-xs text-gray-500 text-center">Drag & drop or click to browse</p>
           </div>
 
           <!-- Name -->
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5">Full Name</label>
             <input 
               type="text"
               v-model="staffForm.name"
               required
-              class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
+              class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400 text-sm shadow-sm"
               placeholder="Enter full name"
             />
           </div>
@@ -836,7 +816,7 @@
               type="email"
               v-model="staffForm.email"
               required
-              class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
+              class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400 text-sm shadow-sm"
               placeholder="Enter email address"
             />
           </div>
@@ -847,7 +827,7 @@
             <select 
               v-model="staffForm.role"
               required
-              class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
+              class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900 text-sm shadow-sm"
             >
               <option value="staff">Staff</option>
               <option value="admin">Admin</option>
@@ -860,7 +840,7 @@
             <select 
               v-model="staffForm.status"
               required
-              class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
+              class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900 text-sm shadow-sm"
             >
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
@@ -873,32 +853,30 @@
             <input 
               type="text"
               v-model="staffForm.position"
-              class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
+              class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400 text-sm shadow-sm"
               placeholder="Enter position"
             />
           </div>
         </div>
 
-        <div class="flex justify-end gap-3 mt-6 border-t border-gray-200 pt-6 sticky bottom-0 bg-white">
+        <div class="flex justify-end gap-3 mt-6 pt-6 border-t border-gray-200 bg-white">
           <button 
             type="button"
             @click="closeModal"
-            class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-medium"
+            class="px-5 py-2.5 border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-50 font-medium transition-colors"
           >
             Cancel
           </button>
           <button 
             type="submit"
-            class="px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg font-medium"
+            class="px-5 py-2.5 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-xl font-semibold shadow-lg shadow-green-500/20 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-60"
             :disabled="loading"
           >
             <span v-if="loading" class="flex items-center gap-2">
               <LoaderIcon class="w-5 h-5 animate-spin" />
               Saving...
             </span>
-            <span v-else>
-              Save Changes
-            </span>
+            <span v-else>Save Changes</span>
           </button>
         </div>
       </form>
@@ -907,25 +885,26 @@
 
   <!-- Delete Confirmation Modal -->
   <div v-if="showDeleteModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-xl border border-gray-200/80 overflow-hidden">
+      <div class="h-1.5 w-full bg-gradient-to-r from-red-400 to-rose-500"></div>
       <div class="p-6">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
-          <AlertTriangleIcon class="w-8 h-8 text-red-600" />
+        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-red-100 flex items-center justify-center">
+          <AlertTriangleIcon class="w-7 h-7 text-red-600" />
         </div>
         <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Delete Staff Member</h3>
-        <p class="text-gray-600 text-center mb-6">
+        <p class="text-gray-600 text-center mb-6 text-sm">
           Are you sure you want to delete {{ selectedStaff?.name || getFullName(selectedStaff) }}? This action cannot be undone.
         </p>
         <div class="flex justify-center gap-3">
           <button 
             @click="showDeleteModal = false"
-            class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+            class="px-5 py-2.5 border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-50 font-medium transition-colors"
           >
             Cancel
           </button>
           <button 
             @click="deleteStaff"
-            class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200"
+            class="px-5 py-2.5 bg-red-500 text-white rounded-xl font-semibold hover:bg-red-600 shadow-sm hover:shadow-md transition-all disabled:opacity-60"
             :disabled="loading"
           >
             <span v-if="loading" class="flex items-center gap-2">
@@ -1082,6 +1061,14 @@ const reloadComponent = () => {
   window.location.reload()
 }
 
+// Normalize Firestore Timestamp or date to ISO string for consistent handling
+const normalizeCreatedAt = (val) => {
+  if (val == null) return null
+  if (typeof val.toDate === 'function') return val.toDate().toISOString()
+  if (val instanceof Date) return val.toISOString()
+  return val
+}
+
 // Setup real-time listener for staff collection
 const setupRealtimeListener = async () => {
   try {
@@ -1152,10 +1139,11 @@ const setupRealtimeListener = async () => {
     unsubscribeStaffListener = onSnapshot(staffCollection, (snapshot) => {
       console.log('📡 Real-time update received! Changes:', snapshot.docChanges().length)
       
-      const staffData = snapshot.docs.map(doc => {
-        const data = doc.data()
+      const staffData = snapshot.docs.map(docSnap => {
+        const data = docSnap.data()
+        const createdAt = normalizeCreatedAt(data.createdAt) || new Date().toISOString()
         return {
-          id: doc.id,
+          id: docSnap.id,
           firstName: data.firstName || '',
           lastName: data.lastName || '',
           fullName: data.fullName || `${data.firstName || ''} ${data.lastName || ''}`.trim(),
@@ -1163,7 +1151,7 @@ const setupRealtimeListener = async () => {
           role: data.role || 'staff',
           status: data.status || 'active',
           photoURL: data.photoURL || null,
-          createdAt: data.createdAt || new Date().toISOString(),
+          createdAt,
           position: data.position || 'Staff Member'
         }
       })
@@ -1197,15 +1185,15 @@ const setupRealtimeListener = async () => {
       console.error('Error details:', error.code, error.message)
       
       // Provide more specific error messages
-      let errorMessage = error.message
-      if (error.code === 'permission-denied') {
+      let errorMessage = error?.message ?? 'Unknown error'
+      if (error?.code === 'permission-denied') {
         errorMessage = 'Permission denied. Please ensure you are logged in as an admin and have proper access rights.'
-      } else if (error.code === 'unauthenticated') {
+      } else if (error?.code === 'unauthenticated') {
         errorMessage = 'Authentication required. Please log in again.'
         setTimeout(() => {
           router.push('/admin')
         }, 3000)
-      } else if (error.code === 'unavailable') {
+      } else if (error?.code === 'unavailable') {
         errorMessage = 'Firebase service is temporarily unavailable. Please try again later.'
       }
       
@@ -1338,12 +1326,11 @@ const fetchStaffMembers = async () => {
     
     console.log('📈 Staff snapshot size:', staffSnapshot.size)
     
-    const staffData = staffSnapshot.docs.map(doc => {
-      const data = doc.data()
-      console.log('👤 Staff document:', doc.id, data)
-      
+    const staffData = staffSnapshot.docs.map(docSnap => {
+      const data = docSnap.data()
+      const createdAt = normalizeCreatedAt(data.createdAt) || new Date().toISOString()
       return {
-        id: doc.id,
+        id: docSnap.id,
         firstName: data.firstName || '',
         lastName: data.lastName || '',
         fullName: data.fullName || `${data.firstName || ''} ${data.lastName || ''}`.trim(),
@@ -1351,7 +1338,7 @@ const fetchStaffMembers = async () => {
         role: data.role || 'staff',
         status: data.status || 'active',
         photoURL: data.photoURL || null,
-        createdAt: data.createdAt || new Date().toISOString(),
+        createdAt,
         position: data.position || 'Staff Member'
       }
     })
@@ -1375,10 +1362,10 @@ const fetchStaffMembers = async () => {
     console.error('Error details:', error.code, error.message)
     
     // Provide more specific error messages and retry logic
-    let errorMessage = error.message
+    let errorMessage = error?.message ?? 'Unknown error'
     let shouldRetry = false
-    
-    if (error.code === 'permission-denied') {
+
+    if (error?.code === 'permission-denied') {
       // Double-check admin status before showing error
       try {
         if (auth.currentUser) {
@@ -1401,15 +1388,15 @@ const fetchStaffMembers = async () => {
       } catch (checkError) {
         errorMessage = 'Unable to verify permissions. Please try logging out and logging back in.'
       }
-    } else if (error.code === 'unauthenticated') {
+    } else if (error?.code === 'unauthenticated') {
       errorMessage = 'Your session has expired. Please log in again.'
       setTimeout(() => {
         router.push('/admin')
       }, 3000)
-    } else if (error.code === 'unavailable') {
+    } else if (error?.code === 'unavailable') {
       errorMessage = 'Firebase service is temporarily unavailable. Please try again in a few moments.'
       shouldRetry = true
-    } else if (error.code === 'failed-precondition') {
+    } else if (error?.code === 'failed-precondition') {
       errorMessage = 'Database connection issue. Please refresh the page and try again.'
       shouldRetry = true
     }
@@ -1469,15 +1456,16 @@ const handleSubmit = async () => {
   try {
     loading.value = true
     
-    // Split the name into firstName and lastName
-    const nameParts = staffForm.value.name.split(' ')
+    // Split the name into firstName and lastName (guard against empty/undefined)
+    const nameStr = (staffForm.value.name || '').trim()
+    const nameParts = nameStr ? nameStr.split(/\s+/) : ['']
     const firstName = nameParts[0] || ''
     const lastName = nameParts.slice(1).join(' ') || ''
     
     const staffData = {
       firstName,
       lastName,
-      fullName: staffForm.value.name.trim(),
+      fullName: nameStr || 'Unnamed',
       email: staffForm.value.email,
       role: staffForm.value.role,
       status: staffForm.value.status,
@@ -1553,6 +1541,10 @@ const removeStaffPhoto = () => {
   staffForm.value.photoURL = null
 }
 
+const triggerPhotoInput = () => {
+  photoInput.value?.click()
+}
+
 // Bulk operations
 const bulkUpdateStatus = async (status) => {
   if (selectedStaffIds.value.length === 0) return
@@ -1605,9 +1597,9 @@ const filteredStaff = computed(() => {
   // Apply search filter with debounced query
   if (debouncedSearchQuery.value) {
     const query = debouncedSearchQuery.value.toLowerCase()
-    filtered = filtered.filter(staff => 
+    filtered = filtered.filter(staff =>
       getFullName(staff).toLowerCase().includes(query) ||
-      staff.email.toLowerCase().includes(query) ||
+      (staff.email || '').toLowerCase().includes(query) ||
       (staff.position || '').toLowerCase().includes(query)
     )
   }
@@ -1721,6 +1713,7 @@ const closeModal = () => {
 }
 
 const getRoleBadgeClass = (role) => {
+  if (role == null || role === '') return 'bg-gray-100 text-gray-800 border border-gray-200'
   const classes = {
     admin: 'bg-purple-100 text-purple-800 border border-purple-200',
     staff: 'bg-blue-100 text-blue-800 border border-blue-200'
@@ -1729,6 +1722,7 @@ const getRoleBadgeClass = (role) => {
 }
 
 const getStatusBadgeClass = (status) => {
+  if (status == null || status === '') return 'bg-gray-100 text-gray-800 border border-gray-200'
   const classes = {
     active: 'bg-green-100 text-green-800 border border-green-200',
     inactive: 'bg-red-100 text-red-800 border border-red-200'
@@ -1737,24 +1731,31 @@ const getStatusBadgeClass = (status) => {
 }
 
 const formatRole = (role) => {
+  if (role == null || role === '') return '—'
   const roles = {
     admin: 'Admin',
     staff: 'Staff'
   }
-  return roles[role] || role
+  return roles[role] || String(role)
 }
 
 const formatStatus = (status) => {
+  if (status == null || status === '') return '—'
   const statuses = {
     active: 'Active',
     inactive: 'Inactive'
   }
-  return statuses[status] || status
+  return statuses[status] || String(status)
 }
 
 const formatDate = (date) => {
-  if (!date) return 'Never'
-  return new Date(date).toLocaleDateString()
+  if (date == null) return 'Never'
+  try {
+    const d = typeof date.toDate === 'function' ? date.toDate() : new Date(date)
+    return isNaN(d.getTime()) ? 'Never' : d.toLocaleDateString()
+  } catch {
+    return 'Never'
+  }
 }
 
 const toggleMobileSidebar = () => {
@@ -1770,14 +1771,15 @@ const userEmail = computed(() => 'admin@example.com');
 
 // Add missing methods that were referenced but not defined
 const editStaff = (staff) => {
+  if (!staff) return
   editingStaff.value = staff
   staffForm.value = {
     name: getFullName(staff),
-    email: staff.email,
+    email: staff.email ?? '',
     role: staff.role || 'staff',
     status: staff.status || 'active',
     photoURL: staff.photoURL || null,
-    position: staff.position || ''
+    position: staff.position ?? ''
   }
   showAddModal.value = true
 }
@@ -1813,7 +1815,7 @@ const deleteStaff = async () => {
     connectionStatus.value = {
       success: false,
       title: 'Delete Failed',
-      message: `Error deleting staff: ${error.message}`
+      message: `Error deleting staff: ${error?.message ?? 'Unknown error'}`
     }
     
     setTimeout(() => {

@@ -1,104 +1,101 @@
 <template>
   <!-- biome-ignore lint/correctness/useHookAtTopLevel: False positive - all hooks are at top level -->
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
+  <div 
+    class="min-h-screen bg-gradient-to-b from-slate-50 via-amber-50/20 to-slate-100/80 relative overflow-x-hidden"
+    :class="{ 'overflow-y-hidden': showSecurityCodeModal || showEraseAllModal || showDeleteAccountModal }"
+  >
     <!-- Background Elements -->
-    <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-200 to-blue-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="absolute top-0 right-0 w-[480px] h-[480px] bg-gradient-to-br from-amber-200/25 to-orange-200/20 rounded-full filter blur-3xl transform translate-x-1/4 -translate-y-1/4"></div>
+      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-br from-yellow-200/20 to-amber-200/15 rounded-full filter blur-3xl transform -translate-x-1/4 translate-y-1/4"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(245,158,11,0.06),transparent)]"></div>
     </div>
 
-    <div class="relative z-10 flex h-screen">
+    <div class="relative z-10 flex min-h-screen flex-col md:flex-row md:h-screen">
       <!-- Sidebar -->
-      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden md:flex md:flex-col shadow-lg">
-        <!-- Logo/Brand -->
-        <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <ShieldIcon class="h-3 w-3 mr-1" />
+      <aside class="w-64 bg-white/95 backdrop-blur-sm border-r border-gray-200/80 hidden md:flex md:flex-col shadow-sm">
+        <div class="p-4 xl:p-5 border-b border-gray-100 flex-shrink-0">
+          <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight tracking-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-amber-500 to-orange-600 px-2.5 xl:px-3 py-1.5 rounded-lg inline-flex items-center shadow-sm font-medium">
+            <ShieldIcon class="h-3.5 w-3.5 mr-1.5 flex-shrink-0" />
             Admin Portal
           </div>
         </div>
 
-        <!-- Navigation - Scrollable Area -->
-        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+        <nav class="flex-1 p-3 xl:p-4 space-y-1 overflow-y-auto">
           <router-link 
             to="/admin/dashboard" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-            :class="{ 'shadow-sm border border-blue-200 transform scale-105': $route.path === '/admin/dashboard' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+            :class="{ 'shadow-sm border-l-4 border-blue-500': $route.path === '/admin/dashboard' }"
           >
-            <LayoutDashboardIcon class="w-5 h-5" />
-            <span>Dashboard</span>
+            <LayoutDashboardIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Dashboard</span>
           </router-link>
 
           <router-link 
             to="/admin/staff" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
-            :class="{ 'shadow-sm border border-green-200 transform scale-105': $route.path === '/admin/staff' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
+            :class="{ 'shadow-sm border-l-4 border-green-500': $route.path === '/admin/staff' }"
           >
-            <UsersIcon class="w-5 h-5" />
-            <span>Staff Management</span>
+            <UsersIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Staff Management</span>
           </router-link>
 
           <router-link 
             to="/admin/inventory" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
-            :class="{ 'shadow-sm border border-purple-200 transform scale-105': $route.path === '/admin/inventory' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
+            :class="{ 'shadow-sm border-l-4 border-purple-500': $route.path === '/admin/inventory' }"
           >
-            <PackageIcon class="w-5 h-5" />
-            <span>Inventory</span>
+            <PackageIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Inventory</span>
           </router-link>
 
           <router-link 
             to="/admin/house-paint-recommender" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
-            :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/admin/house-paint-recommender' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
+            :class="{ 'shadow-sm border-l-4 border-orange-500': $route.path === '/admin/house-paint-recommender' }"
           >
-            <HomeIcon class="w-5 h-5" />
-            <span>Paint Recommender</span>
+            <HomeIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Paint Recommender</span>
           </router-link>
 
           <router-link 
             to="/admin/paint-mixing" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
-            :class="{ 'shadow-sm border border-pink-200 transform scale-105': $route.path === '/admin/paint-mixing' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
+            :class="{ 'shadow-sm border-l-4 border-pink-500': $route.path === '/admin/paint-mixing' }"
           >
-            <PaletteIcon class="w-5 h-5" />
-            <span>Paint Mixing</span>
+            <PaletteIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Paint Mixing</span>
           </router-link>
 
           <router-link 
             to="/admin/sales-analytics" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
-            :class="{ 'shadow-sm border border-teal-200 transform scale-105': $route.path === '/admin/sales-analytics' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
+            :class="{ 'shadow-sm border-l-4 border-teal-500': $route.path === '/admin/sales-analytics' }"
           >
-            <TrendingUpIcon class="w-5 h-5" />
-            <span>Sales Analytics</span>
+            <TrendingUpIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Sales Analytics</span>
           </router-link>
 
-          <router-link to="/admin/visualization" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 shadow-sm border border-indigo-200">
+          <router-link to="/admin/visualization" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700">
             <BarChart3Icon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Data Visualization</span>
           </router-link>
 
           <router-link 
             to="/admin/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 shadow-sm border border-amber-200 transform scale-105"
-            :class="{ 'hover:bg-amber-100 hover:text-amber-700': $route.path !== '/admin/settings' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700 shadow-sm border-l-4 border-amber-500"
           >
-            <SettingsIcon class="w-5 h-5" />
-            <span>Settings</span>
+            <SettingsIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="text-sm xl:text-base truncate">Settings</span>
           </router-link>
 
-          <!-- Perfect spacing -->
           <div class="h-4"></div>
         </nav>
 
-        <!-- User Menu - Fixed at bottom -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-4 border-t border-gray-100 bg-gradient-to-r from-amber-50/80 to-orange-50/80 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-md flex-shrink-0">
               <UserIcon class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
@@ -107,7 +104,7 @@
             </div>
             <button 
               @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
+              class="p-2.5 rounded-xl hover:bg-white/60 text-gray-600 hover:text-gray-900 transition-colors"
               title="Logout"
             >
               <LogOutIcon class="w-5 h-5" />
@@ -120,7 +117,7 @@
       <div class="fixed top-4 left-4 z-30 md:hidden">
         <button 
           @click="toggleMobileSidebar"
-          class="p-3 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+          class="p-3 bg-white/95 backdrop-blur-sm border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
           aria-label="Toggle navigation menu"
         >
           <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
@@ -131,124 +128,61 @@
       <!-- Mobile Sidebar -->
       <div 
         v-if="mobileSidebarOpen" 
-        class="fixed inset-0 bg-black/20 z-20 md:hidden"
+        class="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 md:hidden"
         @click="toggleMobileSidebar"
       ></div>
 
       <aside 
         v-if="mobileSidebarOpen"
-        class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-20 md:hidden shadow-xl flex flex-col"
+        class="fixed left-0 top-0 h-full w-64 bg-white/95 backdrop-blur-sm border-r border-gray-200 z-30 md:hidden shadow-xl flex flex-col"
       >
-        <!-- Logo/Brand -->
-        <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <ShieldIcon class="h-3 w-3 mr-1" />
+        <div class="p-5 border-b border-gray-100 flex-shrink-0">
+          <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-amber-500 to-orange-600 px-2.5 py-1.5 rounded-lg inline-flex items-center font-medium">
+            <ShieldIcon class="h-3.5 w-3.5 mr-1" />
             Admin Portal
           </div>
         </div>
 
-        <!-- Mobile Navigation - Scrollable -->
-        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link 
-            to="/admin/dashboard" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50"
-            :class="{ 'shadow-sm border border-blue-200': $route.path === '/admin/dashboard' }"
-            @click="mobileSidebarOpen = false"
-          >
+        <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+          <router-link to="/admin/dashboard" class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50" :class="{ 'shadow-sm border-l-4 border-blue-500': $route.path === '/admin/dashboard' }" @click="mobileSidebarOpen = false">
             <LayoutDashboardIcon class="w-5 h-5" />
             <span>Dashboard</span>
           </router-link>
-
-          <router-link 
-            to="/admin/staff" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50"
-            :class="{ 'shadow-sm border border-green-200': $route.path === '/admin/staff' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/admin/staff" class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50" :class="{ 'shadow-sm border-l-4 border-green-500': $route.path === '/admin/staff' }" @click="mobileSidebarOpen = false">
             <UsersIcon class="w-5 h-5" />
             <span>Staff Management</span>
           </router-link>
-
-          <router-link 
-            to="/admin/inventory" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50"
-            :class="{ 'shadow-sm border border-purple-200': $route.path === '/admin/inventory' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/admin/inventory" class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50" :class="{ 'shadow-sm border-l-4 border-purple-500': $route.path === '/admin/inventory' }" @click="mobileSidebarOpen = false">
             <PackageIcon class="w-5 h-5" />
             <span>Inventory</span>
           </router-link>
-
-          <router-link 
-            to="/admin/house-paint-recommender" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50"
-            :class="{ 'shadow-sm border border-orange-200': $route.path === '/admin/house-paint-recommender' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/admin/house-paint-recommender" class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50" :class="{ 'shadow-sm border-l-4 border-orange-500': $route.path === '/admin/house-paint-recommender' }" @click="mobileSidebarOpen = false">
             <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+            <span>Paint Recommender</span>
           </router-link>
-
-          <router-link 
-            to="/admin/paint-mixing" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50"
-            :class="{ 'shadow-sm border border-pink-200': $route.path === '/admin/paint-mixing' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/admin/paint-mixing" class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50" :class="{ 'shadow-sm border-l-4 border-pink-500': $route.path === '/admin/paint-mixing' }" @click="mobileSidebarOpen = false">
             <PaletteIcon class="w-5 h-5" />
             <span>Paint Mixing</span>
           </router-link>
-
-          <router-link 
-            to="/admin/sales-analytics" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50"
-            :class="{ 'shadow-sm border border-teal-200': $route.path === '/admin/sales-analytics' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/admin/sales-analytics" class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50" :class="{ 'shadow-sm border-l-4 border-teal-500': $route.path === '/admin/sales-analytics' }" @click="mobileSidebarOpen = false">
             <TrendingUpIcon class="w-5 h-5" />
             <span>Sales Analytics</span>
           </router-link>
-
-          <router-link 
-            to="/admin/reports" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50"
-            :class="{ 'shadow-sm border border-indigo-200': $route.path === '/admin/reports' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <ClipboardIcon class="w-5 h-5" />
-            <span>Reports</span>
+          <router-link to="/admin/visualization" class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50" :class="{ 'shadow-sm border-l-4 border-indigo-500': $route.path === '/admin/visualization' }" @click="mobileSidebarOpen = false">
+            <BarChart3Icon class="w-5 h-5" />
+            <span>Data Visualization</span>
           </router-link>
-
-          <router-link 
-            to="/admin/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 shadow-sm border border-amber-200"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/admin/settings" class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 shadow-sm border-l-4 border-amber-500" @click="mobileSidebarOpen = false">
             <SettingsIcon class="w-5 h-5" />
-            <span>System Settings</span>
+            <span>Settings</span>
           </router-link>
-
-          <router-link 
-            to="/admin/security" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-red-600 bg-red-50"
-            :class="{ 'shadow-sm border border-red-200': $route.path === '/admin/security' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <ShieldIcon class="w-5 h-5" />
-            <span>Security</span>
-          </router-link>
-
-          <!-- Perfect spacing for mobile too -->
           <div class="h-4"></div>
         </nav>
 
-        <!-- Mobile User Menu - Fixed at bottom -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-4 border-t border-gray-100 bg-gradient-to-r from-amber-50 to-orange-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-md">
               <UserIcon class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
@@ -267,179 +201,221 @@
       </aside>
 
       <!-- Main Content -->
-      <main class="flex-1 overflow-auto">
-        <!-- Header -->
-        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-4 shadow-sm">
-          <div class="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:items-center justify-between">
-            <!-- Enhanced mobile header layout -->
-            <div class="ml-12 md:ml-0">
-              <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Settings</h1>
-              <p class="text-sm sm:text-base text-gray-600">Manage your account security settings</p>
+      <main class="flex-1 min-h-0 overflow-auto overflow-x-hidden">
+        <header class="relative bg-white/80 backdrop-blur-md border-b border-gray-200/90 px-4 sm:px-6 lg:px-8 py-4 sm:py-5 shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-4 ml-12 md:ml-0">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/25">
+                <SettingsIcon class="w-7 h-7 text-white" />
+              </div>
+              <div>
+                <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">System Settings</h1>
+                <p class="text-sm sm:text-base text-gray-500 mt-0.5">Manage your account preferences and security protocols.</p>
+              </div>
             </div>
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-              <div class="flex items-center gap-2 text-gray-700 text-sm sm:text-base">
-                <CalendarIcon class="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
-                <span class="hidden sm:inline">{{ currentDate }}</span>
-                <span class="sm:hidden">{{ currentDate.split(',')[0] }}</span>
+              <div class="flex items-center gap-2 px-3 py-2 rounded-xl bg-amber-50/80 border border-amber-100 text-amber-800 text-sm font-medium">
+                <CalendarIcon class="w-4 h-4 flex-shrink-0" />
+                <span class="truncate max-w-[180px] sm:max-w-none">{{ currentDate }}</span>
               </div>
-              <div class="hidden sm:block h-6 w-px bg-gray-300"></div>
-              <div class="flex items-center gap-2 sm:gap-3">
-                <span class="text-sm sm:text-base text-gray-900 truncate max-w-32 sm:max-w-none">Welcome, {{ userDisplayName || 'Admin' }}</span>
-                <div class="relative">
-                  <BellIcon class="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 cursor-pointer hover:text-orange-600" />
-                </div>
+              <div class="hidden sm:block h-8 w-px bg-gray-200"></div>
+              <div class="flex items-center gap-3">
+                <span class="text-sm text-gray-700 truncate max-w-32 sm:max-w-none">Welcome, <strong class="text-gray-900">{{ userDisplayName || 'Admin' }}</strong></span>
+                <button class="p-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-colors">
+                  <BellIcon class="w-5 h-5" />
+                </button>
               </div>
             </div>
           </div>
         </header>
 
-        <!-- Enhanced responsive padding and spacing -->
-        <div class="p-4 sm:p-6 lg:p-8">
-          <!-- Settings Content - Better Layout -->
-          <div class="max-w-4xl mx-auto">
-            <!-- Page Title -->
-            <div class="mb-6 sm:mb-8">
-              <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Account Settings</h2>
-              <p class="text-gray-600 text-sm sm:text-base">Manage your account security and preferences</p>
+        <div class="p-3 sm:p-4 lg:p-6">
+          <div class="max-w-5xl mx-auto">
+            <!-- Two-column layout: Left = Profile + Tip, Right = Security Credentials -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-6">
+              <!-- Left column: Admin Profile + Security Tip -->
+              <div class="lg:col-span-4 space-y-3">
+                <!-- Admin Profile Card -->
+                <div class="bg-white rounded-xl border border-gray-200/90 shadow-sm overflow-hidden">
+                  <div class="p-4 flex flex-col items-center text-center">
+                    <div class="w-14 h-14 rounded-xl bg-orange-500 flex items-center justify-center text-white text-xl font-bold mb-3">
+                      {{ adminInitial }}
+                    </div>
+                    <h3 class="text-base font-bold text-gray-900 truncate w-full">{{ userDisplayName || 'Admin User' }}</h3>
+                    <p class="text-xs text-gray-500 truncate w-full mt-0.5">{{ userEmail || 'admin@example.com' }}</p>
+                    <div class="mt-3 w-full">
+                      <span class="inline-block px-3 py-1.5 rounded-lg bg-emerald-100 text-emerald-700 text-xs font-semibold">
+                        ACTIVE ACCOUNT
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Security Tip Card -->
+                <div class="bg-white rounded-xl border-2 border-blue-200/90 shadow-sm p-3">
+                  <div class="flex gap-2">
+                    <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
+                      <ShieldCheckIcon class="w-4 h-4 text-blue-600" />
+                    </div>
+                    <p class="text-xs text-gray-700 leading-snug">
+                      Your account security is our priority. Always use a unique password to protect your inventory data.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right column: Security Credentials -->
+              <div class="lg:col-span-8 min-w-0">
+                <div class="bg-white rounded-xl border border-gray-200/90 shadow-sm overflow-hidden lg:h-full">
+                  <div class="p-4 border-b border-gray-100">
+                    <h3 class="text-base font-bold text-gray-900">Security Credentials</h3>
+                    <p class="text-xs text-gray-500 mt-0.5">Update your access password regularly</p>
+                  </div>
+                  <form @submit.prevent="updatePassword" class="p-4 space-y-4">
+                    <div>
+                      <label class="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1">Current Password</label>
+                      <div class="relative">
+                        <div class="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400">
+                          <LockIcon class="w-4 h-4" />
+                        </div>
+                        <input 
+                          :type="showCurrentPassword ? 'text' : 'password'"
+                          v-model="passwordForm.current"
+                          required
+                          class="w-full pl-9 pr-9 py-2.5 text-sm rounded-lg border border-gray-200 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-orange-200 focus:border-orange-400 text-gray-900 transition-all"
+                          placeholder="Verify identity"
+                        />
+                        <button type="button" @click="showCurrentPassword = !showCurrentPassword" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 -m-2 text-gray-400 hover:text-gray-600 touch-manipulation" aria-label="Toggle password visibility">
+                          <EyeIcon v-if="!showCurrentPassword" class="w-4 h-4" />
+                          <EyeOffIcon v-else class="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1">New Password</label>
+                        <div class="relative">
+                          <div class="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400">
+                            <KeyIcon class="w-4 h-4" />
+                          </div>
+                          <input 
+                            :type="showNewPassword ? 'text' : 'password'"
+                            v-model="passwordForm.new"
+                            required
+                            minlength="8"
+                            class="w-full pl-9 pr-9 py-2.5 text-sm rounded-lg border border-gray-200 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-orange-200 focus:border-orange-400 text-gray-900 transition-all"
+                            placeholder="Min. 8 characters"
+                          />
+                          <button type="button" @click="showNewPassword = !showNewPassword" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 -m-2 text-gray-400 hover:text-gray-600 touch-manipulation" aria-label="Toggle password visibility">
+                            <EyeIcon v-if="!showNewPassword" class="w-4 h-4" />
+                            <EyeOffIcon v-else class="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1">Confirm Password</label>
+                        <div class="relative">
+                          <div class="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400">
+                            <CheckIcon class="w-4 h-4" />
+                          </div>
+                          <input 
+                            :type="showConfirmPassword ? 'text' : 'password'"
+                            v-model="passwordForm.confirm"
+                            required
+                            class="w-full pl-9 pr-9 py-2.5 text-sm rounded-lg border border-gray-200 bg-gray-50/50 focus:bg-white focus:ring-2 focus:ring-orange-200 focus:border-orange-400 text-gray-900 transition-all"
+                            placeholder="Re-type new password"
+                          />
+                          <button type="button" @click="showConfirmPassword = !showConfirmPassword" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 -m-2 text-gray-400 hover:text-gray-600 touch-manipulation" aria-label="Toggle password visibility">
+                            <EyeIcon v-if="!showConfirmPassword" class="w-4 h-4" />
+                            <EyeOffIcon v-else class="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-end pt-1 gap-2">
+                      <button 
+                        type="submit"
+                        :disabled="isUpdatingPassword"
+                        class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 min-h-[44px] bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold rounded-lg shadow transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <ShieldCheckIcon class="w-4 h-4 flex-shrink-0" />
+                        {{ isUpdatingPassword ? 'Saving...' : 'Save New Password' }}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
 
-            <!-- Settings Grid Layout -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 max-w-3xl mx-auto">
-              <!-- Admin Security Code Card -->
-              <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden flex flex-col h-full">
-                <div class="p-4 flex flex-col flex-1">
-                  <div class="flex items-center gap-2.5 mb-3">
-                    <div class="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 shadow-md flex-shrink-0">
-                      <ShieldIcon class="w-4 h-4 text-white" />
+            <!-- Additional settings: Security Code, Erase Data, Delete Account -->
+            <div class="border-t border-gray-200 pt-6">
+              <h3 class="text-sm font-bold text-gray-900 mb-3">More options</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:items-stretch">
+                <!-- Admin Security Code Card -->
+                <div class="bg-white rounded-xl border-2 border-blue-200/90 shadow-sm p-4 hover:shadow-md transition-shadow flex flex-col">
+                  <div class="flex items-center gap-2 mb-2">
+                    <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
+                      <ShieldIcon class="w-4 h-4 text-blue-600" />
                     </div>
-                    <div class="flex-1 min-w-0">
-                      <h3 class="text-sm sm:text-base font-bold text-gray-900 truncate">Admin Security Code</h3>
-                      <p class="text-xs text-gray-500 mt-0.5">Manage registration security code</p>
+                    <div>
+                      <h4 class="font-bold text-gray-900 text-xs">Admin Security Code</h4>
+                      <p class="text-[11px] text-gray-500">Registration code</p>
                     </div>
                   </div>
-                  
-                  <div class="mb-3 p-2.5 bg-blue-50 rounded-lg border border-blue-200 flex-shrink-0">
-                    <p class="text-xs text-gray-600 mb-0.5">Current Code:</p>
-                    <p class="text-xs font-mono font-semibold text-blue-700 break-all">{{ adminSecurityCode || 'Not set' }}</p>
+                  <div class="flex-1 min-h-0 mb-2">
+                    <p class="text-[11px] font-mono text-blue-700 bg-blue-50 rounded px-2 py-1 truncate">{{ adminSecurityCode || 'Not set' }}</p>
                   </div>
-                  
-                  <div class="mt-auto">
-                    <button 
-                      @click="showSecurityCodeModal = true"
-                      class="w-full px-3 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium text-xs sm:text-sm"
-                    >
-                      <ShieldIcon class="w-3.5 h-3.5" />
-                      <span class="truncate">{{ adminSecurityCode ? 'Change Security Code' : 'Set Security Code' }}</span>
-                    </button>
-                  </div>
+                  <button 
+                    @click="showSecurityCodeModal = true"
+                    class="w-full py-2.5 min-h-[44px] text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors mt-auto touch-manipulation"
+                  >
+                    {{ adminSecurityCode ? 'Change Code' : 'Set Code' }}
+                  </button>
                 </div>
-              </div>
 
-              <!-- Change Password Card -->
-              <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden flex flex-col h-full">
-                <div class="p-4 flex flex-col flex-1">
-                  <div class="flex items-center gap-2.5 mb-3">
-                    <div class="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 shadow-md flex-shrink-0">
-                      <KeyIcon class="w-4 h-4 text-white" />
+                <!-- Erase All Data Card -->
+                <div class="bg-white rounded-xl border-2 border-violet-200/90 shadow-sm p-4 hover:shadow-md transition-shadow flex flex-col">
+                  <div class="flex items-center gap-2 mb-2">
+                    <div class="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center">
+                      <Trash2Icon class="w-4 h-4 text-violet-600" />
                     </div>
-                    <div class="flex-1 min-w-0">
-                      <h3 class="text-sm sm:text-base font-bold text-gray-900 truncate">Change Password</h3>
-                      <p class="text-xs text-gray-500 mt-0.5">Update your account password</p>
+                    <div>
+                      <h4 class="font-bold text-violet-900 text-xs">Erase All Data</h4>
+                      <p class="text-[11px] text-violet-700">Reset system data</p>
                     </div>
                   </div>
-                  
-                  <div class="mb-3 p-2.5 bg-purple-50 rounded-lg border border-purple-200 flex-shrink-0">
-                    <p class="text-xs text-gray-600 mb-0.5">Last Changed:</p>
-                    <p class="text-xs font-medium text-purple-700 break-words">{{ passwordLastChangedText }}</p>
+                  <div class="flex-1 min-h-0 mb-2">
+                    <p class="text-[11px] text-violet-800 line-clamp-2">Permanently delete all products, sales, staff, and customer data.</p>
                   </div>
-                  
-                  <div class="mt-auto">
-                    <button 
-                      @click="changePassword"
-                      class="w-full px-3 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-lg hover:from-purple-600 hover:to-pink-700 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium text-xs sm:text-sm"
-                    >
-                      <KeyIcon class="w-3.5 h-3.5" />
-                      Change Password
-                    </button>
-                  </div>
+                  <button 
+                    @click="showEraseAllModal = true"
+                    :disabled="isErasingData"
+                    class="w-full py-2.5 min-h-[44px] text-xs font-semibold text-white bg-gradient-to-r from-violet-600 to-purple-600 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 mt-auto touch-manipulation"
+                  >
+                    {{ isErasingData ? 'Erasing...' : 'Erase All Data' }}
+                  </button>
                 </div>
-              </div>
 
-              <!-- Erase All Data Card -->
-              <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border-2 border-orange-200 overflow-hidden flex flex-col h-full">
-                <div class="p-4 flex flex-col flex-1">
-                  <div class="flex items-center gap-2.5 mb-3">
-                    <div class="p-2 rounded-lg bg-gradient-to-br from-orange-500 to-red-600 shadow-md flex-shrink-0">
-                      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                      </svg>
+                <!-- Delete Account Card -->
+                <div class="bg-white rounded-xl border-2 border-red-200/90 shadow-sm p-4 hover:shadow-md transition-shadow flex flex-col">
+                  <div class="flex items-center gap-2 mb-2">
+                    <div class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center">
+                      <Trash2Icon class="w-4 h-4 text-red-600" />
                     </div>
-                    <div class="flex-1 min-w-0">
-                      <h3 class="text-sm sm:text-base font-bold text-orange-900 truncate">Erase All Data</h3>
-                      <p class="text-xs text-orange-700 mt-0.5">Reset all system data</p>
+                    <div>
+                      <h4 class="font-bold text-red-900 text-xs">Delete Account</h4>
+                      <p class="text-[11px] text-red-700">Remove your account</p>
                     </div>
                   </div>
-                  
-                  <div class="mb-3 p-2.5 bg-orange-50 rounded-lg border border-orange-200 flex-shrink-0">
-                    <p class="text-xs text-orange-800 font-medium flex items-start gap-1.5">
-                      <svg class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                      </svg>
-                      <span class="text-xs leading-snug">This will permanently delete all products, sales, orders, paint mixtures, recommendations, quotes, staff, and customer data. This action cannot be undone.</span>
-                    </p>
+                  <div class="flex-1 min-h-0 mb-2">
+                    <p class="text-[11px] text-red-800">Permanently delete your account. Cannot be undone.</p>
                   </div>
-                  
-                  <div class="mt-auto">
-                    <button 
-                      @click="eraseAllData"
-                      :disabled="isErasingData"
-                      class="w-full px-3 py-2 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-lg hover:from-orange-700 hover:to-red-700 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium text-xs sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                      </svg>
-                      <span class="truncate">{{ isErasingData ? 'Erasing All Data...' : 'Erase All Data' }}</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Delete Account Card -->
-              <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border-2 border-red-200 overflow-hidden flex flex-col h-full">
-                <div class="p-4 flex flex-col flex-1">
-                  <div class="flex items-center gap-2.5 mb-3">
-                    <div class="p-2 rounded-lg bg-gradient-to-br from-red-500 to-orange-600 shadow-md flex-shrink-0">
-                      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                      </svg>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <h3 class="text-sm sm:text-base font-bold text-red-900 truncate">Delete Account</h3>
-                      <p class="text-xs text-red-700 mt-0.5">Permanently delete your account</p>
-                    </div>
-                  </div>
-                  
-                  <div class="mb-3 p-2.5 bg-red-50 rounded-lg border border-red-200 flex-shrink-0">
-                    <p class="text-xs text-red-800 font-medium flex items-start gap-1.5">
-                      <svg class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                      </svg>
-                      <span class="text-xs leading-snug">This action cannot be undone. All your data will be permanently deleted.</span>
-                    </p>
-                  </div>
-                  
-                  <div class="mt-auto">
-                    <button 
-                      @click="deleteAccount"
-                      :disabled="isDeletingAccount"
-                      class="w-full px-3 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 font-medium text-xs sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                      </svg>
-                      <span class="truncate">{{ isDeletingAccount ? 'Deleting Account...' : 'Delete Account' }}</span>
-                    </button>
-                  </div>
+                  <button 
+                    @click="showDeleteAccountModal = true"
+                    :disabled="isDeletingAccount"
+                    class="w-full py-2.5 min-h-[44px] text-xs font-semibold text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 mt-auto touch-manipulation"
+                  >
+                    {{ isDeletingAccount ? 'Deleting...' : 'Delete Account' }}
+                  </button>
                 </div>
               </div>
             </div>
@@ -448,105 +424,108 @@
       </main>
     </div>
 
-    <!-- Success Toast -->
-    <div 
-      v-if="showToast"
-      class="fixed top-4 right-4 z-50 max-w-sm bg-white rounded-lg shadow-lg border transition-all duration-300 transform"
-      :class="{
-        'translate-x-full': !showToast,
-        'border-green-200': notificationType === 'success',
-        'border-red-200': notificationType === 'error'
-      }"
+    <!-- Toast -->
+    <Transition
+      enter-active-class="transition ease-out duration-300"
+      enter-from-class="opacity-0 translate-x-8"
+      enter-to-class="opacity-100 translate-x-0"
+      leave-active-class="transition ease-in duration-200"
+      leave-from-class="opacity-100 translate-x-0"
+      leave-to-class="opacity-0 translate-x-8"
     >
-      <div class="p-4 flex items-center gap-3">
-        <div 
-          class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
-          :class="{
-            'bg-green-100': notificationType === 'success',
-            'bg-red-100': notificationType === 'error'
-          }"
-        >
-          <CheckIcon v-if="notificationType === 'success'" class="w-6 h-6 text-green-600" />
-          <XIcon v-else class="w-6 h-6 text-red-600" />
-        </div>
-        <div class="flex-1 min-w-0">
-          <p 
-            class="font-medium"
+      <div 
+        v-if="showToast"
+        class="fixed top-4 right-4 left-4 sm:left-auto z-[60] sm:max-w-sm w-auto max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-xl border-2 transition-all duration-300"
+        :class="{
+          'border-emerald-200 shadow-emerald-500/10': notificationType === 'success',
+          'border-red-200 shadow-red-500/10': notificationType === 'error'
+        }"
+      >
+        <div class="p-4 flex items-center gap-3">
+          <div 
+            class="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
             :class="{
-              'text-green-800': notificationType === 'success',
-              'text-red-800': notificationType === 'error'
+              'bg-emerald-100': notificationType === 'success',
+              'bg-red-100': notificationType === 'error'
             }"
           >
-            {{ toastMessage }}
-          </p>
+            <CheckIcon v-if="notificationType === 'success'" class="w-6 h-6 text-emerald-600" />
+            <XIcon v-else class="w-6 h-6 text-red-600" />
+          </div>
+          <div class="flex-1 min-w-0">
+            <p 
+              class="font-semibold text-sm"
+              :class="{
+                'text-emerald-800': notificationType === 'success',
+                'text-red-800': notificationType === 'error'
+              }"
+            >
+              {{ toastMessage }}
+            </p>
+          </div>
+          <button 
+            @click="showToast = false"
+            class="flex-shrink-0 p-2 rounded-xl text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+          >
+            <XIcon class="w-5 h-5" />
+          </button>
         </div>
-        <button 
-          @click="showToast = false"
-          class="flex-shrink-0 ml-2 text-gray-400 hover:text-gray-600"
-        >
-          <XIcon class="w-5 h-5" />
-        </button>
       </div>
-    </div>
+    </Transition>
 
     <!-- Admin Security Code Modal -->
-    <div v-if="showSecurityCodeModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div class="bg-white rounded-xl w-full max-w-md border border-gray-200 shadow-2xl">
-        <div class="p-4 sm:p-6 border-b border-gray-200">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="p-2 rounded-lg bg-blue-100">
+    <div v-if="showSecurityCodeModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-end sm:items-center justify-center z-50 p-0 sm:p-4" @click.self="showSecurityCodeModal = false">
+      <div class="bg-white rounded-t-2xl sm:rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto border border-gray-200/90 shadow-2xl animate-slide-up flex flex-col">
+        <div class="h-1.5 w-full bg-gradient-to-r from-blue-500 to-indigo-600"></div>
+        <div class="p-4 sm:p-6 border-b border-gray-100 flex-shrink-0">
+          <div class="flex items-start sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-blue-100 flex items-center justify-center flex-shrink-0">
                 <ShieldIcon class="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
               </div>
-              <h3 class="text-lg sm:text-xl font-bold text-gray-900">Admin Security Code</h3>
+              <h3 class="text-base sm:text-xl font-bold text-gray-900 truncate">Admin Security Code</h3>
             </div>
             <button 
               @click="showSecurityCodeModal = false"
-              class="text-gray-400 hover:text-gray-600 transition-colors"
+              class="p-2.5 min-h-[44px] min-w-[44px] rounded-xl text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors flex-shrink-0 touch-manipulation"
+              aria-label="Close"
             >
               <XIcon class="w-5 h-5" />
             </button>
           </div>
         </div>
-        
         <form @submit.prevent="updateSecurityCode" class="p-4 sm:p-6 space-y-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">New Security Code</label>
+            <label class="block text-sm font-semibold text-gray-700 mb-1.5">New Security Code</label>
             <input 
               type="text"
               v-model="securityCodeForm.newCode"
               required
               minlength="4"
-              class="w-full px-3 py-2 text-sm sm:text-base rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
-              placeholder="Enter new security code (min. 4 characters)"
+              class="w-full px-4 py-3 text-sm sm:text-base rounded-xl border-2 border-gray-200 focus:ring-2 focus:ring-blue-300 focus:border-blue-400 bg-white text-gray-900 transition-all"
+              placeholder="Min. 4 characters"
             />
-            <p class="text-xs text-gray-500 mt-1">This code will be required for new admin registrations</p>
+            <p class="text-xs text-gray-500 mt-1.5">Required for new admin registrations</p>
           </div>
-          
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Security Code</label>
+            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Confirm Security Code</label>
             <input 
               type="text"
               v-model="securityCodeForm.confirmCode"
               required
               minlength="4"
-              class="w-full px-3 py-2 text-sm sm:text-base rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
-              placeholder="Confirm security code"
+              class="w-full px-4 py-3 text-sm sm:text-base rounded-xl border-2 border-gray-200 focus:ring-2 focus:ring-blue-300 focus:border-blue-400 bg-white text-gray-900 transition-all"
+              placeholder="Confirm code"
             />
           </div>
-
-          <div class="flex flex-col sm:flex-row justify-end gap-3 mt-6">
-            <button 
-              type="button"
-              @click="showSecurityCodeModal = false"
-              class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-            >
+          <div class="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-2">
+            <button type="button" @click="showSecurityCodeModal = false" class="w-full sm:w-auto px-4 py-3 min-h-[44px] sm:min-h-0 border-2 border-gray-200 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition-colors">
               Cancel
             </button>
             <button 
               type="submit"
               :disabled="isSavingSecurityCode"
-              class="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              class="w-full sm:w-auto px-5 py-3 min-h-[44px] sm:min-h-0 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-semibold shadow-lg shadow-blue-500/25 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               {{ isSavingSecurityCode ? 'Saving...' : 'Save Security Code' }}
             </button>
@@ -555,71 +534,89 @@
       </div>
     </div>
 
-    <!-- Change Password Modal -->
-    <div v-if="showPasswordModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div class="bg-white rounded-xl w-full max-w-md border border-gray-200 shadow-2xl">
-        <div class="p-4 sm:p-6 border-b border-gray-200">
-          <div class="flex items-center gap-3">
-            <div class="p-2 rounded-lg bg-purple-100">
-              <KeyIcon class="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
-            </div>
-            <h3 class="text-lg sm:text-xl font-bold text-gray-900">Change Password</h3>
+    <!-- Erase All Data Confirmation Modal -->
+    <div v-if="showEraseAllModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-end sm:items-center justify-center z-50 p-0 sm:p-4" @click.self="showEraseAllModal = false">
+      <div class="bg-white rounded-t-2xl sm:rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto border border-gray-200/90 shadow-2xl flex flex-col">
+        <div class="h-1.5 w-full bg-gradient-to-r from-violet-600 to-purple-600"></div>
+        <div class="p-4 sm:p-5 border-b border-gray-100 flex items-center gap-3 flex-shrink-0">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-violet-100 flex items-center justify-center flex-shrink-0">
+            <AlertTriangleIcon class="w-5 h-5 sm:w-6 sm:h-6 text-violet-600" />
+          </div>
+          <div class="min-w-0">
+            <h3 class="text-base sm:text-lg font-bold text-gray-900">Erase All Data</h3>
+            <p class="text-xs text-gray-500">This action cannot be undone</p>
+          </div>
+          <button @click="showEraseAllModal = false" class="ml-auto p-2 min-h-[44px] min-w-[44px] rounded-xl text-gray-400 hover:text-gray-600 hover:bg-gray-100 touch-manipulation flex items-center justify-center" aria-label="Close">
+            <XIcon class="w-5 h-5" />
+          </button>
+        </div>
+        <div class="p-4 sm:p-5 space-y-4">
+          <p class="text-sm text-gray-700">
+            This will permanently delete <strong>all</strong> data: products, sales, orders, paint mixtures, recommendations, quotes, staff, and customers.
+          </p>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1.5">Type <span class="font-mono text-violet-600">ERASE ALL</span> to confirm</label>
+            <input 
+              v-model="eraseConfirmText"
+              type="text"
+              class="w-full px-3 py-2.5 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-violet-200 focus:border-violet-400 text-sm"
+              placeholder="ERASE ALL"
+            />
           </div>
         </div>
-        
-        <form @submit.prevent="updatePassword" class="p-4 sm:p-6 space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
-            <input 
-              type="password"
-              v-model="passwordForm.current"
-              required
-              class="w-full px-3 py-2 text-sm sm:text-base rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
-              placeholder="Enter current password"
-            />
-          </div>
-          
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
-            <input 
-              type="password"
-              v-model="passwordForm.new"
-              required
-              class="w-full px-3 py-2 text-sm sm:text-base rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
-              placeholder="Enter new password"
-            />
-          </div>
-          
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
-            <input 
-              type="password"
-              v-model="passwordForm.confirm"
-              required
-              class="w-full px-3 py-2 text-sm sm:text-base rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
-              placeholder="Confirm new password"
-            />
-          </div>
-
-          <div class="flex flex-col sm:flex-row justify-end gap-3 mt-6">
-            <button 
-              type="button"
-              @click="showPasswordModal = false"
-              class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              Cancel
-            </button>
-            <button 
-              type="submit"
-              :disabled="isUpdatingPassword"
-              class="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {{ isUpdatingPassword ? 'Updating...' : 'Update Password' }}
-            </button>
-          </div>
-        </form>
+        <div class="p-4 sm:p-5 border-t border-gray-100 flex flex-col-reverse sm:flex-row gap-3 justify-end flex-shrink-0">
+          <button type="button" @click="showEraseAllModal = false" class="w-full sm:w-auto px-4 py-2.5 min-h-[44px] border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 touch-manipulation">
+            Cancel
+          </button>
+          <button 
+            type="button"
+            @click="confirmEraseAllData"
+            :disabled="eraseConfirmText !== 'ERASE ALL' || isErasingData"
+            class="w-full sm:w-auto px-4 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-violet-600 to-purple-600 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+          >
+            {{ isErasingData ? 'Erasing...' : 'Erase All Data' }}
+          </button>
+        </div>
       </div>
     </div>
+
+    <!-- Delete Account Confirmation Modal -->
+    <div v-if="showDeleteAccountModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-end sm:items-center justify-center z-50 p-0 sm:p-4" @click.self="showDeleteAccountModal = false">
+      <div class="bg-white rounded-t-2xl sm:rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto border border-gray-200/90 shadow-2xl flex flex-col">
+        <div class="h-1.5 w-full bg-red-500"></div>
+        <div class="p-4 sm:p-5 border-b border-gray-100 flex items-center gap-3 flex-shrink-0">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
+            <AlertTriangleIcon class="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
+          </div>
+          <div class="min-w-0">
+            <h3 class="text-base sm:text-lg font-bold text-gray-900">Delete Account</h3>
+            <p class="text-xs text-gray-500">This action cannot be undone</p>
+          </div>
+          <button @click="showDeleteAccountModal = false" class="ml-auto p-2 min-h-[44px] min-w-[44px] rounded-xl text-gray-400 hover:text-gray-600 hover:bg-gray-100 touch-manipulation flex items-center justify-center" aria-label="Close">
+            <XIcon class="w-5 h-5" />
+          </button>
+        </div>
+        <div class="p-4 sm:p-5">
+          <p class="text-sm text-gray-700">
+            Your admin account and all associated data will be <strong>permanently deleted</strong>. You will be logged out immediately.
+          </p>
+        </div>
+        <div class="p-4 sm:p-5 border-t border-gray-100 flex flex-col-reverse sm:flex-row gap-3 justify-end flex-shrink-0">
+          <button type="button" @click="showDeleteAccountModal = false" class="w-full sm:w-auto px-4 py-2.5 min-h-[44px] border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 touch-manipulation">
+            Cancel
+          </button>
+          <button 
+            type="button"
+            @click="confirmDeleteAccount"
+            :disabled="isDeletingAccount"
+            class="w-full sm:w-auto px-4 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-white bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+          >
+            {{ isDeletingAccount ? 'Deleting...' : 'Delete Account' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -644,6 +641,7 @@ import {
   TrendingUp as TrendingUpIcon,
   Settings as SettingsIcon,
   Shield as ShieldIcon,
+  ShieldCheck as ShieldCheckIcon,
   User as UserIcon,
   LogOut as LogOutIcon,
   Menu as MenuIcon,
@@ -653,7 +651,11 @@ import {
   Calendar as CalendarIcon,
   Bell as BellIcon,
   BarChart3 as BarChart3Icon,
-  Clipboard as ClipboardIcon
+  Trash2 as Trash2Icon,
+  AlertTriangle as AlertTriangleIcon,
+  Lock as LockIcon,
+  Eye as EyeIcon,
+  EyeOff as EyeOffIcon
 } from 'lucide-vue-next'
 
 const router = useRouter()
@@ -661,8 +663,13 @@ const mobileSidebarOpen = ref(false)
 const showToast = ref(false)
 const toastMessage = ref('')
 const notificationType = ref('success')
-const showPasswordModal = ref(false)
 const showSecurityCodeModal = ref(false)
+const showEraseAllModal = ref(false)
+const showDeleteAccountModal = ref(false)
+const eraseConfirmText = ref('')
+const showCurrentPassword = ref(false)
+const showNewPassword = ref(false)
+const showConfirmPassword = ref(false)
 const adminSecurityCode = ref('')
 const isSavingSecurityCode = ref(false)
 const isUpdatingPassword = ref(false)
@@ -681,6 +688,11 @@ const passwordForm = ref({
 const securityCodeForm = ref({
   newCode: '',
   confirmCode: ''
+})
+
+const adminInitial = computed(() => {
+  const name = userDisplayName.value || 'Admin'
+  return name.charAt(0).toUpperCase()
 })
 
 // Computed property for password last changed text
@@ -716,10 +728,6 @@ const passwordLastChangedText = computed(() => {
     return `Last changed ${years} year${years > 1 ? 's' : ''} ago`
   }
 })
-
-const changePassword = () => {
-  showPasswordModal.value = true
-}
 
 const updatePassword = async () => {
   // Validation
@@ -795,7 +803,6 @@ const updatePassword = async () => {
       new: '',
       confirm: ''
     }
-    showPasswordModal.value = false
     
     toastMessage.value = 'Password updated successfully!'
     notificationType.value = 'success'
@@ -828,38 +835,21 @@ const updatePassword = async () => {
   }
 }
 
-const eraseAllData = async () => {
+const confirmEraseAllData = async () => {
+  if (eraseConfirmText.value !== 'ERASE ALL') return
   if (!auth.currentUser) {
     toastMessage.value = 'You must be logged in to erase data!'
     notificationType.value = 'error'
     showToast.value = true
-    setTimeout(() => {
-      showToast.value = false
-    }, 3000)
+    setTimeout(() => { showToast.value = false }, 3000)
     return
   }
+  showEraseAllModal.value = false
+  eraseConfirmText.value = ''
+  await doEraseAllData()
+}
 
-  // First confirmation
-  if (!confirm('⚠️ WARNING: This will permanently delete ALL data from the system:\n\n• All Products\n• All Sales Records\n• All Orders\n• All Paint Mixtures\n• All Paint Recommendations\n• All Quotes\n• All Staff Members\n• All Customers\n\nThis action cannot be undone. Are you absolutely sure you want to proceed?')) {
-    return
-  }
-
-  // Second confirmation
-  if (!confirm('⚠️ FINAL WARNING: This will erase EVERYTHING. Type "ERASE ALL" to confirm (case sensitive):')) {
-    return
-  }
-
-  const confirmation = prompt('Type "ERASE ALL" to confirm:')
-  if (confirmation !== 'ERASE ALL') {
-    toastMessage.value = 'Confirmation text did not match. Operation cancelled.'
-    notificationType.value = 'error'
-    showToast.value = true
-    setTimeout(() => {
-      showToast.value = false
-    }, 3000)
-    return
-  }
-
+const doEraseAllData = async () => {
   try {
     isErasingData.value = true
 
@@ -920,27 +910,19 @@ const eraseAllData = async () => {
   }
 }
 
-const deleteAccount = async () => {
+const confirmDeleteAccount = async () => {
   if (!auth.currentUser) {
     toastMessage.value = 'You must be logged in to delete your account!'
     notificationType.value = 'error'
     showToast.value = true
-    setTimeout(() => {
-      showToast.value = false
-    }, 3000)
+    setTimeout(() => { showToast.value = false }, 3000)
     return
   }
+  showDeleteAccountModal.value = false
+  await doDeleteAccount()
+}
 
-  // First confirmation
-  if (!confirm('⚠️ WARNING: This will permanently delete your admin account and all associated data.\n\nThis action cannot be undone. Are you absolutely sure you want to proceed?')) {
-    return
-  }
-
-  // Second confirmation
-  if (!confirm('Please confirm one more time: Delete your account permanently?')) {
-    return
-  }
-
+const doDeleteAccount = async () => {
   try {
     isDeletingAccount.value = true
 
@@ -995,7 +977,12 @@ const toggleMobileSidebar = () => {
   mobileSidebarOpen.value = !mobileSidebarOpen.value
 }
 
-const handleLogout = () => {
+const handleLogout = async () => {
+  try {
+    await signOut(auth)
+  } catch (err) {
+    console.error('Logout error:', err)
+  }
   router.push('/admin')
 }
 
@@ -1137,33 +1124,33 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
   background: #f1f5f9;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  background: linear-gradient(135deg, #d97706, #c2410c);
 }
 
-/* Animation classes */
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out;
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
 }
 
-@keyframes fadeIn {
-  from { 
+@keyframes slideUp {
+  from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;

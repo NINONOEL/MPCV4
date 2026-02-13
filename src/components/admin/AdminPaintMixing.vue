@@ -1,21 +1,18 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
-    <!-- Background Elements -->
-    <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-200 to-blue-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+  <div class="min-h-screen bg-gradient-to-b from-slate-50 via-gray-50/95 to-slate-100/80 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="absolute top-0 right-0 w-[480px] h-[480px] bg-gradient-to-br from-pink-200/25 to-rose-200/20 rounded-full filter blur-3xl transform translate-x-1/4 -translate-y-1/4"></div>
+      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-br from-purple-200/20 to-fuchsia-200/15 rounded-full filter blur-3xl transform -translate-x-1/4 translate-y-1/4"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(236,72,153,0.06),transparent)]"></div>
     </div>
 
     <div class="relative z-10 flex h-screen">
       <!-- Sidebar -->
-      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden lg:flex lg:flex-col shadow-lg">
-        <!-- Logo/Brand -->
-        <div class="p-4 xl:p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-2 xl:px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <ShieldIcon class="h-3 w-3 mr-1" />
+      <aside class="w-64 bg-white/95 backdrop-blur-sm border-r border-gray-200/80 hidden lg:flex lg:flex-col shadow-sm">
+        <div class="p-4 xl:p-5 border-b border-gray-100 flex-shrink-0">
+          <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight tracking-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-pink-500 to-rose-500 px-2.5 xl:px-3 py-1.5 rounded-lg inline-flex items-center shadow-sm font-medium">
+            <ShieldIcon class="h-3.5 w-3.5 mr-1.5 flex-shrink-0" />
             Admin Portal
           </div>
         </div>
@@ -24,8 +21,8 @@
         <nav class="flex-1 p-3 xl:p-4 space-y-1 xl:space-y-2 overflow-y-auto">
           <router-link 
             to="/admin/dashboard" 
-            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-            :class="{ 'shadow-sm border border-blue-200': $route.path === '/admin/dashboard' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+            :class="{ 'shadow-sm border-l-4 border-blue-500': $route.path === '/admin/dashboard' }"
           >
             <LayoutDashboardIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Dashboard</span>
@@ -33,8 +30,8 @@
 
           <router-link 
             to="/admin/staff" 
-            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
-            :class="{ 'shadow-sm border border-green-200': $route.path === '/admin/staff' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
+            :class="{ 'shadow-sm border-l-4 border-green-500': $route.path === '/admin/staff' }"
           >
             <UsersIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Staff Management</span>
@@ -42,8 +39,8 @@
 
           <router-link 
             to="/admin/inventory" 
-            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
-            :class="{ 'shadow-sm border border-purple-200': $route.path === '/admin/inventory' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
+            :class="{ 'shadow-sm border-l-4 border-purple-500': $route.path === '/admin/inventory' }"
           >
             <PackageIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Inventory</span>
@@ -51,8 +48,8 @@
 
           <router-link 
             to="/admin/house-paint-recommender" 
-            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
-            :class="{ 'shadow-sm border border-orange-200': $route.path === '/admin/house-paint-recommender' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
+            :class="{ 'shadow-sm border-l-4 border-orange-500': $route.path === '/admin/house-paint-recommender' }"
           >
             <HomeIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Paint Recommender</span>
@@ -60,7 +57,8 @@
 
           <router-link 
             to="/admin/paint-mixing" 
-            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 shadow-sm border border-pink-200"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
+            :class="{ 'shadow-sm border-l-4 border-pink-500': $route.path === '/admin/paint-mixing' }"
           >
             <PaletteIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Paint Mixing</span>
@@ -68,8 +66,8 @@
 
           <router-link 
             to="/admin/sales-analytics" 
-            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
-            :class="{ 'shadow-sm border border-teal-200': $route.path === '/admin/sales-analytics' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
+            :class="{ 'shadow-sm border-l-4 border-teal-500': $route.path === '/admin/sales-analytics' }"
           >
             <TrendingUpIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Sales Analytics</span>
@@ -77,9 +75,8 @@
 
           <router-link
             to="/admin/visualization"
-            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700"
-            active-class="bg-indigo-100 border border-indigo-200 shadow-sm font-semibold"
-            :class="{ 'shadow-sm border border-indigo-200': $route.path === '/admin/visualization' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700"
+            :class="{ 'shadow-sm border-l-4 border-indigo-500': $route.path === '/admin/visualization' }"
           >
             <BarChart3Icon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Data Visualization</span>
@@ -87,8 +84,8 @@
 
           <router-link 
             to="/admin/settings" 
-            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700"
-            :class="{ 'shadow-sm border border-amber-200': $route.path === '/admin/settings' }"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700"
+            :class="{ 'shadow-sm border-l-4 border-amber-500': $route.path === '/admin/settings' }"
           >
             <SettingsIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Settings</span>
@@ -96,10 +93,10 @@
         </nav>
 
         <!-- User Menu - Fixed at bottom -->
-        <div class="p-3 xl:p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-3 xl:p-4 border-t border-gray-100 bg-gradient-to-r from-pink-50/80 to-rose-50/80 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-2 xl:gap-3">
-            <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg flex-shrink-0">
-              <UserIcon class="w-4 xl:w-5 h-4 xl:w-5 text-white" />
+            <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-md flex-shrink-0">
+              <UserIcon class="w-4 xl:w-5 h-4 xl:h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-xs xl:text-sm font-medium text-gray-900 truncate">{{ userDisplayName || 'Admin User' }}</p>
@@ -129,126 +126,63 @@
       </div>
 
       <!-- Mobile Sidebar Overlay -->
-      <div 
-        v-if="mobileSidebarOpen" 
-        class="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 lg:hidden"
-        @click="toggleMobileSidebar"
-      ></div>
+      <div v-if="mobileSidebarOpen" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 lg:hidden" @click="toggleMobileSidebar"></div>
 
       <!-- Mobile Sidebar -->
-      <aside 
-        v-if="mobileSidebarOpen"
-        class="fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-30 lg:hidden shadow-2xl flex flex-col"
-      >
-        <!-- Logo/Brand -->
-        <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <ShieldIcon class="h-3 w-3 mr-1" />
+      <aside v-if="mobileSidebarOpen" class="fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-white/95 backdrop-blur-sm border-r border-gray-200/80 z-30 lg:hidden shadow-2xl flex flex-col">
+        <div class="p-5 border-b border-gray-100 flex-shrink-0">
+          <h1 class="text-lg font-bold text-gray-900 leading-tight tracking-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-pink-500 to-rose-500 px-3 py-1.5 rounded-lg inline-flex items-center shadow-sm font-medium">
+            <ShieldIcon class="h-3.5 w-3.5 mr-1.5" />
             Admin Portal
           </div>
         </div>
 
-        <!-- Mobile Navigation - Scrollable -->
-        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link 
-            to="/admin/dashboard" 
-            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100"
-            :class="{ 'shadow-sm border border-blue-200': $route.path === '/admin/dashboard' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <LayoutDashboardIcon class="w-6 h-6 flex-shrink-0" />
+        <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+          <router-link to="/admin/dashboard" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700" :class="{ 'shadow-sm border-l-4 border-blue-500': $route.path === '/admin/dashboard' }" @click="mobileSidebarOpen = false">
+            <LayoutDashboardIcon class="w-5 h-5 flex-shrink-0" />
             <span class="text-base">Dashboard</span>
           </router-link>
-
-          <router-link 
-            to="/admin/staff" 
-            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100"
-            :class="{ 'shadow-sm border border-green-200': $route.path === '/admin/staff' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <UsersIcon class="w-6 h-6 flex-shrink-0" />
+          <router-link to="/admin/staff" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700" :class="{ 'shadow-sm border-l-4 border-green-500': $route.path === '/admin/staff' }" @click="mobileSidebarOpen = false">
+            <UsersIcon class="w-5 h-5 flex-shrink-0" />
             <span class="text-base">Staff Management</span>
           </router-link>
-
-          <router-link 
-            to="/admin/inventory" 
-            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100"
-            :class="{ 'shadow-sm border border-purple-200': $route.path === '/admin/inventory' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <PackageIcon class="w-6 h-6 flex-shrink-0" />
+          <router-link to="/admin/inventory" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700" :class="{ 'shadow-sm border-l-4 border-purple-500': $route.path === '/admin/inventory' }" @click="mobileSidebarOpen = false">
+            <PackageIcon class="w-5 h-5 flex-shrink-0" />
             <span class="text-base">Inventory</span>
           </router-link>
-
-          <router-link 
-            to="/admin/house-paint-recommender" 
-            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100"
-            :class="{ 'shadow-sm border border-orange-200': $route.path === '/admin/house-paint-recommender' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <HomeIcon class="w-6 h-6 flex-shrink-0" />
+          <router-link to="/admin/house-paint-recommender" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700" :class="{ 'shadow-sm border-l-4 border-orange-500': $route.path === '/admin/house-paint-recommender' }" @click="mobileSidebarOpen = false">
+            <HomeIcon class="w-5 h-5 flex-shrink-0" />
             <span class="text-base">Paint Recommender</span>
           </router-link>
-
-          <router-link 
-            to="/admin/paint-mixing" 
-            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 shadow-sm border border-pink-200"
-            @click="mobileSidebarOpen = false"
-          >
-            <PaletteIcon class="w-6 h-6 flex-shrink-0" />
-            <span class="text-base">Paint Mix</span>
+          <router-link to="/admin/paint-mixing" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700" :class="{ 'shadow-sm border-l-4 border-pink-500': $route.path === '/admin/paint-mixing' }" @click="mobileSidebarOpen = false">
+            <PaletteIcon class="w-5 h-5 flex-shrink-0" />
+            <span class="text-base">Paint Mixing</span>
           </router-link>
-
-          <router-link 
-            to="/admin/sales-analytics" 
-            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100"
-            :class="{ 'shadow-sm border border-teal-200': $route.path === '/admin/sales-analytics' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <TrendingUpIcon class="w-6 h-6 flex-shrink-0" />
+          <router-link to="/admin/sales-analytics" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700" :class="{ 'shadow-sm border-l-4 border-teal-500': $route.path === '/admin/sales-analytics' }" @click="mobileSidebarOpen = false">
+            <TrendingUpIcon class="w-5 h-5 flex-shrink-0" />
             <span class="text-base">Sales Analytics</span>
           </router-link>
-
-          <router-link
-            to="/admin/visualization"
-            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100"
-            active-class="bg-indigo-100 border border-indigo-200 shadow-sm font-semibold"
-            :class="{ 'shadow-sm border border-indigo-200': $route.path === '/admin/visualization' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <BarChart3Icon class="w-6 h-6 flex-shrink-0" />
-            <span class="text-base">Visualize</span>
+          <router-link to="/admin/visualization" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700" :class="{ 'shadow-sm border-l-4 border-indigo-500': $route.path === '/admin/visualization' }" @click="mobileSidebarOpen = false">
+            <BarChart3Icon class="w-5 h-5 flex-shrink-0" />
+            <span class="text-base">Data Visualization</span>
           </router-link>
-
-          <router-link 
-            to="/admin/settings" 
-            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100"
-            :class="{ 'shadow-sm border border-amber-200': $route.path === '/admin/settings' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <SettingsIcon class="w-6 h-6 flex-shrink-0" />
-            <span class="text-base">System Settings</span>
+          <router-link to="/admin/settings" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700" :class="{ 'shadow-sm border-l-4 border-amber-500': $route.path === '/admin/settings' }" @click="mobileSidebarOpen = false">
+            <SettingsIcon class="w-5 h-5 flex-shrink-0" />
+            <span class="text-base">Settings</span>
           </router-link>
         </nav>
 
-        <!-- User Menu -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-4 border-t border-gray-100 bg-gradient-to-r from-pink-50/80 to-rose-50/80 flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg flex-shrink-0">
-              <UserIcon class="w-6 h-6 text-white" />
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-md flex-shrink-0">
+              <UserIcon class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-900 truncate">{{ userDisplayName || 'Admin User' }}</p>
               <p class="text-xs text-gray-600 truncate">{{ userEmail || 'admin@example.com' }}</p>
             </div>
-            <button 
-              @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0"
-              title="Logout"
-            >
+            <button @click="handleLogout" class="p-2 rounded-xl hover:bg-white/60 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0" title="Logout">
               <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
@@ -256,28 +190,48 @@
       </aside>
 
       <!-- Main Content -->
-      <main class="flex-1 overflow-auto">
-        <div class="bg-background p-2 sm:p-3 min-h-full">
-          <div class="max-w-5xl mx-auto space-y-3 sm:space-y-4">
-            <!-- Header -->
-            <div class="text-center space-y-1 pt-4">
-              <h1 class="text-xl sm:text-2xl font-bold text-foreground">Paint Mixing Studio</h1>
-              <p class="text-xs sm:text-sm text-muted-foreground">Create perfect color combinations with AI Predictions</p>
+      <main class="flex-1 flex flex-col overflow-auto">
+        <header class="sticky top-0 z-20 bg-white/90 backdrop-blur-xl border-b border-gray-200/90 shadow-sm">
+          <div class="h-1 w-full bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-500"></div>
+          <div class="px-4 sm:px-6 py-4">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+              <div class="pl-14 sm:pl-0 flex items-center gap-3">
+                <div class="hidden sm:flex w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 items-center justify-center shadow-lg shadow-pink-500/20 flex-shrink-0">
+                  <PaletteIcon class="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">Paint Mixing Studio</h1>
+                  <p class="text-sm text-gray-500 mt-0.5">Create perfect color combinations</p>
+                </div>
+              </div>
+              <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-100/90 text-gray-700 text-sm border border-gray-200/60">
+                  <CalendarIcon class="w-4 h-4 text-pink-500 flex-shrink-0" />
+                  <span class="truncate font-medium">{{ currentDate.split(',')[0] }}</span>
+                </div>
+                <div class="hidden sm:block h-8 w-px bg-gray-200"></div>
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-pink-50 to-rose-50 text-gray-800 text-sm border border-pink-200/60">
+                  <span class="font-medium truncate">Welcome, {{ userDisplayName || 'Admin' }}</span>
+                  <BellIcon class="w-4 h-4 text-pink-500 cursor-pointer hover:text-pink-600 flex-shrink-0" />
+                </div>
+              </div>
             </div>
+          </div>
+        </header>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+        <div class="flex-1 p-4 sm:p-6 min-h-full">
+          <div class="max-w-6xl mx-auto space-y-4 sm:space-y-5">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               <!-- Left Panel: Color Selection -->
-              <div class="space-y-3 sm:space-y-4">
-                <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-3 sm:space-y-4">
+              <div class="space-y-4 sm:space-y-5">
+                <div class="bg-white rounded-2xl shadow-md border border-gray-200/90 p-4 sm:p-5 space-y-4 hover:shadow-lg transition-shadow">
                   <div class="space-y-3">
-                    <!-- Fixed color picker with accurate HSV color wheel and reduced sizes -->
                     <div class="space-y-2">
-                      <h3 class="text-sm sm:text-base font-semibold text-foreground">Interactive Color Picker</h3>
+                      <h3 class="text-sm sm:text-base font-semibold text-gray-900">Interactive Color Picker</h3>
                       <div class="relative">
-                        <!-- Reduced canvas height for more compact layout -->
                         <canvas
                           ref="colorCanvas"
-                          class="w-full h-32 sm:h-40 rounded-lg cursor-crosshair border-2 border-border shadow-md"
+                          class="w-full h-32 sm:h-40 rounded-xl cursor-crosshair border-2 border-gray-200 shadow-inner"
                           width="400"
                           height="200"
                           @click="selectColorFromCanvas"
@@ -290,41 +244,37 @@
                           <div class="w-full h-full rounded border border-black/30"></div>
                         </div>
                       </div>
-                      <!-- Added current color preview for accuracy verification -->
                       <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-lg border-2 border-gray-300 shadow-sm" :style="{ backgroundColor: currentPreviewColor }"></div>
-                        <span class="text-xs font-mono text-muted-foreground">{{ currentPreviewColor }}</span>
+                        <div class="w-8 h-8 rounded-xl border-2 border-gray-200 shadow-sm" :style="{ backgroundColor: currentPreviewColor }"></div>
+                        <span class="text-xs font-mono text-gray-500">{{ currentPreviewColor }}</span>
                       </div>
                     </div>
 
-                    <!-- Enhanced Quick Color Selection with smooth animations -->
                     <div>
-                      <h3 class="text-sm sm:text-base font-semibold text-card-foreground mb-2">Quick Color Selection</h3>
+                      <h3 class="text-sm sm:text-base font-semibold text-gray-900 mb-2">Quick Color Selection</h3>
 
-                <!-- Primary & Basic Colors -->
                 <div class="mb-2">
-                  <!-- Reduced padding and text sizes for compact layout -->
                   <button
                     @click="toggleCategory('primary')"
-                    class="flex items-center gap-2 w-full text-left bg-card hover:bg-accent/50 rounded-lg px-3 py-2 transition-all duration-200 group border border-border hover:border-primary/30 shadow-sm hover:shadow-md"
+                    class="flex items-center gap-2 w-full text-left bg-white hover:bg-pink-50/50 rounded-xl px-3 py-2 transition-all duration-200 group border border-gray-200 hover:border-pink-200 shadow-sm hover:shadow-md"
                   >
-                    <div class="w-6 h-6 rounded-full bg-primary/20 border border-primary/30 group-hover:bg-primary/30 transition-colors">
+                    <div class="w-6 h-6 rounded-full bg-pink-100 border border-pink-200 group-hover:bg-pink-200 transition-colors">
                     </div>
                     <div class="flex-1 min-w-0">
-                      <h4 class="text-xs font-semibold text-foreground group-hover:text-primary transition-colors">
+                      <h4 class="text-xs font-semibold text-gray-900 group-hover:text-pink-600 transition-colors">
                         Primary & Basic Colors
                       </h4>
-                      <p class="text-xs text-muted-foreground hidden sm:block">Essential colors</p>
+                      <p class="text-xs text-gray-500 hidden sm:block">Essential colors</p>
                     </div>
                     <div class="flex items-center gap-1">
-                      <span class="text-xs font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded-full">
+                      <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded-lg">
                         {{ primaryColors.length }}
                       </span>
-                      <div class="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-muted border border-border hover:bg-primary/10 hover:border-primary/30 transition-all">
-                        <Palette class="w-3 h-3 text-foreground/60" />
+                      <div class="flex items-center gap-0.5 px-1.5 py-0.5 rounded-lg bg-gray-100 border border-gray-200 hover:bg-pink-100 hover:border-pink-200 transition-all">
+                        <Palette class="w-3 h-3 text-gray-500" />
                         <component
                           :is="categoryVisibility.primary ? ChevronDown : ChevronRightIcon"
-                          class="w-3 h-3 text-foreground/70"
+                          class="w-3 h-3 text-gray-600"
                         />
                       </div>
                     </div>
@@ -335,9 +285,9 @@
                     @leave="onCategoryLeave"
                   >
                     <div v-show="categoryVisibility.primary" class="overflow-hidden">
-                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-1 mt-2 p-2 bg-muted/30 rounded-lg">
+                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-1 mt-2 p-2 bg-gray-50 rounded-xl border border-gray-100">
                         <div v-for="color in primaryColors" :key="color.name"
-                             class="aspect-square rounded-lg cursor-pointer border-2 border-border hover:border-primary hover:scale-110 transition-all duration-200 shadow-sm hover:shadow-lg"
+                             class="aspect-square rounded-xl cursor-pointer border-2 border-gray-200 hover:border-pink-400 hover:scale-110 transition-all duration-200 shadow-sm hover:shadow-md"
                              :style="{ backgroundColor: color.hex }"
                              @click="selectPredefinedColor(color)"
                              :title="color.name">
@@ -347,29 +297,28 @@
                   </transition>
                 </div>
 
-                <!-- Earth Tones -->
                 <div class="mb-2">
                   <button
                     @click="toggleCategory('earth')"
-                    class="flex items-center gap-2 w-full text-left bg-card hover:bg-accent/50 rounded-lg px-3 py-2 transition-all duration-200 group border border-border hover:border-primary/30 shadow-sm hover:shadow-md"
+                    class="flex items-center gap-2 w-full text-left bg-white hover:bg-amber-50/50 rounded-xl px-3 py-2 transition-all duration-200 group border border-gray-200 hover:border-amber-200 shadow-sm hover:shadow-md"
                   >
                     <div class="w-6 h-6 rounded-full bg-amber-100 border border-amber-300 group-hover:bg-amber-200 transition-colors">
                     </div>
                     <div class="flex-1 min-w-0">
-                      <h4 class="text-xs font-semibold text-foreground group-hover:text-amber-600 transition-colors">
+                      <h4 class="text-xs font-semibold text-gray-900 group-hover:text-amber-600 transition-colors">
                         Earth Tones
                       </h4>
-                      <p class="text-xs text-muted-foreground hidden sm:block">Natural, warm colors</p>
+                      <p class="text-xs text-gray-500 hidden sm:block">Natural, warm colors</p>
                     </div>
                     <div class="flex items-center gap-1">
-                      <span class="text-xs font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded-full">
+                      <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded-lg">
                         {{ earthTones.length }}
                       </span>
-                      <div class="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-muted border border-border hover:bg-amber-100 hover:border-amber-300 transition-all">
-                        <Palette class="w-3 h-3 text-foreground/60" />
+                      <div class="flex items-center gap-0.5 px-1.5 py-0.5 rounded-lg bg-gray-100 border border-gray-200 hover:bg-amber-100 hover:border-amber-300 transition-all">
+                        <Palette class="w-3 h-3 text-gray-500" />
                         <component
                           :is="categoryVisibility.earth ? ChevronDown : ChevronRightIcon"
-                          class="w-3 h-3 text-foreground/70"
+                          class="w-3 h-3 text-gray-600"
                         />
                       </div>
                     </div>
@@ -380,9 +329,9 @@
                     @leave="onCategoryLeave"
                   >
                     <div v-show="categoryVisibility.earth" class="overflow-hidden">
-                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-1 mt-2 p-2 bg-muted/30 rounded-lg">
+                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-1 mt-2 p-2 bg-gray-50 rounded-xl border border-gray-100">
                         <div v-for="color in earthTones" :key="color.name"
-                             class="aspect-square rounded-lg cursor-pointer border-2 border-border hover:border-primary hover:scale-110 transition-all duration-200 shadow-sm hover:shadow-lg"
+                             class="aspect-square rounded-xl cursor-pointer border-2 border-gray-200 hover:border-pink-400 hover:scale-110 transition-all duration-200 shadow-sm hover:shadow-md"
                              :style="{ backgroundColor: color.hex }"
                              @click="selectPredefinedColor(color)"
                              :title="color.name">
@@ -392,29 +341,28 @@
                   </transition>
                 </div>
 
-                <!-- Pastels -->
                 <div class="mb-2">
                   <button
                     @click="toggleCategory('pastels')"
-                    class="flex items-center gap-2 w-full text-left bg-card hover:bg-accent/50 rounded-lg px-3 py-2 transition-all duration-200 group border border-border hover:border-primary/30 shadow-sm hover:shadow-md"
+                    class="flex items-center gap-2 w-full text-left bg-white hover:bg-pink-50/50 rounded-xl px-3 py-2 transition-all duration-200 group border border-gray-200 hover:border-pink-200 shadow-sm hover:shadow-md"
                   >
                     <div class="w-6 h-6 rounded-full bg-pink-100 border border-pink-300 group-hover:bg-pink-200 transition-colors">
                     </div>
                     <div class="flex-1 min-w-0">
-                      <h4 class="text-xs font-semibold text-foreground group-hover:text-pink-600 transition-colors">
+                      <h4 class="text-xs font-semibold text-gray-900 group-hover:text-pink-600 transition-colors">
                         Pastel Colors
                       </h4>
-                      <p class="text-xs text-muted-foreground hidden sm:block">Soft, gentle tones</p>
+                      <p class="text-xs text-gray-500 hidden sm:block">Soft, gentle tones</p>
                     </div>
                     <div class="flex items-center gap-1">
-                      <span class="text-xs font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded-full">
+                      <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded-lg">
                         {{ pastelColors.length }}
                       </span>
-                      <div class="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-muted border border-border hover:bg-pink-100 hover:border-pink-300 transition-all">
-                        <Palette class="w-3 h-3 text-foreground/60" />
+                      <div class="flex items-center gap-0.5 px-1.5 py-0.5 rounded-lg bg-gray-100 border border-gray-200 hover:bg-pink-100 hover:border-pink-300 transition-all">
+                        <Palette class="w-3 h-3 text-gray-500" />
                         <component
                           :is="categoryVisibility.pastels ? ChevronDown : ChevronRightIcon"
-                          class="w-3 h-3 text-foreground/70"
+                          class="w-3 h-3 text-gray-600"
                         />
                       </div>
                     </div>
@@ -425,9 +373,9 @@
                     @leave="onCategoryLeave"
                   >
                     <div v-show="categoryVisibility.pastels" class="overflow-hidden">
-                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-1 mt-2 p-2 bg-muted/30 rounded-lg">
+                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-1 mt-2 p-2 bg-gray-50 rounded-xl border border-gray-100">
                         <div v-for="color in pastelColors" :key="color.name"
-                             class="aspect-square rounded-lg cursor-pointer border-2 border-border hover:border-primary hover:scale-110 transition-all duration-200 shadow-sm hover:shadow-lg"
+                             class="aspect-square rounded-xl cursor-pointer border-2 border-gray-200 hover:border-pink-400 hover:scale-110 transition-all duration-200 shadow-sm hover:shadow-md"
                              :style="{ backgroundColor: color.hex }"
                              @click="selectPredefinedColor(color)"
                              :title="color.name">
@@ -437,29 +385,28 @@
                   </transition>
                 </div>
 
-                <!-- Deep & Rich Colors -->
                 <div>
                   <button
                     @click="toggleCategory('deep')"
-                    class="flex items-center gap-2 w-full text-left bg-card hover:bg-accent/50 rounded-lg px-3 py-2 transition-all duration-200 group border border-border hover:border-primary/30 shadow-sm hover:shadow-md"
+                    class="flex items-center gap-2 w-full text-left bg-white hover:bg-purple-50/50 rounded-xl px-3 py-2 transition-all duration-200 group border border-gray-200 hover:border-purple-200 shadow-sm hover:shadow-md"
                   >
                     <div class="w-6 h-6 rounded-full bg-purple-100 border border-purple-300 group-hover:bg-purple-200 transition-colors">
                     </div>
                     <div class="flex-1 min-w-0">
-                      <h4 class="text-xs font-semibold text-foreground group-hover:text-purple-600 transition-colors">
+                      <h4 class="text-xs font-semibold text-gray-900 group-hover:text-purple-600 transition-colors">
                         Deep & Rich Colors
                       </h4>
-                      <p class="text-xs text-muted-foreground hidden sm:block">Bold, vibrant tones</p>
+                      <p class="text-xs text-gray-500 hidden sm:block">Bold, vibrant tones</p>
                     </div>
                     <div class="flex items-center gap-1">
-                      <span class="text-xs font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded-full">
+                      <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded-lg">
                         {{ deepColors.length }}
                       </span>
-                      <div class="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-muted border border-border hover:bg-purple-100 hover:border-purple-300 transition-all">
-                        <Palette class="w-3 h-3 text-foreground/60" />
+                      <div class="flex items-center gap-0.5 px-1.5 py-0.5 rounded-lg bg-gray-100 border border-gray-200 hover:bg-purple-100 hover:border-purple-300 transition-all">
+                        <Palette class="w-3 h-3 text-gray-500" />
                         <component
                           :is="categoryVisibility.deep ? ChevronDown : ChevronRightIcon"
-                          class="w-3 h-3 text-foreground/70"
+                          class="w-3 h-3 text-gray-600"
                         />
                       </div>
                     </div>
@@ -470,9 +417,9 @@
                     @leave="onCategoryLeave"
                   >
                     <div v-show="categoryVisibility.deep" class="overflow-hidden">
-                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-1 mt-2 p-2 bg-muted/30 rounded-lg">
+                      <div class="grid grid-cols-8 sm:grid-cols-10 gap-1 mt-2 p-2 bg-gray-50 rounded-xl border border-gray-100">
                         <div v-for="color in deepColors" :key="color.name"
-                             class="aspect-square rounded-lg cursor-pointer border-2 border-border hover:border-primary hover:scale-110 transition-all duration-200 shadow-sm hover:shadow-lg"
+                             class="aspect-square rounded-xl cursor-pointer border-2 border-gray-200 hover:border-pink-400 hover:scale-110 transition-all duration-200 shadow-sm hover:shadow-md"
                              :style="{ backgroundColor: color.hex }"
                              @click="selectPredefinedColor(color)"
                              :title="color.name">
@@ -484,44 +431,41 @@
               </div>
             </div>
 
-            <!-- Selected Colors for Mixing -->
             <div class="space-y-2">
                   <div class="flex items-center justify-between">
-                    <h3 class="text-sm sm:text-base font-semibold text-foreground">Selected Colors</h3>
-                    <!-- Reduced button size and padding -->
+                    <h3 class="text-sm sm:text-base font-semibold text-gray-900">Selected Colors</h3>
                     <button v-if="selectedColors.length > 0"
                             @click="clearAllColors"
-                            class="px-2 py-1 text-xs font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg transition-all duration-200 hover:shadow-md hover:scale-105 flex items-center gap-1">
+                            class="px-3 py-1.5 text-xs font-medium text-white bg-red-500 hover:bg-red-600 rounded-xl transition-all hover:shadow-md flex items-center gap-1">
                       <X class="w-3 h-3" />
                       Clear
                     </button>
                   </div>
 
-                  <div v-if="selectedColors.length === 0" class="text-center py-3 text-muted-foreground text-xs">
+                  <div v-if="selectedColors.length === 0" class="text-center py-4 text-gray-500 text-sm rounded-xl bg-gray-50 border border-dashed border-gray-200">
                     Select colors to start mixing
                   </div>
 
-                  <div v-else class="space-y-1.5">
+                  <div v-else class="space-y-2">
                     <div v-for="(color, index) in selectedColors" :key="index"
-                         class="flex items-center gap-2 p-2 bg-muted/50 rounded-lg border border-muted hover:border-primary/30 transition-colors">
-                      <div class="w-6 h-6 rounded-lg border-2 border-gray-300 shadow-sm flex-shrink-0" :style="{ backgroundColor: color.hex }"></div>
+                         class="flex items-center gap-2 p-2.5 bg-gray-50 rounded-xl border border-gray-200 hover:border-pink-200 transition-colors">
+                      <div class="w-7 h-7 rounded-xl border-2 border-gray-200 shadow-sm flex-shrink-0" :style="{ backgroundColor: color.hex }"></div>
                       <div class="flex-1 min-w-0">
-                        <p class="text-xs font-medium text-foreground truncate">{{ color.name }}</p>
-                        <p class="text-xs text-muted-foreground">{{ color.hex }}</p>
+                        <p class="text-xs font-medium text-gray-900 truncate">{{ color.name }}</p>
+                        <p class="text-xs text-gray-500">{{ color.hex }}</p>
                       </div>
-                      <!-- Reduced range slider size and padding -->
-                      <div class="flex items-center gap-2 bg-gradient-to-r from-background to-muted/30 rounded-lg p-2 border shadow-sm">
+                      <div class="flex items-center gap-2 bg-white rounded-xl p-2 border border-gray-200 shadow-sm">
                         <input type="range"
                                v-model="color.ratio"
                                min="1"
                                max="100"
                                class="enhanced-range w-16"
                                :style="{ '--color': color.hex }">
-                        <span class="text-xs font-bold text-foreground min-w-[2rem] text-right">{{ color.ratio }}%</span>
+                        <span class="text-xs font-bold text-gray-800 min-w-[2rem] text-right">{{ color.ratio }}%</span>
                       </div>
                       <button @click="removeColor(index)"
-                              class="text-red-500 hover:text-red-600 hover:bg-red-50 p-1 rounded-lg transition-all duration-200 hover:scale-110 flex-shrink-0">
-                        <X class="w-3 h-3" />
+                              class="text-red-500 hover:text-red-600 hover:bg-red-50 p-2 rounded-xl transition-all flex-shrink-0">
+                        <X class="w-3.5 h-3.5" />
                       </button>
                     </div>
                   </div>
@@ -529,16 +473,14 @@
               </div>
             </div>
 
-            <!-- Right Column -->
-            <div class="space-y-3 sm:space-y-4">
-                <!-- Color Palette Display -->
-                <div class="bg-card border border-border rounded-lg p-3 sm:p-4 shadow-sm">
-                  <h3 class="font-semibold text-sm text-foreground mb-2">Current Palette</h3>
-                  <div class="grid grid-cols-5 gap-1.5 mb-3">
+            <div class="space-y-4 sm:space-y-5">
+                <div class="bg-white rounded-2xl shadow-md border border-gray-200/90 p-4 sm:p-5 hover:shadow-lg transition-shadow">
+                  <h3 class="font-semibold text-sm text-gray-900 mb-3">Current Palette</h3>
+                  <div class="grid grid-cols-5 gap-2 mb-3">
                     <div
                       v-for="(color, index) in selectedColors"
                       :key="index"
-                      class="aspect-square rounded-lg border-2 border-border cursor-pointer hover:scale-105 transition-transform"
+                      class="aspect-square rounded-xl border-2 border-gray-200 cursor-pointer hover:scale-105 hover:border-pink-300 transition-all shadow-inner"
                       :style="{ backgroundColor: color.hex }"
                       @click="removeColor(index)"
                       :title="`Remove ${color.name || color.hex}`"
@@ -546,122 +488,110 @@
                     <div
                       v-for="n in Math.max(0, 5 - selectedColors.length)"
                       :key="`empty-${n}`"
-                      class="aspect-square rounded-lg border-2 border-dashed border-muted-foreground/30 flex items-center justify-center text-muted-foreground/50"
+                      class="aspect-square rounded-xl border-2 border-dashed border-gray-200 flex items-center justify-center text-gray-400"
                     >
-                      <PlusIcon class="w-3 h-3" />
+                      <PlusIcon class="w-4 h-4" />
                     </div>
                   </div>
-                <p class="text-xs text-muted-foreground">
-                  Click colors to add them to your palette (max 5)
-                </p>
+                  <p class="text-xs text-gray-500">
+                    Click colors to add to palette (max 5)
+                  </p>
                 </div>
 
-                <!-- Mixed Result -->
-                <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-2">
-                  <h3 class="text-sm sm:text-base font-semibold text-foreground">Mixed Result</h3>
-
+                <div class="bg-white rounded-2xl shadow-md border border-gray-200/90 p-4 sm:p-5 space-y-3 hover:shadow-lg transition-shadow">
+                  <h3 class="text-sm sm:text-base font-semibold text-gray-900">Mixed Result</h3>
                   <div class="relative">
-                    <div class="w-full h-24 sm:h-32 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center"
+                    <div class="w-full h-24 sm:h-32 rounded-xl border-2 border-dashed border-gray-200 flex items-center justify-center shadow-inner"
                          :style="{ backgroundColor: mixedColor }">
-                      <div v-if="!mixedColor || mixedColor === '#ffffff'" class="text-center text-muted-foreground">
-                        <Palette class="w-6 h-6 mx-auto mb-1 opacity-50" />
+                      <div v-if="!mixedColor || mixedColor === '#ffffff'" class="text-center text-gray-400">
+                        <Palette class="w-6 h-6 mx-auto mb-1 opacity-60" />
                         <p class="text-xs">Mixed color will appear here</p>
                       </div>
                     </div>
-
-                    <div v-if="mixedColor && mixedColor !== '#ffffff'" class="mt-2 text-center">
-                      <p class="text-xs font-mono text-muted-foreground">{{ mixedColor }}</p>
-                      <div class="flex justify-center gap-1 mt-1 flex-wrap">
-                        <span class="text-xs px-1.5 py-0.5 bg-muted rounded">RGB: {{ getRgbFromHex(mixedColor) }}</span>
-                        <span class="text-xs px-1.5 py-0.5 bg-muted rounded">HSL: {{ getHslFromHex(mixedColor) }}</span>
+                    <div v-if="mixedColor && mixedColor !== '#ffffff'" class="mt-3 text-center">
+                      <p class="text-sm font-mono text-gray-600 font-medium">{{ mixedColor }}</p>
+                      <div class="flex justify-center gap-2 mt-2 flex-wrap">
+                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-lg text-gray-600">RGB: {{ getRgbFromHex(mixedColor) }}</span>
+                        <span class="text-xs px-2 py-1 bg-gray-100 rounded-lg text-gray-600">HSL: {{ getHslFromHex(mixedColor) }}</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Save Mixture Section -->
-                <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-3">
-                  <h3 class="text-sm sm:text-base font-semibold text-foreground">Save Mixture</h3>
+                <div class="bg-white rounded-2xl shadow-md border border-gray-200/90 p-4 sm:p-5 space-y-3 hover:shadow-lg transition-shadow">
+                  <h3 class="text-sm sm:text-base font-semibold text-gray-900">Save Mixture</h3>
                   <input
                     type="text"
                     v-model="mixtureName"
                     placeholder="Enter mixture name..."
-                    class="w-full px-3 py-2 border border-border rounded-lg focus:ring-primary focus:border-primary text-sm shadow-sm"
+                    class="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-300 focus:border-pink-400 text-sm transition-all"
                   />
                   <button
                     @click="saveMixture"
                     :disabled="!mixtureName || selectedColors.length === 0"
-                    class="w-full px-3 py-2 font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-1"
-                    :class="!mixtureName || selectedColors.length === 0 ? 'bg-primary/40 text-white/70 cursor-not-allowed' : 'bg-primary hover:bg-primary-hover shadow-md hover:scale-105 text-white'"
+                    class="w-full px-4 py-2.5 font-semibold rounded-xl transition-all flex items-center justify-center gap-2 focus:ring-2 focus:ring-pink-400 focus:ring-offset-2"
+                    :class="!mixtureName || selectedColors.length === 0 ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white shadow-lg shadow-pink-500/25 hover:shadow-xl'"
                   >
                     <SaveIcon class="w-4 h-4" />
                     Save Mixture
                   </button>
-                  <div v-if="successMessage" class="text-xs text-green-500 mt-2">{{ successMessage }}</div>
-                  <div v-if="errorMessage" class="text-xs text-red-500 mt-2">{{ errorMessage }}</div>
+                  <div v-if="successMessage" class="text-xs text-emerald-600 font-medium mt-2">{{ successMessage }}</div>
+                  <div v-if="errorMessage" class="text-xs text-red-600 font-medium mt-2">{{ errorMessage }}</div>
                 </div>
 
-                <!-- Mixture History Section -->
-                <div class="bg-card rounded-lg border p-3 sm:p-4 space-y-3">
+                <div class="bg-white rounded-2xl shadow-md border border-gray-200/90 p-4 sm:p-5 space-y-3 hover:shadow-lg transition-shadow">
                   <div class="flex items-center justify-between">
-                    <h3 class="text-sm sm:text-base font-semibold text-foreground">Saved Mixtures</h3>
-                    <span class="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full">
+                    <h3 class="text-sm sm:text-base font-semibold text-gray-900">Saved Mixtures</h3>
+                    <span class="text-xs text-gray-500 bg-gray-100 px-2.5 py-1 rounded-xl font-medium">
                       {{ savedMixtures.length }}
                     </span>
                   </div>
-                  
-                  <div v-if="savedMixtures.length === 0" class="text-center py-6 text-muted-foreground text-xs">
-                    <Palette class="w-8 h-8 mx-auto mb-2 opacity-50" />
-                    <p>No saved mixtures yet</p>
+                  <div v-if="savedMixtures.length === 0" class="text-center py-8 text-gray-500">
+                    <div class="w-12 h-12 rounded-2xl bg-pink-100 flex items-center justify-center mx-auto mb-3">
+                      <Palette class="w-6 h-6 text-pink-500" />
+                    </div>
+                    <p class="text-sm font-medium">No saved mixtures yet</p>
                     <p class="text-xs mt-1">Save your first mixture to see it here</p>
                   </div>
-                  
-                  <div v-else class="space-y-2 max-h-96 overflow-y-auto">
+                  <div v-else class="space-y-3 max-h-96 overflow-y-auto">
                     <div
                       v-for="mixture in savedMixtures"
                       :key="mixture.id"
-                      class="bg-muted/50 rounded-lg border border-border p-3 hover:border-primary/30 transition-all duration-200 hover:shadow-md group"
+                      class="bg-gray-50 rounded-xl border border-gray-200 p-3 hover:border-pink-200 hover:shadow-md transition-all group"
                     >
                       <div class="flex items-start gap-3">
-                        <!-- Color Preview -->
                         <div
-                          class="w-12 h-12 rounded-lg border-2 border-border shadow-sm flex-shrink-0"
+                          class="w-12 h-12 rounded-xl border-2 border-gray-200 shadow-sm flex-shrink-0"
                           :style="{ backgroundColor: mixture.mixedColor }"
                           :title="mixture.mixedColor"
                         ></div>
-                        
-                        <!-- Mixture Info -->
                         <div class="flex-1 min-w-0">
-                          <h4 class="text-sm font-semibold text-foreground truncate">{{ mixture.name }}</h4>
-                          <p class="text-xs text-muted-foreground mt-1 font-mono">{{ mixture.mixedColor }}</p>
+                          <h4 class="text-sm font-semibold text-gray-900 truncate">{{ mixture.name }}</h4>
+                          <p class="text-xs text-gray-500 mt-1 font-mono">{{ mixture.mixedColor }}</p>
                           <div class="flex items-center gap-1 mt-2 flex-wrap">
                             <span
                               v-for="(color, idx) in mixture.colors.slice(0, 3)"
                               :key="idx"
-                              class="text-xs px-1.5 py-0.5 rounded bg-background border border-border"
+                              class="text-xs px-2 py-0.5 rounded-lg bg-white border border-gray-200"
                               :style="{ color: color.hex }"
                             >
                               {{ color.name }} ({{ color.ratio }}%)
                             </span>
-                            <span v-if="mixture.colors.length > 3" class="text-xs text-muted-foreground">
+                            <span v-if="mixture.colors.length > 3" class="text-xs text-gray-500">
                               +{{ mixture.colors.length - 3 }} more
                             </span>
                           </div>
                           <div class="flex items-center gap-2 mt-1">
-                            <p class="text-xs text-muted-foreground">
-                              {{ formatDate(mixture.timestamp) }}
-                            </p>
-                            <span class="text-xs px-1.5 py-0.5 rounded bg-primary/10 text-primary font-medium">
+                            <p class="text-xs text-gray-500">{{ formatDate(mixture.timestamp) }}</p>
+                            <span class="text-xs px-2 py-0.5 rounded-lg bg-pink-100 text-pink-700 font-medium">
                               By {{ mixture.createdBy === 'admin' ? 'Admin' : 'Staff' }}
                             </span>
                           </div>
                         </div>
-                        
-                        <!-- Actions -->
                         <div class="flex items-center gap-1 flex-shrink-0">
                           <button
                             @click="loadMixture(mixture)"
-                            class="p-1.5 rounded-lg hover:bg-primary/10 text-primary hover:text-primary-hover transition-colors"
+                            class="p-2 rounded-xl hover:bg-pink-100 text-pink-600 hover:text-pink-700 transition-colors"
                             title="Load mixture"
                           >
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -670,7 +600,7 @@
                           </button>
                           <button
                             @click="deleteMixture(mixture.id)"
-                            class="p-1.5 rounded-lg hover:bg-red-50 text-red-500 hover:text-red-600 transition-colors"
+                            class="p-2 rounded-xl hover:bg-red-50 text-red-500 hover:text-red-600 transition-colors"
                             title="Delete mixture"
                           >
                             <X class="w-4 h-4" />
@@ -720,12 +650,22 @@ import {
   X as XIcon,
   Shield as ShieldIcon,
   BarChart3 as BarChart3Icon,
+  Calendar as CalendarIcon,
+  Bell as BellIcon,
 } from 'lucide-vue-next'
 
 const router = useRouter()
 const mobileSidebarOpen = ref(false)
 const userDisplayName = ref('')
 const userEmail = ref('')
+const currentDate = ref(
+  new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+)
 
 const toggleMobileSidebar = () => {
   mobileSidebarOpen.value = !mobileSidebarOpen.value

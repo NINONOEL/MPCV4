@@ -1,31 +1,27 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
-    <!-- Background Elements -->
-    <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-200 to-blue-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+  <div class="min-h-screen bg-gradient-to-b from-slate-50 via-gray-50/95 to-slate-100/80 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="absolute top-0 right-0 w-[480px] h-[480px] bg-gradient-to-br from-teal-200/25 to-cyan-200/20 rounded-full filter blur-3xl transform translate-x-1/4 -translate-y-1/4"></div>
+      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-br from-emerald-200/20 to-teal-200/15 rounded-full filter blur-3xl transform -translate-x-1/4 translate-y-1/4"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(20,184,166,0.06),transparent)]"></div>
     </div>
 
     <div class="relative z-10 flex h-screen">
       <!-- Sidebar -->
-      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden md:flex md:flex-col shadow-lg">
-        <!-- Logo/Brand -->
-        <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <Shield class="h-3 w-3 mr-1" />
+      <aside class="w-64 bg-white/95 backdrop-blur-sm border-r border-gray-200/80 hidden md:flex md:flex-col shadow-sm">
+        <div class="p-4 xl:p-5 border-b border-gray-100 flex-shrink-0">
+          <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight tracking-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-teal-500 to-cyan-500 px-2.5 xl:px-3 py-1.5 rounded-lg inline-flex items-center shadow-sm font-medium">
+            <Shield class="h-3.5 w-3.5 mr-1.5 flex-shrink-0" />
             Admin Portal
           </div>
         </div>
 
-        <!-- Navigation - Scrollable Area -->
-        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+        <nav class="flex-1 p-3 xl:p-4 space-y-1 overflow-y-auto">
           <router-link
             to="/admin/dashboard"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-            :class="{ 'shadow-sm border border-blue-200 transform scale-105': $route.path === '/admin/dashboard' }"
+            class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+            :class="{ 'shadow-sm border-l-4 border-blue-500': $route.path === '/admin/dashboard' }"
           >
             <LayoutDashboard class="w-5 h-5" />
             <span>Dashboard</span>
@@ -33,8 +29,8 @@
 
           <router-link
             to="/admin/staff"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
-            :class="{ 'shadow-sm border border-green-200 transform scale-105': $route.path === '/admin/staff' }"
+            class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
+            :class="{ 'shadow-sm border-l-4 border-green-500': $route.path === '/admin/staff' }"
           >
             <Users class="w-5 h-5" />
             <span>Staff Management</span>
@@ -42,8 +38,8 @@
 
           <router-link
             to="/admin/inventory"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
-            :class="{ 'shadow-sm border border-purple-200 transform scale-105': $route.path === '/admin/inventory' }"
+            class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
+            :class="{ 'shadow-sm border-l-4 border-purple-500': $route.path === '/admin/inventory' }"
           >
             <Package class="w-5 h-5" />
             <span>Inventory</span>
@@ -51,8 +47,8 @@
 
           <router-link
             to="/admin/house-paint-recommender"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
-            :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/admin/house-paint-recommender' }"
+            class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
+            :class="{ 'shadow-sm border-l-4 border-orange-500': $route.path === '/admin/house-paint-recommender' }"
           >
             <Home class="w-5 h-5" />
             <span>Paint Recommender</span>
@@ -60,8 +56,8 @@
 
           <router-link
             to="/admin/paint-mixing"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
-            :class="{ 'shadow-sm border border-pink-200 transform scale-105': $route.path === '/admin/paint-mixing' }"
+            class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
+            :class="{ 'shadow-sm border-l-4 border-pink-500': $route.path === '/admin/paint-mixing' }"
           >
             <Palette class="w-5 h-5" />
             <span>Paint Mixing</span>
@@ -69,22 +65,22 @@
 
           <router-link
             to="/admin/sales-analytics"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 shadow-sm border border-teal-200 transform scale-105"
-            :class="{ 'hover:bg-teal-100 hover:text-teal-700': $route.path !== '/admin/sales-analytics' }"
+            class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
+            :class="{ 'shadow-sm border-l-4 border-teal-500': $route.path === '/admin/sales-analytics' }"
           >
             <TrendingUp class="w-5 h-5" />
             <span>Sales Analytics</span>
           </router-link>
 
-          <router-link to="/admin/visualization" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 shadow-sm border border-indigo-200">
+          <router-link to="/admin/visualization" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700" :class="{ 'shadow-sm border-l-4 border-indigo-500': $route.path === '/admin/visualization' }">
             <BarChart3 class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
             <span class="text-sm xl:text-base truncate">Data Visualization</span>
           </router-link>
 
           <router-link
             to="/admin/settings"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700"
-            :class="{ 'shadow-sm border border-amber-200 transform scale-105': $route.path === '/admin/settings' }"
+            class="flex items-center space-x-3 p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700"
+            :class="{ 'shadow-sm border-l-4 border-amber-500': $route.path === '/admin/settings' }"
           >
             <Settings class="w-5 h-5" />
             <span>Settings</span>
@@ -94,21 +90,16 @@
           <div class="h-4"></div>
         </nav>
 
-        <!-- User Menu - Fixed at bottom -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-4 border-t border-gray-100 bg-gradient-to-r from-teal-50/80 to-cyan-50/80 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center shadow-md">
               <User class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
               <p class="text-xs text-gray-600 truncate">admin@example.com</p>
             </div>
-            <button
-              @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
-              title="Logout"
-            >
+            <button @click="handleLogout" class="p-2 rounded-xl hover:bg-white/60 text-gray-600 hover:text-gray-900 transition-colors" title="Logout">
               <LogOut class="w-5 h-5" />
             </button>
           </div>
@@ -117,232 +108,151 @@
 
       <!-- Mobile Sidebar Toggle -->
       <div class="fixed top-4 left-4 z-30 md:hidden">
-        <button
-          @click="toggleMobileSidebar"
-          class="p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg"
-          aria-label="Toggle navigation menu"
-        >
+        <button @click="toggleMobileSidebar" class="p-3 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all" aria-label="Toggle navigation menu">
           <Menu v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
           <X v-else class="w-6 h-6 text-gray-700" />
         </button>
       </div>
 
-      <!-- Mobile Sidebar -->
-      <div
-        v-if="mobileSidebarOpen"
-        class="fixed inset-0 bg-black/20 z-20 md:hidden"
-        @click="toggleMobileSidebar"
-      ></div>
+      <div v-if="mobileSidebarOpen" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 md:hidden" @click="toggleMobileSidebar"></div>
 
-      <aside
-        v-if="mobileSidebarOpen"
-        class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-20 md:hidden shadow-xl flex flex-col"
-      >
-        <!-- Same mobile sidebar content as desktop -->
-        <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-blue-500 to-purple-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <Shield class="h-3 w-3 mr-1" />
+      <aside v-if="mobileSidebarOpen" class="fixed left-0 top-0 h-full w-64 bg-white/95 backdrop-blur-sm border-r border-gray-200/80 z-30 md:hidden shadow-xl flex flex-col">
+        <div class="p-5 border-b border-gray-100 flex-shrink-0">
+          <h1 class="text-lg font-bold text-gray-900 leading-tight tracking-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-teal-500 to-cyan-500 px-3 py-1.5 rounded-lg inline-flex items-center shadow-sm font-medium">
+            <Shield class="h-3.5 w-3.5 mr-1.5" />
             Admin Portal
           </div>
         </div>
-
-        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <!-- Mobile navigation links with same styling -->
-          <router-link
-            to="/admin/dashboard"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50"
-            :class="{ 'shadow-sm border border-blue-200': $route.path === '/admin/dashboard' }"
-            @click="mobileSidebarOpen = false"
-          >
+        <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+          <router-link to="/admin/dashboard" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700" :class="{ 'shadow-sm border-l-4 border-blue-500': $route.path === '/admin/dashboard' }" @click="mobileSidebarOpen = false">
             <LayoutDashboard class="w-5 h-5" />
             <span>Dashboard</span>
           </router-link>
-
-          <router-link
-            to="/admin/staff"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50"
-            :class="{ 'shadow-sm border border-green-200': $route.path === '/admin/staff' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/admin/staff" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700" :class="{ 'shadow-sm border-l-4 border-green-500': $route.path === '/admin/staff' }" @click="mobileSidebarOpen = false">
             <Users class="w-5 h-5" />
             <span>Staff Management</span>
           </router-link>
-
-          <router-link
-            to="/admin/inventory"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50"
-            :class="{ 'shadow-sm border border-purple-200': $route.path === '/admin/inventory' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/admin/inventory" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700" :class="{ 'shadow-sm border-l-4 border-purple-500': $route.path === '/admin/inventory' }" @click="mobileSidebarOpen = false">
             <Package class="w-5 h-5" />
             <span>Inventory</span>
           </router-link>
-
-          <router-link
-            to="/admin/house-paint-recommender"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50"
-            :class="{ 'shadow-sm border border-orange-200': $route.path === '/admin/house-paint-recommender' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/admin/house-paint-recommender" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700" :class="{ 'shadow-sm border-l-4 border-orange-500': $route.path === '/admin/house-paint-recommender' }" @click="mobileSidebarOpen = false">
             <Home class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+            <span>Paint Recommender</span>
           </router-link>
-
-          <router-link
-            to="/admin/paint-mixing"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50"
-            :class="{ 'shadow-sm border border-pink-200': $route.path === '/admin/paint-mixing' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/admin/paint-mixing" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700" :class="{ 'shadow-sm border-l-4 border-pink-500': $route.path === '/admin/paint-mixing' }" @click="mobileSidebarOpen = false">
             <Palette class="w-5 h-5" />
             <span>Paint Mixing</span>
           </router-link>
-
-          <router-link
-            to="/admin/sales-analytics"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 shadow-sm border border-teal-200"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/admin/sales-analytics" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700" :class="{ 'shadow-sm border-l-4 border-teal-500': $route.path === '/admin/sales-analytics' }" @click="mobileSidebarOpen = false">
             <TrendingUp class="w-5 h-5" />
             <span>Sales Analytics</span>
           </router-link>
-
-          <router-link
-            to="/admin/reports"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50"
-            :class="{ 'shadow-sm border border-indigo-200': $route.path === '/admin/reports' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <Clipboard class="w-5 h-5" />
-            <span>Reports</span>
+          <router-link to="/admin/visualization" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 hover:text-indigo-700" :class="{ 'shadow-sm border-l-4 border-indigo-500': $route.path === '/admin/visualization' }" @click="mobileSidebarOpen = false">
+            <BarChart3 class="w-5 h-5" />
+            <span>Data Visualization</span>
           </router-link>
-
-          <router-link
-            to="/admin/settings"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-amber-600 bg-amber-50"
-            :class="{ 'shadow-sm border border-amber-200': $route.path === '/admin/settings' }"
-            @click="mobileSidebarOpen = false"
-          >
+          <router-link to="/admin/settings" class="flex items-center space-x-3 p-3 rounded-xl font-medium text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700" :class="{ 'shadow-sm border-l-4 border-amber-500': $route.path === '/admin/settings' }" @click="mobileSidebarOpen = false">
             <Settings class="w-5 h-5" />
-            <span>System Settings</span>
+            <span>Settings</span>
           </router-link>
-
-          <router-link
-            to="/admin/security"
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-red-600 bg-red-50"
-            :class="{ 'shadow-sm border border-red-200': $route.path === '/admin/security' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <Shield class="w-5 h-5" />
-            <span>Security</span>
-          </router-link>
-
-          <!-- Perfect spacing for mobile too -->
-          <div class="h-4"></div>
         </nav>
-
-        <!-- Mobile User Menu - Fixed at bottom -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-4 border-t border-gray-100 bg-gradient-to-r from-teal-50/80 to-cyan-50/80 flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center shadow-md">
               <User class="w-5 h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
               <p class="text-xs text-gray-600 truncate">admin@example.com</p>
             </div>
-            <button
-              @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
-            >
+            <button @click="handleLogout" class="p-2 rounded-xl hover:bg-white/60 text-gray-600 hover:text-gray-900 transition-colors">
               <LogOut class="w-5 h-5" />
             </button>
           </div>
         </div>
       </aside>
 
-      <!-- Main Content -->
-      <main class="flex-1 overflow-auto">
-        <!-- Header -->
-        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-8 py-4 shadow-sm">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <h1 class="text-2xl font-bold text-gray-900">Sales Analytics</h1>
-              <p class="text-gray-600">Monitor your sales performance and trends</p>
-            </div>
-            <div class="flex items-center gap-4">
-              <div class="hidden md:flex items-center gap-2 text-gray-700">
-                <Calendar class="w-5 h-5 text-teal-500" />
-                <span>{{ currentDate }}</span>
+      <main class="flex-1 flex flex-col overflow-auto">
+        <header class="sticky top-0 z-20 bg-white/90 backdrop-blur-xl border-b border-gray-200/90 shadow-sm">
+          <div class="h-1 w-full bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-500"></div>
+          <div class="px-4 md:px-8 py-4">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+              <div class="pl-14 md:pl-0 flex items-center gap-3">
+                <div class="hidden sm:flex w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 items-center justify-center shadow-lg shadow-teal-500/20 flex-shrink-0">
+                  <TrendingUp class="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h1 class="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">Sales Analytics</h1>
+                  <p class="text-sm text-gray-500 mt-0.5">Monitor sales performance and trends</p>
+                </div>
               </div>
-              <div class="hidden md:block h-6 w-px bg-gray-300"></div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-900">Welcome, Admin</span>
-                <div class="relative">
-                  <Bell class="w-5 h-5 text-orange-500 cursor-pointer hover:text-orange-600" />
+              <div class="flex flex-wrap items-center gap-2 md:gap-4">
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-100/90 text-gray-700 text-sm border border-gray-200/60">
+                  <Calendar class="w-4 h-4 text-teal-500 flex-shrink-0" />
+                  <span class="truncate font-medium">{{ currentDate.split(',')[0] }}</span>
+                </div>
+                <div class="hidden md:block h-8 w-px bg-gray-200"></div>
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-teal-50 to-cyan-50 text-gray-800 text-sm border border-teal-200/60">
+                  <span class="font-medium truncate">Welcome, Admin</span>
+                  <Bell class="w-4 h-4 text-teal-500 cursor-pointer hover:text-teal-600 flex-shrink-0" />
                 </div>
               </div>
             </div>
           </div>
         </header>
 
-        <div class="p-6 md:p-8">
-          <!-- Action Buttons and Date Range -->
+        <div class="flex-1 p-4 md:p-6 lg:p-8 max-w-[1600px] w-full mx-auto">
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-            <div class="flex items-center gap-3">
-              <!-- Add Sale Button -->
+            <div class="flex flex-wrap items-center gap-3">
               <button
                 @click="showAddSaleModal = true"
-                class="px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2 shadow-lg"
+                class="inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl font-semibold text-white shadow-lg shadow-teal-500/30 hover:shadow-xl hover:shadow-teal-500/40 transition-all focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600"
               >
-                <Plus class="w-5 h-5" />
+                <span class="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
+                  <Plus class="w-5 h-5" />
+                </span>
                 Add Sale
               </button>
-
-              <!-- Daily Report Button -->
               <button
-                @click="generateDailyReport"
-                class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2 shadow-lg"
+                @click="openReportModal"
+                class="inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl font-semibold text-gray-800 bg-white border-2 border-teal-200 hover:border-teal-300 hover:bg-teal-50 hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 ease-out shadow-sm"
               >
-                <Clipboard class="w-5 h-5" />
-                Daily Report
+                <span class="w-9 h-9 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
+                  <Clipboard class="w-5 h-5" />
+                </span>
+                Report
               </button>
-
-              <!-- Delete All Sales Button -->
               <button
                 @click="confirmDeleteAllSales"
-                class="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2 shadow-lg"
+                class="inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl font-semibold text-red-600 bg-white border-2 border-red-200 hover:border-red-300 hover:bg-red-50 hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 ease-out shadow-sm"
               >
-                <Trash2 class="w-5 h-5" />
+                <span class="w-9 h-9 rounded-xl bg-red-100 flex items-center justify-center text-red-600">
+                  <Trash2 class="w-5 h-5" />
+                </span>
                 Delete All Sales
               </button>
             </div>
-
-            <!-- Date Range Selector -->
-            <div class="flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-lg border border-gray-200 p-1 shadow-sm">
+            <div class="flex items-center gap-2 bg-white rounded-2xl border border-gray-200/90 shadow-sm p-1.5 ring-1 ring-black/5">
               <button
                 v-for="range in dateRanges"
                 :key="range.value"
                 @click="selectedRange = range.value"
-                class="px-3 py-1 rounded-md text-sm transition-colors"
-                :class="selectedRange === range.value ? 'bg-teal-500 text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'"
+                class="px-3 py-2 rounded-xl text-sm font-medium transition-all"
+                :class="selectedRange === range.value ? 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'"
               >
                 {{ range.label }}
               </button>
             </div>
           </div>
 
-          <!-- Loading State -->
-          <div v-if="loading && !error" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-8 mb-6 text-center">
-            <Loader class="w-8 h-8 text-gray-400 animate-spin mx-auto mb-4" />
-            <p class="text-gray-600">Loading sales data...</p>
+          <div v-if="loading && !error" class="bg-white rounded-2xl shadow-md border border-gray-200/90 p-10 mb-6 text-center">
+            <Loader class="w-10 h-10 text-teal-500 animate-spin mx-auto mb-4" />
+            <p class="text-gray-600 font-medium">Loading sales data...</p>
           </div>
 
-          <!-- Error State -->
-          <div v-if="error" class="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 flex items-center justify-between">
+          <div v-if="error" class="bg-white rounded-2xl border border-red-200 shadow-md p-4 mb-6 flex items-center justify-between">
             <div class="flex items-center gap-2">
               <AlertTriangle class="w-5 h-5 text-red-600" />
               <span class="text-red-800">{{ error }}</span>
@@ -355,14 +265,12 @@
             </button>
           </div>
 
-          <!-- Stats Cards -->
           <div v-if="!loading || sales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <!-- Total Revenue -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-4">
+            <div class="bg-white rounded-2xl shadow-md border border-gray-200/90 hover:shadow-lg transition-all overflow-hidden relative group">
+              <div class="h-1 w-full bg-gradient-to-r from-emerald-500 to-teal-500 absolute top-0 left-0 right-0"></div>
+              <div class="p-5">
                 <div class="flex items-center gap-3">
-                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
+                  <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
                     <DollarSign class="w-5 h-5 text-white" />
                   </div>
                   <div class="flex-1 min-w-0">
@@ -379,12 +287,11 @@
               </div>
             </div>
 
-            <!-- Net Gross (Profit) -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-amber-400 via-orange-500 to-yellow-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-4">
+            <div class="bg-white rounded-2xl shadow-md border border-gray-200/90 hover:shadow-lg transition-all overflow-hidden relative group">
+              <div class="h-1 w-full bg-gradient-to-r from-amber-500 to-orange-500 absolute top-0 left-0 right-0"></div>
+              <div class="p-5">
                 <div class="flex items-center gap-3">
-                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-amber-400 via-orange-500 to-yellow-600 transform hover:scale-110 transition-transform duration-200">
+                  <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
                     <TrendingUp class="w-5 h-5 text-white" />
                   </div>
                   <div class="flex-1 min-w-0">
@@ -400,12 +307,11 @@
               </div>
             </div>
 
-            <!-- Total Orders -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-4">
+            <div class="bg-white rounded-2xl shadow-md border border-gray-200/90 hover:shadow-lg transition-all overflow-hidden relative group">
+              <div class="h-1 w-full bg-gradient-to-r from-cyan-500 to-blue-500 absolute top-0 left-0 right-0"></div>
+              <div class="p-5">
                 <div class="flex items-center gap-3">
-                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
+                  <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
                     <ShoppingCart class="w-5 h-5 text-white" />
                   </div>
                   <div class="flex-1 min-w-0">
@@ -422,12 +328,11 @@
               </div>
             </div>
 
-            <!-- Products Sold -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-4">
+            <div class="bg-white rounded-2xl shadow-md border border-gray-200/90 hover:shadow-lg transition-all overflow-hidden relative group">
+              <div class="h-1 w-full bg-gradient-to-r from-violet-500 to-fuchsia-500 absolute top-0 left-0 right-0"></div>
+              <div class="p-5">
                 <div class="flex items-center gap-3">
-                  <div class="p-2 rounded-lg shadow-lg bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
+                  <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center shadow-lg shadow-violet-500/20 group-hover:scale-105 transition-transform">
                     <Package class="w-5 h-5 text-white" />
                   </div>
                   <div class="flex-1 min-w-0">
@@ -447,24 +352,23 @@
 
           <!-- Removed the Average Order Value card and Best Seller section to lighten the page -->
 
-          <!-- Empty State -->
-          <div v-if="!loading && sales.length === 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-8 mb-8 text-center">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center">
+          <div v-if="!loading && sales.length === 0" class="bg-white rounded-2xl shadow-md border border-gray-200/90 p-10 mb-8 text-center">
+            <div class="w-16 h-16 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center">
               <ShoppingCart class="w-8 h-8 text-teal-600" />
             </div>
-            <h3 class="text-lg font-medium text-gray-900 mb-2">No sales data yet</h3>
-            <p class="text-gray-600 mb-4">Start recording sales to see analytics and insights.</p>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">No sales data yet</h3>
+            <p class="text-gray-500 mb-6 max-w-sm mx-auto">Start recording sales to see analytics and insights.</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
               <button
                 @click="showAddSaleModal = true"
-                class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
+                class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-medium rounded-xl shadow-lg shadow-teal-500/25 hover:shadow-xl transition-all"
               >
                 <Plus class="w-5 h-5" />
                 Record Sale
               </button>
               <button
                 @click="createSampleSale"
-                class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
+                class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white border border-gray-200 text-gray-700 font-medium rounded-xl hover:bg-teal-50 hover:border-teal-200 transition-all shadow-sm"
               >
                 <Clipboard class="w-5 h-5" />
                 Create Sample Sale
@@ -472,28 +376,26 @@
             </div>
           </div>
 
-          <!-- Charts Section -->
           <div v-if="!loading && sales.length > 0" class="mb-8">
-            <!-- Top Products Chart -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
+            <div class="bg-white rounded-2xl shadow-md border border-gray-200/90 p-6 hover:shadow-lg transition-shadow">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <h2 class="text-lg font-semibold text-gray-900">Top Products</h2>
                 <select
                   v-model="selectedProductMetric"
-                  class="px-3 py-1 rounded-lg border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  class="px-4 py-2 rounded-xl border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-teal-300 focus:border-teal-400 transition-all"
                 >
                   <option value="revenue">By Revenue</option>
                   <option value="units">By Units Sold</option>
                 </select>
               </div>
-              <div class="space-y-4">
+              <div class="space-y-3">
                 <div
                   v-for="product in sortedTopProducts"
                   :key="product.id"
-                  class="flex items-center gap-4 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                  class="flex items-center gap-4 p-3 bg-gray-50 rounded-xl border border-gray-100 hover:bg-teal-50/50 hover:border-teal-100 transition-colors"
                 >
-                  <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
-                    <Package class="w-6 h-6 text-purple-600" />
+                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center">
+                    <Package class="w-6 h-6 text-teal-600" />
                   </div>
                   <div class="flex-1 min-w-0">
                     <p class="font-medium text-gray-900 truncate">{{ product.name }}</p>
@@ -514,13 +416,12 @@
             </div>
           </div>
 
-          <!-- Sales by Category -->
-          <div v-if="!loading && sales.length > 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6 mb-8">
+          <div v-if="!loading && sales.length > 0" class="bg-white rounded-2xl shadow-md border border-gray-200/90 p-6 mb-8 hover:shadow-lg transition-shadow">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <h2 class="text-lg font-semibold text-gray-900">Sales by Category</h2>
               <select
                 v-model="selectedCategoryView"
-                class="px-3 py-1 rounded-lg border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                class="px-4 py-2 rounded-xl border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-teal-300 focus:border-teal-400 transition-all"
               >
                 <option value="revenue">Revenue</option>
                 <option value="units">Units Sold</option>
@@ -531,11 +432,11 @@
               <div
                 v-for="category in salesByCategory"
                 :key="category.name"
-                class="p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+                class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-teal-50/50 hover:border-teal-100 transition-colors"
               >
                 <div class="flex items-center gap-3 mb-3">
-                  <div class="p-2 rounded-md bg-gradient-to-br from-blue-100 to-purple-100">
-                    <component :is="getCategoryIcon(category.name)" class="w-5 h-5 text-blue-600" />
+                  <div class="p-2 rounded-xl bg-gradient-to-br from-teal-100 to-cyan-100">
+                    <component :is="getCategoryIcon(category.name)" class="w-5 h-5 text-teal-600" />
                   </div>
                   <h3 class="font-medium text-gray-900">{{ category.name }}</h3>
                 </div>
@@ -567,42 +468,39 @@
             </div>
           </div>
 
-          <!-- Recent Sales Table -->
-          <div v-if="!loading && sales.length > 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg overflow-hidden">
-            <div class="p-6 border-b border-gray-200">
+          <div v-if="!loading && sales.length > 0" class="bg-white rounded-2xl shadow-md border border-gray-200/90 overflow-hidden">
+            <div class="p-5 border-b border-gray-100 bg-gradient-to-r from-gray-50/80 to-white">
               <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <h2 class="text-lg font-semibold text-gray-900">Recent Sales</h2>
-                <div class="relative">
+                <div class="relative w-full sm:w-64">
                   <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                   <input
                     type="text"
                     v-model="searchQuery"
                     placeholder="Search sales..."
-                    class="pl-9 pr-4 py-2 rounded-lg border border-gray-200 text-sm bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent placeholder-gray-500"
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-teal-300 focus:border-teal-400 placeholder-gray-400 transition-all"
                   />
                 </div>
               </div>
             </div>
-
-            <!-- Table -->
             <div class="overflow-x-auto">
               <table class="w-full">
                 <thead>
-                  <tr class="border-b border-gray-200">
-                    <th class="text-left p-4 text-sm font-medium text-gray-600">Order ID</th>
-                    <th class="text-left p-4 text-sm font-medium text-gray-600">Customer</th>
-                    <th class="text-left p-4 text-sm font-medium text-gray-600">Products</th>
-                    <th class="text-left p-4 text-sm font-medium text-gray-600">Total</th>
-                    <th class="text-left p-4 text-sm font-medium text-gray-600">Status</th>
-                    <th class="text-left p-4 text-sm font-medium text-gray-600">Date</th>
-                    <th class="text-left p-4 text-sm font-medium text-gray-600">Actions</th>
+                  <tr class="border-b border-gray-200 bg-gray-50/80">
+                    <th class="text-left p-4 text-sm font-semibold text-gray-700">Order ID</th>
+                    <th class="text-left p-4 text-sm font-semibold text-gray-700">Customer</th>
+                    <th class="text-left p-4 text-sm font-semibold text-gray-700">Products</th>
+                    <th class="text-left p-4 text-sm font-semibold text-gray-700">Total</th>
+                    <th class="text-left p-4 text-sm font-semibold text-gray-700">Status</th>
+                    <th class="text-left p-4 text-sm font-semibold text-gray-700">Date</th>
+                    <th class="text-left p-4 text-sm font-semibold text-gray-700">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr
                     v-for="sale in filteredSales"
                     :key="sale.id"
-                    class="border-b border-gray-100 hover:bg-gray-50"
+                    class="border-b border-gray-100 hover:bg-teal-50/30 transition-colors"
                   >
                     <td class="p-4">
                       <span class="font-medium text-gray-900">{{ sale.orderId }}</span>
@@ -627,10 +525,10 @@
                     </td>
                     <td class="p-4">
                       <span
-                        class="px-2 py-1 rounded-full text-sm font-medium"
+                        class="px-2.5 py-1 rounded-xl text-sm font-medium"
                         :class="{
-                          'bg-green-100 text-green-800 border border-green-200': sale.status === 'completed',
-                          'bg-yellow-100 text-yellow-800 border border-yellow-200': sale.status === 'pending',
+                          'bg-emerald-100 text-emerald-800 border border-emerald-200': sale.status === 'completed',
+                          'bg-amber-100 text-amber-800 border border-amber-200': sale.status === 'pending',
                           'bg-red-100 text-red-800 border border-red-200': sale.status === 'cancelled'
                         }"
                       >
@@ -643,7 +541,7 @@
                     <td class="p-4">
                       <button
                         @click="confirmDeleteSale(sale)"
-                        class="p-2 hover:bg-red-50 rounded-lg text-red-600 hover:text-red-700 transition-colors"
+                        class="p-2 hover:bg-red-50 rounded-xl text-red-600 hover:text-red-700 transition-colors"
                         title="Delete Sale"
                       >
                         <Trash2 class="w-4 h-4" />
@@ -653,25 +551,23 @@
                 </tbody>
               </table>
             </div>
-
-            <!-- Pagination -->
-            <div class="flex items-center justify-between p-4 border-t border-gray-200">
-              <p class="text-sm text-gray-600">
+            <div class="flex items-center justify-between p-4 border-t border-gray-100 bg-gray-50/50">
+              <p class="text-sm text-gray-600 font-medium">
                 Showing {{ paginationStart }} to {{ paginationEnd }} of {{ filteredSales.length }} results
               </p>
               <div class="flex items-center gap-2">
                 <button
                   @click="currentPage--"
                   :disabled="currentPage === 1"
-                  class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-700"
+                  class="p-2.5 rounded-xl hover:bg-white border border-gray-200 disabled:opacity-50 text-gray-700 transition-colors"
                 >
                   <ChevronLeft class="w-5 h-5" />
                 </button>
-                <span class="text-sm text-gray-700">Page {{ currentPage }} of {{ totalPages }}</span>
+                <span class="text-sm font-medium text-gray-700 px-2">Page {{ currentPage }} of {{ totalPages }}</span>
                 <button
                   @click="currentPage++"
                   :disabled="currentPage === totalPages"
-                  class="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-700"
+                  class="p-2.5 rounded-xl hover:bg-white border border-gray-200 disabled:opacity-50 text-gray-700 transition-colors"
                 >
                   <ChevronRight class="w-5 h-5" />
                 </button>
@@ -684,156 +580,213 @@
   </div>
 
   <!-- Add Sale Modal -->
-  <div v-if="showAddSaleModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
-      <div class="p-6 border-b border-gray-200">
-        <h3 class="text-xl font-bold text-gray-900">Record New Sale</h3>
+  <div v-if="showAddSaleModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity duration-200" @click.self="showAddSaleModal = false">
+    <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-200/90 animate-slide-up">
+      <div class="h-1.5 w-full bg-gradient-to-r from-teal-500 to-cyan-500 rounded-t-2xl"></div>
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-teal-100 flex items-center justify-center">
+            <ShoppingCart class="w-6 h-6 text-teal-600" />
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-gray-900">Record New Sale</h3>
+            <p class="text-sm text-gray-500 mt-0.5">Add customer and products</p>
+          </div>
+        </div>
+        <button
+          type="button"
+          @click="showAddSaleModal = false"
+          class="p-2.5 rounded-xl text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all duration-200"
+          aria-label="Close"
+        >
+          <X class="w-5 h-5" />
+        </button>
       </div>
 
-      <form @submit.prevent="handleAddSale" class="p-4 md:p-6">
-        <div class="space-y-4">
+      <form @submit.prevent="handleAddSale" class="p-5 md:p-6">
+        <div class="space-y-5">
           <!-- Customer Information -->
-          <div>
-            <h4 class="text-sm font-medium text-gray-900 mb-3">Customer Information</h4>
+          <div class="bg-gray-50/80 rounded-2xl border border-gray-200/90 p-5">
+            <h4 class="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <User class="w-4 h-4 text-teal-600" />
+              Customer Information
+            </h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label class="block text-sm text-gray-600 mb-1">Customer Name</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">Customer Name</label>
                 <input
                   type="text"
                   v-model="saleForm.customerName"
                   required
-                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
+                  placeholder="Full name"
+                  class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-300 focus:border-teal-400 bg-white text-gray-900 placeholder-gray-400 transition-all"
                 />
               </div>
               <div>
-                <label class="block text-sm text-gray-600 mb-1">Contact No.</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">Contact No.</label>
                 <input
                   type="tel"
                   v-model="saleForm.customerContactNo"
                   placeholder="09XX-XXX-XXXX"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
+                  class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-300 focus:border-teal-400 bg-white text-gray-900 placeholder-gray-400 transition-all"
                 />
               </div>
             </div>
           </div>
 
           <!-- Products -->
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <h4 class="text-sm font-medium text-gray-900">Products</h4>
+          <div class="bg-gray-50/80 rounded-2xl border border-gray-200/90 p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="text-sm font-semibold text-gray-900 flex items-center gap-2">
+                <Package class="w-4 h-4 text-teal-600" />
+                Products
+              </h4>
               <button
                 type="button"
                 @click="addProductToSale"
-                class="text-sm text-teal-600 hover:text-teal-700 flex items-center gap-1"
+                class="inline-flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-teal-600 bg-teal-100 hover:bg-teal-200 transition-colors"
               >
                 <Plus class="w-4 h-4" />
                 Add Product
               </button>
             </div>
 
-            <div v-for="(product, index) in saleForm.products" :key="index" class="mb-3 p-3 border border-gray-200 rounded-lg bg-gray-50">
-              <div class="flex justify-between mb-2">
-                <h5 class="text-sm font-medium text-gray-900">Product {{ index + 1 }}</h5>
+            <div v-for="(product, index) in saleForm.products" :key="index" class="mb-4 p-4 rounded-xl border border-gray-200 bg-white shadow-sm last:mb-0">
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-sm font-semibold text-gray-800">Product {{ index + 1 }}</span>
                 <button
                   type="button"
                   @click="removeProductFromSale(index)"
-                  class="text-red-600 hover:text-red-700"
+                  class="p-2 rounded-lg text-red-500 hover:bg-red-50 transition-colors"
                 >
                   <X class="w-4 h-4" />
                 </button>
               </div>
-
               <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div class="md:col-span-3">
-                  <label class="block text-xs text-gray-600 mb-1">Product</label>
+                  <label class="block text-xs font-medium text-gray-600 mb-1">Product</label>
                   <select
                     v-model="product.id"
                     required
-                    class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900"
+                    class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-300 focus:border-teal-400 bg-white text-gray-900 transition-all"
                     @change="updateProductDetails(index)"
                   >
                     <option value="">Select a product</option>
                     <option v-for="p in availableProducts" :key="p.id" :value="p.id">
-                      {{ p.name }} - {{ formatCurrency(p.price) }} (Stock: {{ p.stock || 0 }})
+                      {{ p.name }} — {{ formatCurrency(p.price) }} (Stock: {{ p.stock || 0 }})
                     </option>
                   </select>
                 </div>
                 <div>
-                  <label class="block text-xs text-gray-600 mb-1">Quantity</label>
+                  <label class="block text-xs font-medium text-gray-600 mb-1">Quantity</label>
                   <input
                     type="number"
                     v-model.number="product.quantity"
                     min="1"
                     required
-                    class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900"
+                    class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-300 bg-white text-gray-900 transition-all"
                     @input="calculateTotal"
                   />
                 </div>
                 <div>
-                  <label class="block text-xs text-gray-600 mb-1">Price</label>
+                  <label class="block text-xs font-medium text-gray-600 mb-1">Price</label>
                   <input
                     type="number"
                     v-model.number="product.price"
                     min="0"
                     step="0.01"
                     required
-                    class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900"
+                    class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-300 bg-white text-gray-900 transition-all"
                     @input="calculateTotal"
                   />
                 </div>
                 <div>
-                  <label class="block text-xs text-gray-600 mb-1">Subtotal</label>
+                  <label class="block text-xs font-medium text-gray-600 mb-1">Subtotal</label>
                   <input
                     type="text"
                     :value="formatCurrency(product.price * product.quantity)"
                     readonly
-                    class="w-full px-3 py-2 rounded-lg border border-gray-200 bg-gray-100 text-gray-700"
+                    class="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-100 text-gray-700 font-medium"
                   />
                 </div>
               </div>
             </div>
 
-            <div v-if="saleForm.products.length === 0" class="text-center p-4 border border-dashed border-gray-300 rounded-lg">
-              <p class="text-gray-600">No products added yet</p>
+            <div v-if="saleForm.products.length === 0" class="text-center py-8 border-2 border-dashed border-gray-200 rounded-xl bg-white/50">
+              <Package class="w-10 h-10 mx-auto mb-2 text-gray-300" />
+              <p class="text-gray-500 text-sm font-medium">No products added yet</p>
+              <p class="text-xs text-gray-400 mt-1">Click "Add Product" to start</p>
             </div>
           </div>
 
-          <!-- Sale Details -->
-
-          <div>
-            <label class="block text-sm text-gray-600 mb-1">Payment Method</label>
-            <select
-              v-model="saleForm.paymentMethod"
-              required
-              class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900"
-            >
-              <option value="cash">Cash</option>
-              <option value="credit_card">Credit Card</option>
-              <option value="bank_transfer">Bank Transfer</option>
-              <option value=" gcash">GCash</option>
-            </select>
+          <div class="bg-gray-50/80 rounded-2xl border border-gray-200/90 p-5">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Payment Method</label>
+            <div class="relative" ref="paymentDropdownRef">
+              <button
+                type="button"
+                @click="paymentDropdownOpen = !paymentDropdownOpen"
+                class="w-full px-4 py-3 rounded-xl border-2 bg-white text-left flex items-center justify-between gap-2 transition-all duration-200"
+                :class="paymentDropdownOpen ? 'border-teal-400 ring-2 ring-teal-100 shadow-md' : 'border-gray-200 hover:border-teal-200 focus:ring-2 focus:ring-teal-200'"
+              >
+                <span class="flex items-center gap-2">
+                  <component
+                    :is="paymentMethodOptions.find(o => o.value === saleForm.paymentMethod)?.icon || Banknote"
+                    class="w-5 h-5 text-teal-600 flex-shrink-0"
+                  />
+                  <span class="font-medium text-gray-900">{{ paymentMethodOptions.find(o => o.value === saleForm.paymentMethod)?.label || 'Select payment' }}</span>
+                </span>
+                <ChevronDown
+                  class="w-5 h-5 text-gray-400 flex-shrink-0 transition-transform duration-200"
+                  :class="{ 'rotate-180': paymentDropdownOpen }"
+                />
+              </button>
+              <Transition
+                enter-active-class="transition ease-out duration-200"
+                enter-from-class="opacity-0 -translate-y-2"
+                enter-to-class="opacity-100 translate-y-0"
+                leave-active-class="transition ease-in duration-150"
+                leave-from-class="opacity-100 translate-y-0"
+                leave-to-class="opacity-0 -translate-y-2"
+              >
+                <div
+                  v-show="paymentDropdownOpen"
+                  class="absolute top-full left-0 right-0 mt-2 py-2 bg-white rounded-xl border-2 border-gray-200 shadow-xl z-10 overflow-hidden"
+                >
+                  <button
+                    v-for="opt in paymentMethodOptions"
+                    :key="opt.value"
+                    type="button"
+                    @click="saleForm.paymentMethod = opt.value; paymentDropdownOpen = false"
+                    class="w-full px-4 py-3 flex items-center gap-3 text-left transition-colors duration-150 hover:bg-teal-50"
+                    :class="saleForm.paymentMethod === opt.value ? 'bg-teal-50 text-teal-800 font-medium' : 'text-gray-700'"
+                  >
+                    <component :is="opt.icon" class="w-5 h-5 text-teal-600 flex-shrink-0" />
+                    <span>{{ opt.label }}</span>
+                  </button>
+                </div>
+              </Transition>
+            </div>
           </div>
 
-          <!-- Total -->
-          <div class="border-t border-gray-200 pt-4">
+          <div class="rounded-2xl border-2 border-teal-200 bg-gradient-to-r from-teal-50 to-cyan-50 p-5">
             <div class="flex justify-between items-center">
-              <span class="text-gray-900 font-medium">Total Amount:</span>
-              <span class="text-xl font-bold text-gray-900">{{ formatCurrency(saleForm.total) }}</span>
+              <span class="text-gray-800 font-semibold">Total Amount</span>
+              <span class="text-2xl font-bold text-teal-700">{{ formatCurrency(saleForm.total) }}</span>
             </div>
           </div>
         </div>
 
-        <div class="flex justify-end gap-3 mt-6">
+        <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-100">
           <button
             type="button"
             @click="showAddSaleModal = false"
-            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+            class="px-5 py-2.5 border border-gray-200 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition-colors"
           >
             Cancel
           </button>
           <button
             type="submit"
-            class="px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
+            class="px-6 py-2.5 rounded-xl font-semibold text-white shadow-lg shadow-teal-500/25 hover:shadow-xl transition-all focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 bg-gradient-to-r from-teal-500 to-cyan-500 disabled:opacity-70"
             :disabled="isSubmitting"
           >
             <span v-if="isSubmitting" class="flex items-center gap-2">
@@ -847,37 +800,69 @@
     </div>
   </div>
 
-  <!-- Daily Sales Report Modal -->
-  <div v-if="showDailyReportModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl">
-      <div class="p-6 border-b border-gray-200">
+  <!-- Sales Report Modal -->
+  <div v-if="showDailyReportModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-200/90">
+      <div class="h-1 w-full bg-gradient-to-r from-teal-500 to-cyan-500 rounded-t-2xl"></div>
+      <div class="p-6 border-b border-gray-100">
         <div class="flex items-center justify-between">
-          <h3 class="text-xl font-bold text-gray-900">Daily Sales Report</h3>
+          <h3 class="text-xl font-bold text-gray-900">Sales Report</h3>
+          <button @click="showDailyReportModal = false" class="p-2 rounded-xl text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors">
+            <X class="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+
+      <!-- Period selector: Days / Months / Years -->
+      <div class="p-4 border-b border-gray-100 bg-gray-50/80">
+        <p class="text-sm font-medium text-gray-700 mb-3">Report period</p>
+        <div class="flex gap-2 mb-4">
           <button
-            @click="showDailyReportModal = false"
-            class="text-gray-400 hover:text-gray-600"
+            v-for="t in reportPeriodTypes"
+            :key="t.value"
+            @click="reportPeriodType = t.value"
+            class="flex-1 py-2.5 px-3 rounded-xl text-sm font-medium transition-all"
+            :class="reportPeriodType === t.value ? 'bg-teal-500 text-white shadow-md' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-100'"
           >
-            <X class="w-6 h-6" />
+            {{ t.label }}
+          </button>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button
+            v-for="opt in reportPeriodOptions"
+            :key="opt.value"
+            @click="reportPeriodValue = opt.value"
+            class="py-2 px-4 rounded-xl text-sm font-medium transition-all border"
+            :class="reportPeriodValue === opt.value ? 'bg-teal-100 border-teal-300 text-teal-800' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-100'"
+          >
+            {{ opt.label }}
           </button>
         </div>
       </div>
 
       <div class="p-4 md:p-6">
-        <!-- Daily Sales Report Preview -->
-        <div id="daily-report-content" class="bg-gradient-to-br from-blue-50 to-purple-50 p-4 rounded-lg mb-4 text-sm">
+        <div v-if="reportDataLoading" class="text-center py-10 text-gray-500 rounded-2xl border border-gray-200 bg-gray-50/50">
+          <Loader class="w-10 h-10 mx-auto mb-3 text-teal-500 animate-spin" />
+          <p class="font-medium">Loading report data...</p>
+        </div>
+        <div v-else-if="reportSales.length === 0" class="text-center py-8 text-gray-500 rounded-2xl border border-dashed border-gray-200 bg-gray-50/50">
+          <TrendingUp class="w-12 h-12 mx-auto mb-3 text-gray-300" />
+          <p class="font-medium">No sales in this period</p>
+          <p class="text-sm mt-1">Choose another period.</p>
+        </div>
+        <div v-else id="daily-report-content" class="bg-gradient-to-br from-teal-50/50 to-cyan-50/50 p-4 rounded-2xl mb-4 text-sm border border-gray-200/90">
           <div class="text-center mb-6">
-            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+            <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center">
               <TrendingUp class="w-8 h-8 text-white" />
             </div>
             <h2 class="text-xl font-bold text-gray-900">Barcelona Paint Center</h2>
-            <p class="text-blue-600 font-medium">Admin Daily Sales Report</p>
+            <p class="text-teal-600 font-medium">Sales Report — {{ reportPeriodLabel }}</p>
             <p class="text-xs text-gray-500 mt-1">{{ formatDateTime(new Date()) }}</p>
           </div>
 
-          <!-- Admin Information -->
-          <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200">
+          <div class="bg-white/90 rounded-xl p-4 mb-4 border border-gray-200">
             <h3 class="font-semibold text-gray-900 mb-2 flex items-center">
-              <Shield class="w-4 h-4 mr-2 text-blue-600" />
+              <Shield class="w-4 h-4 mr-2 text-teal-600" />
               Admin Report
             </h3>
             <div class="grid grid-cols-2 gap-2 text-xs">
@@ -891,7 +876,7 @@
               </div>
               <div>
                 <span class="text-gray-600">Period:</span>
-                <span class="font-medium ml-1">{{ selectedRange.toUpperCase() }}</span>
+                <span class="font-medium ml-1">{{ reportPeriodLabel }}</span>
               </div>
               <div>
                 <span class="text-gray-600">Status:</span>
@@ -900,41 +885,39 @@
             </div>
           </div>
 
-          <!-- Performance Summary -->
-          <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200">
+          <div class="bg-white/90 rounded-xl p-4 mb-4 border border-gray-200">
             <h3 class="font-semibold text-gray-900 mb-3 flex items-center">
               <DollarSign class="w-4 h-4 mr-2 text-green-600" />
-              Overall Performance ({{ selectedRange.toUpperCase() }})
+              Overall Performance ({{ reportPeriodLabel }})
             </h3>
             <div class="grid grid-cols-2 gap-3">
-              <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-3 rounded-lg border border-green-200">
+              <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-3 rounded-xl border border-green-200">
                 <p class="text-xs text-green-700 font-medium">Total Revenue</p>
-                <p class="text-lg font-bold text-green-800">{{ formatCurrency(totalRevenue) }}</p>
+                <p class="text-lg font-bold text-green-800">{{ formatCurrency(reportTotalRevenue) }}</p>
               </div>
-              <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-3 rounded-lg border border-blue-200">
+              <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-3 rounded-xl border border-blue-200">
                 <p class="text-xs text-blue-700 font-medium">Total Orders</p>
-                <p class="text-lg font-bold text-blue-800">{{ totalOrders }}</p>
+                <p class="text-lg font-bold text-blue-800">{{ reportTotalOrders }}</p>
               </div>
-              <div class="bg-gradient-to-r from-purple-50 to-violet-50 p-3 rounded-lg border border-purple-200">
+              <div class="bg-gradient-to-r from-purple-50 to-violet-50 p-3 rounded-xl border border-purple-200">
                 <p class="text-xs text-purple-700 font-medium">Items Sold</p>
-                <p class="text-lg font-bold text-purple-800">{{ totalProductsSold }}</p>
+                <p class="text-lg font-bold text-purple-800">{{ reportTotalProductsSold }}</p>
               </div>
-              <div class="bg-gradient-to-r from-orange-50 to-amber-50 p-3 rounded-lg border border-orange-200">
+              <div class="bg-gradient-to-r from-orange-50 to-amber-50 p-3 rounded-xl border border-orange-200">
                 <p class="text-xs text-orange-700 font-medium">Avg Order</p>
-                <p class="text-lg font-bold text-orange-800">{{ formatCurrency(averageOrderValue) }}</p>
+                <p class="text-lg font-bold text-orange-800">{{ formatCurrency(reportAverageOrderValue) }}</p>
               </div>
             </div>
           </div>
 
-          <!-- Top Products -->
-          <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200" v-if="sortedTopProducts.length > 0">
+          <div class="bg-white/90 rounded-xl p-4 mb-4 border border-gray-200" v-if="reportSortedTopProducts.length > 0">
             <h3 class="font-semibold text-gray-900 mb-3 flex items-center">
-              <Package class="w-4 h-4 mr-2 text-purple-600" />
-              Top Products ({{ selectedRange.toUpperCase() }})
+              <Package class="w-4 h-4 mr-2 text-teal-600" />
+              Top Products ({{ reportPeriodLabel }})
             </h3>
             <div class="space-y-3">
               <div
-                v-for="(product, index) in sortedTopProducts.slice(0, 5)"
+                v-for="(product, index) in reportSortedTopProducts.slice(0, 5)"
                 :key="product.id"
                 class="grid grid-cols-12 gap-3 p-3 bg-gray-50 rounded text-xs border border-gray-100 items-center"
               >
@@ -967,24 +950,22 @@
                   <div class="text-gray-600 text-xs">per unit</div>
                 </div>
 
-                <!-- Percentage -->
                 <div class="col-span-1 text-right">
-                  <div class="text-purple-600 text-xs font-medium">{{ totalRevenue > 0 ? ((product.revenue / totalRevenue) * 100).toFixed(1) : 0 }}%</div>
+                  <div class="text-purple-600 text-xs font-medium">{{ reportTotalRevenue > 0 ? ((product.revenue / reportTotalRevenue) * 100).toFixed(1) : 0 }}%</div>
                   <div class="text-gray-600 text-xs">of total</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Recent Sales -->
-          <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200" v-if="sales.length > 0">
+          <div class="bg-white/90 rounded-xl p-4 mb-4 border border-gray-200" v-if="reportSales.length > 0">
             <h3 class="font-semibold text-gray-900 mb-3 flex items-center">
-              <ShoppingCart class="w-4 h-4 mr-2 text-blue-600" />
+              <ShoppingCart class="w-4 h-4 mr-2 text-teal-600" />
               Recent Transactions (Last 5)
             </h3>
             <div class="space-y-3">
               <div
-                v-for="sale in sales.slice(0, 5)"
+                v-for="sale in reportSales.slice(0, 5)"
                 :key="sale.id"
                 class="p-3 bg-gray-50 rounded border border-gray-100"
               >
@@ -1039,17 +1020,17 @@
         </div>
       </div>
 
-      <div class="flex gap-3">
+      <div v-if="!reportDataLoading && reportSales.length > 0" class="flex gap-3 p-4 border-t border-gray-100">
         <button
           @click="downloadDailyReport"
-          class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
+          class="flex-1 px-4 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-medium rounded-xl shadow-lg shadow-teal-500/25 flex items-center justify-center gap-2 hover:shadow-xl transition-all"
         >
           <Download class="w-5 h-5" />
           Save as Image
         </button>
         <button
           @click="printDailyReport"
-          class="flex-1 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
+          class="flex-1 px-4 py-2.5 bg-white border border-gray-200 text-gray-700 font-medium rounded-xl flex items-center justify-center gap-2 hover:bg-gray-50 transition-all"
         >
           <Printer class="w-5 h-5" />
           Print
@@ -1059,16 +1040,14 @@
   </div>
 
   <!-- Receipt Modal -->
-  <div v-if="showReceiptModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
-      <div class="p-6 border-b border-gray-200">
+  <div v-if="showReceiptModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl border border-gray-200/90">
+      <div class="h-1 w-full bg-gradient-to-r from-teal-500 to-cyan-500 rounded-t-2xl"></div>
+      <div class="p-6 border-b border-gray-100">
         <div class="flex items-center justify-between">
           <h3 class="text-xl font-bold text-gray-900">Receipt Generated</h3>
-          <button
-            @click="showReceiptModal = false"
-            class="text-gray-400 hover:text-gray-600"
-          >
-            <X class="w-6 h-6" />
+          <button @click="showReceiptModal = false" class="p-2 rounded-xl text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors">
+            <X class="w-5 h-5" />
           </button>
         </div>
       </div>
@@ -1146,28 +1125,23 @@
   </div>
 
   <!-- Delete Sale Confirmation Modal -->
-  <div v-if="showDeleteModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
+  <div v-if="showDeleteModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl border border-gray-200/90">
+      <div class="h-1 w-full bg-red-500 rounded-t-2xl"></div>
       <div class="p-6">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
-          <AlertTriangle class="w-8 h-8 text-red-600" />
+        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-red-100 flex items-center justify-center">
+          <AlertTriangle class="w-7 h-7 text-red-600" />
         </div>
         <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Delete Sale</h3>
-        <p class="text-gray-600 text-center mb-6">
+        <p class="text-gray-600 text-center mb-6 text-sm">
           Are you sure you want to delete sale <strong>{{ saleToDelete?.orderId }}</strong>?
           This will restore the product stock and cannot be undone.
         </p>
         <div class="flex justify-center gap-3">
-          <button
-            @click="showDeleteModal = false"
-            class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-          >
+          <button @click="showDeleteModal = false" class="px-5 py-2.5 border border-gray-200 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition-colors">
             Cancel
           </button>
-          <button
-            @click="deleteSale"
-            class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200"
-          >
+          <button @click="deleteSale" class="px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white font-medium rounded-xl shadow-md transition-all">
             Delete Sale
           </button>
         </div>
@@ -1176,27 +1150,25 @@
   </div>
 
   <!-- Delete All Sales Confirmation Modal -->
-  <div v-if="showDeleteAllModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
+  <div v-if="showDeleteAllModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl border border-gray-200/90">
+      <div class="h-1 w-full bg-red-500 rounded-t-2xl"></div>
       <div class="p-6">
-        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
-          <AlertTriangle class="w-8 h-8 text-red-600" />
+        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-red-100 flex items-center justify-center">
+          <AlertTriangle class="w-7 h-7 text-red-600" />
         </div>
         <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Delete All Sales</h3>
-        <p class="text-gray-600 text-center mb-6">
-          Are you sure you want to delete <strong>ALL {{ sales.length }} sales</strong>?
-          This will restore all product stock and cannot be undone.
+        <p class="text-gray-600 text-center mb-6 text-sm">
+          Are you sure you want to delete <strong>all sales in the system</strong>?
+          This will restore product stock and cannot be undone. You don't need to select a date range (1D, 7D, etc.) — this deletes every sale.
         </p>
         <div class="flex justify-center gap-3">
-          <button
-            @click="showDeleteAllModal = false"
-            class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-          >
+          <button @click="showDeleteAllModal = false" class="px-5 py-2.5 border border-gray-200 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition-colors">
             Cancel
           </button>
           <button
             @click="deleteAllSales"
-            class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200"
+            class="px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white font-medium rounded-xl shadow-md transition-all"
           >
             Delete All Sales
           </button>
@@ -1231,10 +1203,10 @@ import { auth } from '../../config/firebase'
 // Icons Import
 import {
   Palette, TrendingUp, BarChart3, Settings, User, Menu, X, Calendar, Bell,
-  Plus, Trash2, Search, ChevronLeft, ChevronRight, Loader, AlertTriangle,
+  Plus, Trash2, Search, ChevronLeft, ChevronRight, ChevronDown, Loader, AlertTriangle,
   RefreshCw, ShoppingCart, TrendingDown, Droplets, Paintbrush, Clipboard,
   Download, Printer, LogOut, DollarSign, Shield, LayoutDashboard, Users,
-  Package, Home
+  Package, Home, Banknote, CreditCard, Building2, Smartphone
 } from 'lucide-vue-next'
 
 const currentDate = new Date().toLocaleDateString('en-US', {
@@ -1285,6 +1257,120 @@ const dateRanges = [
   { label: '1Y', value: '1y' },
 ]
 const selectedRange = ref('30d')
+
+// Report modal: period type (days / months / years) and value; report has its own data (independent of 1D/7D/30D/3M/1Y)
+const reportSalesRaw = ref([])
+const reportDataLoading = ref(false)
+const reportPeriodType = ref('days')
+const reportPeriodValue = ref(1)
+const reportPeriodTypes = [
+  { label: 'Days', value: 'days' },
+  { label: 'Months', value: 'months' },
+  { label: 'Years', value: 'years' },
+]
+const reportPeriodOptions = computed(() => {
+  if (reportPeriodType.value === 'days') {
+    return [
+      { label: 'Last 1 Day', value: 1 },
+      { label: 'Last 7 Days', value: 7 },
+      { label: 'Last 30 Days', value: 30 },
+    ]
+  }
+  if (reportPeriodType.value === 'months') {
+    return [
+      { label: 'This Month', value: 1 },
+      { label: 'Last 3 Months', value: 3 },
+      { label: 'Last 6 Months', value: 6 },
+    ]
+  }
+  return [
+    { label: 'This Year', value: 1 },
+    { label: 'Last 2 Years', value: 2 },
+  ]
+})
+const reportStartDate = computed(() => {
+  const now = new Date()
+  const d = new Date(now)
+  if (reportPeriodType.value === 'days') {
+    d.setDate(now.getDate() - Number(reportPeriodValue.value))
+    return d
+  }
+  if (reportPeriodType.value === 'months') {
+    d.setMonth(now.getMonth() - Number(reportPeriodValue.value))
+    return d
+  }
+  const yearsBack = Number(reportPeriodValue.value)
+  d.setFullYear(now.getFullYear() - (yearsBack - 1))
+  d.setMonth(0)
+  d.setDate(1)
+  d.setHours(0, 0, 0, 0)
+  return d
+})
+const reportSales = computed(() => {
+  return reportSalesRaw.value.filter(sale => sale.date && new Date(sale.date) >= reportStartDate.value)
+})
+const reportTotalRevenue = computed(() => {
+  return reportSales.value.reduce((sum, s) => sum + Number(s.total || 0), 0)
+})
+const reportTotalOrders = computed(() => reportSales.value.length)
+const reportTotalProductsSold = computed(() => {
+  return reportSales.value.reduce((sum, sale) => {
+    return sum + (sale.products?.reduce((s, p) => s + (Number(p.quantity) || 0), 0) || 0)
+  }, 0)
+})
+const reportAverageOrderValue = computed(() => {
+  return reportTotalOrders.value ? reportTotalRevenue.value / reportTotalOrders.value : 0
+})
+function computeTopProductsFromSales(salesData) {
+  const productMap = new Map()
+  salesData.forEach(sale => {
+    (sale.products || []).forEach(product => {
+      const existing = productMap.get(product.id) || {
+        id: product.id,
+        name: product.name || 'Unknown Product',
+        category: product.category || 'Uncategorized',
+        revenue: 0,
+        units: 0,
+      }
+      existing.revenue += Number(product.price || 0) * Number(product.quantity || 0)
+      existing.units += Number(product.quantity || 0)
+      productMap.set(product.id, existing)
+    })
+  })
+  return Array.from(productMap.values()).sort((a, b) => b.revenue - a.revenue)
+}
+function computeSalesByCategoryFromSales(salesData) {
+  const categoryMap = new Map()
+  salesData.forEach(sale => {
+    (sale.products || []).forEach(product => {
+      const category = product.category || 'Uncategorized'
+      const existing = categoryMap.get(category) || {
+        name: category,
+        revenue: 0,
+        units: 0,
+        orders: 0,
+        trend: 0,
+      }
+      existing.revenue += Number(product.price || 0) * Number(product.quantity || 0)
+      existing.units += Number(product.quantity || 0)
+      existing.orders += 1
+      categoryMap.set(category, existing)
+    })
+  })
+  return Array.from(categoryMap.values())
+}
+const reportTopProducts = computed(() => computeTopProductsFromSales(reportSales.value))
+const reportSalesByCategory = computed(() => computeSalesByCategoryFromSales(reportSales.value))
+const reportSortedTopProducts = computed(() => [...reportTopProducts.value].sort((a, b) => b.revenue - a.revenue))
+const reportPeriodLabel = computed(() => {
+  if (reportPeriodType.value === 'days') {
+    return Number(reportPeriodValue.value) === 1 ? 'Last 1 Day' : `Last ${reportPeriodValue.value} Days`
+  }
+  if (reportPeriodType.value === 'months') {
+    return reportPeriodValue.value === 1 ? 'This Month' : `Last ${reportPeriodValue.value} Months`
+  }
+  return reportPeriodValue.value === 1 ? 'This Year' : `Last ${reportPeriodValue.value} Years`
+})
 const selectedProductMetric = ref('revenue')
 const selectedCategoryView = ref('revenue')
 const searchQuery = ref('')
@@ -1300,6 +1386,26 @@ const saleForm = ref({
   total: 0,
   status: 'completed',
   paymentMethod: 'cash'
+})
+const paymentDropdownOpen = ref(false)
+const paymentDropdownRef = ref(null)
+const paymentMethodOptions = [
+  { value: 'cash', label: 'Cash', icon: Banknote },
+  { value: 'credit_card', label: 'Credit Card', icon: CreditCard },
+  { value: 'bank_transfer', label: 'Bank Transfer', icon: Building2 },
+  { value: ' gcash', label: 'GCash', icon: Smartphone },
+]
+
+function closePaymentDropdown(e) {
+  if (paymentDropdownRef.value && !paymentDropdownRef.value.contains(e.target)) {
+    paymentDropdownOpen.value = false
+  }
+}
+onMounted(() => {
+  document.addEventListener('click', closePaymentDropdown)
+})
+onUnmounted(() => {
+  document.removeEventListener('click', closePaymentDropdown)
 })
 
 onMounted(() => {
@@ -1321,6 +1427,13 @@ watch(selectedRange, () => {
 
 watch(searchQuery, () => {
   currentPage.value = 1
+})
+
+watch(reportPeriodType, () => {
+  const opts = reportPeriodOptions.value
+  if (opts.length && !opts.some(o => o.value === reportPeriodValue.value)) {
+    reportPeriodValue.value = opts[0].value
+  }
 })
 
 // Calculate daily sales
@@ -1594,36 +1707,51 @@ const deleteSale = async () => {
   }
 }
 
-// Confirm delete all sales
+// Confirm delete all sales — no need to select 1D/7D etc.; opens modal to confirm
 const confirmDeleteAllSales = () => {
-  if (sales.value.length === 0) {
-    alert('No sales to delete')
-    return
-  }
   showDeleteAllModal.value = true
 }
 
-// Delete all sales
+// Fetch ALL sales from Firestore (for delete-all; not tied to page date range)
+const fetchAllSalesFromDb = async () => {
+  const salesRef = collection(db, 'sales')
+  const q = query(salesRef, orderBy('date', 'desc'))
+  const snapshot = await getDocs(q)
+  const list = []
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data()
+    const sale = {
+      id: docSnap.id,
+      orderId: data.orderId || '',
+      products: data.products || [],
+      total: Number(data.total) || 0,
+    }
+    list.push(sale)
+  })
+  return list
+}
+
+// Delete ALL sales in the database and restore stock (independent of 1D/7D/30D/3M/1Y)
 const deleteAllSales = async () => {
   try {
-    if (sales.value.length === 0) return
+    const allSales = await fetchAllSalesFromDb()
+    if (allSales.length === 0) {
+      alert('No sales to delete.')
+      showDeleteAllModal.value = false
+      return
+    }
 
-    // Delete all sales and restore stock
-    for (const sale of sales.value) {
-      // Delete from Firestore
+    for (const sale of allSales) {
       const saleRef = doc(db, 'sales', sale.id)
       await deleteDoc(saleRef)
 
-      // Restore stock for each product in the sale
-      for (const product of sale.products) {
+      for (const product of sale.products || []) {
         if (product.id && product.id !== 'sample-product') {
           const productRef = doc(db, 'products', product.id)
           const productDoc = await getDoc(productRef)
-
           if (productDoc.exists()) {
             const currentStock = productDoc.data().stock || 0
-            const restoredStock = currentStock + product.quantity
-
+            const restoredStock = currentStock + (Number(product.quantity) || 0)
             await updateDoc(productRef, {
               stock: restoredStock,
               lastUpdated: serverTimestamp()
@@ -1634,10 +1762,9 @@ const deleteAllSales = async () => {
     }
 
     localStorage.setItem('nextOrderId', '1')
-
-    alert(`Successfully deleted ${sales.value.length} sales and restored all stock!`)
+    alert(`Successfully deleted ${allSales.length} sales and restored all stock.`)
     showDeleteAllModal.value = false
-
+    fetchSalesData()
   } catch (err) {
     console.error('Error deleting all sales:', err)
     alert('Failed to delete all sales: ' + err.message)
@@ -1811,21 +1938,52 @@ const generateReceipt = (saleData) => {
   showReceiptModal.value = true
 }
 
-// Generate daily sales report
-const generateDailyReport = () => {
-  const reportData = {
-    date: new Date(),
-    totalRevenue: totalRevenue.value,
-    totalOrders: totalOrders.value,
-    totalProductsSold: totalProductsSold.value,
-    averageOrderValue: averageOrderValue.value,
-    topProducts: sortedTopProducts.value.slice(0, 3),
-    recentSales: sales.value.slice(0, 3),
-    totalSales: sales.value.length
+// Fetch sales data for report only (last 2 years) — independent of main page 1D/7D/30D/3M/1Y
+const fetchReportSalesData = async () => {
+  reportDataLoading.value = true
+  reportSalesRaw.value = []
+  try {
+    const now = new Date()
+    const twoYearsAgo = new Date(now)
+    twoYearsAgo.setFullYear(now.getFullYear() - 2)
+    const salesRef = collection(db, 'sales')
+    const q = query(salesRef, orderBy('date', 'desc'))
+    const snapshot = await getDocs(q)
+    const salesData = []
+    snapshot.forEach((doc) => {
+      const data = doc.data()
+      const sale = {
+        id: doc.id,
+        orderId: data.orderId || `ORD-${doc.id.substring(0, 8)}`,
+        customerName: data.customerName || 'Unknown Customer',
+        customerContactNo: data.customerContactNo || '',
+        products: data.products || [],
+        total: Number(data.total) || 0,
+        status: data.status || 'completed',
+        paymentMethod: data.paymentMethod || 'cash',
+        date: data.date,
+      }
+      if (sale.date && typeof sale.date.toDate === 'function') {
+        sale.date = sale.date.toDate()
+      } else if (!sale.date) {
+        sale.date = new Date()
+      }
+      if (sale.date >= twoYearsAgo && sale.date <= now) {
+        salesData.push(sale)
+      }
+    })
+    reportSalesRaw.value = salesData
+  } catch (err) {
+    console.error('Error fetching report sales:', err)
+    reportSalesRaw.value = []
+  } finally {
+    reportDataLoading.value = false
   }
+}
 
-  lastSaleData.value = reportData
+const openReportModal = () => {
   showDailyReportModal.value = true
+  fetchReportSalesData()
 }
 
 // Download daily report as image with complete details
@@ -1872,7 +2030,7 @@ const downloadDailyReport = async () => {
     // Report title
     ctx.fillStyle = '#a7f3d0'
     ctx.font = 'bold 20px Arial'
-    ctx.fillText('ADMIN DAILY SALES REPORT', canvas.width / 2, 75)
+    ctx.fillText(`SALES REPORT — ${reportPeriodLabel.value.toUpperCase()}`, canvas.width / 2, 75)
 
     // Date and time
     ctx.fillStyle = '#e6fffa'
@@ -1905,7 +2063,7 @@ const downloadDailyReport = async () => {
     ctx.fillText(`Admin: Admin User`, 45, currentY + 50)
     ctx.fillText(`Admin ID: ADM-001`, 45, currentY + 70)
     ctx.fillText(`Date: ${todayFormatted}`, 350, currentY + 50)
-    ctx.fillText(`Period: ${selectedRange.value.toUpperCase()}`, 350, currentY + 70)
+    ctx.fillText(`Period: ${reportPeriodLabel.value}`, 350, currentY + 70)
 
     // Status badge
     ctx.fillStyle = '#059669'
@@ -1926,14 +2084,13 @@ const downloadDailyReport = async () => {
     // Performance header
     ctx.fillStyle = '#059669'
     ctx.font = 'bold 18px Arial'
-    ctx.fillText(`💰 OVERALL PERFORMANCE (${selectedRange.value.toUpperCase()})`, 45, currentY + 25)
+    ctx.fillText(`💰 OVERALL PERFORMANCE (${reportPeriodLabel.value})`, 45, currentY + 25)
 
-    // Performance metrics in a detailed grid
     const metrics = [
-      { label: 'Total Revenue', value: formatCurrency(totalRevenue.value), color: '#059669', icon: '💰' },
-      { label: 'Total Orders', value: `${totalOrders.value} orders`, color: '#0891b2', icon: '📋' },
-      { label: 'Items Sold', value: `${totalProductsSold.value} pieces`, color: '#7c3aed', icon: '📦' },
-      { label: 'Average Order', value: formatCurrency(averageOrderValue.value), color: '#ea580c', icon: '📊' }
+      { label: 'Total Revenue', value: formatCurrency(reportTotalRevenue.value), color: '#059669', icon: '💰' },
+      { label: 'Total Orders', value: `${reportTotalOrders.value} orders`, color: '#0891b2', icon: '📋' },
+      { label: 'Items Sold', value: `${reportTotalProductsSold.value} pieces`, color: '#7c3aed', icon: '📦' },
+      { label: 'Average Order', value: formatCurrency(reportAverageOrderValue.value), color: '#ea580c', icon: '📊' }
     ]
 
     metrics.forEach((metric, index) => {
@@ -1965,10 +2122,9 @@ const downloadDailyReport = async () => {
 
     currentY += 180
 
-    // Top Products Section - Complete Details with Fixed Layout
-    if (sortedTopProducts.value.length > 0) {
-      const productsToShow = Math.min(sortedTopProducts.value.length, 5)
-      const sectionHeight = productsToShow * 80 + 120 // Increased spacing between rows
+    if (reportSortedTopProducts.value.length > 0) {
+      const productsToShow = Math.min(reportSortedTopProducts.value.length, 5)
+      const sectionHeight = productsToShow * 80 + 120
       
       ctx.fillStyle = '#ffffff'
       ctx.fillRect(25, currentY, canvas.width - 50, sectionHeight)
@@ -1976,10 +2132,9 @@ const downloadDailyReport = async () => {
       ctx.lineWidth = 2
       ctx.strokeRect(25, currentY, canvas.width - 50, sectionHeight)
       
-      // Top products header
       ctx.fillStyle = '#7c3aed'
       ctx.font = 'bold 18px Arial'
-      ctx.fillText(`🏆 TOP PRODUCTS (${selectedRange.value.toUpperCase()})`, 45, currentY + 25)
+      ctx.fillText(`🏆 TOP PRODUCTS (${reportPeriodLabel.value})`, 45, currentY + 25)
       
       // Column headers with proper spacing
       ctx.fillStyle = '#6b7280'
@@ -2001,8 +2156,7 @@ const downloadDailyReport = async () => {
       ctx.lineTo(canvas.width - 45, currentY + 60)
       ctx.stroke()
       
-      // Products list with improved layout and no overlapping
-      sortedTopProducts.value.slice(0, productsToShow).forEach((product, index) => {
+      reportSortedTopProducts.value.slice(0, productsToShow).forEach((product, index) => {
         const y = currentY + 85 + (index * 80) // Increased spacing between rows
       
         // Alternating row background
@@ -2070,7 +2224,7 @@ const downloadDailyReport = async () => {
         ctx.fillStyle = '#ea580c'
         ctx.font = 'bold 12px Arial'
         ctx.textAlign = 'center'
-        const percentage = totalRevenue.value > 0 ? ((product.revenue / totalRevenue.value) * 100).toFixed(1) : 0
+        const percentage = reportTotalRevenue.value > 0 ? ((product.revenue / reportTotalRevenue.value) * 100).toFixed(1) : 0
         ctx.fillText(`${percentage}%`, 700, y - 10)
         ctx.fillStyle = '#6b7280'
         ctx.font = '9px Arial'
@@ -2086,10 +2240,9 @@ const downloadDailyReport = async () => {
       currentY += sectionHeight + 30
     }
     
-    // Sales Summary by Payment Method
-    if (sales.value.length > 0) {
+    if (reportSales.value.length > 0) {
       const paymentMethods = {}
-      sales.value.forEach(sale => {
+      reportSales.value.forEach(sale => {
         const method = sale.paymentMethod || 'cash'
         if (!paymentMethods[method]) {
           paymentMethods[method] = { count: 0, total: 0 }
@@ -2129,9 +2282,8 @@ const downloadDailyReport = async () => {
       currentY += sectionHeight + 30
     }
     
-    // Recent Sales Section - Fixed Layout with No Overlapping
-    if (sales.value.length > 0) {
-      const salesToShow = Math.min(sales.value.length, 5)
+    if (reportSales.value.length > 0) {
+      const salesToShow = Math.min(reportSales.value.length, 5)
       const sectionHeight = salesToShow * 100 + 120 // Fixed height per transaction
       
       ctx.fillStyle = '#ffffff'
@@ -2165,8 +2317,7 @@ const downloadDailyReport = async () => {
       ctx.lineTo(canvas.width - 45, currentY + 60)
       ctx.stroke()
       
-      // Sales list with proper spacing and no overlapping
-      sales.value.slice(0, salesToShow).forEach((sale, index) => {
+      reportSales.value.slice(0, salesToShow).forEach((sale, index) => {
         const y = currentY + 85 + (index * 100) // Fixed spacing between transactions
         
         // Alternating row background
@@ -2247,7 +2398,7 @@ const downloadDailyReport = async () => {
         ctx.fillStyle = '#6b7280'
         ctx.font = '10px Arial'
         ctx.textAlign = 'right'
-        const percentage = totalRevenue.value > 0 ? ((sale.total / totalRevenue.value) * 100).toFixed(1) : 0
+        const percentage = reportTotalRevenue.value > 0 ? ((sale.total / reportTotalRevenue.value) * 100).toFixed(1) : 0
         ctx.fillText(`${percentage}% of total`, canvas.width - 50, y + 45)
       })
       
@@ -2310,94 +2461,338 @@ const downloadDailyReport = async () => {
   }
 }
 
-// Print daily report
+// Print daily report — enhanced layout and alignment
 const printDailyReport = () => {
-  const reportContent = document.getElementById('daily-report-content')
-  if (!reportContent) {
-    alert('Daily report content not found.')
+  if (reportSales.value.length === 0) {
+    alert('No sales data to print. Choose a period with sales.')
     return
   }
-  
+
   const printWindow = window.open('', '_blank')
   if (!printWindow) {
     alert('Please allow pop-ups to print the report.')
     return
   }
 
-  printWindow.document.write(`
+  const topProducts = reportSortedTopProducts.value.slice(0, 5)
+  const recentSales = reportSales.value.slice(0, 5)
+  const reportId = `ADM-${Date.now().toString().slice(-8)}`
+
+  const printContent = `
     <!DOCTYPE html>
     <html>
     <head>
-      <title>Daily Sales Report</title>
+      <title>Sales Report - ${reportPeriodLabel.value}</title>
       <style>
-        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
-        .report-header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid #333; padding-bottom: 10px; }
-        .report-header h2 { font-size: 24px; font-weight: bold; color: #1e40af; margin-bottom: 5px; }
-        .report-header p { font-size: 14px; color: #0891b2; font-weight: 600; }
-        .report-header .date { font-size: 12px; color: #6b7280; margin-top: 5px; }
-        .report-content { font-size: 12px; line-height: 1.6; }
-        .section { margin-bottom: 15px; }
-        .section-title { font-weight: bold; color: #1e40af; margin-bottom: 8px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f3f4f6; font-weight: bold; }
-        .footer { text-align: center; margin-top: 20px; font-size: 10px; color: #666; border-top: 1px solid #ddd; padding-top: 10px; }
-        .admin-info, .performance, .top-products, .recent-transactions { 
-          background-color: rgba(255, 255, 255, 0.8); 
-          border: 1px solid #e2e8f0; 
-          border-radius: 8px; 
-          padding: 15px; 
-          margin-bottom: 20px; 
-        }
-        .section-title { font-size: 16px; font-weight: 700; color: #1e3a8a; margin-bottom: 15px; display: flex; align-items: center; }
-        .section-title svg { margin-right: 8px; color: #0891b2; width: 18px; height: 18px;}
-        .grid-cols-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-        .grid-cols-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
-        .metric-box { padding: 10px; border-radius: 6px; display: flex; align-items: center; }
-        .metric-label { font-size: 11px; color: #4b5563; font-weight: 600; margin-bottom: 3px;}
-        .metric-value { font-size: 18px; font-weight: 800; }
-        .product-item, .sale-item { border-bottom: 1px dashed #e5e7eb; padding-bottom: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
-        .product-item:last-child, .sale-item:last-child { border-bottom: none; margin-bottom: 0; }
-        .product-name { font-weight: 600; color: #1f2937; }
-        .product-category { font-size: 11px; color: #6b7280; }
-        .product-units, .product-revenue, .product-amount, .product-percent { text-align: center; }
-        .product-units .value, .product-revenue .value, .product-amount .value { font-weight: 700; }
-        .product-units .label, .product-revenue .label, .product-amount .label, .product-percent .label { font-size: 10px; color: #6b7280; }
-        .status-badge { padding: 3px 8px; border-radius: 9999px; font-size: 11px; font-weight: 600; display: inline-block; }
-        .status-completed { background-color: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
-        .status-pending { background-color: #ffedd5; color: #92400e; border: 1px solid #fecaca; }
-        .status-cancelled { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
-        
         @media print {
-          body { margin: 0; }
-          .report-container { border: none; box-shadow: none; max-width: 100%; padding: 10px; }
-          .section-title svg { display: none; } /* Hide icons for print */
-          button { display: none; } /* Hide buttons */
+          @page { size: A4; margin: 1cm; }
+          body { padding: 12px; font-size: 12px !important; }
+          .header h1 { font-size: 26px !important; }
+          .header .sub { font-size: 14px !important; }
+          .info-grid .label { font-size: 10px !important; }
+          .info-grid .val { font-size: 13px !important; }
+          .perf-grid .val { font-size: 14px !important; }
+          th, td { padding: 6px 8px !important; font-size: 11px !important; }
+          .section-title { font-size: 13px !important; }
+          .footer { font-size: 11px !important; }
         }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          color: #1f2937;
+          background: #fff;
+          padding: 20px;
+          font-size: 13px;
+          line-height: 1.45;
+        }
+        .brand-bar {
+          height: 5px;
+          background: linear-gradient(90deg, #0d9488 0%, #0891b2 50%, #06b6d4 100%);
+          margin: -20px -20px 0 -20px;
+          margin-bottom: 16px;
+        }
+        .header {
+          text-align: center;
+          margin-bottom: 20px;
+          padding: 20px 24px;
+          background: linear-gradient(145deg, #f0fdfa 0%, #ccfbf1 50%, #99f6e4 100%);
+          border-radius: 12px;
+          border: 2px solid #14b8a6;
+          box-shadow: 0 2px 8px rgba(20, 184, 166, 0.15);
+        }
+        .header h1 {
+          color: #0f766e;
+          font-size: 28px;
+          font-weight: 800;
+          margin-bottom: 4px;
+        }
+        .header .sub {
+          font-size: 15px;
+          color: #0d9488;
+          font-weight: 600;
+        }
+        .header .meta {
+          font-size: 12px;
+          color: #6b7280;
+          margin-top: 8px;
+        }
+        .info-section {
+          margin-bottom: 18px;
+          padding: 14px 18px;
+          background: #f9fafb;
+          border-radius: 10px;
+          border: 1px solid #e5e7eb;
+        }
+        .info-section .section-title {
+          font-size: 14px;
+          font-weight: 700;
+          color: #0f766e;
+          margin-bottom: 12px;
+          padding-bottom: 8px;
+          border-bottom: 1px solid #a7f3d0;
+        }
+        .info-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 12px;
+          text-align: center;
+        }
+        .info-grid .label { font-size: 11px; color: #6b7280; font-weight: 600; margin-bottom: 2px; }
+        .info-grid .val { font-size: 15px; font-weight: 700; color: #1f2937; }
+        .perf-section {
+          margin-bottom: 18px;
+          padding: 14px 18px;
+          background: #f9fafb;
+          border-radius: 10px;
+          border: 1px solid #e5e7eb;
+        }
+        .perf-section .section-title {
+          font-size: 14px;
+          font-weight: 700;
+          color: #0f766e;
+          margin-bottom: 12px;
+          padding-bottom: 8px;
+          border-bottom: 1px solid #a7f3d0;
+        }
+        .perf-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 10px;
+          text-align: center;
+        }
+        .perf-box {
+          padding: 12px 10px;
+          border-radius: 8px;
+          border: 1px solid #e5e7eb;
+        }
+        .perf-box.rev { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-color: #a7f3d0; }
+        .perf-box.ord { background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%); border-color: #a5f3fc; }
+        .perf-box.items { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border-color: #c4b5fd; }
+        .perf-box.avg { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border-color: #fed7aa; }
+        .perf-box .label { font-size: 11px; font-weight: 600; margin-bottom: 4px; }
+        .perf-box.rev .label { color: #065f46; }
+        .perf-box.ord .label { color: #155e75; }
+        .perf-box.items .label { color: #5b21b6; }
+        .perf-box.avg .label { color: #9a3412; }
+        .perf-box .val { font-size: 16px; font-weight: 800; }
+        .perf-box.rev .val { color: #047857; }
+        .perf-box.ord .val { color: #0e7490; }
+        .perf-box.items .val { color: #6d28d9; }
+        .perf-box.avg .val { color: #c2410c; }
+        .table-section {
+          margin-bottom: 18px;
+          padding: 14px 18px;
+          background: #fff;
+          border-radius: 10px;
+          border: 1px solid #e5e7eb;
+        }
+        .table-section .section-title {
+          font-size: 14px;
+          font-weight: 700;
+          color: #0f766e;
+          margin-bottom: 12px;
+          padding-bottom: 8px;
+          border-bottom: 1px solid #a7f3d0;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 12px;
+        }
+        thead {
+          background: linear-gradient(135deg, #0d9488 0%, #0891b2 100%);
+          color: #fff;
+        }
+        th {
+          padding: 10px 8px;
+          text-align: left;
+          font-weight: 700;
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          vertical-align: middle;
+        }
+        th.tc { text-align: center; }
+        th.tr { text-align: right; }
+        tbody tr { border-bottom: 1px solid #e5e7eb; }
+        tbody tr:nth-child(even) { background: #fafafa; }
+        td {
+          padding: 10px 8px;
+          vertical-align: middle;
+        }
+        td.tc { text-align: center; }
+        td.tr { text-align: right; }
+        .status-badge {
+          display: inline-block;
+          padding: 4px 10px;
+          border-radius: 9999px;
+          font-size: 10px;
+          font-weight: 700;
+          text-transform: capitalize;
+        }
+        .status-completed { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+        .status-pending { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .status-cancelled { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+        .footer {
+          margin-top: 24px;
+          text-align: center;
+          padding-top: 16px;
+          border-top: 2px solid #e5e7eb;
+          color: #6b7280;
+          font-size: 12px;
+          line-height: 1.5;
+        }
+        .footer p { margin-bottom: 4px; }
       </style>
     </head>
     <body>
-      <div class="report-container">
-        <div class="report-header">
-          <h2>Barcelona Paint Center</h2>
-          <p>Admin Daily Sales Report</p>
-          <p class="date">${formatDateTime(new Date())}</p>
+      <div class="brand-bar"></div>
+      <div class="header">
+        <h1>Barcelona Paint Center</h1>
+        <p class="sub">Sales Report — ${reportPeriodLabel.value}</p>
+        <p class="meta">${formatDateTime(new Date())} &nbsp;|&nbsp; Report ID: ${reportId}</p>
+      </div>
+
+      <div class="info-section">
+        <div class="section-title">Admin Report</div>
+        <div class="info-grid">
+          <div>
+            <div class="label">Admin</div>
+            <div class="val">Admin User</div>
+          </div>
+          <div>
+            <div class="label">Date</div>
+            <div class="val">${todayFormatted}</div>
+          </div>
+          <div>
+            <div class="label">Period</div>
+            <div class="val">${reportPeriodLabel.value}</div>
+          </div>
+          <div>
+            <div class="label">Status</div>
+            <div class="val" style="color: #059669;">Active</div>
+          </div>
         </div>
-        <div class="report-content">
-          ${reportContent.innerHTML}
+      </div>
+
+      <div class="perf-section">
+        <div class="section-title">Overall Performance (${reportPeriodLabel.value})</div>
+        <div class="perf-grid">
+          <div class="perf-box rev">
+            <div class="label">Total Revenue</div>
+            <div class="val">${formatCurrency(reportTotalRevenue.value)}</div>
+          </div>
+          <div class="perf-box ord">
+            <div class="label">Total Orders</div>
+            <div class="val">${reportTotalOrders.value}</div>
+          </div>
+          <div class="perf-box items">
+            <div class="label">Items Sold</div>
+            <div class="val">${reportTotalProductsSold.value}</div>
+          </div>
+          <div class="perf-box avg">
+            <div class="label">Avg Order</div>
+            <div class="val">${formatCurrency(reportAverageOrderValue.value)}</div>
+          </div>
         </div>
-        <div class="footer">
-          <p>Report generated for admin review</p>
-          <p>Barcelona Paint Center Admin Portal</p>
-        </div>
+      </div>
+  ${topProducts.length > 0 ? `
+      <div class="table-section">
+        <div class="section-title">Top Products (${reportPeriodLabel.value})</div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 40px;" class="tc">#</th>
+              <th style="width: 28%;">Product</th>
+              <th style="width: 10%;" class="tc">Category</th>
+              <th style="width: 12%;" class="tc">Units</th>
+              <th style="width: 18%;" class="tr">Revenue</th>
+              <th style="width: 14%;" class="tr">Per Unit</th>
+              <th style="width: 10%;" class="tr">%</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${topProducts.map((p, i) => `
+              <tr>
+                <td class="tc">${i + 1}</td>
+                <td>${p.name || 'N/A'}</td>
+                <td class="tc">${p.category || 'N/A'}</td>
+                <td class="tc">${p.units || 0}</td>
+                <td class="tr">${formatCurrency(p.revenue)}</td>
+                <td class="tr">${formatCurrency(p.units > 0 ? p.revenue / p.units : 0)}</td>
+                <td class="tr">${reportTotalRevenue.value > 0 ? ((p.revenue / reportTotalRevenue.value) * 100).toFixed(1) : 0}%</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+  ` : ''}
+  ${recentSales.length > 0 ? `
+      <div class="table-section">
+        <div class="section-title">Recent Transactions (Last 5)</div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 18%;">Order ID</th>
+              <th style="width: 12%;" class="tc">Time</th>
+              <th style="width: 20%;">Customer</th>
+              <th style="width: 10%;" class="tc">Items</th>
+              <th style="width: 14%;" class="tr">Total</th>
+              <th style="width: 14%;" class="tc">Payment</th>
+              <th style="width: 12%;" class="tc">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${recentSales.map(s => `
+              <tr>
+                <td>${s.orderId || 'N/A'}</td>
+                <td class="tc">${formatTime(s.date)}</td>
+                <td>${s.customerName || 'N/A'}</td>
+                <td class="tc">${(s.products && s.products.length) || 0}</td>
+                <td class="tr">${formatCurrency(s.total)}</td>
+                <td class="tc">${formatPaymentMethod(s.paymentMethod)}</td>
+                <td class="tc"><span class="status-badge status-${s.status || 'completed'}">${(s.status || 'completed').toLowerCase()}</span></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+  ` : ''}
+      <div class="footer">
+        <p><strong>Report generated for admin review</strong></p>
+        <p>Barcelona Paint Center Admin Portal</p>
+        <p>All sales data verified and current</p>
       </div>
     </body>
     </html>
-  `)
+  `
 
+  printWindow.document.write(printContent)
   printWindow.document.close()
-  printWindow.focus() // Required for some browsers to print correctly
-  printWindow.print()
+  printWindow.focus()
+  setTimeout(() => {
+    printWindow.print()
+  }, 200)
 }
 
 

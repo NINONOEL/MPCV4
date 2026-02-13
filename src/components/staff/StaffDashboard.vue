@@ -1,111 +1,120 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
+  <div class="min-h-screen bg-gradient-to-b from-slate-50/95 via-white to-emerald-50/40 relative overflow-hidden">
     <!-- Background Elements -->
-    <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-200 to-blue-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-0 right-0 w-[min(90vw,520px)] h-[min(90vw,520px)] bg-gradient-to-br from-emerald-300/25 via-teal-200/20 to-cyan-100/15 rounded-full blur-3xl -translate-y-1/4 translate-x-1/4"></div>
+      <div class="absolute bottom-0 left-0 w-[min(70vw,440px)] h-[min(70vw,440px)] bg-gradient-to-tr from-teal-200/20 to-emerald-100/15 rounded-full blur-3xl -translate-x-1/4 translate-y-1/4"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(16,185,129,0.06),transparent)] pointer-events-none"></div>
     </div>
 
     <div class="relative z-10 flex h-screen">
-      <!-- Sidebar -->
-      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden md:flex md:flex-col shadow-lg">
+      <!-- Sidebar - same size/structure as Admin Inventory -->
+      <aside class="w-64 bg-white/98 backdrop-blur-xl border-r border-gray-200/80 hidden lg:flex lg:flex-col shadow-lg shadow-gray-200/30">
         <!-- Logo/Brand -->
-        <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+        <div class="p-4 xl:p-5 border-b border-gray-100 flex-shrink-0">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-md shadow-emerald-500/20 flex-shrink-0">
+              <LayoutDashboardIcon class="w-4 h-4 text-white" />
+            </div>
+            <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight tracking-tight">Barcelona Paint Center</h1>
           </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <UserIcon class="h-3 w-3 mr-1" />
+          <div class="mt-2.5 text-xs text-white bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 px-2.5 xl:px-3 py-1.5 rounded-lg inline-flex items-center shadow-md shadow-emerald-500/25 font-medium">
+            <UserIcon class="h-3.5 w-3.5 mr-1.5 flex-shrink-0" />
             Staff Portal
           </div>
         </div>
 
-        <!-- Navigation - Scrollable Area -->
-        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link 
-            to="/staff/dashboard" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 shadow-sm border border-blue-200 transform scale-105"
-            :class="{ 'hover:bg-blue-100 hover:text-blue-700': $route.path !== '/staff/dashboard' }"
+        <!-- Navigation - Scrollable Area (colored per function) -->
+        <nav class="flex-1 p-3 xl:p-4 space-y-1 xl:space-y-2 overflow-y-auto">
+          <router-link
+            to="/staff/dashboard"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base"
+            :class="$route.path === '/staff/dashboard'
+              ? 'text-blue-700 bg-blue-100 shadow-sm border-l-4 border-blue-500'
+              : 'text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700'"
           >
-            <LayoutDashboardIcon class="w-5 h-5" />
-            <span>Dashboard</span>
+            <LayoutDashboardIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Dashboard</span>
           </router-link>
-
-          <router-link 
-            to="/staff/inventory" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
-            :class="{ 'shadow-sm border border-purple-200 transform scale-105': $route.path === '/staff/inventory' }"
+          <router-link
+            to="/staff/inventory"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base"
+            :class="$route.path === '/staff/inventory'
+              ? 'text-purple-600 bg-purple-50 border border-purple-200 shadow-sm'
+              : 'text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700'"
           >
-            <PackageIcon class="w-5 h-5" />
-            <span>Inventory</span>
+            <PackageIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Inventory</span>
           </router-link>
-
-          <router-link 
-            to="/staff/paint-mixing" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
-            :class="{ 'shadow-sm border border-pink-200 transform scale-105': $route.path === '/staff/paint-mixing' }"
+          <router-link
+            to="/staff/paint-mixing"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base"
+            :class="$route.path === '/staff/paint-mixing'
+              ? 'text-pink-600 bg-pink-50 border border-pink-200 shadow-sm'
+              : 'text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700'"
           >
-            <PaletteIcon class="w-5 h-5" />
-            <span>Paint Mixing</span>
+            <PaletteIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Paint Mixing</span>
           </router-link>
-
-          <router-link 
-            to="/staff/house-paint-recommender" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
-            :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/staff/house-paint-recommender' }"
+          <router-link
+            to="/staff/house-paint-recommender"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base"
+            :class="$route.path === '/staff/house-paint-recommender'
+              ? 'text-orange-600 bg-orange-50 border border-orange-200 shadow-sm'
+              : 'text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700'"
           >
-            <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+            <HomeIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">House Paint Recommender</span>
           </router-link>
-
-          <router-link 
-            to="/staff/sales-analytics" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700"
-            :class="{ 'shadow-sm border border-teal-200 transform scale-105': $route.path === '/staff/sales-analytics' }"
+          <router-link
+            to="/staff/sales-analytics"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base"
+            :class="$route.path === '/staff/sales-analytics'
+              ? 'text-teal-600 bg-teal-50 border border-teal-200 shadow-sm'
+              : 'text-teal-600 bg-teal-50 hover:bg-teal-100 hover:text-teal-700'"
           >
-            <TrendingUpIcon class="w-5 h-5" />
-            <span>Sales Analytics</span>
+            <TrendingUpIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Sales Analytics</span>
           </router-link>
-
-          <router-link 
-            to="/staff/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
-            :class="{ 'shadow-sm border border-green-200 transform scale-105': $route.path === '/staff/settings' }"
+          <router-link
+            to="/staff/settings"
+            class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base"
+            :class="$route.path === '/staff/settings'
+              ? 'text-green-600 bg-green-50 border border-green-200 shadow-sm'
+              : 'text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700'"
           >
-            <SettingsIcon class="w-5 h-5" />
-            <span>Settings</span>
+            <SettingsIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Settings</span>
           </router-link>
-
-          <!-- Perfect spacing -->
           <div class="h-4"></div>
         </nav>
 
         <!-- User Menu - Fixed at bottom -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg">
-              <UserIcon class="w-5 h-5 text-white" />
+        <div class="p-3 xl:p-4 border-t border-gray-200 bg-gradient-to-r from-emerald-50/95 to-teal-50/95 backdrop-blur-sm flex-shrink-0">
+          <div class="flex items-center gap-2 xl:gap-3">
+            <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/25 flex-shrink-0">
+              <UserIcon class="w-4 xl:w-5 h-4 xl:h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">{{ userDisplayName || 'Staff User' }}</p>
+              <p class="text-xs xl:text-sm font-medium text-gray-900 truncate">{{ userDisplayName || 'Staff User' }}</p>
               <p class="text-xs text-gray-600 truncate">{{ userEmail || 'staff@example.com' }}</p>
             </div>
-            <button 
+            <button
               @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
+              class="p-1.5 xl:p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0"
               title="Logout"
             >
-              <LogOutIcon class="w-5 h-5" />
+              <LogOutIcon class="w-4 xl:w-5 h-4 xl:h-5" />
             </button>
           </div>
         </div>
       </aside>
 
-      <!-- Mobile Sidebar Toggle -->
-      <div class="fixed top-4 left-4 z-30 md:hidden">
-        <button 
+      <!-- Mobile Sidebar Toggle - same as Admin Inventory -->
+      <div class="fixed top-4 left-4 z-30 lg:hidden">
+        <button
           @click="toggleMobileSidebar"
-          class="p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg"
+          class="p-3 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
           aria-label="Toggle navigation menu"
         >
           <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
@@ -113,108 +122,62 @@
         </button>
       </div>
 
-      <!-- Mobile Sidebar -->
-      <div 
-        v-if="mobileSidebarOpen" 
-        class="fixed inset-0 bg-black/20 z-20 md:hidden"
+      <!-- Mobile Sidebar Overlay -->
+      <div
+        v-if="mobileSidebarOpen"
+        class="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 lg:hidden"
         @click="toggleMobileSidebar"
       ></div>
 
-      <aside 
+      <!-- Mobile Sidebar - same size/structure as Admin Inventory -->
+      <aside
         v-if="mobileSidebarOpen"
-        class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-20 md:hidden shadow-xl flex flex-col"
+        class="fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-30 lg:hidden shadow-2xl flex flex-col"
       >
-        <!-- Logo/Brand -->
         <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
+          <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-emerald-500 to-teal-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
             <UserIcon class="h-3 w-3 mr-1" />
             Staff Portal
           </div>
         </div>
-
-        <!-- Mobile Navigation - Scrollable -->
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link 
-            to="/staff/dashboard" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 shadow-sm border border-blue-200"
-            @click="mobileSidebarOpen = false"
-          >
-            <LayoutDashboardIcon class="w-5 h-5" />
-            <span>Dashboard</span>
+          <router-link to="/staff/dashboard" class="flex items-center space-x-3 p-4 rounded-xl font-medium transition-all duration-200" :class="$route.path === '/staff/dashboard' ? 'text-blue-700 bg-blue-100 border-l-4 border-blue-500 shadow-lg' : 'text-blue-600 bg-blue-50 hover:bg-blue-100'" @click="mobileSidebarOpen = false">
+            <LayoutDashboardIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base" :class="{ 'font-semibold': $route.path === '/staff/dashboard' }">Dashboard</span>
           </router-link>
-
-          <router-link 
-            to="/staff/inventory" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50"
-            :class="{ 'shadow-sm border border-purple-200': $route.path === '/staff/inventory' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <PackageIcon class="w-5 h-5" />
-            <span>Inventory</span>
+          <router-link to="/staff/inventory" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-purple-600 bg-purple-50 hover:bg-purple-100" :class="{ 'shadow-lg border border-purple-200': $route.path === '/staff/inventory' }" @click="mobileSidebarOpen = false">
+            <PackageIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Inventory</span>
           </router-link>
-
-          <router-link 
-            to="/staff/paint-mixing" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50"
-            :class="{ 'shadow-sm border border-pink-200': $route.path === '/staff/paint-mixing' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <PaletteIcon class="w-5 h-5" />
-            <span>Paint Mixing</span>
+          <router-link to="/staff/paint-mixing" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-pink-600 bg-pink-50 hover:bg-pink-100" :class="{ 'shadow-lg border border-pink-200': $route.path === '/staff/paint-mixing' }" @click="mobileSidebarOpen = false">
+            <PaletteIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Paint Mixing</span>
           </router-link>
-
-          <router-link 
-            to="/staff/house-paint-recommender" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50"
-            :class="{ 'shadow-sm border border-orange-200': $route.path === '/staff/house-paint-recommender' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+          <router-link to="/staff/house-paint-recommender" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-orange-600 bg-orange-50 hover:bg-orange-100" :class="{ 'shadow-lg border border-orange-200': $route.path === '/staff/house-paint-recommender' }" @click="mobileSidebarOpen = false">
+            <HomeIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">House Paint Recommender</span>
           </router-link>
-
-          <router-link 
-            to="/staff/sales-analytics" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50"
-            :class="{ 'shadow-sm border border-teal-200': $route.path === '/staff/sales-analytics' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <TrendingUpIcon class="w-5 h-5" />
-            <span>Sales Analytics</span>
+          <router-link to="/staff/sales-analytics" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-teal-600 bg-teal-50 hover:bg-teal-100" :class="{ 'shadow-lg border border-teal-200': $route.path === '/staff/sales-analytics' }" @click="mobileSidebarOpen = false">
+            <TrendingUpIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Sales Analytics</span>
           </router-link>
-
-          <router-link 
-            to="/staff/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50"
-            :class="{ 'shadow-sm border border-green-200': $route.path === '/staff/settings' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <SettingsIcon class="w-5 h-5" />
-            <span>Settings</span>
+          <router-link to="/staff/settings" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-green-600 bg-green-50 hover:bg-green-100" :class="{ 'shadow-lg border border-green-200': $route.path === '/staff/settings' }" @click="mobileSidebarOpen = false">
+            <SettingsIcon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Settings</span>
           </router-link>
-
-          <!-- Perfect spacing for mobile too -->
           <div class="h-4"></div>
         </nav>
-
-        <!-- Mobile User Menu - Fixed at bottom -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-emerald-50 to-teal-50 backdrop-blur-sm flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg">
-              <UserIcon class="w-5 h-5 text-white" />
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg flex-shrink-0">
+              <UserIcon class="w-6 h-6 text-white" />
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-900 truncate">{{ userDisplayName || 'Staff User' }}</p>
               <p class="text-xs text-gray-600 truncate">{{ userEmail || 'staff@example.com' }}</p>
             </div>
-            <button 
-              @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
-              title="Logout"
-            >
+            <button @click="handleLogout" class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0" title="Logout">
               <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
@@ -223,24 +186,32 @@
 
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
-        <!-- Header -->
-        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-8 py-4 shadow-sm">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <h1 class="text-2xl font-bold text-gray-900">Staff Dashboard</h1>
-              <p class="text-gray-600">Welcome to your staff dashboard</p>
-            </div>
-            <div class="flex items-center gap-4">
-              <div class="hidden md:flex items-center gap-2 text-gray-700">
-                <CalendarIcon class="w-5 h-5 text-orange-500" />
-                <span>{{ currentDate }}</span>
+        <!-- Header - same size/structure as Admin Inventory -->
+        <header class="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-gray-200/90 shadow-sm">
+          <div class="h-1 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-b-full"></div>
+          <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="pl-14 sm:pl-16 lg:pl-0 flex items-center gap-3">
+                <div class="hidden sm:flex w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 items-center justify-center shadow-lg shadow-emerald-500/20 flex-shrink-0">
+                  <LayoutDashboardIcon class="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">Staff Dashboard</h1>
+                  <p class="text-sm text-gray-500 mt-0.5">Welcome back, {{ userDisplayName || 'Staff' }}</p>
+                </div>
               </div>
-              <div class="hidden md:block h-6 w-px bg-gray-300"></div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-900">Welcome, {{ userDisplayName || 'Staff' }}</span>
-                <div class="relative">
-                  <BellIcon class="w-5 h-5 text-orange-500 cursor-pointer hover:text-orange-600" />
-                  <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">0</span>
+              <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-100/90 text-gray-700 text-sm border border-gray-200/60">
+                  <CalendarIcon class="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                  <span class="truncate font-medium">{{ currentDate }}</span>
+                </div>
+                <div class="hidden sm:block h-8 w-px bg-gray-200"></div>
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 text-gray-800 text-sm border border-emerald-200/60">
+                  <span class="font-medium truncate">Welcome, {{ userDisplayName || 'Staff' }}</span>
+                  <div class="relative">
+                    <BellIcon class="w-4 h-4 text-emerald-500 cursor-pointer hover:text-emerald-600 flex-shrink-0" />
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold rounded-full min-w-[16px] h-[16px] flex items-center justify-center">0</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -248,97 +219,82 @@
         </header>
 
         <!-- Dashboard Content -->
-        <div class="p-6 md:p-8">
+        <div class="p-5 md:p-6 lg:p-8">
           <!-- Quick Stats -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <!-- Total Products -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
-                    <PackageIcon class="w-6 h-6 text-white" />
+            <div class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-violet-100/80 shadow-lg shadow-violet-500/5 hover:shadow-xl hover:shadow-violet-500/10 hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-violet-500/5 to-transparent pointer-events-none"></div>
+              <div class="h-1.5 bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500"></div>
+              <div class="relative p-4 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-600 flex items-center justify-center shadow-lg shadow-violet-500/30 group-hover:scale-105 transition-transform duration-200 shrink-0">
+                    <PackageIcon class="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p class="text-sm text-gray-600">Total Products</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ inventoryStats.totalProducts }}</p>
+                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Total Products</p>
+                    <p class="text-xl font-black text-slate-900 tabular-nums">{{ inventoryStats.totalProducts }}</p>
                   </div>
                 </div>
-                <div class="mt-4 flex items-center justify-between">
-                  <span class="text-sm text-gray-600">In stock</span>
-                  <div v-if="inventoryStats.totalProducts === 0" class="flex items-center text-gray-500 bg-gray-100 px-3 py-1 rounded-full border border-gray-200">
-                    <InfoIcon class="w-4 h-4 mr-1" />
-                    <span class="text-sm font-medium">No items yet</span>
-                  </div>
-                  <div v-else class="flex items-center text-purple-700 bg-purple-100 px-3 py-1 rounded-full border border-purple-200">
-                    <InfoIcon class="w-4 h-4 mr-1" />
-                    <span class="text-sm font-medium">{{ inventoryStats.categories }} categories</span>
-                  </div>
+                <div v-if="inventoryStats.totalProducts === 0" class="flex items-center gap-1.5 text-slate-500 bg-slate-100/80 px-2.5 py-1.5 rounded-xl text-xs font-medium shrink-0">
+                  <InfoIcon class="w-3.5 h-3.5" />
+                  <span>No items</span>
+                </div>
+                <div v-else class="flex items-center gap-1.5 text-violet-700 bg-violet-50 px-2.5 py-1.5 rounded-xl text-xs font-bold border border-violet-100 shrink-0">
+                  <InfoIcon class="w-3.5 h-3.5" />
+                  <span>{{ inventoryStats.categories }} cat.</span>
                 </div>
               </div>
             </div>
 
             <!-- Orders -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
-                    <ShoppingCartIcon class="w-6 h-6 text-white" />
+            <div class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-emerald-100/80 shadow-lg shadow-emerald-500/5 hover:shadow-xl hover:shadow-emerald-500/10 hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent pointer-events-none"></div>
+              <div class="h-1.5 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500"></div>
+              <div class="relative p-4 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30 group-hover:scale-105 transition-transform duration-200 shrink-0">
+                    <ShoppingCartIcon class="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p class="text-sm text-gray-600">Orders</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ salesStats.today }}</p>
+                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Orders Today</p>
+                    <p class="text-xl font-black text-slate-900 tabular-nums">{{ salesStats.today }}</p>
                   </div>
                 </div>
-                <div class="mt-4 flex items-center justify-between">
-                  <span class="text-sm text-gray-600">Today's orders</span>
-                  <div v-if="salesStats.today === 0" class="flex items-center text-gray-500 bg-gray-100 px-3 py-1 rounded-full border border-gray-200">
-                    <InfoIcon class="w-4 h-4 mr-1" />
-                    <span class="text-sm font-medium">No orders yet</span>
-                  </div>
-                  <div v-else class="flex items-center text-green-700 bg-green-100 px-3 py-1 rounded-full border border-green-200">
-                    <CheckCircleIcon class="w-4 h-4 mr-1" />
-                    <span class="text-sm font-medium">Active</span>
-                  </div>
+                <div v-if="salesStats.today === 0" class="flex items-center gap-1.5 text-slate-500 bg-slate-100/80 px-2.5 py-1.5 rounded-xl text-xs font-medium shrink-0">
+                  <InfoIcon class="w-3.5 h-3.5" />
+                  <span>No orders</span>
+                </div>
+                <div v-else class="flex items-center gap-1.5 text-emerald-700 bg-emerald-50 px-2.5 py-1.5 rounded-xl text-xs font-bold border border-emerald-100 shrink-0">
+                  <CheckCircleIcon class="w-3.5 h-3.5" />
+                  <span>Active</span>
                 </div>
               </div>
             </div>
 
             <!-- System Status -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 h-2 absolute top-0 left-0 right-0"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-4 mb-4">
-                  <div class="p-3 rounded-xl shadow-lg bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
-                    <ActivityIcon class="w-6 h-6 text-white" />
+            <div class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-blue-100/80 shadow-lg shadow-blue-500/5 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent pointer-events-none"></div>
+              <div class="h-1.5 bg-gradient-to-r from-blue-500 via-cyan-500 to-indigo-500"></div>
+              <div class="relative p-4">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/30 shrink-0">
+                    <ActivityIcon class="w-5 h-5 text-white" />
                   </div>
-                  <div>
-                    <p class="text-sm text-gray-600">System Status</p>
-                    <p class="text-lg font-bold text-gray-900">All Systems</p>
-                  </div>
+                  <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">System Status</p>
                 </div>
-                <div class="space-y-3">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sm text-gray-700">Inventory System</span>
-                    <div class="flex items-center">
-                      <span class="h-2 w-2 rounded-full" :class="systemStatus.inventory ? 'bg-green-500' : 'bg-red-500'"></span>
-                      <span :class="systemStatus.inventory ? 'text-green-600' : 'text-red-600'" class="text-sm ml-2 font-medium">{{ systemStatus.inventory ? 'Online' : 'Offline' }}</span>
-                    </div>
+                <div class="flex flex-wrap gap-x-4 gap-y-2">
+                  <div class="flex items-center gap-2 py-1.5 px-2.5 rounded-lg bg-slate-50/80">
+                    <span class="h-2 w-2 rounded-full shrink-0 ring-2 ring-white shadow" :class="systemStatus.inventory ? 'bg-emerald-500' : 'bg-red-500'"></span>
+                    <span :class="systemStatus.inventory ? 'text-emerald-700' : 'text-red-700'" class="text-xs font-bold">Inventory</span>
                   </div>
-                  <div class="flex items-center justify-between">
-                    <span class="text-sm text-gray-700">Paint Mixing</span>
-                    <div class="flex items-center">
-                      <span class="h-2 w-2 rounded-full" :class="systemStatus.paintMixing ? 'bg-green-500' : 'bg-red-500'"></span>
-                      <span :class="systemStatus.paintMixing ? 'text-green-600' : 'text-red-600'" class="text-sm ml-2 font-medium">{{ systemStatus.paintMixing ? 'Online' : 'Offline' }}</span>
-                    </div>
+                  <div class="flex items-center gap-2 py-1.5 px-2.5 rounded-lg bg-slate-50/80">
+                    <span class="h-2 w-2 rounded-full shrink-0 ring-2 ring-white shadow" :class="systemStatus.paintMixing ? 'bg-emerald-500' : 'bg-red-500'"></span>
+                    <span :class="systemStatus.paintMixing ? 'text-emerald-700' : 'text-red-700'" class="text-xs font-bold">Mixing</span>
                   </div>
-                  <div class="flex items-center justify-between">
-                    <span class="text-sm text-gray-700">Recommender</span>
-                    <div class="flex items-center">
-                      <span class="h-2 w-2 rounded-full" :class="systemStatus.recommender ? 'bg-green-500' : 'bg-red-500'"></span>
-                      <span :class="systemStatus.recommender ? 'text-green-600' : 'text-red-600'" class="text-sm ml-2 font-medium">{{ systemStatus.recommender ? 'Online' : 'Offline' }}</span>
-                    </div>
+                  <div class="flex items-center gap-2 py-1.5 px-2.5 rounded-lg bg-slate-50/80">
+                    <span class="h-2 w-2 rounded-full shrink-0 ring-2 ring-white shadow" :class="systemStatus.recommender ? 'bg-emerald-500' : 'bg-red-500'"></span>
+                    <span :class="systemStatus.recommender ? 'text-emerald-700' : 'text-red-700'" class="text-xs font-bold">Recommender</span>
                   </div>
                 </div>
               </div>
@@ -346,72 +302,67 @@
           </div>
 
           <!-- Quick Actions -->
-          <div class="mb-8">
-            <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-4">
+              <div class="h-0.5 flex-1 max-w-[60px] rounded-full bg-gradient-to-r from-emerald-400 to-teal-400"></div>
+              <h2 class="text-lg font-bold text-slate-900 tracking-tight">Quick Actions</h2>
+              <div class="h-0.5 flex-1 rounded-full bg-gradient-to-l from-emerald-400 to-teal-400"></div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
               <router-link
                 to="/staff/inventory"
-                class="group relative bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl hover:shadow-violet-500/15 hover:border-violet-200 hover:-translate-y-1 transition-all duration-300 p-4 flex flex-col items-center text-center overflow-hidden"
               >
-                <div class="flex flex-col items-center text-center">
-                  <div class="p-3 rounded-lg bg-gradient-to-br from-purple-400 to-violet-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
-                    <PackageIcon class="w-5 h-5" />
-                  </div>
-                  <p class="text-xs sm:text-sm font-semibold text-gray-900">Inventory</p>
-                  <p class="text-xs text-gray-600 mt-1">{{ inventoryStats.totalProducts }} items</p>
+                <div class="absolute inset-0 bg-gradient-to-br from-violet-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                <div class="relative w-11 h-11 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg shadow-violet-500/25 mb-2 group-hover:scale-110 group-hover:shadow-violet-500/40 transition-all duration-200">
+                  <PackageIcon class="w-5 h-5 text-white" />
                 </div>
+                <p class="relative text-sm font-bold text-slate-900">Inventory</p>
+                <p class="relative text-xs text-slate-500 mt-0.5">{{ inventoryStats.totalProducts }} items</p>
               </router-link>
-
               <router-link
                 to="/staff/paint-mixing"
-                class="group relative bg-gradient-to-br from-pink-50 to-rose-50 border border-pink-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl hover:shadow-pink-500/15 hover:border-pink-200 hover:-translate-y-1 transition-all duration-300 p-4 flex flex-col items-center text-center overflow-hidden"
               >
-                <div class="flex flex-col items-center text-center">
-                  <div class="p-3 rounded-lg bg-gradient-to-br from-pink-400 to-rose-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
-                    <PaletteIcon class="w-5 h-5" />
-                  </div>
-                  <p class="text-xs sm:text-sm font-semibold text-gray-900">Paint Mix</p>
-                  <p class="text-xs text-gray-600 mt-1">Color mixing</p>
+                <div class="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                <div class="relative w-11 h-11 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center shadow-lg shadow-pink-500/25 mb-2 group-hover:scale-110 group-hover:shadow-pink-500/40 transition-all duration-200">
+                  <PaletteIcon class="w-5 h-5 text-white" />
                 </div>
+                <p class="relative text-sm font-bold text-slate-900">Paint Mix</p>
+                <p class="relative text-xs text-slate-500 mt-0.5">Color mixing</p>
               </router-link>
-
               <router-link
                 to="/staff/house-paint-recommender"
-                class="group relative bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl hover:shadow-amber-500/15 hover:border-amber-200 hover:-translate-y-1 transition-all duration-300 p-4 flex flex-col items-center text-center overflow-hidden"
               >
-                <div class="flex flex-col items-center text-center">
-                  <div class="p-3 rounded-lg bg-gradient-to-br from-orange-400 to-amber-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
-                    <HomeIcon class="w-5 h-5" />
-                  </div>
-                  <p class="text-xs sm:text-sm font-semibold text-gray-900">Recommender</p>
-                  <p class="text-xs text-gray-600 mt-1">Paint advisor</p>
+                <div class="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                <div class="relative w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/25 mb-2 group-hover:scale-110 group-hover:shadow-amber-500/40 transition-all duration-200">
+                  <HomeIcon class="w-5 h-5 text-white" />
                 </div>
+                <p class="relative text-sm font-bold text-slate-900">Recommender</p>
+                <p class="relative text-xs text-slate-500 mt-0.5">Paint advisor</p>
               </router-link>
-
               <router-link
                 to="/staff/sales-analytics"
-                class="group relative bg-gradient-to-br from-teal-50 to-cyan-50 border border-teal-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl hover:shadow-teal-500/15 hover:border-teal-200 hover:-translate-y-1 transition-all duration-300 p-4 flex flex-col items-center text-center overflow-hidden"
               >
-                <div class="flex flex-col items-center text-center">
-                  <div class="p-3 rounded-lg bg-gradient-to-br from-teal-400 to-cyan-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
-                    <TrendingUpIcon class="w-5 h-5" />
-                  </div>
-                  <p class="text-xs sm:text-sm font-semibold text-gray-900">Analytics</p>
-                  <p class="text-xs text-gray-600 mt-1">Sales data</p>
+                <div class="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                <div class="relative w-11 h-11 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center shadow-lg shadow-teal-500/25 mb-2 group-hover:scale-110 group-hover:shadow-teal-500/40 transition-all duration-200">
+                  <TrendingUpIcon class="w-5 h-5 text-white" />
                 </div>
+                <p class="relative text-sm font-bold text-slate-900">Analytics</p>
+                <p class="relative text-xs text-slate-500 mt-0.5">Sales data</p>
               </router-link>
-
               <router-link
                 to="/staff/settings"
-                class="group relative bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-200 rounded-xl p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl hover:shadow-slate-400/10 hover:border-slate-300 hover:-translate-y-1 transition-all duration-300 p-4 flex flex-col items-center text-center overflow-hidden"
               >
-                <div class="flex flex-col items-center text-center">
-                  <div class="p-3 rounded-lg bg-gradient-to-br from-gray-400 to-slate-500 text-white mb-2 group-hover:scale-110 transition-transform duration-300">
-                    <SettingsIcon class="w-5 h-5" />
-                  </div>
-                  <p class="text-xs sm:text-sm font-semibold text-gray-900">Settings</p>
-                  <p class="text-xs text-gray-600 mt-1">Preferences</p>
+                <div class="absolute inset-0 bg-gradient-to-br from-slate-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                <div class="relative w-11 h-11 rounded-xl bg-gradient-to-br from-slate-500 to-slate-700 flex items-center justify-center shadow-lg shadow-slate-500/20 mb-2 group-hover:scale-110 transition-all duration-200">
+                  <SettingsIcon class="w-5 h-5 text-white" />
                 </div>
+                <p class="relative text-sm font-bold text-slate-900">Settings</p>
+                <p class="relative text-xs text-slate-500 mt-0.5">Preferences</p>
               </router-link>
             </div>
           </div>
@@ -420,23 +371,24 @@
     </div>
 
     <!-- Logout Confirmation Modal -->
-    <div v-if="showLogoutConfirmation" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div class="bg-white rounded-xl w-full max-w-md border border-gray-200 shadow-2xl p-6">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Confirm Logout</h3>
-        <p class="text-gray-700 mb-6">Are you sure you want to log out of your account?</p>
+    <div v-if="showLogoutConfirmation" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-2xl w-full max-w-sm border border-slate-200/80 shadow-2xl shadow-slate-900/20 p-6 overflow-hidden">
+        <div class="h-1 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-t-2xl -mx-6 -mt-6 mb-4"></div>
+        <h3 class="text-lg font-bold text-slate-900 mb-2">Confirm Logout</h3>
+        <p class="text-slate-600 text-sm mb-5">Are you sure you want to log out of your account?</p>
         <div class="flex justify-end gap-3">
-          <button 
+          <button
             @click="showLogoutConfirmation = false"
-            class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+            class="px-4 py-2.5 bg-slate-100 text-slate-700 text-sm font-semibold rounded-xl hover:bg-slate-200 transition-colors"
           >
             Cancel
           </button>
-          <button 
+          <button
             @click="confirmLogout"
-            class="bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-medium px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center"
+            class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-lg shadow-emerald-500/25 hover:shadow-xl hover:shadow-emerald-500/30 hover:-translate-y-0.5 transition-all flex items-center gap-2 disabled:opacity-60"
             :disabled="isLoggingOut"
           >
-            <LoaderIcon v-if="isLoggingOut" class="animate-spin w-4 h-4 mr-2" />
+            <LoaderIcon v-if="isLoggingOut" class="animate-spin w-4 h-4" />
             <span>{{ isLoggingOut ? 'Logging out...' : 'Logout' }}</span>
           </button>
         </div>
@@ -1047,21 +999,23 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Custom scrollbar */
+/* Custom scrollbar - staff theme */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
   background: #f1f5f9;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  border-radius: 3px;
+  background: linear-gradient(135deg, #10b981, #14b8a6);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  background: linear-gradient(135deg, #059669, #0d9488);
 }
 </style>

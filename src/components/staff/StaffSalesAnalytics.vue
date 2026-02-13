@@ -1,219 +1,125 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
+  <div class="min-h-screen bg-gradient-to-b from-slate-50/95 via-white to-teal-50/30 relative overflow-hidden">
     <!-- Background Elements -->
-    <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 opacity-20 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-pink-200 to-blue-200 opacity-20 rounded-full filter blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-0 right-0 w-[min(90vw,520px)] h-[min(90vw,520px)] bg-gradient-to-br from-teal-300/20 via-cyan-200/15 to-emerald-100/10 rounded-full blur-3xl -translate-y-1/4 translate-x-1/4"></div>
+      <div class="absolute bottom-0 left-0 w-[min(70vw,440px)] h-[min(70vw,440px)] bg-gradient-to-tr from-emerald-200/15 to-teal-100/10 rounded-full blur-3xl -translate-x-1/4 translate-y-1/4"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(20,184,166,0.06),transparent)] pointer-events-none"></div>
     </div>
 
     <div class="relative z-10 flex h-screen">
       <!-- Sidebar -->
-      <aside class="w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 hidden md:flex md:flex-col shadow-lg">
-        <!-- Logo/Brand -->
-        <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+      <aside class="w-64 bg-white/98 backdrop-blur-xl border-r border-gray-200/80 hidden lg:flex lg:flex-col shadow-lg shadow-gray-200/30">
+        <div class="p-4 xl:p-5 border-b border-gray-100 flex-shrink-0">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center shadow-md shadow-teal-500/20 flex-shrink-0">
+              <TrendingUpIcon class="w-4 h-4 text-white" />
+            </div>
+            <h1 class="text-base xl:text-lg font-bold text-gray-900 leading-tight tracking-tight">Barcelona Paint Center</h1>
           </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-orange-500 to-yellow-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <UserIcon class="h-3 w-3 mr-1" />
+          <div class="mt-2.5 text-xs text-white bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-600 px-2.5 xl:px-3 py-1.5 rounded-lg inline-flex items-center shadow-md shadow-teal-500/25 font-medium">
+            <UserIcon class="h-3.5 w-3.5 mr-1.5 flex-shrink-0" />
             Staff Portal
           </div>
         </div>
 
-        <!-- Navigation - Scrollable Area -->
-        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <router-link 
-            to="/staff/dashboard" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-            :class="{ 'shadow-sm border border-blue-200 transform scale-105': $route.path === '/staff/dashboard' }"
-          >
-            <LayoutDashboardIcon class="w-5 h-5" />
-            <span>Dashboard</span>
+        <nav class="flex-1 p-3 xl:p-4 space-y-1 xl:space-y-2 overflow-y-auto">
+          <router-link to="/staff/dashboard" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700" :class="{ 'shadow-sm border border-blue-200': $route.path === '/staff/dashboard' }">
+            <LayoutDashboardIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Dashboard</span>
           </router-link>
-
-          <router-link 
-            to="/staff/inventory" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700"
-            :class="{ 'shadow-sm border border-purple-200 transform scale-105': $route.path === '/staff/inventory' }"
-          >
-            <PackageIcon class="w-5 h-5" />
-            <span>Inventory</span>
+          <router-link to="/staff/inventory" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-purple-600 bg-purple-50 hover:bg-purple-100 hover:text-purple-700" :class="{ 'shadow-sm border border-purple-200': $route.path === '/staff/inventory' }">
+            <PackageIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Inventory</span>
           </router-link>
-
-          <router-link 
-            to="/staff/paint-mixing" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700"
-            :class="{ 'shadow-sm border border-pink-200 transform scale-105': $route.path === '/staff/paint-mixing' }"
-          >
-            <PaletteIcon class="w-5 h-5" />
-            <span>Paint Mixing</span>
+          <router-link to="/staff/house-paint-recommender" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700" :class="{ 'shadow-sm border border-orange-200': $route.path === '/staff/house-paint-recommender' }">
+            <HomeIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Paint Recommender</span>
           </router-link>
-
-          <router-link 
-            to="/staff/house-paint-recommender" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 hover:text-orange-700"
-            :class="{ 'shadow-sm border border-orange-200 transform scale-105': $route.path === '/staff/house-paint-recommender' }"
-          >
-            <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+          <router-link to="/staff/paint-mixing" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-pink-600 bg-pink-50 hover:bg-pink-100 hover:text-pink-700" :class="{ 'shadow-sm border border-pink-200': $route.path === '/staff/paint-mixing' }">
+            <PaletteIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Paint Mixing</span>
           </router-link>
-
-          <router-link 
-            to="/staff/sales-analytics" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 shadow-sm border border-teal-200 transform scale-105"
-            :class="{ 'hover:bg-teal-100 hover:text-teal-700': $route.path !== '/staff/sales-analytics' }"
-          >
-            <TrendingUpIcon class="w-5 h-5" />
-            <span>Sales Analytics</span>
+          <router-link to="/staff/sales-analytics" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-xl cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-teal-700 bg-teal-100 shadow-sm border-l-4 border-teal-500" :class="{ 'hover:bg-teal-50': $route.path !== '/staff/sales-analytics' }">
+            <TrendingUpIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Sales Analytics</span>
           </router-link>
-
-          <router-link 
-            to="/staff/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700"
-            :class="{ 'shadow-sm border border-green-200 transform scale-105': $route.path === '/staff/settings' }"
-          >
-            <SettingsIcon class="w-5 h-5" />
-            <span>Settings</span>
+          <router-link to="/staff/settings" class="flex items-center space-x-2 xl:space-x-3 p-2 xl:p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-sm xl:text-base text-green-600 bg-green-50 hover:bg-green-100 hover:text-green-700" :class="{ 'shadow-sm border border-green-200': $route.path === '/staff/settings' }">
+            <SettingsIcon class="w-4 xl:w-5 h-4 xl:h-5 flex-shrink-0" />
+            <span class="truncate">Settings</span>
           </router-link>
-
-          <!-- Perfect spacing -->
           <div class="h-4"></div>
         </nav>
 
-        <!-- User Menu - Fixed at bottom -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-green-50 to-teal-50 backdrop-blur-sm flex-shrink-0">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-600 flex items-center justify-center shadow-lg">
-              <UserIcon class="w-5 h-5 text-white" />
+        <div class="p-3 xl:p-4 border-t border-gray-200 bg-gradient-to-r from-teal-50/95 to-cyan-50/95 backdrop-blur-sm flex-shrink-0">
+          <div class="flex items-center gap-2 xl:gap-3">
+            <div class="w-8 xl:w-10 h-8 xl:h-10 rounded-full bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center shadow-lg shadow-teal-500/25 flex-shrink-0">
+              <UserIcon class="w-4 xl:w-5 h-4 xl:h-5 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">Staff User</p>
-              <p class="text-xs text-gray-600 truncate">staff@example.com</p>
+              <p class="text-xs xl:text-sm font-medium text-gray-900 truncate">{{ userDisplayName || 'Staff User' }}</p>
+              <p class="text-xs text-gray-600 truncate">{{ userEmail || 'staff@example.com' }}</p>
             </div>
-            <button 
-              @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
-              title="Logout"
-            >
-              <LogOutIcon class="w-5 h-5" />
+            <button @click="handleLogout" class="p-1.5 xl:p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0" title="Logout">
+              <LogOutIcon class="w-4 xl:w-5 h-4 xl:h-5" />
             </button>
           </div>
         </div>
       </aside>
 
-      <!-- Mobile Sidebar Toggle -->
-      <div class="fixed top-4 left-4 z-30 md:hidden">
-        <button 
-          @click="toggleMobileSidebar"
-          class="p-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg"
-          aria-label="Toggle navigation menu"
-        >
+      <!-- Mobile Toggle -->
+      <div class="fixed top-4 left-4 z-30 lg:hidden">
+        <button @click="toggleMobileSidebar" class="p-3 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200" aria-label="Toggle menu">
           <MenuIcon v-if="!mobileSidebarOpen" class="w-6 h-6 text-gray-700" />
           <XIcon v-else class="w-6 h-6 text-gray-700" />
         </button>
       </div>
-
-      <!-- Mobile Sidebar -->
-      <div 
-        v-if="mobileSidebarOpen" 
-        class="fixed inset-0 bg-black/20 z-20 md:hidden"
-        @click="toggleMobileSidebar"
-      ></div>
-
-      <aside 
-        v-if="mobileSidebarOpen"
-        class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-white to-gray-50 backdrop-blur-sm border-r border-gray-200 z-20 md:hidden shadow-xl flex flex-col"
-      >
-        <!-- Same mobile sidebar content as desktop -->
+      <div v-if="mobileSidebarOpen" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 lg:hidden" @click="toggleMobileSidebar"></div>
+      <aside v-if="mobileSidebarOpen" class="fixed left-0 top-0 h-full w-80 max-w-[85vw] bg-white border-r border-gray-200 z-30 lg:hidden shadow-2xl flex flex-col">
         <div class="p-6 border-b border-gray-200 flex-shrink-0">
-          <div>
-            <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
-          </div>
-          <div class="mt-2 text-xs text-white bg-gradient-to-r from-green-500 to-teal-600 px-3 py-1 rounded-full inline-flex items-center shadow-sm">
-            <UserIcon class="h-3 w-3 mr-1" />
+          <h1 class="text-lg font-bold text-gray-900 leading-tight">Barcelona Paint Center</h1>
+          <div class="mt-2 text-xs text-white bg-gradient-to-r from-teal-500 to-cyan-600 px-3 py-1.5 rounded-lg inline-flex items-center font-medium">
+            <UserIcon class="h-3.5 w-3.5 mr-1.5" />
             Staff Portal
           </div>
         </div>
-
         <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-          <!-- Mobile navigation links with same styling -->
-          <router-link 
-            to="/staff/dashboard" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-blue-600 bg-blue-50"
-            :class="{ 'shadow-sm border border-blue-200': $route.path === '/staff/dashboard' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <LayoutDashboardIcon class="w-5 h-5" />
-            <span>Dashboard</span>
+          <router-link to="/staff/dashboard" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-blue-600 bg-blue-50 hover:bg-blue-100" @click="mobileSidebarOpen = false">
+            <LayoutDashboardIcon class="w-6 h-6" />
+            <span class="text-base">Dashboard</span>
           </router-link>
-
-          <router-link 
-            to="/staff/inventory" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-purple-600 bg-purple-50"
-            :class="{ 'shadow-sm border border-purple-200': $route.path === '/staff/inventory' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <PackageIcon class="w-5 h-5" />
-            <span>Inventory</span>
+          <router-link to="/staff/inventory" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-purple-600 bg-purple-50 hover:bg-purple-100" @click="mobileSidebarOpen = false">
+            <PackageIcon class="w-6 h-6" />
+            <span class="text-base">Inventory</span>
           </router-link>
-
-          <router-link 
-            to="/staff/house-paint-recommender" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-orange-600 bg-orange-50"
-            :class="{ 'shadow-sm border border-orange-200': $route.path === '/staff/house-paint-recommender' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <HomeIcon class="w-5 h-5" />
-            <span>House Paint Recommender</span>
+          <router-link to="/staff/house-paint-recommender" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-orange-600 bg-orange-50 hover:bg-orange-100" @click="mobileSidebarOpen = false">
+            <HomeIcon class="w-6 h-6" />
+            <span class="text-base">Paint Recommender</span>
           </router-link>
-
-          <router-link 
-            to="/staff/paint-mixing" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-pink-600 bg-pink-50"
-            :class="{ 'shadow-sm border border-pink-200': $route.path === '/staff/paint-mixing' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <PaletteIcon class="w-5 h-5" />
-            <span>Paint Mixing</span>
+          <router-link to="/staff/paint-mixing" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-pink-600 bg-pink-50 hover:bg-pink-100" @click="mobileSidebarOpen = false">
+            <PaletteIcon class="w-6 h-6" />
+            <span class="text-base">Paint Mixing</span>
           </router-link>
-
-          <router-link 
-            to="/staff/sales-analytics" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-teal-600 bg-teal-50 shadow-sm border border-teal-200"
-            @click="mobileSidebarOpen = false"
-          >
-            <TrendingUpIcon class="w-5 h-5" />
-            <span>Sales Analytics</span>
+          <router-link to="/staff/sales-analytics" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-teal-700 bg-teal-100 border-l-4 border-teal-500 shadow-sm" @click="mobileSidebarOpen = false">
+            <TrendingUpIcon class="w-6 h-6" />
+            <span class="text-base font-semibold">Sales Analytics</span>
           </router-link>
-
-          <router-link 
-            to="/staff/settings" 
-            class="flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 font-medium text-green-600 bg-green-50"
-            :class="{ 'shadow-sm border border-green-200': $route.path === '/staff/settings' }"
-            @click="mobileSidebarOpen = false"
-          >
-            <SettingsIcon class="w-5 h-5" />
-            <span>Settings</span>
+          <router-link to="/staff/settings" class="flex items-center space-x-3 p-4 rounded-xl font-medium text-green-600 bg-green-50 hover:bg-green-100" @click="mobileSidebarOpen = false">
+            <SettingsIcon class="w-6 h-6" />
+            <span class="text-base">Settings</span>
           </router-link>
-
-          <!-- Perfect spacing for mobile too -->
           <div class="h-4"></div>
         </nav>
-
-        <!-- Mobile User Menu - Fixed at bottom -->
-        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-green-50 to-teal-50 backdrop-blur-sm flex-shrink-0">
+        <div class="p-4 border-t border-gray-200 bg-gradient-to-r from-teal-50 to-cyan-50 flex-shrink-0">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center shadow-lg">
-              <UserIcon class="w-5 h-5 text-white" />
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center shadow-lg flex-shrink-0">
+              <UserIcon class="w-6 h-6 text-white" />
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-gray-900 truncate">Staff User</p>
-              <p class="text-xs text-gray-600 truncate">staff@example.com</p>
+              <p class="text-sm font-medium text-gray-900 truncate">{{ userDisplayName || 'Staff User' }}</p>
+              <p class="text-xs text-gray-600 truncate">{{ userEmail || 'staff@example.com' }}</p>
             </div>
-            <button 
-              @click="handleLogout"
-              class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors"
-            >
+            <button @click="handleLogout" class="p-2 rounded-lg hover:bg-white/50 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0" title="Logout">
               <LogOutIcon class="w-5 h-5" />
             </button>
           </div>
@@ -223,82 +129,84 @@
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
         <!-- Header -->
-        <header class="bg-white/50 backdrop-blur-sm border-b border-gray-200 px-8 py-4 shadow-sm">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <h1 class="text-2xl font-bold text-gray-900">Daily Sales Analytics</h1>
-              <p class="text-gray-600">Monitor today's sales performance and trends</p>
-            </div>
-            <div class="flex items-center gap-4">
-              <div class="hidden md:flex items-center gap-2 text-gray-700">
-                <CalendarIcon class="w-5 h-5 text-teal-500" />
-                <span>{{ currentDate }}</span>
+        <header class="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-gray-200/90 shadow-sm">
+          <div class="h-1 w-full bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-500 rounded-b-full"></div>
+          <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div class="pl-14 sm:pl-16 lg:pl-0 flex items-center gap-3">
+                <div class="hidden sm:flex w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 items-center justify-center shadow-lg shadow-teal-500/20 flex-shrink-0">
+                  <TrendingUpIcon class="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">Daily Sales Analytics</h1>
+                  <p class="text-sm text-gray-500 mt-0.5">Monitor today's sales performance and trends</p>
+                </div>
               </div>
-              <div class="hidden md:block h-6 w-px bg-gray-300"></div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-900">Welcome, Staff</span>
-                <div class="relative">
-                  <BellIcon class="w-5 h-5 text-orange-500 cursor-pointer hover:text-orange-600" />
+              <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-100/90 text-gray-700 text-sm border border-gray-200/60">
+                  <CalendarIcon class="w-4 h-4 text-teal-500 flex-shrink-0" />
+                  <span class="truncate font-medium">{{ currentDate }}</span>
+                </div>
+                <div class="hidden sm:block h-8 w-px bg-gray-200"></div>
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-teal-50 to-cyan-50 text-gray-800 text-sm border border-teal-200/60">
+                  <span class="font-medium truncate">Welcome, {{ userDisplayName || 'Staff' }}</span>
+                  <BellIcon class="w-4 h-4 text-teal-500 cursor-pointer hover:text-teal-600 flex-shrink-0" />
                 </div>
               </div>
             </div>
           </div>
         </header>
 
-        <div class="p-6 md:p-8">
-          <!-- Action Buttons - Only Add Sale (no Delete All) -->
+        <div class="p-4 sm:p-6 lg:p-8">
+          <!-- Action Buttons -->
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-            <div class="flex items-center gap-3">
-              <!-- Add Sale Button -->
+            <div class="flex flex-wrap items-center gap-2 sm:gap-3">
               <button
                 @click="showAddSaleModal = true"
-                class="px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2 shadow-lg"
+                class="px-4 py-2.5 bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-500 hover:from-teal-600 hover:via-cyan-600 hover:to-emerald-600 text-white rounded-xl font-medium shadow-lg shadow-teal-500/25 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2"
               >
                 <PlusIcon class="w-5 h-5" />
                 Add Sale
               </button>
-              <!-- Add this button next to the "Add Sale" button -->
               <button
                 @click="generateDailyReport"
-                class="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-2 shadow-lg"
+                class="px-4 py-2.5 bg-white border border-teal-200 text-teal-700 hover:bg-teal-50 rounded-xl font-medium shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-2"
               >
                 <ClipboardIcon class="w-5 h-5" />
                 Daily Report
               </button>
             </div>
-            
-            <!-- Today's Date Display -->
-            <div class="flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-lg border border-gray-200 p-3 shadow-sm">
-              <CalendarIcon class="w-5 h-5 text-teal-500" />
+            <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/95 border border-teal-100 shadow-sm">
+              <CalendarIcon class="w-5 h-5 text-teal-500 flex-shrink-0" />
               <span class="text-sm font-medium text-gray-700">Today: {{ todayFormatted }}</span>
             </div>
           </div>
 
           <!-- Loading State -->
-          <div v-if="loading && !error" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-8 mb-6 text-center">
-            <LoaderIcon class="w-8 h-8 text-gray-400 animate-spin mx-auto mb-4" />
-            <p class="text-gray-600">Loading today's sales data...</p>
+          <div v-if="loading && !error" class="bg-white/95 backdrop-blur-sm border border-teal-100/80 rounded-2xl shadow-lg p-12 mb-6 text-center">
+            <div class="w-14 h-14 border-4 border-teal-200 border-t-teal-500 rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="text-gray-600 font-medium">Loading today's sales data...</p>
           </div>
 
           <!-- Error State -->
-          <div v-if="error" class="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <AlertTriangleIcon class="w-5 h-5 text-red-600" />
-              <span class="text-red-800">{{ error }}</span>
+          <div v-if="error" class="bg-red-50/95 border border-red-200 rounded-2xl p-4 sm:p-5 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
+                <AlertTriangleIcon class="w-5 h-5 text-red-600" />
+              </div>
+              <span class="text-red-800 font-medium">{{ error }}</span>
             </div>
-            <button 
-              @click="fetchTodaysSalesData"
-              class="text-red-600 hover:text-red-700"
-            >
-              <RefreshCwIcon class="w-5 h-5" />
+            <button @click="fetchTodaysSalesData" class="px-4 py-2 rounded-xl bg-red-100 text-red-700 hover:bg-red-200 font-medium flex items-center gap-2 transition-colors">
+              <RefreshCwIcon class="w-4 h-4" />
+              Retry
             </button>
           </div>
 
           <!-- Today's Stats Cards -->
-          <div v-if="!loading || todaysSales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 mb-8">
+          <div v-if="!loading || todaysSales.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
             <!-- Today's Revenue -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 h-1.5 absolute top-0 left-0 right-0"></div>
+            <div class="bg-white/95 backdrop-blur-sm border border-teal-100/80 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
+              <div class="h-1.5 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500"></div>
               <div class="p-4">
                 <div class="flex items-center gap-2.5">
                   <div class="p-2 rounded-lg shadow-md bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 transform hover:scale-110 transition-transform duration-200">
@@ -317,8 +225,8 @@
             </div>
 
             <!-- Today's Net Gross (Profit) -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-amber-400 via-orange-500 to-yellow-600 h-1.5 absolute top-0 left-0 right-0"></div>
+            <div class="bg-white/95 backdrop-blur-sm border border-amber-100/80 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
+              <div class="h-1.5 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500"></div>
               <div class="p-4">
                 <div class="flex items-center gap-2.5">
                   <div class="p-2 rounded-lg shadow-md bg-gradient-to-br from-amber-400 via-orange-500 to-yellow-600 transform hover:scale-110 transition-transform duration-200">
@@ -337,8 +245,8 @@
             </div>
 
             <!-- Today's Orders -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 h-1.5 absolute top-0 left-0 right-0"></div>
+            <div class="bg-white/95 backdrop-blur-sm border border-cyan-100/80 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
+              <div class="h-1.5 bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500"></div>
               <div class="p-4">
                 <div class="flex items-center gap-2.5">
                   <div class="p-2 rounded-lg shadow-md bg-gradient-to-br from-blue-400 via-cyan-500 to-indigo-600 transform hover:scale-110 transition-transform duration-200">
@@ -357,8 +265,8 @@
             </div>
 
             <!-- Today's Products Sold -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 h-1.5 absolute top-0 left-0 right-0"></div>
+            <div class="bg-white/95 backdrop-blur-sm border border-violet-100/80 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
+              <div class="h-1.5 bg-gradient-to-r from-purple-500 via-violet-500 to-fuchsia-500"></div>
               <div class="p-4">
                 <div class="flex items-center gap-2.5">
                   <div class="p-2 rounded-lg shadow-md bg-gradient-to-br from-purple-400 via-violet-500 to-fuchsia-600 transform hover:scale-110 transition-transform duration-200">
@@ -377,8 +285,8 @@
             </div>
 
             <!-- Today's Average Order Value -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 overflow-hidden relative">
-              <div class="bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 h-1.5 absolute top-0 left-0 right-0"></div>
+            <div class="bg-white/95 backdrop-blur-sm border border-amber-100/80 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
+              <div class="h-1.5 bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500"></div>
               <div class="p-4">
                 <div class="flex items-center gap-2.5">
                   <div class="p-2 rounded-lg shadow-md bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500 transform hover:scale-110 transition-transform duration-200">
@@ -398,8 +306,15 @@
           </div>
 
           <!-- Today's Best Seller Section -->
-          <div v-if="!loading && todaysTopProducts.length > 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6 mb-8">
-            <h2 class="text-lg font-semibold text-gray-900 mb-4">Today's Best Seller</h2>
+          <div v-if="!loading && todaysTopProducts.length > 0" class="bg-white/95 backdrop-blur-sm border border-teal-100/80 rounded-2xl shadow-lg overflow-hidden mb-8">
+            <div class="h-1.5 bg-gradient-to-r from-teal-500/50 to-emerald-500/50"></div>
+            <div class="p-5 sm:p-6">
+            <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+              <div class="w-8 h-8 rounded-xl bg-teal-100 flex items-center justify-center">
+                <PackageIcon class="w-4 h-4 text-teal-600" />
+              </div>
+              Today's Best Seller
+            </h2>
             <div v-if="sortedTodaysTopProducts.length > 0" class="flex flex-col md:flex-row items-start md:items-center gap-6">
               <div class="w-20 h-20 rounded-lg bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center shadow-sm">
                 <PackageIcon class="w-10 h-10 text-green-600" />
@@ -430,27 +345,22 @@
               <PackageIcon class="w-8 h-8 text-gray-300 mx-auto mb-2" />
               <p class="text-gray-600">No product sales today yet</p>
             </div>
+            </div>
           </div>
 
           <!-- Empty State -->
-          <div v-if="!loading && todaysSales.length === 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg p-8 mb-8 text-center">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center">
-              <ShoppingCartIcon class="w-8 h-8 text-teal-600" />
+          <div v-if="!loading && todaysSales.length === 0" class="bg-white/95 backdrop-blur-sm border border-teal-100/80 rounded-2xl shadow-lg p-8 sm:p-12 mb-8 text-center">
+            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center">
+              <ShoppingCartIcon class="w-10 h-10 text-teal-500" />
             </div>
-            <h3 class="text-lg font-medium text-gray-900 mb-2">No sales today today</h3>
-            <p class="text-gray-600 mb-4">Start recording sales to see today's analytics and insights.</p>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">No sales today</h3>
+            <p class="text-gray-500 mb-6 max-w-sm mx-auto">Start recording sales to see today's analytics and insights.</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
-              <button 
-                @click="showAddSaleModal = true"
-                class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
-              >
+              <button @click="showAddSaleModal = true" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all shadow-md">
                 <PlusIcon class="w-5 h-5" />
                 Record Sale
               </button>
-              <button 
-                @click="createSampleSale"
-                class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
-              >
+              <button @click="createSampleSale" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white border border-teal-200 text-teal-700 rounded-xl font-medium hover:bg-teal-50 transition-all">
                 <ClipboardIcon class="w-5 h-5" />
                 Create Sample Sale
               </button>
@@ -459,13 +369,14 @@
 
           <!-- Charts Section -->
           <div v-if="!loading && todaysSales.length > 0" class="mb-8">
-            <!-- Today's Top Products Chart -->
-            <div class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6">
+            <div class="bg-white/95 backdrop-blur-sm border border-teal-100/80 rounded-2xl shadow-lg overflow-hidden">
+              <div class="h-1.5 bg-gradient-to-r from-teal-500/50 to-cyan-500/50"></div>
+              <div class="p-5 sm:p-6">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-                <h2 class="text-lg font-semibold text-gray-900">Today's Top Products</h2>
+                <h2 class="text-lg font-bold text-gray-900">Today's Top Products</h2>
                 <select 
                   v-model="selectedProductMetric"
-                  class="px-3 py-1 rounded-lg border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  class="px-4 py-2 rounded-xl border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-teal-200 focus:border-teal-400 transition-all shadow-sm"
                 >
                   <option value="revenue">By Revenue</option>
                   <option value="units">By Units Sold</option>
@@ -522,16 +433,19 @@
                   <p class="text-gray-600">No product data available for today</p>
                 </div>
               </div>
+              </div>
             </div>
           </div>
 
           <!-- Today's Sales by Category -->
-          <div v-if="!loading && todaysSales.length > 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 p-6 mb-8">
+          <div v-if="!loading && todaysSales.length > 0" class="bg-white/95 backdrop-blur-sm border border-teal-100/80 rounded-2xl shadow-lg overflow-hidden mb-8">
+            <div class="h-1.5 bg-gradient-to-r from-cyan-500/50 to-teal-500/50"></div>
+            <div class="p-5 sm:p-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-              <h2 class="text-lg font-semibold text-gray-900">Today's Sales by Category</h2>
+              <h2 class="text-lg font-bold text-gray-900">Today's Sales by Category</h2>
               <select 
                 v-model="selectedCategoryView"
-                class="px-3 py-1 rounded-lg border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                class="px-4 py-2 rounded-xl border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-teal-200 focus:border-teal-400 transition-all shadow-sm"
               >
                 <option value="revenue">Revenue</option>
                 <option value="units">Units Sold</option>
@@ -561,26 +475,27 @@
                 </div>
               </div>
               
-              <!-- Empty state for categories -->
               <div v-if="todaysSalesByCategory.length === 0" class="col-span-4 text-center py-8">
                 <PaletteIcon class="w-8 h-8 text-gray-300 mx-auto mb-2" />
                 <p class="text-gray-600">No category data available for today</p>
               </div>
             </div>
+            </div>
           </div>
 
           <!-- Today's Sales Table -->
-          <div v-if="!loading && todaysSales.length > 0" class="bg-white/80 backdrop-blur-sm border border-white/20 rounded-xl shadow-lg overflow-hidden">
-            <div class="p-6 border-b border-gray-200">
+          <div v-if="!loading && todaysSales.length > 0" class="bg-white/95 backdrop-blur-sm border border-teal-100/80 rounded-2xl shadow-lg overflow-hidden">
+            <div class="h-1.5 bg-gradient-to-r from-teal-500/50 to-emerald-500/50"></div>
+            <div class="p-5 sm:p-6 border-b border-gray-100">
               <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <h2 class="text-lg font-semibold text-gray-900">Today's Sales</h2>
-                <div class="relative">
+                <h2 class="text-lg font-bold text-gray-900">Today's Sales</h2>
+                <div class="relative w-full sm:w-64">
                   <SearchIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                   <input 
                     type="text"
                     v-model="searchQuery"
                     placeholder="Search today's sales..."
-                    class="pl-9 pr-4 py-2 rounded-lg border border-gray-200 text-sm bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent placeholder-gray-500"
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm bg-white text-gray-900 focus:ring-2 focus:ring-teal-200 focus:border-teal-400 placeholder-gray-500 shadow-sm"
                   />
                 </div>
               </div>
@@ -686,72 +601,92 @@
   </div>
   
   <!-- Add Sale Modal -->
-  <div v-if="showAddSaleModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
-      <div class="p-6 border-b border-gray-200">
-        <h3 class="text-xl font-bold text-gray-900">Record New Sale</h3>
-      </div>
-      
-      <form @submit.prevent="handleAddSale" class="p-4 md:p-6">
-        <div class="space-y-4">
+  <Transition name="modal-fade">
+    <div v-if="showAddSaleModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 add-sale-modal-backdrop" @click.self="showAddSaleModal = false">
+      <div class="add-sale-modal-panel bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-teal-100">
+        <div class="h-1.5 bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-500 rounded-t-2xl"></div>
+        <div class="p-5 sm:p-6 border-b border-gray-100 flex items-center justify-between">
+          <h3 class="text-xl font-bold text-gray-900 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center ring-2 ring-teal-200/50">
+              <PlusIcon class="w-5 h-5 text-teal-600" />
+            </div>
+            Record New Sale
+          </h3>
+          <button type="button" @click="showAddSaleModal = false" class="p-2 rounded-xl hover:bg-gray-100 text-gray-500 hover:text-gray-700 transition-colors">
+            <XIcon class="w-5 h-5" />
+          </button>
+        </div>
+        
+        <form @submit.prevent="handleAddSale" class="p-5 sm:p-6 space-y-6">
           <!-- Customer Information -->
-          <div>
-            <h4 class="text-sm font-medium text-gray-900 mb-3">Customer Information</h4>
+          <div class="add-sale-form-section">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-teal-100 flex items-center justify-center">
+                <UserIcon class="w-4 h-4 text-teal-600" />
+              </div>
+              <h4 class="text-base font-semibold text-gray-900">Customer Information</h4>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label class="block text-sm text-gray-600 mb-1">Customer Name</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">Customer Name</label>
                 <input 
                   type="text"
                   v-model="saleForm.customerName"
                   required
-                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
+                  placeholder="Enter customer name"
+                  class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-200 focus:border-teal-400 bg-white text-gray-900 placeholder-gray-400 transition-all shadow-sm"
                 />
               </div>
               <div>
-                <label class="block text-sm text-gray-600 mb-1">Contact No.</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1.5">Contact No.</label>
                 <input 
                   type="tel"
                   v-model="saleForm.customerContactNo"
                   placeholder="09XX-XXX-XXXX"
-                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
+                  class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-200 focus:border-teal-400 bg-white text-gray-900 placeholder-gray-400 transition-all shadow-sm"
                 />
               </div>
             </div>
           </div>
 
           <!-- Products -->
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <h4 class="text-sm font-medium text-gray-900">Products</h4>
+          <div class="add-sale-form-section">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-cyan-100 flex items-center justify-center">
+                  <PackageIcon class="w-4 h-4 text-cyan-600" />
+                </div>
+                <h4 class="text-base font-semibold text-gray-900">Products</h4>
+              </div>
               <button 
                 type="button"
                 @click="addProductToSale"
-                class="text-sm text-teal-600 hover:text-teal-700 flex items-center gap-1"
+                class="add-product-btn px-3 py-2 rounded-xl bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
               >
                 <PlusIcon class="w-4 h-4" />
                 Add Product
               </button>
             </div>
             
-            <div v-for="(product, index) in saleForm.products" :key="index" class="mb-3 p-3 border border-gray-200 rounded-lg bg-gray-50">
-              <div class="flex justify-between mb-2">
-                <h5 class="text-sm font-medium text-gray-900">Product {{ index + 1 }}</h5>
+            <div v-for="(product, index) in saleForm.products" :key="index" class="add-sale-product-item mb-4 p-4 border border-teal-100 rounded-xl bg-gradient-to-br from-white to-teal-50/30 shadow-sm hover:shadow-md transition-all">
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-sm font-semibold text-gray-800">Product {{ index + 1 }}</span>
                 <button 
                   type="button"
                   @click="removeProductFromSale(index)"
-                  class="text-red-600 hover:text-red-700"
+                  class="p-1.5 rounded-lg text-red-500 hover:bg-red-50 hover:text-red-600 transition-colors"
+                  title="Remove product"
                 >
                   <XIcon class="w-4 h-4" />
                 </button>
               </div>
-              
               <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div class="md:col-span-3">
-                  <label class="block text-xs text-gray-600 mb-1">Product</label>
+                  <label class="block text-xs font-medium text-gray-600 mb-1">Product</label>
                   <select 
                     v-model="product.id"
                     required
-                    class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900"
+                    class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-200 focus:border-teal-400 bg-white text-gray-900 transition-all"
                     @change="updateProductDetails(index)"
                   >
                     <option value="">Select a product</option>
@@ -761,123 +696,109 @@
                   </select>
                 </div>
                 <div>
-                  <label class="block text-xs text-gray-600 mb-1">Quantity</label>
-                  <input 
-                    type="number"
-                    v-model.number="product.quantity"
-                    min="1"
-                    required
-                    class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900"
-                    @input="calculateTotal"
-                  />
+                  <label class="block text-xs font-medium text-gray-600 mb-1">Quantity</label>
+                  <input type="number" v-model.number="product.quantity" min="1" required class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-200 bg-white text-gray-900" @input="calculateTotal" />
                 </div>
                 <div>
-                  <label class="block text-xs text-gray-600 mb-1">Price</label>
-                  <input 
-                    type="number"
-                    v-model.number="product.price"
-                    min="0"
-                    step="0.01"
-                    required
-                    class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900"
-                    @input="calculateTotal"
-                  />
+                  <label class="block text-xs font-medium text-gray-600 mb-1">Price</label>
+                  <input type="number" v-model.number="product.price" min="0" step="0.01" required class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-200 bg-white text-gray-900" @input="calculateTotal" />
                 </div>
                 <div>
-                  <label class="block text-xs text-gray-600 mb-1">Subtotal</label>
-                  <input 
-                    type="text"
-                    :value="formatCurrency(product.price * product.quantity)"
-                    readonly
-                    class="w-full px-3 py-2 rounded-lg border border-gray-200 bg-gray-100 text-gray-700"
-                  />
+                  <label class="block text-xs font-medium text-gray-600 mb-1">Subtotal</label>
+                  <input type="text" :value="formatCurrency(product.price * product.quantity)" readonly class="w-full px-3 py-2.5 rounded-xl border border-teal-100 bg-teal-50/50 text-teal-800 font-semibold" />
                 </div>
               </div>
             </div>
             
-            <div v-if="saleForm.products.length === 0" class="text-center p-4 border border-dashed border-gray-300 rounded-lg">
-              <p class="text-gray-600">No products added yet</p>
+            <div v-if="saleForm.products.length === 0" class="add-sale-empty-products text-center py-8 px-4 border-2 border-dashed border-teal-200 rounded-xl bg-teal-50/30">
+              <PackageIcon class="w-10 h-10 text-teal-300 mx-auto mb-2" />
+              <p class="text-gray-500 text-sm">No products added yet</p>
+              <p class="text-gray-400 text-xs mt-1">Click "Add Product" to start</p>
             </div>
           </div>
 
-          <!-- Sale Details -->
-          
-          <div>
-            <label class="block text-sm text-gray-600 mb-1">Payment Method</label>
-            <select 
-              v-model="saleForm.paymentMethod"
-              required
-              class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white text-gray-900"
+          <!-- Payment & Total -->
+          <div class="add-sale-form-section">
+            <div class="flex items-center gap-2 mb-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center">
+                <DollarSignIcon class="w-4 h-4 text-emerald-600" />
+              </div>
+              <h4 class="text-base font-semibold text-gray-900">Payment & Total</h4>
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700 mb-1.5">Payment Method</label>
+              <select 
+                v-model="saleForm.paymentMethod"
+                required
+                class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-200 focus:border-teal-400 bg-white text-gray-900 transition-all shadow-sm"
+              >
+                <option value="cash">Cash</option>
+                <option value="credit_card">Credit Card</option>
+                <option value="bank_transfer">Bank Transfer</option>
+                <option value="gcash">GCash</option>
+              </select>
+            </div>
+            <div class="flex justify-between items-center p-4 rounded-xl bg-gradient-to-r from-teal-50 to-cyan-50 border border-teal-100">
+              <span class="text-gray-800 font-semibold">Total Amount</span>
+              <span class="text-2xl font-bold text-teal-700">{{ formatCurrency(saleForm.total) }}</span>
+            </div>
+          </div>
+
+          <div class="flex justify-end gap-3 pt-2">
+            <button type="button" @click="showAddSaleModal = false" class="px-5 py-2.5 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 font-medium transition-all">
+              Cancel
+            </button>
+            <button 
+              type="submit"
+              class="px-5 py-2.5 bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-500 hover:from-teal-600 hover:via-cyan-600 hover:to-emerald-600 text-white rounded-xl font-semibold shadow-lg shadow-teal-500/25 hover:shadow-xl hover:-translate-y-0.5 transition-all disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+              :disabled="isSubmitting"
             >
-              <option value="cash">Cash</option>
-              <option value="credit_card">Credit Card</option>
-              <option value="bank_transfer">Bank Transfer</option>
-              <option value="gcash">GCash</option>
-            </select>
+              <span v-if="isSubmitting" class="flex items-center gap-2">
+                <LoaderIcon class="w-5 h-5 animate-spin" />
+                Saving...
+              </span>
+              <span v-else class="flex items-center gap-2">
+                <SaveIcon class="w-4 h-4" />
+                Record Sale
+              </span>
+            </button>
           </div>
-
-          <!-- Total -->
-          <div class="border-t border-gray-200 pt-4">
-            <div class="flex justify-between items-center">
-              <span class="text-gray-900 font-medium">Total Amount:</span>
-              <span class="text-xl font-bold text-gray-900">{{ formatCurrency(saleForm.total) }}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex justify-end gap-3 mt-6">
-          <button 
-            type="button"
-            @click="showAddSaleModal = false"
-            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-          >
-            Cancel
-          </button>
-          <button 
-            type="submit"
-            class="px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg"
-            :disabled="isSubmitting"
-          >
-            <span v-if="isSubmitting" class="flex items-center gap-2">
-              <LoaderIcon class="w-5 h-5 animate-spin" />
-              Saving...
-            </span>
-            <span v-else>Record Sale</span>
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
+  </Transition>
 
   <!-- Daily Sales Report Modal -->
-  <div v-if="showReceiptModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
-      <div class="p-6 border-b border-gray-200">
-        <div class="flex items-center justify-between">
-          <h3 class="text-xl font-bold text-gray-900">Daily Sales Report</h3>
-          <button 
-            @click="showReceiptModal = false"
-            class="text-gray-400 hover:text-gray-600"
-          >
-            <XIcon class="w-6 h-6" />
+  <Transition name="modal-fade">
+    <div v-if="showReceiptModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 daily-report-modal-backdrop" @click.self="showReceiptModal = false">
+      <div class="daily-report-modal-panel bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-teal-100">
+        <div class="h-1.5 bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-500 rounded-t-2xl"></div>
+        <div class="p-5 sm:p-6 border-b border-gray-100 flex items-center justify-between">
+          <h3 class="text-xl font-bold text-gray-900 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center ring-2 ring-teal-200/50">
+              <TrendingUpIcon class="w-5 h-5 text-teal-600" />
+            </div>
+            Daily Sales Report
+          </h3>
+          <button type="button" @click="showReceiptModal = false" class="p-2 rounded-xl hover:bg-gray-100 text-gray-500 hover:text-gray-700 transition-colors">
+            <XIcon class="w-5 h-5" />
           </button>
         </div>
-      </div>
     
-      <div class="p-4 md:p-6">
+      <div class="p-5 sm:p-6">
         <!-- Daily Sales Report Preview -->
-        <div id="daily-report-content" class="bg-gradient-to-br from-blue-50 to-purple-50 p-4 rounded-lg mb-4 text-sm">
-          <div class="text-center mb-6">
-            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center">
-              <TrendingUpIcon class="w-8 h-8 text-white" />
+        <div id="daily-report-content" class="daily-report-content bg-gradient-to-br from-slate-50 via-teal-50/50 to-cyan-50 p-5 sm:p-6 rounded-2xl mb-5 border border-teal-100 shadow-inner text-sm">
+          <div class="daily-report-section text-center mb-6">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-teal-500 via-cyan-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-teal-500/30 p-1">
+              <TrendingUpIcon class="w-9 h-9 text-white" />
             </div>
             <h2 class="text-xl font-bold text-gray-900">Barcelona Paint Center</h2>
-            <p class="text-teal-600 font-medium">Daily Sales Report</p>
-            <p class="text-xs text-gray-500 mt-1">{{ formatDateTime(new Date()) }}</p>
+            <p class="text-teal-600 font-semibold mt-1">Daily Sales Report</p>
+            <p class="text-xs text-gray-500 mt-2">{{ formatDateTime(new Date()) }}</p>
           </div>
         
           <!-- Staff Information -->
-          <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200">
+          <div class="daily-report-section bg-white rounded-xl p-4 mb-4 border border-teal-100 shadow-sm">
             <h3 class="font-semibold text-gray-900 mb-2 flex items-center">
               <UserIcon class="w-4 h-4 mr-2 text-teal-600" />
               Staff Report
@@ -903,9 +824,9 @@
           </div>
         
           <!-- Daily Summary -->
-          <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200">
+          <div class="daily-report-section bg-white rounded-xl p-4 mb-4 border border-teal-100 shadow-sm">
             <h3 class="font-semibold text-gray-900 mb-3 flex items-center">
-              <DollarSignIcon class="w-4 h-4 mr-2 text-green-600" />
+              <DollarSignIcon class="w-4 h-4 mr-2 text-teal-600" />
               Today's Performance
             </h3>
             <div class="grid grid-cols-2 gap-3">
@@ -933,7 +854,7 @@
           </div>
 
           <!-- Top Products Today -->
-          <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200" v-if="sortedTodaysTopProducts.length > 0">
+          <div class="daily-report-section bg-white rounded-xl p-4 mb-4 border border-teal-100 shadow-sm" v-if="sortedTodaysTopProducts.length > 0">
             <h3 class="font-semibold text-gray-900 mb-3 flex items-center">
               <PackageIcon class="w-4 h-4 mr-2 text-purple-600" />
               Top Products Today
@@ -983,7 +904,7 @@
           </div>
 
           <!-- Recent Sales -->
-          <div class="bg-white/80 rounded-lg p-4 mb-4 border border-gray-200" v-if="todaysSales.length > 0">
+          <div class="daily-report-section bg-white rounded-xl p-4 mb-4 border border-teal-100 shadow-sm" v-if="todaysSales.length > 0">
             <h3 class="font-semibold text-gray-900 mb-3 flex items-center">
               <ShoppingCartIcon class="w-4 h-4 mr-2 text-blue-600" />
               Recent Transactions (Last 5)
@@ -1034,35 +955,36 @@
           </div>
 
           <!-- Footer -->
-          <div class="text-center pt-4 border-t border-gray-200">
+          <div class="daily-report-section text-center pt-4 border-t border-teal-200">
             <p class="text-xs text-gray-600 mb-1">Report generated for owner review</p>
             <p class="text-xs text-gray-500">Barcelona Paint Center Staff Portal</p>
             <div class="mt-2 flex items-center justify-center">
-              <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+              <div class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
               <span class="text-xs text-green-600 font-medium">All sales recorded and verified</span>
             </div>
           </div>
         </div>
       
-        <div class="flex gap-3">
+        <div class="flex gap-3 pt-2">
           <button 
             @click="downloadDailyReport"
-            class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
+            class="flex-1 px-4 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white rounded-xl font-medium shadow-lg shadow-teal-500/25 hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
           >
             <DownloadIcon class="w-5 h-5" />
             Save as Image
           </button>
           <button 
             @click="generateDailySummary"
-            class="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 shadow-lg flex items-center justify-center gap-2"
+            class="flex-1 px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white rounded-xl font-medium shadow-lg shadow-emerald-500/25 hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
           >
             <ClipboardIcon class="w-5 h-5" />
             Summary
           </button>
         </div>
       </div>
+      </div>
     </div>
-  </div>
+  </Transition>
 
   <!-- Delete Sale Confirmation Modal -->
   <div v-if="showDeleteModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
@@ -1114,7 +1036,8 @@ import {
   updateDoc,
   deleteDoc
 } from 'firebase/firestore'
-import { db } from '../../config/firebase'
+import { auth, db } from '../../config/firebase'
+import { onAuthStateChanged } from 'firebase/auth'
 import {
   LayoutDashboard as LayoutDashboardIcon,
   Users as UsersIcon,
@@ -1145,7 +1068,8 @@ import {
   Loader as LoaderIcon,
   Trash2 as Trash2Icon,
   Download as DownloadIcon,
-  Printer as PrinterIcon
+  Printer as PrinterIcon,
+  Save as SaveIcon
 } from 'lucide-vue-next'
 
 // Current date
@@ -1183,6 +1107,11 @@ const isSubmitting = ref(false)
 const mobileSidebarOpen = ref(false)
 const router = useRouter()
 const route = useRoute()
+
+// User display (auth)
+const userDisplayName = ref('')
+const userEmail = ref('')
+
 const lastSaleData = ref({}) // Store last sale data for receipt
 const showDeleteModal = ref(false)
 const saleToDelete = ref(null)
@@ -1883,6 +1812,12 @@ watch(searchQuery, () => {
 
 // Initialize data on component mount
 onMounted(() => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      userDisplayName.value = user.displayName || 'Staff User'
+      userEmail.value = user.email || 'staff@example.com'
+    }
+  })
   console.log("Staff Sales Analytics component mounted, initializing today's data...")
   fetchAvailableProducts()
   const unsubscribe = fetchTodaysSalesData()
@@ -2491,6 +2426,74 @@ Barcelona Paint Center - Staff Portal
 </script>
 
 <style scoped>
+/* Modal enter/leave transitions */
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+.modal-fade-enter-active .add-sale-modal-panel,
+.modal-fade-leave-active .add-sale-modal-panel,
+.modal-fade-enter-active .daily-report-modal-panel,
+.modal-fade-leave-active .daily-report-modal-panel {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+.modal-fade-enter-from .add-sale-modal-panel,
+.modal-fade-leave-to .add-sale-modal-panel,
+.modal-fade-enter-from .daily-report-modal-panel,
+.modal-fade-leave-to .daily-report-modal-panel {
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+/* Add Sale form stagger */
+.add-sale-form-section {
+  animation: formSectionIn 0.4s ease-out backwards;
+}
+.add-sale-form-section:nth-child(1) { animation-delay: 0.05s; }
+.add-sale-form-section:nth-child(2) { animation-delay: 0.12s; }
+.add-sale-form-section:nth-child(3) { animation-delay: 0.19s; }
+.add-sale-form-section:nth-child(4) { animation-delay: 0.26s; }
+.add-sale-form-section:nth-child(5) { animation-delay: 0.33s; }
+.add-sale-product-item {
+  animation: formSectionIn 0.35s ease-out backwards;
+}
+.add-sale-product-item:nth-child(1) { animation-delay: 0.08s; }
+.add-sale-product-item:nth-child(2) { animation-delay: 0.14s; }
+.add-sale-product-item:nth-child(3) { animation-delay: 0.2s; }
+.add-sale-product-item:nth-child(4) { animation-delay: 0.26s; }
+.add-sale-product-item:nth-child(5) { animation-delay: 0.32s; }
+.add-sale-empty-products {
+  animation: formSectionIn 0.4s ease-out 0.15s backwards;
+}
+
+/* Daily Report section stagger */
+.daily-report-content .daily-report-section {
+  animation: formSectionIn 0.4s ease-out backwards;
+}
+.daily-report-content .daily-report-section:nth-child(1) { animation-delay: 0.06s; }
+.daily-report-content .daily-report-section:nth-child(2) { animation-delay: 0.12s; }
+.daily-report-content .daily-report-section:nth-child(3) { animation-delay: 0.18s; }
+.daily-report-content .daily-report-section:nth-child(4) { animation-delay: 0.24s; }
+.daily-report-content .daily-report-section:nth-child(5) { animation-delay: 0.3s; }
+.daily-report-content .daily-report-section:nth-child(6) { animation-delay: 0.36s; }
+.daily-report-content .daily-report-section:nth-child(7) { animation-delay: 0.42s; }
+.daily-report-content .daily-report-section:nth-child(8) { animation-delay: 0.48s; }
+
+@keyframes formSectionIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .animate-fade-in {
   animation: fadeIn 0.5s ease-out;
 }
@@ -2509,18 +2512,19 @@ Barcelona Paint Center - Staff Portal
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #ccfbf1;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #10b981, #06b6d4);
+  background: linear-gradient(135deg, #14b8a6, #06b6d4);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #059669, #0891b2);
+  background: linear-gradient(135deg, #0d9488, #0891b2);
 }
 </style>
