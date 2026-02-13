@@ -49,23 +49,11 @@
               :class="['group relative flex-1 bg-gradient-to-br from-orange-100 via-orange-50 to-white backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden border-2 border-orange-200', staffClicked ? 'scale-95' : '']"
               style="border-radius: 24px; padding: 16px 14px;"
             >
-              <!-- Simple Loading State - Staff -->
-              <div v-if="staffClicked" class="absolute inset-0 bg-white/98 backdrop-blur-sm flex items-center justify-center z-30" style="border-radius: 24px;">
+              <!-- Loading State - Staff (Simple & Clean) -->
+              <div v-if="staffClicked" class="absolute inset-0 bg-white/95 flex items-center justify-center z-30 rounded-[22px]" style="border-radius: 24px;">
                 <div class="flex flex-col items-center gap-4">
-                  <!-- Simple Spinner -->
-                  <div class="w-8 h-8 border-3 border-orange-200 border-t-orange-500 rounded-full animate-spin"></div>
-                  
-                  <!-- Clean Loading Text -->
-                  <div class="text-center">
-                    <p class="text-orange-600 font-medium text-sm">Loading Staff Portal</p>
-                    
-                    <!-- Smooth Animated Loading Dots -->
-                    <div class="flex justify-center gap-1 mt-3">
-                      <div class="w-2 h-2 bg-orange-500 rounded-full animate-smooth-bounce"></div>
-                      <div class="w-2 h-2 bg-orange-500 rounded-full animate-smooth-bounce" style="animation-delay: 0.2s;"></div>
-                      <div class="w-2 h-2 bg-orange-500 rounded-full animate-smooth-bounce" style="animation-delay: 0.4s;"></div>
-                    </div>
-                  </div>
+                  <div class="w-10 h-10 rounded-full border-2 border-orange-200 border-t-orange-500 animate-spin"></div>
+                  <p class="text-orange-600 font-medium text-sm">Loading Staff Portal</p>
                 </div>
               </div>
               
@@ -98,23 +86,11 @@
               :class="['group relative flex-1 bg-gradient-to-br from-blue-100 via-blue-50 to-white backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden border-2 border-blue-200', adminClicked ? 'scale-95' : '']"
               style="border-radius: 24px; padding: 16px 14px;"
             >
-              <!-- Simple Loading State - Admin -->
-              <div v-if="adminClicked" class="absolute inset-0 bg-white/98 backdrop-blur-sm flex items-center justify-center z-30" style="border-radius: 24px;">
+              <!-- Loading State - Admin (Simple & Clean) -->
+              <div v-if="adminClicked" class="absolute inset-0 bg-white/95 flex items-center justify-center z-30 rounded-[22px]" style="border-radius: 24px;">
                 <div class="flex flex-col items-center gap-4">
-                  <!-- Simple Spinner -->
-                  <div class="w-8 h-8 border-3 border-blue-200 border-t-blue-500 rounded-full animate-spin"></div>
-                  
-                  <!-- Clean Loading Text -->
-                  <div class="text-center">
-                    <p class="text-blue-600 font-medium text-sm">Loading Admin Portal</p>
-                    
-                    <!-- Smooth Animated Loading Dots -->
-                    <div class="flex justify-center gap-1 mt-3">
-                      <div class="w-2 h-2 bg-blue-500 rounded-full animate-smooth-bounce"></div>
-                      <div class="w-2 h-2 bg-blue-500 rounded-full animate-smooth-bounce" style="animation-delay: 0.2s;"></div>
-                      <div class="w-2 h-2 bg-blue-500 rounded-full animate-smooth-bounce" style="animation-delay: 0.4s;"></div>
-                    </div>
-                  </div>
+                  <div class="w-10 h-10 rounded-full border-2 border-blue-200 border-t-blue-500 animate-spin"></div>
+                  <p class="text-blue-600 font-medium text-sm">Loading Admin Portal</p>
                 </div>
               </div>
               
