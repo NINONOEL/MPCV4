@@ -568,7 +568,7 @@
             <div>
               <h3 class="text-sm font-bold text-neutral-900 mb-1.5">Visit Our Store</h3>
               <p class="text-neutral-600 mb-0.5 text-xs">Brgy. Masipit, Calapan City</p>
-              <p class="text-neutral-600 mb-2 text-xs">Oriental Mindoto, Philippines 5200</p>
+              <p class="text-neutral-600 mb-2 text-xs">Oriental Mindoro, Philippines 5200</p>
               <div class="space-y-0.5 text-xs">
                 <p class="text-neutral-500">Mon-Sat: 7:00 AM - 5:00 PM</p>
                 <p class="text-neutral-500">Sunday: 7:00 AM - 11:00 AM</p>
