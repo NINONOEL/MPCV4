@@ -41,19 +41,19 @@
             </div>
           </div>
 
-          <!-- FLAT OVAL Portal Buttons - More Visible Color Tints -->
-          <div class="flex flex-col sm:flex-row justify-center gap-4 mb-32 w-full max-w-lg mx-auto mt-12">
+          <!-- FLAT OVAL Portal Buttons - More Visible Color Tints (Fully Responsive) -->
+          <div class="flex flex-col sm:flex-row justify-center gap-4 mb-32 w-full max-w-lg mx-auto mt-12 px-2 sm:px-0">
             <!-- Staff Portal Button - More Orange Tinted -->
             <div 
               @click="handleStaffClick"
-              :class="['group relative flex-1 bg-gradient-to-br from-orange-100 via-orange-50 to-white backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden border-2 border-orange-200', staffClicked ? 'scale-95' : '']"
-              style="border-radius: 24px; padding: 16px 14px;"
+              :class="['group relative flex-1 min-h-[160px] sm:min-h-[180px] bg-gradient-to-br from-orange-100 via-orange-50 to-white backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden border-2 border-orange-200', staffClicked ? 'scale-95' : '']"
+              style="border-radius: 24px; padding: 20px 16px;"
             >
               <!-- Loading State - Staff (Simple & Clean) -->
-              <div v-if="staffClicked" class="absolute inset-0 bg-white/95 flex items-center justify-center z-30 rounded-[22px]" style="border-radius: 24px;">
-                <div class="flex flex-col items-center gap-4">
-                  <div class="w-10 h-10 rounded-full border-2 border-orange-200 border-t-orange-500 animate-spin"></div>
-                  <p class="text-orange-600 font-medium text-sm">Loading Staff Portal</p>
+              <div v-if="staffClicked" class="absolute inset-0 min-h-[160px] sm:min-h-full bg-white/95 flex items-center justify-center z-30 rounded-[22px] py-4 px-4" style="border-radius: 24px;">
+                <div class="flex flex-col items-center justify-center gap-3 sm:gap-4">
+                  <div class="w-10 h-10 shrink-0 rounded-full border-2 border-orange-200 border-t-orange-500 animate-spin"></div>
+                  <p class="text-orange-600 font-medium text-sm text-center">Loading Staff Portal</p>
                 </div>
               </div>
               
@@ -83,14 +83,14 @@
             <!-- Admin Portal Button - More Blue Tinted -->
             <div 
               @click="handleAdminClick"
-              :class="['group relative flex-1 bg-gradient-to-br from-blue-100 via-blue-50 to-white backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden border-2 border-blue-200', adminClicked ? 'scale-95' : '']"
-              style="border-radius: 24px; padding: 16px 14px;"
+              :class="['group relative flex-1 min-h-[160px] sm:min-h-[180px] bg-gradient-to-br from-blue-100 via-blue-50 to-white backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden border-2 border-blue-200', adminClicked ? 'scale-95' : '']"
+              style="border-radius: 24px; padding: 20px 16px;"
             >
               <!-- Loading State - Admin (Simple & Clean) -->
-              <div v-if="adminClicked" class="absolute inset-0 bg-white/95 flex items-center justify-center z-30 rounded-[22px]" style="border-radius: 24px;">
-                <div class="flex flex-col items-center gap-4">
-                  <div class="w-10 h-10 rounded-full border-2 border-blue-200 border-t-blue-500 animate-spin"></div>
-                  <p class="text-blue-600 font-medium text-sm">Loading Admin Portal</p>
+              <div v-if="adminClicked" class="absolute inset-0 min-h-[160px] sm:min-h-full bg-white/95 flex items-center justify-center z-30 rounded-[22px] py-4 px-4" style="border-radius: 24px;">
+                <div class="flex flex-col items-center justify-center gap-3 sm:gap-4">
+                  <div class="w-10 h-10 shrink-0 rounded-full border-2 border-blue-200 border-t-blue-500 animate-spin"></div>
+                  <p class="text-blue-600 font-medium text-sm text-center">Loading Admin Portal</p>
                 </div>
               </div>
               
