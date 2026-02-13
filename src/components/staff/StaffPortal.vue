@@ -345,14 +345,26 @@
                   alertType === 'success' ? 'bg-gradient-to-r from-green-50/90 to-emerald-50/90 text-green-800 border-green-300' : 'bg-gradient-to-r from-red-50/90 to-pink-50/90 text-red-800 border-red-300'
                 ]"
               >
-                <div class="flex items-center">
-                  <div v-if="alertType === 'success'" class="mr-3 text-green-600">
-                    <CheckCircle class="h-6 w-6" />
+                <div class="flex flex-col gap-3">
+                  <div class="flex items-center">
+                    <div v-if="alertType === 'success'" class="mr-3 text-green-600 shrink-0">
+                      <CheckCircle class="h-6 w-6" />
+                    </div>
+                    <div v-else class="mr-3 text-red-600 shrink-0">
+                      <AlertCircle class="h-6 w-6" />
+                    </div>
+                    <span class="flex-1">{{ alertMessage }}</span>
                   </div>
-                  <div v-else class="mr-3 text-red-600">
-                    <AlertCircle class="h-6 w-6" />
-                  </div>
-                  {{ alertMessage }}
+                  <button 
+                    v-if="verificationEmailFailed && alertType === 'success'"
+                    @click="resendVerificationAfterRegister"
+                    :disabled="isResendingVerification"
+                    class="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    <LoaderIcon v-if="isResendingVerification" class="h-4 w-4 animate-spin" />
+                    <MailIcon v-else class="h-4 w-4" />
+                    {{ isResendingVerification ? 'Sending...' : 'Resend Verification Email' }}
+                  </button>
                 </div>
               </div>
             </div>
@@ -472,6 +484,7 @@ const showVerificationMessage = ref(false)
 const verificationEmail = ref('')
 const isResendingVerification = ref(false)
 const isEmailVerified = ref(false)
+const verificationEmailFailed = ref(false)
 
 const loginData = ref({
   email: '',
@@ -533,14 +546,10 @@ const createStaffAccount = async () => {
 
     console.log('Staff document created in Firestore:', staffDocData)
 
-    // Send email verification with redirect URL
+    // Send email verification (without actionCodeSettings - avoids domain auth issues)
+    verificationEmailFailed.value = false
     try {
-      const actionCodeSettings = {
-        url: `${window.location.origin}/staff`,
-        handleCodeInApp: true
-      }
-      
-      await sendEmailVerification(user, actionCodeSettings)
+      await sendEmailVerification(user)
       verificationEmail.value = staffData.value.email
       isEmailVerified.value = false
       showVerificationMessage.value = true
@@ -548,8 +557,9 @@ const createStaffAccount = async () => {
       alertType.value = 'success'
     } catch (verificationError) {
       console.error('Error sending verification email:', verificationError)
-      // Still show success but mention verification email issue
-      alertMessage.value = 'Account created successfully! However, we could not send the verification email. Please contact support.'
+      verificationEmailFailed.value = true
+      verificationEmail.value = staffData.value.email
+      alertMessage.value = 'Account created successfully! We could not send the verification email. You can still login and verify later.'
       alertType.value = 'success'
     }
     
@@ -586,6 +596,25 @@ const createStaffAccount = async () => {
   }
 }
 
+// Resend verification email right after failed registration (user still signed in)
+const resendVerificationAfterRegister = async () => {
+  if (!auth.currentUser) return
+  try {
+    isResendingVerification.value = true
+    alertMessage.value = ''
+    await sendEmailVerification(auth.currentUser)
+    verificationEmailFailed.value = false
+    alertMessage.value = 'Verification email sent! Please check your inbox (and spam folder).'
+    alertType.value = 'success'
+  } catch (err) {
+    console.error('Error resending verification email:', err)
+    alertMessage.value = 'Could not resend. You can still login and verify later.'
+    alertType.value = 'success'
+  } finally {
+    isResendingVerification.value = false
+  }
+}
+
 const loginStaff = async () => {
   try {
     isLoading.value = true
@@ -604,24 +633,11 @@ const loginStaff = async () => {
     // Reload user to get latest email verification status
     await reload(user)
 
-    // Check if email is verified
+    // Allow login even if email not verified (staff can verify later)
     if (!user.emailVerified) {
-      // Try to resend verification email before signing out
-      try {
-        await sendEmailVerification(user)
-        verificationEmail.value = user.email
-        isEmailVerified.value = false
-        showVerificationMessage.value = true
-        await auth.signOut()
-        throw new Error('Please verify your email address before logging in. A new verification email has been sent to your inbox.')
-      } catch (verificationError) {
-        console.error('Error sending verification email:', verificationError)
-        verificationEmail.value = user.email
-        isEmailVerified.value = false
-        showVerificationMessage.value = true
-        await auth.signOut()
-        throw new Error('Please verify your email address before logging in. Check your inbox for the verification email.')
-      }
+      verificationEmail.value = user.email
+      isEmailVerified.value = false
+      showVerificationMessage.value = true
     }
 
     // Check if user is a staff member
