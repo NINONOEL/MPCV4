@@ -252,7 +252,7 @@
                 <div class="flex justify-end mt-1">
                   <button 
                     type="button"
-                    @click="showForgotPassword = true"
+                    @click="openForgotPassword"
                     class="text-sm text-purple-600 hover:text-purple-800 transition-colors duration-200 hover:underline font-semibold"
                   >
                     Forgot Password?
@@ -285,55 +285,17 @@
                 </div>
               </form>
 
-              <!-- Email Verification Message (Unverified) -->
+              <!-- Login Success Message -->
               <div 
-                v-if="showVerificationMessage && !isEmailVerified" 
-                class="p-4 rounded-xl text-sm font-bold transition-all duration-300 border-2 backdrop-blur-sm bg-gradient-to-r from-blue-50/90 to-indigo-50/90 text-blue-800 border-blue-300"
-              >
-                <div class="flex flex-col gap-3">
-                  <div class="flex items-center">
-                    <MailIcon class="mr-3 text-blue-600 h-6 w-6" />
-                    <span>Please verify your email address to continue</span>
-                  </div>
-                  <div class="text-xs text-blue-700">
-                    <p>We've sent a verification email to <strong>{{ verificationEmail }}</strong></p>
-                    <p class="mt-1">Click the link in the email to verify your account.</p>
-                  </div>
-                  <div class="flex gap-2">
-                    <button 
-                      @click="resendVerificationEmail"
-                      :disabled="isResendingVerification"
-                      class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {{ isResendingVerification ? 'Sending...' : 'Resend Verification Email' }}
-                    </button>
-                    <button 
-                      @click="showVerificationMessage = false"
-                      class="px-4 py-2 border border-blue-300 text-blue-700 rounded-lg hover:bg-blue-50 transition-colors text-xs font-semibold"
-                    >
-                      Dismiss
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Email Verified Success Message -->
-              <div 
-                v-if="showVerificationMessage && isEmailVerified" 
+                v-if="showLoginSuccess" 
                 class="p-4 rounded-xl text-sm font-bold transition-all duration-300 border-2 backdrop-blur-sm bg-gradient-to-r from-green-50/90 to-emerald-50/90 text-green-800 border-green-300 animate-fade-in"
               >
                 <div class="flex items-center gap-3">
                   <CheckCircle class="text-green-600 h-6 w-6 flex-shrink-0" />
                   <div class="flex-1">
-                    <p class="font-bold text-base">✓ Email Verified Successfully!</p>
-                    <p class="text-xs text-green-700 mt-1 font-medium">Your email address has been verified. Please login to your account.</p>
+                    <p class="font-bold text-base">Login successful!</p>
+                    <p class="text-xs text-green-700 mt-1 font-medium">Redirecting to dashboard...</p>
                   </div>
-                  <button 
-                    @click="showVerificationMessage = false"
-                    class="text-green-600 hover:text-green-800 transition-colors"
-                  >
-                    <X class="h-5 w-5" />
-                  </button>
                 </div>
               </div>
 
@@ -355,16 +317,6 @@
                     </div>
                     <span class="flex-1">{{ alertMessage }}</span>
                   </div>
-                  <button 
-                    v-if="verificationEmailFailed && alertType === 'success'"
-                    @click="resendVerificationAfterRegister"
-                    :disabled="isResendingVerification"
-                    class="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                  >
-                    <LoaderIcon v-if="isResendingVerification" class="h-4 w-4 animate-spin" />
-                    <MailIcon v-else class="h-4 w-4" />
-                    {{ isResendingVerification ? 'Sending...' : 'Resend Verification Email' }}
-                  </button>
                 </div>
               </div>
             </div>
@@ -447,10 +399,7 @@ import { auth, db } from '@/config/firebase'
 import { 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  sendEmailVerification,
-  reload,
-  applyActionCode
+  sendPasswordResetEmail
 } from 'firebase/auth'
 import { doc, setDoc, getDoc } from 'firebase/firestore'
 import { 
@@ -480,11 +429,7 @@ const resetEmail = ref('')
 const activeTab = ref('login')
 const showPassword = ref(false)
 const showConfirmPassword = ref(false)
-const showVerificationMessage = ref(false)
-const verificationEmail = ref('')
-const isResendingVerification = ref(false)
-const isEmailVerified = ref(false)
-const verificationEmailFailed = ref(false)
+const showLoginSuccess = ref(false)
 
 const loginData = ref({
   email: '',
@@ -546,26 +491,17 @@ const createStaffAccount = async () => {
 
     console.log('Staff document created in Firestore:', staffDocData)
 
-    // Send email verification (without actionCodeSettings - avoids domain auth issues)
-    verificationEmailFailed.value = false
-    try {
-      await sendEmailVerification(user)
-      verificationEmail.value = staffData.value.email
-      isEmailVerified.value = false
-      showVerificationMessage.value = true
-      alertMessage.value = 'Account created successfully! Please verify your email address before logging in.'
-      alertType.value = 'success'
-    } catch (verificationError) {
-      console.error('Error sending verification email:', verificationError)
-      verificationEmailFailed.value = true
-      verificationEmail.value = staffData.value.email
-      alertMessage.value = 'Account created successfully! We could not send the verification email. You can still login and verify later.'
-      alertType.value = 'success'
+    // No email verification required - redirect to dashboard immediately
+    const userData = {
+      uid: user.uid,
+      email: user.email,
+      fullName: staffDocData.fullName,
+      firstName: staffDocData.firstName,
+      lastName: staffDocData.lastName,
+      role: staffDocData.role,
+      position: staffDocData.position
     }
-    
-    // Switch to login tab after successful registration (don't auto-switch, let user see the message)
-    // Pre-fill login email
-    loginData.value.email = staffData.value.email
+    localStorage.setItem('mindoro-user-data', JSON.stringify(userData))
 
     // Reset registration form
     staffData.value = {
@@ -575,6 +511,9 @@ const createStaffAccount = async () => {
       password: '',
       confirmPassword: ''
     }
+
+    // Redirect to dashboard
+    router.push('/staff/dashboard')
   } catch (err) {
     console.error('Error creating staff account:', err)
     
@@ -596,25 +535,6 @@ const createStaffAccount = async () => {
   }
 }
 
-// Resend verification email right after failed registration (user still signed in)
-const resendVerificationAfterRegister = async () => {
-  if (!auth.currentUser) return
-  try {
-    isResendingVerification.value = true
-    alertMessage.value = ''
-    await sendEmailVerification(auth.currentUser)
-    verificationEmailFailed.value = false
-    alertMessage.value = 'Verification email sent! Please check your inbox (and spam folder).'
-    alertType.value = 'success'
-  } catch (err) {
-    console.error('Error resending verification email:', err)
-    alertMessage.value = 'Could not resend. You can still login and verify later.'
-    alertType.value = 'success'
-  } finally {
-    isResendingVerification.value = false
-  }
-}
-
 const loginStaff = async () => {
   try {
     isLoading.value = true
@@ -629,16 +549,6 @@ const loginStaff = async () => {
     )
 
     console.log('Firebase Auth login successful:', user.uid)
-
-    // Reload user to get latest email verification status
-    await reload(user)
-
-    // Allow login even if email not verified (staff can verify later)
-    if (!user.emailVerified) {
-      verificationEmail.value = user.email
-      isEmailVerified.value = false
-      showVerificationMessage.value = true
-    }
 
     // Check if user is a staff member
     const staffDoc = await getDoc(doc(db, 'staff', user.uid))
@@ -664,17 +574,8 @@ const loginStaff = async () => {
     
     localStorage.setItem('mindoro-user-data', JSON.stringify(userData))
 
-    // Show email verified success message
-    isEmailVerified.value = true
-    verificationEmail.value = user.email
-    showVerificationMessage.value = true
-    alertMessage.value = '✓ Email verified! Login successful! Redirecting to dashboard...'
-    alertType.value = 'success'
-
-    // Auto-dismiss verification message after 3 seconds
-    setTimeout(() => {
-      showVerificationMessage.value = false
-    }, 3000)
+    // Show login success message
+    showLoginSuccess.value = true
 
     // Redirect after a short delay
     setTimeout(() => {
@@ -708,154 +609,30 @@ const handleForgotPassword = async () => {
     isResetting.value = true
     alertMessage.value = ''
     await sendPasswordResetEmail(auth, resetEmail.value)
-    alertMessage.value = 'Password reset email sent!'
+    alertMessage.value = 'Password reset email sent! Check your inbox (and spam folder) for the reset link.'
     alertType.value = 'success'
     showForgotPassword.value = false
   } catch (err) {
     console.error('Error sending password reset email:', err)
-    alertMessage.value = err.message
+    let errMsg = 'Failed to send password reset email. Please try again.'
+    if (err.code === 'auth/user-not-found') errMsg = 'No account found with this email address.'
+    else if (err.code === 'auth/invalid-email') errMsg = 'Invalid email address format.'
+    else if (err.code === 'auth/too-many-requests') errMsg = 'Too many attempts. Please try again later.'
+    else if (err.message) errMsg = err.message
+    alertMessage.value = errMsg
     alertType.value = 'error'
   } finally {
     isResetting.value = false
   }
 }
 
-// Resend verification email
-const resendVerificationEmail = async () => {
-  if (!verificationEmail.value) {
-    alertMessage.value = 'No email address found. Please register again.'
-    alertType.value = 'error'
-    return
-  }
-
-  try {
-    isResendingVerification.value = true
-    alertMessage.value = ''
-    
-    // Try to sign in temporarily to resend verification email
-    // We'll need the password, but for security, we'll prompt the user
-    // For now, we'll provide instructions
-    alertMessage.value = 'To resend verification email, please try logging in with your password. If login fails due to unverified email, the system will automatically resend the verification email.'
-    alertType.value = 'info'
-    
-    // Alternative: If user is already signed in (from failed login attempt)
-    if (auth.currentUser && auth.currentUser.email === verificationEmail.value) {
-      try {
-        await sendEmailVerification(auth.currentUser)
-        alertMessage.value = 'Verification email sent successfully! Please check your inbox.'
-        alertType.value = 'success'
-      } catch (error) {
-        console.error('Error sending verification email:', error)
-        alertMessage.value = 'Failed to resend verification email. Please try logging in again.'
-        alertType.value = 'error'
-      }
-    } else {
-      // User needs to attempt login first
-      alertMessage.value = 'Please enter your password below and try logging in. If your email is not verified, we will automatically resend the verification email.'
-      alertType.value = 'info'
-    }
-    
-  } catch (error) {
-    console.error('Error resending verification email:', error)
-    alertMessage.value = 'Failed to resend verification email. Please try logging in with your credentials.'
-    alertType.value = 'error'
-  } finally {
-    isResendingVerification.value = false
-  }
+// Open Forgot Password modal with pre-filled email from login form
+const openForgotPassword = () => {
+  resetEmail.value = loginData.value.email || ''
+  showForgotPassword.value = true
 }
 
-// Check for email verification action code on mount
-const checkEmailVerification = async () => {
-  try {
-    const urlParams = new URLSearchParams(window.location.search)
-    const mode = urlParams.get('mode')
-    const actionCode = urlParams.get('oobCode')
-    const apiKey = urlParams.get('apiKey')
-    const verified = urlParams.get('verified')
-
-    console.log('Checking email verification:', { mode, actionCode, apiKey, verified })
-
-    // Handle email verification action code (primary method - Firebase sends this)
-    if (mode === 'verifyEmail' && actionCode) {
-      try {
-        console.log('Applying email verification code...')
-        isLoading.value = true
-        
-        await applyActionCode(auth, actionCode)
-        
-        console.log('Email verified successfully!')
-        
-        // Switch to login tab immediately - this is critical
-        activeTab.value = 'login'
-        
-        // Set verification state
-        isEmailVerified.value = true
-        showVerificationMessage.value = true
-        
-        // Set email if available from URL or current user
-        const emailParam = urlParams.get('email')
-        if (emailParam) {
-          verificationEmail.value = emailParam
-        } else if (auth.currentUser) {
-          verificationEmail.value = auth.currentUser.email || ''
-        }
-        
-        // Show success messages
-        alertMessage.value = '✓ Email verified successfully! Please login to your account.'
-        alertType.value = 'success'
-        
-        // Clear URL parameters
-        window.history.replaceState({}, document.title, '/staff')
-        
-        isLoading.value = false
-        
-        // Auto-dismiss verification message after 10 seconds
-        setTimeout(() => {
-          showVerificationMessage.value = false
-        }, 10000)
-        
-        return
-      } catch (error) {
-        console.error('Error verifying email:', error)
-        isLoading.value = false
-        activeTab.value = 'login'
-        alertMessage.value = 'Failed to verify email. The link may have expired. Please request a new verification email.'
-        alertType.value = 'error'
-        
-        // Clear URL parameters
-        window.history.replaceState({}, document.title, '/staff')
-        return
-      }
-    }
-
-    // If user just verified email via redirect (fallback method)
-    if (verified === 'true') {
-      console.log('Email verification confirmed via redirect parameter')
-      activeTab.value = 'login'
-      isEmailVerified.value = true
-      showVerificationMessage.value = true
-      
-      const emailParam = urlParams.get('email')
-      if (emailParam) {
-        verificationEmail.value = emailParam
-      }
-      
-      alertMessage.value = '✓ Email verified successfully! Please login to your account.'
-      alertType.value = 'success'
-      
-      // Clear URL parameters
-      window.history.replaceState({}, document.title, '/staff')
-      
-      // Auto-dismiss after 10 seconds
-      setTimeout(() => {
-        showVerificationMessage.value = false
-      }, 10000)
-    }
-  } catch (error) {
-    console.error('Error checking email verification:', error)
-    isLoading.value = false
-  }
-}
+// Clear URL params on mount (e.g. after password reset redirect)
 
 // Enhanced goToHomepage function with loading state
 const goToHomepage = async () => {
@@ -873,9 +650,11 @@ const goToHomepage = async () => {
   }
 }
 
-// Check email verification on component mount
 onMounted(() => {
-  checkEmailVerification()
+  const urlParams = new URLSearchParams(window.location.search)
+  if (urlParams.toString()) {
+    window.history.replaceState({}, document.title, '/staff')
+  }
 })
 </script>
 

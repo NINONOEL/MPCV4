@@ -125,7 +125,7 @@
       </aside>
 
       <!-- Main Content -->
-      <main class="flex-1 overflow-auto">
+      <main class="flex-1 overflow-auto overflow-x-hidden min-w-0">
         <!-- Header - match Staff Dashboard style -->
         <header class="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-gray-200/90 shadow-sm">
           <div class="h-1 w-full bg-gradient-to-r from-purple-500 via-violet-500 to-fuchsia-500 rounded-b-full"></div>

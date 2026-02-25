@@ -184,7 +184,7 @@
       </aside>
 
       <!-- Main Content -->
-      <main class="flex-1 overflow-auto">
+      <main class="flex-1 overflow-auto overflow-x-hidden min-w-0">
         <!-- Header -->
         <header class="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-gray-200/90 shadow-sm">
           <div class="h-1 w-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 rounded-b-full"></div>
@@ -216,7 +216,7 @@
 
         <div class="p-4 sm:p-6 lg:p-8">
           <!-- Tabs -->
-          <div class="flex gap-1 p-1 rounded-xl bg-gray-100/80 border border-gray-200/60 w-fit mb-6">
+          <div class="flex gap-1 p-1 rounded-xl bg-gray-100/80 border border-gray-200/60 w-full overflow-x-auto min-w-0 mb-6">
             <button
               @click="activeTab = 'recommender'"
               class="px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium transition-all flex items-center gap-2 text-sm sm:text-base"
@@ -823,7 +823,7 @@
                           </div>
 
                           <button
-                            @click="deleteHistoryItem(item.id)"
+                            @click="confirmDeleteHistoryItem(item)"
                             class="p-2 rounded-lg hover:bg-red-50 text-gray-600 hover:text-red-600 transition-colors border border-transparent hover:border-red-200"
                           >
                             <TrashIcon class="w-3 h-3 md:w-4 md:h-4" />
@@ -1013,6 +1013,23 @@
         </div>
       </main>
     </div>
+
+    <!-- Delete History Item Confirmation Modal -->
+    <div v-if="showDeleteHistoryModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
+        <div class="p-6">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
+            <AlertTriangleIcon class="w-8 h-8 text-red-600" />
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Delete Recommendation</h3>
+          <p class="text-gray-600 text-center mb-6">Are you sure you want to delete this paint recommendation from history? This action cannot be undone.</p>
+          <div class="flex flex-col sm:flex-row justify-center gap-3">
+            <button @click="showDeleteHistoryModal = false" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors order-2 sm:order-1">Cancel</button>
+            <button @click="deleteHistoryItem(selectedHistoryItemForDelete?.id)" class="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all order-1 sm:order-2">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -1047,7 +1064,8 @@ import {
   SearchX as SearchXIcon,
   ChevronDown as ChevronDownIcon,
   Shield as ShieldIcon,
-  TrendingUp as TrendingUpIcon
+  TrendingUp as TrendingUpIcon,
+  AlertTriangle as AlertTriangleIcon
 } from 'lucide-vue-next';
 import { collection, addDoc, getDocs, deleteDoc, doc, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../config/firebase';
@@ -1061,6 +1079,8 @@ const userEmail = ref('');
 // Toast state
 const showToast = ref(false);
 const toastMessage = ref('');
+const showDeleteHistoryModal = ref(false);
+const selectedHistoryItemForDelete = ref(null);
 
 // Show success toast
 const showSuccessToast = (message) => {
@@ -1582,10 +1602,18 @@ const fetchAllHistory = async () => {
 };
 
 // Delete history item
+const confirmDeleteHistoryItem = (item) => {
+  selectedHistoryItemForDelete.value = item;
+  showDeleteHistoryModal.value = true;
+};
+
 const deleteHistoryItem = async (itemId) => {
+  if (!itemId) return;
   try {
     if (db) {
       await deleteDoc(doc(db, 'paintRecommendations', itemId));
+      showDeleteHistoryModal.value = false;
+      selectedHistoryItemForDelete.value = null;
       showSuccessToast('Recommendation deleted successfully');
       fetchAllHistory();
     } else {

@@ -127,7 +127,7 @@
       </aside>
 
       <!-- Main Content -->
-      <main class="flex-1 overflow-auto">
+      <main class="flex-1 overflow-auto overflow-x-hidden min-w-0">
         <!-- Header -->
         <header class="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-gray-200/90 shadow-sm">
           <div class="h-1 w-full bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-500 rounded-b-full"></div>
@@ -501,8 +501,56 @@
               </div>
             </div>
 
-            <!-- Table -->
-            <div class="overflow-x-auto">
+            <!-- Mobile Card View -->
+            <div class="block md:hidden divide-y divide-gray-100">
+              <div 
+                v-for="sale in filteredTodaysSales" 
+                :key="sale.id"
+                class="p-4 hover:bg-gray-50/50 transition-colors"
+              >
+                <div class="flex items-start justify-between gap-3 mb-2">
+                  <div class="flex-1 min-w-0">
+                    <p class="font-semibold text-gray-900 truncate">{{ sale.orderId }}</p>
+                    <p class="text-sm text-gray-600">{{ formatTime(sale.date) }}</p>
+                  </div>
+                  <p class="font-bold text-teal-700 text-lg shrink-0">{{ formatCurrency(sale.total) }}</p>
+                </div>
+                <div class="flex items-center gap-3 mb-2">
+                  <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center shrink-0">
+                    <UserIcon class="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-medium text-gray-900 truncate">{{ sale.customerName }}</p>
+                    <p class="text-xs text-gray-600 truncate">{{ sale.customerContactNo || 'No contact' }}</p>
+                  </div>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-sm text-gray-600">{{ sale.products.length }} items · {{ sale.products[0]?.name || 'N/A' }}</span>
+                  <div class="flex items-center gap-2">
+                    <span 
+                      class="px-2 py-0.5 rounded-full text-xs font-medium"
+                      :class="{
+                        'bg-green-100 text-green-800': sale.status === 'completed',
+                        'bg-yellow-100 text-yellow-800': sale.status === 'pending',
+                        'bg-red-100 text-red-800': sale.status === 'cancelled'
+                      }"
+                    >
+                      {{ sale.status }}
+                    </span>
+                    <button 
+                      @click="confirmDeleteSale(sale)"
+                      class="p-2 hover:bg-red-50 rounded-lg text-red-600 transition-colors"
+                      title="Delete Sale"
+                    >
+                      <Trash2Icon class="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Desktop Table -->
+            <div class="hidden md:block overflow-x-auto">
               <table class="w-full">
                 <thead>
                   <tr class="border-b border-gray-200">
@@ -572,8 +620,8 @@
             </div>
 
             <!-- Pagination -->
-            <div class="flex items-center justify-between p-4 border-t border-gray-200">
-              <p class="text-sm text-gray-600">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 border-t border-gray-200">
+              <p class="text-sm text-gray-600 text-center sm:text-left">
                 Showing {{ paginationStart }} to {{ paginationEnd }} of {{ filteredTodaysSales.length }} results
               </p>
               <div class="flex items-center gap-2">
@@ -605,19 +653,114 @@
     <div v-if="showAddSaleModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 add-sale-modal-backdrop" @click.self="showAddSaleModal = false">
       <div class="add-sale-modal-panel bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-teal-100">
         <div class="h-1.5 bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-500 rounded-t-2xl"></div>
-        <div class="p-5 sm:p-6 border-b border-gray-100 flex items-center justify-between">
-          <h3 class="text-xl font-bold text-gray-900 flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center ring-2 ring-teal-200/50">
-              <PlusIcon class="w-5 h-5 text-teal-600" />
-            </div>
-            Record New Sale
-          </h3>
-          <button type="button" @click="showAddSaleModal = false" class="p-2 rounded-xl hover:bg-gray-100 text-gray-500 hover:text-gray-700 transition-colors">
-            <XIcon class="w-5 h-5" />
-          </button>
+        <div class="p-5 sm:p-6 border-b border-gray-100">
+          <div class="flex items-center justify-between gap-3 mb-4">
+            <h3 class="text-xl font-bold text-gray-900 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center ring-2 ring-teal-200/50">
+                <PlusIcon class="w-5 h-5 text-teal-600" />
+              </div>
+              Record New Sale
+            </h3>
+            <button type="button" @click="showAddSaleModal = false" class="p-2 rounded-xl hover:bg-gray-100 text-gray-500 hover:text-gray-700 transition-colors">
+              <XIcon class="w-5 h-5" />
+            </button>
+          </div>
+          <!-- Mode Tabs -->
+          <div class="flex gap-2">
+            <button
+              type="button"
+              @click="saleMode = 'full'"
+              :class="['px-4 py-2 rounded-xl text-sm font-medium transition-all', saleMode === 'full' ? 'bg-teal-500 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200']"
+            >
+              Full Form
+            </button>
+            <button
+              type="button"
+              @click="saleMode = 'quick'"
+              :class="['px-4 py-2 rounded-xl text-sm font-medium transition-all', saleMode === 'quick' ? 'bg-teal-500 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200']"
+            >
+              Quick Add
+            </button>
+          </div>
         </div>
         
-        <form @submit.prevent="handleAddSale" class="p-5 sm:p-6 space-y-6">
+        <!-- Quick Add Form -->
+        <form v-if="saleMode === 'quick'" @submit.prevent="handleQuickAddSale" class="p-5 sm:p-6 space-y-6">
+          <div class="add-sale-form-section space-y-4">
+            <div class="relative">
+              <label class="block text-sm font-medium text-gray-700 mb-1.5">Product</label>
+              <input
+                type="text"
+                v-model="productSearchQuery"
+                placeholder="Search products by name or SKU..."
+                class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-200 focus:border-teal-400 bg-white text-gray-900 placeholder-gray-400 text-sm"
+                @focus="quickProductDropdownOpen = true"
+              />
+              <div v-if="quickSaleForm.productId" class="mt-1 text-xs text-teal-600 font-medium">
+                {{ availableProducts.find(p => p.id === quickSaleForm.productId)?.name || 'Selected' }}
+              </div>
+              <div
+                v-show="quickProductDropdownOpen && filteredProductsForSale.length > 0"
+                class="absolute z-20 top-full left-0 right-0 mt-1 max-h-48 overflow-y-auto bg-white border border-gray-200 rounded-xl shadow-lg py-1"
+              >
+                <button
+                  v-for="p in filteredProductsForSale"
+                  :key="p.id"
+                  type="button"
+                  @click="selectQuickProduct(p)"
+                  class="w-full px-4 py-2.5 text-left hover:bg-teal-50 text-sm flex justify-between items-center"
+                >
+                  <span>{{ p.name }}</span>
+                  <span class="text-gray-500 text-xs">{{ formatCurrency(p.price) }} · Stock: {{ p.stock || 0 }}</span>
+                </button>
+              </div>
+              <select
+                v-model="quickSaleForm.productId"
+                class="w-full mt-2 px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-200 focus:border-teal-400 bg-white text-gray-900 text-sm"
+              >
+                <option value="">Or select from dropdown</option>
+                <option v-for="p in filteredProductsForSale" :key="p.id" :value="p.id">
+                  {{ p.name }} - {{ formatCurrency(p.price) }} (Stock: {{ p.stock || 0 }})
+                </option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1.5">Amount (₱)</label>
+              <input
+                type="number"
+                v-model.number="quickSaleForm.amount"
+                min="0"
+                step="0.01"
+                required
+                placeholder="0.00"
+                class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-200 focus:border-teal-400 bg-white text-gray-900"
+              />
+            </div>
+          </div>
+          <div class="flex justify-end gap-3">
+            <button type="button" @click="showAddSaleModal = false" class="px-5 py-2.5 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 font-medium">
+              Cancel
+            </button>
+            <button type="submit" :disabled="isSubmitting" class="px-5 py-2.5 bg-teal-500 text-white rounded-xl font-semibold hover:bg-teal-600 disabled:opacity-70">
+              <span v-if="isSubmitting">Saving...</span>
+              <span v-else>Record Sale</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Full Form -->
+        <form v-else @submit.prevent="handleAddSale" class="p-5 sm:p-6 space-y-6">
+          <!-- Invoice No. -->
+          <div class="add-sale-form-section">
+            <label class="block text-sm font-medium text-gray-700 mb-1.5">Invoice No.</label>
+            <input 
+              type="text"
+              v-model="saleForm.invoiceNo"
+              placeholder="e.g. INV-2024-001"
+              class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-200 focus:border-teal-400 bg-white text-gray-900 placeholder-gray-400 transition-all shadow-sm"
+            />
+          </div>
+
           <!-- Customer Information -->
           <div class="add-sale-form-section">
             <div class="flex items-center gap-2 mb-4">
@@ -667,7 +810,6 @@
                 Add Product
               </button>
             </div>
-            
             <div v-for="(product, index) in saleForm.products" :key="index" class="add-sale-product-item mb-4 p-4 border border-teal-100 rounded-xl bg-gradient-to-br from-white to-teal-50/30 shadow-sm hover:shadow-md transition-all">
               <div class="flex justify-between items-center mb-3">
                 <span class="text-sm font-semibold text-gray-800">Product {{ index + 1 }}</span>
@@ -681,16 +823,41 @@
                 </button>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div class="md:col-span-3">
+                <div class="md:col-span-3 relative">
                   <label class="block text-xs font-medium text-gray-600 mb-1">Product</label>
-                  <select 
+                  <input
+                    type="text"
+                    :value="productSearchByRow[index] ?? ''"
+                    @input="productSearchByRow[index] = $event.target.value"
+                    placeholder="Search products by name or SKU..."
+                    class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-200 focus:border-teal-400 bg-white text-gray-900 placeholder-gray-400 text-sm"
+                    @focus="productDropdownOpenByRow[index] = true"
+                  />
+                  <div v-if="product.id" class="mt-1 text-xs text-teal-600 font-medium">
+                    {{ product.name || availableProducts.find(ap => ap.id === product.id)?.name }}
+                  </div>
+                  <div
+                    v-show="productDropdownOpenByRow[index] && getFilteredProductsForRow(index).length > 0"
+                    class="absolute z-20 top-full left-0 right-0 mt-1 max-h-48 overflow-y-auto bg-white border border-gray-200 rounded-xl shadow-lg py-1"
+                  >
+                    <button
+                      v-for="p in getFilteredProductsForRow(index)"
+                      :key="p.id"
+                      type="button"
+                      @click="selectProductForRow(index, p)"
+                      class="w-full px-4 py-2.5 text-left hover:bg-teal-50 text-sm flex justify-between items-center"
+                    >
+                      <span>{{ p.name }}</span>
+                      <span class="text-gray-500 text-xs">{{ formatCurrency(p.price) }} · Stock: {{ p.stock || 0 }}</span>
+                    </button>
+                  </div>
+                  <select
                     v-model="product.id"
-                    required
-                    class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-200 focus:border-teal-400 bg-white text-gray-900 transition-all"
+                    class="w-full mt-2 px-3 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-200 focus:border-teal-400 bg-white text-gray-900 text-sm"
                     @change="updateProductDetails(index)"
                   >
-                    <option value="">Select a product</option>
-                    <option v-for="p in availableProducts" :key="p.id" :value="p.id">
+                    <option value="">Or select from dropdown</option>
+                    <option v-for="p in getFilteredProductsForRow(index)" :key="p.id" :value="p.id">
                       {{ p.name }} - {{ formatCurrency(p.price) }} (Stock: {{ p.stock || 0 }})
                     </option>
                   </select>
@@ -765,6 +932,58 @@
           </div>
         </form>
       </div>
+    </div>
+  </Transition>
+
+  <!-- Sale Recorded Success Modal -->
+  <Transition
+    enter-active-class="transition ease-out duration-300"
+    enter-from-class="opacity-0"
+    enter-to-class="opacity-100"
+    leave-active-class="transition ease-in duration-200"
+    leave-from-class="opacity-100"
+    leave-to-class="opacity-0"
+  >
+    <div v-if="showSaleSuccessModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[60] p-4" @click.self="showSaleSuccessModal = false">
+      <Transition
+        enter-active-class="transition ease-out duration-300"
+        enter-from-class="opacity-0 scale-95 translate-y-4"
+        enter-to-class="opacity-100 scale-100 translate-y-0"
+        leave-active-class="transition ease-in duration-200"
+        leave-from-class="opacity-100 scale-100"
+        leave-to-class="opacity-0 scale-95"
+      >
+        <div class="bg-white rounded-3xl w-full max-w-md shadow-2xl overflow-hidden border border-gray-200/90" @click.stop>
+          <div class="h-2 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500"></div>
+          <div class="p-8 text-center">
+            <div class="mx-auto w-20 h-20 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/30 mb-6 ring-4 ring-emerald-100">
+              <CheckCircle2Icon class="w-12 h-12 text-white" strokeWidth="2.5" />
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Sale Recorded!</h3>
+            <p class="text-gray-600 mb-6">Transaction completed successfully. Inventory has been updated.</p>
+            <div class="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl p-5 border border-teal-100/80 mb-6 text-left">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm text-gray-600">Customer</span>
+                <span class="font-semibold text-gray-900">{{ saleSuccessData.customerName }}</span>
+              </div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm text-gray-600">Items</span>
+                <span class="font-semibold text-gray-900">{{ saleSuccessData.productCount }} product(s)</span>
+              </div>
+              <div class="flex justify-between items-center pt-3 border-t border-teal-200/60">
+                <span class="text-sm font-medium text-gray-700">Total</span>
+                <span class="text-xl font-bold text-teal-700">{{ formatCurrency(saleSuccessData.total) }}</span>
+              </div>
+            </div>
+            <button
+              @click="showSaleSuccessModal = false"
+              class="w-full py-3.5 px-6 rounded-xl font-semibold text-white bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 shadow-lg shadow-teal-500/25 hover:shadow-xl transition-all duration-200"
+            >
+              Done
+            </button>
+          </div>
+        </div>
+      </Transition>
     </div>
   </Transition>
 
@@ -1018,7 +1237,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { ref, reactive, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { 
   collection, 
@@ -1069,7 +1288,8 @@ import {
   Trash2 as Trash2Icon,
   Download as DownloadIcon,
   Printer as PrinterIcon,
-  Save as SaveIcon
+  Save as SaveIcon,
+  CheckCircle2 as CheckCircle2Icon
 } from 'lucide-vue-next'
 
 // Current date
@@ -1102,6 +1322,8 @@ const todaysTopProducts = ref([])
 const todaysSalesByCategory = ref([])
 const availableProducts = ref([])
 const showAddSaleModal = ref(false)
+const showSaleSuccessModal = ref(false)
+const saleSuccessData = ref({ customerName: '', total: 0, productCount: 0 })
 const showReceiptModal = ref(false)
 const isSubmitting = ref(false)
 const mobileSidebarOpen = ref(false)
@@ -1126,8 +1348,46 @@ const currentPage = ref(1)
 const itemsPerPage = 10
 
 // Sale form
+const saleMode = ref('full') // 'full' | 'quick'
+const quickSaleForm = ref({ productId: '', amount: 0 })
+const productSearchQuery = ref('')
+const quickProductDropdownOpen = ref(false)
+const selectQuickProduct = (p) => {
+  quickSaleForm.value.productId = p.id
+  quickProductDropdownOpen.value = false
+  productSearchQuery.value = ''
+}
+const productSearchByRow = reactive({})
+const productDropdownOpenByRow = reactive({})
+const getFilteredProductsForRow = (index) => {
+  const q = (productSearchByRow[index] ?? '').trim().toLowerCase()
+  if (!q) return availableProducts.value
+  return availableProducts.value.filter(p =>
+    (p.name || '').toLowerCase().includes(q) ||
+    (p.sku || '').toLowerCase().includes(q)
+  )
+}
+const selectProductForRow = (index, p) => {
+  saleForm.value.products[index].id = p.id
+  saleForm.value.products[index].name = p.name
+  saleForm.value.products[index].price = Number(p.price)
+  saleForm.value.products[index].category = p.category || 'Uncategorized'
+  saleForm.value.products[index].stock = p.stock ?? 0
+  productDropdownOpenByRow[index] = false
+  productSearchByRow[index] = ''
+  updateProductDetails(index)
+}
+const filteredProductsForSale = computed(() => {
+  const q = (productSearchQuery.value || '').trim().toLowerCase()
+  if (!q) return availableProducts.value
+  return availableProducts.value.filter(p =>
+    (p.name || '').toLowerCase().includes(q) ||
+    (p.sku || '').toLowerCase().includes(q)
+  )
+})
 const saleForm = ref({
   orderId: '',
+  invoiceNo: '',
   customerId: '',
   customerName: '',
   customerContactNo: '',
@@ -1644,6 +1904,72 @@ const generateOrderId = () => {
 //   printWindow.print()
 // }
 
+// Handle quick add sale (Product + Amount only)
+const handleQuickAddSale = async () => {
+  try {
+    isSubmitting.value = true
+    const { productId, amount } = quickSaleForm.value
+    if (!productId || !amount || amount <= 0) {
+      alert('Please select a product and enter a valid amount.')
+      isSubmitting.value = false
+      return
+    }
+    const product = availableProducts.value.find(p => p.id === productId)
+    if (!product) {
+      alert('Product not found.')
+      isSubmitting.value = false
+      return
+    }
+    const productRef = doc(db, 'products', productId)
+    const productDoc = await getDoc(productRef)
+    if (!productDoc.exists()) {
+      alert('Product not found in inventory.')
+      isSubmitting.value = false
+      return
+    }
+    const currentStock = productDoc.data().stock || 0
+    if (currentStock < 1) {
+      alert(`Insufficient stock for ${product.name}. Available: ${currentStock}`)
+      isSubmitting.value = false
+      return
+    }
+    const saleData = {
+      orderId: generateOrderId(),
+      invoiceNo: `INV-${Date.now()}`,
+      customerId: `CUST-${Date.now()}`,
+      customerName: 'Walk-in',
+      customerContactNo: '',
+      products: [{
+        id: productId,
+        name: product.name,
+        quantity: 1,
+        price: Number(amount),
+        category: product.category || 'Uncategorized'
+      }],
+      total: Number(amount),
+      status: 'completed',
+      paymentMethod: 'cash',
+      date: serverTimestamp()
+    }
+    await updateDoc(productRef, {
+      stock: Math.max(0, currentStock - 1),
+      lastUpdated: serverTimestamp()
+    })
+    const salesRef = collection(db, 'sales')
+    await addDoc(salesRef, saleData)
+    saleSuccessData.value = { customerName: 'Walk-in', total: Number(amount), productCount: 1 }
+    quickSaleForm.value = { productId: '', amount: 0 }
+    showAddSaleModal.value = false
+    showSaleSuccessModal.value = true
+    fetchTodaysSalesData()
+  } catch (err) {
+    console.error('Quick add sale error:', err)
+    alert('Failed to record sale: ' + err.message)
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
 // Handle add sale
 const handleAddSale = async () => {
   try {
@@ -1693,6 +2019,7 @@ const handleAddSale = async () => {
     // Prepare sale data
     const saleData = {
       orderId: saleForm.value.orderId,
+      invoiceNo: saleForm.value.invoiceNo || `INV-${Date.now()}`,
       customerId: saleForm.value.customerId,
       customerName: saleForm.value.customerName,
       customerContactNo: saleForm.value.customerContactNo,
@@ -1738,12 +2065,14 @@ const handleAddSale = async () => {
     
     console.log('Sale added successfully with ID:', docRef.id)
     
-    // Show success message without auto-generating daily report
-    alert('Sale recorded successfully!')
-
-    // Reset form and close modal
+    saleSuccessData.value = {
+      customerName: saleForm.value.customerName,
+      total: Number(saleForm.value.total),
+      productCount: saleForm.value.products.length
+    }
     resetSaleForm()
     showAddSaleModal.value = false
+    showSaleSuccessModal.value = true
     
   } catch (err) {
     console.error('Error adding sale:', err)
@@ -1755,8 +2084,13 @@ const handleAddSale = async () => {
 
 // Reset sale form
 const resetSaleForm = () => {
+  productSearchQuery.value = ''
+  quickProductDropdownOpen.value = false
+  Object.keys(productSearchByRow).forEach(k => delete productSearchByRow[k])
+  Object.keys(productDropdownOpenByRow).forEach(k => delete productDropdownOpenByRow[k])
   saleForm.value = {
     orderId: '',
+    invoiceNo: '',
     customerId: '',
     customerName: '',
     customerContactNo: '',

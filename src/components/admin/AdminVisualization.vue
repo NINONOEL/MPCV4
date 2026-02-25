@@ -170,7 +170,7 @@
       </aside>
 
       <!-- Main Content -->
-      <main class="flex-1 overflow-auto">
+      <main class="flex-1 overflow-auto overflow-x-hidden min-w-0">
         <header class="relative bg-white/80 backdrop-blur-md border-b border-gray-200/90 px-4 sm:px-6 lg:px-8 py-5 shadow-sm">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div class="flex items-center gap-4">
@@ -229,10 +229,10 @@
               </div>
               <button 
                 @click="refreshData" 
-                class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-semibold shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+                class="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-semibold shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
               >
-                <RefreshCwIcon class="w-4 h-4" />
-                <span>Refresh Data</span>
+                <RefreshCwIcon class="w-4 h-4 flex-shrink-0" />
+                <span class="hidden sm:inline">Refresh Data</span>
               </button>
             </div>
           </div>
@@ -334,7 +334,7 @@
                     {{ salesChartType === 'line' ? 'Bar View' : 'Line View' }}
                   </button>
                 </div>
-                <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50">
+                <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50 min-w-0 overflow-hidden">
                   <canvas ref="salesChart" class="w-full h-full"></canvas>
                   <div v-if="dailySales.length === 0" class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm text-center px-4 rounded-xl bg-gray-50/80">
                     No sales data available for the selected period
@@ -350,7 +350,7 @@
                   </h3>
                   <span class="text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1.5 rounded-lg">{{ salesByCategory.length }} categories</span>
                 </div>
-                <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50">
+                <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50 min-w-0 overflow-hidden">
                   <canvas ref="categoryChart" class="w-full h-full"></canvas>
                   <div v-if="salesByCategory.length === 0" class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm text-center px-4 rounded-xl bg-gray-50/80">
                     No category data available
@@ -369,7 +369,7 @@
                   </h3>
                   <span class="text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1.5 rounded-lg">Top {{ topProducts.length }} products</span>
                 </div>
-                <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50">
+                <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50 min-w-0 overflow-hidden">
                   <canvas ref="productsChart" class="w-full h-full"></canvas>
                   <div v-if="topProducts.length === 0" class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm text-center px-4 rounded-xl bg-gray-50/80">
                     No product sales data available
@@ -385,7 +385,7 @@
                   </h3>
                   <span class="text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1.5 rounded-lg">{{ totalOrders }} transactions</span>
                 </div>
-                <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50">
+                <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50 min-w-0 overflow-hidden">
                   <canvas ref="paymentChart" class="w-full h-full"></canvas>
                   <div v-if="sales.length === 0" class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm text-center px-4 rounded-xl bg-gray-50/80">
                     No payment data available
@@ -403,7 +403,7 @@
                 </h3>
                 <span class="text-xs sm:text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1.5 rounded-lg">Last 12 months</span>
               </div>
-              <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50">
+              <div class="h-48 sm:h-64 relative rounded-xl bg-gray-50/50 min-w-0 overflow-hidden">
                 <canvas ref="monthlyChart" class="w-full h-full"></canvas>
               </div>
             </div>

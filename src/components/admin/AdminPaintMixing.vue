@@ -599,7 +599,7 @@
                             </svg>
                           </button>
                           <button
-                            @click="deleteMixture(mixture.id)"
+                            @click="confirmDeleteMixture(mixture)"
                             class="p-2 rounded-xl hover:bg-red-50 text-red-500 hover:text-red-600 transition-colors"
                             title="Delete mixture"
                           >
@@ -615,6 +615,37 @@
           </div>
         </div>
       </main>
+    </div>
+
+    <!-- Delete Mixture Confirmation Modal -->
+    <div v-if="showDeleteMixtureModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
+        <div class="p-6">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
+            <AlertTriangleIcon class="w-8 h-8 text-red-600" />
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Delete Mixture</h3>
+          <p class="text-gray-600 text-center mb-6">
+            Are you sure you want to delete "{{ selectedMixtureForDelete?.name }}"? This action cannot be undone.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-3">
+            <button
+              @click="showDeleteMixtureModal = false"
+              class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors order-2 sm:order-1"
+            >
+              Cancel
+            </button>
+            <button
+              @click="deleteMixture(selectedMixtureForDelete?.id)"
+              class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transition-all order-1 sm:order-2"
+              :disabled="deleteMixtureLoading"
+            >
+              <span v-if="deleteMixtureLoading" class="flex items-center justify-center gap-2">Deleting...</span>
+              <span v-else>Delete</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -648,6 +679,7 @@ import {
   LogOut as LogOutIcon,
   Menu as MenuIcon,
   X as XIcon,
+  AlertTriangle as AlertTriangleIcon,
   Shield as ShieldIcon,
   BarChart3 as BarChart3Icon,
   Calendar as CalendarIcon,
@@ -707,6 +739,9 @@ const savedMixtures = ref([])
 const searchQuery = ref('')
 const successMessage = ref('')
 const errorMessage = ref('')
+const showDeleteMixtureModal = ref(false)
+const selectedMixtureForDelete = ref(null) // { id, name }
+const deleteMixtureLoading = ref(false)
 const pickerPosition = reactive({ x: null, y: null })
 const currentPreviewColor = ref('#ffffff')
 const colorCanvas = ref(null)
@@ -1424,20 +1459,27 @@ const loadMixture = (mixture) => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
+const confirmDeleteMixture = (mixture) => {
+  selectedMixtureForDelete.value = { id: mixture.id, name: mixture.name }
+  showDeleteMixtureModal.value = true
+}
+
 const deleteMixture = async (id) => {
-  if (!confirm('Are you sure you want to delete this mixture?')) {
-    return
-  }
-  
+  if (!id) return
   try {
+    deleteMixtureLoading.value = true
     const mixtureDoc = doc(db, MIXTURES_COLLECTION, id)
     await deleteDoc(mixtureDoc)
+    showDeleteMixtureModal.value = false
+    selectedMixtureForDelete.value = null
     successMessage.value = 'Mixture deleted successfully!'
     clearMessages()
   } catch (error) {
     console.error('Error deleting mixture:', error)
     errorMessage.value = 'Failed to delete mixture. Please try again.'
     clearMessages()
+  } finally {
+    deleteMixtureLoading.value = false
   }
 }
 

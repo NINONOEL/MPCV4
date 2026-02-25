@@ -7,6 +7,17 @@
         
         <form @submit.prevent="handleSubmit" class="p-6">
           <div class="space-y-4">
+            <!-- Invoice No. -->
+            <div>
+              <label class="block text-sm text-navy/60 mb-1">Invoice No.</label>
+              <input 
+                type="text"
+                v-model="saleForm.invoiceNo"
+                placeholder="e.g. INV-2024-001"
+                class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+              />
+            </div>
+
             <!-- Customer Information -->
             <div>
               <h4 class="text-sm font-medium text-navy mb-3">Customer Information</h4>
@@ -44,7 +55,6 @@
                   Add Product
                 </button>
               </div>
-              
               <div v-for="(product, index) in saleForm.products" :key="index" class="mb-3 p-3 border border-navy/10 rounded-lg">
                 <div class="flex justify-between mb-2">
                   <h5 class="text-sm font-medium text-navy">Product {{ index + 1 }}</h5>
@@ -61,28 +71,42 @@
                   <div class="md:col-span-3">
                     <label class="block text-xs text-navy/60 mb-1">Product</label>
                     <div class="relative">
-                      <select 
+                      <input
+                        type="text"
+                        :value="productSearchByRow[index] ?? ''"
+                        @input="productSearchByRow[index] = $event.target.value"
+                        placeholder="Search products by name or SKU..."
+                        class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white text-sm"
+                        @focus="productDropdownOpenByRow[index] = true"
+                      />
+                      <div v-if="product.id" class="mt-1 text-xs text-navy/80 font-medium">
+                        {{ product.name || availableProducts.find(ap => ap.id === product.id)?.name }}
+                      </div>
+                      <div
+                        v-show="productDropdownOpenByRow[index] && getFilteredProductsForRow(index).length > 0"
+                        class="absolute z-20 top-full left-0 right-0 mt-1 max-h-48 overflow-y-auto bg-white border border-navy/10 rounded-lg shadow-lg py-1"
+                      >
+                        <button
+                          v-for="p in getFilteredProductsForRow(index)"
+                          :key="p.id"
+                          type="button"
+                          @click="selectProductForRow(index, p)"
+                          class="w-full px-3 py-2 text-left hover:bg-navy/5 text-sm flex justify-between items-center"
+                        >
+                          <span>{{ p.name }}</span>
+                          <span class="text-navy/60 text-xs">{{ formatCurrency(p.price) }} · Stock: {{ p.stock || 0 }}</span>
+                        </button>
+                      </div>
+                      <select
                         v-model="product.id"
-                        required
-                        class="w-full px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white"
+                        class="w-full mt-2 px-3 py-2 rounded-lg border border-navy/10 focus:outline-none focus:ring-2 focus:ring-navy/20 bg-white text-sm"
                         @change="updateProductDetails(index)"
                       >
-                        <option value="">Select a product</option>
-                        <option v-for="p in availableProducts" :key="p.id" :value="p.id">
-                          {{ p.name }} - {{ formatCurrency(p.price) }} 
-                          (Stock: {{ p.stock || 0 }})
+                        <option value="">Or select from dropdown</option>
+                        <option v-for="p in getFilteredProductsForRow(index)" :key="p.id" :value="p.id">
+                          {{ p.name }} - {{ formatCurrency(p.price) }} (Stock: {{ p.stock || 0 }})
                         </option>
                       </select>
-                      <!-- Stock indicator -->
-                      <div v-if="product.id && product.stock !== undefined" 
-                           class="absolute right-10 top-1/2 transform -translate-y-1/2 px-2 py-0.5 rounded-full text-xs font-medium"
-                           :class="{
-                             'bg-green-100 text-green-800': product.stock > 10,
-                             'bg-yellow-100 text-yellow-800': product.stock > 0 && product.stock <= 10,
-                             'bg-red-100 text-red-800': product.stock <= 0
-                           }">
-                        Stock: {{ product.stock }}
-                      </div>
                     </div>
                   </div>
                   <div>
@@ -208,7 +232,7 @@
   </template>
   
   <script setup>
-  import { ref, defineProps, defineEmits, onMounted, watch } from 'vue';
+  import { ref, reactive, computed, defineProps, defineEmits, onMounted, watch } from 'vue';
   import { collection, getDocs, doc, getDoc, updateDoc, serverTimestamp, addDoc } from 'firebase/firestore';
   import { db } from '../../config/firebase';
   import { checkProductStock } from '../../utils/salesUtils';
@@ -225,6 +249,7 @@
   
   // State
   const saleForm = ref({
+    invoiceNo: '',
     customerName: '',
     customerEmail: '',
     products: [],
@@ -234,6 +259,26 @@
   });
   
   const availableProducts = ref([]);
+  const productSearchByRow = reactive({});
+  const productDropdownOpenByRow = reactive({});
+  const getFilteredProductsForRow = (index) => {
+    const q = (productSearchByRow[index] ?? '').trim().toLowerCase();
+    if (!q) return availableProducts.value;
+    return availableProducts.value.filter(p =>
+      (p.name || '').toLowerCase().includes(q) ||
+      (p.sku || '').toLowerCase().includes(q)
+    );
+  };
+  const selectProductForRow = (index, p) => {
+    saleForm.value.products[index].id = p.id;
+    saleForm.value.products[index].name = p.name;
+    saleForm.value.products[index].price = Number(p.price);
+    saleForm.value.products[index].category = p.category || 'Uncategorized';
+    saleForm.value.products[index].stock = p.stock ?? 0;
+    productDropdownOpenByRow[index] = false;
+    productSearchByRow[index] = '';
+    updateProductDetails(index);
+  };
   const isSubmitting = ref(false);
   const overrideStockCheck = ref(false);
   const stockWarnings = ref({});
@@ -393,6 +438,7 @@
       // Prepare sale data
       const saleData = {
         orderId: orderId,
+        invoiceNo: saleForm.value.invoiceNo || `INV-${Date.now()}`,
         customerId: customerId,
         customerName: saleForm.value.customerName,
         customerEmail: saleForm.value.customerEmail,
@@ -484,7 +530,10 @@
   
   // Reset form
   const resetForm = () => {
+    Object.keys(productSearchByRow).forEach(k => delete productSearchByRow[k]);
+    Object.keys(productDropdownOpenByRow).forEach(k => delete productDropdownOpenByRow[k]);
     saleForm.value = {
+      invoiceNo: '',
       customerName: '',
       customerEmail: '',
       products: [],

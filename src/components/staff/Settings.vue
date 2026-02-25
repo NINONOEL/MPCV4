@@ -150,7 +150,7 @@
       </aside>
 
       <!-- Main Content -->
-      <main class="flex-1 overflow-auto">
+      <main class="flex-1 overflow-auto overflow-x-hidden min-w-0">
         <header class="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-gray-200/90 shadow-sm">
           <div class="h-1 w-full bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 rounded-b-full"></div>
           <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
@@ -181,12 +181,12 @@
 
         <div class="p-4 sm:p-6 lg:p-8 space-y-6">
           <!-- Tabs -->
-          <div class="flex gap-1 p-1 rounded-xl bg-gray-100/80 border border-gray-200/60 w-fit">
+          <div class="flex gap-1 p-1 rounded-xl bg-gray-100/80 border border-gray-200/60 w-full overflow-x-auto hide-scrollbar min-w-0">
             <button 
               v-for="tab in tabs" 
               :key="tab.id"
               @click="activeTab = tab.id"
-              class="px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-medium whitespace-nowrap transition-all flex items-center gap-2"
+              class="px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-medium whitespace-nowrap transition-all flex items-center gap-2 flex-shrink-0"
               :class="activeTab === tab.id ? 'bg-white text-emerald-600 shadow-sm border border-emerald-200/60' : 'text-gray-600 hover:text-emerald-500'"
             >
               <component :is="tab.icon" class="w-4 h-4 sm:w-5 sm:h-5" />

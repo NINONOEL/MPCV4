@@ -211,13 +211,13 @@
           </router-link>
 
           <router-link
-            to="/admin/reports"
+            to="/admin/visualization"
             class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100"
-            :class="{ 'shadow-lg border border-indigo-200 scale-105': isActive('/admin/reports') }"
+            :class="{ 'shadow-lg border border-indigo-200 scale-105': isActive('/admin/visualization') }"
             @click="mobileSidebarOpen = false"
           >
-            <ClipboardIcon class="w-6 h-6 flex-shrink-0" />
-            <span class="text-base">Reports</span>
+            <BarChart3Icon class="w-6 h-6 flex-shrink-0" />
+            <span class="text-base">Data Visualization</span>
           </router-link>
 
           <router-link
@@ -227,17 +227,7 @@
             @click="mobileSidebarOpen = false"
           >
             <SettingsIcon class="w-6 h-6 flex-shrink-0" />
-            <span class="text-base">System Settings</span>
-          </router-link>
-
-          <router-link
-            to="/admin/security"
-            class="flex items-center space-x-3 p-4 rounded-xl cursor-pointer transition-all duration-200 font-medium text-red-600 bg-red-50 hover:bg-red-100"
-            :class="{ 'shadow-lg border border-red-200 scale-105': isActive('/admin/security') }"
-            @click="mobileSidebarOpen = false"
-          >
-            <ShieldIcon class="w-6 h-6 flex-shrink-0" />
-            <span class="text-base">Security</span>
+            <span class="text-base">Settings</span>
           </router-link>
 
           <div class="h-4"></div>
@@ -379,17 +369,6 @@
               >
                 Categories ({{ categories.length }})
               </button>
-              <button
-                @click="activeTab = 'sizes'"
-                :class="[
-                  'flex-1 min-w-[100px] px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 text-center',
-                  activeTab === 'sizes'
-                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/30 ring-2 ring-purple-400/30'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-800'
-                ]"
-              >
-                Sizes ({{ totalSizesCount }})
-              </button>
             </div>
           </div>
 
@@ -485,8 +464,8 @@
             </div>
           </div>
 
-          <!-- Search and Filter Bar -->
-          <div class="bg-white rounded-2xl shadow-md border border-gray-200/90 p-4 sm:p-5 mb-6 sm:mb-8 ring-1 ring-black/5 focus-within:ring-2 focus-within:ring-purple-500/20 focus-within:border-purple-300/50 transition-all duration-200">
+          <!-- Search and Filter Bar (Products tab only - category filter filters products by selected category) -->
+          <div v-if="activeTab === 'products'" class="bg-white rounded-2xl shadow-md border border-gray-200/90 p-4 sm:p-5 mb-6 sm:mb-8 ring-1 ring-black/5 focus-within:ring-2 focus-within:ring-purple-500/20 focus-within:border-purple-300/50 transition-all duration-200">
             <div class="flex flex-col lg:flex-row gap-4">
               <div class="flex-1">
                 <div class="relative">
@@ -565,7 +544,7 @@
                     <div class="flex-1 min-w-0">
                       <p class="font-semibold text-gray-900 truncate">{{ product.name }}</p>
                       <p class="text-sm text-gray-600 truncate whitespace-nowrap">{{ formatCategory(product.category) }}</p>
-                      <p class="text-xs text-gray-500">SKU: {{ product.sku }}</p>
+                      <p class="text-xs text-gray-500">SKU: {{ product.sku }} · Size: {{ product.size || 'N/A' }}</p>
                     </div>
                   </div>
                   <div class="flex items-center gap-1.5 flex-shrink-0">
@@ -606,6 +585,7 @@
                 <thead>
                   <tr class="bg-gradient-to-r from-gray-50 to-slate-50 border-b border-gray-200">
                     <th class="text-left px-5 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Product</th>
+                    <th class="text-left px-5 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Size</th>
                     <th class="text-left px-5 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Category</th>
                     <th class="text-left px-5 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Stock</th>
                     <th class="text-left px-5 py-4 text-xs font-semibold text-gray-600 uppercase tracking-wider">Price</th>
@@ -615,12 +595,12 @@
                 </thead>
                 <tbody class="divide-y divide-gray-100">
                   <tr v-if="loading" class="bg-white">
-                    <td colspan="6" class="px-5 py-12 text-center">
+                    <td colspan="7" class="px-5 py-12 text-center">
                       <LoaderIcon class="w-6 h-6 text-purple-500 animate-spin mx-auto" />
                     </td>
                   </tr>
                   <tr v-else-if="paginatedProducts.length === 0" class="bg-white">
-                    <td colspan="6" class="px-5 py-12 text-center text-gray-500 font-medium">
+                    <td colspan="7" class="px-5 py-12 text-center text-gray-500 font-medium">
                       No products match your filters
                     </td>
                   </tr>
@@ -647,6 +627,7 @@
                         </div>
                       </div>
                     </td>
+                    <td class="px-5 py-4 align-middle text-sm text-gray-600">{{ product.size || 'N/A' }}</td>
                     <td class="px-5 py-4 align-middle">
                       <span
                         class="inline-block max-w-[200px] px-2.5 py-1 rounded-lg text-xs font-medium bg-purple-100 text-purple-800 border border-purple-200/60 whitespace-nowrap truncate"
@@ -720,7 +701,7 @@
                       <option value="delivered">Delivered</option>
                     </select>
                     <button
-                      @click="deleteOrder(order.id)"
+                      @click="confirmDeleteOrder(order)"
                       class="p-2 hover:bg-red-50 rounded-lg text-red-600 hover:text-red-700 transition-colors"
                       title="Delete Order"
                     >
@@ -797,7 +778,7 @@
                       <td class="px-6 py-4 text-sm text-center text-gray-600">{{ formatDate(order.createdAt) }}</td>
                       <td class="px-6 py-4 text-center">
                         <button
-                          @click="deleteOrder(order.id)"
+                          @click="confirmDeleteOrder(order)"
                           class="p-2 hover:bg-red-50 rounded-lg text-red-600 hover:text-red-700 transition-colors"
                           title="Delete Order"
                         >
@@ -855,91 +836,7 @@
                     <p class="text-sm text-gray-600">{{ cat.key }}</p>
                   </div>
                   <button
-                    @click="deleteCategory(index)"
-                    class="px-4 py-2 bg-red-100 text-red-700 hover:bg-red-200 font-medium rounded-lg transition-colors"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Sizes Management Section -->
-            <div v-if="activeTab === 'sizes'" class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
-              <div class="space-y-6">
-                <!-- Add Size Form -->
-                <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-4 border border-purple-200">
-                  <h3 class="font-semibold text-gray-900 mb-4">Add New Size for Product</h3>
-                  <div class="space-y-3">
-                    <!-- Product Selection -->
-                    <div>
-                      <label class="block text-sm font-medium text-gray-700 mb-1">Select Product</label>
-                      <select
-                        v-model="newSizeForm.productId"
-                        required
-                        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
-                      >
-                        <option value="">Choose a product...</option>
-                        <optgroup
-                          v-for="category in categoriesWithProducts"
-                          :key="category.key"
-                          :label="category.value"
-                        >
-                          <option
-                            v-for="product in getProductsByCategory(category.key)"
-                            :key="product.id"
-                            :value="product.id"
-                          >
-                            {{ product.name }} ({{ product.sku }})
-                          </option>
-                        </optgroup>
-                      </select>
-                    </div>
-                    <!-- Size Inputs -->
-                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                      <input
-                        v-model="newSizeForm.value"
-                        type="text"
-                        placeholder="Enter size name (e.g., 1 Liter, 4 Liters, 16 Liters)"
-                        class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                      />
-                      <input
-                        v-model="newSizeForm.key"
-                        type="text"
-                        placeholder="Size key (e.g., 1l, 4l, 16l)"
-                        class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                      />
-                      <button
-                        @click="addSize"
-                        :disabled="!newSizeForm.productId"
-                        class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        Add Size
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Sizes List -->
-                <h3 class="font-semibold text-gray-900 mb-4">All Product Sizes</h3>
-                <div v-if="filteredSizesForView.length === 0" class="text-center py-8 text-gray-500">
-                  No sizes found. Add new sizes above.
-                </div>
-
-                <div
-                  v-for="(sizeItem, index) in filteredSizesForView"
-                  :key="`${sizeItem.productId}-${sizeItem.key}`"
-                  class="flex items-center justify-between bg-gradient-to-r from-gray-50 to-white p-4 rounded-lg border border-gray-200 hover:border-gray-300 transition-all mb-3"
-                >
-                  <div class="flex-1">
-                    <h4 class="font-medium text-gray-900">{{ sizeItem.value }}</h4>
-                    <p class="text-sm text-gray-600">Key: {{ sizeItem.key }}</p>
-                    <p class="text-xs text-gray-500 mt-1">
-                      Product: {{ getProductName(sizeItem.productId) }}
-                    </p>
-                  </div>
-                  <button
-                    @click="deleteSize(sizeItem.productId, index)"
+                    @click="confirmDeleteCategory(cat, index)"
                     class="px-4 py-2 bg-red-100 text-red-700 hover:bg-red-200 font-medium rounded-lg transition-colors"
                   >
                     Delete
@@ -1101,6 +998,17 @@
                   </select>
                 </div>
 
+                <!-- Size -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1.5">Size</label>
+                  <input
+                    type="text"
+                    v-model="productForm.size"
+                    class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400 text-sm shadow-sm"
+                    placeholder="e.g. 1 Liter, 4 Liters, 16 Liters"
+                  />
+                </div>
+
                 <!-- Price and Unit Price -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
@@ -1198,6 +1106,74 @@
             </button>
             <button
               @click="deleteProduct"
+              class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 order-1 sm:order-2"
+              :disabled="modalLoading"
+            >
+              <span v-if="modalLoading" class="flex items-center justify-center gap-2">
+                <LoaderIcon class="w-5 h-5 animate-spin" />
+                Deleting...
+              </span>
+              <span v-else>Delete</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Order Confirmation Modal -->
+    <div v-if="showDeleteOrderModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
+        <div class="p-6">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
+            <AlertTriangleIcon class="w-8 h-8 text-red-600" />
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Delete Order</h3>
+          <p class="text-gray-600 text-center mb-6">
+            Are you sure you want to delete this order ({{ selectedOrder?.productName }})? This action cannot be undone.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-3">
+            <button
+              @click="showDeleteOrderModal = false"
+              class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors order-2 sm:order-1"
+            >
+              Cancel
+            </button>
+            <button
+              @click="deleteOrder(selectedOrder?.id)"
+              class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 order-1 sm:order-2"
+              :disabled="modalLoading"
+            >
+              <span v-if="modalLoading" class="flex items-center justify-center gap-2">
+                <LoaderIcon class="w-5 h-5 animate-spin" />
+                Deleting...
+              </span>
+              <span v-else>Delete</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Category Confirmation Modal -->
+    <div v-if="showDeleteCategoryModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
+        <div class="p-6">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
+            <AlertTriangleIcon class="w-8 h-8 text-red-600" />
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Delete Category</h3>
+          <p class="text-gray-600 text-center mb-6">
+            Are you sure you want to delete "{{ selectedCategoryForDelete?.cat?.value }}" ({{ selectedCategoryForDelete?.cat?.key }})? Products using this category may be affected.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-3">
+            <button
+              @click="showDeleteCategoryModal = false"
+              class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors order-2 sm:order-1"
+            >
+              Cancel
+            </button>
+            <button
+              @click="deleteCategory(selectedCategoryForDelete?.index)"
               class="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 order-1 sm:order-2"
               :disabled="modalLoading"
             >
@@ -1341,37 +1317,15 @@
                     </select>
                   </div>
 
-                  <!-- Size Selection -->
+                  <!-- Size (auto-filled from product, editable) -->
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1.5">
-                      Size
-                      <span v-if="orderForm.productId && sizesForSelectedProduct.length === 0" class="text-xs text-orange-600 ml-2">
-                        (No sizes - add in Sizes tab)
-                      </span>
-                    </label>
-                    <select
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">Size</label>
+                    <input
+                      type="text"
                       v-model="orderForm.size"
-                      :disabled="!orderForm.productId"
-                      class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 text-sm disabled:bg-gray-100 disabled:cursor-not-allowed shadow-sm"
-                    >
-                      <option value="">
-                        {{ !orderForm.productId 
-                          ? 'Select product first' 
-                          : sizesForSelectedProduct.length === 0 
-                            ? 'No sizes available for this product' 
-                            : 'Select size...' }}
-                      </option>
-                      <option
-                        v-for="size in sizesForSelectedProduct"
-                        :key="size.key"
-                        :value="size.value"
-                      >
-                        {{ size.value }}
-                      </option>
-                    </select>
-                    <p v-if="orderForm.productId && sizesForSelectedProduct.length === 0" class="text-xs text-gray-500 mt-1">
-                      Product ID: {{ orderForm.productId }} | Available sizes: {{ Object.keys(sizes).length }} products have sizes
-                    </p>
+                      class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400 text-sm shadow-sm"
+                      placeholder="e.g. 1 Liter, 4 Liters (auto-filled from product)"
+                    />
                   </div>
 
                   <!-- Supplier Name Field -->
@@ -1464,7 +1418,7 @@
                       <option value="delivered">Delivered</option>
                     </select>
                     <button
-                      @click="deleteOrder(order.id)"
+                      @click="confirmDeleteOrder(order)"
                       class="p-2 hover:bg-red-50 rounded-lg text-red-600 hover:text-red-700 transition-colors"
                       title="Delete Order"
                     >
@@ -1622,7 +1576,6 @@ import {
   Home as HomeIcon,
   Palette as PaletteIcon,
   TrendingUp as TrendingUpIcon,
-  Clipboard as ClipboardIcon,
   Settings as SettingsIcon,
   Shield as ShieldIcon,
   User as UserIcon,
@@ -1675,6 +1628,10 @@ const notificationType = ref('success')
 const stockUpdateInProgress = ref(false)
 const modalLoading = ref(false)
 const showOrderModal = ref(false)
+const showDeleteOrderModal = ref(false)
+const selectedOrder = ref(null)
+const showDeleteCategoryModal = ref(false)
+const selectedCategoryForDelete = ref(null) // { cat, index }
 const orders = ref([])
 const products = ref([])
 const selectedPrintMonth = ref('')
@@ -1730,6 +1687,7 @@ const productForm = ref({
   name: '',
   sku: '',
   category: 'interior',
+  size: '',
   price: 0,
   unitPrice: 0,
   stockLevel: 0,
@@ -1746,12 +1704,13 @@ const orderForm = ref({
 })
 
 // Category management state
-const activeTab = ref('products') // 'products', 'orders', 'categories', 'sizes'
-const categories = ref([
+const activeTab = ref('products') // 'products', 'orders', 'categories'
+const DEFAULT_CATEGORIES = [
   { key: 'interior', value: 'Interior Paint' },
   { key: 'exterior', value: 'Exterior Paint' },
   { key: 'primer', value: 'Primers' },
   { key: 'specialty', value: 'Specialty Paints' },
+  { key: 'house-paint', value: 'House Paint' },
   { key: 'house-interior', value: 'House Interior' },
   { key: 'house-exterior', value: 'House Exterior' },
   { key: 'automotive', value: 'Automotive Paints' },
@@ -1760,7 +1719,8 @@ const categories = ref([
   { key: 'waterproofing', value: 'Waterproofing Products' },
   { key: 'thinners-solvents', value: 'Thinners & Solvents' },
   { key: 'accessories-tools', value: 'Accessories & Tools' }
-])
+]
+const categories = ref([...DEFAULT_CATEGORIES])
 const newCategoryForm = ref({
   key: '',
   value: ''
@@ -1789,6 +1749,7 @@ const currentDate = new Date().toLocaleDateString('en-US', {
 const productsRef = db ? collection(db, 'products') : null
 
 // Computed properties - all declared at top level
+// Use ONLY categories from Categories section - no extras from products
 // Filter categories to only show those with products
 const categoriesWithProducts = computed(() => {
   return categories.value.filter(category => {
@@ -1808,7 +1769,14 @@ const filteredProducts = computed(() => {
   }
 
   if (filterCategory.value) {
-    filtered = filtered.filter(product => product.category === filterCategory.value)
+    const selectedKey = String(filterCategory.value).trim().toLowerCase()
+    const selectedCat = categories.value.find(c => String(c?.key || '').trim().toLowerCase() === selectedKey)
+    filtered = filtered.filter(product => {
+      const productCat = String(product.category || '').trim().toLowerCase()
+      const matchKey = productCat === selectedKey
+      const matchValue = selectedCat && productCat === String(selectedCat?.value || '').trim().toLowerCase()
+      return matchKey || matchValue
+    })
   }
 
   if (filterStock.value) {
@@ -2020,6 +1988,11 @@ const filterByOutOfStock = () => {
   }, 3000)
 }
 
+// Reset to page 1 when filters change so category filter works correctly
+watch([filterCategory, filterStock, searchQuery], () => {
+  currentPage.value = 1
+})
+
 const clearAllFilters = () => {
   filterStock.value = ''
   searchQuery.value = ''
@@ -2051,6 +2024,7 @@ const handleSubmit = async () => {
       unitPrice: Number(productForm.value.unitPrice),
       stockLevel: Number(productForm.value.stockLevel),
       stock: Number(productForm.value.stockLevel),
+      size: productForm.value.size || '',
       image: productForm.value.image
     }
 
@@ -2128,6 +2102,7 @@ const closeModal = () => {
     name: '',
     sku: '',
     category: 'interior',
+    size: '',
     price: 0,
     unitPrice: 0,
     stockLevel: 0,
@@ -2157,22 +2132,11 @@ const formatStockLevel = (stockLevel) => {
   return `In Stock (${stockLevel})`
 }
 
+// Display category name - ONLY from Categories section
 const formatCategory = (category) => {
-  const categories = {
-    'interior': 'Interior Paint',
-    'exterior': 'Exterior Paint',
-    'primer': 'Primers',
-    'specialty': 'Specialty Paints',
-    'house-interior': 'House Interior',
-    'house-exterior': 'House Exterior',
-    'automotive': 'Automotive Paints',
-    'wood-coatings': 'Wood Coatings',
-    'metal-coatings': 'Metal Coatings',
-    'waterproofing': 'Waterproofing Products',
-    'thinners-solvents': 'Thinners & Solvents',
-    'accessories-tools': 'Accessories & Tools'
-  }
-  return categories[category] || category
+  if (!category) return '-'
+  const found = categories.value.find(c => (c?.key || '').toLowerCase() === String(category).trim().toLowerCase())
+  return found ? found.value : '-'
 }
 
 // Helper function to get products by category for the order dropdown
@@ -2315,8 +2279,8 @@ const updateSelectedProduct = () => {
   const selectedProduct = products.value.find(p => p.id === orderForm.value.productId);
   if (selectedProduct) {
     orderForm.value.productName = selectedProduct.name;
-    // Clear size when product changes
-    orderForm.value.size = '';
+    // Auto-fill size from product
+    orderForm.value.size = selectedProduct.size || '';
     
     // Debug logging
     console.log('[v0] ===== PRODUCT SELECTED IN ORDER FORM =====');
@@ -2396,16 +2360,27 @@ const updateProductStockFromOrder = async (productId, quantity) => {
   }
 };
 
+const confirmDeleteOrder = (order) => {
+  selectedOrder.value = order;
+  showDeleteOrderModal.value = true;
+};
+
 const deleteOrder = async (orderId) => {
+  if (!orderId) return;
   try {
+    modalLoading.value = true;
     const orderRef = doc(db, 'orders', orderId);
     await deleteDoc(orderRef);
+    showDeleteOrderModal.value = false;
+    selectedOrder.value = null;
     showSuccessNotification('Order deleted successfully!');
   } catch (err) {
     console.error('Error deleting order:', err);
     notificationMessage.value = 'Failed to delete order';
     notificationType.value = 'error';
     showNotification.value = true;
+  } finally {
+    modalLoading.value = false;
   }
 };
 
@@ -2950,12 +2925,12 @@ const fetchCategories = async () => {
     const docRef = doc(db, 'settings', 'categories');
     // Use unsubscribeCategories.value to store the onSnapshot listener
     unsubscribeCategories.value = onSnapshot(docRef, (docSnap) => {
-      if (docSnap.exists() && docSnap.data().list) {
+      if (docSnap.exists() && docSnap.data().list?.length > 0) {
         categories.value = docSnap.data().list;
         console.log('[v0] Categories updated in real-time:', categories.value);
       } else {
-        // Handle case where the document doesn't exist or has no list
-        categories.value = []; 
+        // Use defaults when Firestore has no categories - ensures dropdown and House Paint etc. work
+        categories.value = [...DEFAULT_CATEGORIES];
       }
     });
   } catch (error) {
@@ -2986,18 +2961,20 @@ const addCategory = async () => {
   }
 };
 
+const confirmDeleteCategory = (cat, index) => {
+  selectedCategoryForDelete.value = { cat, index };
+  showDeleteCategoryModal.value = true;
+};
+
 const deleteCategory = async (index) => {
-  // Prevent deletion of default categories
-  if (categories.value[index]?.key === 'interior' || categories.value[index]?.key === 'exterior') {
-    notificationMessage.value = 'Cannot delete default categories.';
-    notificationType.value = 'error';
-    showNotification.value = true;
-    return;
-  }
+  if (index == null) return;
   try {
+    modalLoading.value = true;
     const updatedCategories = categories.value.filter((_, i) => i !== index);
     const settingsRef = doc(db, 'settings', 'categories');
     await setDoc(settingsRef, { list: updatedCategories }, { merge: true });
+    showDeleteCategoryModal.value = false;
+    selectedCategoryForDelete.value = null;
     notificationMessage.value = 'Category deleted successfully!';
     notificationType.value = 'success';
     showNotification.value = true;
@@ -3006,6 +2983,8 @@ const deleteCategory = async (index) => {
     notificationMessage.value = 'Failed to delete category.';
     notificationType.value = 'error';
     showNotification.value = true;
+  } finally {
+    modalLoading.value = false;
   }
 };
 

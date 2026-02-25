@@ -335,6 +335,23 @@
         </div>
       </div>
     </div>
+
+    <!-- Delete Mixture Confirmation Modal -->
+    <div v-if="showDeleteMixtureModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
+        <div class="p-6">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
+            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Delete Mixture</h3>
+          <p class="text-gray-600 text-center mb-6">Are you sure you want to delete "{{ selectedMixtureForDelete?.name }}"? This action cannot be undone.</p>
+          <div class="flex flex-col sm:flex-row justify-center gap-3">
+            <button @click="showDeleteMixtureModal = false" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Cancel</button>
+            <button @click="deleteMixture(selectedMixtureForDelete?.id)" class="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -371,6 +388,8 @@ const savedMixtures = ref([])
 const searchQuery = ref('')
 const successMessage = ref('')
 const errorMessage = ref('')
+const showDeleteMixtureModal = ref(false)
+const selectedMixtureForDelete = ref(null)
 const pickerPosition = reactive({ x: null, y: null })
 const currentPreviewColor = ref('#ffffff')
 const colorCanvas = ref(null)
@@ -839,12 +858,18 @@ const loadMixture = (mixture) => {
   clearMessages()
 }
 
+const confirmDeleteMixture = (mixture) => {
+  selectedMixtureForDelete.value = { id: mixture.id, name: mixture.name }
+  showDeleteMixtureModal.value = true
+}
+
 const deleteMixture = (id) => {
-  if (confirm('Are you sure you want to delete this mixture?')) {
-    savedMixtures.value = savedMixtures.value.filter(m => m.id !== id)
-    successMessage.value = 'Mixture deleted successfully!'
-    clearMessages()
-  }
+  if (!id) return
+  savedMixtures.value = savedMixtures.value.filter(m => m.id !== id)
+  showDeleteMixtureModal.value = false
+  selectedMixtureForDelete.value = null
+  successMessage.value = 'Mixture deleted successfully!'
+  clearMessages()
 }
 
 // Utility functions

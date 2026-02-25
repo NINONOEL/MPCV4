@@ -175,7 +175,7 @@
         </div>
       </aside>
 
-      <main class="flex-1 overflow-auto">
+      <main class="flex-1 overflow-auto overflow-x-hidden min-w-0">
         <header class="sticky top-0 z-20 bg-white/90 backdrop-blur-xl border-b border-gray-200/90 shadow-sm">
           <div class="h-1 w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500"></div>
           <div class="px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
@@ -471,7 +471,66 @@
                   <p class="text-sm text-gray-500 mt-1">Quote requests will appear here</p>
                 </div>
 
-                <div v-else class="overflow-x-auto">
+                <!-- Mobile + Desktop: both show when we have quotes -->
+                <template v-else>
+                <!-- Mobile Card View -->
+                <div class="block md:hidden divide-y divide-gray-100">
+                  <div
+                    v-for="quote in filteredQuotes"
+                    :key="quote.id"
+                    class="p-4 hover:bg-blue-50/40 transition-colors"
+                  >
+                    <div class="flex items-start justify-between gap-3 mb-2">
+                      <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-gray-900 truncate">{{ quote.firstName }} {{ quote.lastName }}</p>
+                        <p class="text-sm text-gray-600 truncate">{{ quote.email }}</p>
+                        <p class="text-xs text-gray-500">{{ formatDate(quote.createdAt) }}</p>
+                      </div>
+                      <select
+                        :value="quote.status"
+                        @change="(e) => updateStatus(quote.id, e.target.value)"
+                        :class="[
+                          'px-2.5 py-1 rounded-full text-xs font-semibold border-0 cursor-pointer flex-shrink-0',
+                          quote.status === 'new' ? 'bg-blue-100 text-blue-800' :
+                          quote.status === 'contacted' ? 'bg-yellow-100 text-yellow-800' :
+                          'bg-green-100 text-green-800'
+                        ]"
+                      >
+                        <option value="new">New</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="completed">Completed</option>
+                      </select>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-sm text-gray-600 mb-2">
+                      <span class="truncate">{{ quote.contactNo || 'N/A' }}</span>
+                      <span class="capitalize">{{ formatService(quote.service) }}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <button
+                        @click="viewQuote(quote)"
+                        class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                        title="View details"
+                      >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                      </button>
+                      <button
+                        @click="confirmDeleteQuote(quote)"
+                        class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                        title="Delete quote"
+                      >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Desktop Table -->
+                <div class="hidden md:block overflow-x-auto">
                   <table class="w-full">
                     <thead class="bg-gradient-to-r from-gray-50 to-slate-50 border-b border-gray-200">
                       <tr>
@@ -530,7 +589,7 @@
                               </svg>
                             </button>
                             <button
-                              @click="deleteQuote(quote.id)"
+                              @click="confirmDeleteQuote(quote)"
                               class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
                               title="Delete quote"
                             >
@@ -544,6 +603,7 @@
                     </tbody>
                   </table>
                 </div>
+                </template>
               </div>
 
               <!-- Quote Details Modal -->
@@ -629,6 +689,25 @@
             <LoaderIcon v-if="isLoggingOut" class="animate-spin w-4 h-4 mr-2" />
             <span>{{ isLoggingOut ? 'Logging out...' : 'Logout' }}</span>
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Quote Confirmation Modal -->
+  <div v-if="showDeleteQuoteModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-xl w-full max-w-md shadow-2xl">
+      <div class="p-6">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
+          <AlertTriangleIcon class="w-8 h-8 text-red-600" />
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Delete Quote</h3>
+        <p class="text-gray-600 text-center mb-6">
+          Are you sure you want to delete the quote from {{ selectedQuoteForDelete?.firstName }} {{ selectedQuoteForDelete?.lastName }}? This action cannot be undone.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-3">
+          <button @click="showDeleteQuoteModal = false" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors order-2 sm:order-1">Cancel</button>
+          <button @click="deleteQuote(selectedQuoteForDelete?.id)" class="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all order-1 sm:order-2">Delete</button>
         </div>
       </div>
     </div>
@@ -749,7 +828,8 @@ import {
   BarChart3 as BarChart3Icon,
   Plus as PlusIcon,
   Clock as ClockIcon,
-  MessageSquare as MessageSquareIcon
+  MessageSquare as MessageSquareIcon,
+  AlertTriangle as AlertTriangleIcon
 } from 'lucide-vue-next'
 import { collection, query, getDocs, orderBy, onSnapshot } from 'firebase/firestore'
 import { db, auth } from '../../config/firebase'
@@ -776,6 +856,8 @@ const activeTab = ref('dashboard')
 
 const quotes = ref([])
 const selectedQuote = ref(null)
+const showDeleteQuoteModal = ref(false)
+const selectedQuoteForDelete = ref(null)
 const filterStatus = ref('all')
 
 const filteredQuotes = computed(() => {
@@ -824,13 +906,19 @@ const updateStatus = async (id, status) => {
   }
 }
 
+const confirmDeleteQuote = (quote) => {
+  selectedQuoteForDelete.value = quote
+  showDeleteQuoteModal.value = true
+}
+
 const deleteQuote = async (id) => {
-  if (confirm('Are you sure you want to delete this quote?')) {
-    const result = await quoteService.deleteQuote(id)
-    if (result.success) {
-      quotes.value = quotes.value.filter(q => q.id !== id)
-      selectedQuote.value = null
-    }
+  if (!id) return
+  const result = await quoteService.deleteQuote(id)
+  if (result.success) {
+    quotes.value = quotes.value.filter(q => q.id !== id)
+    selectedQuote.value = null
+    selectedQuoteForDelete.value = null
+    showDeleteQuoteModal.value = false
   }
 }
 
